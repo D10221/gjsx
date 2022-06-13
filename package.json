@@ -1,0 +1,15 @@
+{
+  "name": "gjsx",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "^0.14.43",
+    "typescript": "^4.7.3"
+  },
+  "scripts": {
+    "build": "esbuild src/main.tsx --bundle --outfile=build/app.js", 
+    "watch": "yarn build --watch",
+    "start": "gjs build/app.js"
+  }
+}
