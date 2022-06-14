@@ -9,7 +9,7 @@
     "typescript": "^4.7.3"
   },
   "scripts": {
-    "build": "esbuild app/main.tsx --bundle --outfile=build/app.js",
+    "build": "node ./esbuild.mjs",
     "watch": "yarn build --watch",
     "start": "gjs build/app.js",
     "format": "prettier -w ./"
