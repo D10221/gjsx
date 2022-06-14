@@ -9,14 +9,14 @@ function clicked(sender: any) {
 }
 //
 const widget = (
-  <window
+  <window     
     title="Hellow World"
     border_width={100}
-    signals={{ "delete-event": () => Gtk.main_quit() }}
+    signals={{ "destroy": () => Gtk.main_quit() }}
   >
     <box>
-      <button label="Click me!" signals={{ clicked }} />
-      <button label="Click me!" signals={{ clicked }} />
+      <button label="Click me!" signals={{ clicked: clicked }} />
+      <button label="Click me!" signals={{ clicked, }} />
     </box>
   </window>
 );
