@@ -10,10 +10,7 @@
   "scripts": {
     "build": "rm dist -rf && ./build 'app/main.tsx'",
     "watch": "yarn build --watch",
-    "start": "gjs dist/app.js",
+    "start": "gjs dist/main.js",
     "format": "prettier -w ./"
-  },
-  "dependencies": {
-    "@ci-types/gjs": "https://github.com/Gr3q/types-gjs"
-  }
+  }  
 }

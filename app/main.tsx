@@ -1,4 +1,5 @@
-import { v, b, Gtk } from "../lib/gjsx";
+import Gtk from "../@types/Gjs/Gtk-3.0";
+import v from "../lib/gjsx";
 
 Gtk.init(null);
 
@@ -7,13 +8,16 @@ function clicked(sender: any) {
   sender.label = `Clicks=${++i}`;
 }
 //
-const widget = b(
+const widget = (
   <window
     title="Hellow World"
     border_width={100}
     signals={{ "delete-event": () => Gtk.main_quit() }}
   >
-    <button label="Click me!" signals={{ clicked }} />
+    <box>
+      <button label="Click me!" signals={{ clicked }} />
+      <button label="Click me!" signals={{ clicked }} />
+    </box>
   </window>
 );
 widget.show_all();

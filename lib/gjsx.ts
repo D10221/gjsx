@@ -1,5 +1,6 @@
-imports.gi.versions.Gtk = "3.0";
-export const Gtk = imports.gi.Gtk;
+import Gtk from "../@types/Gjs/Gtk-3.0";
+// import imports from "../@types/Gjs/index"
+// imports.gi.versions.Gtk = "3.0";
 /**
  *
  */
@@ -19,36 +20,24 @@ export type VirtualWidget = {
   children?: any[] | null | undefined;
 };
 /**
- * virtual widget
+ * Widget Tree Builder
  */
-export function v(
-  widget: string,
-  props: Props,
-  ...children: any[]
-): VirtualWidget {
-  return {
-    widget,
-    props,
-    children,
-  };
-}
-/**
- * virtual widget builder
- */
-export function b({ widget, props, children }: VirtualWidget) {
-  const { signals, ...attributes } = props;
-  const el: any = Object.keys(attributes).reduce((out, key) => {
-    out[key] = attributes[key];
-    return out;
-  }, new (Gtk as any)[capitalize(widget)]());
-  if (children) {
-    for (let child of children) {
-      el.add(b(child));
+export default function v(elName: keyof typeof Gtk, props: Props = {}, ...children: any[]): VirtualWidget {
+  const el = new (Gtk as any)[capitalize(elName)]();
+  const { signals, ...attributes } = props || {};
+  if (attributes) {
+    for (let key of Object.keys(attributes)) {
+      el[key] = attributes[key]
     }
   }
   if (signals) {
     for (let signal of Object.keys(signals)) {
       el.connect(signal, signals[signal]);
+    }
+  }
+  if (children) {
+    for (let child of children) {
+      el.add(child);
     }
   }
   return el;
