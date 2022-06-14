@@ -1,7 +1,6 @@
 {
   "name": "gjsx",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "devDependencies": {
     "esbuild": "^0.14.43",
@@ -9,9 +8,9 @@
     "typescript": "^4.7.3"
   },
   "scripts": {
-    "build": "node ./esbuild.mjs",
+    "build": "rm dist -rf && ./build 'app/main.tsx'",
     "watch": "yarn build --watch",
-    "start": "gjs build/app.js",
+    "start": "gjs dist/app.js",
     "format": "prettier -w ./"
   },
   "dependencies": {
