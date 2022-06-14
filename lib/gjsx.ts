@@ -1,23 +1,23 @@
 imports.gi.versions.Gtk = "3.0";
 export const Gtk = imports.gi.Gtk;
 /**
- * 
+ *
  */
 export type Signals = {
   [key: string]: (...args: any[]) => any;
 };
 /**
- * 
+ *
  */
-export type Props = { [key: string]: any, signals?: Signals }
+export type Props = { [key: string]: any; signals?: Signals };
 /**
- * 
+ *
  */
 export type VirtualWidget = {
-  widget: string,
-  props: Props,
-  children?: any[] | null | undefined
-}
+  widget: string;
+  props: Props;
+  children?: any[] | null | undefined;
+};
 /**
  * virtual widget
  */
@@ -35,23 +35,15 @@ export function v(
 /**
  * virtual widget builder
  */
-export function b({
-  widget,
-  props,
-  children,
-}: VirtualWidget) {
+export function b({ widget, props, children }: VirtualWidget) {
   const { signals, ...attributes } = props;
-  const el: any = Object.keys(attributes)
-    .reduce(
-      (out, key) => {
-        out[key] = attributes[key];
-        return out;
-      },
-      new (Gtk as any)[capitalize(widget)]()
-    );
+  const el: any = Object.keys(attributes).reduce((out, key) => {
+    out[key] = attributes[key];
+    return out;
+  }, new (Gtk as any)[capitalize(widget)]());
   if (children) {
     for (let child of children) {
-      el.add(b(child))
+      el.add(b(child));
     }
   }
   if (signals) {

@@ -1,8 +1,8 @@
 /**
- * 
+ *
  */
 declare namespace JSX {
-    interface IntrinsicElements {
-        [elementName: string]: any
-    }
+  interface IntrinsicElements {
+    [elementName: string]: any;
+  }
 }

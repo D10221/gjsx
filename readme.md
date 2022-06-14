@@ -1,5 +1,6 @@
 # GJSX <small>(wip)</small>
-Using JSX and typescript with GJS 
+
+Using JSX and typescript with GJS
 
 ### Credits:
 
@@ -10,5 +11,3 @@ Using JSX and typescript with GJS
 - [node-gtk](https://github.com/romgrk/node-gtk)
 - [ts-for-gir](https://github.com/sammydre/ts-for-gir)
 - [gjsify](https://github.com/gjsify)
-
- 

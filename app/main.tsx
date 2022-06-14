@@ -1,11 +1,10 @@
-
 import { v, b, Gtk } from "../lib/gjsx";
 
 Gtk.init(null);
 
 let i = 0;
 function clicked(sender: any) {
-  sender.label = `Clicks=${++i}`
+  sender.label = `Clicks=${++i}`;
 }
 //
 const widget = b(
