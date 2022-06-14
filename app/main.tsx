@@ -1,5 +1,5 @@
 
-import { v, b, Gtk } from "./gjsx";
+import { v, b, Gtk } from "../lib/gjsx";
 
 Gtk.init(null);
 

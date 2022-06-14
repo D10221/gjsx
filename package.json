@@ -8,7 +8,7 @@
     "typescript": "^4.7.3"
   },
   "scripts": {
-    "build": "esbuild src/main.tsx --bundle --outfile=build/app.js",
+    "build": "esbuild app/main.tsx --bundle --outfile=build/app.js",
     "watch": "yarn build --watch",
     "start": "gjs build/app.js"
   },
