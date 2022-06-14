@@ -12,5 +12,5 @@
     "watch": "yarn build --watch",
     "start": "gjs dist/main.js",
     "format": "prettier -w ./"
-  }  
+  }
 }
