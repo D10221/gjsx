@@ -6,11 +6,13 @@ Gtk.init(null);
 let i = 0;
 function clicked(sender: Button) {
   sender.label = `Clicks=${++i}`;
+  window.title = title + " Click!";
 }
+const title = "Hellow World";
 //
-const widget: Window = (
+const window: Window = (
   <window
-    title="Hellow World"
+    title={title}
     border_width={100}
     signals={{ destroy: () => Gtk.main_quit() }}
   >
@@ -20,6 +22,6 @@ const widget: Window = (
     </box>
   </window>
 );
-widget.show_all();
+window.show_all();
 // mainloop start until quit
 Gtk.main();
