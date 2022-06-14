@@ -1,48 +1,71 @@
-const Gtk = imports.gi.Gtk;
+imports.gi.versions.Gtk = "3.0";
+export const Gtk = imports.gi.Gtk;
 /**
- *
+ * 
  */
-export  function h(
-  element: string,
-  attributes: { [key: string]: any },
+export type Signals = {
+  [key: string]: (...args: any[]) => any;
+};
+/**
+ * 
+ */
+export type Props = { [key: string]: any, signals?: Signals }
+/**
+ * 
+ */
+export type VirtualWidget = {
+  widget: string,
+  props: Props,
+  children?: any[] | null | undefined
+}
+/**
+ * virtual widget
+ */
+export function v(
+  widget: string,
+  props: Props,
   ...children: any[]
-) {
+): VirtualWidget {
   return {
-    element,
-    attributes,
+    widget,
+    props,
     children,
   };
 }
 /**
- *
+ * virtual widget builder
  */
-export function render({
-  element,
-  attributes,
+export function b({
+  widget,
+  props,
   children,
-}: {
-  element: "string";
-  attributes: { [key: string]: any };
-  children: any[];
-}) {
-  const el = new Gtk[capitalize(element)]();  
-  const { signals, ...atts } = attributes;
-  Object.keys(atts).map((key) => (el[key] = atts[key]));
+}: VirtualWidget) {
+  const { signals, ...attributes } = props;
+  const el: any = Object.keys(attributes)
+    .reduce(
+      (out, key) => {
+        out[key] = attributes[key];
+        return out;
+      },
+      new (Gtk as any)[capitalize(widget)]()
+    );
   if (children) {
-    children.map((child) => el.add(render(child)));
+    for (let child of children) {
+      el.add(b(child))
+    }
   }
   if (signals) {
-    Object.keys(signals).map((signal) => {
+    for (let signal of Object.keys(signals)) {
       el.connect(signal, signals[signal]);
-    });
+    }
   }
   return el;
 }
 /**
  *
- * @param element
+ * @param string
  * @returns
  */
-function capitalize(element: string) {
-  return element[0].toUpperCase() + element.substring(1);
+function capitalize(string: string) {
+  return string[0].toUpperCase() + string.substring(1);
 }
