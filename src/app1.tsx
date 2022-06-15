@@ -3,12 +3,12 @@ import v from "../lib/gjsx";
 
 Gtk.init(null);
 
+const title = "Hellow World";
 let i = 0;
 function clicked(sender: Button) {
   sender.label = `Clicks=${++i}`;
   window.title = title + " Click!";
 }
-const title = "Hellow World";
 //
 const window: Window = (
   <window

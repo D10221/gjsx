@@ -8,10 +8,10 @@
     "typescript": "^4.7.3"
   },
   "scripts": {
-    "build": "./build 'app/main.tsx'",
+    "build": "./build app1.tsx",
     "clean": "rm dist -rf",
     "format": "prettier -w ./",
-    "start": "gjs dist/main.js",
+    "start": "./start app1",
     "test": "echo Not Implemented",
     "watch": "yarn build --watch"
   }
