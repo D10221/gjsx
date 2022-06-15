@@ -3,7 +3,7 @@
  *   ;) But you get the gist ?  
  */
 import "@local/gjs";
-import Gtk from "@local/gjs/@types/Gjs/Gtk-3.0.js"; 
+import Gtk from "./gjs/Gtk-3.0.js"; 
 /** @jsx JSXXML */
 import { render, JSXXML } from "jsx-xml";
 

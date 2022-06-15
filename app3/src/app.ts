@@ -1,5 +1,5 @@
 import "@local/gjs";
-import Gtk from "@local/gjs/@types/Gjs/Gtk-3.0.js"; 
+import Gtk from "./gjs/Gtk-3.0";
 // @ts-ignore
 import xml from "./app.xml";
 
