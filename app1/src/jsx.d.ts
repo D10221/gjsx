@@ -3,8 +3,6 @@
  */
 declare namespace JSX {
   
-  
-
   type Maybe<T> = T | null | undefined;
 
   type IntrinsicElement<T, K extends keyof T = keyof T> = Partial<

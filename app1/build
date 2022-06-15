@@ -4,8 +4,9 @@
 # target: "firefox68", // Since GJS 1.63.90
 # target: "firefox78", // Since GJS 1.65.90
 # target: "firefox91", // Since GJS 1.71.1
+
 if [  -z "$1" ]; then
     echo "Expected \$1" >&2
     exit 1
 fi
-esbuild --target=firefox78 --loader:.xml=text --bundle --outdir=dist --external:gi://* "src/$1"
+esbuild --target=firefox78 --loader:.xml=text --bundle --outdir=dist --external:gi://* "$1"

@@ -2,8 +2,8 @@
  *  jsx-xml doesnt work here , is for Node
  *   ;) But you get the gist ?  
  */
-import "../@types/Gjs";
-import Gtk, { Builder, Button, Window, Label } from "../@types/Gjs/Gtk-3.0";
+import "@local/gjs";
+import Gtk from "@local/gjs/@types/Gjs/Gtk-3.0.js"; 
 /** @jsx JSXXML */
 import { render, JSXXML } from "jsx-xml";
 

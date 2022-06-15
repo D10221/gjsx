@@ -1,4 +1,4 @@
-import Gtk from "../@types/Gjs/Gtk-3.0";
+import Gtk from "@local/gjs/@types/Gjs/Gtk-3.0.js";
 // import imports from "../@types/Gjs/index"
 // imports.gi.versions.Gtk = "3.0";
 /**

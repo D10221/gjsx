@@ -1,5 +1,5 @@
-import Gtk, { Button, Window } from "../@types/Gjs/Gtk-3.0";
-import v from "../lib/gjsx";
+import Gtk, { Button, Window } from "@local/gjs/@types/Gjs/Gtk-3.0.js";
+import v from "./gjsx";
 
 Gtk.init(null);
 
