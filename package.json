@@ -14,5 +14,8 @@
     "start": "./start app1",
     "test": "echo Not Implemented",
     "watch": "yarn build --watch"
+  },
+  "dependencies": {
+    "jsx-xml": "^0.2.3"
   }
 }

@@ -1,10 +1,16 @@
-/** @jsx  jsx  */
+/**
+ *  jsx-xml doesnt work here , is for Node
+ *   ;) But you get the gist ?  
+ */
 import "../@types/Gjs";
 import Gtk, { Builder, Button, Window, Label } from "../@types/Gjs/Gtk-3.0";
+/** @jsx JSXXML */
+import { render, JSXXML } from "jsx-xml";
 
 try {
   Gtk.init(null);
-  const builder = render(    
+  const builder = build(
+    render(
       <interface>
         <requires lib="gtk+" version="3.18" />
         <object class="GtkWindow" id="MainWindow">
@@ -55,7 +61,8 @@ try {
             </object>
           </child>
         </object>
-      </interface>    
+      </interface>
+    )
   );
 
   const title = "Hellow World";
@@ -71,30 +78,25 @@ try {
   const button1 = builder.get_object("_button1") as Button;
   button1.connect("clicked", clicked);
 
-  const label = builder.get_object("_label1") as Label
+  const label = builder.get_object("_label1") as Label;
 
   window.show_all();
-  
+
   Gtk.main(); // mainloop start until quit
 } catch (error) {
   log(error);
   Gtk.main_quit();
 }
 
-function jsx(e: any, p: any, c: any) {
-  throw new Error("TODO");
-}
+// declare namespace JSX {
+//   interface IntrinsicElements {
+//     object: any;
+//     property: any;
+//     child: any;
+//     packing: any;
+//   }
+// }
 
-function render(x: any) {  
-  if(true) throw new Error("TODO");
-  return Builder.new_from_string(?, ?.length)  
-}
-
-declare namespace JSX {
-  interface IntrinsicElements {
-    object: any;
-    property: any;
-    child: any;
-    packing: any;
-  }
+function build(string: string) {
+  return Builder.new_from_string(string, string?.length);
 }
