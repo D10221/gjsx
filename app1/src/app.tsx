@@ -1,20 +1,20 @@
-import Gtk, { Button, Window } from "./gjs/Gtk-3.0";
+import * as gtk from "@local/gjs/types/gjs/Gtk-3.0";
 import v from "./gjsx";
 
-Gtk.init(null);
+gtk.init(null);
 
 const title = "Hellow World";
 let i = 0;
-function clicked(sender: Button) {
+function clicked(sender: gtk.Button) {
   sender.label = `Clicks=${++i}`;
   window.title = title + " Click!";
 }
 //
-const window: Window = (
+const window: gtk.Window = (
   <window
     title={title}
     border_width={100}
-    signals={{ destroy: () => Gtk.main_quit() }}
+    signals={{ destroy: () => gtk.main_quit() }}
   >
     <box>
       <button label="Click me!" signals={{ clicked }} />
@@ -24,4 +24,4 @@ const window: Window = (
 );
 window.show_all();
 // mainloop start until quit
-Gtk.main();
+gtk.main();

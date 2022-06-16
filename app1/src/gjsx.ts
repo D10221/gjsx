@@ -1,4 +1,4 @@
-import Gtk from "@local/gjs/@types/Gjs/Gtk-3.0.js";
+import * as gtk from "@local/gjs/types/gjs/Gtk-3.0";
 // import imports from "../@types/Gjs/index"
 // imports.gi.versions.Gtk = "3.0";
 /**
@@ -19,7 +19,7 @@ export default function v<K extends keyof JSX.IntrinsicElements>(
     | undefined,
   ...children: any[]
 ) {
-  const el: JSX.IntrinsicElements[K] = new (Gtk as any)[
+  const el: JSX.IntrinsicElements[K] = new (gtk as any)[
     capitalize(elementName as any)
   ]();
   if (props) {

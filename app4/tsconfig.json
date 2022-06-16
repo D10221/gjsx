@@ -1,9 +1,16 @@
 {
-  "extends": "../tsconfig.json",
   "compilerOptions": {
+    "target": "esnext" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+    "lib": ["ESNext"],
     "jsx": "react",
-    "jsxFactory": "v" /* Specify the JSX factory function used when targeting React JSX emit, e.g. 'React.createElement' or 'h'. */,
-    // "jsxFragmentFactory": "",                         /* Specify the JSX Fragment reference used for fragments when targeting React JSX emit e.g. 'React.Fragment' or 'Fragment'. */
+    "jsxFactory": "jsxml",
+    "reactNamespace": "" /* Specify the object invoked for 'createElement'. This only applies when targeting 'react' JSX emit. */,
+    "module": "ESNext" /* Specify what module code is generated. */,
+    "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
+    "allowJs": true /* Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files. */,
+    "checkJs": true /* Enable error reporting in type-checked JavaScript files. */,
+    "noEmit": true /* Disable emitting files from a compilation. */,
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
-  "include": ["src"]
+  "include": ["src/"]
 }

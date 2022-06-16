@@ -2,6 +2,6 @@
   "name": "@local/gjs",
   "private": "true",
   "version": "0.0.1",
-  "main": "@types/Gjs/Gjs.js",
-  "types": "@types/Gjs/Gjs.d.ts"
+  "main": "types/gjs/index.js",
+  "types": "types/gjs/index.d.ts"
 }
