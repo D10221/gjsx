@@ -2,8 +2,7 @@ import "@local/gjs";
 import * as gtk from "@local/gjs/types/gjs/Gtk-3.0";
 import { Button, Window, Label } from "@local/gjs/types/gjs/Gtk-3.0";
 import build from "./builder";
-import jsxml  from "./jsxml";
-import render from "./render";
+import { jsxml, render }  from "@local/jsxml";
 
 gtk.init(null);
 const builder = build(

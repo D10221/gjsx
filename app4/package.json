@@ -13,7 +13,7 @@
     "clean": "rm dist -rf",
     "format": "prettier -w ./",
     "start": "./start app.js",
-    "test": "ts-node test",
+    "test": "echo N/A",
     "watch": "yarn build --watch"
   },
   "dependencies": {
