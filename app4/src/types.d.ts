@@ -9,12 +9,12 @@ declare namespace JSX {
       // children: ( requires | object | template | menu )
     };
     requires: {
-      lib: string;
-      version: string;
+      lib: "gtk+";
+      version: "3.0"|"3.18"; // TODO
       // no children
     };
     object: {
-      class: string;
+      class: "GtkWindow"|"GtkBox"|"GtkLabel"|"GtkButton";
       id?: string; //xsd:ID
       "type-func"?: string;
       // "constructor"?: string;
