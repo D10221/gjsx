@@ -3,5 +3,11 @@
   "private": "true",
   "version": "0.0.1",
   "main": "types/gjs/index.js",
-  "types": "types/gjs/index.d.ts"
+  "types": "types/gjs/index.d.ts",
+  "scripts": {
+    "build": "echo N/A",
+    "clean": "echo N/A",
+    "test": "echo N/A",
+    "format": "echo N/A"
+  }
 }

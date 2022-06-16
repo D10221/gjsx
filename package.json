@@ -1,10 +1,18 @@
 {
- "private": true,
- "workspaces": [
-  "app1",
-  "app2",
-  "app3",
-  "app4",
-  "gjs"
- ]
+  "private": true,
+  "workspaces": [
+    "gjs",
+    "jsxml",
+    "app1",
+    "app2",
+    "app3",
+    "app4"
+  ],
+  "scripts": {
+    "build": "yarn workspaces run build",
+    "clean": "yarn workspaces run clean",
+    "format": "yarn workspaces run format",
+    "start": "./start",
+    "test": "yarn workspaces run test"
+  }
 }

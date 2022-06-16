@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+if [ -z "$1" ]; then
+    echo "Expected workspace name as argument"
+    echo "example: '\$yarn start app1'"
+    exit 1
+fi
+yarn workspace "@local/$1" run start

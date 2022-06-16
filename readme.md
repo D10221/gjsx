@@ -1,6 +1,6 @@
 # GJSX <small>(wip)</small>
 
-Using JSX and Typescript with GJS
+Explore JSX and Typescript usage with [GJS](https://gjs.guide/)
 
 ### Types:
 
