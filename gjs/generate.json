@@ -1,0 +1,11 @@
+{
+  "outDir": "./",
+  "scriptTarget": "ESNext",
+  "proptypes": {
+    "outDir": "proptypes",
+    "module": "@local/gjs",
+    "classes": {
+      "types/gjs/Gtk-3.0.d.ts": ["Window", "Box", "Button", "Label"]
+    }
+  }
+}

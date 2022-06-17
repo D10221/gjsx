@@ -1,7 +1,6 @@
 {
   "private": true,
   "workspaces": [
-    "tsq",
     "gjs",
     "jsxml",
     "app1",
@@ -9,6 +8,12 @@
     "app3",
     "app4"
   ],
+  "devDependencies": {
+    "esbuild": "0.14.43",
+    "prettier": "2.6.2",
+    "ts-node": "^10.8.1",
+    "typescript": "4.7.3"
+  },
   "scripts": {
     "build": "yarn workspaces run build",
     "clean": "yarn workspaces run clean",

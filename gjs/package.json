@@ -2,12 +2,18 @@
   "name": "@local/gjs",
   "private": "true",
   "version": "0.0.1",
-  "main": "types/gjs/index.js",
   "types": "types/gjs/index.d.ts",
   "scripts": {
     "build": "echo N/A",
     "clean": "echo N/A",
     "test": "echo N/A",
     "format": "echo N/A"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/prettier": "^2.6.3",
+    "prettier": "2.6.2",
+    "ts-node": "^10.8.1",
+    "typescript": "4.7.3"
   }
 }

@@ -1,10 +1,10 @@
-import { Window } from "@local/gjs/types/gjs/Gtk-3.0";
 import jsxml from "@local/jsxml";
 import GtkObjectProperty from "./GtkObjectProperty";
+import { WindowProps } from "@local/gjs/proptypes/Gtk-3.0";
 /**
  *
  */
-type GtkWindowProps = Omit<Partial<Pick<Window, keyof Window>>, "add"> & {
+type GtkWindowProps = WindowProps & {
   children?: any;
   id?: string;
 };
