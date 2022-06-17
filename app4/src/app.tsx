@@ -12,8 +12,8 @@ const builder = build(
       <requires lib="gtk+" version="3.18" />
       <GtkWindow
         id="MainWindow"
-        can_focus={"False"}
-        title="Hello World"
+        can_focus={false}
+        title="Hello World #4"
         default_width={480}
         default_height={240}
       >
