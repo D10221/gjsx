@@ -1,11 +1,17 @@
 import "@local/gjs";
-import * as gtk from "@local/gjs/types/gjs/Gtk-3.0";
-import { Button, Window, Label } from "@local/gjs/types/gjs/Gtk-3.0";
+import {
+  Button,
+  Window,
+  Label,
+  init,
+  main,
+  main_quit,
+} from "@local/gjs/types/gjs/Gtk-3.0";
 import build from "./builder";
 import { jsxml, render } from "@local/jsxml";
 import GtkWindow from "./components/GtkWindow";
 
-gtk.init(null);
+init(null);
 const builder = build(
   render(
     <interface>
@@ -67,8 +73,8 @@ function clicked(sender: Button) {
   window.title = title + " Click!";
 }
 
-const window: gtk.Window = builder.get_object("MainWindow") as Window;
-window.connect("delete-event", () => gtk.main_quit());
+const window: Window = builder.get_object("MainWindow") as Window;
+window.connect("delete-event", () => main_quit());
 
 const button1 = builder.get_object("_button1") as Button;
 button1.connect("clicked", clicked);
@@ -77,4 +83,4 @@ const label = builder.get_object("_label1") as Label;
 
 window.show_all();
 
-gtk.main(); // mainloop start until quit
+main(); // mainloop start until quit
