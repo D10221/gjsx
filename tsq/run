@@ -1,0 +1,2 @@
+ #!/usr/bin/env sh
+ yarn dev '../gjs/types/gjs/Gtk-3.0.d.ts' Window
