@@ -2,9 +2,9 @@
  * src: https://github.com/smmoosavi/jsx-xml/blob/master/src/jsxxml.js
  */
 /**
- * 
- * @param children 
- * @returns 
+ *
+ * @param children
+ * @returns
  */
 const normalizeChildren = (children) => {
   //return _.reduce(_.flatMapDeep(children),
@@ -63,6 +63,6 @@ function mapKeys(attr) {
   }, {});
 }
 
-function isEmpty(o: {}){
-  return Object.keys(o).length == 0
+function isEmpty(o: {}) {
+  return Object.keys(o).length == 0;
 }
