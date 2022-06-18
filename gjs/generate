@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+echo "TODO: generate ts-for-git Gjs definition"
+# gemerate prop types from gir generated Gjs definition
+cd proptypes && generate 

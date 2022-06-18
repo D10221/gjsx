@@ -7,7 +7,8 @@
     "build": "echo N/A",
     "clean": "echo N/A",
     "test": "echo N/A",
-    "format": "echo N/A"
+    "format": "echo N/A",
+    "generate": "./generate"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
