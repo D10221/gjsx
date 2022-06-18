@@ -1,0 +1,3 @@
+[submodule "ts-for-gir"]
+	path = ts-for-gir
+	url = https://github.com/sammydre/ts-for-gir
