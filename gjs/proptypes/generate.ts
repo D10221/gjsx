@@ -16,7 +16,10 @@ import { format } from "prettier";
 (function main({ proptypes, outDir, scriptTarget }: Config) {
   let output: Out = {};
   for (let [filePath, classNames] of Object.entries(proptypes.classes)) {
-    const { basename, code, dirname, filename } = fileInfo(filePath);
+    const { basename, code, dirname, filename } = fileInfo(
+      proptypes.module,
+      filePath
+    );
 
     const target: ScriptTarget =
       // @ts-ignore
@@ -63,11 +66,18 @@ import { format } from "prettier";
 type Out = {
   [s: string]: { imports: string; declaration: string };
 };
-function fileInfo(filePath: string) {
+/**
+ *
+ * @param filePath
+ * @returns
+ */
+function fileInfo(module: string, filePath: string) {
+  // @ts-ignore
+  const root = path.dirname(require.resolve(module));
   const basename = path.basename(filePath);
   const filename = basename.replace(".d.ts", "");
   const dirname = path.dirname(filePath);
-  const code = readFileSync(filePath, "utf-8");
+  const code = readFileSync(path.join(root, filePath), "utf-8");
   return { basename, code, dirname, filename };
 }
 
