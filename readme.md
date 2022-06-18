@@ -4,13 +4,7 @@ Explore JSX and Typescript usage with [GJS](https://gjs.guide/)
 
 ## Apps
 
-- app1  
-   using a simple jsx factory function to create Gtk windgets class instances
-- app2  
-   using `ts-for-gir` for classic Gtk 
-- app3  
-   using `ts-for-gir` for classic Gtk, from glade UI xml templates
-- app4
+- app
     using jsx factory function to create glade xml 
 
 # Init
