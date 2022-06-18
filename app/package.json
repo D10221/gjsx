@@ -12,10 +12,10 @@
     "xmlbuilder": "^15.1.1"
   },
   "scripts": {
-    "build": "./build src/app.tsx",
+    "build": "./build src/main.tsx",
     "clean": "rm dist -rf",
     "format": "prettier -w ./",
-    "start": "./start app.js",
+    "start": "./start main.js",
     "test": "echo N/A",
     "watch": "yarn build --watch"
   }

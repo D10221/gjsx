@@ -2,13 +2,13 @@
   "name": "@local/gjs",
   "private": "true",
   "version": "0.0.1",
-  "types": "types/gjs/index.d.ts",
+  "types": "./index.d.ts",
   "scripts": {
     "build": "echo N/A",
     "clean": "echo N/A",
     "test": "echo N/A",
     "format": "echo N/A",
-    "generate": "./generate"
+    "generate": "./generate.sh"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",

@@ -52,7 +52,8 @@ export default (
       [type]: [...(isEmpty(attr) ? [] : [attr]), ...children],
     };
   }
-  throw new Error("type should be function or string");
+  // throw new Error(`jsxml: type (${JSON.stringify(type)}:${typeof type}) should be function or string`);
+  return type;
 };
 
 function mapKeys(attr) {
