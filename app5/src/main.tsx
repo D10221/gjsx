@@ -1,5 +1,5 @@
 import { Window, init, main, main_quit } from "@local/gjs";
-import { build } from "@local/gjsxml"
+import { build } from "@local/gjsxml";
 import { jsxml, render } from "@local/jsxml/src";
 import UI from "./ui";
 import app from "./app";

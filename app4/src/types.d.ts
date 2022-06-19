@@ -10,11 +10,11 @@ declare namespace JSX {
     };
     requires: {
       lib: "gtk+";
-      version: "3.0"|"3.18"; // TODO
+      version: "3.0" | "3.18"; // TODO
       // no children
     };
     object: {
-      class: "GtkWindow"|"GtkBox"|"GtkLabel"|"GtkButton";
+      class: "GtkWindow" | "GtkBox" | "GtkLabel" | "GtkButton";
       id?: string; //xsd:ID
       "type-func"?: string;
       // "constructor"?: string;
@@ -26,61 +26,60 @@ declare namespace JSX {
       // children: property | signal | child | ANY
     };
     property: {
-      name: string,
+      name: string;
       translatable?: "yes" | "no";
       comments?: string;
-      context?: string,
-      "bind-source"?: string,
-      "bind-property"?: string,
-      "bind-flags"?: string,
+      context?: string;
+      "bind-source"?: string;
+      "bind-property"?: string;
+      "bind-flags"?: string;
       // children: text ?
     };
     signal: {
-      name: string,
-      handler: string,
-      after?: string,
-      swapped?: string,
-      object?: string,
-      last_modification_time?: string,
+      name: string;
+      handler: string;
+      after?: string;
+      swapped?: string;
+      object?: string;
+      last_modification_time?: string;
       // children empty
     };
     packing: {};
     child: {
-      type?: string,
-      "internal-child"?: string,
+      type?: string;
+      "internal-child"?: string;
       // children: (object | ANY)*
-    },
+    };
     menu: {
-      id: string // { xsd:ID },
-      domain?: string,
+      id: string; // { xsd:ID },
+      domain?: string;
       // children: (item | submenu | section) *
     };
     item: {
-      id?: string;// { xsd:ID } ?,
+      id?: string; // { xsd:ID } ?,
       // children: (attribute_ | link) *
     };
     attribute: {
-      name: string,
-      type?: string,
-      translatable?: "yes" | "no",
-      context?: string,
-      comments?: string,
+      name: string;
+      type?: string;
+      translatable?: "yes" | "no";
+      context?: string;
+      comments?: string;
       // children:text ?
     };
     ink: {
-       id ?: string; //{ xsd:ID } ?,
-       name: string // { text },
+      id?: string; //{ xsd:ID } ?,
+      name: string; // { text },
       // children: item *
     };
     submenu: {
-       id?: string; //  { xsd:ID } ?,
+      id?: string; //  { xsd:ID } ?,
       // children: (attribute_ | item | submenu | section) *
     };
-    section :{
-       id ?: string ; // { xsd:ID } ?,
+    section: {
+      id?: string; // { xsd:ID } ?,
       // children: (attribute_ | item | submenu | section) *
-    }
-    
+    };
   }
   // ANY = element * - (interface | requires | object | template | property | signal | child | menu | item | attribute | link | submenu | section) {
   //   attribute * { text } *,
@@ -90,5 +89,4 @@ declare namespace JSX {
   //   attribute * { text } *,
   //   (ALL * & text ?)
   // }
-  
 }

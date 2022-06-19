@@ -12,11 +12,11 @@ export default function GtkObjectProperty({
   return <property name={key}>{propValue(value)}</property>;
 }
 /**
- * 
- * @param value 
- * @returns 
+ *
+ * @param value
+ * @returns
  */
-function propValue(value: any){
-  if(typeof value === "boolean")return value ? "True": "False";
+function propValue(value: any) {
+  if (typeof value === "boolean") return value ? "True" : "False";
   return value;
 }
