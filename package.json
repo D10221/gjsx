@@ -3,10 +3,12 @@
   "workspaces": [
     "gjs",
     "jsxml",
+    "gjsxml",
     "app1",
     "app2",
     "app3",
-    "app4"
+    "app4",
+    "app5"
   ],
   "devDependencies": {
     "esbuild": "0.14.43",

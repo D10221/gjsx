@@ -13,43 +13,88 @@ import { format } from "prettier";
 /**
  *
  */
-(function main({ proptypes, outDir, scriptTarget }: Config) {
-  let output: Out = {};
-  for (let [filePath, classNames] of Object.entries(proptypes.classes)) {
-    const { basename, code, dirname, filename } = fileInfo(
-      proptypes.module,
-      filePath
-    );
-
-    const target: ScriptTarget =
-      // @ts-ignore
-      ScriptTarget[scriptTarget] || ScriptTarget.ESNext;
-
-    const sourceFile = createSourceFile(
-      basename,
-      code,
-      target,
-      /*setParentNodes*/ true
-    );
-    for (const className of classNames) {
-      sourceFile.forEachChild(
-        findClass(
-          ofName(
-            className,
-            getProps((props) => {
-              output = {
-                ...output,
-                [className]: {
-                  declaration: declareProps(className, props),
-                  imports: toImports(className, proptypes, dirname, filename),
-                },
-              };
-            })
-          )
-        )
+(function main(
+  args: string[],
+  { proptypes, outDir, scriptTarget, classes, module }: Config
+) {
+  // GtkClass
+  if (args.indexOf("gtkclass") !== -1) {
+    for (let [filePath, classNames] of Object.entries(classes)) {
+      const basename = path.basename(filePath);
+      const filename = basename.replace(".d.ts", "");
+      //const dirname = path.dirname(filePath);
+      //WAR: confict
+      write(
+        `JSX/${filename}.d.ts`,
+        format(gtkClass(classNames), { parser: "typescript" })
       );
     }
-    write(`${proptypes.outDir}/${filename}/index.d.ts`, format(toText(output)));
+  }
+  // Components
+  if (args.indexOf("components") !== -1) {
+    for (let [filePath, classNames] of Object.entries(classes)) {
+      const basename = path.basename(filePath);
+      const filename = basename.replace(".d.ts", "");
+      //const dirname = path.dirname(filePath);
+      //WAR: confict
+      write(
+        `components/${filename}.ts`,
+        format(gtkComponent(classNames), { parser: "typescript" })
+      );
+    }
+  }
+  // poptypes
+  if (args.indexOf("proptypes") !== -1) {
+    let output: Out = {};
+    for (let [filePath, classNames] of Object.entries(classes)) {
+      const { basename, code, dirname, filename, root } = fileInfo(
+        module,
+        filePath
+      );
+
+      const target: ScriptTarget =
+        // @ts-ignore
+        ScriptTarget[scriptTarget] || ScriptTarget.ESNext;
+
+      const sourceFile = createSourceFile(
+        basename,
+        code,
+        target,
+        /*setParentNodes*/ true
+      );
+      for (const className of classNames) {
+        sourceFile.forEachChild(
+          findClass(
+            ofName(
+              className,
+              getProps((props) => {
+                output = {
+                  ...output,
+                  [className]: {
+                    declaration: declareProps(className, props),
+                    imports: toImports(className, module, dirname, filename),
+                  },
+                };
+              })
+            )
+          )
+        );
+      }
+      // write proptypes
+      write(
+        `${proptypes.outDir}/${filename}/index.d.ts`,
+        format(toText(output), { parser: "typescript" })
+      );
+    }
+  }
+  /**
+   *
+   * @param classNames
+   * @returns
+   */
+  function gtkClass(classNames: string[]) {
+    const classes = classNames.map((x) => `"Gtk${x}"`).join("|");
+    return `declare namespace JSX { type GtkClass=${classes};}`;
   }
   /**
    *
@@ -61,7 +106,7 @@ import { format } from "prettier";
     mkdirSync(path.dirname(p), { recursive: true });
     writeFileSync(p, content);
   }
-})(config());
+})(process.argv.slice(2), config());
 /** */
 type Out = {
   [s: string]: { imports: string; declaration: string };
@@ -78,7 +123,7 @@ function fileInfo(module: string, filePath: string) {
   const filename = basename.replace(".d.ts", "");
   const dirname = path.dirname(filePath);
   const code = readFileSync(path.join(root, filePath), "utf-8");
-  return { basename, code, dirname, filename };
+  return { basename, code, dirname, filename, root };
 }
 
 /**
@@ -91,15 +136,11 @@ function fileInfo(module: string, filePath: string) {
  */
 function toImports(
   className: string,
-  proptypes: {
-    outDir: string;
-    module: string;
-    classes: { [s: string]: string[] };
-  },
+  module: string,
   dirname: string,
   filename: string
 ): string {
-  return `import { ${className} } from "${proptypes.module}/${dirname}/${filename}";`;
+  return `import { ${className} } from "${module}/${dirname}/${filename}";`;
 }
 
 /**
@@ -173,10 +214,10 @@ function getProps(yields: (props: PropertyDeclaration[]) => any) {
 type Config = {
   outDir: string;
   scriptTarget: string;
+  classes: { [s: string]: string[] };
+  module: string;
   proptypes: {
     outDir: string;
-    module: string;
-    classes: { [s: string]: string[] };
   };
 };
 /**
@@ -228,4 +269,19 @@ function findProperty(yields: (node: PropertyDeclaration) => any) {
       yields(member as PropertyDeclaration);
     }
   };
+}
+function gtkComponent(classNames: string[]): string {
+  const components = classNames
+    .map(
+      (className) =>
+        `export const Gtk${className}= GtkComponent<${className}Props>("Gtk${className}");`
+    )
+    .join("\n");
+
+  const props = classNames.map((x) => `${x}Props`).join(",");
+  return [
+    'import GtkComponent from "./GtkComponent";',
+    `import { ${props} } from "@local/gjs"; `,
+    components,
+  ].join("\n");
 }
