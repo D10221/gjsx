@@ -1,10 +1,43 @@
 /**
  * src: https://github.com/smmoosavi/jsx-xml/blob/master/src/jsxxml.js
  */
+export default (
+  type?: string | Function,
+  attr?: {} | null | undefined,
+  ...children: any[]
+) => {
+  if (typeof type === "function") {
+    return type({
+      ...attr,
+      ...(children.length > 0 ? { children } : {}),
+    });
+  }
+  if (typeof type === "string") {
+    children = normalizeChildren(children);
+    // attr = _.omitBy(attr, (value, key) => key.startsWith("__")); // don't include '_'
+    // attr = _.mapKeys(attr, (value, key) => "@" + key);           // don't include '_'
+    attr = mapKeys(attr || {});
+    return {
+      [type]: [...(isEmpty(attr) ? [] : [attr]), ...children],
+    };
+  }
+  return type; //throw new Error("type should be function or string");
+};
+
+function mapKeys(attr) {
+  return Object.entries(attr).reduce((o, [k, v]) => {
+    o["@" + k] = v;
+    return o;
+  }, {});
+}
+
+function isEmpty(o: {}) {
+  return Object.keys(o).length == 0;
+}
 /**
- * 
- * @param children 
- * @returns 
+ *
+ * @param children
+ * @returns
  */
 const normalizeChildren = (children) => {
   //return _.reduce(_.flatMapDeep(children),
@@ -29,39 +62,3 @@ const normalizeChildren = (children) => {
     return acc;
   }, []);
 };
-/**
- *
- */
-export default (
-  type?: string | Function,
-  attr?: {} | null | undefined,
-  ...children: any[]
-) => {
-  if (typeof type === "function") {
-    return type({
-      ...attr,
-      ...(children.length > 0 ? { children } : {}),
-    });
-  }
-  if (typeof type === "string") {
-    children = normalizeChildren(children);
-    // attr = _.omitBy(attr, (value, key) => key.startsWith("__"));
-    // attr = _.mapKeys(attr, (value, key) => "@" + key);
-    attr = mapKeys(attr || {});
-    return {
-      [type]: [...(isEmpty(attr) ? [] : [attr]), ...children],
-    };
-  }
-  throw new Error("type should be function or string");
-};
-
-function mapKeys(attr) {
-  return Object.entries(attr).reduce((o, [k, v]) => {
-    o["@" + k] = v;
-    return o;
-  }, {});
-}
-
-function isEmpty(o: {}){
-  return Object.keys(o).length == 0
-}
