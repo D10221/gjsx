@@ -1,13 +1,10 @@
-import { Window, init, main, main_quit } from "@local/gjs";
 import { build } from "@local/gjsxml";
+import { init, main } from "@local/gjs";
 import { jsxml, render } from "@local/jsxml/src";
 import UI from "./ui";
 import configure from "./configure";
+import start from "./start";
 
 init(null);
-
-const { window } = configure(build(render(<UI />)));
-window.connect("delete-event", () => main_quit());
-window.show_all();
-
+start(configure(build(render(<UI />))));
 main(); // mainloop start until quit
