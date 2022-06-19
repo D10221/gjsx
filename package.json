@@ -18,6 +18,7 @@
   },
   "scripts": {
     "build": "yarn workspaces run build",
+    "build:": "./build",
     "clean": "yarn workspaces run clean",
     "format": "yarn workspaces run format",
     "start": "./start",
