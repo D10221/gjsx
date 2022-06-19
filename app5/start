@@ -3,4 +3,4 @@ if [  -z "$1" ]; then
     echo "Expected \$1" >&2
     exit 1
 fi
-gjs dist/$1
+GTK_DEBUG=interactive gjs dist/$1

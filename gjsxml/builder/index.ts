@@ -1,13 +1,49 @@
-import { Builder } from "@local/gjs/types/gjs/Gtk-3.0";
+import { Builder, ApplicationWindow } from "@local/gjs/types/gjs/Gtk-3.0";
+import type * as Gio from "@local/gjs/types/gjs/Gio-2.0";
+import type * as GLib from "@local/gjs/types/gjs/GLib-2.0";
 import type * as GObject from "@local/gjs/types/gjs/GObject-2.0";
-
+/**
+ * 
+ * @param string 
+ * @returns 
+ */
 export function build(string: string) {
   return Builder.new_from_string(string, string?.length);
 }
 /**
- * nah
+ * 
+ * @param configure 
+ * @param xml 
+ * @returns 
+ */
+export function factory<T extends GObject.Object>(
+  configure: (builder: Builder) => T,
+  xml: string
+) {
+  return configure(build(xml));
+}
+/**
+ * nah?
  */
 export function getObject(builder: Builder) {
   return <T extends GObject.Object = GObject.Object>(name: string) =>
     builder.get_object(name) as T;
+}
+/**
+ *
+ * @param window
+ * @param callback
+ */
+export function addAction(
+  window: ApplicationWindow,
+  actionName: string,
+  callback: ($obj: Gio.SimpleAction, parameter: GLib.Variant | null) => void
+) {
+  // @ts-ignore
+  imports.gi.versions.Gio = "2.0";
+  // @ts-ignore
+  const Gio = imports.gi.Gio;
+  const action = Gio.SimpleAction.new(actionName, null);
+  action.connect("activate", callback);
+  window.add_action(action);
 }

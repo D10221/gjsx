@@ -130,7 +130,7 @@ import {
   ViewportProps,
   VolumeButtonProps,
   WindowProps,
-} from "@local/gjs";
+} from "@local/gjsxml";
 export const GtkAboutDialog = GtkComponent<AboutDialogProps>("GtkAboutDialog");
 export const GtkAccelLabel = GtkComponent<AccelLabelProps>("GtkAccelLabel");
 export const GtkActionBar = GtkComponent<ActionBarProps>("GtkActionBar");

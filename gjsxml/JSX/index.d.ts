@@ -81,6 +81,12 @@ declare namespace JSX {
       section :{
          id ?: string ; // { xsd:ID } ?,
         // children: (attribute_ | item | submenu | section) *
+      };
+      /**
+       * glade?
+       */
+      placeholder: {
+        // ?? 
       }
       
     }

@@ -42,3 +42,9 @@ yarn && yarn build && yarn start app1
 - [Gjs](https://gjs.guide/)
 - [jsx-xml](https://github.com/smmoosavi/jsx-xml)
 - [xmlbuilder](https://github.com/oozcitak/xmlbuilder-js)
+
+### Debug
+- enable [inspector](https://wiki.gnome.org/action/show/Projects/GTK/Inspector)  
+    ```bash
+    $ gsettings set org.gtk.Settings.Debug enable-inspector-keybinding true
+    ```

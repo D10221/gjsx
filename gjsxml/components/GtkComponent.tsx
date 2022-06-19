@@ -29,13 +29,12 @@ function propValue(value: any) {
   return value;
 }
 /**
- * 
+ * this is wrong, packing depends on parent Element
  */
 type PackingProps = {
   expand?: boolean;
   fill?: boolean;
   position?: number;
-  padding?: number;
   "pack-type"?: "end" | "start";
   children?: any;
 };
