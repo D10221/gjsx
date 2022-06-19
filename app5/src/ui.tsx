@@ -6,7 +6,9 @@ import {
   GtkWindow,
   GtkPacking,
 } from "@local/gjsxml";
-
+/**
+ * Feeding builder
+ */
 export default (
   <interface>
     <requires lib="gtk+" version="3.0" />

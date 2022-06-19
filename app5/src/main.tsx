@@ -2,15 +2,11 @@ import { Window, init, main, main_quit } from "@local/gjs";
 import { build } from "@local/gjsxml";
 import { jsxml, render } from "@local/jsxml/src";
 import UI from "./ui";
-import app from "./app";
+import configure from "./configure";
 
 init(null);
 
-const xml = render(<UI />);
-const builder = build(xml);
-app(builder);
-
-const window = builder.get_object("MainWindow") as Window;
+const { window } = configure(build(render(<UI />)));
 window.connect("delete-event", () => main_quit());
 window.show_all();
 
