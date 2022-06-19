@@ -5,7 +5,7 @@ import {
   GtkLabel,
   GtkWindow,
   GtkPacking,
-} from "@local/gjs/components";
+} from "@local/gjsxml";
 
 export default (
   <interface>

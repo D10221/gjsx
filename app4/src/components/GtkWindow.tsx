@@ -1,6 +1,6 @@
 import jsxml from "@local/jsxml";
 import GtkObjectProperty from "./GtkObjectProperty";
-import { WindowProps } from "@local/gjs/proptypes/Gtk-3.0";
+import { WindowProps } from "@local/gjsxml/proptypes/Gtk-3.0";
 /**
  *
  */

@@ -1,7 +1,8 @@
-import { Builder, Button, getObject } from "@local/gjs";
+import { getObject } from "@local/gjsxml";
+import { Builder, Button } from "@local/gjs";
 /**
- * 
- * @param builder 
+ *
+ * @param builder
  */
 export default function app(builder: Builder) {
   let i = 0;

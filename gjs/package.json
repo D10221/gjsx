@@ -2,7 +2,7 @@
   "name": "@local/gjs",
   "private": "true",
   "version": "0.0.1",
-  "types": "types/gjs/index.d.ts",
+  "types": "index.d.ts",
   "scripts": {
     "build": "echo N/A",
     "clean": "echo N/A",

@@ -1,4 +1,4 @@
-import imports from "@local/gjs";
+import {} from "@local/gjs";
 import * as gtk from "@local/gjs/types/gjs/Gtk-3.0";
 import { Button, Window } from "@local/gjs/types/gjs/Gtk-3.0";
 // @ts-ignore
