@@ -11,7 +11,9 @@ Explore JSX and Typescript usage with [GJS](https://gjs.guide/)
 - app3  
    using `ts-for-gir` for classic Gtk, from glade UI xml templates
 - app4
-    using jsx factory function to create glade xml 
+    using jsx factory function to create glade xml
+- app5
+    using jsx and components
 
 # Init
 
