@@ -181,7 +181,6 @@ export function pixbuf_error_quark(): GLib.Quark
  * created from it; in this case you will need to pass in a function
  * of #GdkPixbufDestroyNotify so that the pixel data can be freed
  * when the pixbuf is finalized.
- * @callback 
  */
 export interface PixbufDestroyNotify {
     (pixels: Uint8Array): void
@@ -193,7 +192,6 @@ export interface PixbufDestroyNotify {
  * successful it should return %TRUE.  If an error occurs it should set
  * `error` and return %FALSE, in which case gdk_pixbuf_save_to_callback()
  * will fail with the same error.
- * @callback 
  */
 export interface PixbufSaveFunc {
     (buf: Uint8Array): boolean
@@ -204,34 +202,27 @@ export interface Pixbuf_ConstructProps extends GObject.Object_ConstructProps {
      * The number of bits per sample.
      * Currently only 8 bit per sample are supported.
      */
-    bits_per_sample?: number | null
-    colorspace?: Colorspace | null
-    has_alpha?: boolean | null
-    height?: number | null
+    bits_per_sample?: number
+    colorspace?: Colorspace
+    has_alpha?: boolean
+    height?: number
     /**
      * The number of samples per pixel.
      * Currently, only 3 or 4 samples per pixel are supported.
      */
-    n_channels?: number | null
-    pixel_bytes?: GLib.Bytes | null
-    pixels?: object | null
+    n_channels?: number
+    pixel_bytes?: GLib.Bytes
+    pixels?: object
     /**
      * The number of bytes between the start of a row and
      * the start of the next row. This number must (obviously)
      * be at least as large as the width of the pixbuf.
      */
-    rowstride?: number | null
-    width?: number | null
+    rowstride?: number
+    width?: number
 }
-/**
- * This is the main structure in the gdk-pixbuf library.  It is
- * used to represent images.  It contains information about the
- * image's pixel data, its color space, bits per sample, width and
- * height, and the rowstride (the number of bytes between the start of
- * one row and the start of the next).
- */
 export class Pixbuf {
-    /* Own properties of GdkPixbuf-2.0.GdkPixbuf.Pixbuf */
+    /* Properties of GdkPixbuf-2.0.GdkPixbuf.Pixbuf */
     /**
      * The number of bits per sample.
      * Currently only 8 bit per sample are supported.
@@ -254,9 +245,9 @@ export class Pixbuf {
      */
     readonly rowstride: number
     readonly width: number
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GdkPixbuf-2.0.GdkPixbuf.Pixbuf */
+    /* Methods of GdkPixbuf-2.0.GdkPixbuf.Pixbuf */
     /**
      * Takes an existing pixbuf and adds an alpha channel to it.
      * If the existing pixbuf already had an alpha channel, the channel
@@ -546,7 +537,7 @@ export class Pixbuf {
      * @param option_values values for named options
      * @param cancellable optional #GCancellable object, %NULL to ignore
      */
-    save_to_streamv(stream: Gio.OutputStream, type: string, option_keys: string[], option_values: string[], cancellable: Gio.Cancellable | null): boolean
+    save_to_streamv(stream: Gio.OutputStream, type: string, option_keys: string[], option_values: string[], cancellable?: Gio.Cancellable | null): boolean
     /**
      * Saves `pixbuf` to an output stream asynchronously.
      * 
@@ -562,7 +553,7 @@ export class Pixbuf {
      * @param cancellable optional #GCancellable object, %NULL to ignore
      * @param callback a #GAsyncReadyCallback to call when the pixbuf is saved
      */
-    save_to_streamv_async(stream: Gio.OutputStream, type: string, option_keys: string[], option_values: string[], cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    save_to_streamv_async(stream: Gio.OutputStream, type: string, option_keys: string[], option_values: string[], cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Saves pixbuf to a file in `type,` which is currently "jpeg", "png", "tiff", "ico" or "bmp".
      * If `error` is set, %FALSE will be returned.
@@ -628,7 +619,7 @@ export class Pixbuf {
      * @param value a nul-terminated string.
      */
     set_option(key: string, value: string): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -674,7 +665,7 @@ export class Pixbuf {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -843,7 +834,7 @@ export class Pixbuf {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -931,13 +922,13 @@ export class Pixbuf {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Gio-2.0.Gio.Icon */
+    watch_closure(closure: Function): void
+    /* Methods of Gio-2.0.Gio.Icon */
     /**
      * Checks if two icons are equal.
      * @param icon2 pointer to the second #GIcon.
      */
-    equal(icon2: Gio.Icon | null): boolean
+    equal(icon2?: Gio.Icon | null): boolean
     /**
      * Serializes a #GIcon into a #GVariant. An equivalent #GIcon can be retrieved
      * back by calling g_icon_deserialize() on the returned value.
@@ -965,14 +956,14 @@ export class Pixbuf {
      *   the encoding is simply the name (such as `network-server`).
      */
     to_string(): string | null
-    /* Implemented methods of Gio-2.0.Gio.LoadableIcon */
+    /* Methods of Gio-2.0.Gio.LoadableIcon */
     /**
      * Loads a loadable icon. For the asynchronous version of this function,
      * see g_loadable_icon_load_async().
      * @param size an integer.
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    load(size: number, cancellable: Gio.Cancellable | null): [ /* returnType */ Gio.InputStream, /* type */ string ]
+    load(size: number, cancellable?: Gio.Cancellable | null): [ /* returnType */ Gio.InputStream, /* type */ string | null ]
     /**
      * Loads an icon asynchronously. To finish this function, see
      * g_loadable_icon_load_finish(). For the synchronous, blocking
@@ -981,22 +972,20 @@ export class Pixbuf {
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      * @param callback a #GAsyncReadyCallback to call when the            request is satisfied
      */
-    load_async(size: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    load_async(size: number, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Finishes an asynchronous icon load started in g_loadable_icon_load_async().
      * @param res a #GAsyncResult.
      */
-    load_finish(res: Gio.AsyncResult): [ /* returnType */ Gio.InputStream, /* type */ string ]
-    /* Own virtual methods of GdkPixbuf-2.0.GdkPixbuf.Pixbuf */
+    load_finish(res: Gio.AsyncResult): [ /* returnType */ Gio.InputStream, /* type */ string | null ]
+    /* Virtual methods of GdkPixbuf-2.0.GdkPixbuf.Pixbuf */
     /**
      * Checks if two icons are equal.
-     * @virtual 
      * @param icon2 pointer to the second #GIcon.
      */
-    vfunc_equal(icon2: Gio.Icon | null): boolean
+    vfunc_equal(icon2?: Gio.Icon | null): boolean
     /**
      * Gets a hash for an icon.
-     * @virtual 
      */
     vfunc_hash(): number
     /**
@@ -1005,34 +994,30 @@ export class Pixbuf {
      * As serialization will avoid using raw icon data when possible, it only
      * makes sense to transfer the #GVariant between processes on the same machine,
      * (as opposed to over the network), and within the same file system namespace.
-     * @virtual 
      */
     vfunc_serialize(): GLib.Variant
     /**
      * Loads a loadable icon. For the asynchronous version of this function,
      * see g_loadable_icon_load_async().
-     * @virtual 
      * @param size an integer.
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    vfunc_load(size: number, cancellable: Gio.Cancellable | null): [ /* returnType */ Gio.InputStream, /* type */ string ]
+    vfunc_load(size: number, cancellable?: Gio.Cancellable | null): [ /* returnType */ Gio.InputStream, /* type */ string | null ]
     /**
      * Loads an icon asynchronously. To finish this function, see
      * g_loadable_icon_load_finish(). For the synchronous, blocking
      * version of this function, see g_loadable_icon_load().
-     * @virtual 
      * @param size an integer.
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      * @param callback a #GAsyncReadyCallback to call when the            request is satisfied
      */
-    vfunc_load_async(size: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    vfunc_load_async(size: number, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Finishes an asynchronous icon load started in g_loadable_icon_load_async().
-     * @virtual 
      * @param res a #GAsyncResult.
      */
-    vfunc_load_finish(res: Gio.AsyncResult): [ /* returnType */ Gio.InputStream, /* type */ string ]
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    vfunc_load_finish(res: Gio.AsyncResult): [ /* returnType */ Gio.InputStream, /* type */ string | null ]
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -1049,12 +1034,11 @@ export class Pixbuf {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1081,7 +1065,6 @@ export class Pixbuf {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Pixbuf, pspec: GObject.ParamSpec) => void)): number
@@ -1105,8 +1088,8 @@ export class Pixbuf {
     connect_after(sigName: "notify::rowstride", callback: (($obj: Pixbuf, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::width", callback: (($obj: Pixbuf, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::width", callback: (($obj: Pixbuf, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -1115,15 +1098,15 @@ export class Pixbuf {
     /* Static methods and pseudo-constructors */
     static new(colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number): Pixbuf
     static new_from_bytes(data: GLib.Bytes, colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number, rowstride: number): Pixbuf
-    static new_from_data(data: Uint8Array, colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number, rowstride: number, destroy_fn: PixbufDestroyNotify | null): Pixbuf
+    static new_from_data(data: Uint8Array, colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number, rowstride: number, destroy_fn?: PixbufDestroyNotify | null): Pixbuf
     static new_from_file(filename: string): Pixbuf
     static new_from_file_at_scale(filename: string, width: number, height: number, preserve_aspect_ratio: boolean): Pixbuf
     static new_from_file_at_size(filename: string, width: number, height: number): Pixbuf
     static new_from_inline(data: Uint8Array, copy_pixels: boolean): Pixbuf
     static new_from_resource(resource_path: string): Pixbuf
     static new_from_resource_at_scale(resource_path: string, width: number, height: number, preserve_aspect_ratio: boolean): Pixbuf
-    static new_from_stream(stream: Gio.InputStream, cancellable: Gio.Cancellable | null): Pixbuf
-    static new_from_stream_at_scale(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable: Gio.Cancellable | null): Pixbuf
+    static new_from_stream(stream: Gio.InputStream, cancellable?: Gio.Cancellable | null): Pixbuf
+    static new_from_stream_at_scale(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable?: Gio.Cancellable | null): Pixbuf
     static new_from_stream_finish(async_result: Gio.AsyncResult): Pixbuf
     static new_from_xpm_data(data: string[]): Pixbuf
     /**
@@ -1141,7 +1124,7 @@ export class Pixbuf {
      * Parses an image file far enough to determine its format and size.
      * @param filename The name of the file to identify.
      */
-    static get_file_info(filename: string): [ /* returnType */ PixbufFormat | null, /* width */ number, /* height */ number ]
+    static get_file_info(filename: string): [ /* returnType */ PixbufFormat | null, /* width */ number | null, /* height */ number | null ]
     /**
      * Asynchronously parses an image file far enough to determine its
      * format and size.
@@ -1156,7 +1139,7 @@ export class Pixbuf {
      * @param cancellable optional #GCancellable object, %NULL to ignore
      * @param callback a #GAsyncReadyCallback to call when the file info is available
      */
-    static get_file_info_async(filename: string, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    static get_file_info_async(filename: string, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Finishes an asynchronous pixbuf parsing operation started with
      * gdk_pixbuf_get_file_info_async().
@@ -1197,7 +1180,7 @@ export class Pixbuf {
      * @param cancellable optional #GCancellable object, %NULL to ignore
      * @param callback a #GAsyncReadyCallback to call when the pixbuf is loaded
      */
-    static new_from_stream_async(stream: Gio.InputStream, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    static new_from_stream_async(stream: Gio.InputStream, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Creates a new pixbuf by asynchronously loading an image from an input stream.
      * 
@@ -1213,7 +1196,7 @@ export class Pixbuf {
      * @param cancellable optional #GCancellable object, %NULL to ignore
      * @param callback a #GAsyncReadyCallback to call when the pixbuf is loaded
      */
-    static new_from_stream_at_scale_async(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    static new_from_stream_at_scale_async(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Finishes an asynchronous pixbuf save operation started with
      * gdk_pixbuf_save_to_stream_async().
@@ -1240,17 +1223,14 @@ export class Pixbuf {
      * @param str A string obtained via g_icon_to_string().
      */
     static new_for_string(str: string): Gio.Icon
-    static $gtype: GObject.GType<Pixbuf>
+    static $gtype: GObject.Type
 }
 export interface PixbufAnimation_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * An opaque struct representing an animation.
- */
 export class PixbufAnimation {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GdkPixbuf-2.0.GdkPixbuf.PixbufAnimation */
+    /* Methods of GdkPixbuf-2.0.GdkPixbuf.PixbufAnimation */
     /**
      * Queries the height of the bounding box of a pixbuf animation.
      */
@@ -1291,7 +1271,7 @@ export class PixbufAnimation {
      * A delay time of -1 is possible, indicating "infinite."
      * @param start_time time when the animation starts playing
      */
-    get_iter(start_time: GLib.TimeVal | null): PixbufAnimationIter
+    get_iter(start_time?: GLib.TimeVal | null): PixbufAnimationIter
     /**
      * If an animation is really just a plain image (has only one frame),
      * this function returns that image. If the animation is an animation,
@@ -1312,7 +1292,7 @@ export class PixbufAnimation {
      * the image.
      */
     is_static_image(): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -1358,7 +1338,7 @@ export class PixbufAnimation {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -1527,7 +1507,7 @@ export class PixbufAnimation {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -1615,8 +1595,8 @@ export class PixbufAnimation {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -1633,12 +1613,11 @@ export class PixbufAnimation {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1665,14 +1644,13 @@ export class PixbufAnimation {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: PixbufAnimation, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: PixbufAnimation, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -1681,7 +1659,7 @@ export class PixbufAnimation {
     /* Static methods and pseudo-constructors */
     static new_from_file(filename: string): PixbufAnimation
     static new_from_resource(resource_path: string): PixbufAnimation
-    static new_from_stream(stream: Gio.InputStream, cancellable: Gio.Cancellable | null): PixbufAnimation
+    static new_from_stream(stream: Gio.InputStream, cancellable?: Gio.Cancellable | null): PixbufAnimation
     static new_from_stream_finish(async_result: Gio.AsyncResult): PixbufAnimation
     /**
      * Creates a new animation by asynchronously loading an image from an input stream.
@@ -1696,19 +1674,15 @@ export class PixbufAnimation {
      * @param cancellable optional #GCancellable object, %NULL to ignore
      * @param callback a #GAsyncReadyCallback to call when the pixbuf is loaded
      */
-    static new_from_stream_async(stream: Gio.InputStream, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
-    static $gtype: GObject.GType<PixbufAnimation>
+    static new_from_stream_async(stream: Gio.InputStream, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
+    static $gtype: GObject.Type
 }
 export interface PixbufAnimationIter_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * An opaque struct representing an iterator which points to a
- * certain position in an animation.
- */
 export class PixbufAnimationIter {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GdkPixbuf-2.0.GdkPixbuf.PixbufAnimationIter */
+    /* Methods of GdkPixbuf-2.0.GdkPixbuf.PixbufAnimationIter */
     /**
      * Possibly advances an animation to a new frame. Chooses the frame based
      * on the start time passed to gdk_pixbuf_animation_get_iter().
@@ -1731,7 +1705,7 @@ export class PixbufAnimationIter {
      * and update the display with the new pixbuf.
      * @param current_time current time
      */
-    advance(current_time: GLib.TimeVal | null): boolean
+    advance(current_time?: GLib.TimeVal | null): boolean
     /**
      * Gets the number of milliseconds the current pixbuf should be displayed,
      * or -1 if the current pixbuf should be displayed forever. g_timeout_add()
@@ -1765,7 +1739,7 @@ export class PixbufAnimationIter {
      * the updated area.
      */
     on_currently_loading_frame(): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -1811,7 +1785,7 @@ export class PixbufAnimationIter {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -1980,7 +1954,7 @@ export class PixbufAnimationIter {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -2068,8 +2042,8 @@ export class PixbufAnimationIter {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -2086,12 +2060,11 @@ export class PixbufAnimationIter {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -2118,33 +2091,26 @@ export class PixbufAnimationIter {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: PixbufAnimationIter, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: PixbufAnimationIter, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: PixbufAnimationIter_ConstructProps)
     _init (config?: PixbufAnimationIter_ConstructProps): void
-    static $gtype: GObject.GType<PixbufAnimationIter>
+    static $gtype: GObject.Type
 }
 export interface PixbufLoader_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * The GdkPixbufLoader struct contains only private
- * fields.
- */
 export class PixbufLoader {
-    /* Own fields of GdkPixbuf-2.0.GdkPixbuf.PixbufLoader */
-    parent_instance: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GdkPixbuf-2.0.GdkPixbuf.PixbufLoader */
+    /* Methods of GdkPixbuf-2.0.GdkPixbuf.PixbufLoader */
     /**
      * Informs a pixbuf loader that no further writes with
      * gdk_pixbuf_loader_write() will occur, so that it can free its
@@ -2221,7 +2187,7 @@ export class PixbufLoader {
      * @param buffer The image data as a #GBytes
      */
     write_bytes(buffer: GLib.Bytes): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -2267,7 +2233,7 @@ export class PixbufLoader {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -2436,7 +2402,7 @@ export class PixbufLoader {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -2524,13 +2490,13 @@ export class PixbufLoader {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of GdkPixbuf-2.0.GdkPixbuf.PixbufLoader */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GdkPixbuf-2.0.GdkPixbuf.PixbufLoader */
     vfunc_area_prepared(): void
     vfunc_area_updated(x: number, y: number, width: number, height: number): void
     vfunc_closed(): void
     vfunc_size_prepared(width: number, height: number): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -2547,18 +2513,16 @@ export class PixbufLoader {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of GdkPixbuf-2.0.GdkPixbuf.PixbufLoader */
+    /* Signals of GdkPixbuf-2.0.GdkPixbuf.PixbufLoader */
     /**
      * This signal is emitted when the pixbuf loader has allocated the
      * pixbuf in the desired size.  After this signal is emitted,
      * applications can call gdk_pixbuf_loader_get_pixbuf() to fetch
      * the partially-loaded pixbuf.
-     * @signal 
      */
     connect(sigName: "area-prepared", callback: (($obj: PixbufLoader) => void)): number
     connect_after(sigName: "area-prepared", callback: (($obj: PixbufLoader) => void)): number
@@ -2569,7 +2533,6 @@ export class PixbufLoader {
      * scanline has been read in, but it could be a different area as
      * well.  Applications can use this signal to know when to repaint
      * areas of an image that is being loaded.
-     * @signal 
      * @param x X offset of upper-left corner of the updated area.
      * @param y Y offset of upper-left corner of the updated area.
      * @param width Width of updated area.
@@ -2583,7 +2546,6 @@ export class PixbufLoader {
      * It can be used by different parts of an application to receive
      * notification when an image loader is closed by the code that
      * drives it.
-     * @signal 
      */
     connect(sigName: "closed", callback: (($obj: PixbufLoader) => void)): number
     connect_after(sigName: "closed", callback: (($obj: PixbufLoader) => void)): number
@@ -2594,14 +2556,13 @@ export class PixbufLoader {
      * of the image that it will create.  Applications can call
      * gdk_pixbuf_loader_set_size() in response to this signal to set
      * the desired size to which the image should be scaled.
-     * @signal 
      * @param width the original width of the image
      * @param height the original height of the image
      */
     connect(sigName: "size-prepared", callback: (($obj: PixbufLoader, width: number, height: number) => void)): number
     connect_after(sigName: "size-prepared", callback: (($obj: PixbufLoader, width: number, height: number) => void)): number
     emit(sigName: "size-prepared", width: number, height: number): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -2628,14 +2589,13 @@ export class PixbufLoader {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: PixbufLoader, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: PixbufLoader, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -2645,27 +2605,24 @@ export class PixbufLoader {
     static new(): PixbufLoader
     static new_with_mime_type(mime_type: string): PixbufLoader
     static new_with_type(image_type: string): PixbufLoader
-    static $gtype: GObject.GType<PixbufLoader>
+    static $gtype: GObject.Type
 }
 export interface PixbufSimpleAnim_ConstructProps extends PixbufAnimation_ConstructProps {
     /* Constructor properties of GdkPixbuf-2.0.GdkPixbuf.PixbufSimpleAnim */
     /**
      * Whether the animation should loop when it reaches the end.
      */
-    loop?: boolean | null
+    loop?: boolean
 }
-/**
- * An opaque struct representing a simple animation.
- */
 export class PixbufSimpleAnim {
-    /* Own properties of GdkPixbuf-2.0.GdkPixbuf.PixbufSimpleAnim */
+    /* Properties of GdkPixbuf-2.0.GdkPixbuf.PixbufSimpleAnim */
     /**
      * Whether the animation should loop when it reaches the end.
      */
     loop: boolean
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GdkPixbuf-2.0.GdkPixbuf.PixbufSimpleAnim */
+    /* Methods of GdkPixbuf-2.0.GdkPixbuf.PixbufSimpleAnim */
     /**
      * Adds a new frame to `animation`. The `pixbuf` must
      * have the dimensions specified when the animation
@@ -2682,7 +2639,7 @@ export class PixbufSimpleAnim {
      * @param loop whether to loop the animation
      */
     set_loop(loop: boolean): void
-    /* Extended methods of GdkPixbuf-2.0.GdkPixbuf.PixbufAnimation */
+    /* Methods of GdkPixbuf-2.0.GdkPixbuf.PixbufAnimation */
     /**
      * Queries the height of the bounding box of a pixbuf animation.
      */
@@ -2723,7 +2680,7 @@ export class PixbufSimpleAnim {
      * A delay time of -1 is possible, indicating "infinite."
      * @param start_time time when the animation starts playing
      */
-    get_iter(start_time: GLib.TimeVal | null): PixbufAnimationIter
+    get_iter(start_time?: GLib.TimeVal | null): PixbufAnimationIter
     /**
      * If an animation is really just a plain image (has only one frame),
      * this function returns that image. If the animation is an animation,
@@ -2744,7 +2701,7 @@ export class PixbufSimpleAnim {
      * the image.
      */
     is_static_image(): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -2790,7 +2747,7 @@ export class PixbufSimpleAnim {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -2959,7 +2916,7 @@ export class PixbufSimpleAnim {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -3047,8 +3004,8 @@ export class PixbufSimpleAnim {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -3065,12 +3022,11 @@ export class PixbufSimpleAnim {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -3097,7 +3053,6 @@ export class PixbufSimpleAnim {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: PixbufSimpleAnim, pspec: GObject.ParamSpec) => void)): number
@@ -3105,8 +3060,8 @@ export class PixbufSimpleAnim {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::loop", callback: (($obj: PixbufSimpleAnim, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::loop", callback: (($obj: PixbufSimpleAnim, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -3114,14 +3069,14 @@ export class PixbufSimpleAnim {
     _init (config?: PixbufSimpleAnim_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(width: number, height: number, rate: number): PixbufSimpleAnim
-    static $gtype: GObject.GType<PixbufSimpleAnim>
+    static $gtype: GObject.Type
 }
 export interface PixbufSimpleAnimIter_ConstructProps extends PixbufAnimationIter_ConstructProps {
 }
 export class PixbufSimpleAnimIter {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of GdkPixbuf-2.0.GdkPixbuf.PixbufAnimationIter */
+    /* Methods of GdkPixbuf-2.0.GdkPixbuf.PixbufAnimationIter */
     /**
      * Possibly advances an animation to a new frame. Chooses the frame based
      * on the start time passed to gdk_pixbuf_animation_get_iter().
@@ -3144,7 +3099,7 @@ export class PixbufSimpleAnimIter {
      * and update the display with the new pixbuf.
      * @param current_time current time
      */
-    advance(current_time: GLib.TimeVal | null): boolean
+    advance(current_time?: GLib.TimeVal | null): boolean
     /**
      * Gets the number of milliseconds the current pixbuf should be displayed,
      * or -1 if the current pixbuf should be displayed forever. g_timeout_add()
@@ -3178,7 +3133,7 @@ export class PixbufSimpleAnimIter {
      * the updated area.
      */
     on_currently_loading_frame(): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -3224,7 +3179,7 @@ export class PixbufSimpleAnimIter {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -3393,7 +3348,7 @@ export class PixbufSimpleAnimIter {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -3481,8 +3436,8 @@ export class PixbufSimpleAnimIter {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -3499,12 +3454,11 @@ export class PixbufSimpleAnimIter {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -3531,23 +3485,22 @@ export class PixbufSimpleAnimIter {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: PixbufSimpleAnimIter, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: PixbufSimpleAnimIter, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: PixbufSimpleAnimIter_ConstructProps)
     _init (config?: PixbufSimpleAnimIter_ConstructProps): void
-    static $gtype: GObject.GType<PixbufSimpleAnimIter>
+    static $gtype: GObject.Type
 }
 export class PixbufFormat {
-    /* Owm methods of GdkPixbuf-2.0.GdkPixbuf.PixbufFormat */
+    /* Methods of GdkPixbuf-2.0.GdkPixbuf.PixbufFormat */
     /**
      * Creates a copy of `format`
      */
@@ -3615,7 +3568,7 @@ export class PixbufFormat {
     static name: string
 }
 export abstract class PixbufLoaderClass {
-    /* Own fields of GdkPixbuf-2.0.GdkPixbuf.PixbufLoaderClass */
+    /* Fields of GdkPixbuf-2.0.GdkPixbuf.PixbufLoaderClass */
     parent_class: GObject.ObjectClass
     size_prepared: (loader: PixbufLoader, width: number, height: number) => void
     area_prepared: (loader: PixbufLoader) => void

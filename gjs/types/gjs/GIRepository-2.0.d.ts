@@ -339,7 +339,6 @@ export enum nvokeError {
 }
 /**
  * Flags for a #GIFieldInfo.
- * @bitfield 
  */
 export enum FieldInfoFlags {
     /**
@@ -353,7 +352,6 @@ export enum FieldInfoFlags {
 }
 /**
  * Flags for a #GIFunctionInfo struct.
- * @bitfield 
  */
 export enum FunctionInfoFlags {
     /**
@@ -383,7 +381,6 @@ export enum FunctionInfoFlags {
 }
 /**
  * Flags that control how a typelib is loaded.
- * @bitfield 
  */
 export enum RepositoryLoadFlags {
     /**
@@ -393,7 +390,6 @@ export enum RepositoryLoadFlags {
 }
 /**
  * Flags of a #GIVFuncInfo struct.
- * @bitfield 
  */
 export enum VFuncInfoFlags {
     /**
@@ -455,7 +451,7 @@ export function callable_info_load_arg(info: CallableInfo, n: number): /* arg */
 export function callable_info_load_return_type(info: CallableInfo): /* type */ TypeInfo
 export function callable_info_may_return_null(info: CallableInfo): boolean
 export function callable_info_skip_return(info: CallableInfo): boolean
-export function cclosure_marshal_generic(closure: GObject.TClosure, return_gvalue: any, n_param_values: number, param_values: any, invocation_hint: object | null, marshal_data: object | null): void
+export function cclosure_marshal_generic(closure: Function, return_gvalue: any, n_param_values: number, param_values: any, invocation_hint?: object | null, marshal_data?: object | null): void
 export function constant_info_get_type(info: ConstantInfo): TypeInfo
 export function enum_info_get_error_domain(info: EnumInfo): string
 export function enum_info_get_method(info: EnumInfo, n: number): FunctionInfo
@@ -525,7 +521,7 @@ export function object_info_get_vfunc(info: ObjectInfo, n: number): VFuncInfo
 export function property_info_get_flags(info: PropertyInfo): GObject.ParamFlags
 export function property_info_get_ownership_transfer(info: PropertyInfo): Transfer
 export function property_info_get_type(info: PropertyInfo): TypeInfo
-export function registered_type_info_get_g_type(info: RegisteredTypeInfo): GObject.GType
+export function registered_type_info_get_g_type(info: RegisteredTypeInfo): GObject.Type
 export function registered_type_info_get_type_init(info: RegisteredTypeInfo): string
 export function registered_type_info_get_type_name(info: RegisteredTypeInfo): string
 export function signal_info_get_class_closure(info: SignalInfo): VFuncInfo
@@ -562,32 +558,17 @@ export function union_info_get_n_methods(info: UnionInfo): number
 export function union_info_get_size(info: UnionInfo): number
 export function union_info_is_discriminated(info: UnionInfo): boolean
 export function value_info_get_value(info: ValueInfo): number
-export function vfunc_info_get_address(info: VFuncInfo, implementor_gtype: GObject.GType): object | null
+export function vfunc_info_get_address(info: VFuncInfo, implementor_gtype: GObject.Type): object | null
 export function vfunc_info_get_flags(info: VFuncInfo): VFuncInfoFlags
 export function vfunc_info_get_invoker(info: VFuncInfo): FunctionInfo
 export function vfunc_info_get_offset(info: VFuncInfo): number
 export function vfunc_info_get_signal(info: VFuncInfo): SignalInfo
 export interface Repository_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * #GIRepository is used to manage repositories of namespaces. Namespaces
- * are represented on disk by type libraries (.typelib files).
- * 
- * ### Discovery of type libraries
- * 
- * #GIRepository will typically look for a `girepository-1.0` directory
- * under the library directory used when compiling gobject-introspection.
- * 
- * It is possible to control the search paths programmatically, using
- * g_irepository_prepend_search_path(). It is also possible to modify
- * the search paths by using the `GI_TYPELIB_PATH` environment variable.
- * The environment variable takes precedence over the default search path
- * and the g_irepository_prepend_search_path() calls.
- */
 export class Repository {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GIRepository-2.0.GIRepository.Repository */
+    /* Methods of GIRepository-2.0.GIRepository.Repository */
     /**
      * Obtain an unordered list of versions (either currently loaded or
      * available) for `namespace_` in this `repository`.
@@ -611,7 +592,7 @@ export class Repository {
      * when you know the GType to originate from be from a loaded namespace.
      * @param gtype GType to search for
      */
-    find_by_gtype(gtype: GObject.GType): BaseInfo
+    find_by_gtype(gtype: GObject.Type): BaseInfo
     /**
      * Searches for a particular entry in a namespace.  Before calling
      * this function for a particular namespace, you must call
@@ -691,7 +672,7 @@ export class Repository {
      * see at runtime, but not statically.
      * @param gtype a #GType whose fundamental type is G_TYPE_OBJECT
      */
-    get_object_gtype_interfaces(gtype: GObject.GType): /* interfaces_out */ InterfaceInfo[]
+    get_object_gtype_interfaces(gtype: GObject.Type): /* interfaces_out */ InterfaceInfo[]
     /**
      * This function returns a comma-separated list of paths to the
      * shared C libraries associated with the given namespace `namespace_`.
@@ -730,7 +711,7 @@ export class Repository {
      * @param namespace_ Namespace of interest
      * @param version Required version, may be %NULL for latest
      */
-    is_registered(namespace_: string, version: string | null): boolean
+    is_registered(namespace_: string, version?: string | null): boolean
     /**
      * TODO
      * @param typelib TODO
@@ -760,7 +741,7 @@ export class Repository {
      * @param flags Set of %GIRepositoryLoadFlags, may be 0
      */
     require_private(typelib_dir: string, namespace_: string, version: string | null, flags: RepositoryLoadFlags): Typelib
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -806,7 +787,7 @@ export class Repository {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -975,7 +956,7 @@ export class Repository {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -1063,8 +1044,8 @@ export class Repository {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -1081,12 +1062,11 @@ export class Repository {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1113,14 +1093,13 @@ export class Repository {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Repository, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Repository, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -1162,56 +1141,13 @@ export class Repository {
      * @param directory directory name to prepend to the typelib   search path
      */
     static prepend_search_path(directory: string): void
-    static $gtype: GObject.GType<Repository>
+    static $gtype: GObject.Type
 }
-/**
- * An opaque structure used to iterate over attributes
- * in a #GIBaseInfo struct.
- */
 export class AttributeIter {
     static name: string
 }
-/**
- * GIBaseInfo is the common base struct of all other *Info structs
- * accessible through the #GIRepository API.
- * All other structs can be casted to a #GIBaseInfo, for instance:
- * <example>
- * <title>Casting a #GIFunctionInfo to #GIBaseInfo</title>
- * <programlisting>
- *    GIFunctionInfo *function_info = ...;
- *    GIBaseInfo *info = (GIBaseInfo*)function_info;
- * </programlisting>
- * </example>
- * Most #GIRepository APIs returning a #GIBaseInfo is actually creating a new struct, in other
- * words, g_base_info_unref() has to be called when done accessing the data.
- * GIBaseInfos are normally accessed by calling either
- * g_irepository_find_by_name(), g_irepository_find_by_gtype() or g_irepository_get_info().
- * 
- * <example>
- * <title>Getting the Button of the Gtk typelib</title>
- * <programlisting>
- *    GIBaseInfo *button_info = g_irepository_find_by_name(NULL, "Gtk", "Button");
- *    ... use button_info ...
- *    g_base_info_unref(button_info);
- * </programlisting>
- * </example>
- * 
- * <refsect1 id="gi-gibaseinfo.struct-hierarchy" role="struct_hierarchy">
- * <title role="struct_hierarchy.title">Struct hierarchy</title>
- * <synopsis>
- *   GIBaseInfo
- *    +----<link linkend="gi-GIArgInfo">GIArgInfo</link>
- *    +----<link linkend="gi-GICallableInfo">GICallableInfo</link>
- *    +----<link linkend="gi-GIConstantInfo">GIConstantInfo</link>
- *    +----<link linkend="gi-GIFieldInfo">GIFieldInfo</link>
- *    +----<link linkend="gi-GIPropertyInfo">GIPropertyInfo</link>
- *    +----<link linkend="gi-GIRegisteredTypeInfo">GIRegisteredTypeInfo</link>
- *    +----<link linkend="gi-GITypeInfo">GITypeInfo</link>
- * </synopsis>
- * </refsect1>
- */
 export class BaseInfo {
-    /* Owm methods of GIRepository-2.0.GIRepository.BaseInfo */
+    /* Methods of GIRepository-2.0.GIRepository.BaseInfo */
     /**
      * Compare two #GIBaseInfo.
      * 
@@ -1293,111 +1229,17 @@ export abstract class RepositoryClass {
 export class RepositoryPrivate {
     static name: string
 }
-/**
- * TODO
- */
 export class Typelib {
-    /* Owm methods of GIRepository-2.0.GIRepository.Typelib */
+    /* Methods of GIRepository-2.0.GIRepository.Typelib */
     free(): void
     get_namespace(): string
-    symbol(symbol_name: string, symbol: object | null): boolean
+    symbol(symbol_name: string, symbol?: object | null): boolean
     static name: string
 }
-/**
- * Represents a unresolved type in a typelib.
- */
 export class UnresolvedInfo {
     static name: string
 }
-/**
- * Stores an argument of varying type
- */
 export class Argument {
-    /* Own fields of GIRepository-2.0.GIRepository.Argument */
-    /**
-     * TODO
-     */
-    v_boolean: boolean
-    /**
-     * TODO
-     */
-    v_int8: number
-    /**
-     * TODO
-     */
-    v_uint8: number
-    /**
-     * TODO
-     */
-    v_int16: number
-    /**
-     * TODO
-     */
-    v_uint16: number
-    /**
-     * TODO
-     */
-    v_int32: number
-    /**
-     * TODO
-     */
-    v_uint32: number
-    /**
-     * TODO
-     */
-    v_int64: number
-    /**
-     * TODO
-     */
-    v_uint64: number
-    /**
-     * TODO
-     */
-    v_float: number
-    /**
-     * TODO
-     */
-    v_double: number
-    /**
-     * TODO
-     */
-    v_short: number
-    /**
-     * TODO
-     */
-    v_ushort: number
-    /**
-     * TODO
-     */
-    v_int: number
-    /**
-     * TODO
-     */
-    v_uint: number
-    /**
-     * TODO
-     */
-    v_long: number
-    /**
-     * TODO
-     */
-    v_ulong: number
-    /**
-     * TODO
-     */
-    v_ssize: number
-    /**
-     * TODO
-     */
-    v_size: number
-    /**
-     * TODO
-     */
-    v_string: string
-    /**
-     * TODO
-     */
-    v_pointer: object
     static name: string
 }
     export type ArgInfo = BaseInfo

@@ -43,33 +43,10 @@ export interface Client_ConstructProps extends GObject.Object_ConstructProps {
      * it's the empty array, events from all subsystems will be
      * reported.
      */
-    subsystems?: string[] | null
+    subsystems?: string[]
 }
-/**
- * #GUdevClient is used to query information about devices on a Linux
- * system from the Linux kernel and the udev device
- * manager.
- * 
- * Device information is retrieved from the kernel (through the
- * <literal>sysfs</literal> filesystem) and the udev daemon (through a
- * <literal>tmpfs</literal> filesystem) and presented through
- * #GUdevDevice objects. This means that no blocking IO ever happens
- * (in both cases, we are essentially just reading data from kernel
- * memory) and as such there are no asynchronous versions of the
- * provided methods.
- * 
- * To get #GUdevDevice objects, use
- * g_udev_client_query_by_subsystem(),
- * g_udev_client_query_by_device_number(),
- * g_udev_client_query_by_device_file(),
- * g_udev_client_query_by_sysfs_path(),
- * g_udev_client_query_by_subsystem_and_name()
- * or the #GUdevEnumerator type.
- * 
- * To listen to uevents, connect to the #GUdevClient::uevent signal.
- */
 export class Client {
-    /* Own properties of GUdev-1.0.GUdev.Client */
+    /* Properties of GUdev-1.0.GUdev.Client */
     /**
      * The subsystems to listen for uevents on.
      * 
@@ -83,11 +60,9 @@ export class Client {
      * reported.
      */
     readonly subsystems: string[]
-    /* Own fields of GUdev-1.0.GUdev.Client */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GUdev-1.0.GUdev.Client */
+    /* Methods of GUdev-1.0.GUdev.Client */
     /**
      * Looks up a device for a device file.
      * @param device_file A device file.
@@ -103,7 +78,7 @@ export class Client {
      * Gets all devices belonging to `subsystem`.
      * @param subsystem The subsystem to get devices for or %NULL to get all devices.
      */
-    query_by_subsystem(subsystem: string | null): Device[] | null
+    query_by_subsystem(subsystem?: string | null): Device[] | null
     /**
      * Looks up a device for a subsystem and name.
      * @param subsystem A subsystem name.
@@ -115,7 +90,7 @@ export class Client {
      * @param sysfs_path A sysfs path.
      */
     query_by_sysfs_path(sysfs_path: string): Device | null
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -161,7 +136,7 @@ export class Client {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -330,7 +305,7 @@ export class Client {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -418,10 +393,10 @@ export class Client {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of GUdev-1.0.GUdev.Client */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GUdev-1.0.GUdev.Client */
     vfunc_uevent(action: string, device: Device): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -438,12 +413,11 @@ export class Client {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of GUdev-1.0.GUdev.Client */
+    /* Signals of GUdev-1.0.GUdev.Client */
     /**
      * Emitted when `client` receives an uevent.
      * 
@@ -457,14 +431,13 @@ export class Client {
      * This signal is emitted in the
      * <link linkend="g-main-context-push-thread-default">thread-default main loop</link>
      * of the thread that `client` was created in.
-     * @signal 
      * @param action The action for the uevent e.g. "add", "remove", "change", "move",          "online" or "offline"
      * @param device Details about the #GUdevDevice the event is for.
      */
     connect(sigName: "uevent", callback: (($obj: Client, action: string, device: Device) => void)): number
     connect_after(sigName: "uevent", callback: (($obj: Client, action: string, device: Device) => void)): number
     emit(sigName: "uevent", action: string, device: Device): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -491,7 +464,6 @@ export class Client {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Client, pspec: GObject.ParamSpec) => void)): number
@@ -499,73 +471,23 @@ export class Client {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::subsystems", callback: (($obj: Client, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::subsystems", callback: (($obj: Client, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: Client_ConstructProps)
     _init (config?: Client_ConstructProps): void
     /* Static methods and pseudo-constructors */
-    static new(subsystems: string[] | null): Client
-    static $gtype: GObject.GType<Client>
+    static new(subsystems?: string[] | null): Client
+    static $gtype: GObject.Type
 }
 export interface Device_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * The #GUdevDevice class is used to get information about a specific
- * device. Note that you cannot instantiate a #GUdevDevice object
- * yourself. Instead you must use #GUdevClient to obtain #GUdevDevice
- * objects.
- * 
- * To get basic information about a device, use
- * g_udev_device_get_subsystem(), g_udev_device_get_devtype(),
- * g_udev_device_get_name(), g_udev_device_get_number(),
- * g_udev_device_get_sysfs_path(), g_udev_device_get_driver(),
- * g_udev_device_get_action(), g_udev_device_get_seqnum(),
- * g_udev_device_get_device_type(), g_udev_device_get_device_number(),
- * g_udev_device_get_device_file(),
- * g_udev_device_get_device_file_symlinks().
- * 
- * To navigate the device tree, use g_udev_device_get_parent() and
- * g_udev_device_get_parent_with_subsystem().
- * 
- * To access udev properties for the device, use
- * g_udev_device_get_property_keys(),
- * g_udev_device_has_property(),
- * g_udev_device_get_property(),
- * g_udev_device_get_property_as_int(),
- * g_udev_device_get_property_as_uint64(),
- * g_udev_device_get_property_as_double(),
- * g_udev_device_get_property_as_boolean() and
- * g_udev_device_get_property_as_strv().
- * 
- * To access sysfs attributes for the device, use
- * g_udev_device_get_sysfs_attr_keys(),
- * g_udev_device_has_sysfs_attr(),
- * g_udev_device_get_sysfs_attr(),
- * g_udev_device_get_sysfs_attr_as_int(),
- * g_udev_device_get_sysfs_attr_as_uint64(),
- * g_udev_device_get_sysfs_attr_as_double(),
- * g_udev_device_get_sysfs_attr_as_boolean() and
- * g_udev_device_get_sysfs_attr_as_strv().
- * 
- * Note that all getters on #GUdevDevice are non-reffing – returned
- * values are owned by the object, should not be freed and are only
- * valid as long as the object is alive.
- * 
- * By design, #GUdevDevice will not react to changes for a device – it
- * only contains a snapshot of information when the #GUdevDevice
- * object was created. To work with changes, you typically connect to
- * the #GUdevClient::uevent signal on a #GUdevClient and get a new
- * #GUdevDevice whenever an event happens.
- */
 export class Device {
-    /* Own fields of GUdev-1.0.GUdev.Device */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GUdev-1.0.GUdev.Device */
+    /* Methods of GUdev-1.0.GUdev.Device */
     /**
      * Gets the most recent action (e.g. "add", "remove", "change", etc.) for `device`.
      */
@@ -617,7 +539,7 @@ export class Device {
      * @param subsystem The subsystem of the parent to get.
      * @param devtype The devtype of the parent to get or %NULL.
      */
-    get_parent_with_subsystem(subsystem: string, devtype: string | null): Device | null
+    get_parent_with_subsystem(subsystem: string, devtype?: string | null): Device | null
     /**
      * Look up the value for `key` on `device`.
      * @param key Name of property.
@@ -737,7 +659,7 @@ export class Device {
      * @param key Name of sysfs attribute.
      */
     has_sysfs_attr(key: string): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -783,7 +705,7 @@ export class Device {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -952,7 +874,7 @@ export class Device {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -1040,8 +962,8 @@ export class Device {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -1058,12 +980,11 @@ export class Device {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1090,42 +1011,36 @@ export class Device {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Device, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Device, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: Device_ConstructProps)
     _init (config?: Device_ConstructProps): void
-    static $gtype: GObject.GType<Device>
+    static $gtype: GObject.Type
 }
 export interface Enumerator_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of GUdev-1.0.GUdev.Enumerator */
     /**
      * The #GUdevClient to enumerate devices from.
      */
-    client?: Client | null
+    client?: Client
 }
-/**
- * #GUdevEnumerator is used to lookup and sort devices.
- */
 export class Enumerator {
-    /* Own properties of GUdev-1.0.GUdev.Enumerator */
+    /* Properties of GUdev-1.0.GUdev.Enumerator */
     /**
      * The #GUdevClient to enumerate devices from.
      */
     readonly client: Client
-    /* Own fields of GUdev-1.0.GUdev.Enumerator */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GUdev-1.0.GUdev.Enumerator */
+    /* Methods of GUdev-1.0.GUdev.Enumerator */
     /**
      * All returned devices will be initialized.
      */
@@ -1177,7 +1092,7 @@ export class Enumerator {
      * Executes the query in `enumerator`.
      */
     execute(): Device[]
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -1223,7 +1138,7 @@ export class Enumerator {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -1392,7 +1307,7 @@ export class Enumerator {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -1480,8 +1395,8 @@ export class Enumerator {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -1498,12 +1413,11 @@ export class Enumerator {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1530,7 +1444,6 @@ export class Enumerator {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Enumerator, pspec: GObject.ParamSpec) => void)): number
@@ -1538,8 +1451,8 @@ export class Enumerator {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::client", callback: (($obj: Enumerator, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::client", callback: (($obj: Enumerator, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -1547,13 +1460,10 @@ export class Enumerator {
     _init (config?: Enumerator_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(client: Client): Enumerator
-    static $gtype: GObject.GType<Enumerator>
+    static $gtype: GObject.Type
 }
-/**
- * Class structure for #GUdevClient.
- */
 export abstract class ClientClass {
-    /* Own fields of GUdev-1.0.GUdev.ClientClass */
+    /* Fields of GUdev-1.0.GUdev.ClientClass */
     /**
      * Parent class.
      */
@@ -1572,11 +1482,8 @@ export abstract class ClientClass {
 export class ClientPrivate {
     static name: string
 }
-/**
- * Class structure for #GUdevDevice.
- */
 export abstract class DeviceClass {
-    /* Own fields of GUdev-1.0.GUdev.DeviceClass */
+    /* Fields of GUdev-1.0.GUdev.DeviceClass */
     /**
      * Parent class.
      */
@@ -1594,11 +1501,8 @@ export abstract class DeviceClass {
 export class DevicePrivate {
     static name: string
 }
-/**
- * Class structure for #GUdevEnumerator.
- */
 export abstract class EnumeratorClass {
-    /* Own fields of GUdev-1.0.GUdev.EnumeratorClass */
+    /* Fields of GUdev-1.0.GUdev.EnumeratorClass */
     /**
      * Parent class.
      */

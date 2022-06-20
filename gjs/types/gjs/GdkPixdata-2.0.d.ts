@@ -22,7 +22,6 @@ import type * as GModule from './GModule-2.0';
  * and `GDK_PIXDATA_DUMP_MACROS` are mutually exclusive, as are
  * `GDK_PIXBUF_DUMP_GTYPES` and `GDK_PIXBUF_DUMP_CTYPES`. The remaining
  * elements are optional flags that can be freely added.
- * @bitfield 
  */
 export enum PixdataDumpType {
     /**
@@ -72,7 +71,6 @@ export enum PixdataDumpType {
  * An enumeration containing three sets of flags for a #GdkPixdata struct:
  * one for the used colorspace, one for the width of the samples and one
  * for the encoding of the pixel data.
- * @bitfield 
  */
 export enum PixdataType {
     /**
@@ -122,12 +120,8 @@ export const PIXBUF_MAGIC_NUMBER: number
  */
 export const PIXDATA_HEADER_LENGTH: number
 export function pixbuf_from_pixdata(pixdata: Pixdata, copy_pixels: boolean): GdkPixbuf.Pixbuf
-/**
- * A #GdkPixdata contains pixbuf information in a form suitable for
- * serialization and streaming.
- */
 export class Pixdata {
-    /* Own fields of GdkPixdata-2.0.GdkPixdata.Pixdata */
+    /* Fields of GdkPixdata-2.0.GdkPixdata.Pixdata */
     /**
      * magic number. A valid #GdkPixdata structure must have
      *    #GDK_PIXBUF_MAGIC_NUMBER here.
@@ -160,7 +154,7 @@ export class Pixdata {
      *   and `rowstride`.
      */
     pixel_data: Uint8Array
-    /* Owm methods of GdkPixdata-2.0.GdkPixdata.Pixdata */
+    /* Methods of GdkPixdata-2.0.GdkPixdata.Pixdata */
     /**
      * Deserializes (reconstruct) a #GdkPixdata structure from a byte stream.
      * The byte stream consists of a straightforward writeout of the

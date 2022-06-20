@@ -101,35 +101,35 @@ export interface Indicator_ConstructProps extends GObject.Object_ConstructProps 
      * If the indicator sets it's status to %APP_INDICATOR_STATUS_ATTENTION
      * then this textual description of the icon shown.
      */
-    attention_icon_desc?: string | null
+    attention_icon_desc?: string
     /**
      * If the indicator sets it's status to %APP_INDICATOR_STATUS_ATTENTION
      * then this icon is shown.
      */
-    attention_icon_name?: string | null
+    attention_icon_name?: string
     /**
      * The type of indicator that this represents.  Please don't use 'Other'.
      * Defaults to 'ApplicationStatus'.
      */
-    category?: string | null
+    category?: string
     /**
      * The description of the regular icon that is shown for the indicator.
      */
-    icon_desc?: string | null
+    icon_desc?: string
     /**
      * The name of the regular icon that is shown for the indicator.
      */
-    icon_name?: string | null
+    icon_name?: string
     /**
      * An additional place to look for icon names that may be installed by the
      * application.
      */
-    icon_theme_path?: string | null
+    icon_theme_path?: string
     /**
      * The ID for this indicator, which should be unique, but used consistently
      * by this program and its indicator.
      */
-    id?: string | null
+    id?: string
     /**
      * A label that can be shown next to the string in the application
      * indicator.  The label will not be shown unless there is an icon
@@ -138,7 +138,7 @@ export interface Indicator_ConstructProps extends GObject.Object_ConstructProps 
      * user requests it as it can take up a significant amount of space
      * on the user's panel.  This may not be shown in all visualizations.
      */
-    label?: string | null
+    label?: string
     /**
      * An optional string to provide guidance to the panel on how big
      * the #AppIndicator:label string could get.  If this is set correctly
@@ -148,7 +148,7 @@ export interface Indicator_ConstructProps extends GObject.Object_ConstructProps 
      * set this string to "100% thrust" to ensure space when Scotty can
      * get you enough power.
      */
-    label_guide?: string | null
+    label_guide?: string
     /**
      * The ordering index is an odd parameter, and if you think you don't need
      * it you're probably right.  In general, the application indicator try
@@ -159,30 +159,22 @@ export interface Indicator_ConstructProps extends GObject.Object_ConstructProps 
      * with a new one.  Again, you probably don't want to be doing this, but
      * in case you do, this is the way.
      */
-    ordering_index?: number | null
+    ordering_index?: number
     /**
      * Whether the indicator is shown or requests attention. Defaults to
      * 'Passive'.
      */
-    status?: string | null
+    status?: string
     /**
      * Provides a way to refer to this application indicator in a human
      * readable form.  This is used in the Unity desktop in the HUD as
      * the first part of the menu entries to distinguish them from the
      * focused application's entries.
      */
-    title?: string | null
+    title?: string
 }
-/**
- * A application indicator represents the values that are needed to show a
- * unique status in the panel for an application.  In general, applications
- * should try to fit in the other indicators that are available on the
- * panel before using this.  But, sometimes it is necissary.
- * 
- *  Private fields
- */
 export class Indicator {
-    /* Own properties of AppIndicator3-0.1.AppIndicator3.Indicator */
+    /* Properties of AppIndicator3-0.1.AppIndicator3.Indicator */
     /**
      * If the indicator sets it's status to %APP_INDICATOR_STATUS_ATTENTION
      * then this textual description of the icon shown.
@@ -263,18 +255,9 @@ export class Indicator {
      * focused application's entries.
      */
     title: string
-    /* Own fields of AppIndicator3-0.1.AppIndicator3.Indicator */
-    /**
-     * Parent object.
-     */
-    parent: GObject.Object
-    /**
-     * Internal data.
-     */
-    priv: IndicatorPrivate
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of AppIndicator3-0.1.AppIndicator3.Indicator */
+    /* Methods of AppIndicator3-0.1.AppIndicator3.Indicator */
     /**
      * This function allows for building the Application Indicator menu
      * from a static desktop file.
@@ -390,7 +373,7 @@ export class Indicator {
      * Wrapper function for property #AppIndicator:menu.
      * @param menu A #GtkMenu to set
      */
-    set_menu(menu: Gtk.Menu | null): void
+    set_menu(menu?: Gtk.Menu | null): void
     /**
      * Sets the ordering index for the app indicator which effects the
      * placement of it on the panel.  For almost all app indicator
@@ -411,7 +394,7 @@ export class Indicator {
      * Setting `menuitem` to %NULL causes to disable this feature.
      * @param menuitem A #GtkWidget to be activated on secondary activation
      */
-    set_secondary_activate_target(menuitem: Gtk.Widget | null): void
+    set_secondary_activate_target(menuitem?: Gtk.Widget | null): void
     /**
      * Wrapper function for property #AppIndicator:status.
      * @param status The status to set for this indicator
@@ -429,8 +412,8 @@ export class Indicator {
      * Setting `title` to %NULL removes the title.
      * @param title Title of the app indicator
      */
-    set_title(title: string | null): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    set_title(title?: string | null): void
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -476,7 +459,7 @@ export class Indicator {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -645,7 +628,7 @@ export class Indicator {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -733,8 +716,8 @@ export class Indicator {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of AppIndicator3-0.1.AppIndicator3.Indicator */
+    watch_closure(closure: Function): void
+    /* Virtual methods of AppIndicator3-0.1.AppIndicator3.Indicator */
     vfunc_connection_changed(connected: boolean): void
     vfunc_new_attention_icon(): void
     vfunc_new_icon(): void
@@ -743,7 +726,7 @@ export class Indicator {
     vfunc_new_status(status: string): void
     vfunc_scroll_event(delta: number, direction: Gdk.ScrollDirection): void
     vfunc_unfallback(status_icon: Gtk.StatusIcon): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -760,15 +743,13 @@ export class Indicator {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of AppIndicator3-0.1.AppIndicator3.Indicator */
+    /* Signals of AppIndicator3-0.1.AppIndicator3.Indicator */
     /**
      * Signaled when we connect to a watcher, or when it drops away.
-     * @signal 
      * @param arg1 Whether we're connected or not
      */
     connect(sigName: "connection-changed", callback: (($obj: Indicator, arg1: boolean) => void)): number
@@ -776,14 +757,12 @@ export class Indicator {
     emit(sigName: "connection-changed", arg1: boolean): void
     /**
      * Emitted when #AppIndicator:attention-icon-name is changed
-     * @signal 
      */
     connect(sigName: "new-attention-icon", callback: (($obj: Indicator) => void)): number
     connect_after(sigName: "new-attention-icon", callback: (($obj: Indicator) => void)): number
     emit(sigName: "new-attention-icon"): void
     /**
      * when #AppIndicator:icon-name is changed
-     * @signal 
      */
     connect(sigName: "new-icon", callback: (($obj: Indicator) => void)): number
     connect_after(sigName: "new-icon", callback: (($obj: Indicator) => void)): number
@@ -791,7 +770,6 @@ export class Indicator {
     /**
      * Signaled when there is a new icon set for the
      * object.
-     * @signal 
      * @param object 
      */
     connect(sigName: "new-icon-theme-path", callback: (($obj: Indicator, object: string) => void)): number
@@ -800,7 +778,6 @@ export class Indicator {
     /**
      * Emitted when either #AppIndicator:label or #AppIndicator:label-guide are
      * changed.
-     * @signal 
      * @param object 
      * @param p0 
      */
@@ -809,7 +786,6 @@ export class Indicator {
     emit(sigName: "new-label", object: string, p0: string): void
     /**
      * Emitted when #AppIndicator:status is changed
-     * @signal 
      * @param arg1 The string value of the #AppIndicatorStatus enum.
      */
     connect(sigName: "new-status", callback: (($obj: Indicator, arg1: string) => void)): number
@@ -817,14 +793,13 @@ export class Indicator {
     emit(sigName: "new-status", arg1: string): void
     /**
      * Signaled when the #AppIndicator receives a scroll event.
-     * @signal 
      * @param arg1 How many steps the scroll wheel has taken
      * @param arg2 Which direction the wheel went in
      */
     connect(sigName: "scroll-event", callback: (($obj: Indicator, arg1: number, arg2: Gdk.ScrollDirection) => void)): number
     connect_after(sigName: "scroll-event", callback: (($obj: Indicator, arg1: number, arg2: Gdk.ScrollDirection) => void)): number
     emit(sigName: "scroll-event", arg1: number, arg2: Gdk.ScrollDirection): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -851,7 +826,6 @@ export class Indicator {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Indicator, pspec: GObject.ParamSpec) => void)): number
@@ -883,8 +857,8 @@ export class Indicator {
     connect_after(sigName: "notify::status", callback: (($obj: Indicator, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::title", callback: (($obj: Indicator, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::title", callback: (($obj: Indicator, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -893,14 +867,10 @@ export class Indicator {
     /* Static methods and pseudo-constructors */
     static new(id: string, icon_name: string, category: IndicatorCategory): Indicator
     static new_with_path(id: string, icon_name: string, category: IndicatorCategory, icon_theme_path: string): Indicator
-    static $gtype: GObject.GType<Indicator>
+    static $gtype: GObject.Type
 }
-/**
- * The signals and external functions that make up the #AppIndicator
- * class object.
- */
 export abstract class IndicatorClass {
-    /* Own fields of AppIndicator3-0.1.AppIndicator3.IndicatorClass */
+    /* Fields of AppIndicator3-0.1.AppIndicator3.IndicatorClass */
     /**
      * Mia familia
      */
@@ -922,10 +892,6 @@ export abstract class IndicatorClass {
     app_indicator_reserved_6: () => void
     static name: string
 }
-/**
- * All of the private data in an instance of an application indicator.
- * Private Fields
- */
 export class IndicatorPrivate {
     static name: string
 }

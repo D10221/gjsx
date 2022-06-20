@@ -1448,7 +1448,6 @@ export enum WinsysID {
 }
 /**
  * The access hints for cogl_buffer_set_update_hint()
- * @bitfield 
  */
 export enum BufferAccess {
     /**
@@ -1467,7 +1466,6 @@ export enum BufferAccess {
 }
 /**
  * Types of auxiliary buffers
- * @bitfield 
  */
 export enum BufferBit {
     /**
@@ -1486,7 +1484,6 @@ export enum BufferBit {
 /**
  * Hints to Cogl about how you are planning to modify the data once it
  * is mapped.
- * @bitfield 
  */
 export enum BufferMapHint {
     /**
@@ -1499,7 +1496,6 @@ export enum BufferMapHint {
 }
 /**
  * Target flags for FBOs.
- * @bitfield 
  */
 export enum BufferTarget {
     /**
@@ -1516,7 +1512,6 @@ export enum BufferTarget {
  * cogl_pipeline_set_color_mask() for example to define which color
  * channels should be written to the current framebuffer when
  * drawing something.
- * @bitfield 
  */
 export enum ColorMask {
     /**
@@ -1546,7 +1541,6 @@ export enum ColorMask {
 }
 /**
  * Flags for the supported features.
- * @bitfield 
  */
 export enum FeatureFlags {
     /**
@@ -1662,7 +1656,6 @@ export enum FeatureFlags {
 }
 /**
  * Flags for cogl_framebuffer_read_pixels_into_bitmap()
- * @bitfield 
  */
 export enum ReadPixelsFlags {
     /**
@@ -1682,7 +1675,6 @@ export enum ReadPixelsFlags {
  * 
  * Applications should ideally minimize how many of these constraints
  * they depend on to ensure maximum portability.
- * @bitfield 
  */
 export enum RendererConstraint {
     /**
@@ -1708,7 +1700,6 @@ export enum RendererConstraint {
 }
 /**
  * Flags to pass to the cogl_texture_new_* family of functions.
- * @bitfield 
  */
 export enum TextureFlags {
     /**
@@ -1751,7 +1742,7 @@ export function buffer_map_range(buffer: Buffer, offset: number, size: number, a
 export function buffer_set_data(buffer: Buffer, offset: number, data: object | null, size: number): Bool
 export function buffer_set_update_hint(buffer: Buffer, hint: BufferUpdateHint): void
 export function buffer_unmap(buffer: Buffer): void
-export function color_equal(v1: object | null, v2: object | null): Bool
+export function color_equal(v1?: object | null, v2?: object | null): Bool
 export function color_init_from_hsl(hue: number, saturation: number, luminance: number): /* color */ Color
 export function debug_matrix_entry_print(entry: MatrixEntry): void
 export function debug_matrix_print(matrix: Matrix): void
@@ -1760,7 +1751,7 @@ export function debug_object_print_instances(): void
 export function error_copy(error: GLib.Error): GLib.Error
 export function error_free(error: GLib.Error): void
 export function error_matches(error: GLib.Error, domain: number, code: number): Bool
-export function euler_equal(v1: object | null, v2: object | null): Bool
+export function euler_equal(v1?: object | null, v2?: object | null): Bool
 export function foreach_feature(context: Context, callback: FeatureCallback): void
 export function framebuffer_error_quark(): number
 export function get_clock_time(context: Context): number
@@ -1770,53 +1761,53 @@ export function get_static_zero_quaternion(): Quaternion
 export function gles2_texture_get_handle(texture: Texture, handle: number, target: number): Bool
 export function glib_renderer_source_new(renderer: Renderer, priority: number): GLib.Source
 export function glib_source_new(context: Context, priority: number): GLib.Source
-export function gtype_matrix_get_type(): GObject.GType
-export function handle_get_type(): GObject.GType
+export function gtype_matrix_get_type(): GObject.Type
+export function handle_get_type(): GObject.Type
 export function handle_ref(handle: Handle): Handle
 export function handle_unref(handle: Handle): void
 export function has_feature(context: Context, feature: FeatureID): Bool
-export function is_atlas_texture(object: object | null): Bool
-export function is_attribute(object: object | null): Bool
-export function is_attribute_buffer(object: object | null): Bool
-export function is_bitmap(object: object | null): Bool
-export function is_buffer(object: object | null): Bool
-export function is_context(object: object | null): Bool
-export function is_display(object: object | null): Bool
-export function is_frame_info(object: object | null): Bool
-export function is_framebuffer(object: object | null): Bool
-export function is_gles2_context(object: object | null): Bool
-export function is_index_buffer(object: object | null): Bool
-export function is_indices(object: object | null): Bool
-export function is_matrix_stack(object: object | null): Bool
-export function is_onscreen(object: object | null): Bool
-export function is_onscreen_template(object: object | null): Bool
-export function is_output(object: object | null): Bool
-export function is_pipeline(object: object | null): Bool
-export function is_pixel_buffer(object: object | null): Bool
-export function is_primitive(object: object | null): Bool
-export function is_primitive_texture(object: object | null): Bool
-export function is_renderer(object: object | null): Bool
-export function is_snippet(object: object | null): Bool
-export function is_sub_texture(object: object | null): Bool
-export function is_swap_chain(object: object | null): Bool
-export function is_texture(object: object | null): Bool
-export function is_texture_2d(object: object | null): Bool
-export function is_texture_2d_sliced(object: object | null): Bool
-export function is_texture_3d(object: object | null): Bool
-export function is_texture_pixmap_x11(object: object | null): Bool
-export function is_texture_rectangle(object: object | null): Bool
+export function is_atlas_texture(object?: object | null): Bool
+export function is_attribute(object?: object | null): Bool
+export function is_attribute_buffer(object?: object | null): Bool
+export function is_bitmap(object?: object | null): Bool
+export function is_buffer(object?: object | null): Bool
+export function is_context(object?: object | null): Bool
+export function is_display(object?: object | null): Bool
+export function is_frame_info(object?: object | null): Bool
+export function is_framebuffer(object?: object | null): Bool
+export function is_gles2_context(object?: object | null): Bool
+export function is_index_buffer(object?: object | null): Bool
+export function is_indices(object?: object | null): Bool
+export function is_matrix_stack(object?: object | null): Bool
+export function is_onscreen(object?: object | null): Bool
+export function is_onscreen_template(object?: object | null): Bool
+export function is_output(object?: object | null): Bool
+export function is_pipeline(object?: object | null): Bool
+export function is_pixel_buffer(object?: object | null): Bool
+export function is_primitive(object?: object | null): Bool
+export function is_primitive_texture(object?: object | null): Bool
+export function is_renderer(object?: object | null): Bool
+export function is_snippet(object?: object | null): Bool
+export function is_sub_texture(object?: object | null): Bool
+export function is_swap_chain(object?: object | null): Bool
+export function is_texture(object?: object | null): Bool
+export function is_texture_2d(object?: object | null): Bool
+export function is_texture_2d_sliced(object?: object | null): Bool
+export function is_texture_3d(object?: object | null): Bool
+export function is_texture_pixmap_x11(object?: object | null): Bool
+export function is_texture_rectangle(object?: object | null): Bool
 export function kms_display_queue_modes_reset(display: Display): void
 export function kms_display_set_ignore_crtc(display: Display, id: number, ignore: Bool): void
 export function kms_display_set_layout(display: Display, width: number, height: number, crtcs: KmsCrtc, n_crtcs: number): Bool
 export function kms_renderer_get_gbm(renderer: Renderer): object | null
 export function kms_renderer_get_kms_fd(renderer: Renderer): number
 export function kms_renderer_set_kms_fd(renderer: Renderer, fd: number): void
-export function matrix_equal(v1: object | null, v2: object | null): Bool
+export function matrix_equal(v1?: object | null, v2?: object | null): Bool
 export function poll_renderer_dispatch(renderer: Renderer, poll_fds: PollFD, n_poll_fds: number): void
 export function poll_renderer_get_info(renderer: Renderer, poll_fds: PollFD, n_poll_fds: number, timeout: number): number
 export function pop_gles2_context(ctx: Context): void
 export function push_gles2_context(ctx: Context, gles2_ctx: GLES2Context, read_buffer: Framebuffer, write_buffer: Framebuffer): Bool
-export function quaternion_equal(v1: object | null, v2: object | null): Bool
+export function quaternion_equal(v1?: object | null, v2?: object | null): Bool
 export function renderer_error_quark(): number
 export function texture_error_quark(): number
 export function vector3_add(result: number, a: number, b: number): void
@@ -1825,7 +1816,7 @@ export function vector3_cross_product(result: number, u: number, v: number): voi
 export function vector3_distance(a: number, b: number): number
 export function vector3_divide_scalar(vector: number, scalar: number): void
 export function vector3_dot_product(a: number, b: number): number
-export function vector3_equal(v1: object | null, v2: object | null): Bool
+export function vector3_equal(v1?: object | null, v2?: object | null): Bool
 export function vector3_equal_with_epsilon(vector0: number, vector1: number, epsilon: number): Bool
 export function vector3_free(vector: number): void
 export function vector3_init(vector: number, x: number, y: number, z: number): void
@@ -1835,20 +1826,19 @@ export function vector3_magnitude(vector: number): number
 export function vector3_multiply_scalar(vector: number, scalar: number): void
 export function vector3_normalize(vector: number): void
 export function vector3_subtract(result: number, a: number, b: number): void
-export function wayland_display_set_compositor_display(display: Display, wayland_display: object | null): void
+export function wayland_display_set_compositor_display(display: Display, wayland_display?: object | null): void
 export function wayland_onscreen_get_shell_surface(onscreen: Onscreen): object | null
 export function wayland_onscreen_get_surface(onscreen: Onscreen): object | null
 export function wayland_onscreen_resize(onscreen: Onscreen, width: number, height: number, offset_x: number, offset_y: number): void
-export function wayland_onscreen_set_foreign_surface(onscreen: Onscreen, surface: object | null): void
+export function wayland_onscreen_set_foreign_surface(onscreen: Onscreen, surface?: object | null): void
 export function wayland_renderer_get_display(renderer: Renderer): object | null
 export function wayland_renderer_set_event_dispatch_enabled(renderer: Renderer, enable: Bool): void
-export function wayland_renderer_set_foreign_display(renderer: Renderer, display: object | null): void
+export function wayland_renderer_set_foreign_display(renderer: Renderer, display?: object | null): void
 export function wayland_texture_set_region_from_shm_buffer(texture: Texture, src_x: number, src_y: number, width: number, height: number, shm_buffer: object | null, dst_x: number, dst_y: number, level: number): Bool
 export function x11_onscreen_get_visual_xid(onscreen: Onscreen): number
 export function x11_onscreen_get_window_xid(onscreen: Onscreen): number
 /**
  * A callback function to use for cogl_debug_object_foreach_type().
- * @callback 
  */
 export interface DebugObjectForeachTypeCallback {
     (info: DebugObjectTypeInfo): void
@@ -1856,7 +1846,6 @@ export interface DebugObjectForeachTypeCallback {
 /**
  * A callback used with cogl_foreach_feature() for enumerating all
  * context level features supported by Cogl.
- * @callback 
  */
 export interface FeatureCallback {
     (feature: FeatureID): void
@@ -1865,7 +1854,6 @@ export interface FeatureCallback {
  * The callback prototype used with
  * cogl_framebuffer_add_fence_callback() for notification of GPU
  * command completion.
- * @callback 
  */
 export interface FenceCallback {
     (fence: Fence): void
@@ -1878,7 +1866,6 @@ export interface FenceCallback {
  * Please see the documentation for #CoglFrameEvent and
  * cogl_onscreen_add_frame_callback() for more details about what
  * events can be notified.
- * @callback 
  */
 export interface FrameCallback {
     (onscreen: Onscreen, event: FrameEvent, info: FrameInfo): void
@@ -1887,7 +1874,6 @@ export interface FrameCallback {
  * The type used by cogl for function pointers, note that this type
  * is used as a generic catch-all cast for function pointers and the
  * actual arguments and return type may be different.
- * @callback 
  */
 export interface FuncPtr {
     (): void
@@ -1896,7 +1882,6 @@ export interface FuncPtr {
  * A callback used with cogl_meta_texture_foreach_in_region() to
  * retrieve details of all the low-level #CoglTexture<!-- -->s that
  * make up a given #CoglMetaTexture.
- * @callback 
  */
 export interface MetaTextureCallback {
     (sub_texture: Texture, sub_texture_coords: number, meta_coords: number): void
@@ -1906,7 +1891,6 @@ export interface MetaTextureCallback {
  * cogl_onscreen_add_dirty_callback() to be called when the windowing
  * system determines that a region of the onscreen window has been
  * lost and the application should redraw it.
- * @callback 
  */
 export interface OnscreenDirtyCallback {
     (onscreen: Onscreen, info: OnscreenDirtyInfo): void
@@ -1925,14 +1909,10 @@ export interface OnscreenDirtyCallback {
  * cogl_poll_renderer_dispatch(). This is so that callbacks shouldn't
  * occur while an application might have arbitrary locks held for
  * example.</note>
- * @callback 
  */
 export interface OnscreenResizeCallback {
     (onscreen: Onscreen, width: number, height: number): void
 }
-/**
- * @callback 
- */
 export interface OnscreenX11MaskCallback {
     (onscreen: Onscreen, event_mask: number): void
 }
@@ -1940,7 +1920,6 @@ export interface OnscreenX11MaskCallback {
  * A callback type that can be passed to
  * cogl_renderer_foreach_output() for iterating display outputs for a
  * given renderer.
- * @callback 
  */
 export interface OutputCallback {
     (output: Output): void
@@ -1948,7 +1927,6 @@ export interface OutputCallback {
 /**
  * The callback prototype used with cogl_pipeline_foreach_layer() for
  * iterating all the layers of a `pipeline`.
- * @callback 
  */
 export interface PipelineLayerCallback {
     (pipeline: Pipeline, layer_index: number): Bool
@@ -1959,26 +1937,15 @@ export interface PipelineLayerCallback {
  * 
  * The function should return TRUE to continue iteration or FALSE to
  * stop.
- * @callback 
  */
 export interface PrimitiveAttributeCallback {
     (primitive: Primitive, attribute: Attribute): Bool
 }
-/**
- * @callback 
- */
 export interface SwapBuffersNotify {
     (framebuffer: Framebuffer): void
 }
-export interface Framebuffer_ConstructProps extends GObject.Object_ConstructProps {
-}
-/**
- * @interface 
- */
 export class Framebuffer {
-    /* Extended fields of GObject-2.0.GObject.Object */
-    g_type_instance: GObject.TypeInstance
-    /* Owm methods of Cogl-2.0.Cogl.Framebuffer */
+    /* Methods of Cogl-2.0.Cogl.Framebuffer */
     /**
      * Explicitly allocates a configured #CoglFramebuffer allowing developers to
      * check and handle any errors that might arise from an unsupported
@@ -2836,387 +2803,12 @@ export class Framebuffer {
      * @param z Distance to translate along the z-axis
      */
     translate(x: number, y: number, z: number): void
-    /* Extended methods of GObject-2.0.GObject.Object */
-    /**
-     * Creates a binding between `source_property` on `source` and `target_property`
-     * on `target`. Whenever the `source_property` is changed the `target_property` is
-     * updated using the same value. For instance:
-     * 
-     * |[
-     *   g_object_bind_property (action, "active", widget, "sensitive", 0);
-     * ```
-     * 
-     * 
-     * Will result in the "sensitive" property of the widget #GObject instance to be
-     * updated with the same value of the "active" property of the action #GObject
-     * instance.
-     * 
-     * If `flags` contains %G_BINDING_BIDIRECTIONAL then the binding will be mutual:
-     * if `target_property` on `target` changes then the `source_property` on `source`
-     * will be updated as well.
-     * 
-     * The binding will automatically be removed when either the `source` or the
-     * `target` instances are finalized. To remove the binding without affecting the
-     * `source` and the `target` you can just call g_object_unref() on the returned
-     * #GBinding instance.
-     * 
-     * A #GObject can have multiple bindings.
-     * @param source_property the property on `source` to bind
-     * @param target the target #GObject
-     * @param target_property the property on `target` to bind
-     * @param flags flags to pass to #GBinding
-     */
-    bind_property(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags): GObject.Binding
-    /**
-     * Creates a binding between `source_property` on `source` and `target_property`
-     * on `target,` allowing you to set the transformation functions to be used by
-     * the binding.
-     * 
-     * This function is the language bindings friendly version of
-     * g_object_bind_property_full(), using #GClosures instead of
-     * function pointers.
-     * @param source_property the property on `source` to bind
-     * @param target the target #GObject
-     * @param target_property the property on `target` to bind
-     * @param flags flags to pass to #GBinding
-     * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
-     * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
-     */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
-    /**
-     * This function is intended for #GObject implementations to re-enforce
-     * a [floating][floating-ref] object reference. Doing this is seldom
-     * required: all #GInitiallyUnowneds are created with a floating reference
-     * which usually just needs to be sunken by calling g_object_ref_sink().
-     */
-    force_floating(): void
-    /**
-     * Increases the freeze count on `object`. If the freeze count is
-     * non-zero, the emission of "notify" signals on `object` is
-     * stopped. The signals are queued until the freeze count is decreased
-     * to zero. Duplicate notifications are squashed so that at most one
-     * #GObject::notify signal is emitted for each property modified while the
-     * object is frozen.
-     * 
-     * This is necessary for accessors that modify multiple properties to prevent
-     * premature notification while the object is still being modified.
-     */
-    freeze_notify(): void
-    /**
-     * Gets a named field from the objects table of associations (see g_object_set_data()).
-     * @param key name of the key for that association
-     */
-    get_data(key: string): object | null
-    /**
-     * Gets a property of an object.
-     * 
-     * The `value` can be:
-     * 
-     *  - an empty #GValue initialized by %G_VALUE_INIT, which will be
-     *    automatically initialized with the expected type of the property
-     *    (since GLib 2.60)
-     *  - a #GValue initialized with the expected type of the property
-     *  - a #GValue initialized with a type to which the expected type
-     *    of the property can be transformed
-     * 
-     * In general, a copy is made of the property contents and the caller is
-     * responsible for freeing the memory by calling g_value_unset().
-     * 
-     * Note that g_object_get_property() is really intended for language
-     * bindings, g_object_get() is much more convenient for C programming.
-     * @param property_name the name of the property to get
-     * @param value return location for the property value
-     */
-    get_property(property_name: string, value: any): void
-    /**
-     * This function gets back user data pointers stored via
-     * g_object_set_qdata().
-     * @param quark A #GQuark, naming the user data pointer
-     */
-    get_qdata(quark: GLib.Quark): object | null
-    /**
-     * Gets `n_properties` properties for an `object`.
-     * Obtained properties will be set to `values`. All properties must be valid.
-     * Warnings will be emitted and undefined behaviour may result if invalid
-     * properties are passed in.
-     * @param names the names of each property to get
-     * @param values the values of each property to get
-     */
-    getv(names: string[], values: any[]): void
-    /**
-     * Checks whether `object` has a [floating][floating-ref] reference.
-     */
-    is_floating(): boolean
-    /**
-     * Emits a "notify" signal for the property `property_name` on `object`.
-     * 
-     * When possible, eg. when signaling a property change from within the class
-     * that registered the property, you should use g_object_notify_by_pspec()
-     * instead.
-     * 
-     * Note that emission of the notify signal may be blocked with
-     * g_object_freeze_notify(). In this case, the signal emissions are queued
-     * and will be emitted (in reverse order) when g_object_thaw_notify() is
-     * called.
-     * @param property_name the name of a property installed on the class of `object`.
-     */
-    notify(property_name: string): void
-    /**
-     * Emits a "notify" signal for the property specified by `pspec` on `object`.
-     * 
-     * This function omits the property name lookup, hence it is faster than
-     * g_object_notify().
-     * 
-     * One way to avoid using g_object_notify() from within the
-     * class that registered the properties, and using g_object_notify_by_pspec()
-     * instead, is to store the GParamSpec used with
-     * g_object_class_install_property() inside a static array, e.g.:
-     * 
-     * 
-     * ```c
-     *   enum
-     *   {
-     *     PROP_0,
-     *     PROP_FOO,
-     *     PROP_LAST
-     *   };
-     * 
-     *   static GParamSpec *properties[PROP_LAST];
-     * 
-     *   static void
-     *   my_object_class_init (MyObjectClass *klass)
-     *   {
-     *     properties[PROP_FOO] = g_param_spec_int ("foo", "Foo", "The foo",
-     *                                              0, 100,
-     *                                              50,
-     *                                              G_PARAM_READWRITE);
-     *     g_object_class_install_property (gobject_class,
-     *                                      PROP_FOO,
-     *                                      properties[PROP_FOO]);
-     *   }
-     * ```
-     * 
-     * 
-     * and then notify a change on the "foo" property with:
-     * 
-     * 
-     * ```c
-     *   g_object_notify_by_pspec (self, properties[PROP_FOO]);
-     * ```
-     * 
-     * @param pspec the #GParamSpec of a property installed on the class of `object`.
-     */
-    notify_by_pspec(pspec: GObject.ParamSpec): void
-    /**
-     * Increases the reference count of `object`.
-     * 
-     * Since GLib 2.56, if `GLIB_VERSION_MAX_ALLOWED` is 2.56 or greater, the type
-     * of `object` will be propagated to the return type (using the GCC typeof()
-     * extension), so any casting the caller needs to do on the return type must be
-     * explicit.
-     */
-    ref(): GObject.Object
-    /**
-     * Increase the reference count of `object,` and possibly remove the
-     * [floating][floating-ref] reference, if `object` has a floating reference.
-     * 
-     * In other words, if the object is floating, then this call "assumes
-     * ownership" of the floating reference, converting it to a normal
-     * reference by clearing the floating flag while leaving the reference
-     * count unchanged.  If the object is not floating, then this call
-     * adds a new normal reference increasing the reference count by one.
-     * 
-     * Since GLib 2.56, the type of `object` will be propagated to the return type
-     * under the same conditions as for g_object_ref().
-     */
-    ref_sink(): GObject.Object
-    /**
-     * Releases all references to other objects. This can be used to break
-     * reference cycles.
-     * 
-     * This function should only be called from object system implementations.
-     */
-    run_dispose(): void
-    /**
-     * Each object carries around a table of associations from
-     * strings to pointers.  This function lets you set an association.
-     * 
-     * If the object already had an association with that name,
-     * the old association will be destroyed.
-     * 
-     * Internally, the `key` is converted to a #GQuark using g_quark_from_string().
-     * This means a copy of `key` is kept permanently (even after `object` has been
-     * finalized) — so it is recommended to only use a small, bounded set of values
-     * for `key` in your program, to avoid the #GQuark storage growing unbounded.
-     * @param key name of the key
-     * @param data data to associate with that key
-     */
-    set_data(key: string, data: object | null): void
-    /**
-     * Sets a property on an object.
-     * @param property_name the name of the property to set
-     * @param value the value
-     */
-    set_property(property_name: string, value: any): void
-    /**
-     * Remove a specified datum from the object's data associations,
-     * without invoking the association's destroy handler.
-     * @param key name of the key
-     */
-    steal_data(key: string): object | null
-    /**
-     * This function gets back user data pointers stored via
-     * g_object_set_qdata() and removes the `data` from object
-     * without invoking its destroy() function (if any was
-     * set).
-     * Usually, calling this function is only required to update
-     * user data pointers with a destroy notifier, for example:
-     * 
-     * ```c
-     * void
-     * object_add_to_user_list (GObject     *object,
-     *                          const gchar *new_string)
-     * {
-     *   // the quark, naming the object data
-     *   GQuark quark_string_list = g_quark_from_static_string ("my-string-list");
-     *   // retrive the old string list
-     *   GList *list = g_object_steal_qdata (object, quark_string_list);
-     * 
-     *   // prepend new string
-     *   list = g_list_prepend (list, g_strdup (new_string));
-     *   // this changed 'list', so we need to set it again
-     *   g_object_set_qdata_full (object, quark_string_list, list, free_string_list);
-     * }
-     * static void
-     * free_string_list (gpointer data)
-     * {
-     *   GList *node, *list = data;
-     * 
-     *   for (node = list; node; node = node->next)
-     *     g_free (node->data);
-     *   g_list_free (list);
-     * }
-     * ```
-     * 
-     * Using g_object_get_qdata() in the above example, instead of
-     * g_object_steal_qdata() would have left the destroy function set,
-     * and thus the partial string list would have been freed upon
-     * g_object_set_qdata_full().
-     * @param quark A #GQuark, naming the user data pointer
-     */
-    steal_qdata(quark: GLib.Quark): object | null
-    /**
-     * Reverts the effect of a previous call to
-     * g_object_freeze_notify(). The freeze count is decreased on `object`
-     * and when it reaches zero, queued "notify" signals are emitted.
-     * 
-     * Duplicate notifications for each property are squashed so that at most one
-     * #GObject::notify signal is emitted for each property, in the reverse order
-     * in which they have been queued.
-     * 
-     * It is an error to call this function when the freeze count is zero.
-     */
-    thaw_notify(): void
-    /**
-     * Decreases the reference count of `object`. When its reference count
-     * drops to 0, the object is finalized (i.e. its memory is freed).
-     * 
-     * If the pointer to the #GObject may be reused in future (for example, if it is
-     * an instance variable of another object), it is recommended to clear the
-     * pointer to %NULL rather than retain a dangling pointer to a potentially
-     * invalid #GObject instance. Use g_clear_object() for this.
-     */
-    unref(): void
-    /**
-     * This function essentially limits the life time of the `closure` to
-     * the life time of the object. That is, when the object is finalized,
-     * the `closure` is invalidated by calling g_closure_invalidate() on
-     * it, in order to prevent invocations of the closure with a finalized
-     * (nonexisting) object. Also, g_object_ref() and g_object_unref() are
-     * added as marshal guards to the `closure,` to ensure that an extra
-     * reference count is held on `object` during invocation of the
-     * `closure`.  Usually, this function will be called on closures that
-     * use this `object` as closure data.
-     * @param closure #GClosure to watch
-     */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
-    vfunc_constructed(): void
-    vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
-    vfunc_dispose(): void
-    vfunc_finalize(): void
-    vfunc_get_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /**
-     * Emits a "notify" signal for the property `property_name` on `object`.
-     * 
-     * When possible, eg. when signaling a property change from within the class
-     * that registered the property, you should use g_object_notify_by_pspec()
-     * instead.
-     * 
-     * Note that emission of the notify signal may be blocked with
-     * g_object_freeze_notify(). In this case, the signal emissions are queued
-     * and will be emitted (in reverse order) when g_object_thaw_notify() is
-     * called.
-     * @virtual 
-     * @param pspec 
-     */
-    vfunc_notify(pspec: GObject.ParamSpec): void
-    vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
-    /**
-     * The notify signal is emitted on an object when one of its properties has
-     * its value set through g_object_set_property(), g_object_set(), et al.
-     * 
-     * Note that getting this signal doesn’t itself guarantee that the value of
-     * the property has actually changed. When it is emitted is determined by the
-     * derived GObject class. If the implementor did not create the property with
-     * %G_PARAM_EXPLICIT_NOTIFY, then any call to g_object_set_property() results
-     * in ::notify being emitted, even if the new value is the same as the old.
-     * If they did pass %G_PARAM_EXPLICIT_NOTIFY, then this signal is emitted only
-     * when they explicitly call g_object_notify() or g_object_notify_by_pspec(),
-     * and common practice is to do that only when the value has actually changed.
-     * 
-     * This signal is typically used to obtain change notification for a
-     * single property, by specifying the property name as a detail in the
-     * g_signal_connect() call, like this:
-     * 
-     * ```c
-     * g_signal_connect (text_view->buffer, "notify::paste-target-list",
-     *                   G_CALLBACK (gtk_text_view_target_list_notify),
-     *                   text_view)
-     * ```
-     * 
-     * It is important to note that you must use
-     * [canonical parameter names][canonical-parameter-names] as
-     * detail strings for the notify signal.
-     * @signal 
-     * @param pspec the #GParamSpec of the property which changed.
-     */
-    connect(sigName: "notify", callback: (($obj: Framebuffer, pspec: GObject.ParamSpec) => void)): number
-    connect_after(sigName: "notify", callback: (($obj: Framebuffer, pspec: GObject.ParamSpec) => void)): number
-    emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
-    emit(sigName: string, ...args: any[]): void
-    disconnect(id: number): void
     static name: string
-    constructor (config?: Framebuffer_ConstructProps)
-    _init (config?: Framebuffer_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static error_quark(): number
-    static value_get_object(value: any): object | null
-    static value_set_object(value: any, object: object | null): void
-    static $gtype: GObject.GType<Framebuffer>
 }
-export interface Texture_ConstructProps extends GObject.Object_ConstructProps {
-}
-/**
- * @interface 
- */
 export class Texture {
-    /* Extended fields of GObject-2.0.GObject.Object */
-    g_type_instance: GObject.TypeInstance
-    /* Owm methods of Cogl-2.0.Cogl.Texture */
+    /* Methods of Cogl-2.0.Cogl.Texture */
     /**
      * Explicitly allocates the storage for the given `texture` which
      * allows you to be sure that there is enough memory for the
@@ -3256,7 +2848,7 @@ export class Texture {
      * If the texture is spliced the data for the first sub texture will be
      * queried.
      */
-    get_gl_texture(): [ /* returnType */ Bool, /* out_gl_handle */ number, /* out_gl_target */ number ]
+    get_gl_texture(): [ /* returnType */ Bool, /* out_gl_handle */ number | null, /* out_gl_target */ number | null ]
     /**
      * Queries the height of a cogl texture.
      */
@@ -3411,379 +3003,8 @@ export class Texture {
      * @param bitmap The source bitmap to read from
      */
     set_region_from_bitmap(src_x: number, src_y: number, dst_x: number, dst_y: number, dst_width: number, dst_height: number, bitmap: Bitmap): Bool
-    /* Extended methods of GObject-2.0.GObject.Object */
-    /**
-     * Creates a binding between `source_property` on `source` and `target_property`
-     * on `target`. Whenever the `source_property` is changed the `target_property` is
-     * updated using the same value. For instance:
-     * 
-     * |[
-     *   g_object_bind_property (action, "active", widget, "sensitive", 0);
-     * ```
-     * 
-     * 
-     * Will result in the "sensitive" property of the widget #GObject instance to be
-     * updated with the same value of the "active" property of the action #GObject
-     * instance.
-     * 
-     * If `flags` contains %G_BINDING_BIDIRECTIONAL then the binding will be mutual:
-     * if `target_property` on `target` changes then the `source_property` on `source`
-     * will be updated as well.
-     * 
-     * The binding will automatically be removed when either the `source` or the
-     * `target` instances are finalized. To remove the binding without affecting the
-     * `source` and the `target` you can just call g_object_unref() on the returned
-     * #GBinding instance.
-     * 
-     * A #GObject can have multiple bindings.
-     * @param source_property the property on `source` to bind
-     * @param target the target #GObject
-     * @param target_property the property on `target` to bind
-     * @param flags flags to pass to #GBinding
-     */
-    bind_property(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags): GObject.Binding
-    /**
-     * Creates a binding between `source_property` on `source` and `target_property`
-     * on `target,` allowing you to set the transformation functions to be used by
-     * the binding.
-     * 
-     * This function is the language bindings friendly version of
-     * g_object_bind_property_full(), using #GClosures instead of
-     * function pointers.
-     * @param source_property the property on `source` to bind
-     * @param target the target #GObject
-     * @param target_property the property on `target` to bind
-     * @param flags flags to pass to #GBinding
-     * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
-     * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
-     */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
-    /**
-     * This function is intended for #GObject implementations to re-enforce
-     * a [floating][floating-ref] object reference. Doing this is seldom
-     * required: all #GInitiallyUnowneds are created with a floating reference
-     * which usually just needs to be sunken by calling g_object_ref_sink().
-     */
-    force_floating(): void
-    /**
-     * Increases the freeze count on `object`. If the freeze count is
-     * non-zero, the emission of "notify" signals on `object` is
-     * stopped. The signals are queued until the freeze count is decreased
-     * to zero. Duplicate notifications are squashed so that at most one
-     * #GObject::notify signal is emitted for each property modified while the
-     * object is frozen.
-     * 
-     * This is necessary for accessors that modify multiple properties to prevent
-     * premature notification while the object is still being modified.
-     */
-    freeze_notify(): void
-    /**
-     * Gets a named field from the objects table of associations (see g_object_set_data()).
-     * @param key name of the key for that association
-     */
-    get_data(key: string): object | null
-    /**
-     * Gets a property of an object.
-     * 
-     * The `value` can be:
-     * 
-     *  - an empty #GValue initialized by %G_VALUE_INIT, which will be
-     *    automatically initialized with the expected type of the property
-     *    (since GLib 2.60)
-     *  - a #GValue initialized with the expected type of the property
-     *  - a #GValue initialized with a type to which the expected type
-     *    of the property can be transformed
-     * 
-     * In general, a copy is made of the property contents and the caller is
-     * responsible for freeing the memory by calling g_value_unset().
-     * 
-     * Note that g_object_get_property() is really intended for language
-     * bindings, g_object_get() is much more convenient for C programming.
-     * @param property_name the name of the property to get
-     * @param value return location for the property value
-     */
-    get_property(property_name: string, value: any): void
-    /**
-     * This function gets back user data pointers stored via
-     * g_object_set_qdata().
-     * @param quark A #GQuark, naming the user data pointer
-     */
-    get_qdata(quark: GLib.Quark): object | null
-    /**
-     * Gets `n_properties` properties for an `object`.
-     * Obtained properties will be set to `values`. All properties must be valid.
-     * Warnings will be emitted and undefined behaviour may result if invalid
-     * properties are passed in.
-     * @param names the names of each property to get
-     * @param values the values of each property to get
-     */
-    getv(names: string[], values: any[]): void
-    /**
-     * Checks whether `object` has a [floating][floating-ref] reference.
-     */
-    is_floating(): boolean
-    /**
-     * Emits a "notify" signal for the property `property_name` on `object`.
-     * 
-     * When possible, eg. when signaling a property change from within the class
-     * that registered the property, you should use g_object_notify_by_pspec()
-     * instead.
-     * 
-     * Note that emission of the notify signal may be blocked with
-     * g_object_freeze_notify(). In this case, the signal emissions are queued
-     * and will be emitted (in reverse order) when g_object_thaw_notify() is
-     * called.
-     * @param property_name the name of a property installed on the class of `object`.
-     */
-    notify(property_name: string): void
-    /**
-     * Emits a "notify" signal for the property specified by `pspec` on `object`.
-     * 
-     * This function omits the property name lookup, hence it is faster than
-     * g_object_notify().
-     * 
-     * One way to avoid using g_object_notify() from within the
-     * class that registered the properties, and using g_object_notify_by_pspec()
-     * instead, is to store the GParamSpec used with
-     * g_object_class_install_property() inside a static array, e.g.:
-     * 
-     * 
-     * ```c
-     *   enum
-     *   {
-     *     PROP_0,
-     *     PROP_FOO,
-     *     PROP_LAST
-     *   };
-     * 
-     *   static GParamSpec *properties[PROP_LAST];
-     * 
-     *   static void
-     *   my_object_class_init (MyObjectClass *klass)
-     *   {
-     *     properties[PROP_FOO] = g_param_spec_int ("foo", "Foo", "The foo",
-     *                                              0, 100,
-     *                                              50,
-     *                                              G_PARAM_READWRITE);
-     *     g_object_class_install_property (gobject_class,
-     *                                      PROP_FOO,
-     *                                      properties[PROP_FOO]);
-     *   }
-     * ```
-     * 
-     * 
-     * and then notify a change on the "foo" property with:
-     * 
-     * 
-     * ```c
-     *   g_object_notify_by_pspec (self, properties[PROP_FOO]);
-     * ```
-     * 
-     * @param pspec the #GParamSpec of a property installed on the class of `object`.
-     */
-    notify_by_pspec(pspec: GObject.ParamSpec): void
-    /**
-     * Increases the reference count of `object`.
-     * 
-     * Since GLib 2.56, if `GLIB_VERSION_MAX_ALLOWED` is 2.56 or greater, the type
-     * of `object` will be propagated to the return type (using the GCC typeof()
-     * extension), so any casting the caller needs to do on the return type must be
-     * explicit.
-     */
-    ref(): GObject.Object
-    /**
-     * Increase the reference count of `object,` and possibly remove the
-     * [floating][floating-ref] reference, if `object` has a floating reference.
-     * 
-     * In other words, if the object is floating, then this call "assumes
-     * ownership" of the floating reference, converting it to a normal
-     * reference by clearing the floating flag while leaving the reference
-     * count unchanged.  If the object is not floating, then this call
-     * adds a new normal reference increasing the reference count by one.
-     * 
-     * Since GLib 2.56, the type of `object` will be propagated to the return type
-     * under the same conditions as for g_object_ref().
-     */
-    ref_sink(): GObject.Object
-    /**
-     * Releases all references to other objects. This can be used to break
-     * reference cycles.
-     * 
-     * This function should only be called from object system implementations.
-     */
-    run_dispose(): void
-    /**
-     * Each object carries around a table of associations from
-     * strings to pointers.  This function lets you set an association.
-     * 
-     * If the object already had an association with that name,
-     * the old association will be destroyed.
-     * 
-     * Internally, the `key` is converted to a #GQuark using g_quark_from_string().
-     * This means a copy of `key` is kept permanently (even after `object` has been
-     * finalized) — so it is recommended to only use a small, bounded set of values
-     * for `key` in your program, to avoid the #GQuark storage growing unbounded.
-     * @param key name of the key
-     * @param data data to associate with that key
-     */
-    set_data(key: string, data: object | null): void
-    /**
-     * Sets a property on an object.
-     * @param property_name the name of the property to set
-     * @param value the value
-     */
-    set_property(property_name: string, value: any): void
-    /**
-     * Remove a specified datum from the object's data associations,
-     * without invoking the association's destroy handler.
-     * @param key name of the key
-     */
-    steal_data(key: string): object | null
-    /**
-     * This function gets back user data pointers stored via
-     * g_object_set_qdata() and removes the `data` from object
-     * without invoking its destroy() function (if any was
-     * set).
-     * Usually, calling this function is only required to update
-     * user data pointers with a destroy notifier, for example:
-     * 
-     * ```c
-     * void
-     * object_add_to_user_list (GObject     *object,
-     *                          const gchar *new_string)
-     * {
-     *   // the quark, naming the object data
-     *   GQuark quark_string_list = g_quark_from_static_string ("my-string-list");
-     *   // retrive the old string list
-     *   GList *list = g_object_steal_qdata (object, quark_string_list);
-     * 
-     *   // prepend new string
-     *   list = g_list_prepend (list, g_strdup (new_string));
-     *   // this changed 'list', so we need to set it again
-     *   g_object_set_qdata_full (object, quark_string_list, list, free_string_list);
-     * }
-     * static void
-     * free_string_list (gpointer data)
-     * {
-     *   GList *node, *list = data;
-     * 
-     *   for (node = list; node; node = node->next)
-     *     g_free (node->data);
-     *   g_list_free (list);
-     * }
-     * ```
-     * 
-     * Using g_object_get_qdata() in the above example, instead of
-     * g_object_steal_qdata() would have left the destroy function set,
-     * and thus the partial string list would have been freed upon
-     * g_object_set_qdata_full().
-     * @param quark A #GQuark, naming the user data pointer
-     */
-    steal_qdata(quark: GLib.Quark): object | null
-    /**
-     * Reverts the effect of a previous call to
-     * g_object_freeze_notify(). The freeze count is decreased on `object`
-     * and when it reaches zero, queued "notify" signals are emitted.
-     * 
-     * Duplicate notifications for each property are squashed so that at most one
-     * #GObject::notify signal is emitted for each property, in the reverse order
-     * in which they have been queued.
-     * 
-     * It is an error to call this function when the freeze count is zero.
-     */
-    thaw_notify(): void
-    /**
-     * Decreases the reference count of `object`. When its reference count
-     * drops to 0, the object is finalized (i.e. its memory is freed).
-     * 
-     * If the pointer to the #GObject may be reused in future (for example, if it is
-     * an instance variable of another object), it is recommended to clear the
-     * pointer to %NULL rather than retain a dangling pointer to a potentially
-     * invalid #GObject instance. Use g_clear_object() for this.
-     */
-    unref(): void
-    /**
-     * This function essentially limits the life time of the `closure` to
-     * the life time of the object. That is, when the object is finalized,
-     * the `closure` is invalidated by calling g_closure_invalidate() on
-     * it, in order to prevent invocations of the closure with a finalized
-     * (nonexisting) object. Also, g_object_ref() and g_object_unref() are
-     * added as marshal guards to the `closure,` to ensure that an extra
-     * reference count is held on `object` during invocation of the
-     * `closure`.  Usually, this function will be called on closures that
-     * use this `object` as closure data.
-     * @param closure #GClosure to watch
-     */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
-    vfunc_constructed(): void
-    vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
-    vfunc_dispose(): void
-    vfunc_finalize(): void
-    vfunc_get_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /**
-     * Emits a "notify" signal for the property `property_name` on `object`.
-     * 
-     * When possible, eg. when signaling a property change from within the class
-     * that registered the property, you should use g_object_notify_by_pspec()
-     * instead.
-     * 
-     * Note that emission of the notify signal may be blocked with
-     * g_object_freeze_notify(). In this case, the signal emissions are queued
-     * and will be emitted (in reverse order) when g_object_thaw_notify() is
-     * called.
-     * @virtual 
-     * @param pspec 
-     */
-    vfunc_notify(pspec: GObject.ParamSpec): void
-    vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
-    /**
-     * The notify signal is emitted on an object when one of its properties has
-     * its value set through g_object_set_property(), g_object_set(), et al.
-     * 
-     * Note that getting this signal doesn’t itself guarantee that the value of
-     * the property has actually changed. When it is emitted is determined by the
-     * derived GObject class. If the implementor did not create the property with
-     * %G_PARAM_EXPLICIT_NOTIFY, then any call to g_object_set_property() results
-     * in ::notify being emitted, even if the new value is the same as the old.
-     * If they did pass %G_PARAM_EXPLICIT_NOTIFY, then this signal is emitted only
-     * when they explicitly call g_object_notify() or g_object_notify_by_pspec(),
-     * and common practice is to do that only when the value has actually changed.
-     * 
-     * This signal is typically used to obtain change notification for a
-     * single property, by specifying the property name as a detail in the
-     * g_signal_connect() call, like this:
-     * 
-     * ```c
-     * g_signal_connect (text_view->buffer, "notify::paste-target-list",
-     *                   G_CALLBACK (gtk_text_view_target_list_notify),
-     *                   text_view)
-     * ```
-     * 
-     * It is important to note that you must use
-     * [canonical parameter names][canonical-parameter-names] as
-     * detail strings for the notify signal.
-     * @signal 
-     * @param pspec the #GParamSpec of the property which changed.
-     */
-    connect(sigName: "notify", callback: (($obj: Texture, pspec: GObject.ParamSpec) => void)): number
-    connect_after(sigName: "notify", callback: (($obj: Texture, pspec: GObject.ParamSpec) => void)): number
-    emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
-    emit(sigName: string, ...args: any[]): void
-    disconnect(id: number): void
     static name: string
-    constructor (config?: Texture_ConstructProps)
-    _init (config?: Texture_ConstructProps): void
-    /* Static methods and pseudo-constructors */
-    static value_get_object(value: any): object | null
-    static value_set_object(value: any, object: object | null): void
-    static $gtype: GObject.GType<Texture>
 }
-// Workaround
-export type Object_ConstructProps = GObject.Object_ConstructProps;
 export class AtlasTexture {
     static name: string
     /* Static methods and pseudo-constructors */
@@ -3793,7 +3014,7 @@ export class AtlasTexture {
     static new_with_size(ctx: Context, width: number, height: number): AtlasTexture
 }
 export class Attribute {
-    /* Owm methods of Cogl-2.0.Cogl.Attribute */
+    /* Methods of Cogl-2.0.Cogl.Attribute */
     get_buffer(): AttributeBuffer
     get_normalized(): Bool
     /**
@@ -3836,7 +3057,7 @@ export class AttributeBuffer {
     static new_with_size(context: Context, bytes: number): AttributeBuffer
 }
 export class Bitmap {
-    /* Owm methods of Cogl-2.0.Cogl.Bitmap */
+    /* Methods of Cogl-2.0.Cogl.Bitmap */
     get_buffer(): PixelBuffer
     get_format(): PixelFormat
     get_height(): number
@@ -3856,7 +3077,7 @@ export class Bitmap {
     static get_size_from_file(filename: string): [ /* returnType */ Bool, /* width */ number, /* height */ number ]
 }
 export class Context {
-    /* Owm methods of Cogl-2.0.Cogl.Context */
+    /* Methods of Cogl-2.0.Cogl.Context */
     /**
      * Retrieves the #CoglDisplay that is internally associated with the
      * given `context`. This will return the same #CoglDisplay that was
@@ -3875,13 +3096,13 @@ export class Context {
      */
     get_renderer(): Renderer
     static name: string
-    static new(display: Display | null): Context
-    constructor(display: Display | null)
+    static new(display?: Display | null): Context
+    constructor(display?: Display | null)
     /* Static methods and pseudo-constructors */
-    static new(display: Display | null): Context
+    static new(display?: Display | null): Context
 }
 export class Display {
-    /* Owm methods of Cogl-2.0.Cogl.Display */
+    /* Methods of Cogl-2.0.Cogl.Display */
     /**
      * Queries the #CoglRenderer associated with the given `display`.
      */
@@ -3926,14 +3147,11 @@ export class Display {
     /* Static methods and pseudo-constructors */
     static new(renderer: Renderer, onscreen_template: OnscreenTemplate): Display
 }
-/**
- * Fixed point number using a (16.16) notation.
- */
 export class Fixed {
     static name: string
 }
 export class FrameInfo {
-    /* Owm methods of Cogl-2.0.Cogl.FrameInfo */
+    /* Methods of Cogl-2.0.Cogl.FrameInfo */
     /**
      * Gets the frame counter for the #CoglOnscreen that corresponds
      * to this frame.
@@ -3972,13 +3190,8 @@ export class FrameInfo {
     get_refresh_rate(): number
     static name: string
 }
-/**
- * Represents an OpenGLES 2.0 api context used as a sandbox for
- * OpenGLES 2.0 state. This is comparable to an EGLContext for those
- * who have used OpenGLES 2.0 with EGL before.
- */
 export class GLES2Context {
-    /* Owm methods of Cogl-2.0.Cogl.GLES2Context */
+    /* Methods of Cogl-2.0.Cogl.GLES2Context */
     /**
      * Queries the OpenGLES 2.0 api function pointers that should be
      * used for rendering with the given `gles2`_ctx.
@@ -4001,7 +3214,7 @@ export class IndexBuffer {
     static new(context: Context, bytes: number): IndexBuffer
 }
 export class Indices {
-    /* Owm methods of Cogl-2.0.Cogl.Indices */
+    /* Methods of Cogl-2.0.Cogl.Indices */
     get_offset(): number
     get_type(): IndicesType
     set_offset(offset: number): void
@@ -4012,41 +3225,8 @@ export class Indices {
     static new(context: Context, type: IndicesType, indices_data: object | null, n_indices: number): Indices
     static new_for_buffer(type: IndicesType, buffer: IndexBuffer, offset: number): Indices
 }
-/**
- * Tracks your current position within a hierarchy and lets you build
- * up a graph of transformations as you traverse through a hierarchy
- * such as a scenegraph.
- * 
- * A #CoglMatrixStack always maintains a reference to a single
- * transformation at any point in time, representing the
- * transformation at the current position in the hierarchy. You can
- * get a reference to the current transformation by calling
- * cogl_matrix_stack_get_entry().
- * 
- * When a #CoglMatrixStack is first created with
- * cogl_matrix_stack_new() then it is conceptually positioned at the
- * root of your hierarchy and the current transformation simply
- * represents an identity transformation.
- * 
- * As you traverse your object hierarchy (your scenegraph) then you
- * should call cogl_matrix_stack_push() whenever you move down one
- * level and call cogl_matrix_stack_pop() whenever you move back up
- * one level towards the root.
- * 
- * At any time you can apply a set of operations, such as "rotate",
- * "scale", "translate" on top of the current transformation of a
- * #CoglMatrixStack using functions such as
- * cogl_matrix_stack_rotate(), cogl_matrix_stack_scale() and
- * cogl_matrix_stack_translate(). These operations will derive a new
- * current transformation and will never affect a transformation
- * that you have referenced using cogl_matrix_stack_get_entry().
- * 
- * Internally applying operations to a #CoglMatrixStack builds up a
- * graph of #CoglMatrixEntry structures which each represent a single
- * immutable transform.
- */
 export class MatrixStack {
-    /* Owm methods of Cogl-2.0.Cogl.MatrixStack */
+    /* Methods of Cogl-2.0.Cogl.MatrixStack */
     /**
      * Replaces the current matrix with a perspective matrix for a given
      * viewing frustum defined by 4 side clip planes that all cross
@@ -4205,12 +3385,10 @@ export class Object {
     static name: string
     /* Static methods and pseudo-constructors */
     static value_get_object(value: any): object | null
-    static value_set_object(value: any, object: object | null): void
-}
-export interface Onscreen_ConstructProps extends Object_ConstructProps {
+    static value_set_object(value: any, object?: object | null): void
 }
 export class Onscreen {
-    /* Owm methods of Cogl-2.0.Cogl.Onscreen */
+    /* Methods of Cogl-2.0.Cogl.Onscreen */
     /**
      * Installs a `callback` function that will be called whenever the
      * window system has lost the contents of a region of the onscreen
@@ -4231,7 +3409,7 @@ export class Onscreen {
      * @param callback A callback function to call for dirty events
      * @param destroy An optional callback to destroy `user_data` when the           `callback` is removed or `onscreen` is freed.
      */
-    add_dirty_callback(callback: OnscreenDirtyCallback, destroy: UserDataDestroyCallback | null): OnscreenDirtyClosure
+    add_dirty_callback(callback: OnscreenDirtyCallback, destroy?: UserDataDestroyCallback | null): OnscreenDirtyClosure
     /**
      * Installs a `callback` function that will be called for significant
      * events relating to the given `onscreen` framebuffer.
@@ -4259,7 +3437,7 @@ export class Onscreen {
      * @param callback A callback function to call for frame events
      * @param destroy An optional callback to destroy `user_data`           when the `callback` is removed or `onscreen` is freed.
      */
-    add_frame_callback(callback: FrameCallback, destroy: UserDataDestroyCallback | null): FrameClosure
+    add_frame_callback(callback: FrameCallback, destroy?: UserDataDestroyCallback | null): FrameClosure
     /**
      * Registers a `callback` with `onscreen` that will be called whenever
      * the `onscreen` framebuffer changes size.
@@ -4282,7 +3460,7 @@ export class Onscreen {
      * @param callback A #CoglOnscreenResizeCallback to call when            the `onscreen` changes size.
      * @param destroy An optional callback to destroy `user_data`           when the `callback` is removed or `onscreen` is freed.
      */
-    add_resize_callback(callback: OnscreenResizeCallback, destroy: UserDataDestroyCallback | null): OnscreenResizeClosure
+    add_resize_callback(callback: OnscreenResizeCallback, destroy?: UserDataDestroyCallback | null): OnscreenResizeClosure
     /**
      * Installs a `callback` function that should be called whenever a swap buffers
      * request (made using cogl_onscreen_swap_buffers()) for the given
@@ -4542,7 +3720,7 @@ export class Onscreen {
      * @param n_rectangles The number of 4-tuples to be read from `rectangles`
      */
     swap_region(rectangles: number, n_rectangles: number): void
-    /* Implemented methods of Cogl-2.0.Cogl.Framebuffer */
+    /* Methods of Cogl-2.0.Cogl.Framebuffer */
     /**
      * Explicitly allocates a configured #CoglFramebuffer allowing developers to
      * check and handle any errors that might arise from an unsupported
@@ -5400,20 +4578,15 @@ export class Onscreen {
      * @param z Distance to translate along the z-axis
      */
     translate(x: number, y: number, z: number): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
-    emit(sigName: string, ...args: any[]): void
-    disconnect(id: number): void
     static name: string
-    constructor (config?: Onscreen_ConstructProps)
-    _init (config?: Onscreen_ConstructProps): void
+    static new(context: Context, width: number, height: number): Onscreen
+    constructor(context: Context, width: number, height: number)
     /* Static methods and pseudo-constructors */
     static new(context: Context, width: number, height: number): Onscreen
     static error_quark(): number
-    static $gtype: GObject.GType<Onscreen>
 }
 export class OnscreenTemplate {
-    /* Owm methods of Cogl-2.0.Cogl.OnscreenTemplate */
+    /* Methods of Cogl-2.0.Cogl.OnscreenTemplate */
     /**
      * Requires that any future CoglOnscreen framebuffers derived from
      * this template must support making at least `n` samples per pixel
@@ -5455,7 +4628,7 @@ export class OnscreenTemplate {
     static new(swap_chain: SwapChain): OnscreenTemplate
 }
 export class Output {
-    /* Owm methods of Cogl-2.0.Cogl.Output */
+    /* Methods of Cogl-2.0.Cogl.Output */
     /**
      * Gets the height of the output in pixels.
      */
@@ -5502,7 +4675,7 @@ export class Output {
     static name: string
 }
 export class Pipeline {
-    /* Owm methods of Cogl-2.0.Cogl.Pipeline */
+    /* Methods of Cogl-2.0.Cogl.Pipeline */
     /**
      * Adds a shader snippet that will hook on to the given layer of the
      * pipeline. The exact part of the pipeline that the snippet wraps
@@ -6240,13 +5413,13 @@ export class Pipeline {
 }
 export class PixelBuffer {
     static name: string
-    static new(context: Context, size: number, data: object | null): PixelBuffer
-    constructor(context: Context, size: number, data: object | null)
+    static new(context: Context, size: number, data?: object | null): PixelBuffer
+    constructor(context: Context, size: number, data?: object | null)
     /* Static methods and pseudo-constructors */
-    static new(context: Context, size: number, data: object | null): PixelBuffer
+    static new(context: Context, size: number, data?: object | null): PixelBuffer
 }
 export class Primitive {
-    /* Owm methods of Cogl-2.0.Cogl.Primitive */
+    /* Methods of Cogl-2.0.Cogl.Primitive */
     /**
      * Makes a copy of an existing #CoglPrimitive. Note that the primitive
      * is a shallow copy which means it will use the same attributes and
@@ -6357,7 +5530,7 @@ export class Primitive {
     static texture_set_auto_mipmap(primitive_texture: PrimitiveTexture, value: Bool): void
 }
 export class Renderer {
-    /* Owm methods of Cogl-2.0.Cogl.Renderer */
+    /* Methods of Cogl-2.0.Cogl.Renderer */
     /**
      * This adds a renderer selection `constraint`.
      * 
@@ -6441,7 +5614,7 @@ export class Renderer {
     static new(): Renderer
 }
 export class Snippet {
-    /* Owm methods of Cogl-2.0.Cogl.Snippet */
+    /* Methods of Cogl-2.0.Cogl.Snippet */
     get_declarations(): string
     get_hook(): SnippetHook
     get_post(): string
@@ -6502,7 +5675,7 @@ export class Snippet {
     static new(hook: SnippetHook, declarations: string, post: string): Snippet
 }
 export class SubTexture {
-    /* Owm methods of Cogl-2.0.Cogl.SubTexture */
+    /* Methods of Cogl-2.0.Cogl.SubTexture */
     /**
      * Retrieves the parent texture that `sub_texture` derives its content
      * from.  This is the texture that was passed to
@@ -6516,7 +5689,7 @@ export class SubTexture {
     static new(ctx: Context, parent_texture: Texture, sub_x: number, sub_y: number, sub_width: number, sub_height: number): SubTexture
 }
 export class SwapChain {
-    /* Owm methods of Cogl-2.0.Cogl.SwapChain */
+    /* Methods of Cogl-2.0.Cogl.SwapChain */
     set_has_alpha(has_alpha: Bool): void
     set_length(length: number): void
     static name: string
@@ -6525,10 +5698,8 @@ export class SwapChain {
     /* Static methods and pseudo-constructors */
     static new(): SwapChain
 }
-export interface Texture2D_ConstructProps extends Object_ConstructProps {
-}
 export class Texture2D {
-    /* Implemented methods of Cogl-2.0.Cogl.Texture */
+    /* Methods of Cogl-2.0.Cogl.Texture */
     /**
      * Explicitly allocates the storage for the given `texture` which
      * allows you to be sure that there is enough memory for the
@@ -6568,7 +5739,7 @@ export class Texture2D {
      * If the texture is spliced the data for the first sub texture will be
      * queried.
      */
-    get_gl_texture(): [ /* returnType */ Bool, /* out_gl_handle */ number, /* out_gl_target */ number ]
+    get_gl_texture(): [ /* returnType */ Bool, /* out_gl_handle */ number | null, /* out_gl_target */ number | null ]
     /**
      * Queries the height of a cogl texture.
      */
@@ -6723,25 +5894,16 @@ export class Texture2D {
      * @param bitmap The source bitmap to read from
      */
     set_region_from_bitmap(src_x: number, src_y: number, dst_x: number, dst_y: number, dst_width: number, dst_height: number, bitmap: Bitmap): Bool
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
-    emit(sigName: string, ...args: any[]): void
-    disconnect(id: number): void
     static name: string
-    constructor (config?: Texture2D_ConstructProps)
-    _init (config?: Texture2D_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static gl_new_from_foreign(ctx: Context, gl_handle: number, width: number, height: number, format: PixelFormat): Texture2D
     static new_from_bitmap(bitmap: Bitmap): Texture2D
     static new_from_data(ctx: Context, width: number, height: number, format: PixelFormat, rowstride: number, data: number): Texture2D
     static new_from_file(ctx: Context, filename: string): Texture2D
     static new_with_size(ctx: Context, width: number, height: number): Texture2D
-    static $gtype: GObject.GType<Texture2D>
-}
-export interface Texture2DSliced_ConstructProps extends Object_ConstructProps {
 }
 export class Texture2DSliced {
-    /* Implemented methods of Cogl-2.0.Cogl.Texture */
+    /* Methods of Cogl-2.0.Cogl.Texture */
     /**
      * Explicitly allocates the storage for the given `texture` which
      * allows you to be sure that there is enough memory for the
@@ -6781,7 +5943,7 @@ export class Texture2DSliced {
      * If the texture is spliced the data for the first sub texture will be
      * queried.
      */
-    get_gl_texture(): [ /* returnType */ Bool, /* out_gl_handle */ number, /* out_gl_target */ number ]
+    get_gl_texture(): [ /* returnType */ Bool, /* out_gl_handle */ number | null, /* out_gl_target */ number | null ]
     /**
      * Queries the height of a cogl texture.
      */
@@ -6936,24 +6098,15 @@ export class Texture2DSliced {
      * @param bitmap The source bitmap to read from
      */
     set_region_from_bitmap(src_x: number, src_y: number, dst_x: number, dst_y: number, dst_width: number, dst_height: number, bitmap: Bitmap): Bool
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
-    emit(sigName: string, ...args: any[]): void
-    disconnect(id: number): void
     static name: string
-    constructor (config?: Texture2DSliced_ConstructProps)
-    _init (config?: Texture2DSliced_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new_from_bitmap(bmp: Bitmap, max_waste: number): Texture2DSliced
     static new_from_data(ctx: Context, width: number, height: number, max_waste: number, format: PixelFormat, rowstride: number, data: number): Texture2DSliced
     static new_from_file(ctx: Context, filename: string, max_waste: number): Texture2DSliced
     static new_with_size(ctx: Context, width: number, height: number, max_waste: number): Texture2DSliced
-    static $gtype: GObject.GType<Texture2DSliced>
-}
-export interface Texture3D_ConstructProps extends Object_ConstructProps {
 }
 export class Texture3D {
-    /* Implemented methods of Cogl-2.0.Cogl.Texture */
+    /* Methods of Cogl-2.0.Cogl.Texture */
     /**
      * Explicitly allocates the storage for the given `texture` which
      * allows you to be sure that there is enough memory for the
@@ -6993,7 +6146,7 @@ export class Texture3D {
      * If the texture is spliced the data for the first sub texture will be
      * queried.
      */
-    get_gl_texture(): [ /* returnType */ Bool, /* out_gl_handle */ number, /* out_gl_target */ number ]
+    get_gl_texture(): [ /* returnType */ Bool, /* out_gl_handle */ number | null, /* out_gl_target */ number | null ]
     /**
      * Queries the height of a cogl texture.
      */
@@ -7148,21 +6301,14 @@ export class Texture3D {
      * @param bitmap The source bitmap to read from
      */
     set_region_from_bitmap(src_x: number, src_y: number, dst_x: number, dst_y: number, dst_width: number, dst_height: number, bitmap: Bitmap): Bool
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
-    emit(sigName: string, ...args: any[]): void
-    disconnect(id: number): void
     static name: string
-    constructor (config?: Texture3D_ConstructProps)
-    _init (config?: Texture3D_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new_from_bitmap(bitmap: Bitmap, height: number, depth: number): Texture3D
     static new_from_data(context: Context, width: number, height: number, depth: number, format: PixelFormat, rowstride: number, image_stride: number, data: number): Texture3D
     static new_with_size(context: Context, width: number, height: number, depth: number): Texture3D
-    static $gtype: GObject.GType<Texture3D>
 }
 export class TexturePixmapX11 {
-    /* Owm methods of Cogl-2.0.Cogl.TexturePixmapX11 */
+    /* Methods of Cogl-2.0.Cogl.TexturePixmapX11 */
     /**
      * Checks whether the given `texture` is using the
      * GLX_EXT_texture_from_pixmap or similar extension to copy the
@@ -7201,10 +6347,8 @@ export class TexturePixmapX11 {
     static new_left(context: Context, pixmap: number, automatic_updates: Bool): TexturePixmapX11
     static error_quark(): number
 }
-export interface TextureRectangle_ConstructProps extends Object_ConstructProps {
-}
 export class TextureRectangle {
-    /* Implemented methods of Cogl-2.0.Cogl.Texture */
+    /* Methods of Cogl-2.0.Cogl.Texture */
     /**
      * Explicitly allocates the storage for the given `texture` which
      * allows you to be sure that there is enough memory for the
@@ -7244,7 +6388,7 @@ export class TextureRectangle {
      * If the texture is spliced the data for the first sub texture will be
      * queried.
      */
-    get_gl_texture(): [ /* returnType */ Bool, /* out_gl_handle */ number, /* out_gl_target */ number ]
+    get_gl_texture(): [ /* returnType */ Bool, /* out_gl_handle */ number | null, /* out_gl_target */ number | null ]
     /**
      * Queries the height of a cogl texture.
      */
@@ -7399,26 +6543,14 @@ export class TextureRectangle {
      * @param bitmap The source bitmap to read from
      */
     set_region_from_bitmap(src_x: number, src_y: number, dst_x: number, dst_y: number, dst_width: number, dst_height: number, bitmap: Bitmap): Bool
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
-    emit(sigName: string, ...args: any[]): void
-    disconnect(id: number): void
     static name: string
-    constructor (config?: TextureRectangle_ConstructProps)
-    _init (config?: TextureRectangle_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new_from_bitmap(bitmap: Bitmap): TextureRectangle
     static new_from_foreign(ctx: Context, gl_handle: number, width: number, height: number, format: PixelFormat): TextureRectangle
     static new_with_size(ctx: Context, width: number, height: number): TextureRectangle
-    static $gtype: GObject.GType<TextureRectangle>
 }
-/**
- * A structure for holding a color definition. The contents of
- * the CoglColor structure are private and should never by accessed
- * directly.
- */
 export class Color {
-    /* Owm methods of Cogl-2.0.Cogl.Color */
+    /* Methods of Cogl-2.0.Cogl.Color */
     /**
      * Creates a copy of `color`
      */
@@ -7616,7 +6748,7 @@ export class Color {
      * @param v1 a #CoglColor
      * @param v2 a #CoglColor
      */
-    static equal(v1: object | null, v2: object | null): Bool
+    static equal(v1?: object | null, v2?: object | null): Bool
     /**
      * Converts a color expressed in HLS (hue, luminance and saturation)
      * values into a #CoglColor.
@@ -7626,12 +6758,8 @@ export class Color {
      */
     static init_from_hsl(hue: number, saturation: number, luminance: number): /* color */ Color
 }
-/**
- * This struct is used to pass information to the callback when
- * cogl_debug_object_foreach_type() is called.
- */
 export class DebugObjectTypeInfo {
-    /* Own fields of Cogl-2.0.Cogl.DebugObjectTypeInfo */
+    /* Fields of Cogl-2.0.Cogl.DebugObjectTypeInfo */
     /**
      * A human readable name for the type.
      */
@@ -7644,7 +6772,7 @@ export class DebugObjectTypeInfo {
     static name: string
 }
 export class DepthState {
-    /* Owm methods of Cogl-2.0.Cogl.DepthState */
+    /* Methods of Cogl-2.0.Cogl.DepthState */
     /**
      * Gets the current range to which normalized depth values are mapped
      * before writing to the depth buffer. This corresponds to the range
@@ -7756,23 +6884,8 @@ export class DepthState {
     set_write_enabled(enable: Bool): void
     static name: string
 }
-/**
- * Represents an ordered rotation first of `heading` degrees around an
- * object's y axis, then `pitch` degrees around an object's x axis and
- * finally `roll` degrees around an object's z axis.
- * 
- * <note>It's important to understand the that axis are associated
- * with the object being rotated, so the axis also rotate in sequence
- * with the rotations being applied.</note>
- * 
- * The members of a #CoglEuler can be initialized, for example, with
- * cogl_euler_init() and cogl_euler_init_from_quaternion ().
- * 
- * You may also want to look at cogl_quaternion_init_from_euler() if
- * you want to do interpolation between 3d rotations.
- */
 export class Euler {
-    /* Own fields of Cogl-2.0.Cogl.Euler */
+    /* Fields of Cogl-2.0.Cogl.Euler */
     /**
      * Angle to rotate around an object's y axis
      */
@@ -7785,7 +6898,7 @@ export class Euler {
      * Angle to rotate around an object's z axis
      */
     roll: number
-    /* Owm methods of Cogl-2.0.Cogl.Euler */
+    /* Methods of Cogl-2.0.Cogl.Euler */
     /**
      * Allocates a new #CoglEuler and initilizes it with the component
      * angles of `src`. The newly allocated euler should be freed using
@@ -7830,41 +6943,21 @@ export class Euler {
      * @param v1 The first euler angle to compare
      * @param v2 The second euler angle to compare
      */
-    static equal(v1: object | null, v2: object | null): Bool
+    static equal(v1?: object | null, v2?: object | null): Bool
 }
-/**
- * An opaque object representing a fence. This type is currently
- * unused but in the future may be used to pass extra information
- * about the fence completion.
- */
 export class Fence {
     static name: string
 }
-/**
- * An opaque type representing one future callback to be made when the
- * GPU command stream has passed a certain point.
- */
 export class FenceClosure {
-    /* Owm methods of Cogl-2.0.Cogl.FenceClosure */
+    /* Methods of Cogl-2.0.Cogl.FenceClosure */
     get_user_data(): object | null
     static name: string
 }
-/**
- * An opaque type that tracks a #CoglFrameCallback and associated user
- * data. A #CoglFrameClosure pointer will be returned from
- * cogl_onscreen_add_frame_callback() and it allows you to remove a
- * callback later using cogl_onscreen_remove_frame_callback().
- */
 export class FrameClosure {
     static name: string
 }
-/**
- * Provides function pointers for the full OpenGLES 2.0 api. The
- * api must be accessed this way and not by directly calling
- * symbols of any system OpenGLES 2.0 api.
- */
 export class GLES2Vtable {
-    /* Own fields of Cogl-2.0.Cogl.GLES2Vtable */
+    /* Fields of Cogl-2.0.Cogl.GLES2Vtable */
     glBindTexture: (target: GL.enum_, texture: GL.uint) => void
     glBlendFunc: (sfactor: GL.enum_, dfactor: GL.enum_) => void
     glClear: (mask: GL.bitfield) => void
@@ -7992,19 +7085,19 @@ export class GLES2Vtable {
     static name: string
 }
 export class GtypeClass {
-    /* Own fields of Cogl-2.0.Cogl.GtypeClass */
+    /* Fields of Cogl-2.0.Cogl.GtypeClass */
     base_class: GObject.TypeClass
     dummy: number
     static name: string
 }
 export class GtypeObject {
-    /* Own fields of Cogl-2.0.Cogl.GtypeObject */
+    /* Fields of Cogl-2.0.Cogl.GtypeObject */
     parent_instance: GObject.TypeInstance
     dummy: number
     static name: string
 }
 export class KmsCrtc {
-    /* Own fields of Cogl-2.0.Cogl.KmsCrtc */
+    /* Fields of Cogl-2.0.Cogl.KmsCrtc */
     id: number
     x: number
     y: number
@@ -8013,35 +7106,8 @@ export class KmsCrtc {
     ignore: Bool
     static name: string
 }
-/**
- * A CoglMatrix holds a 4x4 transform matrix. This is a single precision,
- * column-major matrix which means it is compatible with what OpenGL expects.
- * 
- * A CoglMatrix can represent transforms such as, rotations, scaling,
- * translation, sheering, and linear projections. You can combine these
- * transforms by multiplying multiple matrices in the order you want them
- * applied.
- * 
- * The transformation of a vertex (x, y, z, w) by a CoglMatrix is given by:
- * 
- * |[
- *   x_new = xx * x + xy * y + xz * z + xw * w
- *   y_new = yx * x + yy * y + yz * z + yw * w
- *   z_new = zx * x + zy * y + zz * z + zw * w
- *   w_new = wx * x + wy * y + wz * z + ww * w
- * ```
- * 
- * 
- * Where w is normally 1
- * 
- * <note>You must consider the members of the CoglMatrix structure read only,
- * and all matrix modifications must be done via the cogl_matrix API. This
- * allows Cogl to annotate the matrices internally. Violation of this will give
- * undefined results. If you need to initialize a matrix with a constant other
- * than the identity matrix you can use cogl_matrix_init_from_array().</note>
- */
 export class Matrix {
-    /* Own fields of Cogl-2.0.Cogl.Matrix */
+    /* Fields of Cogl-2.0.Cogl.Matrix */
     xx: number
     yx: number
     zx: number
@@ -8058,7 +7124,7 @@ export class Matrix {
     yw: number
     zw: number
     ww: number
-    /* Owm methods of Cogl-2.0.Cogl.Matrix */
+    /* Methods of Cogl-2.0.Cogl.Matrix */
     /**
      * Allocates a new #CoglMatrix on the heap and initializes it with
      * the same values as `matrix`.
@@ -8411,42 +7477,10 @@ export class Matrix {
      * @param v1 A 4x4 transformation matrix
      * @param v2 A 4x4 transformation matrix
      */
-    static equal(v1: object | null, v2: object | null): Bool
+    static equal(v1?: object | null, v2?: object | null): Bool
 }
-/**
- * Represents a single immutable transformation that was retrieved
- * from a #CoglMatrixStack using cogl_matrix_stack_get_entry().
- * 
- * Internally a #CoglMatrixEntry represents a single matrix
- * operation (such as "rotate", "scale", "translate") which is applied
- * to the transform of a single parent entry.
- * 
- * Using the #CoglMatrixStack api effectively builds up a graph of
- * these immutable #CoglMatrixEntry structures whereby operations
- * that can be shared between multiple transformations will result
- * in shared #CoglMatrixEntry nodes in the graph.
- * 
- * When a #CoglMatrixStack is first created it references one
- * #CoglMatrixEntry that represents a single "load identity"
- * operation. This serves as the root entry and all operations
- * that are then applied to the stack will extend the graph
- * starting from this root "load identity" entry.
- * 
- * Given the typical usage model for a #CoglMatrixStack and the way
- * the entries are built up while traversing a scenegraph then in most
- * cases where an application is interested in comparing two
- * transformations for equality then it is enough to simply compare
- * two #CoglMatrixEntry pointers directly. Technically this can lead
- * to false negatives that could be identified with a deeper
- * comparison but often these false negatives are unlikely and
- * don't matter anyway so this enables extremely cheap comparisons.
- * 
- * <note>#CoglMatrixEntry<!-- -->s are reference counted using
- * cogl_matrix_entry_ref() and cogl_matrix_entry_unref() not with
- * cogl_object_ref() and cogl_object_unref().</note>
- */
 export class MatrixEntry {
-    /* Owm methods of Cogl-2.0.Cogl.MatrixEntry */
+    /* Methods of Cogl-2.0.Cogl.MatrixEntry */
     /**
      * Determines if the only difference between two transforms is a
      * translation and if so returns what the `x,` `y,` and `z` components of
@@ -8512,22 +7546,11 @@ export class MatrixEntry {
     unref(): void
     static name: string
 }
-/**
- * An opaque type that tracks a #CoglOnscreenDirtyCallback and associated
- * user data. A #CoglOnscreenDirtyClosure pointer will be returned from
- * cogl_onscreen_add_dirty_callback() and it allows you to remove a
- * callback later using cogl_onscreen_remove_dirty_callback().
- */
 export class OnscreenDirtyClosure {
     static name: string
 }
-/**
- * A structure passed to callbacks registered using
- * cogl_onscreen_add_dirty_callback(). The members describe a
- * rectangle within the onscreen buffer that should be redrawn.
- */
 export class OnscreenDirtyInfo {
-    /* Own fields of Cogl-2.0.Cogl.OnscreenDirtyInfo */
+    /* Fields of Cogl-2.0.Cogl.OnscreenDirtyInfo */
     /**
      * Left edge of the dirty rectangle
      */
@@ -8546,97 +7569,19 @@ export class OnscreenDirtyInfo {
     height: number
     static name: string
 }
-/**
- * An opaque type that tracks a #CoglOnscreenResizeCallback and
- * associated user data. A #CoglOnscreenResizeClosure pointer will be
- * returned from cogl_onscreen_add_resize_callback() and it allows you
- * to remove a callback later using
- * cogl_onscreen_remove_resize_callback().
- */
 export class OnscreenResizeClosure {
     static name: string
 }
-/**
- * A struct for describing the state of a file descriptor that Cogl
- * needs to block on. The `events` field contains a bitmask of
- * #CoglPollFDEvent<!-- -->s that should cause the application to wake
- * up. After the application is woken up from idle it should pass back
- * an array of #CoglPollFD<!-- -->s to Cogl and update the `revents`
- * mask to the actual events that occurred on the file descriptor.
- * 
- * Note that CoglPollFD is deliberately exactly the same as struct
- * pollfd on Unix so that it can simply be cast when calling poll.
- */
 export class PollFD {
-    /* Own fields of Cogl-2.0.Cogl.PollFD */
+    /* Fields of Cogl-2.0.Cogl.PollFD */
     /**
      * The file descriptor to block on
      */
     fd: number
     static name: string
 }
-/**
- * A quaternion is comprised of a scalar component and a 3D vector
- * component. The scalar component is normally referred to as w and the
- * vector might either be referred to as v or a (for axis) or expanded
- * with the individual components: (x, y, z) A full quaternion would
- * then be written as <literal>[w (x, y, z)]</literal>.
- * 
- * Quaternions can be considered to represent an axis and angle
- * pair although sadly these numbers are buried somewhat under some
- * maths...
- * 
- * For the curious you can see here that a given axis (a) and angle (𝜃)
- * pair are represented in a quaternion as follows:
- * |[
- * [w=cos(𝜃/2) ( x=sin(𝜃/2)*a.x, y=sin(𝜃/2)*a.y, z=sin(𝜃/2)*a.x )]
- * ```
- * 
- * 
- * Unit Quaternions:
- * When using Quaternions to represent spatial orientations for 3D
- * graphics it's always assumed you have a unit quaternion. The
- * magnitude of a quaternion is defined as:
- * |[
- * sqrt (w² + x² + y² + z²)
- * ```
- * 
- * and a unit quaternion satisfies this equation:
- * |[
- * w² + x² + y² + z² = 1
- * ```
- * 
- * 
- * Thankfully most of the time we don't actually have to worry about
- * the maths that goes on behind the scenes but if you are curious to
- * learn more here are some external references:
- * 
- * <itemizedlist>
- * <listitem>
- * <ulink url="http://mathworld.wolfram.com/Quaternion.html"/>
- * </listitem>
- * <listitem>
- * <ulink url="http://www.gamedev.net/reference/articles/article1095.asp"/>
- * </listitem>
- * <listitem>
- * <ulink url="http://www.cprogramming.com/tutorial/3d/quaternions.html"/>
- * </listitem>
- * <listitem>
- * <ulink url="http://www.isner.com/tutorials/quatSpells/quaternion_spells_12.htm"/>
- * </listitem>
- * <listitem>
- * 3D Maths Primer for Graphics and Game Development ISBN-10: 1556229119
- * </listitem>
- * <listitem>
- * <ulink url="http://www.cs.caltech.edu/courses/cs171/quatut.pdf"/>
- * </listitem>
- * <listitem>
- * <ulink url="http://www.j3d.org/matrix_faq/matrfaq_latest.html#Q56"/>
- * </listitem>
- * </itemizedlist>
- */
 export class Quaternion {
-    /* Own fields of Cogl-2.0.Cogl.Quaternion */
+    /* Fields of Cogl-2.0.Cogl.Quaternion */
     /**
      * based on the angle of rotation it is cos(𝜃/2)
      */
@@ -8656,7 +7601,7 @@ export class Quaternion {
      *     rotation it is sin(𝜃/2)*axis.z
      */
     z: number
-    /* Owm methods of Cogl-2.0.Cogl.Quaternion */
+    /* Methods of Cogl-2.0.Cogl.Quaternion */
     /**
      * Allocates a new #CoglQuaternion on the stack and initializes it with
      * the same values as `src`.
@@ -8801,13 +7746,10 @@ export class Quaternion {
      * @param v1 A #CoglQuaternion
      * @param v2 A #CoglQuaternion
      */
-    static equal(v1: object | null, v2: object | null): Bool
+    static equal(v1?: object | null, v2?: object | null): Bool
 }
-/**
- * Used to specify vertex information when calling cogl_polygon()
- */
 export class TextureVertex {
-    /* Own fields of Cogl-2.0.Cogl.TextureVertex */
+    /* Fields of Cogl-2.0.Cogl.TextureVertex */
     /**
      * Model x-coordinate
      */
@@ -8835,49 +7777,16 @@ export class TextureVertex {
     color: Color
     static name: string
 }
-/**
- * A #CoglUserDataKey is used to declare a key for attaching data to a
- * #CoglObject using cogl_object_set_user_data. The typedef only exists as a
- * formality to make code self documenting since only the unique address of a
- * #CoglUserDataKey is used.
- * 
- * Typically you would declare a static #CoglUserDataKey and set private data
- * on an object something like this:
- * 
- * |[
- * static CoglUserDataKey path_private_key;
- * 
- * static void
- * destroy_path_private_cb (void *data)
- * {
- *   g_free (data);
- * }
- * 
- * static void
- * my_path_set_data (CoglPath *path, void *data)
- * {
- *   cogl_object_set_user_data (COGL_OBJECT (path),
- *                              &private_key,
- *                              data,
- *                              destroy_path_private_cb);
- * }
- * ```
- * 
- */
 export class UserDataKey {
-    /* Own fields of Cogl-2.0.Cogl.UserDataKey */
+    /* Fields of Cogl-2.0.Cogl.UserDataKey */
     /**
      * ignored.
      */
     unused: number
     static name: string
 }
-/**
- * A convenience vertex definition that can be used with
- * cogl_primitive_new_p2().
- */
 export class VertexP2 {
-    /* Own fields of Cogl-2.0.Cogl.VertexP2 */
+    /* Fields of Cogl-2.0.Cogl.VertexP2 */
     /**
      * The x component of a position attribute
      */
@@ -8888,12 +7797,8 @@ export class VertexP2 {
     y: number
     static name: string
 }
-/**
- * A convenience vertex definition that can be used with
- * cogl_primitive_new_p2c4().
- */
 export class VertexP2C4 {
-    /* Own fields of Cogl-2.0.Cogl.VertexP2C4 */
+    /* Fields of Cogl-2.0.Cogl.VertexP2C4 */
     /**
      * The x component of a position attribute
      */
@@ -8920,12 +7825,8 @@ export class VertexP2C4 {
     a: number
     static name: string
 }
-/**
- * A convenience vertex definition that can be used with
- * cogl_primitive_new_p2t2().
- */
 export class VertexP2T2 {
-    /* Own fields of Cogl-2.0.Cogl.VertexP2T2 */
+    /* Fields of Cogl-2.0.Cogl.VertexP2T2 */
     /**
      * The x component of a position attribute
      */
@@ -8944,12 +7845,8 @@ export class VertexP2T2 {
     t: number
     static name: string
 }
-/**
- * A convenience vertex definition that can be used with
- * cogl_primitive_new_p3t2c4().
- */
 export class VertexP2T2C4 {
-    /* Own fields of Cogl-2.0.Cogl.VertexP2T2C4 */
+    /* Fields of Cogl-2.0.Cogl.VertexP2T2C4 */
     /**
      * The x component of a position attribute
      */
@@ -8984,12 +7881,8 @@ export class VertexP2T2C4 {
     a: number
     static name: string
 }
-/**
- * A convenience vertex definition that can be used with
- * cogl_primitive_new_p3().
- */
 export class VertexP3 {
-    /* Own fields of Cogl-2.0.Cogl.VertexP3 */
+    /* Fields of Cogl-2.0.Cogl.VertexP3 */
     /**
      * The x component of a position attribute
      */
@@ -9004,12 +7897,8 @@ export class VertexP3 {
     z: number
     static name: string
 }
-/**
- * A convenience vertex definition that can be used with
- * cogl_primitive_new_p3c4().
- */
 export class VertexP3C4 {
-    /* Own fields of Cogl-2.0.Cogl.VertexP3C4 */
+    /* Fields of Cogl-2.0.Cogl.VertexP3C4 */
     /**
      * The x component of a position attribute
      */
@@ -9040,12 +7929,8 @@ export class VertexP3C4 {
     a: number
     static name: string
 }
-/**
- * A convenience vertex definition that can be used with
- * cogl_primitive_new_p3t2().
- */
 export class VertexP3T2 {
-    /* Own fields of Cogl-2.0.Cogl.VertexP3T2 */
+    /* Fields of Cogl-2.0.Cogl.VertexP3T2 */
     /**
      * The x component of a position attribute
      */
@@ -9068,12 +7953,8 @@ export class VertexP3T2 {
     t: number
     static name: string
 }
-/**
- * A convenience vertex definition that can be used with
- * cogl_primitive_new_p3t2c4().
- */
 export class VertexP3T2C4 {
-    /* Own fields of Cogl-2.0.Cogl.VertexP3T2C4 */
+    /* Fields of Cogl-2.0.Cogl.VertexP3T2C4 */
     /**
      * The x component of a position attribute
      */
@@ -9113,27 +7994,27 @@ export class VertexP3T2C4 {
     static name: string
 }
 export class _ColorSizeCheck {
-    /* Own fields of Cogl-2.0.Cogl._ColorSizeCheck */
+    /* Fields of Cogl-2.0.Cogl._ColorSizeCheck */
     compile_time_assert_CoglColor_size: number[]
     static name: string
 }
 export class _EulerSizeCheck {
-    /* Own fields of Cogl-2.0.Cogl._EulerSizeCheck */
+    /* Fields of Cogl-2.0.Cogl._EulerSizeCheck */
     compile_time_assert_CoglEuler_size: number[]
     static name: string
 }
 export class _MatrixSizeCheck {
-    /* Own fields of Cogl-2.0.Cogl._MatrixSizeCheck */
+    /* Fields of Cogl-2.0.Cogl._MatrixSizeCheck */
     compile_time_assert_CoglMatrix_size: number[]
     static name: string
 }
 export class _QuaternionSizeCheck {
-    /* Own fields of Cogl-2.0.Cogl._QuaternionSizeCheck */
+    /* Fields of Cogl-2.0.Cogl._QuaternionSizeCheck */
     compile_time_assert_CoglQuaternion_size: number[]
     static name: string
 }
 export class _TextureVertexSizeCheck {
-    /* Own fields of Cogl-2.0.Cogl._TextureVertexSizeCheck */
+    /* Fields of Cogl-2.0.Cogl._TextureVertexSizeCheck */
     compile_time_assert_CoglTextureVertex_size: number[]
     static name: string
 }

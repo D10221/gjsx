@@ -32,21 +32,16 @@ export function shutdown_display(display: xlib.Display, screen: number): void
 export function substitute_changed(display: xlib.Display, screen: number): void
 /**
  * Function type for doing final config tweaking on prepared FcPatterns.
- * @callback 
  */
 export interface SubstituteFunc {
-    (pattern: fontconfig.Pattern, data: object | null): void
+    (pattern: fontconfig.Pattern, data?: object | null): void
 }
 export interface Font_ConstructProps extends PangoFc.Font_ConstructProps {
 }
-/**
- * #PangoXftFont is an implementation of #PangoFcFont using the Xft
- * library for rendering.  It is used in conjunction with #PangoXftFontMap.
- */
 export class Font {
-    /* Extended properties of PangoFc-1.0.PangoFc.Font */
+    /* Properties of PangoFc-1.0.PangoFc.Font */
     readonly pattern: object
-    /* Extended fields of PangoFc-1.0.PangoFc.Font */
+    /* Fields of PangoFc-1.0.PangoFc.Font */
     parent_instance: Pango.Font
     font_pattern: fontconfig.Pattern
     fontmap: Pango.FontMap
@@ -56,16 +51,16 @@ export class Font {
     metrics_by_lang: object[]
     is_hinted: number
     is_transformed: number
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of PangoFc-1.0.PangoFc.Font */
+    /* Methods of PangoFc-1.0.PangoFc.Font */
     /**
      * Gets the glyph index for a given Unicode character
      * for `font`. If you only want to determine
      * whether the font has the glyph, use pango_fc_font_has_char().
      * @param wc Unicode character to look up
      */
-    get_glyph(wc: string): number
+    get_glyph(wc: number): number
     /**
      * Returns the index of a glyph suitable for drawing `wc` as an
      * unknown character.
@@ -73,12 +68,12 @@ export class Font {
      * Use PANGO_GET_UNKNOWN_GLYPH() instead.
      * @param wc the Unicode character for which a glyph is needed.
      */
-    get_unknown_glyph(wc: string): Pango.Glyph
+    get_unknown_glyph(wc: number): Pango.Glyph
     /**
      * Determines whether `font` has a glyph for the codepoint `wc`.
      * @param wc Unicode codepoint to look up
      */
-    has_char(wc: string): boolean
+    has_char(wc: number): boolean
     /**
      * This function used to adjust each adjacent pair of glyphs
      * in `glyphs` according to kerning information in `font`.
@@ -92,7 +87,7 @@ export class Font {
      * pango_fc_font_lock_face().
      */
     unlock_face(): void
-    /* Extended methods of Pango-1.0.Pango.Font */
+    /* Methods of Pango-1.0.Pango.Font */
     /**
      * Returns a description of the font, with font size set in points.
      * Use pango_font_describe_with_absolute_size() if you want the font
@@ -142,7 +137,7 @@ export class Font {
      * output variables and returns.
      * @param glyph the glyph index
      */
-    get_glyph_extents(glyph: Pango.Glyph): [ /* ink_rect */ Pango.Rectangle, /* logical_rect */ Pango.Rectangle ]
+    get_glyph_extents(glyph: Pango.Glyph): [ /* ink_rect */ Pango.Rectangle | null, /* logical_rect */ Pango.Rectangle | null ]
     /**
      * Gets overall metric information for a font. Since the metrics may be
      * substantially different for different scripts, a language tag can
@@ -153,15 +148,15 @@ export class Font {
      * output variables and returns.
      * @param language language tag used to determine which script to get the metrics            for, or %NULL to indicate to get the metrics for the entire font.
      */
-    get_metrics(language: Pango.Language | null): Pango.FontMetrics
+    get_metrics(language?: Pango.Language | null): Pango.FontMetrics
     /**
      * Returns whether the font provides a glyph for this character.
      * 
      * Returns %TRUE if `font` can render `wc`
      * @param wc a Unicode character
      */
-    has_char(wc: string): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    has_char(wc: number): boolean
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -207,7 +202,7 @@ export class Font {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -376,7 +371,7 @@ export class Font {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -464,19 +459,17 @@ export class Font {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Pango-1.0.Pango.Font */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Pango-1.0.Pango.Font */
     /**
      * Returns a description of the font, with font size set in points.
      * Use pango_font_describe_with_absolute_size() if you want the font
      * size in device units.
-     * @virtual 
      */
     vfunc_describe(): Pango.FontDescription
     vfunc_describe_absolute(): Pango.FontDescription
     /**
      * Computes the coverage map for a given font and language tag.
-     * @virtual 
      * @param language the language tag
      */
     vfunc_get_coverage(language: Pango.Language): Pango.Coverage
@@ -490,7 +483,6 @@ export class Font {
      * It is the responsibility of the user to ensure that the font map is kept
      * alive.  In most uses this is not an issue as a #PangoContext holds
      * a reference to the font map.
-     * @virtual 
      */
     vfunc_get_font_map(): Pango.FontMap | null
     /**
@@ -504,10 +496,9 @@ export class Font {
      * 
      * If `font` is %NULL, this function gracefully sets some sane values in the
      * output variables and returns.
-     * @virtual 
      * @param glyph the glyph index
      */
-    vfunc_get_glyph_extents(glyph: Pango.Glyph): [ /* ink_rect */ Pango.Rectangle, /* logical_rect */ Pango.Rectangle ]
+    vfunc_get_glyph_extents(glyph: Pango.Glyph): [ /* ink_rect */ Pango.Rectangle | null, /* logical_rect */ Pango.Rectangle | null ]
     /**
      * Gets overall metric information for a font. Since the metrics may be
      * substantially different for different scripts, a language tag can
@@ -516,11 +507,10 @@ export class Font {
      * 
      * If `font` is %NULL, this function gracefully sets some sane values in the
      * output variables and returns.
-     * @virtual 
      * @param language language tag used to determine which script to get the metrics            for, or %NULL to indicate to get the metrics for the entire font.
      */
-    vfunc_get_metrics(language: Pango.Language | null): Pango.FontMetrics
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    vfunc_get_metrics(language?: Pango.Language | null): Pango.FontMetrics
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -537,12 +527,11 @@ export class Font {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -569,7 +558,6 @@ export class Font {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Font, pspec: GObject.ParamSpec) => void)): number
@@ -577,8 +565,8 @@ export class Font {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::pattern", callback: (($obj: Font, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::pattern", callback: (($obj: Font, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -594,7 +582,7 @@ export class Font {
      * @param font a #PangoFont for the Xft backend
      * @param wc Unicode codepoint to look up
      */
-    static get_glyph(font: Pango.Font, wc: string): number
+    static get_glyph(font: Pango.Font, wc: number): number
     /**
      * Returns the index of a glyph suitable for drawing `wc` as an
      * unknown character.
@@ -603,7 +591,7 @@ export class Font {
      * @param font a #PangoFont.
      * @param wc the Unicode character for which a glyph is needed.
      */
-    static get_unknown_glyph(font: Pango.Font, wc: string): Pango.Glyph
+    static get_unknown_glyph(font: Pango.Font, wc: number): Pango.Glyph
     /**
      * Determines whether `font` has a glyph for the codepoint `wc`.
      * 
@@ -611,7 +599,7 @@ export class Font {
      * @param font a #PangoFont for the Xft backend
      * @param wc Unicode codepoint to look up
      */
-    static has_char(font: Pango.Font, wc: string): boolean
+    static has_char(font: Pango.Font, wc: number): boolean
     /**
      * Releases a font previously obtained with
      * pango_xft_font_lock_face().
@@ -620,21 +608,16 @@ export class Font {
      * @param font a #PangoFont.
      */
     static unlock_face(font: Pango.Font): void
-    static $gtype: GObject.GType<Font>
+    static $gtype: GObject.Type
 }
 export interface FontMap_ConstructProps extends PangoFc.FontMap_ConstructProps {
 }
-/**
- * #PangoXftFontMap is an implementation of #PangoFcFontMap suitable for
- * the Xft library as the renderer.  It is used in to create fonts of
- * type #PangoXftFont.
- */
 export class FontMap {
-    /* Extended fields of Pango-1.0.Pango.FontMap */
+    /* Fields of Pango-1.0.Pango.FontMap */
     parent_instance: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of PangoFc-1.0.PangoFc.FontMap */
+    /* Methods of PangoFc-1.0.PangoFc.FontMap */
     /**
      * Clear all cached information and fontsets for this font map;
      * this should be called whenever there is a change in the
@@ -665,7 +648,7 @@ export class FontMap {
      * only for backend implementations deriving from #PangoFcFontMap.
      */
     shutdown(): void
-    /* Extended methods of Pango-1.0.Pango.FontMap */
+    /* Methods of Pango-1.0.Pango.FontMap */
     /**
      * Forces a change in the context, which will cause any #PangoContext
      * using this fontmap to change.
@@ -719,7 +702,7 @@ export class FontMap {
      * @param language a #PangoLanguage the fonts will be used for
      */
     load_fontset(context: Pango.Context, desc: Pango.FontDescription, language: Pango.Language): Pango.Fontset | null
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -765,7 +748,7 @@ export class FontMap {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -934,7 +917,7 @@ export class FontMap {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -1022,8 +1005,8 @@ export class FontMap {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Pango-1.0.Pango.FontMap */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Pango-1.0.Pango.FontMap */
     /**
      * Forces a change in the context, which will cause any #PangoContext
      * using this fontmap to change.
@@ -1032,7 +1015,6 @@ export class FontMap {
      * for Pango, something applications won't do. Backends should
      * call this function if they have attached extra data to the context
      * and such data is changed.
-     * @virtual 
      */
     vfunc_changed(): void
     /**
@@ -1047,17 +1029,14 @@ export class FontMap {
      * 
      * This can be used to automatically detect changes to a #PangoFontMap, like
      * in #PangoContext.
-     * @virtual 
      */
     vfunc_get_serial(): number
     /**
      * List all families for a fontmap.
-     * @virtual 
      */
     vfunc_list_families(): /* families */ Pango.FontFamily[]
     /**
      * Load the font in the fontmap that is the closest match for `desc`.
-     * @virtual 
      * @param context the #PangoContext the font will be used with
      * @param desc a #PangoFontDescription describing the font to load
      */
@@ -1065,13 +1044,12 @@ export class FontMap {
     /**
      * Load a set of fonts in the fontmap that can be used to render
      * a font matching `desc`.
-     * @virtual 
      * @param context the #PangoContext the font will be used with
      * @param desc a #PangoFontDescription describing the font to load
      * @param language a #PangoLanguage the fonts will be used for
      */
     vfunc_load_fontset(context: Pango.Context, desc: Pango.FontDescription, language: Pango.Language): Pango.Fontset | null
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -1088,12 +1066,11 @@ export class FontMap {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1120,46 +1097,39 @@ export class FontMap {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: FontMap, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: FontMap, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: FontMap_ConstructProps)
     _init (config?: FontMap_ConstructProps): void
-    static $gtype: GObject.GType<FontMap>
+    static $gtype: GObject.Type
 }
 export interface Renderer_ConstructProps extends Pango.Renderer_ConstructProps {
     /* Constructor properties of PangoXft-1.0.PangoXft.Renderer */
-    display?: object | null
-    screen?: number | null
+    display?: object
+    screen?: number
 }
-/**
- * #PangoXftRenderer is a subclass of #PangoRenderer used for rendering
- * with Pango's Xft backend. It can be used directly, or it can be
- * further subclassed to modify exactly how drawing of individual
- * elements occurs.
- */
 export class Renderer {
-    /* Own properties of PangoXft-1.0.PangoXft.Renderer */
+    /* Properties of PangoXft-1.0.PangoXft.Renderer */
     readonly display: object
     readonly screen: number
-    /* Extended fields of Pango-1.0.Pango.Renderer */
+    /* Fields of Pango-1.0.Pango.Renderer */
     /**
      * the current transformation matrix for
      *    the Renderer; may be %NULL, which should be treated the
      *    same as the identity matrix.
      */
     matrix: Pango.Matrix
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of PangoXft-1.0.PangoXft.Renderer */
+    /* Methods of PangoXft-1.0.PangoXft.Renderer */
     /**
      * Sets the default foreground color for a #XftRenderer.
      * @param default_color the default foreground color
@@ -1171,7 +1141,7 @@ export class Renderer {
      * @param draw a #XftDraw
      */
     set_draw(draw: xft.Draw): void
-    /* Extended methods of Pango-1.0.Pango.Renderer */
+    /* Methods of Pango-1.0.Pango.Renderer */
     /**
      * Does initial setup before rendering operations on `renderer`.
      * pango_renderer_deactivate() should be called when done drawing.
@@ -1339,13 +1309,13 @@ export class Renderer {
      * @param part the part to change the color of
      * @param color the new color or %NULL to unset the current color
      */
-    set_color(part: Pango.RenderPart, color: Pango.Color | null): void
+    set_color(part: Pango.RenderPart, color?: Pango.Color | null): void
     /**
      * Sets the transformation matrix that will be applied when rendering.
      * @param matrix a #PangoMatrix, or %NULL to unset any existing matrix.  (No matrix set is the same as setting the identity matrix.)
      */
-    set_matrix(matrix: Pango.Matrix | null): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    set_matrix(matrix?: Pango.Matrix | null): void
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -1391,7 +1361,7 @@ export class Renderer {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -1560,7 +1530,7 @@ export class Renderer {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -1648,11 +1618,11 @@ export class Renderer {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of PangoXft-1.0.PangoXft.Renderer */
+    watch_closure(closure: Function): void
+    /* Virtual methods of PangoXft-1.0.PangoXft.Renderer */
     vfunc_composite_glyphs(xft_font: xft.Font, glyphs: xft.GlyphSpec, n_glyphs: number): void
     vfunc_composite_trapezoids(part: Pango.RenderPart, trapezoids: xlib.XTrapezoid, n_trapezoids: number): void
-    /* Extended virtual methods of Pango-1.0.Pango.Renderer */
+    /* Virtual methods of Pango-1.0.Pango.Renderer */
     vfunc_begin(): void
     /**
      * Draw a squiggly line that approximately covers the given rectangle
@@ -1663,7 +1633,6 @@ export class Renderer {
      * 
      * This should be called while `renderer` is already active.  Use
      * pango_renderer_activate() to activate a renderer.
-     * @virtual 
      * @param x X coordinate of underline, in Pango units in user coordinate system
      * @param y Y coordinate of underline, in Pango units in user coordinate system
      * @param width width of underline, in Pango units in user coordinate system
@@ -1672,7 +1641,6 @@ export class Renderer {
     vfunc_draw_error_underline(x: number, y: number, width: number, height: number): void
     /**
      * Draws a single glyph with coordinates in device space.
-     * @virtual 
      * @param font a #PangoFont
      * @param glyph the glyph index of a single glyph
      * @param x X coordinate of left edge of baseline of glyph
@@ -1691,7 +1659,6 @@ export class Renderer {
      * 
      * The default implementation of this method simply falls back to
      * pango_renderer_draw_glyphs().
-     * @virtual 
      * @param text the UTF-8 text that `glyph_item` refers to, or %NULL
      * @param glyph_item a #PangoGlyphItem
      * @param x X position of left edge of baseline, in user space coordinates   in Pango units.
@@ -1700,7 +1667,6 @@ export class Renderer {
     vfunc_draw_glyph_item(text: string | null, glyph_item: Pango.GlyphItem, x: number, y: number): void
     /**
      * Draws the glyphs in `glyphs` with the specified #PangoRenderer.
-     * @virtual 
      * @param font a #PangoFont
      * @param glyphs a #PangoGlyphString
      * @param x X position of left edge of baseline, in user space coordinates   in Pango units.
@@ -1713,7 +1679,6 @@ export class Renderer {
      * 
      * This should be called while `renderer` is already active.  Use
      * pango_renderer_activate() to activate a renderer.
-     * @virtual 
      * @param part type of object this rectangle is part of
      * @param x X position at which to draw rectangle, in user space coordinates in Pango units
      * @param y Y position at which to draw rectangle, in user space coordinates in Pango units
@@ -1725,7 +1690,6 @@ export class Renderer {
     /**
      * Draws a trapezoid with the parallel sides aligned with the X axis
      * using the given #PangoRenderer; coordinates are in device space.
-     * @virtual 
      * @param part type of object this trapezoid is part of
      * @param y1_ Y coordinate of top of trapezoid
      * @param x11 X coordinate of left end of top of trapezoid
@@ -1750,12 +1714,11 @@ export class Renderer {
      * When the stipple changes or underlines with different stipples
      * might be joined together. Pango automatically calls this for
      * changes to colors. (See pango_renderer_set_color())
-     * @virtual 
      * @param part the part for which rendering has changed.
      */
     vfunc_part_changed(part: Pango.RenderPart): void
     vfunc_prepare_run(run: Pango.LayoutRun): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -1772,12 +1735,11 @@ export class Renderer {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1804,7 +1766,6 @@ export class Renderer {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Renderer, pspec: GObject.ParamSpec) => void)): number
@@ -1814,8 +1775,8 @@ export class Renderer {
     connect_after(sigName: "notify::display", callback: (($obj: Renderer, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::screen", callback: (($obj: Renderer, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::screen", callback: (($obj: Renderer, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -1823,13 +1784,10 @@ export class Renderer {
     _init (config?: Renderer_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(display: xlib.Display, screen: number): Renderer
-    static $gtype: GObject.GType<Renderer>
+    static $gtype: GObject.Type
 }
-/**
- * The class structure for #PangoXftRenderer
- */
 export abstract class RendererClass {
-    /* Own fields of PangoXft-1.0.PangoXft.RendererClass */
+    /* Fields of PangoXft-1.0.PangoXft.RendererClass */
     composite_trapezoids: (xftrenderer: Renderer, part: Pango.RenderPart, trapezoids: xlib.XTrapezoid, n_trapezoids: number) => void
     composite_glyphs: (xftrenderer: Renderer, xft_font: xft.Font, glyphs: xft.GlyphSpec, n_glyphs: number) => void
     static name: string

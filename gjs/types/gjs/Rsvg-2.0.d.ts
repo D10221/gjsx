@@ -68,9 +68,6 @@ export enum Unit {
      */
     PC,
 }
-/**
- * @bitfield 
- */
 export enum HandleFlags {
     /**
      * No flags are set.
@@ -110,19 +107,16 @@ export function set_default_dpi(dpi: number): void
 export function set_default_dpi_x_y(dpi_x: number, dpi_y: number): void
 export interface Handle_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Rsvg-2.0.Rsvg.Handle */
-    base_uri?: string | null
-    dpi_x?: number | null
-    dpi_y?: number | null
+    base_uri?: string
+    dpi_x?: number
+    dpi_y?: number
     /**
      * Flags from #RsvgHandleFlags.
      */
-    flags?: HandleFlags | null
+    flags?: HandleFlags
 }
-/**
- * Lets you load SVG data and render it.
- */
 export class Handle {
-    /* Own properties of Rsvg-2.0.Rsvg.Handle */
+    /* Properties of Rsvg-2.0.Rsvg.Handle */
     base_uri: string
     /**
      * SVG's description.
@@ -162,11 +156,9 @@ export class Handle {
      * as specified by rsvg_handle_set_size_callback().
      */
     readonly width: number
-    /* Own fields of Rsvg-2.0.Rsvg.Handle */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Rsvg-2.0.Rsvg.Handle */
+    /* Methods of Rsvg-2.0.Rsvg.Handle */
     /**
      * Closes `handle,` to indicate that loading the image is complete.  This will
      * return %TRUE if the loader closed successfully and the SVG data was parsed
@@ -197,7 +189,7 @@ export class Handle {
      * has an <literal>id="foo"</literal> attribute.
      * @param id An element's id within the SVG, starting with "##" (a single hash character), for example, "##layer1".  This notation corresponds to a URL's fragment ID.  Alternatively, pass %NULL to use the whole SVG.
      */
-    get_dimensions_sub(id: string | null): [ /* returnType */ boolean, /* dimension_data */ DimensionData ]
+    get_dimensions_sub(id?: string | null): [ /* returnType */ boolean, /* dimension_data */ DimensionData ]
     /**
      * Computes the ink rectangle and logical rectangle of a single SVG element.
      * 
@@ -234,7 +226,7 @@ export class Handle {
      * Panics: this function will panic if the `handle` is not fully-loaded.
      * @param id An element's id within the SVG, starting with "##" (a single hash character), for example, "##layer1".  This notation corresponds to a URL's fragment ID.  Alternatively, pass %NULL to compute the geometry for the whole SVG.
      */
-    get_geometry_for_element(id: string | null): [ /* returnType */ boolean, /* out_ink_rect */ Rectangle, /* out_logical_rect */ Rectangle ]
+    get_geometry_for_element(id?: string | null): [ /* returnType */ boolean, /* out_ink_rect */ Rectangle | null, /* out_logical_rect */ Rectangle | null ]
     /**
      * Computes the ink rectangle and logical rectangle of an SVG element, or the
      * whole SVG, as if the whole SVG were rendered to a specific viewport.
@@ -266,7 +258,7 @@ export class Handle {
      * @param id An element's id within the SVG, starting with "##" (a single hash character), for example, "##layer1".  This notation corresponds to a URL's fragment ID.  Alternatively, pass %NULL to compute the geometry for the whole SVG.
      * @param viewport Viewport size at which the whole SVG would be fitted.
      */
-    get_geometry_for_layer(id: string | null, viewport: Rectangle): [ /* returnType */ boolean, /* out_ink_rect */ Rectangle, /* out_logical_rect */ Rectangle ]
+    get_geometry_for_layer(id: string | null, viewport: Rectangle): [ /* returnType */ boolean, /* out_ink_rect */ Rectangle | null, /* out_logical_rect */ Rectangle | null ]
     /**
      * Queries the <literal>width</literal>, <literal>height</literal>, and
      * <literal>viewBox</literal> attributes in an SVG document.
@@ -303,7 +295,7 @@ export class Handle {
      * 
      * Panics: this function will panic if the `handle` is not fully-loaded.
      */
-    get_intrinsic_dimensions(): [ /* out_has_width */ boolean, /* out_width */ Length, /* out_has_height */ boolean, /* out_height */ Length, /* out_has_viewbox */ boolean, /* out_viewbox */ Rectangle ]
+    get_intrinsic_dimensions(): [ /* out_has_width */ boolean | null, /* out_width */ Length | null, /* out_has_height */ boolean | null, /* out_height */ Length | null, /* out_has_viewbox */ boolean | null, /* out_viewbox */ Rectangle | null ]
     /**
      * Returns the pixbuf loaded by `handle`.  The pixbuf returned will be reffed, so
      * the caller of this function must assume that ref.  If insufficient data has
@@ -335,7 +327,7 @@ export class Handle {
      * has an <literal>id="foo"</literal> attribute.
      * @param id An element's id within the SVG, starting with "##" (a single hash character), for example, "##layer1".  This notation corresponds to a URL's fragment ID.  Alternatively, pass %NULL to use the whole SVG.
      */
-    get_pixbuf_sub(id: string | null): GdkPixbuf.Pixbuf | null
+    get_pixbuf_sub(id?: string | null): GdkPixbuf.Pixbuf | null
     /**
      * Get the position of a subelement of the SVG file. Do not call from within
      * the size_func callback, because an infinite loop will occur.
@@ -348,7 +340,7 @@ export class Handle {
      * has an <literal>id="foo"</literal> attribute.
      * @param id An element's id within the SVG, starting with "##" (a single hash character), for example, "##layer1".  This notation corresponds to a URL's fragment ID.  Alternatively, pass %NULL to use the whole SVG.
      */
-    get_position_sub(id: string | null): [ /* returnType */ boolean, /* position_data */ PositionData ]
+    get_position_sub(id?: string | null): [ /* returnType */ boolean, /* position_data */ PositionData ]
     /**
      * Checks whether the element `id` exists in the SVG document.
      * 
@@ -380,7 +372,7 @@ export class Handle {
      * @param stream a #GInputStream
      * @param cancellable a #GCancellable, or %NULL
      */
-    read_stream_sync(stream: Gio.InputStream, cancellable: Gio.Cancellable | null): boolean
+    read_stream_sync(stream: Gio.InputStream, cancellable?: Gio.Cancellable | null): boolean
     /**
      * Draws a loaded SVG handle to a Cairo context.  Drawing will occur with
      * respect to the `cr'`s current transformation:  for example, if the `cr` has a
@@ -417,7 +409,7 @@ export class Handle {
      * @param cr A Cairo context
      * @param id An element's id within the SVG, starting with "##" (a single hash character), for example, "##layer1".  This notation corresponds to a URL's fragment ID.  Alternatively, pass %NULL to render the whole SVG.
      */
-    render_cairo_sub(cr: cairo.Context, id: string | null): boolean
+    render_cairo_sub(cr: cairo.Context, id?: string | null): boolean
     /**
      * Renders the whole SVG document fitted to a viewport.
      * 
@@ -553,7 +545,7 @@ export class Handle {
      * @param buf pointer to svg data
      */
     write(buf: Uint8Array): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -599,7 +591,7 @@ export class Handle {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -768,7 +760,7 @@ export class Handle {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -856,8 +848,8 @@ export class Handle {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -874,12 +866,11 @@ export class Handle {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -906,7 +897,6 @@ export class Handle {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Handle, pspec: GObject.ParamSpec) => void)): number
@@ -934,8 +924,8 @@ export class Handle {
     connect_after(sigName: "notify::title", callback: (($obj: Handle, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::width", callback: (($obj: Handle, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::width", callback: (($obj: Handle, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -945,18 +935,13 @@ export class Handle {
     static new(): Handle
     static new_from_data(data: Uint8Array): Handle
     static new_from_file(filename: string): Handle
-    static new_from_gfile_sync(file: Gio.File, flags: HandleFlags, cancellable: Gio.Cancellable | null): Handle
-    static new_from_stream_sync(input_stream: Gio.InputStream, base_file: Gio.File | null, flags: HandleFlags, cancellable: Gio.Cancellable | null): Handle
+    static new_from_gfile_sync(file: Gio.File, flags: HandleFlags, cancellable?: Gio.Cancellable | null): Handle
+    static new_from_stream_sync(input_stream: Gio.InputStream, base_file: Gio.File | null, flags: HandleFlags, cancellable?: Gio.Cancellable | null): Handle
     static new_with_flags(flags: HandleFlags): Handle
-    static $gtype: GObject.GType<Handle>
+    static $gtype: GObject.Type
 }
-/**
- * Dimensions of an SVG image from rsvg_handle_get_dimensions(), or an
- * individual element from rsvg_handle_get_dimensions_sub().  Please see
- * the deprecation documentation for those functions.
- */
 export class DimensionData {
-    /* Own fields of Rsvg-2.0.Rsvg.DimensionData */
+    /* Fields of Rsvg-2.0.Rsvg.DimensionData */
     /**
      * SVG's width, in pixels
      */
@@ -975,34 +960,16 @@ export class DimensionData {
     ex: number
     static name: string
 }
-/**
- * Class structure for #RsvgHandle.
- */
 export abstract class HandleClass {
-    /* Own fields of Rsvg-2.0.Rsvg.HandleClass */
+    /* Fields of Rsvg-2.0.Rsvg.HandleClass */
     /**
      * parent class
      */
     parent: GObject.ObjectClass
     static name: string
 }
-/**
- * #RsvgLength values are used in rsvg_handle_get_intrinsic_dimensions(), for
- * example, to return the CSS length values of the <literal>width</literal> and
- * <literal>height</literal> attributes of an <literal>&lt;svg&gt;</literal>
- * element.
- * 
- * This is equivalent to <ulink
- * url="https://www.w3.org/TR/CSS21/syndata.html#length-units">CSS lengths</ulink>.
- * 
- * It is up to the calling application to convert lengths in non-pixel units
- * (i.e. those where the `unit` field is not #RSVG_UNIT_PX) into something
- * meaningful to the application.  For example, if your application knows the
- * dots-per-inch (DPI) it is using, it can convert lengths with `unit` in
- * #RSVG_UNIT_IN or other physical units.
- */
 export class Length {
-    /* Own fields of Rsvg-2.0.Rsvg.Length */
+    /* Fields of Rsvg-2.0.Rsvg.Length */
     /**
      * numeric part of the length
      */
@@ -1013,12 +980,8 @@ export class Length {
     unit: Unit
     static name: string
 }
-/**
- * Position of an SVG fragment from rsvg_handle_get_position_sub().  Please
- * the deprecation documentation for that function.
- */
 export class PositionData {
-    /* Own fields of Rsvg-2.0.Rsvg.PositionData */
+    /* Fields of Rsvg-2.0.Rsvg.PositionData */
     /**
      * position on the x axis
      */
@@ -1029,11 +992,8 @@ export class PositionData {
     y: number
     static name: string
 }
-/**
- * A data structure for holding a rectangle.
- */
 export class Rectangle {
-    /* Own fields of Rsvg-2.0.Rsvg.Rectangle */
+    /* Fields of Rsvg-2.0.Rsvg.Rectangle */
     /**
      * X coordinate of the left side of the rectangle
      */

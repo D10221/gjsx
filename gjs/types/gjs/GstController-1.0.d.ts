@@ -66,41 +66,33 @@ export enum LFOWaveform {
 export function timed_value_control_invalidate_cache(self: TimedValueControlSource): void
 /**
  * Function to map a control-value to the target GValue.
- * @callback 
  */
 export interface DirectControlBindingConvertGValue {
     (self: DirectControlBinding, src_value: number, dest_value: any): void
 }
 /**
  * Function to map a control-value to the target plain data type.
- * @callback 
  */
 export interface DirectControlBindingConvertValue {
-    (self: DirectControlBinding, src_value: number, dest_value: object | null): void
+    (self: DirectControlBinding, src_value: number, dest_value?: object | null): void
 }
 export interface ARGBControlBinding_ConstructProps extends Gst.ControlBinding_ConstructProps {
     /* Constructor properties of GstController-1.0.GstController.ARGBControlBinding */
-    control_source_a?: Gst.ControlSource | null
-    control_source_b?: Gst.ControlSource | null
-    control_source_g?: Gst.ControlSource | null
-    control_source_r?: Gst.ControlSource | null
+    control_source_a?: Gst.ControlSource
+    control_source_b?: Gst.ControlSource
+    control_source_g?: Gst.ControlSource
+    control_source_r?: Gst.ControlSource
 }
-/**
- * A value mapping object that attaches multiple control sources to a guint
- * gobject properties representing a color. A control value of 0.0 will turn the
- * color component off and a value of 1.0 will be the color level.
- */
 export class ARGBControlBinding {
-    /* Own properties of GstController-1.0.GstController.ARGBControlBinding */
+    /* Properties of GstController-1.0.GstController.ARGBControlBinding */
     control_source_a: Gst.ControlSource
     control_source_b: Gst.ControlSource
     control_source_g: Gst.ControlSource
     control_source_r: Gst.ControlSource
-    /* Extended properties of Gst-1.0.Gst.ControlBinding */
+    /* Properties of Gst-1.0.Gst.ControlBinding */
     readonly object: Gst.Object
-    /* Own fields of GstController-1.0.GstController.ARGBControlBinding */
-    parent: Gst.ControlBinding
-    /* Extended fields of Gst-1.0.Gst.ControlBinding */
+    /* Fields of Gst-1.0.Gst.ControlBinding */
+    parent: Gst.Object
     /**
      * name of the property of this binding
      */
@@ -109,7 +101,7 @@ export class ARGBControlBinding {
      * #GParamSpec for this property
      */
     pspec: GObject.ParamSpec
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
     /**
      * object LOCK
      */
@@ -118,9 +110,9 @@ export class ARGBControlBinding {
      * flags for this object
      */
     flags: number
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Gst-1.0.Gst.ControlBinding */
+    /* Methods of Gst-1.0.Gst.ControlBinding */
     /**
      * Gets a number of #GValues for the given controlled property starting at the
      * requested time. The array `values` need to hold enough space for `n_values` of
@@ -159,7 +151,7 @@ export class ARGBControlBinding {
      * @param last_sync the last time this was called
      */
     sync_values(object: Gst.Object, timestamp: Gst.ClockTime, last_sync: Gst.ClockTime): boolean
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -177,7 +169,7 @@ export class ARGBControlBinding {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -307,7 +299,7 @@ export class ARGBControlBinding {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -344,7 +336,7 @@ export class ARGBControlBinding {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -390,7 +382,7 @@ export class ARGBControlBinding {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -559,7 +551,7 @@ export class ARGBControlBinding {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -637,8 +629,8 @@ export class ARGBControlBinding {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Gst-1.0.Gst.ControlBinding */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Gst-1.0.Gst.ControlBinding */
     /**
      * Gets a number of #GValues for the given controlled property starting at the
      * requested time. The array `values` need to hold enough space for `n_values` of
@@ -646,7 +638,6 @@ export class ARGBControlBinding {
      * 
      * This function is useful if one wants to e.g. draw a graph of the control
      * curve or apply a control curve sample by sample.
-     * @virtual 
      * @param timestamp the time that should be processed
      * @param interval the time spacing between subsequent values
      * @param values array to put control-values in
@@ -654,7 +645,6 @@ export class ARGBControlBinding {
     vfunc_get_g_value_array(timestamp: Gst.ClockTime, interval: Gst.ClockTime, values: any[]): boolean
     /**
      * Gets the value for the given controlled property at the requested time.
-     * @virtual 
      * @param timestamp the time the control-change should be read from
      */
     vfunc_get_value(timestamp: Gst.ClockTime): any | null
@@ -664,15 +654,14 @@ export class ARGBControlBinding {
      * 
      * If this function fails, it is most likely the application developers fault.
      * Most probably the control sources are not setup correctly.
-     * @virtual 
      * @param object the object that has controlled properties
      * @param timestamp the time that should be processed
      * @param last_sync the last time this was called
      */
     vfunc_sync_values(object: Gst.Object, timestamp: Gst.ClockTime, last_sync: Gst.ClockTime): boolean
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -689,24 +678,22 @@ export class ARGBControlBinding {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: ARGBControlBinding, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: ARGBControlBinding, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -733,7 +720,6 @@ export class ARGBControlBinding {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: ARGBControlBinding, pspec: GObject.ParamSpec) => void)): number
@@ -749,8 +735,8 @@ export class ARGBControlBinding {
     connect_after(sigName: "notify::control-source-r", callback: (($obj: ARGBControlBinding, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::object", callback: (($obj: ARGBControlBinding, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::object", callback: (($obj: ARGBControlBinding, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -758,30 +744,21 @@ export class ARGBControlBinding {
     _init (config?: ARGBControlBinding_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(object: Gst.Object, property_name: string, cs_a: Gst.ControlSource, cs_r: Gst.ControlSource, cs_g: Gst.ControlSource, cs_b: Gst.ControlSource): ARGBControlBinding
-    static $gtype: GObject.GType<ARGBControlBinding>
+    static $gtype: GObject.Type
 }
 export interface DirectControlBinding_ConstructProps extends Gst.ControlBinding_ConstructProps {
     /* Constructor properties of GstController-1.0.GstController.DirectControlBinding */
-    absolute?: boolean | null
-    control_source?: Gst.ControlSource | null
+    absolute?: boolean
+    control_source?: Gst.ControlSource
 }
-/**
- * A value mapping object that attaches control sources to gobject properties. It
- * will map the control values directly to the target property range. If a
- * non-absolute direct control binding is used, the value range [0.0 ... 1.0]
- * is mapped to full target property range, and all values outside the range
- * will be clipped. An absolute control binding will not do any value
- * transformations.
- */
 export class DirectControlBinding {
-    /* Own properties of GstController-1.0.GstController.DirectControlBinding */
+    /* Properties of GstController-1.0.GstController.DirectControlBinding */
     readonly absolute: boolean
     control_source: Gst.ControlSource
-    /* Extended properties of Gst-1.0.Gst.ControlBinding */
+    /* Properties of Gst-1.0.Gst.ControlBinding */
     readonly object: Gst.Object
-    /* Own fields of GstController-1.0.GstController.DirectControlBinding */
-    parent: Gst.ControlBinding
-    /* Extended fields of Gst-1.0.Gst.ControlBinding */
+    /* Fields of Gst-1.0.Gst.ControlBinding */
+    parent: Gst.Object
     /**
      * name of the property of this binding
      */
@@ -790,7 +767,7 @@ export class DirectControlBinding {
      * #GParamSpec for this property
      */
     pspec: GObject.ParamSpec
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
     /**
      * object LOCK
      */
@@ -799,9 +776,9 @@ export class DirectControlBinding {
      * flags for this object
      */
     flags: number
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Gst-1.0.Gst.ControlBinding */
+    /* Methods of Gst-1.0.Gst.ControlBinding */
     /**
      * Gets a number of #GValues for the given controlled property starting at the
      * requested time. The array `values` need to hold enough space for `n_values` of
@@ -840,7 +817,7 @@ export class DirectControlBinding {
      * @param last_sync the last time this was called
      */
     sync_values(object: Gst.Object, timestamp: Gst.ClockTime, last_sync: Gst.ClockTime): boolean
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -858,7 +835,7 @@ export class DirectControlBinding {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -988,7 +965,7 @@ export class DirectControlBinding {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -1025,7 +1002,7 @@ export class DirectControlBinding {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -1071,7 +1048,7 @@ export class DirectControlBinding {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -1240,7 +1217,7 @@ export class DirectControlBinding {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -1318,8 +1295,8 @@ export class DirectControlBinding {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Gst-1.0.Gst.ControlBinding */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Gst-1.0.Gst.ControlBinding */
     /**
      * Gets a number of #GValues for the given controlled property starting at the
      * requested time. The array `values` need to hold enough space for `n_values` of
@@ -1327,7 +1304,6 @@ export class DirectControlBinding {
      * 
      * This function is useful if one wants to e.g. draw a graph of the control
      * curve or apply a control curve sample by sample.
-     * @virtual 
      * @param timestamp the time that should be processed
      * @param interval the time spacing between subsequent values
      * @param values array to put control-values in
@@ -1335,7 +1311,6 @@ export class DirectControlBinding {
     vfunc_get_g_value_array(timestamp: Gst.ClockTime, interval: Gst.ClockTime, values: any[]): boolean
     /**
      * Gets the value for the given controlled property at the requested time.
-     * @virtual 
      * @param timestamp the time the control-change should be read from
      */
     vfunc_get_value(timestamp: Gst.ClockTime): any | null
@@ -1345,15 +1320,14 @@ export class DirectControlBinding {
      * 
      * If this function fails, it is most likely the application developers fault.
      * Most probably the control sources are not setup correctly.
-     * @virtual 
      * @param object the object that has controlled properties
      * @param timestamp the time that should be processed
      * @param last_sync the last time this was called
      */
     vfunc_sync_values(object: Gst.Object, timestamp: Gst.ClockTime, last_sync: Gst.ClockTime): boolean
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -1370,24 +1344,22 @@ export class DirectControlBinding {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: DirectControlBinding, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: DirectControlBinding, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1414,7 +1386,6 @@ export class DirectControlBinding {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: DirectControlBinding, pspec: GObject.ParamSpec) => void)): number
@@ -1426,8 +1397,8 @@ export class DirectControlBinding {
     connect_after(sigName: "notify::control-source", callback: (($obj: DirectControlBinding, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::object", callback: (($obj: DirectControlBinding, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::object", callback: (($obj: DirectControlBinding, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -1436,33 +1407,22 @@ export class DirectControlBinding {
     /* Static methods and pseudo-constructors */
     static new(object: Gst.Object, property_name: string, cs: Gst.ControlSource): DirectControlBinding
     static new_absolute(object: Gst.Object, property_name: string, cs: Gst.ControlSource): DirectControlBinding
-    static $gtype: GObject.GType<DirectControlBinding>
+    static $gtype: GObject.Type
 }
 export interface InterpolationControlSource_ConstructProps extends TimedValueControlSource_ConstructProps {
     /* Constructor properties of GstController-1.0.GstController.InterpolationControlSource */
-    mode?: InterpolationMode | null
+    mode?: InterpolationMode
 }
-/**
- * #GstInterpolationControlSource is a #GstControlSource, that interpolates values between user-given
- * control points. It supports several interpolation modes and property types.
- * 
- * To use #GstInterpolationControlSource get a new instance by calling
- * gst_interpolation_control_source_new(), bind it to a #GParamSpec and set some
- * control points by calling gst_timed_value_control_source_set().
- * 
- * All functions are MT-safe.
- */
 export class InterpolationControlSource {
-    /* Own properties of GstController-1.0.GstController.InterpolationControlSource */
+    /* Properties of GstController-1.0.GstController.InterpolationControlSource */
     mode: InterpolationMode
-    /* Own fields of GstController-1.0.GstController.InterpolationControlSource */
-    parent: TimedValueControlSource
-    /* Extended fields of GstController-1.0.GstController.TimedValueControlSource */
+    /* Fields of GstController-1.0.GstController.TimedValueControlSource */
+    parent: Gst.ControlSource
     lock: GLib.Mutex
     values: GLib.Sequence
     nvalues: number
     valid_cache: boolean
-    /* Extended fields of Gst-1.0.Gst.ControlSource */
+    /* Fields of Gst-1.0.Gst.ControlSource */
     /**
      * Function for returning a value for a given timestamp
      */
@@ -1471,7 +1431,7 @@ export class InterpolationControlSource {
      * Function for returning a values array for a given timestamp
      */
     get_value_array: Gst.ControlSourceGetValueArray
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
     object: GObject.InitiallyUnowned
     /**
      * The name of the object
@@ -1481,9 +1441,9 @@ export class InterpolationControlSource {
      * flags for this object
      */
     flags: number
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of GstController-1.0.GstController.TimedValueControlSource */
+    /* Methods of GstController-1.0.GstController.TimedValueControlSource */
     /**
      * Find last value before given timestamp in control point list.
      * If all values in the control point list come after the given
@@ -1523,7 +1483,7 @@ export class InterpolationControlSource {
      * Used to remove all time-stamped values of given controller-handled property
      */
     unset_all(): void
-    /* Extended methods of Gst-1.0.Gst.ControlSource */
+    /* Methods of Gst-1.0.Gst.ControlSource */
     /**
      * Gets the value for this #GstControlSource at a given timestamp.
      * @param timestamp the time for which the value should be returned
@@ -1537,7 +1497,7 @@ export class InterpolationControlSource {
      * @param values array to put control-values in
      */
     control_source_get_value_array(timestamp: Gst.ClockTime, interval: Gst.ClockTime, values: number[]): boolean
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -1555,7 +1515,7 @@ export class InterpolationControlSource {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -1679,7 +1639,7 @@ export class InterpolationControlSource {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -1716,7 +1676,7 @@ export class InterpolationControlSource {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -1762,7 +1722,7 @@ export class InterpolationControlSource {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -1931,7 +1891,7 @@ export class InterpolationControlSource {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -2009,10 +1969,10 @@ export class InterpolationControlSource {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -2029,15 +1989,13 @@ export class InterpolationControlSource {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GstController-1.0.GstController.TimedValueControlSource */
+    /* Signals of GstController-1.0.GstController.TimedValueControlSource */
     /**
      * Emitted right after the new value has been added to `self`
-     * @signal 
      * @param timed_value The newly added #GstTimedValue
      */
     connect(sigName: "value-added", callback: (($obj: InterpolationControlSource, timed_value: ControlPoint) => void)): number
@@ -2045,7 +2003,6 @@ export class InterpolationControlSource {
     emit(sigName: "value-added", timed_value: ControlPoint): void
     /**
      * Emitted right after the new value has been set on `timed_signals`
-     * @signal 
      * @param timed_value The #GstTimedValue where the value changed
      */
     connect(sigName: "value-changed", callback: (($obj: InterpolationControlSource, timed_value: ControlPoint) => void)): number
@@ -2053,25 +2010,23 @@ export class InterpolationControlSource {
     emit(sigName: "value-changed", timed_value: ControlPoint): void
     /**
      * Emitted when `timed_value` is removed from `self`
-     * @signal 
      * @param timed_value The removed #GstTimedValue
      */
     connect(sigName: "value-removed", callback: (($obj: InterpolationControlSource, timed_value: ControlPoint) => void)): number
     connect_after(sigName: "value-removed", callback: (($obj: InterpolationControlSource, timed_value: ControlPoint) => void)): number
     emit(sigName: "value-removed", timed_value: ControlPoint): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: InterpolationControlSource, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: InterpolationControlSource, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -2098,7 +2053,6 @@ export class InterpolationControlSource {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: InterpolationControlSource, pspec: GObject.ParamSpec) => void)): number
@@ -2106,8 +2060,8 @@ export class InterpolationControlSource {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::mode", callback: (($obj: InterpolationControlSource, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::mode", callback: (($obj: InterpolationControlSource, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -2115,24 +2069,24 @@ export class InterpolationControlSource {
     _init (config?: InterpolationControlSource_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(): InterpolationControlSource
-    static $gtype: GObject.GType<InterpolationControlSource>
+    static $gtype: GObject.Type
 }
 export interface LFOControlSource_ConstructProps extends Gst.ControlSource_ConstructProps {
     /* Constructor properties of GstController-1.0.GstController.LFOControlSource */
     /**
      * Specifies the amplitude for the waveform of this #GstLFOControlSource.
      */
-    amplitude?: number | null
+    amplitude?: number
     /**
      * Specifies the frequency that should be used for the waveform
      * of this #GstLFOControlSource. It should be large enough
      * so that the period is longer than one nanosecond.
      */
-    frequency?: number | null
+    frequency?: number
     /**
      * Specifies the value offset for the waveform of this #GstLFOControlSource.
      */
-    offset?: number | null
+    offset?: number
     /**
      * Specifies the timeshift to the right that should be used for the waveform
      * of this #GstLFOControlSource in nanoseconds.
@@ -2140,24 +2094,14 @@ export interface LFOControlSource_ConstructProps extends Gst.ControlSource_Const
      * To get a n nanosecond shift to the left use
      * "(GST_SECOND / frequency) - n".
      */
-    timeshift?: number | null
+    timeshift?: number
     /**
      * Specifies the waveform that should be used for this #GstLFOControlSource.
      */
-    waveform?: LFOWaveform | null
+    waveform?: LFOWaveform
 }
-/**
- * #GstLFOControlSource is a #GstControlSource, that provides several periodic
- * waveforms as control values.
- * 
- * To use #GstLFOControlSource get a new instance by calling
- * gst_lfo_control_source_new(), bind it to a #GParamSpec and set the relevant
- * properties.
- * 
- * All functions are MT-safe.
- */
 export class LFOControlSource {
-    /* Own properties of GstController-1.0.GstController.LFOControlSource */
+    /* Properties of GstController-1.0.GstController.LFOControlSource */
     /**
      * Specifies the amplitude for the waveform of this #GstLFOControlSource.
      */
@@ -2184,9 +2128,8 @@ export class LFOControlSource {
      * Specifies the waveform that should be used for this #GstLFOControlSource.
      */
     waveform: LFOWaveform
-    /* Own fields of GstController-1.0.GstController.LFOControlSource */
-    parent: Gst.ControlSource
-    /* Extended fields of Gst-1.0.Gst.ControlSource */
+    /* Fields of Gst-1.0.Gst.ControlSource */
+    parent: Gst.Object
     /**
      * Function for returning a value for a given timestamp
      */
@@ -2195,7 +2138,7 @@ export class LFOControlSource {
      * Function for returning a values array for a given timestamp
      */
     get_value_array: Gst.ControlSourceGetValueArray
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
     object: GObject.InitiallyUnowned
     /**
      * object LOCK
@@ -2209,9 +2152,9 @@ export class LFOControlSource {
      * flags for this object
      */
     flags: number
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Gst-1.0.Gst.ControlSource */
+    /* Methods of Gst-1.0.Gst.ControlSource */
     /**
      * Gets the value for this #GstControlSource at a given timestamp.
      * @param timestamp the time for which the value should be returned
@@ -2225,7 +2168,7 @@ export class LFOControlSource {
      * @param values array to put control-values in
      */
     control_source_get_value_array(timestamp: Gst.ClockTime, interval: Gst.ClockTime, values: number[]): boolean
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -2243,7 +2186,7 @@ export class LFOControlSource {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -2367,7 +2310,7 @@ export class LFOControlSource {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -2404,7 +2347,7 @@ export class LFOControlSource {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -2450,7 +2393,7 @@ export class LFOControlSource {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -2619,7 +2562,7 @@ export class LFOControlSource {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -2697,10 +2640,10 @@ export class LFOControlSource {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -2717,24 +2660,22 @@ export class LFOControlSource {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: LFOControlSource, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: LFOControlSource, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -2761,7 +2702,6 @@ export class LFOControlSource {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: LFOControlSource, pspec: GObject.ParamSpec) => void)): number
@@ -2777,8 +2717,8 @@ export class LFOControlSource {
     connect_after(sigName: "notify::timeshift", callback: (($obj: LFOControlSource, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::waveform", callback: (($obj: LFOControlSource, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::waveform", callback: (($obj: LFOControlSource, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -2786,17 +2726,14 @@ export class LFOControlSource {
     _init (config?: LFOControlSource_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(): LFOControlSource
-    static $gtype: GObject.GType<LFOControlSource>
+    static $gtype: GObject.Type
 }
 export interface ProxyControlBinding_ConstructProps extends Gst.ControlBinding_ConstructProps {
 }
-/**
- * A #GstControlBinding that forwards requests to another #GstControlBinding
- */
 export class ProxyControlBinding {
-    /* Extended properties of Gst-1.0.Gst.ControlBinding */
+    /* Properties of Gst-1.0.Gst.ControlBinding */
     readonly object: Gst.Object
-    /* Extended fields of Gst-1.0.Gst.ControlBinding */
+    /* Fields of Gst-1.0.Gst.ControlBinding */
     parent: Gst.Object
     /**
      * name of the property of this binding
@@ -2806,7 +2743,7 @@ export class ProxyControlBinding {
      * #GParamSpec for this property
      */
     pspec: GObject.ParamSpec
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
     /**
      * object LOCK
      */
@@ -2815,9 +2752,9 @@ export class ProxyControlBinding {
      * flags for this object
      */
     flags: number
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Gst-1.0.Gst.ControlBinding */
+    /* Methods of Gst-1.0.Gst.ControlBinding */
     /**
      * Gets a number of #GValues for the given controlled property starting at the
      * requested time. The array `values` need to hold enough space for `n_values` of
@@ -2856,7 +2793,7 @@ export class ProxyControlBinding {
      * @param last_sync the last time this was called
      */
     sync_values(object: Gst.Object, timestamp: Gst.ClockTime, last_sync: Gst.ClockTime): boolean
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -2874,7 +2811,7 @@ export class ProxyControlBinding {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -3004,7 +2941,7 @@ export class ProxyControlBinding {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -3041,7 +2978,7 @@ export class ProxyControlBinding {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -3087,7 +3024,7 @@ export class ProxyControlBinding {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -3256,7 +3193,7 @@ export class ProxyControlBinding {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -3334,8 +3271,8 @@ export class ProxyControlBinding {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Gst-1.0.Gst.ControlBinding */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Gst-1.0.Gst.ControlBinding */
     /**
      * Gets a number of #GValues for the given controlled property starting at the
      * requested time. The array `values` need to hold enough space for `n_values` of
@@ -3343,7 +3280,6 @@ export class ProxyControlBinding {
      * 
      * This function is useful if one wants to e.g. draw a graph of the control
      * curve or apply a control curve sample by sample.
-     * @virtual 
      * @param timestamp the time that should be processed
      * @param interval the time spacing between subsequent values
      * @param values array to put control-values in
@@ -3351,7 +3287,6 @@ export class ProxyControlBinding {
     vfunc_get_g_value_array(timestamp: Gst.ClockTime, interval: Gst.ClockTime, values: any[]): boolean
     /**
      * Gets the value for the given controlled property at the requested time.
-     * @virtual 
      * @param timestamp the time the control-change should be read from
      */
     vfunc_get_value(timestamp: Gst.ClockTime): any | null
@@ -3361,15 +3296,14 @@ export class ProxyControlBinding {
      * 
      * If this function fails, it is most likely the application developers fault.
      * Most probably the control sources are not setup correctly.
-     * @virtual 
      * @param object the object that has controlled properties
      * @param timestamp the time that should be processed
      * @param last_sync the last time this was called
      */
     vfunc_sync_values(object: Gst.Object, timestamp: Gst.ClockTime, last_sync: Gst.ClockTime): boolean
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -3386,24 +3320,22 @@ export class ProxyControlBinding {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: ProxyControlBinding, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: ProxyControlBinding, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -3430,7 +3362,6 @@ export class ProxyControlBinding {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: ProxyControlBinding, pspec: GObject.ParamSpec) => void)): number
@@ -3438,8 +3369,8 @@ export class ProxyControlBinding {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::object", callback: (($obj: ProxyControlBinding, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::object", callback: (($obj: ProxyControlBinding, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -3447,26 +3378,13 @@ export class ProxyControlBinding {
     _init (config?: ProxyControlBinding_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(object: Gst.Object, property_name: string, ref_object: Gst.Object, ref_property_name: string): ProxyControlBinding
-    static $gtype: GObject.GType<ProxyControlBinding>
+    static $gtype: GObject.Type
 }
 export interface TimedValueControlSource_ConstructProps extends Gst.ControlSource_ConstructProps {
 }
-/**
- * Base class for #GstControlSource that use time-stamped values.
- * 
- * When overriding bind, chain up first to give this bind implementation a
- * chance to setup things.
- * 
- * All functions are MT-safe.
- */
 export class TimedValueControlSource {
-    /* Own fields of GstController-1.0.GstController.TimedValueControlSource */
-    parent: Gst.ControlSource
-    lock: GLib.Mutex
-    values: GLib.Sequence
-    nvalues: number
-    valid_cache: boolean
-    /* Extended fields of Gst-1.0.Gst.ControlSource */
+    /* Fields of Gst-1.0.Gst.ControlSource */
+    parent: Gst.Object
     /**
      * Function for returning a value for a given timestamp
      */
@@ -3475,8 +3393,12 @@ export class TimedValueControlSource {
      * Function for returning a values array for a given timestamp
      */
     get_value_array: Gst.ControlSourceGetValueArray
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
     object: GObject.InitiallyUnowned
+    /**
+     * object LOCK
+     */
+    lock: GLib.Mutex
     /**
      * The name of the object
      */
@@ -3485,9 +3407,9 @@ export class TimedValueControlSource {
      * flags for this object
      */
     flags: number
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GstController-1.0.GstController.TimedValueControlSource */
+    /* Methods of GstController-1.0.GstController.TimedValueControlSource */
     /**
      * Find last value before given timestamp in control point list.
      * If all values in the control point list come after the given
@@ -3527,7 +3449,7 @@ export class TimedValueControlSource {
      * Used to remove all time-stamped values of given controller-handled property
      */
     unset_all(): void
-    /* Extended methods of Gst-1.0.Gst.ControlSource */
+    /* Methods of Gst-1.0.Gst.ControlSource */
     /**
      * Gets the value for this #GstControlSource at a given timestamp.
      * @param timestamp the time for which the value should be returned
@@ -3541,7 +3463,7 @@ export class TimedValueControlSource {
      * @param values array to put control-values in
      */
     control_source_get_value_array(timestamp: Gst.ClockTime, interval: Gst.ClockTime, values: number[]): boolean
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -3559,7 +3481,7 @@ export class TimedValueControlSource {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -3683,7 +3605,7 @@ export class TimedValueControlSource {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -3720,7 +3642,7 @@ export class TimedValueControlSource {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -3766,7 +3688,7 @@ export class TimedValueControlSource {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -3935,7 +3857,7 @@ export class TimedValueControlSource {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -4013,10 +3935,10 @@ export class TimedValueControlSource {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -4033,15 +3955,13 @@ export class TimedValueControlSource {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of GstController-1.0.GstController.TimedValueControlSource */
+    /* Signals of GstController-1.0.GstController.TimedValueControlSource */
     /**
      * Emitted right after the new value has been added to `self`
-     * @signal 
      * @param timed_value The newly added #GstTimedValue
      */
     connect(sigName: "value-added", callback: (($obj: TimedValueControlSource, timed_value: ControlPoint) => void)): number
@@ -4049,7 +3969,6 @@ export class TimedValueControlSource {
     emit(sigName: "value-added", timed_value: ControlPoint): void
     /**
      * Emitted right after the new value has been set on `timed_signals`
-     * @signal 
      * @param timed_value The #GstTimedValue where the value changed
      */
     connect(sigName: "value-changed", callback: (($obj: TimedValueControlSource, timed_value: ControlPoint) => void)): number
@@ -4057,25 +3976,23 @@ export class TimedValueControlSource {
     emit(sigName: "value-changed", timed_value: ControlPoint): void
     /**
      * Emitted when `timed_value` is removed from `self`
-     * @signal 
      * @param timed_value The removed #GstTimedValue
      */
     connect(sigName: "value-removed", callback: (($obj: TimedValueControlSource, timed_value: ControlPoint) => void)): number
     connect_after(sigName: "value-removed", callback: (($obj: TimedValueControlSource, timed_value: ControlPoint) => void)): number
     emit(sigName: "value-removed", timed_value: ControlPoint): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: TimedValueControlSource, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: TimedValueControlSource, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -4102,46 +4019,34 @@ export class TimedValueControlSource {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: TimedValueControlSource, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: TimedValueControlSource, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: TimedValueControlSource_ConstructProps)
     _init (config?: TimedValueControlSource_ConstructProps): void
-    static $gtype: GObject.GType<TimedValueControlSource>
+    static $gtype: GObject.Type
 }
 export interface TriggerControlSource_ConstructProps extends TimedValueControlSource_ConstructProps {
     /* Constructor properties of GstController-1.0.GstController.TriggerControlSource */
-    tolerance?: number | null
+    tolerance?: number
 }
-/**
- * #GstTriggerControlSource is a #GstControlSource, that returns values from user-given
- * control points. It allows for a tolerance on the time-stamps.
- * 
- * To use #GstTriggerControlSource get a new instance by calling
- * gst_trigger_control_source_new(), bind it to a #GParamSpec and set some
- * control points by calling gst_timed_value_control_source_set().
- * 
- * All functions are MT-safe.
- */
 export class TriggerControlSource {
-    /* Own properties of GstController-1.0.GstController.TriggerControlSource */
+    /* Properties of GstController-1.0.GstController.TriggerControlSource */
     tolerance: number
-    /* Own fields of GstController-1.0.GstController.TriggerControlSource */
-    parent: TimedValueControlSource
-    /* Extended fields of GstController-1.0.GstController.TimedValueControlSource */
+    /* Fields of GstController-1.0.GstController.TimedValueControlSource */
+    parent: Gst.ControlSource
     lock: GLib.Mutex
     values: GLib.Sequence
     nvalues: number
     valid_cache: boolean
-    /* Extended fields of Gst-1.0.Gst.ControlSource */
+    /* Fields of Gst-1.0.Gst.ControlSource */
     /**
      * Function for returning a value for a given timestamp
      */
@@ -4150,7 +4055,7 @@ export class TriggerControlSource {
      * Function for returning a values array for a given timestamp
      */
     get_value_array: Gst.ControlSourceGetValueArray
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
     object: GObject.InitiallyUnowned
     /**
      * The name of the object
@@ -4160,9 +4065,9 @@ export class TriggerControlSource {
      * flags for this object
      */
     flags: number
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of GstController-1.0.GstController.TimedValueControlSource */
+    /* Methods of GstController-1.0.GstController.TimedValueControlSource */
     /**
      * Find last value before given timestamp in control point list.
      * If all values in the control point list come after the given
@@ -4202,7 +4107,7 @@ export class TriggerControlSource {
      * Used to remove all time-stamped values of given controller-handled property
      */
     unset_all(): void
-    /* Extended methods of Gst-1.0.Gst.ControlSource */
+    /* Methods of Gst-1.0.Gst.ControlSource */
     /**
      * Gets the value for this #GstControlSource at a given timestamp.
      * @param timestamp the time for which the value should be returned
@@ -4216,7 +4121,7 @@ export class TriggerControlSource {
      * @param values array to put control-values in
      */
     control_source_get_value_array(timestamp: Gst.ClockTime, interval: Gst.ClockTime, values: number[]): boolean
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -4234,7 +4139,7 @@ export class TriggerControlSource {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -4358,7 +4263,7 @@ export class TriggerControlSource {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -4395,7 +4300,7 @@ export class TriggerControlSource {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -4441,7 +4346,7 @@ export class TriggerControlSource {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -4610,7 +4515,7 @@ export class TriggerControlSource {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -4688,10 +4593,10 @@ export class TriggerControlSource {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -4708,15 +4613,13 @@ export class TriggerControlSource {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GstController-1.0.GstController.TimedValueControlSource */
+    /* Signals of GstController-1.0.GstController.TimedValueControlSource */
     /**
      * Emitted right after the new value has been added to `self`
-     * @signal 
      * @param timed_value The newly added #GstTimedValue
      */
     connect(sigName: "value-added", callback: (($obj: TriggerControlSource, timed_value: ControlPoint) => void)): number
@@ -4724,7 +4627,6 @@ export class TriggerControlSource {
     emit(sigName: "value-added", timed_value: ControlPoint): void
     /**
      * Emitted right after the new value has been set on `timed_signals`
-     * @signal 
      * @param timed_value The #GstTimedValue where the value changed
      */
     connect(sigName: "value-changed", callback: (($obj: TriggerControlSource, timed_value: ControlPoint) => void)): number
@@ -4732,25 +4634,23 @@ export class TriggerControlSource {
     emit(sigName: "value-changed", timed_value: ControlPoint): void
     /**
      * Emitted when `timed_value` is removed from `self`
-     * @signal 
      * @param timed_value The removed #GstTimedValue
      */
     connect(sigName: "value-removed", callback: (($obj: TriggerControlSource, timed_value: ControlPoint) => void)): number
     connect_after(sigName: "value-removed", callback: (($obj: TriggerControlSource, timed_value: ControlPoint) => void)): number
     emit(sigName: "value-removed", timed_value: ControlPoint): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: TriggerControlSource, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: TriggerControlSource, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -4777,7 +4677,6 @@ export class TriggerControlSource {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: TriggerControlSource, pspec: GObject.ParamSpec) => void)): number
@@ -4785,8 +4684,8 @@ export class TriggerControlSource {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::tolerance", callback: (($obj: TriggerControlSource, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::tolerance", callback: (($obj: TriggerControlSource, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -4794,26 +4693,18 @@ export class TriggerControlSource {
     _init (config?: TriggerControlSource_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(): TriggerControlSource
-    static $gtype: GObject.GType<TriggerControlSource>
+    static $gtype: GObject.Type
 }
-/**
- * The class structure of #GstARGBControlBinding.
- */
 export abstract class ARGBControlBindingClass {
-    /* Own fields of GstController-1.0.GstController.ARGBControlBindingClass */
+    /* Fields of GstController-1.0.GstController.ARGBControlBindingClass */
     /**
      * Parent class
      */
     parent_class: Gst.ControlBindingClass
     static name: string
 }
-/**
- * An internal structure for value+time and various temporary
- * values used for interpolation. This "inherits" from
- * GstTimedValue.
- */
 export class ControlPoint {
-    /* Own fields of GstController-1.0.GstController.ControlPoint */
+    /* Fields of GstController-1.0.GstController.ControlPoint */
     /**
      * timestamp of the value change
      */
@@ -4822,7 +4713,7 @@ export class ControlPoint {
      * the new value
      */
     value: number
-    /* Owm methods of GstController-1.0.GstController.ControlPoint */
+    /* Methods of GstController-1.0.GstController.ControlPoint */
     copy(): ControlPoint
     /**
      * Frees all data allocated by a #GstControlPoint instance.
@@ -4830,11 +4721,8 @@ export class ControlPoint {
     free(): void
     static name: string
 }
-/**
- * The class structure of #GstDirectControlBinding.
- */
 export abstract class DirectControlBindingClass {
-    /* Own fields of GstController-1.0.GstController.DirectControlBindingClass */
+    /* Fields of GstController-1.0.GstController.DirectControlBindingClass */
     /**
      * Parent class
      */
@@ -4842,7 +4730,7 @@ export abstract class DirectControlBindingClass {
     static name: string
 }
 export abstract class InterpolationControlSourceClass {
-    /* Own fields of GstController-1.0.GstController.InterpolationControlSourceClass */
+    /* Fields of GstController-1.0.GstController.InterpolationControlSourceClass */
     parent_class: TimedValueControlSourceClass
     static name: string
 }
@@ -4850,21 +4738,18 @@ export class InterpolationControlSourcePrivate {
     static name: string
 }
 export abstract class LFOControlSourceClass {
-    /* Own fields of GstController-1.0.GstController.LFOControlSourceClass */
+    /* Fields of GstController-1.0.GstController.LFOControlSourceClass */
     parent_class: Gst.ControlSourceClass
     static name: string
 }
 export class LFOControlSourcePrivate {
     static name: string
 }
-/**
- * Opaque #GstProxyControlBindingClass struct
- */
 export abstract class ProxyControlBindingClass {
     static name: string
 }
 export abstract class TimedValueControlSourceClass {
-    /* Own fields of GstController-1.0.GstController.TimedValueControlSourceClass */
+    /* Fields of GstController-1.0.GstController.TimedValueControlSourceClass */
     parent_class: Gst.ControlSourceClass
     static name: string
 }
@@ -4872,7 +4757,7 @@ export class TimedValueControlSourcePrivate {
     static name: string
 }
 export abstract class TriggerControlSourceClass {
-    /* Own fields of GstController-1.0.GstController.TriggerControlSourceClass */
+    /* Fields of GstController-1.0.GstController.TriggerControlSourceClass */
     parent_class: TimedValueControlSourceClass
     static name: string
 }

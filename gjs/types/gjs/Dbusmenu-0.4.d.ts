@@ -348,7 +348,6 @@ export const SERVER_SIGNAL_LAYOUT_UPDATED: string
  * 
  * 	Return value: #TRUE if the type has been handled.  #FALSE if this
  * 		function was somehow unable to handle it.
- * @callback 
  */
 export interface ClientTypeHandler {
     (newitem: Menuitem, parent: Menuitem, client: Client): boolean
@@ -356,7 +355,6 @@ export interface ClientTypeHandler {
 /**
  * Callback prototype for a callback that is called when the
  * menu should be shown.
- * @callback 
  */
 export interface menuitem_about_to_show_cb {
     (mi: Menuitem): void
@@ -364,29 +362,24 @@ export interface menuitem_about_to_show_cb {
 /**
  * This is the function that is called to represent this menu item
  * as a variant.  Should call its own children.
- * @callback 
  */
 export interface menuitem_buildvariant_slot_t {
-    (mi: Menuitem, properties: string | null): GLib.Variant
+    (mi: Menuitem, properties?: string | null): GLib.Variant
 }
 export interface Client_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Dbusmenu-0.4.Dbusmenu.Client */
-    dbus_name?: string | null
-    dbus_object?: string | null
-    group_events?: boolean | null
+    dbus_name?: string
+    dbus_object?: string
+    group_events?: boolean
 }
-/**
- * The client for a #DbusmenuServer creating a shared
- * 	object set of #DbusmenuMenuitem objects.
- */
 export class Client {
-    /* Own properties of Dbusmenu-0.4.Dbusmenu.Client */
+    /* Properties of Dbusmenu-0.4.Dbusmenu.Client */
     readonly dbus_name: string
     readonly dbus_object: string
     group_events: boolean
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Dbusmenu-0.4.Dbusmenu.Client */
+    /* Methods of Dbusmenu-0.4.Dbusmenu.Client */
     /**
      * This function connects into the type handling of the #DbusmenuClient.
      * Every new menuitem that comes in immediately gets asked for its
@@ -449,7 +442,7 @@ export class Client {
      * 	Return value: Text direction being exported.
      */
     get_text_direction(): TextDirection
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -495,7 +488,7 @@ export class Client {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -664,7 +657,7 @@ export class Client {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -752,8 +745,8 @@ export class Client {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -770,44 +763,30 @@ export class Client {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Dbusmenu-0.4.Dbusmenu.Client */
-    /**
-     * @signal 
-     * @param object 
-     * @param p0 
-     * @param p1 
-     * @param p2 
-     * @param p3 
-     */
-    connect(sigName: "event-result", callback: (($obj: Client, object: GObject.Object, p0: string, p1: GLib.Variant, p2: number, p3: object | null) => void)): number
-    connect_after(sigName: "event-result", callback: (($obj: Client, object: GObject.Object, p0: string, p1: GLib.Variant, p2: number, p3: object | null) => void)): number
-    emit(sigName: "event-result", object: GObject.Object, p0: string, p1: GLib.Variant, p2: number, p3: object | null): void
+    /* Signals of Dbusmenu-0.4.Dbusmenu.Client */
+    connect(sigName: "event-result", callback: (($obj: Client, object: GObject.Object, p0: string, p1: GLib.Variant, p2: number, p3?: object | null) => void)): number
+    connect_after(sigName: "event-result", callback: (($obj: Client, object: GObject.Object, p0: string, p1: GLib.Variant, p2: number, p3?: object | null) => void)): number
+    emit(sigName: "event-result", object: GObject.Object, p0: string, p1: GLib.Variant, p2: number, p3?: object | null): void
     /**
      * Signaled when the theme directories are changed by the server.
-     * @signal 
      * @param arg1 A #GStrv of theme directories
      */
-    connect(sigName: "icon-theme-dirs-changed", callback: (($obj: Client, arg1: object | null) => void)): number
-    connect_after(sigName: "icon-theme-dirs-changed", callback: (($obj: Client, arg1: object | null) => void)): number
-    emit(sigName: "icon-theme-dirs-changed", arg1: object | null): void
+    connect(sigName: "icon-theme-dirs-changed", callback: (($obj: Client, arg1?: object | null) => void)): number
+    connect_after(sigName: "icon-theme-dirs-changed", callback: (($obj: Client, arg1?: object | null) => void)): number
+    emit(sigName: "icon-theme-dirs-changed", arg1?: object | null): void
     /**
      * Signaled when the server wants to activate an item in
      * 		order to display the menu.
-     * @signal 
      * @param arg1 The #DbusmenuMenuitem activated
      * @param arg2 A timestamp that the event happened at
      */
     connect(sigName: "item-activate", callback: (($obj: Client, arg1: GObject.Object, arg2: number) => void)): number
     connect_after(sigName: "item-activate", callback: (($obj: Client, arg1: GObject.Object, arg2: number) => void)): number
     emit(sigName: "item-activate", arg1: GObject.Object, arg2: number): void
-    /**
-     * @signal 
-     */
     connect(sigName: "layout-updated", callback: (($obj: Client) => void)): number
     connect_after(sigName: "layout-updated", callback: (($obj: Client) => void)): number
     emit(sigName: "layout-updated"): void
@@ -816,7 +795,6 @@ export class Client {
      * 		doesn't mean that it's placed anywhere.  The parent that
      * 		it's applied to will signal #DbusmenuMenuitem::child-added
      * 		when it gets parented.
-     * @signal 
      * @param arg1 The new #DbusmenuMenuitem created
      */
     connect(sigName: "new-menuitem", callback: (($obj: Client, arg1: GObject.Object) => void)): number
@@ -826,13 +804,12 @@ export class Client {
      * The layout has changed in a way that can not be
      * 		represented by the individual items changing as the
      * 		root of this client has changed.
-     * @signal 
      * @param arg1 The new root #DbusmenuMenuitem
      */
     connect(sigName: "root-changed", callback: (($obj: Client, arg1: GObject.Object) => void)): number
     connect_after(sigName: "root-changed", callback: (($obj: Client, arg1: GObject.Object) => void)): number
     emit(sigName: "root-changed", arg1: GObject.Object): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -859,7 +836,6 @@ export class Client {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Client, pspec: GObject.ParamSpec) => void)): number
@@ -871,8 +847,8 @@ export class Client {
     connect_after(sigName: "notify::dbus-object", callback: (($obj: Client, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::group-events", callback: (($obj: Client, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::group-events", callback: (($obj: Client, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -880,35 +856,18 @@ export class Client {
     _init (config?: Client_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(name: string, object: string): Client
-    static $gtype: GObject.GType<Client>
+    static $gtype: GObject.Type
 }
 export interface Menuitem_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Dbusmenu-0.4.Dbusmenu.Menuitem */
-    id?: number | null
+    id?: number
 }
-/**
- * This is the #GObject based object that represents a menu
- * item.  It gets created the same on both the client and
- * the server side and libdbusmenu-glib does the work of making
- * this object model appear on both sides of DBus.  Simple
- * really, though through updates and people coming on and off
- * the bus it can lead to lots of fun complex scenarios.
- */
 export class Menuitem {
-    /* Own properties of Dbusmenu-0.4.Dbusmenu.Menuitem */
+    /* Properties of Dbusmenu-0.4.Dbusmenu.Menuitem */
     readonly id: number
-    /* Own fields of Dbusmenu-0.4.Dbusmenu.Menuitem */
-    /**
-     * Parent object
-     */
-    parent: GObject.Object
-    /**
-     * Private data
-     */
-    priv: MenuitemPrivate
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Dbusmenu-0.4.Dbusmenu.Menuitem */
+    /* Methods of Dbusmenu-0.4.Dbusmenu.Menuitem */
     /**
      * Puts `child` in the list of children for `mi` at the location
      * specified in `position`.  If there is not enough entires available
@@ -964,7 +923,7 @@ export class Menuitem {
      * @param func Function to call on every node in the tree
      * @param data User data to pass to the function
      */
-    foreach(func: object | null, data: object | null): void
+    foreach(func?: object | null, data?: object | null): void
     /**
      * Returns simply the list of children that this menu item
      * has.  The list is valid until another child related function
@@ -1138,7 +1097,7 @@ export class Menuitem {
      * @param cb Callback to call when the call has returned.
      * @param cb_data Data to pass to the callback.
      */
-    send_about_to_show(cb: object | null, cb_data: object | null): void
+    send_about_to_show(cb?: object | null, cb_data?: object | null): void
     /**
      * Sets the parent of `mi` to `parent`. If `mi` already
      * has a parent, then this call will fail. The parent will
@@ -1177,7 +1136,7 @@ export class Menuitem {
      * normally be called directly
      */
     unparent(): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -1223,7 +1182,7 @@ export class Menuitem {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -1392,7 +1351,7 @@ export class Menuitem {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -1480,8 +1439,8 @@ export class Menuitem {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Dbusmenu-0.4.Dbusmenu.Menuitem */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Dbusmenu-0.4.Dbusmenu.Menuitem */
     vfunc_child_added(position: number): void
     vfunc_child_moved(newpos: number, oldpos: number): void
     vfunc_child_removed(): void
@@ -1497,14 +1456,13 @@ export class Menuitem {
      * If you subclass this function you should really think
      * about calling the parent function unless you have a good
      * reason not to.
-     * @virtual 
      * @param name The name of the signal
      * @param variant A value that could be set for the event
      * @param timestamp The timestamp of when the event happened
      */
     vfunc_handle_event(name: string, variant: GLib.Variant, timestamp: number): void
-    vfunc_show_to_user(timestamp: number, cb_data: object | null): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    vfunc_show_to_user(timestamp: number, cb_data?: object | null): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -1521,16 +1479,14 @@ export class Menuitem {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Dbusmenu-0.4.Dbusmenu.Menuitem */
+    /* Signals of Dbusmenu-0.4.Dbusmenu.Menuitem */
     /**
      * Emitted when the submenu for this item
      * 		is about to be shown
-     * @signal 
      */
     connect(sigName: "about-to-show", callback: (($obj: Menuitem) => boolean)): number
     connect_after(sigName: "about-to-show", callback: (($obj: Menuitem) => boolean)): number
@@ -1538,7 +1494,6 @@ export class Menuitem {
     /**
      * Signaled when the child menuitem has been added to
      * 		the parent.
-     * @signal 
      * @param arg1 The #DbusmenuMenuitem which is the child.
      * @param arg2 The position that the child is being added in.
      */
@@ -1548,7 +1503,6 @@ export class Menuitem {
     /**
      * Signaled when the child menuitem has had its location
      * 		in the list change.
-     * @signal 
      * @param arg1 The #DbusmenuMenuitem which is the child.
      * @param arg2 The position that the child is being moved to.
      * @param arg3 The position that the child is was in.
@@ -1561,7 +1515,6 @@ export class Menuitem {
      * 		be removed from the parent.  This signal is called when
      * 		it has been removed from the list but not yet had
      * 		#g_object_unref called on it.
-     * @signal 
      * @param arg1 The #DbusmenuMenuitem which was the child.
      */
     connect(sigName: "child-removed", callback: (($obj: Menuitem, arg1: GObject.Object) => void)): number
@@ -1570,7 +1523,6 @@ export class Menuitem {
     /**
      * Emitted when an event is passed through.  The event is signalled
      * 		after handle_event is called.
-     * @signal 
      * @param arg1 Name of the event
      * @param arg2 Information passed along with the event
      * @param arg3 X11 timestamp of when the event happened
@@ -1581,7 +1533,6 @@ export class Menuitem {
     /**
      * Emitted on the objects on the server side when
      * 		they are signaled on the client side.
-     * @signal 
      * @param arg1 The timestamp of when it was activated
      */
     connect(sigName: "item-activated", callback: (($obj: Menuitem, arg1: number) => void)): number
@@ -1590,7 +1541,6 @@ export class Menuitem {
     /**
      * Emitted everytime a property on a menuitem is either
      * 		updated or added.
-     * @signal 
      * @param arg1 The name of the property that changed
      * @param arg2 The new value of the property
      */
@@ -1602,7 +1552,6 @@ export class Menuitem {
      * 		is complete on the item.  If there is a type
      * 		handler configured for the "type" parameter
      * 		that will be executed before this is signaled.
-     * @signal 
      */
     connect(sigName: "realized", callback: (($obj: Menuitem) => void)): number
     connect_after(sigName: "realized", callback: (($obj: Menuitem) => void)): number
@@ -1611,13 +1560,12 @@ export class Menuitem {
      * Signaled when the application would like the visualization
      * 		of this menu item shown to the user.  This usually requires
      * 		going over the bus to get it done.
-     * @signal 
      * @param arg1 Timestamp the event happened at
      */
     connect(sigName: "show-to-user", callback: (($obj: Menuitem, arg1: number) => void)): number
     connect_after(sigName: "show-to-user", callback: (($obj: Menuitem, arg1: number) => void)): number
     emit(sigName: "show-to-user", arg1: number): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1644,7 +1592,6 @@ export class Menuitem {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Menuitem, pspec: GObject.ParamSpec) => void)): number
@@ -1652,8 +1599,8 @@ export class Menuitem {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::id", callback: (($obj: Menuitem, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::id", callback: (($obj: Menuitem, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -1662,21 +1609,18 @@ export class Menuitem {
     /* Static methods and pseudo-constructors */
     static new(): Menuitem
     static new_with_id(id: number): Menuitem
-    static $gtype: GObject.GType<Menuitem>
+    static $gtype: GObject.Type
 }
 export interface MenuitemProxy_ConstructProps extends Menuitem_ConstructProps {
     /* Constructor properties of Dbusmenu-0.4.Dbusmenu.MenuitemProxy */
-    menu_item?: Menuitem | null
+    menu_item?: Menuitem
 }
-/**
- * Public instance data for a #DbusmenuMenuitemProxy.
- */
 export class MenuitemProxy {
-    /* Own properties of Dbusmenu-0.4.Dbusmenu.MenuitemProxy */
+    /* Properties of Dbusmenu-0.4.Dbusmenu.MenuitemProxy */
     readonly menu_item: Menuitem
-    /* Extended properties of Dbusmenu-0.4.Dbusmenu.Menuitem */
+    /* Properties of Dbusmenu-0.4.Dbusmenu.Menuitem */
     readonly id: number
-    /* Extended fields of Dbusmenu-0.4.Dbusmenu.Menuitem */
+    /* Fields of Dbusmenu-0.4.Dbusmenu.Menuitem */
     /**
      * Parent object
      */
@@ -1685,15 +1629,15 @@ export class MenuitemProxy {
      * Private data
      */
     priv: MenuitemPrivate
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Dbusmenu-0.4.Dbusmenu.MenuitemProxy */
+    /* Methods of Dbusmenu-0.4.Dbusmenu.MenuitemProxy */
     /**
      * Accesses the private variable of which #DbusmenuMenuitem
      * we are doing the proxying for.
      */
     get_wrapped(): Menuitem
-    /* Extended methods of Dbusmenu-0.4.Dbusmenu.Menuitem */
+    /* Methods of Dbusmenu-0.4.Dbusmenu.Menuitem */
     /**
      * Puts `child` in the list of children for `mi` at the location
      * specified in `position`.  If there is not enough entires available
@@ -1749,7 +1693,7 @@ export class MenuitemProxy {
      * @param func Function to call on every node in the tree
      * @param data User data to pass to the function
      */
-    foreach(func: object | null, data: object | null): void
+    foreach(func?: object | null, data?: object | null): void
     /**
      * Returns simply the list of children that this menu item
      * has.  The list is valid until another child related function
@@ -1923,7 +1867,7 @@ export class MenuitemProxy {
      * @param cb Callback to call when the call has returned.
      * @param cb_data Data to pass to the callback.
      */
-    send_about_to_show(cb: object | null, cb_data: object | null): void
+    send_about_to_show(cb?: object | null, cb_data?: object | null): void
     /**
      * Sets the parent of `mi` to `parent`. If `mi` already
      * has a parent, then this call will fail. The parent will
@@ -1962,7 +1906,7 @@ export class MenuitemProxy {
      * normally be called directly
      */
     unparent(): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -2008,7 +1952,7 @@ export class MenuitemProxy {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -2177,7 +2121,7 @@ export class MenuitemProxy {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -2265,8 +2209,8 @@ export class MenuitemProxy {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Dbusmenu-0.4.Dbusmenu.Menuitem */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Dbusmenu-0.4.Dbusmenu.Menuitem */
     vfunc_child_added(position: number): void
     vfunc_child_moved(newpos: number, oldpos: number): void
     vfunc_child_removed(): void
@@ -2282,14 +2226,13 @@ export class MenuitemProxy {
      * If you subclass this function you should really think
      * about calling the parent function unless you have a good
      * reason not to.
-     * @virtual 
      * @param name The name of the signal
      * @param variant A value that could be set for the event
      * @param timestamp The timestamp of when the event happened
      */
     vfunc_handle_event(name: string, variant: GLib.Variant, timestamp: number): void
-    vfunc_show_to_user(timestamp: number, cb_data: object | null): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    vfunc_show_to_user(timestamp: number, cb_data?: object | null): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -2306,16 +2249,14 @@ export class MenuitemProxy {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Dbusmenu-0.4.Dbusmenu.Menuitem */
+    /* Signals of Dbusmenu-0.4.Dbusmenu.Menuitem */
     /**
      * Emitted when the submenu for this item
      * 		is about to be shown
-     * @signal 
      */
     connect(sigName: "about-to-show", callback: (($obj: MenuitemProxy) => boolean)): number
     connect_after(sigName: "about-to-show", callback: (($obj: MenuitemProxy) => boolean)): number
@@ -2323,7 +2264,6 @@ export class MenuitemProxy {
     /**
      * Signaled when the child menuitem has been added to
      * 		the parent.
-     * @signal 
      * @param arg1 The #DbusmenuMenuitem which is the child.
      * @param arg2 The position that the child is being added in.
      */
@@ -2333,7 +2273,6 @@ export class MenuitemProxy {
     /**
      * Signaled when the child menuitem has had its location
      * 		in the list change.
-     * @signal 
      * @param arg1 The #DbusmenuMenuitem which is the child.
      * @param arg2 The position that the child is being moved to.
      * @param arg3 The position that the child is was in.
@@ -2346,7 +2285,6 @@ export class MenuitemProxy {
      * 		be removed from the parent.  This signal is called when
      * 		it has been removed from the list but not yet had
      * 		#g_object_unref called on it.
-     * @signal 
      * @param arg1 The #DbusmenuMenuitem which was the child.
      */
     connect(sigName: "child-removed", callback: (($obj: MenuitemProxy, arg1: GObject.Object) => void)): number
@@ -2355,7 +2293,6 @@ export class MenuitemProxy {
     /**
      * Emitted when an event is passed through.  The event is signalled
      * 		after handle_event is called.
-     * @signal 
      * @param arg1 Name of the event
      * @param arg2 Information passed along with the event
      * @param arg3 X11 timestamp of when the event happened
@@ -2366,7 +2303,6 @@ export class MenuitemProxy {
     /**
      * Emitted on the objects on the server side when
      * 		they are signaled on the client side.
-     * @signal 
      * @param arg1 The timestamp of when it was activated
      */
     connect(sigName: "item-activated", callback: (($obj: MenuitemProxy, arg1: number) => void)): number
@@ -2375,7 +2311,6 @@ export class MenuitemProxy {
     /**
      * Emitted everytime a property on a menuitem is either
      * 		updated or added.
-     * @signal 
      * @param arg1 The name of the property that changed
      * @param arg2 The new value of the property
      */
@@ -2387,7 +2322,6 @@ export class MenuitemProxy {
      * 		is complete on the item.  If there is a type
      * 		handler configured for the "type" parameter
      * 		that will be executed before this is signaled.
-     * @signal 
      */
     connect(sigName: "realized", callback: (($obj: MenuitemProxy) => void)): number
     connect_after(sigName: "realized", callback: (($obj: MenuitemProxy) => void)): number
@@ -2396,13 +2330,12 @@ export class MenuitemProxy {
      * Signaled when the application would like the visualization
      * 		of this menu item shown to the user.  This usually requires
      * 		going over the bus to get it done.
-     * @signal 
      * @param arg1 Timestamp the event happened at
      */
     connect(sigName: "show-to-user", callback: (($obj: MenuitemProxy, arg1: number) => void)): number
     connect_after(sigName: "show-to-user", callback: (($obj: MenuitemProxy, arg1: number) => void)): number
     emit(sigName: "show-to-user", arg1: number): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -2429,7 +2362,6 @@ export class MenuitemProxy {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: MenuitemProxy, pspec: GObject.ParamSpec) => void)): number
@@ -2439,8 +2371,8 @@ export class MenuitemProxy {
     connect_after(sigName: "notify::menu-item", callback: (($obj: MenuitemProxy, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::id", callback: (($obj: MenuitemProxy, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::id", callback: (($obj: MenuitemProxy, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -2450,25 +2382,21 @@ export class MenuitemProxy {
     static new(mi: Menuitem): MenuitemProxy
     /* Function overloads */
     static new(): MenuitemProxy
-    static $gtype: GObject.GType<MenuitemProxy>
+    static $gtype: GObject.Type
 }
 export interface Server_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Dbusmenu-0.4.Dbusmenu.Server */
-    dbus_object?: string | null
-    root_node?: Menuitem | null
+    dbus_object?: string
+    root_node?: Menuitem
 }
-/**
- * A server which represents a sharing of a set of
- * 	#DbusmenuMenuitems across DBus to a #DbusmenuClient.
- */
 export class Server {
-    /* Own properties of Dbusmenu-0.4.Dbusmenu.Server */
+    /* Properties of Dbusmenu-0.4.Dbusmenu.Server */
     readonly dbus_object: string
     root_node: Menuitem
     readonly version: number
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Dbusmenu-0.4.Dbusmenu.Server */
+    /* Methods of Dbusmenu-0.4.Dbusmenu.Server */
     /**
      * Gets the stored and exported icon paths from the server.
      */
@@ -2515,7 +2443,7 @@ export class Server {
      * @param dir Direction of the text
      */
     set_text_direction(dir: TextDirection): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -2561,7 +2489,7 @@ export class Server {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -2730,7 +2658,7 @@ export class Server {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -2818,8 +2746,8 @@ export class Server {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -2836,49 +2764,36 @@ export class Server {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Dbusmenu-0.4.Dbusmenu.Server */
+    /* Signals of Dbusmenu-0.4.Dbusmenu.Server */
     /**
      * This is signaled when a menuitem under this server
      * 		sends its activate signal.
-     * @signal 
      * @param arg1 The ID of the parent for this update.
      * @param arg2 The timestamp of when the event happened
      */
     connect(sigName: "item-activation-requested", callback: (($obj: Server, arg1: number, arg2: number) => void)): number
     connect_after(sigName: "item-activation-requested", callback: (($obj: Server, arg1: number, arg2: number) => void)): number
     emit(sigName: "item-activation-requested", arg1: number, arg2: number): void
-    /**
-     * @signal 
-     * @param object 
-     * @param p0 
-     * @param p1 
-     */
     connect(sigName: "item-property-updated", callback: (($obj: Server, object: number, p0: string, p1: GLib.Variant) => void)): number
     connect_after(sigName: "item-property-updated", callback: (($obj: Server, object: number, p0: string, p1: GLib.Variant) => void)): number
     emit(sigName: "item-property-updated", object: number, p0: string, p1: GLib.Variant): void
-    /**
-     * @signal 
-     * @param object 
-     */
     connect(sigName: "item-updated", callback: (($obj: Server, object: number) => void)): number
     connect_after(sigName: "item-updated", callback: (($obj: Server, object: number) => void)): number
     emit(sigName: "item-updated", object: number): void
     /**
      * This signal is emitted any time the layout of the
      * 		menuitems under this server is changed.
-     * @signal 
      * @param arg1 A revision number representing which revision the update 		       represents itself as.
      * @param arg2 The ID of the parent for this update.
      */
     connect(sigName: "layout-updated", callback: (($obj: Server, arg1: number, arg2: number) => void)): number
     connect_after(sigName: "layout-updated", callback: (($obj: Server, arg1: number, arg2: number) => void)): number
     emit(sigName: "layout-updated", arg1: number, arg2: number): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -2905,7 +2820,6 @@ export class Server {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Server, pspec: GObject.ParamSpec) => void)): number
@@ -2917,8 +2831,8 @@ export class Server {
     connect_after(sigName: "notify::root-node", callback: (($obj: Server, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::version", callback: (($obj: Server, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::version", callback: (($obj: Server, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -2926,15 +2840,10 @@ export class Server {
     _init (config?: Server_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(object: string): Server
-    static $gtype: GObject.GType<Server>
+    static $gtype: GObject.Type
 }
-/**
- * A simple class that takes all of the information from a
- * 	#DbusmenuServer over DBus and makes the same set of
- * 	#DbusmenuMenuitem objects appear on the other side.
- */
 export abstract class ClientClass {
-    /* Own fields of Dbusmenu-0.4.Dbusmenu.ClientClass */
+    /* Fields of Dbusmenu-0.4.Dbusmenu.ClientClass */
     /**
      * #GObjectClass
      */
@@ -2955,12 +2864,8 @@ export abstract class ClientClass {
 export class ClientPrivate {
     static name: string
 }
-/**
- * Functions and signals that every menuitem should know something
- * about.
- */
 export abstract class MenuitemClass {
-    /* Own fields of Dbusmenu-0.4.Dbusmenu.MenuitemClass */
+    /* Fields of Dbusmenu-0.4.Dbusmenu.MenuitemClass */
     /**
      * Functions and signals from our parent
      */
@@ -2972,7 +2877,7 @@ export abstract class MenuitemClass {
     child_moved: (child: Menuitem, newpos: number, oldpos: number) => void
     realized: () => void
     handle_event: (mi: Menuitem, name: string, variant: GLib.Variant, timestamp: number) => void
-    show_to_user: (mi: Menuitem, timestamp: number, cb_data: object | null) => void
+    show_to_user: (mi: Menuitem, timestamp: number, cb_data?: object | null) => void
     about_to_show: () => boolean
     event: (name: string, value: GLib.Variant, timestamp: number) => void
     reserved1: () => void
@@ -2982,19 +2887,11 @@ export abstract class MenuitemClass {
     reserved5: () => void
     static name: string
 }
-/**
- * These are the little secrets that we don't want getting
- * 	out of data that we have.  They can still be gotten using
- * 	accessor functions, but are protected appropriately.
- */
 export class MenuitemPrivate {
     static name: string
 }
-/**
- * Functions and signal slots for #DbusmenuMenuitemProxy.
- */
 export abstract class MenuitemProxyClass {
-    /* Own fields of Dbusmenu-0.4.Dbusmenu.MenuitemProxyClass */
+    /* Fields of Dbusmenu-0.4.Dbusmenu.MenuitemProxyClass */
     /**
      * The Class of #DbusmeneMenuitem
      */
@@ -3008,11 +2905,8 @@ export abstract class MenuitemProxyClass {
 export class MenuitemProxyPrivate {
     static name: string
 }
-/**
- * The class implementing the virtual functions for #DbusmenuServer.
- */
 export abstract class ServerClass {
-    /* Own fields of Dbusmenu-0.4.Dbusmenu.ServerClass */
+    /* Fields of Dbusmenu-0.4.Dbusmenu.ServerClass */
     /**
      * #GObjectClass
      */

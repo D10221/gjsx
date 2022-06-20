@@ -90,7 +90,6 @@ export enum OptionType {
 /**
  * Flags used when defining properties with jsc_value_object_define_property_data() and
  * jsc_value_object_define_property_accessor().
- * @bitfield 
  */
 export enum ValuePropertyFlags {
     /**
@@ -173,7 +172,6 @@ export function options_set_uint(option: string, value: number): boolean
 /**
  * The type of delete_property in #JSCClassVTable. This is only required when you need to handle
  * external properties not added to the prototype.
- * @callback 
  */
 export interface ClassDeletePropertyFunction {
     (jsc_class: Class, context: Context, instance: object | null, name: string): boolean
@@ -181,15 +179,13 @@ export interface ClassDeletePropertyFunction {
 /**
  * The type of enumerate_properties in #JSCClassVTable. This is only required when you need to handle
  * external properties not added to the prototype.
- * @callback 
  */
 export interface ClassEnumeratePropertiesFunction {
-    (jsc_class: Class, context: Context, instance: object | null): string[] | null
+    (jsc_class: Class, context: Context, instance?: object | null): string[] | null
 }
 /**
  * The type of get_property in #JSCClassVTable. This is only required when you need to handle
  * external properties not added to the prototype.
- * @callback 
  */
 export interface ClassGetPropertyFunction {
     (jsc_class: Class, context: Context, instance: object | null, name: string): Value | null
@@ -197,7 +193,6 @@ export interface ClassGetPropertyFunction {
 /**
  * The type of has_property in #JSCClassVTable. This is only required when you need to handle
  * external properties not added to the prototype.
- * @callback 
  */
 export interface ClassHasPropertyFunction {
     (jsc_class: Class, context: Context, instance: object | null, name: string): boolean
@@ -205,14 +200,12 @@ export interface ClassHasPropertyFunction {
 /**
  * The type of set_property in #JSCClassVTable. This is only required when you need to handle
  * external properties not added to the prototype.
- * @callback 
  */
 export interface ClassSetPropertyFunction {
     (jsc_class: Class, context: Context, instance: object | null, name: string, value: Value): boolean
 }
 /**
  * Function used to handle JavaScript exceptions in a #JSCContext.
- * @callback 
  */
 export interface ExceptionHandler {
     (context: Context, exception: Exception): void
@@ -221,28 +214,27 @@ export interface ExceptionHandler {
  * Function used to iterate options.
  * 
  * Not that `description` string is not localized.
- * @callback 
  */
 export interface OptionsFunc {
-    (option: string, type: OptionType, description: string | null): boolean
+    (option: string, type: OptionType, description?: string | null): boolean
 }
 export interface Class_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of JavaScriptCore-4.0.JavaScriptCore.Class */
     /**
      * The #JSCContext in which the class was registered.
      */
-    context?: Context | null
+    context?: Context
     /**
      * The name of the class.
      */
-    name?: string | null
+    name?: string
     /**
      * The parent class or %NULL in case of final classes.
      */
-    parent?: Class | null
+    parent?: Class
 }
 export class Class {
-    /* Own properties of JavaScriptCore-4.0.JavaScriptCore.Class */
+    /* Properties of JavaScriptCore-4.0.JavaScriptCore.Class */
     /**
      * The #JSCContext in which the class was registered.
      */
@@ -255,9 +247,9 @@ export class Class {
      * The parent class or %NULL in case of final classes.
      */
     readonly parent: Class
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of JavaScriptCore-4.0.JavaScriptCore.Class */
+    /* Methods of JavaScriptCore-4.0.JavaScriptCore.Class */
     /**
      * Add a constructor to `jsc_class`. If `name` is %NULL, the class name will be used. When <function>new</function>
      * is used with the constructor or jsc_value_constructor_call() is called, `callback` is invoked receiving
@@ -273,7 +265,7 @@ export class Class {
      * @param callback a #GCallback to be called to create an instance of `jsc_class`
      * @param return_type the #GType of the constructor return value
      */
-    add_constructor_variadic(name: string | null, callback: GObject.Callback, return_type: GObject.GType): Value
+    add_constructor_variadic(name: string | null, callback: GObject.Callback, return_type: GObject.Type): Value
     /**
      * Add a constructor to `jsc_class`. If `name` is %NULL, the class name will be used. When <function>new</function>
      * is used with the constructor or jsc_value_constructor_call() is called, `callback` is invoked receiving the
@@ -290,7 +282,7 @@ export class Class {
      * @param return_type the #GType of the constructor return value
      * @param parameter_types a list of #GType<!-- -->s, one for each parameter, or %NULL
      */
-    add_constructor(name: string | null, callback: GObject.Callback, return_type: GObject.GType, parameter_types: GObject.GType[] | null): Value
+    add_constructor(name: string | null, callback: GObject.Callback, return_type: GObject.Type, parameter_types?: GObject.Type[] | null): Value
     /**
      * Add method with `name` to `jsc_class`. When the method is called by JavaScript or jsc_value_object_invoke_method(),
      * `callback` is called receiving the class instance as first parameter, followed by a #GPtrArray of #JSCValue<!-- -->s
@@ -305,7 +297,7 @@ export class Class {
      * @param callback a #GCallback to be called to invoke method `name` of `jsc_class`
      * @param return_type the #GType of the method return value, or %G_TYPE_NONE if the method is void.
      */
-    add_method_variadic(name: string, callback: GObject.Callback, return_type: GObject.GType): void
+    add_method_variadic(name: string, callback: GObject.Callback, return_type: GObject.Type): void
     /**
      * Add method with `name` to `jsc_class`. When the method is called by JavaScript or jsc_value_object_invoke_method(),
      * `callback` is called receiving the class instance as first parameter, followed by the method parameters and then
@@ -321,7 +313,7 @@ export class Class {
      * @param return_type the #GType of the method return value, or %G_TYPE_NONE if the method is void.
      * @param parameter_types a list of #GType<!-- -->s, one for each parameter, or %NULL
      */
-    add_method(name: string, callback: GObject.Callback, return_type: GObject.GType, parameter_types: GObject.GType[] | null): void
+    add_method(name: string, callback: GObject.Callback, return_type: GObject.Type, parameter_types?: GObject.Type[] | null): void
     /**
      * Add a property with `name` to `jsc_class`. When the property value needs to be getted, `getter` is called
      * receiving the the class instance as first parameter and `user_data` as last parameter. When the property
@@ -338,7 +330,7 @@ export class Class {
      * @param getter a #GCallback to be called to get the property value
      * @param setter a #GCallback to be called to set the property value
      */
-    add_property(name: string, property_type: GObject.GType, getter: GObject.Callback | null, setter: GObject.Callback | null): void
+    add_property(name: string, property_type: GObject.Type, getter?: GObject.Callback | null, setter?: GObject.Callback | null): void
     /**
      * Get the class name of `jsc_class`
      */
@@ -347,7 +339,7 @@ export class Class {
      * Get the parent class of `jsc_class`
      */
     get_parent(): Class
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -393,7 +385,7 @@ export class Class {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -562,7 +554,7 @@ export class Class {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -650,8 +642,8 @@ export class Class {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -668,12 +660,11 @@ export class Class {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -700,7 +691,6 @@ export class Class {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Class, pspec: GObject.ParamSpec) => void)): number
@@ -712,33 +702,31 @@ export class Class {
     connect_after(sigName: "notify::name", callback: (($obj: Class, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::parent", callback: (($obj: Class, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::parent", callback: (($obj: Class, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: Class_ConstructProps)
     _init (config?: Class_ConstructProps): void
-    static $gtype: GObject.GType<Class>
+    static $gtype: GObject.Type
 }
 export interface Context_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of JavaScriptCore-4.0.JavaScriptCore.Context */
     /**
      * The #JSCVirtualMachine in which the context was created.
      */
-    virtual_machine?: VirtualMachine | null
+    virtual_machine?: VirtualMachine
 }
 export class Context {
-    /* Own properties of JavaScriptCore-4.0.JavaScriptCore.Context */
+    /* Properties of JavaScriptCore-4.0.JavaScriptCore.Context */
     /**
      * The #JSCVirtualMachine in which the context was created.
      */
     readonly virtual_machine: VirtualMachine
-    /* Own fields of JavaScriptCore-4.0.JavaScriptCore.Context */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of JavaScriptCore-4.0.JavaScriptCore.Context */
+    /* Methods of JavaScriptCore-4.0.JavaScriptCore.Context */
     /**
      * Check the given `code` in `context` for syntax errors. The `line_number` is the starting line number in `uri;`
      * the value is one-based so the first line is 1. `uri` and `line_number` are only used to fill the `exception`.
@@ -750,7 +738,7 @@ export class Context {
      * @param uri the source URI
      * @param line_number the starting line number
      */
-    check_syntax(code: string, length: number, mode: CheckSyntaxMode, uri: string, line_number: number): [ /* returnType */ CheckSyntaxResult, /* exception */ Exception ]
+    check_syntax(code: string, length: number, mode: CheckSyntaxMode, uri: string, line_number: number): [ /* returnType */ CheckSyntaxResult, /* exception */ Exception | null ]
     /**
      * Clear the uncaught exception in `context` if any.
      */
@@ -831,7 +819,7 @@ export class Context {
      * @param vtable an optional #JSCClassVTable or %NULL
      * @param destroy_notify a destroy notifier for class instances
      */
-    register_class(name: string, parent_class: Class | null, vtable: ClassVTable | null, destroy_notify: GLib.DestroyNotify | null): Class
+    register_class(name: string, parent_class?: Class | null, vtable?: ClassVTable | null, destroy_notify?: GLib.DestroyNotify | null): Class
     /**
      * Set a property of `context` global object with `name` and `value`.
      * @param name the value name
@@ -856,7 +844,7 @@ export class Context {
      * @param error_message an error message
      */
     throw_with_name(error_name: string, error_message: string): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -902,7 +890,7 @@ export class Context {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -1071,7 +1059,7 @@ export class Context {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -1159,8 +1147,8 @@ export class Context {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -1177,12 +1165,11 @@ export class Context {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1209,7 +1196,6 @@ export class Context {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Context, pspec: GObject.ParamSpec) => void)): number
@@ -1217,8 +1203,8 @@ export class Context {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::virtual-machine", callback: (($obj: Context, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::virtual-machine", callback: (($obj: Context, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -1232,16 +1218,14 @@ export class Context {
      * called within a function or method callback, otherwise %NULL will be returned.
      */
     static get_current(): Context | null
-    static $gtype: GObject.GType<Context>
+    static $gtype: GObject.Type
 }
 export interface Exception_ConstructProps extends GObject.Object_ConstructProps {
 }
 export class Exception {
-    /* Own fields of JavaScriptCore-4.0.JavaScriptCore.Exception */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of JavaScriptCore-4.0.JavaScriptCore.Exception */
+    /* Methods of JavaScriptCore-4.0.JavaScriptCore.Exception */
     /**
      * Get a string with the exception backtrace.
      */
@@ -1275,7 +1259,7 @@ export class Exception {
      * Get the string representation of `exception` error.
      */
     to_string(): string
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -1321,7 +1305,7 @@ export class Exception {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -1490,7 +1474,7 @@ export class Exception {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -1578,8 +1562,8 @@ export class Exception {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -1596,12 +1580,11 @@ export class Exception {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1628,14 +1611,13 @@ export class Exception {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Exception, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Exception, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -1644,32 +1626,30 @@ export class Exception {
     /* Static methods and pseudo-constructors */
     static new(context: Context, message: string): Exception
     static new_with_name(context: Context, name: string, message: string): Exception
-    static $gtype: GObject.GType<Exception>
+    static $gtype: GObject.Type
 }
 export interface Value_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of JavaScriptCore-4.0.JavaScriptCore.Value */
     /**
      * The #JSCContext in which the value was created.
      */
-    context?: Context | null
+    context?: Context
 }
 export class Value {
-    /* Own properties of JavaScriptCore-4.0.JavaScriptCore.Value */
+    /* Properties of JavaScriptCore-4.0.JavaScriptCore.Value */
     /**
      * The #JSCContext in which the value was created.
      */
     readonly context: Context
-    /* Own fields of JavaScriptCore-4.0.JavaScriptCore.Value */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of JavaScriptCore-4.0.JavaScriptCore.Value */
+    /* Methods of JavaScriptCore-4.0.JavaScriptCore.Value */
     /**
      * Invoke <function>new</function> with constructor referenced by `value`. If `n_parameters`
      * is 0 no parameters will be passed to the constructor.
      * @param parameters the #JSCValue<!-- -->s to pass as parameters to the constructor, or %NULL
      */
-    constructor_call(parameters: Value[] | null): Value
+    constructor_call(parameters?: Value[] | null): Value
     /**
      * Call function referenced by `value,` passing the given `parameters`. If `n_parameters`
      * is 0 no parameters will be passed to the function.
@@ -1678,7 +1658,7 @@ export class Value {
      * <function>undefined</function> is returned
      * @param parameters the #JSCValue<!-- -->s to pass as parameters to the function, or %NULL
      */
-    function_call(parameters: Value[] | null): Value
+    function_call(parameters?: Value[] | null): Value
     /**
      * Get the #JSCContext in which `value` was created.
      */
@@ -1739,7 +1719,7 @@ export class Value {
      * @param getter a #GCallback to be called to get the property value
      * @param setter a #GCallback to be called to set the property value
      */
-    object_define_property_accessor(property_name: string, flags: ValuePropertyFlags, property_type: GObject.GType, getter: GObject.Callback | null, setter: GObject.Callback | null): void
+    object_define_property_accessor(property_name: string, flags: ValuePropertyFlags, property_type: GObject.Type, getter?: GObject.Callback | null, setter?: GObject.Callback | null): void
     /**
      * Define or modify a property with `property_name` in object referenced by `value`. This is equivalent to
      * JavaScript <function>Object.defineProperty()</function> when used with a data descriptor.
@@ -1747,7 +1727,7 @@ export class Value {
      * @param flags #JSCValuePropertyFlags
      * @param property_value the default property value
      */
-    object_define_property_data(property_name: string, flags: ValuePropertyFlags, property_value: Value | null): void
+    object_define_property_data(property_name: string, flags: ValuePropertyFlags, property_value?: Value | null): void
     /**
      * Try to delete property with `name` from `value`. This function will return %FALSE if
      * the property was defined without %JSC_VALUE_PROPERTY_CONFIGURABLE flag.
@@ -1786,7 +1766,7 @@ export class Value {
      * @param name the method name
      * @param parameters the #JSCValue<!-- -->s to pass as parameters to the method, or %NULL
      */
-    object_invoke_method(name: string, parameters: Value[] | null): Value
+    object_invoke_method(name: string, parameters?: Value[] | null): Value
     /**
      * Get whether the value referenced by `value` is an instance of class `name`.
      * @param name a class name
@@ -1832,7 +1812,7 @@ export class Value {
      * to handle strings with null characters.
      */
     to_string_as_bytes(): GLib.Bytes
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -1878,7 +1858,7 @@ export class Value {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -2047,7 +2027,7 @@ export class Value {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -2135,8 +2115,8 @@ export class Value {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -2153,12 +2133,11 @@ export class Value {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -2185,7 +2164,6 @@ export class Value {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Value, pspec: GObject.ParamSpec) => void)): number
@@ -2193,36 +2171,34 @@ export class Value {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::context", callback: (($obj: Value, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::context", callback: (($obj: Value, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: Value_ConstructProps)
     _init (config?: Value_ConstructProps): void
     /* Static methods and pseudo-constructors */
-    static new_array_from_garray(context: Context, array: Value[] | null): Value
+    static new_array_from_garray(context: Context, array?: Value[] | null): Value
     static new_array_from_strv(context: Context, strv: string[]): Value
     static new_boolean(context: Context, value: boolean): Value
     static new_from_json(context: Context, json: string): Value
-    static new_function_variadic(context: Context, name: string | null, callback: GObject.Callback, return_type: GObject.GType): Value
-    static new_function(context: Context, name: string | null, callback: GObject.Callback, return_type: GObject.GType, parameter_types: GObject.GType[] | null): Value
+    static new_function_variadic(context: Context, name: string | null, callback: GObject.Callback, return_type: GObject.Type): Value
+    static new_function(context: Context, name: string | null, callback: GObject.Callback, return_type: GObject.Type, parameter_types?: GObject.Type[] | null): Value
     static new_null(context: Context): Value
     static new_number(context: Context, number: number): Value
-    static new_object(context: Context, instance: object | null, jsc_class: Class | null): Value
-    static new_string(context: Context, string: string | null): Value
-    static new_string_from_bytes(context: Context, bytes: GLib.Bytes | null): Value
+    static new_object(context: Context, instance?: object | null, jsc_class?: Class | null): Value
+    static new_string(context: Context, string?: string | null): Value
+    static new_string_from_bytes(context: Context, bytes?: GLib.Bytes | null): Value
     static new_undefined(context: Context): Value
-    static $gtype: GObject.GType<Value>
+    static $gtype: GObject.Type
 }
 export interface VirtualMachine_ConstructProps extends GObject.Object_ConstructProps {
 }
 export class VirtualMachine {
-    /* Own fields of JavaScriptCore-4.0.JavaScriptCore.VirtualMachine */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -2268,7 +2244,7 @@ export class VirtualMachine {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -2437,7 +2413,7 @@ export class VirtualMachine {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -2525,8 +2501,8 @@ export class VirtualMachine {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -2543,12 +2519,11 @@ export class VirtualMachine {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -2575,14 +2550,13 @@ export class VirtualMachine {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: VirtualMachine, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: VirtualMachine, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -2590,31 +2564,29 @@ export class VirtualMachine {
     _init (config?: VirtualMachine_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(): VirtualMachine
-    static $gtype: GObject.GType<VirtualMachine>
+    static $gtype: GObject.Type
 }
 export interface WeakValue_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of JavaScriptCore-4.0.JavaScriptCore.WeakValue */
     /**
      * The #JSCValue referencing the JavaScript value.
      */
-    value?: Value | null
+    value?: Value
 }
 export class WeakValue {
-    /* Own properties of JavaScriptCore-4.0.JavaScriptCore.WeakValue */
+    /* Properties of JavaScriptCore-4.0.JavaScriptCore.WeakValue */
     /**
      * The #JSCValue referencing the JavaScript value.
      */
     readonly value: Value
-    /* Own fields of JavaScriptCore-4.0.JavaScriptCore.WeakValue */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of JavaScriptCore-4.0.JavaScriptCore.WeakValue */
+    /* Methods of JavaScriptCore-4.0.JavaScriptCore.WeakValue */
     /**
      * Get a #JSCValue referencing the JavaScript value of `weak_value`.
      */
     get_value(): Value
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -2660,7 +2632,7 @@ export class WeakValue {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -2829,7 +2801,7 @@ export class WeakValue {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -2917,8 +2889,8 @@ export class WeakValue {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -2935,20 +2907,18 @@ export class WeakValue {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of JavaScriptCore-4.0.JavaScriptCore.WeakValue */
+    /* Signals of JavaScriptCore-4.0.JavaScriptCore.WeakValue */
     /**
      * This signal is emitted when the JavaScript value is destroyed.
-     * @signal 
      */
     connect(sigName: "cleared", callback: (($obj: WeakValue) => void)): number
     connect_after(sigName: "cleared", callback: (($obj: WeakValue) => void)): number
     emit(sigName: "cleared"): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -2975,7 +2945,6 @@ export class WeakValue {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: WeakValue, pspec: GObject.ParamSpec) => void)): number
@@ -2983,8 +2952,8 @@ export class WeakValue {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::value", callback: (($obj: WeakValue, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::value", callback: (($obj: WeakValue, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -2992,18 +2961,13 @@ export class WeakValue {
     _init (config?: WeakValue_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(value: Value): WeakValue
-    static $gtype: GObject.GType<WeakValue>
+    static $gtype: GObject.Type
 }
 export abstract class ClassClass {
     static name: string
 }
-/**
- * Virtual table for a JSCClass. This can be optionally used when registering a #JSCClass in a #JSCContext
- * to provide a custom implementation for the class. All virtual functions are optional and can be set to
- * %NULL to fallback to the default implementation.
- */
 export class ClassVTable {
-    /* Own fields of JavaScriptCore-4.0.JavaScriptCore.ClassVTable */
+    /* Fields of JavaScriptCore-4.0.JavaScriptCore.ClassVTable */
     /**
      * a #JSCClassGetPropertyFunction for getting a property.
      */
@@ -3027,7 +2991,7 @@ export class ClassVTable {
     static name: string
 }
 export abstract class ContextClass {
-    /* Own fields of JavaScriptCore-4.0.JavaScriptCore.ContextClass */
+    /* Fields of JavaScriptCore-4.0.JavaScriptCore.ContextClass */
     parent_class: GObject.ObjectClass
     static name: string
 }
@@ -3035,7 +2999,7 @@ export class ContextPrivate {
     static name: string
 }
 export abstract class ExceptionClass {
-    /* Own fields of JavaScriptCore-4.0.JavaScriptCore.ExceptionClass */
+    /* Fields of JavaScriptCore-4.0.JavaScriptCore.ExceptionClass */
     parent_class: GObject.ObjectClass
     static name: string
 }
@@ -3043,7 +3007,7 @@ export class ExceptionPrivate {
     static name: string
 }
 export abstract class ValueClass {
-    /* Own fields of JavaScriptCore-4.0.JavaScriptCore.ValueClass */
+    /* Fields of JavaScriptCore-4.0.JavaScriptCore.ValueClass */
     parent_class: GObject.ObjectClass
     static name: string
 }
@@ -3051,7 +3015,7 @@ export class ValuePrivate {
     static name: string
 }
 export abstract class VirtualMachineClass {
-    /* Own fields of JavaScriptCore-4.0.JavaScriptCore.VirtualMachineClass */
+    /* Fields of JavaScriptCore-4.0.JavaScriptCore.VirtualMachineClass */
     parent_class: GObject.ObjectClass
     static name: string
 }
@@ -3059,7 +3023,7 @@ export class VirtualMachinePrivate {
     static name: string
 }
 export abstract class WeakValueClass {
-    /* Own fields of JavaScriptCore-4.0.JavaScriptCore.WeakValueClass */
+    /* Fields of JavaScriptCore-4.0.JavaScriptCore.WeakValueClass */
     parent_class: GObject.ObjectClass
     static name: string
 }

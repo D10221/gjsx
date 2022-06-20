@@ -923,9 +923,6 @@ export enum XMLRPCFault {
      */
     TRANSPORT_ERROR,
 }
-/**
- * @bitfield 
- */
 export enum Cacheability {
     CACHEABLE,
     UNCACHEABLE,
@@ -934,7 +931,6 @@ export enum Cacheability {
 }
 /**
  * Represents the parsed value of the "Expect" header.
- * @bitfield 
  */
 export enum Expectation {
     /**
@@ -949,7 +945,6 @@ export enum Expectation {
 /**
  * Various flags that can be set on a #SoupMessage to alter its
  * behavior.
- * @bitfield 
  */
 export enum MessageFlags {
     /**
@@ -1026,7 +1021,6 @@ export enum MessageFlags {
  * soup_server_listen_local(), not plain soup_server_listen() (which
  * simply listens on whatever kind of socket you give it). And you
  * cannot specify both of them in a single call.
- * @bitfield 
  */
 export enum ServerListenOptions {
     /**
@@ -1555,7 +1549,7 @@ export function cookies_to_cookie_header(cookies: Cookie[]): string
 export function cookies_to_request(cookies: Cookie[], msg: Message): void
 export function cookies_to_response(cookies: Cookie[], msg: Message): void
 export function form_decode(encoded_form: string): GLib.HashTable
-export function form_decode_multipart(msg: Message, file_control_name: string | null): [ /* returnType */ GLib.HashTable | null, /* filename */ string, /* content_type */ string, /* file */ Buffer ]
+export function form_decode_multipart(msg: Message, file_control_name?: string | null): [ /* returnType */ GLib.HashTable | null, /* filename */ string | null, /* content_type */ string | null, /* file */ Buffer | null ]
 export function form_encode_datalist(form_data_set: GLib.Data): string
 export function form_encode_hash(form_data_set: GLib.HashTable): string
 export function form_request_new_from_datalist(method: string, uri: string, form_data_set: GLib.Data): Message
@@ -1571,39 +1565,39 @@ export function header_g_string_append_param_quoted(string: GLib.String, name: s
 export function header_parse_list(header: string): string[]
 export function header_parse_param_list(header: string): GLib.HashTable
 export function header_parse_param_list_strict(header: string): GLib.HashTable | null
-export function header_parse_quality_list(header: string): [ /* returnType */ string[], /* unacceptable */ string[] ]
+export function header_parse_quality_list(header: string): [ /* returnType */ string[], /* unacceptable */ string[] | null ]
 export function header_parse_semi_param_list(header: string): GLib.HashTable
 export function header_parse_semi_param_list_strict(header: string): GLib.HashTable | null
 export function headers_parse(str: string, len: number, dest: MessageHeaders): boolean
-export function headers_parse_request(str: string, len: number, req_headers: MessageHeaders): [ /* returnType */ number, /* req_method */ string, /* req_path */ string, /* ver */ HTTPVersion ]
-export function headers_parse_response(str: string, len: number, headers: MessageHeaders): [ /* returnType */ boolean, /* ver */ HTTPVersion, /* status_code */ number, /* reason_phrase */ string ]
-export function headers_parse_status_line(status_line: string): [ /* returnType */ boolean, /* ver */ HTTPVersion, /* status_code */ number, /* reason_phrase */ string ]
+export function headers_parse_request(str: string, len: number, req_headers: MessageHeaders): [ /* returnType */ number, /* req_method */ string | null, /* req_path */ string | null, /* ver */ HTTPVersion | null ]
+export function headers_parse_response(str: string, len: number, headers: MessageHeaders): [ /* returnType */ boolean, /* ver */ HTTPVersion | null, /* status_code */ number | null, /* reason_phrase */ string | null ]
+export function headers_parse_status_line(status_line: string): [ /* returnType */ boolean, /* ver */ HTTPVersion | null, /* status_code */ number | null, /* reason_phrase */ string | null ]
 export function http_error_quark(): GLib.Quark
 export function message_headers_iter_init(hdrs: MessageHeaders): /* iter */ MessageHeadersIter
 export function request_error_quark(): GLib.Quark
 export function requester_error_quark(): GLib.Quark
 export function status_get_phrase(status_code: number): string
 export function status_proxify(status_code: number): number
-export function str_case_equal(v1: object | null, v2: object | null): boolean
-export function str_case_hash(key: object | null): number
+export function str_case_equal(v1?: object | null, v2?: object | null): boolean
+export function str_case_hash(key?: object | null): number
 export function tld_domain_is_public_suffix(domain: string): boolean
 export function tld_error_quark(): GLib.Quark
 export function tld_get_base_domain(hostname: string): string
 export function uri_decode(part: string): string
-export function uri_encode(part: string, escape_extra: string | null): string
-export function uri_normalize(part: string, unescape_extra: string | null): string
+export function uri_encode(part: string, escape_extra?: string | null): string
+export function uri_normalize(part: string, unescape_extra?: string | null): string
 export function value_array_new(): GObject.ValueArray
 export function value_hash_insert_value(hash: GLib.HashTable, key: string, value: any): void
 export function value_hash_new(): GLib.HashTable
-export function websocket_client_prepare_handshake(msg: Message, origin: string | null, protocols: string[] | null): void
-export function websocket_client_prepare_handshake_with_extensions(msg: Message, origin: string | null, protocols: string[] | null, supported_extensions: GObject.TypeClass[] | null): void
+export function websocket_client_prepare_handshake(msg: Message, origin?: string | null, protocols?: string[] | null): void
+export function websocket_client_prepare_handshake_with_extensions(msg: Message, origin?: string | null, protocols?: string[] | null, supported_extensions?: GObject.TypeClass[] | null): void
 export function websocket_client_verify_handshake(msg: Message): boolean
-export function websocket_client_verify_handshake_with_extensions(msg: Message, supported_extensions: GObject.TypeClass[] | null): [ /* returnType */ boolean, /* accepted_extensions */ WebsocketExtension[] ]
+export function websocket_client_verify_handshake_with_extensions(msg: Message, supported_extensions?: GObject.TypeClass[] | null): [ /* returnType */ boolean, /* accepted_extensions */ WebsocketExtension[] | null ]
 export function websocket_error_get_quark(): GLib.Quark
-export function websocket_server_check_handshake(msg: Message, origin: string | null, protocols: string[] | null): boolean
-export function websocket_server_check_handshake_with_extensions(msg: Message, origin: string | null, protocols: string[] | null, supported_extensions: GObject.TypeClass[] | null): boolean
-export function websocket_server_process_handshake(msg: Message, expected_origin: string | null, protocols: string[] | null): boolean
-export function websocket_server_process_handshake_with_extensions(msg: Message, expected_origin: string | null, protocols: string[] | null, supported_extensions: GObject.TypeClass[] | null): [ /* returnType */ boolean, /* accepted_extensions */ WebsocketExtension[] ]
+export function websocket_server_check_handshake(msg: Message, origin?: string | null, protocols?: string[] | null): boolean
+export function websocket_server_check_handshake_with_extensions(msg: Message, origin?: string | null, protocols?: string[] | null, supported_extensions?: GObject.TypeClass[] | null): boolean
+export function websocket_server_process_handshake(msg: Message, expected_origin?: string | null, protocols?: string[] | null): boolean
+export function websocket_server_process_handshake_with_extensions(msg: Message, expected_origin?: string | null, protocols?: string[] | null, supported_extensions?: GObject.TypeClass[] | null): [ /* returnType */ boolean, /* accepted_extensions */ WebsocketExtension[] | null ]
 export function xmlrpc_build_method_call(method_name: string, params: any[]): string | null
 export function xmlrpc_build_method_response(value: any): string | null
 export function xmlrpc_build_request(method_name: string, params: GLib.Variant): string
@@ -1615,12 +1609,11 @@ export function xmlrpc_message_set_response(msg: Message, value: GLib.Variant): 
 export function xmlrpc_parse_method_call(method_call: string, length: number): [ /* returnType */ boolean, /* method_name */ string, /* params */ GObject.ValueArray ]
 export function xmlrpc_parse_method_response(method_response: string, length: number): [ /* returnType */ boolean, /* value */ any ]
 export function xmlrpc_parse_request(method_call: string, length: number): [ /* returnType */ string, /* params */ XMLRPCParams ]
-export function xmlrpc_parse_response(method_response: string, length: number, signature: string | null): GLib.Variant
+export function xmlrpc_parse_response(method_response: string, length: number, signature?: string | null): GLib.Variant
 export function xmlrpc_variant_get_datetime(variant: GLib.Variant): Date
 export function xmlrpc_variant_new_datetime(date: Date): GLib.Variant
 /**
  * The callback function passed to soup_address_resolve_async().
- * @callback 
  */
 export interface AddressCallback {
     (addr: Address, status: number): void
@@ -1640,7 +1633,6 @@ export interface AddressCallback {
  * compromising any site with a cleartext (or easily-cracked) password
  * database may give attackers access to other more-interesting sites
  * as well.
- * @callback 
  */
 export interface AuthDomainBasicAuthCallback {
     (domain: AuthDomainBasic, msg: Message, username: string, password: string): boolean
@@ -1650,7 +1642,6 @@ export interface AuthDomainBasicAuthCallback {
  * The application should look up `username` in its password database,
  * and return the corresponding encoded password (see
  * soup_auth_domain_digest_encode_password()).
- * @callback 
  */
 export interface AuthDomainDigestAuthCallback {
     (domain: AuthDomainDigest, msg: Message, username: string): string | null
@@ -1658,7 +1649,6 @@ export interface AuthDomainDigestAuthCallback {
 /**
  * The prototype for a #SoupAuthDomain filter; see
  * soup_auth_domain_set_filter() for details.
- * @callback 
  */
 export interface AuthDomainFilter {
     (domain: AuthDomain, msg: Message): boolean
@@ -1680,7 +1670,6 @@ export interface AuthDomainFilter {
  * servers might be compromised as well. For many of the cases where
  * #SoupServer is used, this is not really relevant, but it may still
  * be worth considering.
- * @callback 
  */
 export interface AuthDomainGenericAuthCallback {
     (domain: AuthDomain, msg: Message, username: string): boolean
@@ -1701,7 +1690,6 @@ export interface AuthDomainGenericAuthCallback {
  * If the allocator returns %NULL, the message will be paused. It is
  * up to the application to make sure that it gets unpaused when it
  * becomes possible to allocate a new buffer.
- * @callback 
  */
 export interface ChunkAllocator {
     (msg: Message, max_len: number): Buffer | null
@@ -1712,7 +1700,6 @@ export interface ChunkAllocator {
  * return a #SoupLoggerLogLevel value indicating how much of the
  * message to log. Eg, it might choose between %SOUP_LOGGER_LOG_BODY
  * and %SOUP_LOGGER_LOG_HEADERS depending on the Content-Type.
- * @callback 
  */
 export interface LoggerFilter {
     (logger: Logger, msg: Message): LoggerLogLevel
@@ -1731,33 +1718,24 @@ export interface LoggerFilter {
  * <informalexample><programlisting>
  * printf ("%c %s\n", direction, data);
  * </programlisting></informalexample>
- * @callback 
  */
 export interface LoggerPrinter {
     (logger: Logger, level: LoggerLogLevel, direction: number, data: string): void
 }
 /**
  * The callback passed to soup_message_headers_foreach().
- * @callback 
  */
 export interface MessageHeadersForeachFunc {
     (name: string, value: string): void
 }
-/**
- * @callback 
- */
 export interface PasswordManagerCallback {
     (password_manager: PasswordManager, msg: Message, auth: Auth, retrying: boolean): void
 }
-/**
- * @callback 
- */
 export interface ProxyResolverCallback {
     (proxy_resolver: ProxyResolver, msg: Message, arg: number, addr: Address): void
 }
 /**
  * Callback for soup_proxy_uri_resolver_get_proxy_uri_async()
- * @callback 
  */
 export interface ProxyURIResolverCallback {
     (resolver: ProxyURIResolver, status: number, proxy_uri: URI): void
@@ -1786,7 +1764,6 @@ export interface ProxyURIResolverCallback {
  * 
  * See soup_server_add_handler() and soup_server_add_early_handler()
  * for details of what handlers can/should do.
- * @callback 
  */
 export interface ServerCallback {
     (server: Server, msg: Message, path: string, query: GLib.HashTable | null, client: ClientContext): void
@@ -1799,7 +1776,6 @@ export interface ServerCallback {
  * 
  * `path` contains the path of the Request-URI, subject to the same
  * rules as #SoupServerCallback (qv).
- * @callback 
  */
 export interface ServerWebsocketCallback {
     (server: Server, connection: WebsocketConnection, path: string, client: ClientContext): void
@@ -1807,341 +1783,27 @@ export interface ServerWebsocketCallback {
 /**
  * Prototype for the callback passed to soup_session_queue_message(),
  * qv.
- * @callback 
  */
 export interface SessionCallback {
     (session: Session, msg: Message): void
 }
 /**
  * Prototype for the progress callback passed to soup_session_connect_async().
- * @callback 
  */
 export interface SessionConnectProgressCallback {
     (session: Session, event: Gio.SocketClientEvent, connection: Gio.IOStream): void
 }
 /**
  * The callback function passed to soup_socket_connect_async().
- * @callback 
  */
 export interface SocketCallback {
     (sock: Socket, status: number): void
 }
-export interface PasswordManager_ConstructProps extends GObject.Object_ConstructProps {
-}
-/**
- * @interface 
- */
 export class PasswordManager {
-    /* Extended fields of GObject-2.0.GObject.Object */
-    g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.PasswordManager */
+    /* Methods of Soup-2.4.Soup.PasswordManager */
     get_passwords_async(msg: Message, auth: Auth, retrying: boolean, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: PasswordManagerCallback): void
-    get_passwords_sync(msg: Message, auth: Auth, cancellable: Gio.Cancellable | null): void
-    /* Extended methods of GObject-2.0.GObject.Object */
-    /**
-     * Creates a binding between `source_property` on `source` and `target_property`
-     * on `target`. Whenever the `source_property` is changed the `target_property` is
-     * updated using the same value. For instance:
-     * 
-     * |[
-     *   g_object_bind_property (action, "active", widget, "sensitive", 0);
-     * ```
-     * 
-     * 
-     * Will result in the "sensitive" property of the widget #GObject instance to be
-     * updated with the same value of the "active" property of the action #GObject
-     * instance.
-     * 
-     * If `flags` contains %G_BINDING_BIDIRECTIONAL then the binding will be mutual:
-     * if `target_property` on `target` changes then the `source_property` on `source`
-     * will be updated as well.
-     * 
-     * The binding will automatically be removed when either the `source` or the
-     * `target` instances are finalized. To remove the binding without affecting the
-     * `source` and the `target` you can just call g_object_unref() on the returned
-     * #GBinding instance.
-     * 
-     * A #GObject can have multiple bindings.
-     * @param source_property the property on `source` to bind
-     * @param target the target #GObject
-     * @param target_property the property on `target` to bind
-     * @param flags flags to pass to #GBinding
-     */
-    bind_property(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags): GObject.Binding
-    /**
-     * Creates a binding between `source_property` on `source` and `target_property`
-     * on `target,` allowing you to set the transformation functions to be used by
-     * the binding.
-     * 
-     * This function is the language bindings friendly version of
-     * g_object_bind_property_full(), using #GClosures instead of
-     * function pointers.
-     * @param source_property the property on `source` to bind
-     * @param target the target #GObject
-     * @param target_property the property on `target` to bind
-     * @param flags flags to pass to #GBinding
-     * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
-     * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
-     */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
-    /**
-     * This function is intended for #GObject implementations to re-enforce
-     * a [floating][floating-ref] object reference. Doing this is seldom
-     * required: all #GInitiallyUnowneds are created with a floating reference
-     * which usually just needs to be sunken by calling g_object_ref_sink().
-     */
-    force_floating(): void
-    /**
-     * Increases the freeze count on `object`. If the freeze count is
-     * non-zero, the emission of "notify" signals on `object` is
-     * stopped. The signals are queued until the freeze count is decreased
-     * to zero. Duplicate notifications are squashed so that at most one
-     * #GObject::notify signal is emitted for each property modified while the
-     * object is frozen.
-     * 
-     * This is necessary for accessors that modify multiple properties to prevent
-     * premature notification while the object is still being modified.
-     */
-    freeze_notify(): void
-    /**
-     * Gets a named field from the objects table of associations (see g_object_set_data()).
-     * @param key name of the key for that association
-     */
-    get_data(key: string): object | null
-    /**
-     * Gets a property of an object.
-     * 
-     * The `value` can be:
-     * 
-     *  - an empty #GValue initialized by %G_VALUE_INIT, which will be
-     *    automatically initialized with the expected type of the property
-     *    (since GLib 2.60)
-     *  - a #GValue initialized with the expected type of the property
-     *  - a #GValue initialized with a type to which the expected type
-     *    of the property can be transformed
-     * 
-     * In general, a copy is made of the property contents and the caller is
-     * responsible for freeing the memory by calling g_value_unset().
-     * 
-     * Note that g_object_get_property() is really intended for language
-     * bindings, g_object_get() is much more convenient for C programming.
-     * @param property_name the name of the property to get
-     * @param value return location for the property value
-     */
-    get_property(property_name: string, value: any): void
-    /**
-     * This function gets back user data pointers stored via
-     * g_object_set_qdata().
-     * @param quark A #GQuark, naming the user data pointer
-     */
-    get_qdata(quark: GLib.Quark): object | null
-    /**
-     * Gets `n_properties` properties for an `object`.
-     * Obtained properties will be set to `values`. All properties must be valid.
-     * Warnings will be emitted and undefined behaviour may result if invalid
-     * properties are passed in.
-     * @param names the names of each property to get
-     * @param values the values of each property to get
-     */
-    getv(names: string[], values: any[]): void
-    /**
-     * Checks whether `object` has a [floating][floating-ref] reference.
-     */
-    is_floating(): boolean
-    /**
-     * Emits a "notify" signal for the property `property_name` on `object`.
-     * 
-     * When possible, eg. when signaling a property change from within the class
-     * that registered the property, you should use g_object_notify_by_pspec()
-     * instead.
-     * 
-     * Note that emission of the notify signal may be blocked with
-     * g_object_freeze_notify(). In this case, the signal emissions are queued
-     * and will be emitted (in reverse order) when g_object_thaw_notify() is
-     * called.
-     * @param property_name the name of a property installed on the class of `object`.
-     */
-    notify(property_name: string): void
-    /**
-     * Emits a "notify" signal for the property specified by `pspec` on `object`.
-     * 
-     * This function omits the property name lookup, hence it is faster than
-     * g_object_notify().
-     * 
-     * One way to avoid using g_object_notify() from within the
-     * class that registered the properties, and using g_object_notify_by_pspec()
-     * instead, is to store the GParamSpec used with
-     * g_object_class_install_property() inside a static array, e.g.:
-     * 
-     * 
-     * ```c
-     *   enum
-     *   {
-     *     PROP_0,
-     *     PROP_FOO,
-     *     PROP_LAST
-     *   };
-     * 
-     *   static GParamSpec *properties[PROP_LAST];
-     * 
-     *   static void
-     *   my_object_class_init (MyObjectClass *klass)
-     *   {
-     *     properties[PROP_FOO] = g_param_spec_int ("foo", "Foo", "The foo",
-     *                                              0, 100,
-     *                                              50,
-     *                                              G_PARAM_READWRITE);
-     *     g_object_class_install_property (gobject_class,
-     *                                      PROP_FOO,
-     *                                      properties[PROP_FOO]);
-     *   }
-     * ```
-     * 
-     * 
-     * and then notify a change on the "foo" property with:
-     * 
-     * 
-     * ```c
-     *   g_object_notify_by_pspec (self, properties[PROP_FOO]);
-     * ```
-     * 
-     * @param pspec the #GParamSpec of a property installed on the class of `object`.
-     */
-    notify_by_pspec(pspec: GObject.ParamSpec): void
-    /**
-     * Increases the reference count of `object`.
-     * 
-     * Since GLib 2.56, if `GLIB_VERSION_MAX_ALLOWED` is 2.56 or greater, the type
-     * of `object` will be propagated to the return type (using the GCC typeof()
-     * extension), so any casting the caller needs to do on the return type must be
-     * explicit.
-     */
-    ref(): GObject.Object
-    /**
-     * Increase the reference count of `object,` and possibly remove the
-     * [floating][floating-ref] reference, if `object` has a floating reference.
-     * 
-     * In other words, if the object is floating, then this call "assumes
-     * ownership" of the floating reference, converting it to a normal
-     * reference by clearing the floating flag while leaving the reference
-     * count unchanged.  If the object is not floating, then this call
-     * adds a new normal reference increasing the reference count by one.
-     * 
-     * Since GLib 2.56, the type of `object` will be propagated to the return type
-     * under the same conditions as for g_object_ref().
-     */
-    ref_sink(): GObject.Object
-    /**
-     * Releases all references to other objects. This can be used to break
-     * reference cycles.
-     * 
-     * This function should only be called from object system implementations.
-     */
-    run_dispose(): void
-    /**
-     * Each object carries around a table of associations from
-     * strings to pointers.  This function lets you set an association.
-     * 
-     * If the object already had an association with that name,
-     * the old association will be destroyed.
-     * 
-     * Internally, the `key` is converted to a #GQuark using g_quark_from_string().
-     * This means a copy of `key` is kept permanently (even after `object` has been
-     * finalized) — so it is recommended to only use a small, bounded set of values
-     * for `key` in your program, to avoid the #GQuark storage growing unbounded.
-     * @param key name of the key
-     * @param data data to associate with that key
-     */
-    set_data(key: string, data: object | null): void
-    /**
-     * Sets a property on an object.
-     * @param property_name the name of the property to set
-     * @param value the value
-     */
-    set_property(property_name: string, value: any): void
-    /**
-     * Remove a specified datum from the object's data associations,
-     * without invoking the association's destroy handler.
-     * @param key name of the key
-     */
-    steal_data(key: string): object | null
-    /**
-     * This function gets back user data pointers stored via
-     * g_object_set_qdata() and removes the `data` from object
-     * without invoking its destroy() function (if any was
-     * set).
-     * Usually, calling this function is only required to update
-     * user data pointers with a destroy notifier, for example:
-     * 
-     * ```c
-     * void
-     * object_add_to_user_list (GObject     *object,
-     *                          const gchar *new_string)
-     * {
-     *   // the quark, naming the object data
-     *   GQuark quark_string_list = g_quark_from_static_string ("my-string-list");
-     *   // retrive the old string list
-     *   GList *list = g_object_steal_qdata (object, quark_string_list);
-     * 
-     *   // prepend new string
-     *   list = g_list_prepend (list, g_strdup (new_string));
-     *   // this changed 'list', so we need to set it again
-     *   g_object_set_qdata_full (object, quark_string_list, list, free_string_list);
-     * }
-     * static void
-     * free_string_list (gpointer data)
-     * {
-     *   GList *node, *list = data;
-     * 
-     *   for (node = list; node; node = node->next)
-     *     g_free (node->data);
-     *   g_list_free (list);
-     * }
-     * ```
-     * 
-     * Using g_object_get_qdata() in the above example, instead of
-     * g_object_steal_qdata() would have left the destroy function set,
-     * and thus the partial string list would have been freed upon
-     * g_object_set_qdata_full().
-     * @param quark A #GQuark, naming the user data pointer
-     */
-    steal_qdata(quark: GLib.Quark): object | null
-    /**
-     * Reverts the effect of a previous call to
-     * g_object_freeze_notify(). The freeze count is decreased on `object`
-     * and when it reaches zero, queued "notify" signals are emitted.
-     * 
-     * Duplicate notifications for each property are squashed so that at most one
-     * #GObject::notify signal is emitted for each property, in the reverse order
-     * in which they have been queued.
-     * 
-     * It is an error to call this function when the freeze count is zero.
-     */
-    thaw_notify(): void
-    /**
-     * Decreases the reference count of `object`. When its reference count
-     * drops to 0, the object is finalized (i.e. its memory is freed).
-     * 
-     * If the pointer to the #GObject may be reused in future (for example, if it is
-     * an instance variable of another object), it is recommended to clear the
-     * pointer to %NULL rather than retain a dangling pointer to a potentially
-     * invalid #GObject instance. Use g_clear_object() for this.
-     */
-    unref(): void
-    /**
-     * This function essentially limits the life time of the `closure` to
-     * the life time of the object. That is, when the object is finalized,
-     * the `closure` is invalidated by calling g_closure_invalidate() on
-     * it, in order to prevent invocations of the closure with a finalized
-     * (nonexisting) object. Also, g_object_ref() and g_object_unref() are
-     * added as marshal guards to the `closure,` to ensure that an extra
-     * reference count is held on `object` during invocation of the
-     * `closure`.  Usually, this function will be called on closures that
-     * use this `object` as closure data.
-     * @param closure #GClosure to watch
-     */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    get_passwords_sync(msg: Message, auth: Auth, cancellable?: Gio.Cancellable | null): void
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -2149,7 +1811,7 @@ export class PasswordManager {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -2157,424 +1819,49 @@ export class PasswordManager {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.PasswordManager */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.PasswordManager */
     vfunc_get_passwords_async(msg: Message, auth: Auth, retrying: boolean, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: PasswordManagerCallback): void
-    vfunc_get_passwords_sync(msg: Message, auth: Auth, cancellable: Gio.Cancellable | null): void
+    vfunc_get_passwords_sync(msg: Message, auth: Auth, cancellable?: Gio.Cancellable | null): void
+    /* Virtual methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
-    vfunc_constructed(): void
-    vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
-    vfunc_dispose(): void
-    vfunc_finalize(): void
-    vfunc_get_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /**
-     * Emits a "notify" signal for the property `property_name` on `object`.
-     * 
-     * When possible, eg. when signaling a property change from within the class
-     * that registered the property, you should use g_object_notify_by_pspec()
-     * instead.
-     * 
-     * Note that emission of the notify signal may be blocked with
-     * g_object_freeze_notify(). In this case, the signal emissions are queued
-     * and will be emitted (in reverse order) when g_object_thaw_notify() is
-     * called.
-     * @virtual 
-     * @param pspec 
-     */
-    vfunc_notify(pspec: GObject.ParamSpec): void
-    vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
-    /**
-     * The notify signal is emitted on an object when one of its properties has
-     * its value set through g_object_set_property(), g_object_set(), et al.
-     * 
-     * Note that getting this signal doesn’t itself guarantee that the value of
-     * the property has actually changed. When it is emitted is determined by the
-     * derived GObject class. If the implementor did not create the property with
-     * %G_PARAM_EXPLICIT_NOTIFY, then any call to g_object_set_property() results
-     * in ::notify being emitted, even if the new value is the same as the old.
-     * If they did pass %G_PARAM_EXPLICIT_NOTIFY, then this signal is emitted only
-     * when they explicitly call g_object_notify() or g_object_notify_by_pspec(),
-     * and common practice is to do that only when the value has actually changed.
-     * 
-     * This signal is typically used to obtain change notification for a
-     * single property, by specifying the property name as a detail in the
-     * g_signal_connect() call, like this:
-     * 
-     * ```c
-     * g_signal_connect (text_view->buffer, "notify::paste-target-list",
-     *                   G_CALLBACK (gtk_text_view_target_list_notify),
-     *                   text_view)
-     * ```
-     * 
-     * It is important to note that you must use
-     * [canonical parameter names][canonical-parameter-names] as
-     * detail strings for the notify signal.
-     * @signal 
-     * @param pspec the #GParamSpec of the property which changed.
-     */
-    connect(sigName: "notify", callback: (($obj: PasswordManager, pspec: GObject.ParamSpec) => void)): number
-    connect_after(sigName: "notify", callback: (($obj: PasswordManager, pspec: GObject.ParamSpec) => void)): number
-    emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
-    emit(sigName: string, ...args: any[]): void
-    disconnect(id: number): void
     static name: string
-    constructor (config?: PasswordManager_ConstructProps)
-    _init (config?: PasswordManager_ConstructProps): void
-    static $gtype: GObject.GType<PasswordManager>
 }
-export interface ProxyResolver_ConstructProps extends GObject.Object_ConstructProps {
-}
-/**
- * @interface 
- */
 export class ProxyResolver {
-    /* Extended fields of GObject-2.0.GObject.Object */
-    g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.ProxyResolver */
+    /* Methods of Soup-2.4.Soup.ProxyResolver */
     get_proxy_async(msg: Message, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: ProxyResolverCallback): void
-    get_proxy_sync(msg: Message, cancellable: Gio.Cancellable | null): [ /* returnType */ number, /* addr */ Address ]
-    /* Extended methods of GObject-2.0.GObject.Object */
-    /**
-     * Creates a binding between `source_property` on `source` and `target_property`
-     * on `target`. Whenever the `source_property` is changed the `target_property` is
-     * updated using the same value. For instance:
-     * 
-     * |[
-     *   g_object_bind_property (action, "active", widget, "sensitive", 0);
-     * ```
-     * 
-     * 
-     * Will result in the "sensitive" property of the widget #GObject instance to be
-     * updated with the same value of the "active" property of the action #GObject
-     * instance.
-     * 
-     * If `flags` contains %G_BINDING_BIDIRECTIONAL then the binding will be mutual:
-     * if `target_property` on `target` changes then the `source_property` on `source`
-     * will be updated as well.
-     * 
-     * The binding will automatically be removed when either the `source` or the
-     * `target` instances are finalized. To remove the binding without affecting the
-     * `source` and the `target` you can just call g_object_unref() on the returned
-     * #GBinding instance.
-     * 
-     * A #GObject can have multiple bindings.
-     * @param source_property the property on `source` to bind
-     * @param target the target #GObject
-     * @param target_property the property on `target` to bind
-     * @param flags flags to pass to #GBinding
-     */
-    bind_property(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags): GObject.Binding
-    /**
-     * Creates a binding between `source_property` on `source` and `target_property`
-     * on `target,` allowing you to set the transformation functions to be used by
-     * the binding.
-     * 
-     * This function is the language bindings friendly version of
-     * g_object_bind_property_full(), using #GClosures instead of
-     * function pointers.
-     * @param source_property the property on `source` to bind
-     * @param target the target #GObject
-     * @param target_property the property on `target` to bind
-     * @param flags flags to pass to #GBinding
-     * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
-     * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
-     */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
-    /**
-     * This function is intended for #GObject implementations to re-enforce
-     * a [floating][floating-ref] object reference. Doing this is seldom
-     * required: all #GInitiallyUnowneds are created with a floating reference
-     * which usually just needs to be sunken by calling g_object_ref_sink().
-     */
-    force_floating(): void
-    /**
-     * Increases the freeze count on `object`. If the freeze count is
-     * non-zero, the emission of "notify" signals on `object` is
-     * stopped. The signals are queued until the freeze count is decreased
-     * to zero. Duplicate notifications are squashed so that at most one
-     * #GObject::notify signal is emitted for each property modified while the
-     * object is frozen.
-     * 
-     * This is necessary for accessors that modify multiple properties to prevent
-     * premature notification while the object is still being modified.
-     */
-    freeze_notify(): void
-    /**
-     * Gets a named field from the objects table of associations (see g_object_set_data()).
-     * @param key name of the key for that association
-     */
-    get_data(key: string): object | null
-    /**
-     * Gets a property of an object.
-     * 
-     * The `value` can be:
-     * 
-     *  - an empty #GValue initialized by %G_VALUE_INIT, which will be
-     *    automatically initialized with the expected type of the property
-     *    (since GLib 2.60)
-     *  - a #GValue initialized with the expected type of the property
-     *  - a #GValue initialized with a type to which the expected type
-     *    of the property can be transformed
-     * 
-     * In general, a copy is made of the property contents and the caller is
-     * responsible for freeing the memory by calling g_value_unset().
-     * 
-     * Note that g_object_get_property() is really intended for language
-     * bindings, g_object_get() is much more convenient for C programming.
-     * @param property_name the name of the property to get
-     * @param value return location for the property value
-     */
-    get_property(property_name: string, value: any): void
-    /**
-     * This function gets back user data pointers stored via
-     * g_object_set_qdata().
-     * @param quark A #GQuark, naming the user data pointer
-     */
-    get_qdata(quark: GLib.Quark): object | null
-    /**
-     * Gets `n_properties` properties for an `object`.
-     * Obtained properties will be set to `values`. All properties must be valid.
-     * Warnings will be emitted and undefined behaviour may result if invalid
-     * properties are passed in.
-     * @param names the names of each property to get
-     * @param values the values of each property to get
-     */
-    getv(names: string[], values: any[]): void
-    /**
-     * Checks whether `object` has a [floating][floating-ref] reference.
-     */
-    is_floating(): boolean
-    /**
-     * Emits a "notify" signal for the property `property_name` on `object`.
-     * 
-     * When possible, eg. when signaling a property change from within the class
-     * that registered the property, you should use g_object_notify_by_pspec()
-     * instead.
-     * 
-     * Note that emission of the notify signal may be blocked with
-     * g_object_freeze_notify(). In this case, the signal emissions are queued
-     * and will be emitted (in reverse order) when g_object_thaw_notify() is
-     * called.
-     * @param property_name the name of a property installed on the class of `object`.
-     */
-    notify(property_name: string): void
-    /**
-     * Emits a "notify" signal for the property specified by `pspec` on `object`.
-     * 
-     * This function omits the property name lookup, hence it is faster than
-     * g_object_notify().
-     * 
-     * One way to avoid using g_object_notify() from within the
-     * class that registered the properties, and using g_object_notify_by_pspec()
-     * instead, is to store the GParamSpec used with
-     * g_object_class_install_property() inside a static array, e.g.:
-     * 
-     * 
-     * ```c
-     *   enum
-     *   {
-     *     PROP_0,
-     *     PROP_FOO,
-     *     PROP_LAST
-     *   };
-     * 
-     *   static GParamSpec *properties[PROP_LAST];
-     * 
-     *   static void
-     *   my_object_class_init (MyObjectClass *klass)
-     *   {
-     *     properties[PROP_FOO] = g_param_spec_int ("foo", "Foo", "The foo",
-     *                                              0, 100,
-     *                                              50,
-     *                                              G_PARAM_READWRITE);
-     *     g_object_class_install_property (gobject_class,
-     *                                      PROP_FOO,
-     *                                      properties[PROP_FOO]);
-     *   }
-     * ```
-     * 
-     * 
-     * and then notify a change on the "foo" property with:
-     * 
-     * 
-     * ```c
-     *   g_object_notify_by_pspec (self, properties[PROP_FOO]);
-     * ```
-     * 
-     * @param pspec the #GParamSpec of a property installed on the class of `object`.
-     */
-    notify_by_pspec(pspec: GObject.ParamSpec): void
-    /**
-     * Increases the reference count of `object`.
-     * 
-     * Since GLib 2.56, if `GLIB_VERSION_MAX_ALLOWED` is 2.56 or greater, the type
-     * of `object` will be propagated to the return type (using the GCC typeof()
-     * extension), so any casting the caller needs to do on the return type must be
-     * explicit.
-     */
-    ref(): GObject.Object
-    /**
-     * Increase the reference count of `object,` and possibly remove the
-     * [floating][floating-ref] reference, if `object` has a floating reference.
-     * 
-     * In other words, if the object is floating, then this call "assumes
-     * ownership" of the floating reference, converting it to a normal
-     * reference by clearing the floating flag while leaving the reference
-     * count unchanged.  If the object is not floating, then this call
-     * adds a new normal reference increasing the reference count by one.
-     * 
-     * Since GLib 2.56, the type of `object` will be propagated to the return type
-     * under the same conditions as for g_object_ref().
-     */
-    ref_sink(): GObject.Object
-    /**
-     * Releases all references to other objects. This can be used to break
-     * reference cycles.
-     * 
-     * This function should only be called from object system implementations.
-     */
-    run_dispose(): void
-    /**
-     * Each object carries around a table of associations from
-     * strings to pointers.  This function lets you set an association.
-     * 
-     * If the object already had an association with that name,
-     * the old association will be destroyed.
-     * 
-     * Internally, the `key` is converted to a #GQuark using g_quark_from_string().
-     * This means a copy of `key` is kept permanently (even after `object` has been
-     * finalized) — so it is recommended to only use a small, bounded set of values
-     * for `key` in your program, to avoid the #GQuark storage growing unbounded.
-     * @param key name of the key
-     * @param data data to associate with that key
-     */
-    set_data(key: string, data: object | null): void
-    /**
-     * Sets a property on an object.
-     * @param property_name the name of the property to set
-     * @param value the value
-     */
-    set_property(property_name: string, value: any): void
-    /**
-     * Remove a specified datum from the object's data associations,
-     * without invoking the association's destroy handler.
-     * @param key name of the key
-     */
-    steal_data(key: string): object | null
-    /**
-     * This function gets back user data pointers stored via
-     * g_object_set_qdata() and removes the `data` from object
-     * without invoking its destroy() function (if any was
-     * set).
-     * Usually, calling this function is only required to update
-     * user data pointers with a destroy notifier, for example:
-     * 
-     * ```c
-     * void
-     * object_add_to_user_list (GObject     *object,
-     *                          const gchar *new_string)
-     * {
-     *   // the quark, naming the object data
-     *   GQuark quark_string_list = g_quark_from_static_string ("my-string-list");
-     *   // retrive the old string list
-     *   GList *list = g_object_steal_qdata (object, quark_string_list);
-     * 
-     *   // prepend new string
-     *   list = g_list_prepend (list, g_strdup (new_string));
-     *   // this changed 'list', so we need to set it again
-     *   g_object_set_qdata_full (object, quark_string_list, list, free_string_list);
-     * }
-     * static void
-     * free_string_list (gpointer data)
-     * {
-     *   GList *node, *list = data;
-     * 
-     *   for (node = list; node; node = node->next)
-     *     g_free (node->data);
-     *   g_list_free (list);
-     * }
-     * ```
-     * 
-     * Using g_object_get_qdata() in the above example, instead of
-     * g_object_steal_qdata() would have left the destroy function set,
-     * and thus the partial string list would have been freed upon
-     * g_object_set_qdata_full().
-     * @param quark A #GQuark, naming the user data pointer
-     */
-    steal_qdata(quark: GLib.Quark): object | null
-    /**
-     * Reverts the effect of a previous call to
-     * g_object_freeze_notify(). The freeze count is decreased on `object`
-     * and when it reaches zero, queued "notify" signals are emitted.
-     * 
-     * Duplicate notifications for each property are squashed so that at most one
-     * #GObject::notify signal is emitted for each property, in the reverse order
-     * in which they have been queued.
-     * 
-     * It is an error to call this function when the freeze count is zero.
-     */
-    thaw_notify(): void
-    /**
-     * Decreases the reference count of `object`. When its reference count
-     * drops to 0, the object is finalized (i.e. its memory is freed).
-     * 
-     * If the pointer to the #GObject may be reused in future (for example, if it is
-     * an instance variable of another object), it is recommended to clear the
-     * pointer to %NULL rather than retain a dangling pointer to a potentially
-     * invalid #GObject instance. Use g_clear_object() for this.
-     */
-    unref(): void
-    /**
-     * This function essentially limits the life time of the `closure` to
-     * the life time of the object. That is, when the object is finalized,
-     * the `closure` is invalidated by calling g_closure_invalidate() on
-     * it, in order to prevent invocations of the closure with a finalized
-     * (nonexisting) object. Also, g_object_ref() and g_object_unref() are
-     * added as marshal guards to the `closure,` to ensure that an extra
-     * reference count is held on `object` during invocation of the
-     * `closure`.  Usually, this function will be called on closures that
-     * use this `object` as closure data.
-     * @param closure #GClosure to watch
-     */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    get_proxy_sync(msg: Message, cancellable?: Gio.Cancellable | null): [ /* returnType */ number, /* addr */ Address ]
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -2582,7 +1869,7 @@ export class ProxyResolver {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -2590,117 +1877,46 @@ export class ProxyResolver {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.ProxyResolver */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.ProxyResolver */
     vfunc_get_proxy_async(msg: Message, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: ProxyResolverCallback): void
-    vfunc_get_proxy_sync(msg: Message, cancellable: Gio.Cancellable | null): [ /* returnType */ number, /* addr */ Address ]
+    vfunc_get_proxy_sync(msg: Message, cancellable?: Gio.Cancellable | null): [ /* returnType */ number, /* addr */ Address ]
+    /* Virtual methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
-    vfunc_constructed(): void
-    vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
-    vfunc_dispose(): void
-    vfunc_finalize(): void
-    vfunc_get_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /**
-     * Emits a "notify" signal for the property `property_name` on `object`.
-     * 
-     * When possible, eg. when signaling a property change from within the class
-     * that registered the property, you should use g_object_notify_by_pspec()
-     * instead.
-     * 
-     * Note that emission of the notify signal may be blocked with
-     * g_object_freeze_notify(). In this case, the signal emissions are queued
-     * and will be emitted (in reverse order) when g_object_thaw_notify() is
-     * called.
-     * @virtual 
-     * @param pspec 
-     */
-    vfunc_notify(pspec: GObject.ParamSpec): void
-    vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
-    /**
-     * The notify signal is emitted on an object when one of its properties has
-     * its value set through g_object_set_property(), g_object_set(), et al.
-     * 
-     * Note that getting this signal doesn’t itself guarantee that the value of
-     * the property has actually changed. When it is emitted is determined by the
-     * derived GObject class. If the implementor did not create the property with
-     * %G_PARAM_EXPLICIT_NOTIFY, then any call to g_object_set_property() results
-     * in ::notify being emitted, even if the new value is the same as the old.
-     * If they did pass %G_PARAM_EXPLICIT_NOTIFY, then this signal is emitted only
-     * when they explicitly call g_object_notify() or g_object_notify_by_pspec(),
-     * and common practice is to do that only when the value has actually changed.
-     * 
-     * This signal is typically used to obtain change notification for a
-     * single property, by specifying the property name as a detail in the
-     * g_signal_connect() call, like this:
-     * 
-     * ```c
-     * g_signal_connect (text_view->buffer, "notify::paste-target-list",
-     *                   G_CALLBACK (gtk_text_view_target_list_notify),
-     *                   text_view)
-     * ```
-     * 
-     * It is important to note that you must use
-     * [canonical parameter names][canonical-parameter-names] as
-     * detail strings for the notify signal.
-     * @signal 
-     * @param pspec the #GParamSpec of the property which changed.
-     */
-    connect(sigName: "notify", callback: (($obj: ProxyResolver, pspec: GObject.ParamSpec) => void)): number
-    connect_after(sigName: "notify", callback: (($obj: ProxyResolver, pspec: GObject.ParamSpec) => void)): number
-    emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
-    emit(sigName: string, ...args: any[]): void
-    disconnect(id: number): void
     static name: string
-    constructor (config?: ProxyResolver_ConstructProps)
-    _init (config?: ProxyResolver_ConstructProps): void
-    static $gtype: GObject.GType<ProxyResolver>
 }
-export interface ProxyURIResolver_ConstructProps extends GObject.Object_ConstructProps {
-}
-/**
- * @interface 
- */
 export class ProxyURIResolver {
-    /* Extended fields of GObject-2.0.GObject.Object */
-    g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.ProxyURIResolver */
+    /* Methods of Soup-2.4.Soup.ProxyURIResolver */
     /**
      * Asynchronously determines a proxy URI to use for `msg` and calls
      * `callback`.
@@ -2717,312 +1933,8 @@ export class ProxyURIResolver {
      * @param uri the #SoupURI you want a proxy for
      * @param cancellable a #GCancellable, or %NULL
      */
-    get_proxy_uri_sync(uri: URI, cancellable: Gio.Cancellable | null): [ /* returnType */ number, /* proxy_uri */ URI ]
-    /* Extended methods of GObject-2.0.GObject.Object */
-    /**
-     * Creates a binding between `source_property` on `source` and `target_property`
-     * on `target`. Whenever the `source_property` is changed the `target_property` is
-     * updated using the same value. For instance:
-     * 
-     * |[
-     *   g_object_bind_property (action, "active", widget, "sensitive", 0);
-     * ```
-     * 
-     * 
-     * Will result in the "sensitive" property of the widget #GObject instance to be
-     * updated with the same value of the "active" property of the action #GObject
-     * instance.
-     * 
-     * If `flags` contains %G_BINDING_BIDIRECTIONAL then the binding will be mutual:
-     * if `target_property` on `target` changes then the `source_property` on `source`
-     * will be updated as well.
-     * 
-     * The binding will automatically be removed when either the `source` or the
-     * `target` instances are finalized. To remove the binding without affecting the
-     * `source` and the `target` you can just call g_object_unref() on the returned
-     * #GBinding instance.
-     * 
-     * A #GObject can have multiple bindings.
-     * @param source_property the property on `source` to bind
-     * @param target the target #GObject
-     * @param target_property the property on `target` to bind
-     * @param flags flags to pass to #GBinding
-     */
-    bind_property(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags): GObject.Binding
-    /**
-     * Creates a binding between `source_property` on `source` and `target_property`
-     * on `target,` allowing you to set the transformation functions to be used by
-     * the binding.
-     * 
-     * This function is the language bindings friendly version of
-     * g_object_bind_property_full(), using #GClosures instead of
-     * function pointers.
-     * @param source_property the property on `source` to bind
-     * @param target the target #GObject
-     * @param target_property the property on `target` to bind
-     * @param flags flags to pass to #GBinding
-     * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
-     * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
-     */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
-    /**
-     * This function is intended for #GObject implementations to re-enforce
-     * a [floating][floating-ref] object reference. Doing this is seldom
-     * required: all #GInitiallyUnowneds are created with a floating reference
-     * which usually just needs to be sunken by calling g_object_ref_sink().
-     */
-    force_floating(): void
-    /**
-     * Increases the freeze count on `object`. If the freeze count is
-     * non-zero, the emission of "notify" signals on `object` is
-     * stopped. The signals are queued until the freeze count is decreased
-     * to zero. Duplicate notifications are squashed so that at most one
-     * #GObject::notify signal is emitted for each property modified while the
-     * object is frozen.
-     * 
-     * This is necessary for accessors that modify multiple properties to prevent
-     * premature notification while the object is still being modified.
-     */
-    freeze_notify(): void
-    /**
-     * Gets a named field from the objects table of associations (see g_object_set_data()).
-     * @param key name of the key for that association
-     */
-    get_data(key: string): object | null
-    /**
-     * Gets a property of an object.
-     * 
-     * The `value` can be:
-     * 
-     *  - an empty #GValue initialized by %G_VALUE_INIT, which will be
-     *    automatically initialized with the expected type of the property
-     *    (since GLib 2.60)
-     *  - a #GValue initialized with the expected type of the property
-     *  - a #GValue initialized with a type to which the expected type
-     *    of the property can be transformed
-     * 
-     * In general, a copy is made of the property contents and the caller is
-     * responsible for freeing the memory by calling g_value_unset().
-     * 
-     * Note that g_object_get_property() is really intended for language
-     * bindings, g_object_get() is much more convenient for C programming.
-     * @param property_name the name of the property to get
-     * @param value return location for the property value
-     */
-    get_property(property_name: string, value: any): void
-    /**
-     * This function gets back user data pointers stored via
-     * g_object_set_qdata().
-     * @param quark A #GQuark, naming the user data pointer
-     */
-    get_qdata(quark: GLib.Quark): object | null
-    /**
-     * Gets `n_properties` properties for an `object`.
-     * Obtained properties will be set to `values`. All properties must be valid.
-     * Warnings will be emitted and undefined behaviour may result if invalid
-     * properties are passed in.
-     * @param names the names of each property to get
-     * @param values the values of each property to get
-     */
-    getv(names: string[], values: any[]): void
-    /**
-     * Checks whether `object` has a [floating][floating-ref] reference.
-     */
-    is_floating(): boolean
-    /**
-     * Emits a "notify" signal for the property `property_name` on `object`.
-     * 
-     * When possible, eg. when signaling a property change from within the class
-     * that registered the property, you should use g_object_notify_by_pspec()
-     * instead.
-     * 
-     * Note that emission of the notify signal may be blocked with
-     * g_object_freeze_notify(). In this case, the signal emissions are queued
-     * and will be emitted (in reverse order) when g_object_thaw_notify() is
-     * called.
-     * @param property_name the name of a property installed on the class of `object`.
-     */
-    notify(property_name: string): void
-    /**
-     * Emits a "notify" signal for the property specified by `pspec` on `object`.
-     * 
-     * This function omits the property name lookup, hence it is faster than
-     * g_object_notify().
-     * 
-     * One way to avoid using g_object_notify() from within the
-     * class that registered the properties, and using g_object_notify_by_pspec()
-     * instead, is to store the GParamSpec used with
-     * g_object_class_install_property() inside a static array, e.g.:
-     * 
-     * 
-     * ```c
-     *   enum
-     *   {
-     *     PROP_0,
-     *     PROP_FOO,
-     *     PROP_LAST
-     *   };
-     * 
-     *   static GParamSpec *properties[PROP_LAST];
-     * 
-     *   static void
-     *   my_object_class_init (MyObjectClass *klass)
-     *   {
-     *     properties[PROP_FOO] = g_param_spec_int ("foo", "Foo", "The foo",
-     *                                              0, 100,
-     *                                              50,
-     *                                              G_PARAM_READWRITE);
-     *     g_object_class_install_property (gobject_class,
-     *                                      PROP_FOO,
-     *                                      properties[PROP_FOO]);
-     *   }
-     * ```
-     * 
-     * 
-     * and then notify a change on the "foo" property with:
-     * 
-     * 
-     * ```c
-     *   g_object_notify_by_pspec (self, properties[PROP_FOO]);
-     * ```
-     * 
-     * @param pspec the #GParamSpec of a property installed on the class of `object`.
-     */
-    notify_by_pspec(pspec: GObject.ParamSpec): void
-    /**
-     * Increases the reference count of `object`.
-     * 
-     * Since GLib 2.56, if `GLIB_VERSION_MAX_ALLOWED` is 2.56 or greater, the type
-     * of `object` will be propagated to the return type (using the GCC typeof()
-     * extension), so any casting the caller needs to do on the return type must be
-     * explicit.
-     */
-    ref(): GObject.Object
-    /**
-     * Increase the reference count of `object,` and possibly remove the
-     * [floating][floating-ref] reference, if `object` has a floating reference.
-     * 
-     * In other words, if the object is floating, then this call "assumes
-     * ownership" of the floating reference, converting it to a normal
-     * reference by clearing the floating flag while leaving the reference
-     * count unchanged.  If the object is not floating, then this call
-     * adds a new normal reference increasing the reference count by one.
-     * 
-     * Since GLib 2.56, the type of `object` will be propagated to the return type
-     * under the same conditions as for g_object_ref().
-     */
-    ref_sink(): GObject.Object
-    /**
-     * Releases all references to other objects. This can be used to break
-     * reference cycles.
-     * 
-     * This function should only be called from object system implementations.
-     */
-    run_dispose(): void
-    /**
-     * Each object carries around a table of associations from
-     * strings to pointers.  This function lets you set an association.
-     * 
-     * If the object already had an association with that name,
-     * the old association will be destroyed.
-     * 
-     * Internally, the `key` is converted to a #GQuark using g_quark_from_string().
-     * This means a copy of `key` is kept permanently (even after `object` has been
-     * finalized) — so it is recommended to only use a small, bounded set of values
-     * for `key` in your program, to avoid the #GQuark storage growing unbounded.
-     * @param key name of the key
-     * @param data data to associate with that key
-     */
-    set_data(key: string, data: object | null): void
-    /**
-     * Sets a property on an object.
-     * @param property_name the name of the property to set
-     * @param value the value
-     */
-    set_property(property_name: string, value: any): void
-    /**
-     * Remove a specified datum from the object's data associations,
-     * without invoking the association's destroy handler.
-     * @param key name of the key
-     */
-    steal_data(key: string): object | null
-    /**
-     * This function gets back user data pointers stored via
-     * g_object_set_qdata() and removes the `data` from object
-     * without invoking its destroy() function (if any was
-     * set).
-     * Usually, calling this function is only required to update
-     * user data pointers with a destroy notifier, for example:
-     * 
-     * ```c
-     * void
-     * object_add_to_user_list (GObject     *object,
-     *                          const gchar *new_string)
-     * {
-     *   // the quark, naming the object data
-     *   GQuark quark_string_list = g_quark_from_static_string ("my-string-list");
-     *   // retrive the old string list
-     *   GList *list = g_object_steal_qdata (object, quark_string_list);
-     * 
-     *   // prepend new string
-     *   list = g_list_prepend (list, g_strdup (new_string));
-     *   // this changed 'list', so we need to set it again
-     *   g_object_set_qdata_full (object, quark_string_list, list, free_string_list);
-     * }
-     * static void
-     * free_string_list (gpointer data)
-     * {
-     *   GList *node, *list = data;
-     * 
-     *   for (node = list; node; node = node->next)
-     *     g_free (node->data);
-     *   g_list_free (list);
-     * }
-     * ```
-     * 
-     * Using g_object_get_qdata() in the above example, instead of
-     * g_object_steal_qdata() would have left the destroy function set,
-     * and thus the partial string list would have been freed upon
-     * g_object_set_qdata_full().
-     * @param quark A #GQuark, naming the user data pointer
-     */
-    steal_qdata(quark: GLib.Quark): object | null
-    /**
-     * Reverts the effect of a previous call to
-     * g_object_freeze_notify(). The freeze count is decreased on `object`
-     * and when it reaches zero, queued "notify" signals are emitted.
-     * 
-     * Duplicate notifications for each property are squashed so that at most one
-     * #GObject::notify signal is emitted for each property, in the reverse order
-     * in which they have been queued.
-     * 
-     * It is an error to call this function when the freeze count is zero.
-     */
-    thaw_notify(): void
-    /**
-     * Decreases the reference count of `object`. When its reference count
-     * drops to 0, the object is finalized (i.e. its memory is freed).
-     * 
-     * If the pointer to the #GObject may be reused in future (for example, if it is
-     * an instance variable of another object), it is recommended to clear the
-     * pointer to %NULL rather than retain a dangling pointer to a potentially
-     * invalid #GObject instance. Use g_clear_object() for this.
-     */
-    unref(): void
-    /**
-     * This function essentially limits the life time of the `closure` to
-     * the life time of the object. That is, when the object is finalized,
-     * the `closure` is invalidated by calling g_closure_invalidate() on
-     * it, in order to prevent invocations of the closure with a finalized
-     * (nonexisting) object. Also, g_object_ref() and g_object_unref() are
-     * added as marshal guards to the `closure,` to ensure that an extra
-     * reference count is held on `object` during invocation of the
-     * `closure`.  Usually, this function will be called on closures that
-     * use this `object` as closure data.
-     * @param closure #GClosure to watch
-     */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    get_proxy_uri_sync(uri: URI, cancellable?: Gio.Cancellable | null): [ /* returnType */ number, /* proxy_uri */ URI ]
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -3030,7 +1942,7 @@ export class ProxyURIResolver {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -3038,18 +1950,17 @@ export class ProxyURIResolver {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.ProxyURIResolver */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.ProxyURIResolver */
     /**
      * Asynchronously determines a proxy URI to use for `msg` and calls
      * `callback`.
-     * @virtual 
      * @param uri the #SoupURI you want a proxy for
      * @param async_context the #GMainContext to invoke `callback` in
      * @param cancellable a #GCancellable, or %NULL
@@ -3060,114 +1971,40 @@ export class ProxyURIResolver {
      * Synchronously determines a proxy URI to use for `uri`. If `uri`
      * should be sent via proxy, *`proxy_uri` will be set to the URI of the
      * proxy, else it will be set to %NULL.
-     * @virtual 
      * @param uri the #SoupURI you want a proxy for
      * @param cancellable a #GCancellable, or %NULL
      */
-    vfunc_get_proxy_uri_sync(uri: URI, cancellable: Gio.Cancellable | null): [ /* returnType */ number, /* proxy_uri */ URI ]
+    vfunc_get_proxy_uri_sync(uri: URI, cancellable?: Gio.Cancellable | null): [ /* returnType */ number, /* proxy_uri */ URI ]
+    /* Virtual methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
-    vfunc_constructed(): void
-    vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
-    vfunc_dispose(): void
-    vfunc_finalize(): void
-    vfunc_get_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /**
-     * Emits a "notify" signal for the property `property_name` on `object`.
-     * 
-     * When possible, eg. when signaling a property change from within the class
-     * that registered the property, you should use g_object_notify_by_pspec()
-     * instead.
-     * 
-     * Note that emission of the notify signal may be blocked with
-     * g_object_freeze_notify(). In this case, the signal emissions are queued
-     * and will be emitted (in reverse order) when g_object_thaw_notify() is
-     * called.
-     * @virtual 
-     * @param pspec 
-     */
-    vfunc_notify(pspec: GObject.ParamSpec): void
-    vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
-    /**
-     * The notify signal is emitted on an object when one of its properties has
-     * its value set through g_object_set_property(), g_object_set(), et al.
-     * 
-     * Note that getting this signal doesn’t itself guarantee that the value of
-     * the property has actually changed. When it is emitted is determined by the
-     * derived GObject class. If the implementor did not create the property with
-     * %G_PARAM_EXPLICIT_NOTIFY, then any call to g_object_set_property() results
-     * in ::notify being emitted, even if the new value is the same as the old.
-     * If they did pass %G_PARAM_EXPLICIT_NOTIFY, then this signal is emitted only
-     * when they explicitly call g_object_notify() or g_object_notify_by_pspec(),
-     * and common practice is to do that only when the value has actually changed.
-     * 
-     * This signal is typically used to obtain change notification for a
-     * single property, by specifying the property name as a detail in the
-     * g_signal_connect() call, like this:
-     * 
-     * ```c
-     * g_signal_connect (text_view->buffer, "notify::paste-target-list",
-     *                   G_CALLBACK (gtk_text_view_target_list_notify),
-     *                   text_view)
-     * ```
-     * 
-     * It is important to note that you must use
-     * [canonical parameter names][canonical-parameter-names] as
-     * detail strings for the notify signal.
-     * @signal 
-     * @param pspec the #GParamSpec of the property which changed.
-     */
-    connect(sigName: "notify", callback: (($obj: ProxyURIResolver, pspec: GObject.ParamSpec) => void)): number
-    connect_after(sigName: "notify", callback: (($obj: ProxyURIResolver, pspec: GObject.ParamSpec) => void)): number
-    emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
-    emit(sigName: string, ...args: any[]): void
-    disconnect(id: number): void
     static name: string
-    constructor (config?: ProxyURIResolver_ConstructProps)
-    _init (config?: ProxyURIResolver_ConstructProps): void
-    static $gtype: GObject.GType<ProxyURIResolver>
 }
-export interface SessionFeature_ConstructProps extends GObject.Object_ConstructProps {
-}
-/**
- * An object that implement some sort of optional feature for
- * #SoupSession.
- * @interface 
- */
 export class SessionFeature {
-    /* Extended fields of GObject-2.0.GObject.Object */
-    g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.SessionFeature */
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -3175,7 +2012,7 @@ export class SessionFeature {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -3183,431 +2020,60 @@ export class SessionFeature {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
-    /**
-     * Creates a binding between `source_property` on `source` and `target_property`
-     * on `target`. Whenever the `source_property` is changed the `target_property` is
-     * updated using the same value. For instance:
-     * 
-     * |[
-     *   g_object_bind_property (action, "active", widget, "sensitive", 0);
-     * ```
-     * 
-     * 
-     * Will result in the "sensitive" property of the widget #GObject instance to be
-     * updated with the same value of the "active" property of the action #GObject
-     * instance.
-     * 
-     * If `flags` contains %G_BINDING_BIDIRECTIONAL then the binding will be mutual:
-     * if `target_property` on `target` changes then the `source_property` on `source`
-     * will be updated as well.
-     * 
-     * The binding will automatically be removed when either the `source` or the
-     * `target` instances are finalized. To remove the binding without affecting the
-     * `source` and the `target` you can just call g_object_unref() on the returned
-     * #GBinding instance.
-     * 
-     * A #GObject can have multiple bindings.
-     * @param source_property the property on `source` to bind
-     * @param target the target #GObject
-     * @param target_property the property on `target` to bind
-     * @param flags flags to pass to #GBinding
-     */
-    bind_property(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags): GObject.Binding
-    /**
-     * Creates a binding between `source_property` on `source` and `target_property`
-     * on `target,` allowing you to set the transformation functions to be used by
-     * the binding.
-     * 
-     * This function is the language bindings friendly version of
-     * g_object_bind_property_full(), using #GClosures instead of
-     * function pointers.
-     * @param source_property the property on `source` to bind
-     * @param target the target #GObject
-     * @param target_property the property on `target` to bind
-     * @param flags flags to pass to #GBinding
-     * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
-     * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
-     */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
-    /**
-     * This function is intended for #GObject implementations to re-enforce
-     * a [floating][floating-ref] object reference. Doing this is seldom
-     * required: all #GInitiallyUnowneds are created with a floating reference
-     * which usually just needs to be sunken by calling g_object_ref_sink().
-     */
-    force_floating(): void
-    /**
-     * Increases the freeze count on `object`. If the freeze count is
-     * non-zero, the emission of "notify" signals on `object` is
-     * stopped. The signals are queued until the freeze count is decreased
-     * to zero. Duplicate notifications are squashed so that at most one
-     * #GObject::notify signal is emitted for each property modified while the
-     * object is frozen.
-     * 
-     * This is necessary for accessors that modify multiple properties to prevent
-     * premature notification while the object is still being modified.
-     */
-    freeze_notify(): void
-    /**
-     * Gets a named field from the objects table of associations (see g_object_set_data()).
-     * @param key name of the key for that association
-     */
-    get_data(key: string): object | null
-    /**
-     * Gets a property of an object.
-     * 
-     * The `value` can be:
-     * 
-     *  - an empty #GValue initialized by %G_VALUE_INIT, which will be
-     *    automatically initialized with the expected type of the property
-     *    (since GLib 2.60)
-     *  - a #GValue initialized with the expected type of the property
-     *  - a #GValue initialized with a type to which the expected type
-     *    of the property can be transformed
-     * 
-     * In general, a copy is made of the property contents and the caller is
-     * responsible for freeing the memory by calling g_value_unset().
-     * 
-     * Note that g_object_get_property() is really intended for language
-     * bindings, g_object_get() is much more convenient for C programming.
-     * @param property_name the name of the property to get
-     * @param value return location for the property value
-     */
-    get_property(property_name: string, value: any): void
-    /**
-     * This function gets back user data pointers stored via
-     * g_object_set_qdata().
-     * @param quark A #GQuark, naming the user data pointer
-     */
-    get_qdata(quark: GLib.Quark): object | null
-    /**
-     * Gets `n_properties` properties for an `object`.
-     * Obtained properties will be set to `values`. All properties must be valid.
-     * Warnings will be emitted and undefined behaviour may result if invalid
-     * properties are passed in.
-     * @param names the names of each property to get
-     * @param values the values of each property to get
-     */
-    getv(names: string[], values: any[]): void
-    /**
-     * Checks whether `object` has a [floating][floating-ref] reference.
-     */
-    is_floating(): boolean
-    /**
-     * Emits a "notify" signal for the property `property_name` on `object`.
-     * 
-     * When possible, eg. when signaling a property change from within the class
-     * that registered the property, you should use g_object_notify_by_pspec()
-     * instead.
-     * 
-     * Note that emission of the notify signal may be blocked with
-     * g_object_freeze_notify(). In this case, the signal emissions are queued
-     * and will be emitted (in reverse order) when g_object_thaw_notify() is
-     * called.
-     * @param property_name the name of a property installed on the class of `object`.
-     */
-    notify(property_name: string): void
-    /**
-     * Emits a "notify" signal for the property specified by `pspec` on `object`.
-     * 
-     * This function omits the property name lookup, hence it is faster than
-     * g_object_notify().
-     * 
-     * One way to avoid using g_object_notify() from within the
-     * class that registered the properties, and using g_object_notify_by_pspec()
-     * instead, is to store the GParamSpec used with
-     * g_object_class_install_property() inside a static array, e.g.:
-     * 
-     * 
-     * ```c
-     *   enum
-     *   {
-     *     PROP_0,
-     *     PROP_FOO,
-     *     PROP_LAST
-     *   };
-     * 
-     *   static GParamSpec *properties[PROP_LAST];
-     * 
-     *   static void
-     *   my_object_class_init (MyObjectClass *klass)
-     *   {
-     *     properties[PROP_FOO] = g_param_spec_int ("foo", "Foo", "The foo",
-     *                                              0, 100,
-     *                                              50,
-     *                                              G_PARAM_READWRITE);
-     *     g_object_class_install_property (gobject_class,
-     *                                      PROP_FOO,
-     *                                      properties[PROP_FOO]);
-     *   }
-     * ```
-     * 
-     * 
-     * and then notify a change on the "foo" property with:
-     * 
-     * 
-     * ```c
-     *   g_object_notify_by_pspec (self, properties[PROP_FOO]);
-     * ```
-     * 
-     * @param pspec the #GParamSpec of a property installed on the class of `object`.
-     */
-    notify_by_pspec(pspec: GObject.ParamSpec): void
-    /**
-     * Increases the reference count of `object`.
-     * 
-     * Since GLib 2.56, if `GLIB_VERSION_MAX_ALLOWED` is 2.56 or greater, the type
-     * of `object` will be propagated to the return type (using the GCC typeof()
-     * extension), so any casting the caller needs to do on the return type must be
-     * explicit.
-     */
-    ref(): GObject.Object
-    /**
-     * Increase the reference count of `object,` and possibly remove the
-     * [floating][floating-ref] reference, if `object` has a floating reference.
-     * 
-     * In other words, if the object is floating, then this call "assumes
-     * ownership" of the floating reference, converting it to a normal
-     * reference by clearing the floating flag while leaving the reference
-     * count unchanged.  If the object is not floating, then this call
-     * adds a new normal reference increasing the reference count by one.
-     * 
-     * Since GLib 2.56, the type of `object` will be propagated to the return type
-     * under the same conditions as for g_object_ref().
-     */
-    ref_sink(): GObject.Object
-    /**
-     * Releases all references to other objects. This can be used to break
-     * reference cycles.
-     * 
-     * This function should only be called from object system implementations.
-     */
-    run_dispose(): void
-    /**
-     * Each object carries around a table of associations from
-     * strings to pointers.  This function lets you set an association.
-     * 
-     * If the object already had an association with that name,
-     * the old association will be destroyed.
-     * 
-     * Internally, the `key` is converted to a #GQuark using g_quark_from_string().
-     * This means a copy of `key` is kept permanently (even after `object` has been
-     * finalized) — so it is recommended to only use a small, bounded set of values
-     * for `key` in your program, to avoid the #GQuark storage growing unbounded.
-     * @param key name of the key
-     * @param data data to associate with that key
-     */
-    set_data(key: string, data: object | null): void
-    /**
-     * Sets a property on an object.
-     * @param property_name the name of the property to set
-     * @param value the value
-     */
-    set_property(property_name: string, value: any): void
-    /**
-     * Remove a specified datum from the object's data associations,
-     * without invoking the association's destroy handler.
-     * @param key name of the key
-     */
-    steal_data(key: string): object | null
-    /**
-     * This function gets back user data pointers stored via
-     * g_object_set_qdata() and removes the `data` from object
-     * without invoking its destroy() function (if any was
-     * set).
-     * Usually, calling this function is only required to update
-     * user data pointers with a destroy notifier, for example:
-     * 
-     * ```c
-     * void
-     * object_add_to_user_list (GObject     *object,
-     *                          const gchar *new_string)
-     * {
-     *   // the quark, naming the object data
-     *   GQuark quark_string_list = g_quark_from_static_string ("my-string-list");
-     *   // retrive the old string list
-     *   GList *list = g_object_steal_qdata (object, quark_string_list);
-     * 
-     *   // prepend new string
-     *   list = g_list_prepend (list, g_strdup (new_string));
-     *   // this changed 'list', so we need to set it again
-     *   g_object_set_qdata_full (object, quark_string_list, list, free_string_list);
-     * }
-     * static void
-     * free_string_list (gpointer data)
-     * {
-     *   GList *node, *list = data;
-     * 
-     *   for (node = list; node; node = node->next)
-     *     g_free (node->data);
-     *   g_list_free (list);
-     * }
-     * ```
-     * 
-     * Using g_object_get_qdata() in the above example, instead of
-     * g_object_steal_qdata() would have left the destroy function set,
-     * and thus the partial string list would have been freed upon
-     * g_object_set_qdata_full().
-     * @param quark A #GQuark, naming the user data pointer
-     */
-    steal_qdata(quark: GLib.Quark): object | null
-    /**
-     * Reverts the effect of a previous call to
-     * g_object_freeze_notify(). The freeze count is decreased on `object`
-     * and when it reaches zero, queued "notify" signals are emitted.
-     * 
-     * Duplicate notifications for each property are squashed so that at most one
-     * #GObject::notify signal is emitted for each property, in the reverse order
-     * in which they have been queued.
-     * 
-     * It is an error to call this function when the freeze count is zero.
-     */
-    thaw_notify(): void
-    /**
-     * Decreases the reference count of `object`. When its reference count
-     * drops to 0, the object is finalized (i.e. its memory is freed).
-     * 
-     * If the pointer to the #GObject may be reused in future (for example, if it is
-     * an instance variable of another object), it is recommended to clear the
-     * pointer to %NULL rather than retain a dangling pointer to a potentially
-     * invalid #GObject instance. Use g_clear_object() for this.
-     */
-    unref(): void
-    /**
-     * This function essentially limits the life time of the `closure` to
-     * the life time of the object. That is, when the object is finalized,
-     * the `closure` is invalidated by calling g_closure_invalidate() on
-     * it, in order to prevent invocations of the closure with a finalized
-     * (nonexisting) object. Also, g_object_ref() and g_object_unref() are
-     * added as marshal guards to the `closure,` to ensure that an extra
-     * reference count is held on `object` during invocation of the
-     * `closure`.  Usually, this function will be called on closures that
-     * use this `object` as closure data.
-     * @param closure #GClosure to watch
-     */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Soup-2.4.Soup.SessionFeature */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
-    vfunc_constructed(): void
-    vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
-    vfunc_dispose(): void
-    vfunc_finalize(): void
-    vfunc_get_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /**
-     * Emits a "notify" signal for the property `property_name` on `object`.
-     * 
-     * When possible, eg. when signaling a property change from within the class
-     * that registered the property, you should use g_object_notify_by_pspec()
-     * instead.
-     * 
-     * Note that emission of the notify signal may be blocked with
-     * g_object_freeze_notify(). In this case, the signal emissions are queued
-     * and will be emitted (in reverse order) when g_object_thaw_notify() is
-     * called.
-     * @virtual 
-     * @param pspec 
-     */
-    vfunc_notify(pspec: GObject.ParamSpec): void
-    vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
-    /**
-     * The notify signal is emitted on an object when one of its properties has
-     * its value set through g_object_set_property(), g_object_set(), et al.
-     * 
-     * Note that getting this signal doesn’t itself guarantee that the value of
-     * the property has actually changed. When it is emitted is determined by the
-     * derived GObject class. If the implementor did not create the property with
-     * %G_PARAM_EXPLICIT_NOTIFY, then any call to g_object_set_property() results
-     * in ::notify being emitted, even if the new value is the same as the old.
-     * If they did pass %G_PARAM_EXPLICIT_NOTIFY, then this signal is emitted only
-     * when they explicitly call g_object_notify() or g_object_notify_by_pspec(),
-     * and common practice is to do that only when the value has actually changed.
-     * 
-     * This signal is typically used to obtain change notification for a
-     * single property, by specifying the property name as a detail in the
-     * g_signal_connect() call, like this:
-     * 
-     * ```c
-     * g_signal_connect (text_view->buffer, "notify::paste-target-list",
-     *                   G_CALLBACK (gtk_text_view_target_list_notify),
-     *                   text_view)
-     * ```
-     * 
-     * It is important to note that you must use
-     * [canonical parameter names][canonical-parameter-names] as
-     * detail strings for the notify signal.
-     * @signal 
-     * @param pspec the #GParamSpec of the property which changed.
-     */
-    connect(sigName: "notify", callback: (($obj: SessionFeature, pspec: GObject.ParamSpec) => void)): number
-    connect_after(sigName: "notify", callback: (($obj: SessionFeature, pspec: GObject.ParamSpec) => void)): number
-    emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
-    emit(sigName: string, ...args: any[]): void
-    disconnect(id: number): void
     static name: string
-    constructor (config?: SessionFeature_ConstructProps)
-    _init (config?: SessionFeature_ConstructProps): void
-    static $gtype: GObject.GType<SessionFeature>
 }
 export interface Address_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.Address */
-    family?: AddressFamily | null
-    name?: string | null
-    port?: number | null
-    protocol?: string | null
-    sockaddr?: object | null
+    family?: AddressFamily
+    name?: string
+    port?: number
+    protocol?: string
+    sockaddr?: object
 }
 export class Address {
-    /* Own properties of Soup-2.4.Soup.Address */
+    /* Properties of Soup-2.4.Soup.Address */
     readonly family: AddressFamily
     readonly name: string
     readonly physical: string
     readonly port: number
     readonly protocol: string
     readonly sockaddr: object
-    /* Own fields of Soup-2.4.Soup.Address */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.Address */
+    /* Methods of Soup-2.4.Soup.Address */
     /**
      * Tests if `addr1` and `addr2` have the same IP address. This method
      * can be used with soup_address_hash_by_ip() to create a
@@ -3738,8 +2204,8 @@ export class Address {
      * soup_address_resolve_async() on the same address.
      * @param cancellable a #GCancellable object, or %NULL
      */
-    resolve_sync(cancellable: Gio.Cancellable | null): number
-    /* Extended methods of GObject-2.0.GObject.Object */
+    resolve_sync(cancellable?: Gio.Cancellable | null): number
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -3785,7 +2251,7 @@ export class Address {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -3954,7 +2420,7 @@ export class Address {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -4042,8 +2508,8 @@ export class Address {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Gio-2.0.Gio.SocketConnectable */
+    watch_closure(closure: Function): void
+    /* Methods of Gio-2.0.Gio.SocketConnectable */
     /**
      * Creates a #GSocketAddressEnumerator for `connectable`.
      */
@@ -4068,10 +2534,9 @@ export class Address {
      * the implementation’s type name will be returned as a fallback.
      */
     to_string(): string
-    /* Own virtual methods of Soup-2.4.Soup.Address */
+    /* Virtual methods of Soup-2.4.Soup.Address */
     /**
      * Creates a #GSocketAddressEnumerator for `connectable`.
-     * @virtual 
      */
     vfunc_enumerate(): Gio.SocketAddressEnumerator
     /**
@@ -4082,7 +2547,6 @@ export class Address {
      * If `connectable` does not implement
      * g_socket_connectable_proxy_enumerate(), this will fall back to
      * calling g_socket_connectable_enumerate().
-     * @virtual 
      */
     vfunc_proxy_enumerate(): Gio.SocketAddressEnumerator
     /**
@@ -4093,10 +2557,9 @@ export class Address {
      * 
      * If the #GSocketConnectable implementation does not support string formatting,
      * the implementation’s type name will be returned as a fallback.
-     * @virtual 
      */
     vfunc_to_string(): string
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -4113,12 +2576,11 @@ export class Address {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -4145,7 +2607,6 @@ export class Address {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Address, pspec: GObject.ParamSpec) => void)): number
@@ -4163,8 +2624,8 @@ export class Address {
     connect_after(sigName: "notify::protocol", callback: (($obj: Address, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::sockaddr", callback: (($obj: Address, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::sockaddr", callback: (($obj: Address, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -4174,32 +2635,24 @@ export class Address {
     static new(name: string, port: number): Address
     static new_any(family: AddressFamily, port: number): Address
     static new_from_sockaddr(sa: object | null, len: number): Address
-    static $gtype: GObject.GType<Address>
+    static $gtype: GObject.Type
 }
 export interface Auth_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.Auth */
-    host?: string | null
-    is_for_proxy?: boolean | null
-    realm?: string | null
+    host?: string
+    is_for_proxy?: boolean
+    realm?: string
 }
-/**
- * The abstract base class for handling authentication. Specific HTTP
- * Authentication mechanisms are implemented by its subclasses, but
- * applications never need to be aware of the specific subclasses
- * being used.
- */
 export class Auth {
-    /* Own properties of Soup-2.4.Soup.Auth */
+    /* Properties of Soup-2.4.Soup.Auth */
     host: string
     readonly is_authenticated: boolean
     is_for_proxy: boolean
-    readonly scheme_name: string
-    /* Own fields of Soup-2.4.Soup.Auth */
-    parent: GObject.Object
     realm: string
-    /* Extended fields of GObject-2.0.GObject.Object */
+    readonly scheme_name: string
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.Auth */
+    /* Methods of Soup-2.4.Soup.Auth */
     /**
      * Call this on an auth to authenticate it; normally this will cause
      * the auth's message to be requeued with the new authentication info.
@@ -4269,7 +2722,7 @@ export class Auth {
      * @param auth_header the WWW-Authenticate/Proxy-Authenticate header
      */
     update(msg: Message, auth_header: string): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -4315,7 +2768,7 @@ export class Auth {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -4484,7 +2937,7 @@ export class Auth {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -4572,12 +3025,11 @@ export class Auth {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Soup-2.4.Soup.Auth */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.Auth */
     /**
      * Call this on an auth to authenticate it; normally this will cause
      * the auth's message to be requeued with the new authentication info.
-     * @virtual 
      * @param username the username provided by the user or client
      * @param password the password provided by the user or client
      */
@@ -4585,14 +3037,12 @@ export class Auth {
     /**
      * Tests if `auth` is able to authenticate by providing credentials to the
      * soup_auth_authenticate().
-     * @virtual 
      */
     vfunc_can_authenticate(): boolean
     /**
      * Generates an appropriate "Authorization" header for `msg`. (The
      * session will only call this if soup_auth_is_authenticated()
      * returned %TRUE.)
-     * @virtual 
      * @param msg the #SoupMessage to be authorized
      */
     vfunc_get_authorization(msg: Message): string
@@ -4601,13 +3051,11 @@ export class Auth {
      * (All subdirectories of these paths are also assumed to be part
      * of `auth'`s protection space, unless otherwise discovered not to
      * be.)
-     * @virtual 
      * @param source_uri the URI of the request that `auth` was generated in response to.
      */
     vfunc_get_protection_space(source_uri: URI): string[]
     /**
      * Tests if `auth` has been given a username and password
-     * @virtual 
      */
     vfunc_is_authenticated(): boolean
     /**
@@ -4615,7 +3063,6 @@ export class Auth {
      * auths, this is equivalent to soup_auth_is_authenticated(), but for
      * some auth types (eg, NTLM), the auth may be sendable (eg, as an
      * authentication request) even before it is authenticated.
-     * @virtual 
      * @param msg a #SoupMessage
      */
     vfunc_is_ready(msg: Message): boolean
@@ -4623,12 +3070,11 @@ export class Auth {
      * Updates `auth` with the information from `msg` and `auth_header,`
      * possibly un-authenticating it. As with soup_auth_new(), this is
      * normally only used by #SoupSession.
-     * @virtual 
      * @param msg the #SoupMessage `auth` is being updated for
      * @param auth_header the WWW-Authenticate/Proxy-Authenticate header
      */
     vfunc_update(msg: Message, auth_header: GLib.HashTable): boolean
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -4645,12 +3091,11 @@ export class Auth {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -4677,7 +3122,6 @@ export class Auth {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Auth, pspec: GObject.ParamSpec) => void)): number
@@ -4689,33 +3133,35 @@ export class Auth {
     connect_after(sigName: "notify::is-authenticated", callback: (($obj: Auth, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::is-for-proxy", callback: (($obj: Auth, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::is-for-proxy", callback: (($obj: Auth, pspec: GObject.ParamSpec) => void)): number
+    connect(sigName: "notify::realm", callback: (($obj: Auth, pspec: GObject.ParamSpec) => void)): number
+    connect_after(sigName: "notify::realm", callback: (($obj: Auth, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::scheme-name", callback: (($obj: Auth, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::scheme-name", callback: (($obj: Auth, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: Auth_ConstructProps)
     _init (config?: Auth_ConstructProps): void
     /* Static methods and pseudo-constructors */
-    static new(type: GObject.GType, msg: Message, auth_header: string): Auth
-    static $gtype: GObject.GType<Auth>
+    static new(type: GObject.Type, msg: Message, auth_header: string): Auth
+    static $gtype: GObject.Type
 }
 export interface AuthBasic_ConstructProps extends Auth_ConstructProps {
 }
 export class AuthBasic {
-    /* Extended properties of Soup-2.4.Soup.Auth */
+    /* Properties of Soup-2.4.Soup.Auth */
     host: string
     readonly is_authenticated: boolean
     is_for_proxy: boolean
     readonly scheme_name: string
-    /* Extended fields of Soup-2.4.Soup.Auth */
+    /* Fields of Soup-2.4.Soup.Auth */
     parent: GObject.Object
     realm: string
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Soup-2.4.Soup.Auth */
+    /* Methods of Soup-2.4.Soup.Auth */
     /**
      * Call this on an auth to authenticate it; normally this will cause
      * the auth's message to be requeued with the new authentication info.
@@ -4785,7 +3231,7 @@ export class AuthBasic {
      * @param auth_header the WWW-Authenticate/Proxy-Authenticate header
      */
     update(msg: Message, auth_header: string): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -4831,7 +3277,7 @@ export class AuthBasic {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -5000,7 +3446,7 @@ export class AuthBasic {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -5088,12 +3534,11 @@ export class AuthBasic {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Soup-2.4.Soup.Auth */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.Auth */
     /**
      * Call this on an auth to authenticate it; normally this will cause
      * the auth's message to be requeued with the new authentication info.
-     * @virtual 
      * @param username the username provided by the user or client
      * @param password the password provided by the user or client
      */
@@ -5101,14 +3546,12 @@ export class AuthBasic {
     /**
      * Tests if `auth` is able to authenticate by providing credentials to the
      * soup_auth_authenticate().
-     * @virtual 
      */
     vfunc_can_authenticate(): boolean
     /**
      * Generates an appropriate "Authorization" header for `msg`. (The
      * session will only call this if soup_auth_is_authenticated()
      * returned %TRUE.)
-     * @virtual 
      * @param msg the #SoupMessage to be authorized
      */
     vfunc_get_authorization(msg: Message): string
@@ -5117,13 +3560,11 @@ export class AuthBasic {
      * (All subdirectories of these paths are also assumed to be part
      * of `auth'`s protection space, unless otherwise discovered not to
      * be.)
-     * @virtual 
      * @param source_uri the URI of the request that `auth` was generated in response to.
      */
     vfunc_get_protection_space(source_uri: URI): string[]
     /**
      * Tests if `auth` has been given a username and password
-     * @virtual 
      */
     vfunc_is_authenticated(): boolean
     /**
@@ -5131,7 +3572,6 @@ export class AuthBasic {
      * auths, this is equivalent to soup_auth_is_authenticated(), but for
      * some auth types (eg, NTLM), the auth may be sendable (eg, as an
      * authentication request) even before it is authenticated.
-     * @virtual 
      * @param msg a #SoupMessage
      */
     vfunc_is_ready(msg: Message): boolean
@@ -5139,12 +3579,11 @@ export class AuthBasic {
      * Updates `auth` with the information from `msg` and `auth_header,`
      * possibly un-authenticating it. As with soup_auth_new(), this is
      * normally only used by #SoupSession.
-     * @virtual 
      * @param msg the #SoupMessage `auth` is being updated for
      * @param auth_header the WWW-Authenticate/Proxy-Authenticate header
      */
     vfunc_update(msg: Message, auth_header: GLib.HashTable): boolean
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -5161,12 +3600,11 @@ export class AuthBasic {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -5193,7 +3631,6 @@ export class AuthBasic {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: AuthBasic, pspec: GObject.ParamSpec) => void)): number
@@ -5207,29 +3644,29 @@ export class AuthBasic {
     connect_after(sigName: "notify::is-for-proxy", callback: (($obj: AuthBasic, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::scheme-name", callback: (($obj: AuthBasic, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::scheme-name", callback: (($obj: AuthBasic, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: AuthBasic_ConstructProps)
     _init (config?: AuthBasic_ConstructProps): void
-    static $gtype: GObject.GType<AuthBasic>
+    static $gtype: GObject.Type
 }
 export interface AuthDigest_ConstructProps extends Auth_ConstructProps {
 }
 export class AuthDigest {
-    /* Extended properties of Soup-2.4.Soup.Auth */
+    /* Properties of Soup-2.4.Soup.Auth */
     host: string
     readonly is_authenticated: boolean
     is_for_proxy: boolean
     readonly scheme_name: string
-    /* Extended fields of Soup-2.4.Soup.Auth */
+    /* Fields of Soup-2.4.Soup.Auth */
     parent: GObject.Object
     realm: string
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Soup-2.4.Soup.Auth */
+    /* Methods of Soup-2.4.Soup.Auth */
     /**
      * Call this on an auth to authenticate it; normally this will cause
      * the auth's message to be requeued with the new authentication info.
@@ -5299,7 +3736,7 @@ export class AuthDigest {
      * @param auth_header the WWW-Authenticate/Proxy-Authenticate header
      */
     update(msg: Message, auth_header: string): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -5345,7 +3782,7 @@ export class AuthDigest {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -5514,7 +3951,7 @@ export class AuthDigest {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -5602,12 +4039,11 @@ export class AuthDigest {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Soup-2.4.Soup.Auth */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.Auth */
     /**
      * Call this on an auth to authenticate it; normally this will cause
      * the auth's message to be requeued with the new authentication info.
-     * @virtual 
      * @param username the username provided by the user or client
      * @param password the password provided by the user or client
      */
@@ -5615,14 +4051,12 @@ export class AuthDigest {
     /**
      * Tests if `auth` is able to authenticate by providing credentials to the
      * soup_auth_authenticate().
-     * @virtual 
      */
     vfunc_can_authenticate(): boolean
     /**
      * Generates an appropriate "Authorization" header for `msg`. (The
      * session will only call this if soup_auth_is_authenticated()
      * returned %TRUE.)
-     * @virtual 
      * @param msg the #SoupMessage to be authorized
      */
     vfunc_get_authorization(msg: Message): string
@@ -5631,13 +4065,11 @@ export class AuthDigest {
      * (All subdirectories of these paths are also assumed to be part
      * of `auth'`s protection space, unless otherwise discovered not to
      * be.)
-     * @virtual 
      * @param source_uri the URI of the request that `auth` was generated in response to.
      */
     vfunc_get_protection_space(source_uri: URI): string[]
     /**
      * Tests if `auth` has been given a username and password
-     * @virtual 
      */
     vfunc_is_authenticated(): boolean
     /**
@@ -5645,7 +4077,6 @@ export class AuthDigest {
      * auths, this is equivalent to soup_auth_is_authenticated(), but for
      * some auth types (eg, NTLM), the auth may be sendable (eg, as an
      * authentication request) even before it is authenticated.
-     * @virtual 
      * @param msg a #SoupMessage
      */
     vfunc_is_ready(msg: Message): boolean
@@ -5653,12 +4084,11 @@ export class AuthDigest {
      * Updates `auth` with the information from `msg` and `auth_header,`
      * possibly un-authenticating it. As with soup_auth_new(), this is
      * normally only used by #SoupSession.
-     * @virtual 
      * @param msg the #SoupMessage `auth` is being updated for
      * @param auth_header the WWW-Authenticate/Proxy-Authenticate header
      */
     vfunc_update(msg: Message, auth_header: GLib.HashTable): boolean
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -5675,12 +4105,11 @@ export class AuthDigest {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -5707,7 +4136,6 @@ export class AuthDigest {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: AuthDigest, pspec: GObject.ParamSpec) => void)): number
@@ -5721,34 +4149,34 @@ export class AuthDigest {
     connect_after(sigName: "notify::is-for-proxy", callback: (($obj: AuthDigest, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::scheme-name", callback: (($obj: AuthDigest, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::scheme-name", callback: (($obj: AuthDigest, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: AuthDigest_ConstructProps)
     _init (config?: AuthDigest_ConstructProps): void
-    static $gtype: GObject.GType<AuthDigest>
+    static $gtype: GObject.Type
 }
 export interface AuthDomain_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.AuthDomain */
-    add_path?: string | null
+    add_path?: string
     /**
      * The #SoupAuthDomainFilter for the domain
      */
-    filter?: AuthDomainFilter | null
-    filter_data?: object | null
+    filter?: AuthDomainFilter
+    filter_data?: object
     /**
      * The #SoupAuthDomainGenericAuthCallback for the domain
      */
-    generic_auth_callback?: AuthDomainGenericAuthCallback | null
-    generic_auth_data?: object | null
-    proxy?: boolean | null
-    realm?: string | null
-    remove_path?: string | null
+    generic_auth_callback?: AuthDomainGenericAuthCallback
+    generic_auth_data?: object
+    proxy?: boolean
+    realm?: string
+    remove_path?: string
 }
 export class AuthDomain {
-    /* Own properties of Soup-2.4.Soup.AuthDomain */
+    /* Properties of Soup-2.4.Soup.AuthDomain */
     add_path: string
     /**
      * The #SoupAuthDomainFilter for the domain
@@ -5763,11 +4191,9 @@ export class AuthDomain {
     readonly proxy: boolean
     readonly realm: string
     remove_path: string
-    /* Own fields of Soup-2.4.Soup.AuthDomain */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.AuthDomain */
+    /* Methods of Soup-2.4.Soup.AuthDomain */
     /**
      * Checks if `msg` contains appropriate authorization for `domain` to
      * accept it. Mirroring soup_auth_domain_covers(), this does not check
@@ -5852,7 +4278,7 @@ export class AuthDomain {
      */
     set_generic_auth_callback(auth_callback: AuthDomainGenericAuthCallback): void
     try_generic_auth_callback(msg: Message, username: string): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -5898,7 +4324,7 @@ export class AuthDomain {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -6067,7 +4493,7 @@ export class AuthDomain {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -6155,8 +4581,8 @@ export class AuthDomain {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Soup-2.4.Soup.AuthDomain */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.AuthDomain */
     vfunc_accepts(msg: Message, header: string): string
     /**
      * Adds a "WWW-Authenticate" or "Proxy-Authenticate" header to `msg,`
@@ -6165,7 +4591,6 @@ export class AuthDomain {
      * 
      * This is used by #SoupServer internally and is probably of no use to
      * anyone else.
-     * @virtual 
      * @param msg a #SoupMessage
      */
     vfunc_challenge(msg: Message): string
@@ -6173,13 +4598,12 @@ export class AuthDomain {
      * Checks if `msg` authenticates to `domain` via `username` and
      * `password`. This would normally be called from a
      * #SoupAuthDomainGenericAuthCallback.
-     * @virtual 
      * @param msg a #SoupMessage
      * @param username a username
      * @param password a password
      */
     vfunc_check_password(msg: Message, username: string, password: string): boolean
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -6196,12 +4620,11 @@ export class AuthDomain {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -6228,7 +4651,6 @@ export class AuthDomain {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: AuthDomain, pspec: GObject.ParamSpec) => void)): number
@@ -6250,28 +4672,28 @@ export class AuthDomain {
     connect_after(sigName: "notify::realm", callback: (($obj: AuthDomain, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::remove-path", callback: (($obj: AuthDomain, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::remove-path", callback: (($obj: AuthDomain, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: AuthDomain_ConstructProps)
     _init (config?: AuthDomain_ConstructProps): void
-    static $gtype: GObject.GType<AuthDomain>
+    static $gtype: GObject.Type
 }
 export interface AuthDomainBasic_ConstructProps extends AuthDomain_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.AuthDomainBasic */
     /**
      * The #SoupAuthDomainBasicAuthCallback
      */
-    auth_callback?: AuthDomainBasicAuthCallback | null
+    auth_callback?: AuthDomainBasicAuthCallback
     /**
      * The data to pass to the #SoupAuthDomainBasicAuthCallback
      */
-    auth_data?: object | null
+    auth_data?: object
 }
 export class AuthDomainBasic {
-    /* Own properties of Soup-2.4.Soup.AuthDomainBasic */
+    /* Properties of Soup-2.4.Soup.AuthDomainBasic */
     /**
      * The #SoupAuthDomainBasicAuthCallback
      */
@@ -6280,7 +4702,7 @@ export class AuthDomainBasic {
      * The data to pass to the #SoupAuthDomainBasicAuthCallback
      */
     auth_data: object
-    /* Extended properties of Soup-2.4.Soup.AuthDomain */
+    /* Properties of Soup-2.4.Soup.AuthDomain */
     add_path: string
     /**
      * The #SoupAuthDomainFilter for the domain
@@ -6295,11 +4717,11 @@ export class AuthDomainBasic {
     readonly proxy: boolean
     readonly realm: string
     remove_path: string
-    /* Own fields of Soup-2.4.Soup.AuthDomainBasic */
-    parent: AuthDomain
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of Soup-2.4.Soup.AuthDomain */
+    parent: GObject.Object
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.AuthDomainBasic */
+    /* Methods of Soup-2.4.Soup.AuthDomainBasic */
     /**
      * Sets the callback that `domain` will use to authenticate incoming
      * requests. For each request containing authorization, `domain` will
@@ -6313,7 +4735,7 @@ export class AuthDomainBasic {
      * @param callback the callback
      */
     set_auth_callback(callback: AuthDomainBasicAuthCallback): void
-    /* Extended methods of Soup-2.4.Soup.AuthDomain */
+    /* Methods of Soup-2.4.Soup.AuthDomain */
     /**
      * Checks if `msg` contains appropriate authorization for `domain` to
      * accept it. Mirroring soup_auth_domain_covers(), this does not check
@@ -6398,7 +4820,7 @@ export class AuthDomainBasic {
      */
     set_generic_auth_callback(auth_callback: AuthDomainGenericAuthCallback): void
     try_generic_auth_callback(msg: Message, username: string): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -6444,7 +4866,7 @@ export class AuthDomainBasic {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -6613,7 +5035,7 @@ export class AuthDomainBasic {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -6701,8 +5123,8 @@ export class AuthDomainBasic {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Soup-2.4.Soup.AuthDomain */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.AuthDomain */
     vfunc_accepts(msg: Message, header: string): string
     /**
      * Adds a "WWW-Authenticate" or "Proxy-Authenticate" header to `msg,`
@@ -6711,7 +5133,6 @@ export class AuthDomainBasic {
      * 
      * This is used by #SoupServer internally and is probably of no use to
      * anyone else.
-     * @virtual 
      * @param msg a #SoupMessage
      */
     vfunc_challenge(msg: Message): string
@@ -6719,13 +5140,12 @@ export class AuthDomainBasic {
      * Checks if `msg` authenticates to `domain` via `username` and
      * `password`. This would normally be called from a
      * #SoupAuthDomainGenericAuthCallback.
-     * @virtual 
      * @param msg a #SoupMessage
      * @param username a username
      * @param password a password
      */
     vfunc_check_password(msg: Message, username: string, password: string): boolean
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -6742,12 +5162,11 @@ export class AuthDomainBasic {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -6774,7 +5193,6 @@ export class AuthDomainBasic {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: AuthDomainBasic, pspec: GObject.ParamSpec) => void)): number
@@ -6800,28 +5218,28 @@ export class AuthDomainBasic {
     connect_after(sigName: "notify::realm", callback: (($obj: AuthDomainBasic, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::remove-path", callback: (($obj: AuthDomainBasic, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::remove-path", callback: (($obj: AuthDomainBasic, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: AuthDomainBasic_ConstructProps)
     _init (config?: AuthDomainBasic_ConstructProps): void
-    static $gtype: GObject.GType<AuthDomainBasic>
+    static $gtype: GObject.Type
 }
 export interface AuthDomainDigest_ConstructProps extends AuthDomain_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.AuthDomainDigest */
     /**
      * The #SoupAuthDomainDigestAuthCallback
      */
-    auth_callback?: AuthDomainDigestAuthCallback | null
+    auth_callback?: AuthDomainDigestAuthCallback
     /**
      * The data to pass to the #SoupAuthDomainDigestAuthCallback
      */
-    auth_data?: object | null
+    auth_data?: object
 }
 export class AuthDomainDigest {
-    /* Own properties of Soup-2.4.Soup.AuthDomainDigest */
+    /* Properties of Soup-2.4.Soup.AuthDomainDigest */
     /**
      * The #SoupAuthDomainDigestAuthCallback
      */
@@ -6830,7 +5248,7 @@ export class AuthDomainDigest {
      * The data to pass to the #SoupAuthDomainDigestAuthCallback
      */
     auth_data: object
-    /* Extended properties of Soup-2.4.Soup.AuthDomain */
+    /* Properties of Soup-2.4.Soup.AuthDomain */
     add_path: string
     /**
      * The #SoupAuthDomainFilter for the domain
@@ -6845,11 +5263,11 @@ export class AuthDomainDigest {
     readonly proxy: boolean
     readonly realm: string
     remove_path: string
-    /* Own fields of Soup-2.4.Soup.AuthDomainDigest */
-    parent: AuthDomain
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of Soup-2.4.Soup.AuthDomain */
+    parent: GObject.Object
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.AuthDomainDigest */
+    /* Methods of Soup-2.4.Soup.AuthDomainDigest */
     /**
      * Sets the callback that `domain` will use to authenticate incoming
      * requests. For each request containing authorization, `domain` will
@@ -6863,7 +5281,7 @@ export class AuthDomainDigest {
      * @param callback the callback
      */
     set_auth_callback(callback: AuthDomainDigestAuthCallback): void
-    /* Extended methods of Soup-2.4.Soup.AuthDomain */
+    /* Methods of Soup-2.4.Soup.AuthDomain */
     /**
      * Checks if `msg` contains appropriate authorization for `domain` to
      * accept it. Mirroring soup_auth_domain_covers(), this does not check
@@ -6948,7 +5366,7 @@ export class AuthDomainDigest {
      */
     set_generic_auth_callback(auth_callback: AuthDomainGenericAuthCallback): void
     try_generic_auth_callback(msg: Message, username: string): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -6994,7 +5412,7 @@ export class AuthDomainDigest {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -7163,7 +5581,7 @@ export class AuthDomainDigest {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -7251,8 +5669,8 @@ export class AuthDomainDigest {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Soup-2.4.Soup.AuthDomain */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.AuthDomain */
     vfunc_accepts(msg: Message, header: string): string
     /**
      * Adds a "WWW-Authenticate" or "Proxy-Authenticate" header to `msg,`
@@ -7261,7 +5679,6 @@ export class AuthDomainDigest {
      * 
      * This is used by #SoupServer internally and is probably of no use to
      * anyone else.
-     * @virtual 
      * @param msg a #SoupMessage
      */
     vfunc_challenge(msg: Message): string
@@ -7269,13 +5686,12 @@ export class AuthDomainDigest {
      * Checks if `msg` authenticates to `domain` via `username` and
      * `password`. This would normally be called from a
      * #SoupAuthDomainGenericAuthCallback.
-     * @virtual 
      * @param msg a #SoupMessage
      * @param username a username
      * @param password a password
      */
     vfunc_check_password(msg: Message, username: string, password: string): boolean
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -7292,12 +5708,11 @@ export class AuthDomainDigest {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -7324,7 +5739,6 @@ export class AuthDomainDigest {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: AuthDomainDigest, pspec: GObject.ParamSpec) => void)): number
@@ -7350,8 +5764,8 @@ export class AuthDomainDigest {
     connect_after(sigName: "notify::realm", callback: (($obj: AuthDomainDigest, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::remove-path", callback: (($obj: AuthDomainDigest, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::remove-path", callback: (($obj: AuthDomainDigest, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -7377,17 +5791,14 @@ export class AuthDomainDigest {
      * @param password the password for `username` in `realm`
      */
     static encode_password(username: string, realm: string, password: string): string
-    static $gtype: GObject.GType<AuthDomainDigest>
+    static $gtype: GObject.Type
 }
 export interface AuthManager_ConstructProps extends GObject.Object_ConstructProps {
 }
 export class AuthManager {
-    /* Own fields of Soup-2.4.Soup.AuthManager */
-    parent: GObject.Object
-    priv: AuthManagerPrivate
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.AuthManager */
+    /* Methods of Soup-2.4.Soup.AuthManager */
     /**
      * Clear all credentials cached by `manager`
      */
@@ -7406,7 +5817,7 @@ export class AuthManager {
      * @param auth the #SoupAuth to use
      */
     use_auth(uri: URI, auth: Auth): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -7452,7 +5863,7 @@ export class AuthManager {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -7621,7 +6032,7 @@ export class AuthManager {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -7709,8 +6120,8 @@ export class AuthManager {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    watch_closure(closure: Function): void
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -7718,7 +6129,7 @@ export class AuthManager {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -7726,44 +6137,41 @@ export class AuthManager {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.AuthManager */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.AuthManager */
     vfunc_authenticate(msg: Message, auth: Auth, retrying: boolean): void
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -7780,12 +6188,11 @@ export class AuthManager {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Soup-2.4.Soup.AuthManager */
+    /* Signals of Soup-2.4.Soup.AuthManager */
     /**
      * Emitted when the manager requires the application to
      * provide authentication credentials.
@@ -7793,7 +6200,6 @@ export class AuthManager {
      * #SoupSession connects to this signal and emits its own
      * #SoupSession::authenticate signal when it is emitted, so
      * you shouldn't need to use this signal directly.
-     * @signal 
      * @param msg the #SoupMessage being sent
      * @param auth the #SoupAuth to authenticate
      * @param retrying %TRUE if this is the second (or later) attempt
@@ -7801,7 +6207,7 @@ export class AuthManager {
     connect(sigName: "authenticate", callback: (($obj: AuthManager, msg: Message, auth: Auth, retrying: boolean) => void)): number
     connect_after(sigName: "authenticate", callback: (($obj: AuthManager, msg: Message, auth: Auth, retrying: boolean) => void)): number
     emit(sigName: "authenticate", msg: Message, auth: Auth, retrying: boolean): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -7828,35 +6234,34 @@ export class AuthManager {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: AuthManager, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: AuthManager, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: AuthManager_ConstructProps)
     _init (config?: AuthManager_ConstructProps): void
-    static $gtype: GObject.GType<AuthManager>
+    static $gtype: GObject.Type
 }
 export interface AuthNTLM_ConstructProps extends Auth_ConstructProps {
 }
 export class AuthNTLM {
-    /* Extended properties of Soup-2.4.Soup.Auth */
+    /* Properties of Soup-2.4.Soup.Auth */
     host: string
     readonly is_authenticated: boolean
     is_for_proxy: boolean
     readonly scheme_name: string
-    /* Extended fields of Soup-2.4.Soup.Auth */
+    /* Fields of Soup-2.4.Soup.Auth */
     parent: GObject.Object
     realm: string
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Soup-2.4.Soup.Auth */
+    /* Methods of Soup-2.4.Soup.Auth */
     /**
      * Call this on an auth to authenticate it; normally this will cause
      * the auth's message to be requeued with the new authentication info.
@@ -7926,7 +6331,7 @@ export class AuthNTLM {
      * @param auth_header the WWW-Authenticate/Proxy-Authenticate header
      */
     update(msg: Message, auth_header: string): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -7972,7 +6377,7 @@ export class AuthNTLM {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -8141,7 +6546,7 @@ export class AuthNTLM {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -8229,12 +6634,11 @@ export class AuthNTLM {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Soup-2.4.Soup.Auth */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.Auth */
     /**
      * Call this on an auth to authenticate it; normally this will cause
      * the auth's message to be requeued with the new authentication info.
-     * @virtual 
      * @param username the username provided by the user or client
      * @param password the password provided by the user or client
      */
@@ -8242,14 +6646,12 @@ export class AuthNTLM {
     /**
      * Tests if `auth` is able to authenticate by providing credentials to the
      * soup_auth_authenticate().
-     * @virtual 
      */
     vfunc_can_authenticate(): boolean
     /**
      * Generates an appropriate "Authorization" header for `msg`. (The
      * session will only call this if soup_auth_is_authenticated()
      * returned %TRUE.)
-     * @virtual 
      * @param msg the #SoupMessage to be authorized
      */
     vfunc_get_authorization(msg: Message): string
@@ -8258,13 +6660,11 @@ export class AuthNTLM {
      * (All subdirectories of these paths are also assumed to be part
      * of `auth'`s protection space, unless otherwise discovered not to
      * be.)
-     * @virtual 
      * @param source_uri the URI of the request that `auth` was generated in response to.
      */
     vfunc_get_protection_space(source_uri: URI): string[]
     /**
      * Tests if `auth` has been given a username and password
-     * @virtual 
      */
     vfunc_is_authenticated(): boolean
     /**
@@ -8272,7 +6672,6 @@ export class AuthNTLM {
      * auths, this is equivalent to soup_auth_is_authenticated(), but for
      * some auth types (eg, NTLM), the auth may be sendable (eg, as an
      * authentication request) even before it is authenticated.
-     * @virtual 
      * @param msg a #SoupMessage
      */
     vfunc_is_ready(msg: Message): boolean
@@ -8280,12 +6679,11 @@ export class AuthNTLM {
      * Updates `auth` with the information from `msg` and `auth_header,`
      * possibly un-authenticating it. As with soup_auth_new(), this is
      * normally only used by #SoupSession.
-     * @virtual 
      * @param msg the #SoupMessage `auth` is being updated for
      * @param auth_header the WWW-Authenticate/Proxy-Authenticate header
      */
     vfunc_update(msg: Message, auth_header: GLib.HashTable): boolean
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -8302,12 +6700,11 @@ export class AuthNTLM {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -8334,7 +6731,6 @@ export class AuthNTLM {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: AuthNTLM, pspec: GObject.ParamSpec) => void)): number
@@ -8348,29 +6744,29 @@ export class AuthNTLM {
     connect_after(sigName: "notify::is-for-proxy", callback: (($obj: AuthNTLM, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::scheme-name", callback: (($obj: AuthNTLM, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::scheme-name", callback: (($obj: AuthNTLM, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: AuthNTLM_ConstructProps)
     _init (config?: AuthNTLM_ConstructProps): void
-    static $gtype: GObject.GType<AuthNTLM>
+    static $gtype: GObject.Type
 }
 export interface AuthNegotiate_ConstructProps extends Auth_ConstructProps {
 }
 export class AuthNegotiate {
-    /* Extended properties of Soup-2.4.Soup.Auth */
+    /* Properties of Soup-2.4.Soup.Auth */
     host: string
     readonly is_authenticated: boolean
     is_for_proxy: boolean
     readonly scheme_name: string
-    /* Extended fields of Soup-2.4.Soup.Auth */
+    /* Fields of Soup-2.4.Soup.Auth */
     parent: GObject.Object
     realm: string
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Soup-2.4.Soup.Auth */
+    /* Methods of Soup-2.4.Soup.Auth */
     /**
      * Call this on an auth to authenticate it; normally this will cause
      * the auth's message to be requeued with the new authentication info.
@@ -8440,7 +6836,7 @@ export class AuthNegotiate {
      * @param auth_header the WWW-Authenticate/Proxy-Authenticate header
      */
     update(msg: Message, auth_header: string): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -8486,7 +6882,7 @@ export class AuthNegotiate {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -8655,7 +7051,7 @@ export class AuthNegotiate {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -8743,12 +7139,11 @@ export class AuthNegotiate {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Soup-2.4.Soup.Auth */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.Auth */
     /**
      * Call this on an auth to authenticate it; normally this will cause
      * the auth's message to be requeued with the new authentication info.
-     * @virtual 
      * @param username the username provided by the user or client
      * @param password the password provided by the user or client
      */
@@ -8756,14 +7151,12 @@ export class AuthNegotiate {
     /**
      * Tests if `auth` is able to authenticate by providing credentials to the
      * soup_auth_authenticate().
-     * @virtual 
      */
     vfunc_can_authenticate(): boolean
     /**
      * Generates an appropriate "Authorization" header for `msg`. (The
      * session will only call this if soup_auth_is_authenticated()
      * returned %TRUE.)
-     * @virtual 
      * @param msg the #SoupMessage to be authorized
      */
     vfunc_get_authorization(msg: Message): string
@@ -8772,13 +7165,11 @@ export class AuthNegotiate {
      * (All subdirectories of these paths are also assumed to be part
      * of `auth'`s protection space, unless otherwise discovered not to
      * be.)
-     * @virtual 
      * @param source_uri the URI of the request that `auth` was generated in response to.
      */
     vfunc_get_protection_space(source_uri: URI): string[]
     /**
      * Tests if `auth` has been given a username and password
-     * @virtual 
      */
     vfunc_is_authenticated(): boolean
     /**
@@ -8786,7 +7177,6 @@ export class AuthNegotiate {
      * auths, this is equivalent to soup_auth_is_authenticated(), but for
      * some auth types (eg, NTLM), the auth may be sendable (eg, as an
      * authentication request) even before it is authenticated.
-     * @virtual 
      * @param msg a #SoupMessage
      */
     vfunc_is_ready(msg: Message): boolean
@@ -8794,12 +7184,11 @@ export class AuthNegotiate {
      * Updates `auth` with the information from `msg` and `auth_header,`
      * possibly un-authenticating it. As with soup_auth_new(), this is
      * normally only used by #SoupSession.
-     * @virtual 
      * @param msg the #SoupMessage `auth` is being updated for
      * @param auth_header the WWW-Authenticate/Proxy-Authenticate header
      */
     vfunc_update(msg: Message, auth_header: GLib.HashTable): boolean
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -8816,12 +7205,11 @@ export class AuthNegotiate {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -8848,7 +7236,6 @@ export class AuthNegotiate {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: AuthNegotiate, pspec: GObject.ParamSpec) => void)): number
@@ -8862,8 +7249,8 @@ export class AuthNegotiate {
     connect_after(sigName: "notify::is-for-proxy", callback: (($obj: AuthNegotiate, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::scheme-name", callback: (($obj: AuthNegotiate, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::scheme-name", callback: (($obj: AuthNegotiate, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -8877,23 +7264,20 @@ export class AuthNegotiate {
      * actually use this auth type.
      */
     static supported(): boolean
-    static $gtype: GObject.GType<AuthNegotiate>
+    static $gtype: GObject.Type
 }
 export interface Cache_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.Cache */
-    cache_dir?: string | null
-    cache_type?: CacheType | null
+    cache_dir?: string
+    cache_type?: CacheType
 }
 export class Cache {
-    /* Own properties of Soup-2.4.Soup.Cache */
+    /* Properties of Soup-2.4.Soup.Cache */
     readonly cache_dir: string
     readonly cache_type: CacheType
-    /* Own fields of Soup-2.4.Soup.Cache */
-    parent_instance: GObject.Object
-    priv: CachePrivate
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.Cache */
+    /* Methods of Soup-2.4.Soup.Cache */
     /**
      * Will remove all entries in the `cache` plus all the cache files.
      */
@@ -8929,7 +7313,7 @@ export class Cache {
      * @param max_size the maximum size of the cache, in bytes
      */
     set_max_size(max_size: number): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -8975,7 +7359,7 @@ export class Cache {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -9144,7 +7528,7 @@ export class Cache {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -9232,8 +7616,8 @@ export class Cache {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    watch_closure(closure: Function): void
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -9241,7 +7625,7 @@ export class Cache {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -9249,44 +7633,41 @@ export class Cache {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.Cache */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.Cache */
     vfunc_get_cacheability(msg: Message): Cacheability
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -9303,12 +7684,11 @@ export class Cache {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -9335,7 +7715,6 @@ export class Cache {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Cache, pspec: GObject.ParamSpec) => void)): number
@@ -9345,8 +7724,8 @@ export class Cache {
     connect_after(sigName: "notify::cache-dir", callback: (($obj: Cache, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::cache-type", callback: (($obj: Cache, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::cache-type", callback: (($obj: Cache, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -9354,17 +7733,14 @@ export class Cache {
     _init (config?: Cache_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(cache_dir: string | null, cache_type: CacheType): Cache
-    static $gtype: GObject.GType<Cache>
+    static $gtype: GObject.Type
 }
 export interface ContentDecoder_ConstructProps extends GObject.Object_ConstructProps {
 }
 export class ContentDecoder {
-    /* Own fields of Soup-2.4.Soup.ContentDecoder */
-    parent: GObject.Object
-    priv: ContentDecoderPrivate
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -9410,7 +7786,7 @@ export class ContentDecoder {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -9579,7 +7955,7 @@ export class ContentDecoder {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -9667,8 +8043,8 @@ export class ContentDecoder {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    watch_closure(closure: Function): void
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -9676,7 +8052,7 @@ export class ContentDecoder {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -9684,43 +8060,40 @@ export class ContentDecoder {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.ContentDecoder */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.ContentDecoder */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -9737,12 +8110,11 @@ export class ContentDecoder {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -9769,30 +8141,26 @@ export class ContentDecoder {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: ContentDecoder, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: ContentDecoder, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: ContentDecoder_ConstructProps)
     _init (config?: ContentDecoder_ConstructProps): void
-    static $gtype: GObject.GType<ContentDecoder>
+    static $gtype: GObject.Type
 }
 export interface ContentSniffer_ConstructProps extends GObject.Object_ConstructProps {
 }
 export class ContentSniffer {
-    /* Own fields of Soup-2.4.Soup.ContentSniffer */
-    parent: GObject.Object
-    priv: ContentSnifferPrivate
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.ContentSniffer */
+    /* Methods of Soup-2.4.Soup.ContentSniffer */
     /**
      * Gets the number of bytes `sniffer` needs in order to properly sniff
      * a buffer.
@@ -9805,8 +8173,8 @@ export class ContentSniffer {
      * @param msg the message to sniff
      * @param buffer a buffer containing the start of `msg'`s response body
      */
-    sniff(msg: Message, buffer: Buffer): [ /* returnType */ string, /* params */ GLib.HashTable ]
-    /* Extended methods of GObject-2.0.GObject.Object */
+    sniff(msg: Message, buffer: Buffer): [ /* returnType */ string, /* params */ GLib.HashTable | null ]
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -9852,7 +8220,7 @@ export class ContentSniffer {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -10021,7 +8389,7 @@ export class ContentSniffer {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -10109,8 +8477,8 @@ export class ContentSniffer {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    watch_closure(closure: Function): void
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -10118,7 +8486,7 @@ export class ContentSniffer {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -10126,58 +8494,53 @@ export class ContentSniffer {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.ContentSniffer */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.ContentSniffer */
     /**
      * Gets the number of bytes `sniffer` needs in order to properly sniff
      * a buffer.
-     * @virtual 
      */
     vfunc_get_buffer_size(): number
     /**
      * Sniffs `buffer` to determine its Content-Type. The result may also
      * be influenced by the Content-Type declared in `msg'`s response
      * headers.
-     * @virtual 
      * @param msg the message to sniff
      * @param buffer a buffer containing the start of `msg'`s response body
      */
-    vfunc_sniff(msg: Message, buffer: Buffer): [ /* returnType */ string, /* params */ GLib.HashTable ]
+    vfunc_sniff(msg: Message, buffer: Buffer): [ /* returnType */ string, /* params */ GLib.HashTable | null ]
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -10194,12 +8557,11 @@ export class ContentSniffer {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -10226,14 +8588,13 @@ export class ContentSniffer {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: ContentSniffer, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: ContentSniffer, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -10241,28 +8602,26 @@ export class ContentSniffer {
     _init (config?: ContentSniffer_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(): ContentSniffer
-    static $gtype: GObject.GType<ContentSniffer>
+    static $gtype: GObject.Type
 }
 export interface CookieJar_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.CookieJar */
     /**
      * The policy the jar should follow to accept or reject cookies
      */
-    accept_policy?: CookieJarAcceptPolicy | null
-    read_only?: boolean | null
+    accept_policy?: CookieJarAcceptPolicy
+    read_only?: boolean
 }
 export class CookieJar {
-    /* Own properties of Soup-2.4.Soup.CookieJar */
+    /* Properties of Soup-2.4.Soup.CookieJar */
     /**
      * The policy the jar should follow to accept or reject cookies
      */
     accept_policy: CookieJarAcceptPolicy
     readonly read_only: boolean
-    /* Own fields of Soup-2.4.Soup.CookieJar */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.CookieJar */
+    /* Methods of Soup-2.4.Soup.CookieJar */
     /**
      * Adds `cookie` to `jar,` emitting the 'changed' signal if we are modifying
      * an existing cookie or adding a valid new cookie ('valid' means
@@ -10288,7 +8647,7 @@ export class CookieJar {
      * @param uri the URI setting the cookie
      * @param first_party the URI for the main document
      */
-    add_cookie_full(cookie: Cookie, uri: URI | null, first_party: URI | null): void
+    add_cookie_full(cookie: Cookie, uri?: URI | null, first_party?: URI | null): void
     /**
      * Adds `cookie` to `jar,` emitting the 'changed' signal if we are modifying
      * an existing cookie or adding a valid new cookie ('valid' means
@@ -10401,7 +8760,7 @@ export class CookieJar {
      * @param cookie the stringified cookie to set
      */
     set_cookie_with_first_party(uri: URI, first_party: URI, cookie: string): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -10447,7 +8806,7 @@ export class CookieJar {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -10616,7 +8975,7 @@ export class CookieJar {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -10704,8 +9063,8 @@ export class CookieJar {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    watch_closure(closure: Function): void
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -10713,7 +9072,7 @@ export class CookieJar {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -10721,25 +9080,23 @@ export class CookieJar {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.CookieJar */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.CookieJar */
     vfunc_changed(old_cookie: Cookie, new_cookie: Cookie): void
     /**
      * Gets whether `jar` stores cookies persistenly.
-     * @virtual 
      */
     vfunc_is_persistent(): boolean
     /**
      * This function exists for backward compatibility, but does not do
      * anything any more; cookie jars are saved automatically when they
      * are changed.
-     * @virtual 
      */
     vfunc_save(): void
     /**
@@ -10747,30 +9104,27 @@ export class CookieJar {
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -10787,12 +9141,11 @@ export class CookieJar {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Soup-2.4.Soup.CookieJar */
+    /* Signals of Soup-2.4.Soup.CookieJar */
     /**
      * Emitted when `jar` changes. If a cookie has been added,
      * `new_cookie` will contain the newly-added cookie and
@@ -10801,14 +9154,13 @@ export class CookieJar {
      * `new_cookie` will be %NULL. If a cookie has been changed,
      * `old_cookie` will contain its old value, and `new_cookie` its
      * new value.
-     * @signal 
      * @param old_cookie the old #SoupCookie value
      * @param new_cookie the new #SoupCookie value
      */
     connect(sigName: "changed", callback: (($obj: CookieJar, old_cookie: Cookie, new_cookie: Cookie) => void)): number
     connect_after(sigName: "changed", callback: (($obj: CookieJar, old_cookie: Cookie, new_cookie: Cookie) => void)): number
     emit(sigName: "changed", old_cookie: Cookie, new_cookie: Cookie): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -10835,7 +9187,6 @@ export class CookieJar {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: CookieJar, pspec: GObject.ParamSpec) => void)): number
@@ -10845,8 +9196,8 @@ export class CookieJar {
     connect_after(sigName: "notify::accept-policy", callback: (($obj: CookieJar, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::read-only", callback: (($obj: CookieJar, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::read-only", callback: (($obj: CookieJar, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -10854,26 +9205,26 @@ export class CookieJar {
     _init (config?: CookieJar_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(): CookieJar
-    static $gtype: GObject.GType<CookieJar>
+    static $gtype: GObject.Type
 }
 export interface CookieJarDB_ConstructProps extends CookieJar_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.CookieJarDB */
-    filename?: string | null
+    filename?: string
 }
 export class CookieJarDB {
-    /* Own properties of Soup-2.4.Soup.CookieJarDB */
+    /* Properties of Soup-2.4.Soup.CookieJarDB */
     readonly filename: string
-    /* Extended properties of Soup-2.4.Soup.CookieJar */
+    /* Properties of Soup-2.4.Soup.CookieJar */
     /**
      * The policy the jar should follow to accept or reject cookies
      */
     accept_policy: CookieJarAcceptPolicy
     readonly read_only: boolean
-    /* Own fields of Soup-2.4.Soup.CookieJarDB */
-    parent: CookieJar
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of Soup-2.4.Soup.CookieJar */
+    parent: GObject.Object
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Soup-2.4.Soup.CookieJar */
+    /* Methods of Soup-2.4.Soup.CookieJar */
     /**
      * Adds `cookie` to `jar,` emitting the 'changed' signal if we are modifying
      * an existing cookie or adding a valid new cookie ('valid' means
@@ -10899,7 +9250,7 @@ export class CookieJarDB {
      * @param uri the URI setting the cookie
      * @param first_party the URI for the main document
      */
-    add_cookie_full(cookie: Cookie, uri: URI | null, first_party: URI | null): void
+    add_cookie_full(cookie: Cookie, uri?: URI | null, first_party?: URI | null): void
     /**
      * Adds `cookie` to `jar,` emitting the 'changed' signal if we are modifying
      * an existing cookie or adding a valid new cookie ('valid' means
@@ -11012,7 +9363,7 @@ export class CookieJarDB {
      * @param cookie the stringified cookie to set
      */
     set_cookie_with_first_party(uri: URI, first_party: URI, cookie: string): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -11058,7 +9409,7 @@ export class CookieJarDB {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -11227,7 +9578,7 @@ export class CookieJarDB {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -11315,8 +9666,8 @@ export class CookieJarDB {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    watch_closure(closure: Function): void
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -11324,7 +9675,7 @@ export class CookieJarDB {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -11332,54 +9683,49 @@ export class CookieJarDB {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.CookieJarDB */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.CookieJarDB */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of Soup-2.4.Soup.CookieJar */
+    /* Virtual methods of Soup-2.4.Soup.CookieJar */
     vfunc_changed(old_cookie: Cookie, new_cookie: Cookie): void
     /**
      * Gets whether `jar` stores cookies persistenly.
-     * @virtual 
      */
     vfunc_is_persistent(): boolean
     /**
      * This function exists for backward compatibility, but does not do
      * anything any more; cookie jars are saved automatically when they
      * are changed.
-     * @virtual 
      */
     vfunc_save(): void
     /**
@@ -11387,30 +9733,27 @@ export class CookieJarDB {
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -11427,12 +9770,11 @@ export class CookieJarDB {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Soup-2.4.Soup.CookieJar */
+    /* Signals of Soup-2.4.Soup.CookieJar */
     /**
      * Emitted when `jar` changes. If a cookie has been added,
      * `new_cookie` will contain the newly-added cookie and
@@ -11441,14 +9783,13 @@ export class CookieJarDB {
      * `new_cookie` will be %NULL. If a cookie has been changed,
      * `old_cookie` will contain its old value, and `new_cookie` its
      * new value.
-     * @signal 
      * @param old_cookie the old #SoupCookie value
      * @param new_cookie the new #SoupCookie value
      */
     connect(sigName: "changed", callback: (($obj: CookieJarDB, old_cookie: Cookie, new_cookie: Cookie) => void)): number
     connect_after(sigName: "changed", callback: (($obj: CookieJarDB, old_cookie: Cookie, new_cookie: Cookie) => void)): number
     emit(sigName: "changed", old_cookie: Cookie, new_cookie: Cookie): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -11475,7 +9816,6 @@ export class CookieJarDB {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: CookieJarDB, pspec: GObject.ParamSpec) => void)): number
@@ -11487,8 +9827,8 @@ export class CookieJarDB {
     connect_after(sigName: "notify::accept-policy", callback: (($obj: CookieJarDB, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::read-only", callback: (($obj: CookieJarDB, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::read-only", callback: (($obj: CookieJarDB, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -11498,26 +9838,26 @@ export class CookieJarDB {
     static new(filename: string, read_only: boolean): CookieJarDB
     /* Function overloads */
     static new(): CookieJarDB
-    static $gtype: GObject.GType<CookieJarDB>
+    static $gtype: GObject.Type
 }
 export interface CookieJarText_ConstructProps extends CookieJar_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.CookieJarText */
-    filename?: string | null
+    filename?: string
 }
 export class CookieJarText {
-    /* Own properties of Soup-2.4.Soup.CookieJarText */
+    /* Properties of Soup-2.4.Soup.CookieJarText */
     readonly filename: string
-    /* Extended properties of Soup-2.4.Soup.CookieJar */
+    /* Properties of Soup-2.4.Soup.CookieJar */
     /**
      * The policy the jar should follow to accept or reject cookies
      */
     accept_policy: CookieJarAcceptPolicy
     readonly read_only: boolean
-    /* Own fields of Soup-2.4.Soup.CookieJarText */
-    parent: CookieJar
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of Soup-2.4.Soup.CookieJar */
+    parent: GObject.Object
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Soup-2.4.Soup.CookieJar */
+    /* Methods of Soup-2.4.Soup.CookieJar */
     /**
      * Adds `cookie` to `jar,` emitting the 'changed' signal if we are modifying
      * an existing cookie or adding a valid new cookie ('valid' means
@@ -11543,7 +9883,7 @@ export class CookieJarText {
      * @param uri the URI setting the cookie
      * @param first_party the URI for the main document
      */
-    add_cookie_full(cookie: Cookie, uri: URI | null, first_party: URI | null): void
+    add_cookie_full(cookie: Cookie, uri?: URI | null, first_party?: URI | null): void
     /**
      * Adds `cookie` to `jar,` emitting the 'changed' signal if we are modifying
      * an existing cookie or adding a valid new cookie ('valid' means
@@ -11656,7 +9996,7 @@ export class CookieJarText {
      * @param cookie the stringified cookie to set
      */
     set_cookie_with_first_party(uri: URI, first_party: URI, cookie: string): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -11702,7 +10042,7 @@ export class CookieJarText {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -11871,7 +10211,7 @@ export class CookieJarText {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -11959,8 +10299,8 @@ export class CookieJarText {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    watch_closure(closure: Function): void
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -11968,7 +10308,7 @@ export class CookieJarText {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -11976,54 +10316,49 @@ export class CookieJarText {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.CookieJarText */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.CookieJarText */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of Soup-2.4.Soup.CookieJar */
+    /* Virtual methods of Soup-2.4.Soup.CookieJar */
     vfunc_changed(old_cookie: Cookie, new_cookie: Cookie): void
     /**
      * Gets whether `jar` stores cookies persistenly.
-     * @virtual 
      */
     vfunc_is_persistent(): boolean
     /**
      * This function exists for backward compatibility, but does not do
      * anything any more; cookie jars are saved automatically when they
      * are changed.
-     * @virtual 
      */
     vfunc_save(): void
     /**
@@ -12031,30 +10366,27 @@ export class CookieJarText {
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -12071,12 +10403,11 @@ export class CookieJarText {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Soup-2.4.Soup.CookieJar */
+    /* Signals of Soup-2.4.Soup.CookieJar */
     /**
      * Emitted when `jar` changes. If a cookie has been added,
      * `new_cookie` will contain the newly-added cookie and
@@ -12085,14 +10416,13 @@ export class CookieJarText {
      * `new_cookie` will be %NULL. If a cookie has been changed,
      * `old_cookie` will contain its old value, and `new_cookie` its
      * new value.
-     * @signal 
      * @param old_cookie the old #SoupCookie value
      * @param new_cookie the new #SoupCookie value
      */
     connect(sigName: "changed", callback: (($obj: CookieJarText, old_cookie: Cookie, new_cookie: Cookie) => void)): number
     connect_after(sigName: "changed", callback: (($obj: CookieJarText, old_cookie: Cookie, new_cookie: Cookie) => void)): number
     emit(sigName: "changed", old_cookie: Cookie, new_cookie: Cookie): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -12119,7 +10449,6 @@ export class CookieJarText {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: CookieJarText, pspec: GObject.ParamSpec) => void)): number
@@ -12131,8 +10460,8 @@ export class CookieJarText {
     connect_after(sigName: "notify::accept-policy", callback: (($obj: CookieJarText, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::read-only", callback: (($obj: CookieJarText, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::read-only", callback: (($obj: CookieJarText, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -12142,17 +10471,14 @@ export class CookieJarText {
     static new(filename: string, read_only: boolean): CookieJarText
     /* Function overloads */
     static new(): CookieJarText
-    static $gtype: GObject.GType<CookieJarText>
+    static $gtype: GObject.Type
 }
 export interface HSTSEnforcer_ConstructProps extends GObject.Object_ConstructProps {
 }
 export class HSTSEnforcer {
-    /* Own fields of Soup-2.4.Soup.HSTSEnforcer */
-    parent: GObject.Object
-    priv: HSTSEnforcerPrivate
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.HSTSEnforcer */
+    /* Methods of Soup-2.4.Soup.HSTSEnforcer */
     /**
      * Gets a list of domains for which there are policies in `enforcer`.
      * @param session_policies whether to include session policies
@@ -12191,7 +10517,7 @@ export class HSTSEnforcer {
      * @param include_subdomains %TRUE if the policy applies on sub domains
      */
     set_session_policy(domain: string, include_subdomains: boolean): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -12237,7 +10563,7 @@ export class HSTSEnforcer {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -12406,7 +10732,7 @@ export class HSTSEnforcer {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -12494,8 +10820,8 @@ export class HSTSEnforcer {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    watch_closure(closure: Function): void
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -12503,7 +10829,7 @@ export class HSTSEnforcer {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -12511,25 +10837,23 @@ export class HSTSEnforcer {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.HSTSEnforcer */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.HSTSEnforcer */
     vfunc_changed(old_policy: HSTSPolicy, new_policy: HSTSPolicy): void
     /**
      * Gets whether `hsts_enforcer` has a currently valid policy for `domain`.
-     * @virtual 
      * @param domain a domain.
      */
     vfunc_has_valid_policy(domain: string): boolean
     vfunc_hsts_enforced(message: Message): void
     /**
      * Gets whether `hsts_enforcer` stores policies persistenly.
-     * @virtual 
      */
     vfunc_is_persistent(): boolean
     /**
@@ -12537,30 +10861,27 @@ export class HSTSEnforcer {
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -12577,12 +10898,11 @@ export class HSTSEnforcer {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Soup-2.4.Soup.HSTSEnforcer */
+    /* Signals of Soup-2.4.Soup.HSTSEnforcer */
     /**
      * Emitted when `hsts_enforcer` changes. If a policy has been added,
      * `new_policy` will contain the newly-added policy and
@@ -12594,7 +10914,6 @@ export class HSTSEnforcer {
      * 
      * Note that you shouldn't modify the policies from a callback to
      * this signal.
-     * @signal 
      * @param old_policy the old #SoupHSTSPolicy value
      * @param new_policy the new #SoupHSTSPolicy value
      */
@@ -12605,13 +10924,12 @@ export class HSTSEnforcer {
      * Emitted when `hsts_enforcer` has upgraded the protocol
      * for `message` to HTTPS as a result of matching its domain with
      * a HSTS policy.
-     * @signal 
      * @param message the message for which HSTS is being enforced
      */
     connect(sigName: "hsts-enforced", callback: (($obj: HSTSEnforcer, message: Message) => void)): number
     connect_after(sigName: "hsts-enforced", callback: (($obj: HSTSEnforcer, message: Message) => void)): number
     emit(sigName: "hsts-enforced", message: Message): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -12638,14 +10956,13 @@ export class HSTSEnforcer {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: HSTSEnforcer, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: HSTSEnforcer, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -12653,27 +10970,27 @@ export class HSTSEnforcer {
     _init (config?: HSTSEnforcer_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(): HSTSEnforcer
-    static $gtype: GObject.GType<HSTSEnforcer>
+    static $gtype: GObject.Type
 }
 export interface HSTSEnforcerDB_ConstructProps extends HSTSEnforcer_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.HSTSEnforcerDB */
     /**
      * The filename of the SQLite database where HSTS policies are stored.
      */
-    filename?: string | null
+    filename?: string
 }
 export class HSTSEnforcerDB {
-    /* Own properties of Soup-2.4.Soup.HSTSEnforcerDB */
+    /* Properties of Soup-2.4.Soup.HSTSEnforcerDB */
     /**
      * The filename of the SQLite database where HSTS policies are stored.
      */
     readonly filename: string
-    /* Own fields of Soup-2.4.Soup.HSTSEnforcerDB */
-    parent: HSTSEnforcer
-    priv: HSTSEnforcerDBPrivate
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of Soup-2.4.Soup.HSTSEnforcer */
+    parent: GObject.Object
+    priv: HSTSEnforcerPrivate
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Soup-2.4.Soup.HSTSEnforcer */
+    /* Methods of Soup-2.4.Soup.HSTSEnforcer */
     /**
      * Gets a list of domains for which there are policies in `enforcer`.
      * @param session_policies whether to include session policies
@@ -12712,7 +11029,7 @@ export class HSTSEnforcerDB {
      * @param include_subdomains %TRUE if the policy applies on sub domains
      */
     set_session_policy(domain: string, include_subdomains: boolean): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -12758,7 +11075,7 @@ export class HSTSEnforcerDB {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -12927,7 +11244,7 @@ export class HSTSEnforcerDB {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -13015,8 +11332,8 @@ export class HSTSEnforcerDB {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    watch_closure(closure: Function): void
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -13024,7 +11341,7 @@ export class HSTSEnforcerDB {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -13032,54 +11349,49 @@ export class HSTSEnforcerDB {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.HSTSEnforcerDB */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.HSTSEnforcerDB */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of Soup-2.4.Soup.HSTSEnforcer */
+    /* Virtual methods of Soup-2.4.Soup.HSTSEnforcer */
     vfunc_changed(old_policy: HSTSPolicy, new_policy: HSTSPolicy): void
     /**
      * Gets whether `hsts_enforcer` has a currently valid policy for `domain`.
-     * @virtual 
      * @param domain a domain.
      */
     vfunc_has_valid_policy(domain: string): boolean
     vfunc_hsts_enforced(message: Message): void
     /**
      * Gets whether `hsts_enforcer` stores policies persistenly.
-     * @virtual 
      */
     vfunc_is_persistent(): boolean
     /**
@@ -13087,30 +11399,27 @@ export class HSTSEnforcerDB {
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -13127,12 +11436,11 @@ export class HSTSEnforcerDB {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Soup-2.4.Soup.HSTSEnforcer */
+    /* Signals of Soup-2.4.Soup.HSTSEnforcer */
     /**
      * Emitted when `hsts_enforcer` changes. If a policy has been added,
      * `new_policy` will contain the newly-added policy and
@@ -13144,7 +11452,6 @@ export class HSTSEnforcerDB {
      * 
      * Note that you shouldn't modify the policies from a callback to
      * this signal.
-     * @signal 
      * @param old_policy the old #SoupHSTSPolicy value
      * @param new_policy the new #SoupHSTSPolicy value
      */
@@ -13155,13 +11462,12 @@ export class HSTSEnforcerDB {
      * Emitted when `hsts_enforcer` has upgraded the protocol
      * for `message` to HTTPS as a result of matching its domain with
      * a HSTS policy.
-     * @signal 
      * @param message the message for which HSTS is being enforced
      */
     connect(sigName: "hsts-enforced", callback: (($obj: HSTSEnforcerDB, message: Message) => void)): number
     connect_after(sigName: "hsts-enforced", callback: (($obj: HSTSEnforcerDB, message: Message) => void)): number
     emit(sigName: "hsts-enforced", message: Message): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -13188,7 +11494,6 @@ export class HSTSEnforcerDB {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: HSTSEnforcerDB, pspec: GObject.ParamSpec) => void)): number
@@ -13196,8 +11501,8 @@ export class HSTSEnforcerDB {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::filename", callback: (($obj: HSTSEnforcerDB, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::filename", callback: (($obj: HSTSEnforcerDB, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -13207,23 +11512,23 @@ export class HSTSEnforcerDB {
     static new(filename: string): HSTSEnforcerDB
     /* Function overloads */
     static new(): HSTSEnforcerDB
-    static $gtype: GObject.GType<HSTSEnforcerDB>
+    static $gtype: GObject.Type
 }
 export interface Logger_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.Logger */
     /**
      * The level of logging output
      */
-    level?: LoggerLogLevel | null
+    level?: LoggerLogLevel
     /**
      * If #SoupLogger:level is %SOUP_LOGGER_LOG_BODY, this gives
      * the maximum number of bytes of the body that will be logged.
      * (-1 means "no limit".)
      */
-    max_body_size?: number | null
+    max_body_size?: number
 }
 export class Logger {
-    /* Own properties of Soup-2.4.Soup.Logger */
+    /* Properties of Soup-2.4.Soup.Logger */
     /**
      * The level of logging output
      */
@@ -13234,11 +11539,9 @@ export class Logger {
      * (-1 means "no limit".)
      */
     max_body_size: number
-    /* Own fields of Soup-2.4.Soup.Logger */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.Logger */
+    /* Methods of Soup-2.4.Soup.Logger */
     /**
      * Sets `logger` to watch `session` and print debug information for
      * its messages.
@@ -13278,7 +11581,7 @@ export class Logger {
      * @param response_filter the callback for response debugging
      */
     set_response_filter(response_filter: LoggerFilter): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -13324,7 +11627,7 @@ export class Logger {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -13493,7 +11796,7 @@ export class Logger {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -13581,8 +11884,8 @@ export class Logger {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    watch_closure(closure: Function): void
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -13590,7 +11893,7 @@ export class Logger {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -13598,43 +11901,40 @@ export class Logger {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.Logger */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.Logger */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -13651,12 +11951,11 @@ export class Logger {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -13683,7 +11982,6 @@ export class Logger {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Logger, pspec: GObject.ParamSpec) => void)): number
@@ -13693,8 +11991,8 @@ export class Logger {
     connect_after(sigName: "notify::level", callback: (($obj: Logger, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::max-body-size", callback: (($obj: Logger, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::max-body-size", callback: (($obj: Logger, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -13702,7 +12000,7 @@ export class Logger {
     _init (config?: Logger_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(level: LoggerLogLevel, max_body_size: number): Logger
-    static $gtype: GObject.GType<Logger>
+    static $gtype: GObject.Type
 }
 export interface Message_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.Message */
@@ -13710,73 +12008,31 @@ export interface Message_ConstructProps extends GObject.Object_ConstructProps {
      * The #SoupURI loaded in the application when the message was
      * queued.
      */
-    first_party?: URI | null
-    flags?: MessageFlags | null
-    http_version?: HTTPVersion | null
+    first_party?: URI
+    flags?: MessageFlags
+    http_version?: HTTPVersion
     /**
      * Set when the message is navigating between top level domains.
      */
-    is_top_level_navigation?: boolean | null
-    method?: string | null
-    priority?: MessagePriority | null
-    reason_phrase?: string | null
-    server_side?: boolean | null
-    site_for_cookies?: URI | null
-    status_code?: number | null
+    is_top_level_navigation?: boolean
+    method?: string
+    priority?: MessagePriority
+    reason_phrase?: string
+    server_side?: boolean
+    site_for_cookies?: URI
+    status_code?: number
     /**
      * The #GTlsCertificate associated with the message
      */
-    tls_certificate?: Gio.TlsCertificate | null
+    tls_certificate?: Gio.TlsCertificate
     /**
      * The verification errors on #SoupMessage:tls-certificate
      */
-    tls_errors?: Gio.TlsCertificateFlags | null
-    uri?: URI | null
+    tls_errors?: Gio.TlsCertificateFlags
+    uri?: URI
 }
-/**
- * Represents an HTTP message being sent or received.
- * 
- * `status_code` will normally be a #SoupStatus value, eg,
- * %SOUP_STATUS_OK, though of course it might actually be an unknown
- * status code. `reason_phrase` is the actual text returned from the
- * server, which may or may not correspond to the "standard"
- * description of `status_code`. At any rate, it is almost certainly
- * not localized, and not very descriptive even if it is in the user's
- * language; you should not use `reason_phrase` in user-visible
- * messages. Rather, you should look at `status_code,` and determine an
- * end-user-appropriate message based on that and on what you were
- * trying to do.
- * 
- * As described in the #SoupMessageBody documentation, the
- * `request_body` and `response_body` <literal>data</literal> fields
- * will not necessarily be filled in at all times. When the body
- * fields are filled in, they will be terminated with a '\0' byte
- * (which is not included in the <literal>length</literal>), so you
- * can use them as ordinary C strings (assuming that you know that the
- * body doesn't have any other '\0' bytes).
- * 
- * For a client-side #SoupMessage, `request_body'`s
- * <literal>data</literal> is usually filled in right before libsoup
- * writes the request to the network, but you should not count on
- * this; use soup_message_body_flatten() if you want to ensure that
- * <literal>data</literal> is filled in. If you are not using
- * #SoupRequest to read the response, then `response_body'`s
- * <literal>data</literal> will be filled in before
- * #SoupMessage::finished is emitted. (If you are using #SoupRequest,
- * then the message body is not accumulated by default, so
- * `response_body'`s <literal>data</literal> will always be %NULL.)
- * 
- * For a server-side #SoupMessage, `request_body'`s %data will be
- * filled in before #SoupMessage::got_body is emitted.
- * 
- * To prevent the %data field from being filled in at all (eg, if you
- * are handling the data from a #SoupMessage::got_chunk, and so don't
- * need to see it all at the end), call
- * soup_message_body_set_accumulate() on `response_body` or
- * `request_body` as appropriate, passing %FALSE.
- */
 export class Message {
-    /* Own properties of Soup-2.4.Soup.Message */
+    /* Properties of Soup-2.4.Soup.Message */
     /**
      * The #SoupURI loaded in the application when the message was
      * queued.
@@ -13788,17 +12044,24 @@ export class Message {
      * Set when the message is navigating between top level domains.
      */
     is_top_level_navigation: boolean
+    method: string
     priority: MessagePriority
+    reason_phrase: string
+    readonly request_body: MessageBody
     /**
      * The message's HTTP request body, as a #GBytes.
      */
     readonly request_body_data: GLib.Bytes
+    readonly request_headers: MessageHeaders
+    readonly response_body: MessageBody
     /**
      * The message's HTTP response body, as a #GBytes.
      */
     readonly response_body_data: GLib.Bytes
+    readonly response_headers: MessageHeaders
     readonly server_side: boolean
     site_for_cookies: URI
+    status_code: number
     /**
      * The #GTlsCertificate associated with the message
      */
@@ -13808,39 +12071,9 @@ export class Message {
      */
     tls_errors: Gio.TlsCertificateFlags
     uri: URI
-    /* Own fields of Soup-2.4.Soup.Message */
-    parent: GObject.Object
-    /**
-     * the HTTP method
-     */
-    method: string
-    /**
-     * the HTTP status code
-     */
-    status_code: number
-    /**
-     * the status phrase associated with `status_code`
-     */
-    reason_phrase: string
-    /**
-     * the request body
-     */
-    request_body: MessageBody
-    /**
-     * the request headers
-     */
-    request_headers: MessageHeaders
-    /**
-     * the response body
-     */
-    response_body: MessageBody
-    /**
-     * the response headers
-     */
-    response_headers: MessageHeaders
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.Message */
+    /* Methods of Soup-2.4.Soup.Message */
     content_sniffed(content_type: string, params: GLib.HashTable): void
     /**
      * This disables the actions of #SoupSessionFeature<!-- -->s with the
@@ -13855,7 +12088,7 @@ export class Message {
      * redirect or authentication.
      * @param feature_type the #GType of a #SoupSessionFeature
      */
-    disable_feature(feature_type: GObject.GType): void
+    disable_feature(feature_type: GObject.Type): void
     finished(): void
     /**
      * Gets the address `msg'`s URI points to. After first setting the
@@ -14030,7 +12263,7 @@ export class Message {
      * for more information.
      * @param site_for_cookies the #SoupURI for the `msg'`s site for cookies
      */
-    set_site_for_cookies(site_for_cookies: URI | null): void
+    set_site_for_cookies(site_for_cookies?: URI | null): void
     /**
      * Sets `msg'`s status code to `status_code`. If `status_code` is a
      * known value, it will also set `msg'`s reason_phrase.
@@ -14056,7 +12289,7 @@ export class Message {
     wrote_chunk(): void
     wrote_headers(): void
     wrote_informational(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -14102,7 +12335,7 @@ export class Message {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -14271,7 +12504,7 @@ export class Message {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -14359,8 +12592,8 @@ export class Message {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Soup-2.4.Soup.Message */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.Message */
     vfunc_finished(): void
     vfunc_got_body(): void
     vfunc_got_chunk(chunk: Buffer): void
@@ -14372,7 +12605,7 @@ export class Message {
     vfunc_wrote_chunk(): void
     vfunc_wrote_headers(): void
     vfunc_wrote_informational(): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -14389,12 +12622,11 @@ export class Message {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Soup-2.4.Soup.Message */
+    /* Signals of Soup-2.4.Soup.Message */
     /**
      * This signal is emitted after #SoupMessage::got-headers, and
      * before the first #SoupMessage::got-chunk. If content
@@ -14415,7 +12647,6 @@ export class Message {
      * After this signal is emitted, the data that was spooled so
      * that sniffing could be done is delivered on the first
      * emission of #SoupMessage::got-chunk.
-     * @signal 
      * @param type the content type that we got from sniffing
      * @param params a #GHashTable with the parameters
      */
@@ -14426,7 +12657,6 @@ export class Message {
      * Emitted when all HTTP processing is finished for a message.
      * (After #SoupMessage::got_body for client-side messages, or
      * after #SoupMessage::wrote_body for server-side messages.)
-     * @signal 
      */
     connect(sigName: "finished", callback: (($obj: Message) => void)): number
     connect_after(sigName: "finished", callback: (($obj: Message) => void)): number
@@ -14440,7 +12670,6 @@ export class Message {
      * See also soup_message_add_header_handler() and
      * soup_message_add_status_code_handler(), which can be used
      * to connect to a subset of emissions of this signal.
-     * @signal 
      */
     connect(sigName: "got-body", callback: (($obj: Message) => void)): number
     connect_after(sigName: "got-body", callback: (($obj: Message) => void)): number
@@ -14454,7 +12683,6 @@ export class Message {
      * If you cancel or requeue `msg` while processing this signal,
      * then the current HTTP I/O will be stopped after this signal
      * emission finished, and `msg'`s connection will be closed.
-     * @signal 
      * @param chunk the just-read chunk
      */
     connect(sigName: "got-chunk", callback: (($obj: Message, chunk: Buffer) => void)): number
@@ -14479,7 +12707,6 @@ export class Message {
      * requeue it from a #SoupMessage::got_body handler rather
      * than a #SoupMessage::got_headers handler, so that the
      * existing HTTP connection can be reused.)
-     * @signal 
      */
     connect(sigName: "got-headers", callback: (($obj: Message) => void)): number
     connect_after(sigName: "got-headers", callback: (($obj: Message) => void)): number
@@ -14494,7 +12721,6 @@ export class Message {
      * If you cancel or requeue `msg` while processing this signal,
      * then the current HTTP I/O will be stopped after this signal
      * emission finished, and `msg'`s connection will be closed.
-     * @signal 
      */
     connect(sigName: "got-informational", callback: (($obj: Message) => void)): number
     connect_after(sigName: "got-informational", callback: (($obj: Message) => void)): number
@@ -14512,7 +12738,6 @@ export class Message {
      * See #GSocketClient::event for more information on what
      * the different values of `event` correspond to, and what
      * `connection` will be in each case.
-     * @signal 
      * @param event the network event
      * @param connection the current state of the network connection
      */
@@ -14524,14 +12749,12 @@ export class Message {
      * being sent again (eg, because the first attempt received a
      * redirection response, or because we needed to use
      * authentication).
-     * @signal 
      */
     connect(sigName: "restarted", callback: (($obj: Message) => void)): number
     connect_after(sigName: "restarted", callback: (($obj: Message) => void)): number
     emit(sigName: "restarted"): void
     /**
      * Emitted just before a message is sent.
-     * @signal 
      */
     connect(sigName: "starting", callback: (($obj: Message) => void)): number
     connect_after(sigName: "starting", callback: (($obj: Message) => void)): number
@@ -14543,7 +12766,6 @@ export class Message {
      * from the server. For a server-side message, this means that
      * libsoup has finished writing the response and is nearly
      * done with the message.)
-     * @signal 
      */
     connect(sigName: "wrote-body", callback: (($obj: Message) => void)): number
     connect_after(sigName: "wrote-body", callback: (($obj: Message) => void)): number
@@ -14555,7 +12777,6 @@ export class Message {
      * Unlike #SoupMessage::wrote_chunk, this is emitted after
      * every successful write() call, not only after finishing a
      * complete "chunk".
-     * @signal 
      * @param chunk the data written
      */
     connect(sigName: "wrote-body-data", callback: (($obj: Message, chunk: Buffer) => void)): number
@@ -14570,7 +12791,6 @@ export class Message {
      * soup_message_body_append_buffer()) has been written. To get
      * more useful continuous progress information, use
      * #SoupMessage::wrote_body_data.
-     * @signal 
      */
     connect(sigName: "wrote-chunk", callback: (($obj: Message) => void)): number
     connect_after(sigName: "wrote-chunk", callback: (($obj: Message) => void)): number
@@ -14580,7 +12800,6 @@ export class Message {
      * message. (For a client-side message, this is after writing
      * the request headers; for a server-side message, it is after
      * writing the response headers.)
-     * @signal 
      */
     connect(sigName: "wrote-headers", callback: (($obj: Message) => void)): number
     connect_after(sigName: "wrote-headers", callback: (($obj: Message) => void)): number
@@ -14588,12 +12807,11 @@ export class Message {
     /**
      * Emitted immediately after writing a 1xx (Informational)
      * response for a (server-side) message.
-     * @signal 
      */
     connect(sigName: "wrote-informational", callback: (($obj: Message) => void)): number
     connect_after(sigName: "wrote-informational", callback: (($obj: Message) => void)): number
     emit(sigName: "wrote-informational"): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -14620,7 +12838,6 @@ export class Message {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
@@ -14634,24 +12851,38 @@ export class Message {
     connect_after(sigName: "notify::http-version", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::is-top-level-navigation", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::is-top-level-navigation", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
+    connect(sigName: "notify::method", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
+    connect_after(sigName: "notify::method", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::priority", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::priority", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
+    connect(sigName: "notify::reason-phrase", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
+    connect_after(sigName: "notify::reason-phrase", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
+    connect(sigName: "notify::request-body", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
+    connect_after(sigName: "notify::request-body", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::request-body-data", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::request-body-data", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
+    connect(sigName: "notify::request-headers", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
+    connect_after(sigName: "notify::request-headers", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
+    connect(sigName: "notify::response-body", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
+    connect_after(sigName: "notify::response-body", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::response-body-data", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::response-body-data", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
+    connect(sigName: "notify::response-headers", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
+    connect_after(sigName: "notify::response-headers", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::server-side", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::server-side", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::site-for-cookies", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::site-for-cookies", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
+    connect(sigName: "notify::status-code", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
+    connect_after(sigName: "notify::status-code", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::tls-certificate", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::tls-certificate", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::tls-errors", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::tls-errors", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::uri", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::uri", callback: (($obj: Message, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -14660,24 +12891,23 @@ export class Message {
     /* Static methods and pseudo-constructors */
     static new(method: string, uri_string: string): Message
     static new_from_uri(method: string, uri: URI): Message
-    static $gtype: GObject.GType<Message>
+    static $gtype: GObject.Type
 }
 export interface MultipartInputStream_ConstructProps extends Gio.FilterInputStream_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.MultipartInputStream */
-    message?: Message | null
+    message?: Message
 }
 export class MultipartInputStream {
-    /* Own properties of Soup-2.4.Soup.MultipartInputStream */
+    /* Properties of Soup-2.4.Soup.MultipartInputStream */
     readonly message: Message
-    /* Extended properties of Gio-2.0.Gio.FilterInputStream */
+    /* Properties of Gio-2.0.Gio.FilterInputStream */
     close_base_stream: boolean
-    /* Own fields of Soup-2.4.Soup.MultipartInputStream */
-    parent_instance: Gio.FilterInputStream
-    /* Extended fields of Gio-2.0.Gio.FilterInputStream */
+    /* Fields of Gio-2.0.Gio.FilterInputStream */
+    parent_instance: Gio.InputStream
     base_stream: Gio.InputStream
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.MultipartInputStream */
+    /* Methods of Soup-2.4.Soup.MultipartInputStream */
     /**
      * Obtains the headers for the part currently being processed. Note
      * that the #SoupMessageHeaders that are returned are owned by the
@@ -14704,7 +12934,7 @@ export class MultipartInputStream {
      * to obtain the next part.
      * @param cancellable a #GCancellable
      */
-    next_part(cancellable: Gio.Cancellable | null): Gio.InputStream | null
+    next_part(cancellable?: Gio.Cancellable | null): Gio.InputStream | null
     /**
      * Obtains a #GInputStream for the next request. See
      * soup_multipart_input_stream_next_part() for details on the
@@ -14713,13 +12943,13 @@ export class MultipartInputStream {
      * @param cancellable a #GCancellable.
      * @param callback callback to call when request is satisfied.
      */
-    next_part_async(io_priority: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    next_part_async(io_priority: number, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Finishes an asynchronous request for the next part.
      * @param result a #GAsyncResult.
      */
     next_part_finish(result: Gio.AsyncResult): Gio.InputStream | null
-    /* Extended methods of Gio-2.0.Gio.FilterInputStream */
+    /* Methods of Gio-2.0.Gio.FilterInputStream */
     /**
      * Gets the base stream for the filter stream.
      */
@@ -14734,7 +12964,7 @@ export class MultipartInputStream {
      * @param close_base %TRUE to close the base stream.
      */
     set_close_base_stream(close_base: boolean): void
-    /* Extended methods of Gio-2.0.Gio.InputStream */
+    /* Methods of Gio-2.0.Gio.InputStream */
     /**
      * Clears the pending flag on `stream`.
      */
@@ -14765,7 +12995,7 @@ export class MultipartInputStream {
      * can use a faster close that doesn't block to e.g. check errors.
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    close(cancellable: Gio.Cancellable | null): boolean
+    close(cancellable?: Gio.Cancellable | null): boolean
     /**
      * Requests an asynchronous closes of the stream, releasing resources related to it.
      * When the operation is finished `callback` will be called.
@@ -14781,7 +13011,7 @@ export class MultipartInputStream {
      * @param cancellable optional cancellable object
      * @param callback callback to call when the request is satisfied
      */
-    close_async(io_priority: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    close_async(io_priority: number, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Finishes closing a stream asynchronously, started from g_input_stream_close_async().
      * @param result a #GAsyncResult.
@@ -14819,7 +13049,7 @@ export class MultipartInputStream {
      * On error -1 is returned and `error` is set accordingly.
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    read(cancellable: Gio.Cancellable | null): [ /* returnType */ number, /* buffer */ Uint8Array ]
+    read(cancellable?: Gio.Cancellable | null): [ /* returnType */ number, /* buffer */ Uint8Array ]
     /**
      * Tries to read `count` bytes from the stream into the buffer starting at
      * `buffer`. Will block during this read.
@@ -14842,7 +13072,7 @@ export class MultipartInputStream {
      * write your own loop around g_input_stream_read().
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    read_all(cancellable: Gio.Cancellable | null): [ /* returnType */ boolean, /* buffer */ Uint8Array, /* bytes_read */ number ]
+    read_all(cancellable?: Gio.Cancellable | null): [ /* returnType */ boolean, /* buffer */ Uint8Array, /* bytes_read */ number ]
     /**
      * Request an asynchronous read of `count` bytes from the stream into the
      * buffer starting at `buffer`.
@@ -14858,7 +13088,7 @@ export class MultipartInputStream {
      * @param cancellable optional #GCancellable object, %NULL to ignore
      * @param callback callback to call when the request is satisfied
      */
-    read_all_async(io_priority: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): /* buffer */ Uint8Array
+    read_all_async(io_priority: number, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): /* buffer */ Uint8Array
     /**
      * Finishes an asynchronous stream read operation started with
      * g_input_stream_read_all_async().
@@ -14900,7 +13130,7 @@ export class MultipartInputStream {
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      * @param callback callback to call when the request is satisfied
      */
-    read_async(io_priority: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): /* buffer */ Uint8Array
+    read_async(io_priority: number, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): /* buffer */ Uint8Array
     /**
      * Like g_input_stream_read(), this tries to read `count` bytes from
      * the stream in a blocking fashion. However, rather than reading into
@@ -14928,7 +13158,7 @@ export class MultipartInputStream {
      * @param count maximum number of bytes that will be read from the stream. Common values include 4096 and 8192.
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    read_bytes(count: number, cancellable: Gio.Cancellable | null): GLib.Bytes
+    read_bytes(count: number, cancellable?: Gio.Cancellable | null): GLib.Bytes
     /**
      * Request an asynchronous read of `count` bytes from the stream into a
      * new #GBytes. When the operation is finished `callback` will be
@@ -14955,7 +13185,7 @@ export class MultipartInputStream {
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      * @param callback callback to call when the request is satisfied
      */
-    read_bytes_async(count: number, io_priority: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    read_bytes_async(count: number, io_priority: number, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Finishes an asynchronous stream read-into-#GBytes operation.
      * @param result a #GAsyncResult.
@@ -14990,7 +13220,7 @@ export class MultipartInputStream {
      * @param count the number of bytes that will be skipped from the stream
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    skip(count: number, cancellable: Gio.Cancellable | null): number
+    skip(count: number, cancellable?: Gio.Cancellable | null): number
     /**
      * Request an asynchronous skip of `count` bytes from the stream.
      * When the operation is finished `callback` will be called.
@@ -15020,13 +13250,13 @@ export class MultipartInputStream {
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      * @param callback callback to call when the request is satisfied
      */
-    skip_async(count: number, io_priority: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    skip_async(count: number, io_priority: number, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Finishes a stream skip operation.
      * @param result a #GAsyncResult.
      */
     skip_finish(result: Gio.AsyncResult): number
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -15072,7 +13302,7 @@ export class MultipartInputStream {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -15241,7 +13471,7 @@ export class MultipartInputStream {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -15329,8 +13559,8 @@ export class MultipartInputStream {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Gio-2.0.Gio.PollableInputStream */
+    watch_closure(closure: Function): void
+    /* Methods of Gio-2.0.Gio.PollableInputStream */
     /**
      * Checks if `stream` is actually pollable. Some classes may implement
      * #GPollableInputStream but have only certain instances of that class
@@ -15352,7 +13582,7 @@ export class MultipartInputStream {
      * rather than g_input_stream_read() from the callback.
      * @param cancellable a #GCancellable, or %NULL
      */
-    create_source(cancellable: Gio.Cancellable | null): GLib.Source
+    create_source(cancellable?: Gio.Cancellable | null): GLib.Source
     /**
      * Checks if `stream` can be read.
      * 
@@ -15379,8 +13609,8 @@ export class MultipartInputStream {
      * @param buffer a buffer to     read data into (which should be at least `count` bytes long).
      * @param cancellable a #GCancellable, or %NULL
      */
-    read_nonblocking(buffer: Uint8Array, cancellable: Gio.Cancellable | null): number
-    /* Own virtual methods of Soup-2.4.Soup.MultipartInputStream */
+    read_nonblocking(buffer: Uint8Array, cancellable?: Gio.Cancellable | null): number
+    /* Virtual methods of Soup-2.4.Soup.MultipartInputStream */
     /**
      * Checks if `stream` is actually pollable. Some classes may implement
      * #GPollableInputStream but have only certain instances of that class
@@ -15389,7 +13619,6 @@ export class MultipartInputStream {
      * 
      * For any given stream, the value returned by this method is constant;
      * a stream cannot switch from pollable to non-pollable or vice versa.
-     * @virtual 
      */
     vfunc_can_poll(): boolean
     /**
@@ -15401,10 +13630,9 @@ export class MultipartInputStream {
      * the stream may not actually be readable even after the source
      * triggers, so you should use g_pollable_input_stream_read_nonblocking()
      * rather than g_input_stream_read() from the callback.
-     * @virtual 
      * @param cancellable a #GCancellable, or %NULL
      */
-    vfunc_create_source(cancellable: Gio.Cancellable | null): GLib.Source
+    vfunc_create_source(cancellable?: Gio.Cancellable | null): GLib.Source
     /**
      * Checks if `stream` can be read.
      * 
@@ -15414,7 +13642,6 @@ export class MultipartInputStream {
      * non-blocking behavior, you should always use
      * g_pollable_input_stream_read_nonblocking(), which will return a
      * %G_IO_ERROR_WOULD_BLOCK error rather than blocking.
-     * @virtual 
      */
     vfunc_is_readable(): boolean
     /**
@@ -15429,11 +13656,10 @@ export class MultipartInputStream {
      * if `cancellable` has already been cancelled when you call, which
      * may happen if you call this method after a source triggers due
      * to having been cancelled.
-     * @virtual 
      * @param buffer a buffer to     read data into (which should be at least `count` bytes long).
      */
     vfunc_read_nonblocking(buffer: Uint8Array | null): number
-    /* Extended virtual methods of Gio-2.0.Gio.InputStream */
+    /* Virtual methods of Gio-2.0.Gio.InputStream */
     /**
      * Requests an asynchronous closes of the stream, releasing resources related to it.
      * When the operation is finished `callback` will be called.
@@ -15445,19 +13671,17 @@ export class MultipartInputStream {
      * The asynchronous methods have a default fallback that uses threads to implement
      * asynchronicity, so they are optional for inheriting classes. However, if you
      * override one you must override all.
-     * @virtual 
      * @param io_priority the [I/O priority][io-priority] of the request
      * @param cancellable optional cancellable object
      * @param callback callback to call when the request is satisfied
      */
-    vfunc_close_async(io_priority: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    vfunc_close_async(io_priority: number, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Finishes closing a stream asynchronously, started from g_input_stream_close_async().
-     * @virtual 
      * @param result a #GAsyncResult.
      */
     vfunc_close_finish(result: Gio.AsyncResult): boolean
-    vfunc_close_fn(cancellable: Gio.Cancellable | null): boolean
+    vfunc_close_fn(cancellable?: Gio.Cancellable | null): boolean
     /**
      * Request an asynchronous read of `count` bytes from the stream into the buffer
      * starting at `buffer`. When the operation is finished `callback` will be called.
@@ -15482,19 +13706,17 @@ export class MultipartInputStream {
      * The asynchronous methods have a default fallback that uses threads to implement
      * asynchronicity, so they are optional for inheriting classes. However, if you
      * override one you must override all.
-     * @virtual 
      * @param io_priority the [I/O priority][io-priority] of the request.
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      * @param callback callback to call when the request is satisfied
      */
-    vfunc_read_async(io_priority: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): /* buffer */ Uint8Array | null
+    vfunc_read_async(io_priority: number, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): /* buffer */ Uint8Array | null
     /**
      * Finishes an asynchronous stream read operation.
-     * @virtual 
      * @param result a #GAsyncResult.
      */
     vfunc_read_finish(result: Gio.AsyncResult): number
-    vfunc_read_fn(buffer: object | null, count: number, cancellable: Gio.Cancellable | null): number
+    vfunc_read_fn(buffer: object | null, count: number, cancellable?: Gio.Cancellable | null): number
     /**
      * Tries to skip `count` bytes from the stream. Will block during the operation.
      * 
@@ -15510,11 +13732,10 @@ export class MultipartInputStream {
      * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an
      * operation was partially finished when the operation was cancelled the
      * partial result will be returned, without an error.
-     * @virtual 
      * @param count the number of bytes that will be skipped from the stream
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    vfunc_skip(count: number, cancellable: Gio.Cancellable | null): number
+    vfunc_skip(count: number, cancellable?: Gio.Cancellable | null): number
     /**
      * Request an asynchronous skip of `count` bytes from the stream.
      * When the operation is finished `callback` will be called.
@@ -15539,20 +13760,18 @@ export class MultipartInputStream {
      * The asynchronous methods have a default fallback that uses threads to
      * implement asynchronicity, so they are optional for inheriting classes.
      * However, if you override one, you must override all.
-     * @virtual 
      * @param count the number of bytes that will be skipped from the stream
      * @param io_priority the [I/O priority][io-priority] of the request
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      * @param callback callback to call when the request is satisfied
      */
-    vfunc_skip_async(count: number, io_priority: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    vfunc_skip_async(count: number, io_priority: number, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Finishes a stream skip operation.
-     * @virtual 
      * @param result a #GAsyncResult.
      */
     vfunc_skip_finish(result: Gio.AsyncResult): number
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -15569,12 +13788,11 @@ export class MultipartInputStream {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -15601,7 +13819,6 @@ export class MultipartInputStream {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: MultipartInputStream, pspec: GObject.ParamSpec) => void)): number
@@ -15611,8 +13828,8 @@ export class MultipartInputStream {
     connect_after(sigName: "notify::message", callback: (($obj: MultipartInputStream, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::close-base-stream", callback: (($obj: MultipartInputStream, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::close-base-stream", callback: (($obj: MultipartInputStream, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -15620,20 +13837,18 @@ export class MultipartInputStream {
     _init (config?: MultipartInputStream_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(msg: Message, base_stream: Gio.InputStream): MultipartInputStream
-    static $gtype: GObject.GType<MultipartInputStream>
+    static $gtype: GObject.Type
 }
 export interface ProxyResolverDefault_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.ProxyResolverDefault */
-    gproxy_resolver?: Gio.ProxyResolver | null
+    gproxy_resolver?: Gio.ProxyResolver
 }
 export class ProxyResolverDefault {
-    /* Own properties of Soup-2.4.Soup.ProxyResolverDefault */
+    /* Properties of Soup-2.4.Soup.ProxyResolverDefault */
     gproxy_resolver: Gio.ProxyResolver
-    /* Own fields of Soup-2.4.Soup.ProxyResolverDefault */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -15679,7 +13894,7 @@ export class ProxyResolverDefault {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -15848,7 +14063,7 @@ export class ProxyResolverDefault {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -15936,8 +14151,8 @@ export class ProxyResolverDefault {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.ProxyURIResolver */
+    watch_closure(closure: Function): void
+    /* Methods of Soup-2.4.Soup.ProxyURIResolver */
     /**
      * Asynchronously determines a proxy URI to use for `msg` and calls
      * `callback`.
@@ -15954,8 +14169,8 @@ export class ProxyResolverDefault {
      * @param uri the #SoupURI you want a proxy for
      * @param cancellable a #GCancellable, or %NULL
      */
-    get_proxy_uri_sync(uri: URI, cancellable: Gio.Cancellable | null): [ /* returnType */ number, /* proxy_uri */ URI ]
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    get_proxy_uri_sync(uri: URI, cancellable?: Gio.Cancellable | null): [ /* returnType */ number, /* proxy_uri */ URI ]
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -15963,7 +14178,7 @@ export class ProxyResolverDefault {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -15971,18 +14186,17 @@ export class ProxyResolverDefault {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.ProxyResolverDefault */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.ProxyResolverDefault */
     /**
      * Asynchronously determines a proxy URI to use for `msg` and calls
      * `callback`.
-     * @virtual 
      * @param uri the #SoupURI you want a proxy for
      * @param async_context the #GMainContext to invoke `callback` in
      * @param cancellable a #GCancellable, or %NULL
@@ -15993,40 +14207,36 @@ export class ProxyResolverDefault {
      * Synchronously determines a proxy URI to use for `uri`. If `uri`
      * should be sent via proxy, *`proxy_uri` will be set to the URI of the
      * proxy, else it will be set to %NULL.
-     * @virtual 
      * @param uri the #SoupURI you want a proxy for
      * @param cancellable a #GCancellable, or %NULL
      */
-    vfunc_get_proxy_uri_sync(uri: URI, cancellable: Gio.Cancellable | null): [ /* returnType */ number, /* proxy_uri */ URI ]
+    vfunc_get_proxy_uri_sync(uri: URI, cancellable?: Gio.Cancellable | null): [ /* returnType */ number, /* proxy_uri */ URI ]
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -16043,12 +14253,11 @@ export class ProxyResolverDefault {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -16075,7 +14284,6 @@ export class ProxyResolverDefault {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: ProxyResolverDefault, pspec: GObject.ParamSpec) => void)): number
@@ -16083,31 +14291,28 @@ export class ProxyResolverDefault {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::gproxy-resolver", callback: (($obj: ProxyResolverDefault, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::gproxy-resolver", callback: (($obj: ProxyResolverDefault, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: ProxyResolverDefault_ConstructProps)
     _init (config?: ProxyResolverDefault_ConstructProps): void
-    static $gtype: GObject.GType<ProxyResolverDefault>
+    static $gtype: GObject.Type
 }
 export interface Request_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.Request */
     /**
      * The request's #SoupSession.
      */
-    session?: Session | null
+    session?: Session
     /**
      * The request URI.
      */
-    uri?: URI | null
+    uri?: URI
 }
-/**
- * A request to retrieve a particular URI.
- */
 export class Request {
-    /* Own properties of Soup-2.4.Soup.Request */
+    /* Properties of Soup-2.4.Soup.Request */
     /**
      * The request's #SoupSession.
      */
@@ -16116,12 +14321,9 @@ export class Request {
      * The request URI.
      */
     readonly uri: URI
-    /* Own fields of Soup-2.4.Soup.Request */
-    parent: GObject.Object
-    priv: RequestPrivate
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.Request */
+    /* Methods of Soup-2.4.Soup.Request */
     /**
      * Gets the length of the data represented by `request`. For most
      * request types, this will not be known until after you call
@@ -16153,7 +14355,7 @@ export class Request {
      * a #SoupSessionAsync.
      * @param cancellable a #GCancellable or %NULL
      */
-    send(cancellable: Gio.Cancellable | null): Gio.InputStream
+    send(cancellable?: Gio.Cancellable | null): Gio.InputStream
     /**
      * Begins an asynchronously request for the URI pointed to by
      * `request`.
@@ -16163,13 +14365,13 @@ export class Request {
      * @param cancellable a #GCancellable or %NULL
      * @param callback a #GAsyncReadyCallback
      */
-    send_async(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    send_async(cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the result of a soup_request_send_async().
      * @param result the #GAsyncResult
      */
     send_finish(result: Gio.AsyncResult): Gio.InputStream
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -16215,7 +14417,7 @@ export class Request {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -16384,7 +14586,7 @@ export class Request {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -16472,8 +14674,8 @@ export class Request {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Gio-2.0.Gio.Initable */
+    watch_closure(closure: Function): void
+    /* Methods of Gio-2.0.Gio.Initable */
     /**
      * Initializes the object implementing the interface.
      * 
@@ -16515,14 +14717,13 @@ export class Request {
      * instance.
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    init(cancellable: Gio.Cancellable | null): boolean
-    /* Own virtual methods of Soup-2.4.Soup.Request */
+    init(cancellable?: Gio.Cancellable | null): boolean
+    /* Virtual methods of Soup-2.4.Soup.Request */
     vfunc_check_uri(uri: URI): boolean
     /**
      * Gets the length of the data represented by `request`. For most
      * request types, this will not be known until after you call
      * soup_request_send() or soup_request_send_finish().
-     * @virtual 
      */
     vfunc_get_content_length(): number
     /**
@@ -16532,7 +14733,6 @@ export class Request {
      * 
      * As in the HTTP Content-Type header, this may include parameters
      * after the MIME type.
-     * @virtual 
      */
     vfunc_get_content_type(): string | null
     /**
@@ -16541,24 +14741,21 @@ export class Request {
      * 
      * Note that you cannot use this method with #SoupRequests attached to
      * a #SoupSessionAsync.
-     * @virtual 
      * @param cancellable a #GCancellable or %NULL
      */
-    vfunc_send(cancellable: Gio.Cancellable | null): Gio.InputStream
+    vfunc_send(cancellable?: Gio.Cancellable | null): Gio.InputStream
     /**
      * Begins an asynchronously request for the URI pointed to by
      * `request`.
      * 
      * Note that you cannot use this method with #SoupRequests attached to
      * a #SoupSessionSync.
-     * @virtual 
      * @param cancellable a #GCancellable or %NULL
      * @param callback a #GAsyncReadyCallback
      */
-    vfunc_send_async(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    vfunc_send_async(cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the result of a soup_request_send_async().
-     * @virtual 
      * @param result the #GAsyncResult
      */
     vfunc_send_finish(result: Gio.AsyncResult): Gio.InputStream
@@ -16601,11 +14798,10 @@ export class Request {
      * In this pattern, a caller would expect to be able to call g_initable_init()
      * on the result of g_object_new(), regardless of whether it is in fact a new
      * instance.
-     * @virtual 
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    vfunc_init(cancellable: Gio.Cancellable | null): boolean
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    vfunc_init(cancellable?: Gio.Cancellable | null): boolean
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -16622,12 +14818,11 @@ export class Request {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -16654,7 +14849,6 @@ export class Request {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Request, pspec: GObject.ParamSpec) => void)): number
@@ -16664,8 +14858,8 @@ export class Request {
     connect_after(sigName: "notify::session", callback: (($obj: Request, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::uri", callback: (($obj: Request, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::uri", callback: (($obj: Request, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -16680,13 +14874,13 @@ export class Request {
      * @param parameters the parameters to use to construct the object
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    static newv(object_type: GObject.GType, parameters: GObject.Parameter[], cancellable: Gio.Cancellable | null): GObject.Object
-    static $gtype: GObject.GType<Request>
+    static newv(object_type: GObject.Type, parameters: GObject.Parameter[], cancellable?: Gio.Cancellable | null): GObject.Object
+    static $gtype: GObject.Type
 }
 export interface RequestData_ConstructProps extends Request_ConstructProps {
 }
 export class RequestData {
-    /* Extended properties of Soup-2.4.Soup.Request */
+    /* Properties of Soup-2.4.Soup.Request */
     /**
      * The request's #SoupSession.
      */
@@ -16695,12 +14889,12 @@ export class RequestData {
      * The request URI.
      */
     readonly uri: URI
-    /* Own fields of Soup-2.4.Soup.RequestData */
-    parent: Request
-    priv: RequestDataPrivate
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of Soup-2.4.Soup.Request */
+    parent: GObject.Object
+    priv: RequestPrivate
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Soup-2.4.Soup.Request */
+    /* Methods of Soup-2.4.Soup.Request */
     /**
      * Gets the length of the data represented by `request`. For most
      * request types, this will not be known until after you call
@@ -16732,7 +14926,7 @@ export class RequestData {
      * a #SoupSessionAsync.
      * @param cancellable a #GCancellable or %NULL
      */
-    send(cancellable: Gio.Cancellable | null): Gio.InputStream
+    send(cancellable?: Gio.Cancellable | null): Gio.InputStream
     /**
      * Begins an asynchronously request for the URI pointed to by
      * `request`.
@@ -16742,13 +14936,13 @@ export class RequestData {
      * @param cancellable a #GCancellable or %NULL
      * @param callback a #GAsyncReadyCallback
      */
-    send_async(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    send_async(cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the result of a soup_request_send_async().
      * @param result the #GAsyncResult
      */
     send_finish(result: Gio.AsyncResult): Gio.InputStream
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -16794,7 +14988,7 @@ export class RequestData {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -16963,7 +15157,7 @@ export class RequestData {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -17051,8 +15245,8 @@ export class RequestData {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Gio-2.0.Gio.Initable */
+    watch_closure(closure: Function): void
+    /* Methods of Gio-2.0.Gio.Initable */
     /**
      * Initializes the object implementing the interface.
      * 
@@ -17094,8 +15288,8 @@ export class RequestData {
      * instance.
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    init(cancellable: Gio.Cancellable | null): boolean
-    /* Own virtual methods of Soup-2.4.Soup.RequestData */
+    init(cancellable?: Gio.Cancellable | null): boolean
+    /* Virtual methods of Soup-2.4.Soup.RequestData */
     /**
      * Initializes the object implementing the interface.
      * 
@@ -17135,17 +15329,15 @@ export class RequestData {
      * In this pattern, a caller would expect to be able to call g_initable_init()
      * on the result of g_object_new(), regardless of whether it is in fact a new
      * instance.
-     * @virtual 
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    vfunc_init(cancellable: Gio.Cancellable | null): boolean
-    /* Extended virtual methods of Soup-2.4.Soup.Request */
+    vfunc_init(cancellable?: Gio.Cancellable | null): boolean
+    /* Virtual methods of Soup-2.4.Soup.Request */
     vfunc_check_uri(uri: URI): boolean
     /**
      * Gets the length of the data represented by `request`. For most
      * request types, this will not be known until after you call
      * soup_request_send() or soup_request_send_finish().
-     * @virtual 
      */
     vfunc_get_content_length(): number
     /**
@@ -17155,7 +15347,6 @@ export class RequestData {
      * 
      * As in the HTTP Content-Type header, this may include parameters
      * after the MIME type.
-     * @virtual 
      */
     vfunc_get_content_type(): string | null
     /**
@@ -17164,24 +15355,21 @@ export class RequestData {
      * 
      * Note that you cannot use this method with #SoupRequests attached to
      * a #SoupSessionAsync.
-     * @virtual 
      * @param cancellable a #GCancellable or %NULL
      */
-    vfunc_send(cancellable: Gio.Cancellable | null): Gio.InputStream
+    vfunc_send(cancellable?: Gio.Cancellable | null): Gio.InputStream
     /**
      * Begins an asynchronously request for the URI pointed to by
      * `request`.
      * 
      * Note that you cannot use this method with #SoupRequests attached to
      * a #SoupSessionSync.
-     * @virtual 
      * @param cancellable a #GCancellable or %NULL
      * @param callback a #GAsyncReadyCallback
      */
-    vfunc_send_async(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    vfunc_send_async(cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the result of a soup_request_send_async().
-     * @virtual 
      * @param result the #GAsyncResult
      */
     vfunc_send_finish(result: Gio.AsyncResult): Gio.InputStream
@@ -17224,11 +15412,10 @@ export class RequestData {
      * In this pattern, a caller would expect to be able to call g_initable_init()
      * on the result of g_object_new(), regardless of whether it is in fact a new
      * instance.
-     * @virtual 
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    vfunc_init(cancellable: Gio.Cancellable | null): boolean
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    vfunc_init(cancellable?: Gio.Cancellable | null): boolean
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -17245,12 +15432,11 @@ export class RequestData {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -17277,7 +15463,6 @@ export class RequestData {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: RequestData, pspec: GObject.ParamSpec) => void)): number
@@ -17287,8 +15472,8 @@ export class RequestData {
     connect_after(sigName: "notify::session", callback: (($obj: RequestData, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::uri", callback: (($obj: RequestData, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::uri", callback: (($obj: RequestData, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -17303,13 +15488,13 @@ export class RequestData {
      * @param parameters the parameters to use to construct the object
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    static newv(object_type: GObject.GType, parameters: GObject.Parameter[], cancellable: Gio.Cancellable | null): GObject.Object
-    static $gtype: GObject.GType<RequestData>
+    static newv(object_type: GObject.Type, parameters: GObject.Parameter[], cancellable?: Gio.Cancellable | null): GObject.Object
+    static $gtype: GObject.Type
 }
 export interface RequestFile_ConstructProps extends Request_ConstructProps {
 }
 export class RequestFile {
-    /* Extended properties of Soup-2.4.Soup.Request */
+    /* Properties of Soup-2.4.Soup.Request */
     /**
      * The request's #SoupSession.
      */
@@ -17318,17 +15503,17 @@ export class RequestFile {
      * The request URI.
      */
     readonly uri: URI
-    /* Own fields of Soup-2.4.Soup.RequestFile */
-    parent: Request
-    priv: RequestFilePrivate
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of Soup-2.4.Soup.Request */
+    parent: GObject.Object
+    priv: RequestPrivate
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.RequestFile */
+    /* Methods of Soup-2.4.Soup.RequestFile */
     /**
      * Gets a #GFile corresponding to `file'`s URI
      */
     get_file(): Gio.File
-    /* Extended methods of Soup-2.4.Soup.Request */
+    /* Methods of Soup-2.4.Soup.Request */
     /**
      * Gets the length of the data represented by `request`. For most
      * request types, this will not be known until after you call
@@ -17360,7 +15545,7 @@ export class RequestFile {
      * a #SoupSessionAsync.
      * @param cancellable a #GCancellable or %NULL
      */
-    send(cancellable: Gio.Cancellable | null): Gio.InputStream
+    send(cancellable?: Gio.Cancellable | null): Gio.InputStream
     /**
      * Begins an asynchronously request for the URI pointed to by
      * `request`.
@@ -17370,13 +15555,13 @@ export class RequestFile {
      * @param cancellable a #GCancellable or %NULL
      * @param callback a #GAsyncReadyCallback
      */
-    send_async(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    send_async(cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the result of a soup_request_send_async().
      * @param result the #GAsyncResult
      */
     send_finish(result: Gio.AsyncResult): Gio.InputStream
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -17422,7 +15607,7 @@ export class RequestFile {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -17591,7 +15776,7 @@ export class RequestFile {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -17679,8 +15864,8 @@ export class RequestFile {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Gio-2.0.Gio.Initable */
+    watch_closure(closure: Function): void
+    /* Methods of Gio-2.0.Gio.Initable */
     /**
      * Initializes the object implementing the interface.
      * 
@@ -17722,8 +15907,8 @@ export class RequestFile {
      * instance.
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    init(cancellable: Gio.Cancellable | null): boolean
-    /* Own virtual methods of Soup-2.4.Soup.RequestFile */
+    init(cancellable?: Gio.Cancellable | null): boolean
+    /* Virtual methods of Soup-2.4.Soup.RequestFile */
     /**
      * Initializes the object implementing the interface.
      * 
@@ -17763,17 +15948,15 @@ export class RequestFile {
      * In this pattern, a caller would expect to be able to call g_initable_init()
      * on the result of g_object_new(), regardless of whether it is in fact a new
      * instance.
-     * @virtual 
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    vfunc_init(cancellable: Gio.Cancellable | null): boolean
-    /* Extended virtual methods of Soup-2.4.Soup.Request */
+    vfunc_init(cancellable?: Gio.Cancellable | null): boolean
+    /* Virtual methods of Soup-2.4.Soup.Request */
     vfunc_check_uri(uri: URI): boolean
     /**
      * Gets the length of the data represented by `request`. For most
      * request types, this will not be known until after you call
      * soup_request_send() or soup_request_send_finish().
-     * @virtual 
      */
     vfunc_get_content_length(): number
     /**
@@ -17783,7 +15966,6 @@ export class RequestFile {
      * 
      * As in the HTTP Content-Type header, this may include parameters
      * after the MIME type.
-     * @virtual 
      */
     vfunc_get_content_type(): string | null
     /**
@@ -17792,24 +15974,21 @@ export class RequestFile {
      * 
      * Note that you cannot use this method with #SoupRequests attached to
      * a #SoupSessionAsync.
-     * @virtual 
      * @param cancellable a #GCancellable or %NULL
      */
-    vfunc_send(cancellable: Gio.Cancellable | null): Gio.InputStream
+    vfunc_send(cancellable?: Gio.Cancellable | null): Gio.InputStream
     /**
      * Begins an asynchronously request for the URI pointed to by
      * `request`.
      * 
      * Note that you cannot use this method with #SoupRequests attached to
      * a #SoupSessionSync.
-     * @virtual 
      * @param cancellable a #GCancellable or %NULL
      * @param callback a #GAsyncReadyCallback
      */
-    vfunc_send_async(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    vfunc_send_async(cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the result of a soup_request_send_async().
-     * @virtual 
      * @param result the #GAsyncResult
      */
     vfunc_send_finish(result: Gio.AsyncResult): Gio.InputStream
@@ -17852,11 +16031,10 @@ export class RequestFile {
      * In this pattern, a caller would expect to be able to call g_initable_init()
      * on the result of g_object_new(), regardless of whether it is in fact a new
      * instance.
-     * @virtual 
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    vfunc_init(cancellable: Gio.Cancellable | null): boolean
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    vfunc_init(cancellable?: Gio.Cancellable | null): boolean
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -17873,12 +16051,11 @@ export class RequestFile {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -17905,7 +16082,6 @@ export class RequestFile {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: RequestFile, pspec: GObject.ParamSpec) => void)): number
@@ -17915,8 +16091,8 @@ export class RequestFile {
     connect_after(sigName: "notify::session", callback: (($obj: RequestFile, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::uri", callback: (($obj: RequestFile, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::uri", callback: (($obj: RequestFile, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -17931,13 +16107,13 @@ export class RequestFile {
      * @param parameters the parameters to use to construct the object
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    static newv(object_type: GObject.GType, parameters: GObject.Parameter[], cancellable: Gio.Cancellable | null): GObject.Object
-    static $gtype: GObject.GType<RequestFile>
+    static newv(object_type: GObject.Type, parameters: GObject.Parameter[], cancellable?: Gio.Cancellable | null): GObject.Object
+    static $gtype: GObject.Type
 }
 export interface RequestHTTP_ConstructProps extends Request_ConstructProps {
 }
 export class RequestHTTP {
-    /* Extended properties of Soup-2.4.Soup.Request */
+    /* Properties of Soup-2.4.Soup.Request */
     /**
      * The request's #SoupSession.
      */
@@ -17946,17 +16122,17 @@ export class RequestHTTP {
      * The request URI.
      */
     readonly uri: URI
-    /* Own fields of Soup-2.4.Soup.RequestHTTP */
-    parent: Request
-    priv: RequestHTTPPrivate
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of Soup-2.4.Soup.Request */
+    parent: GObject.Object
+    priv: RequestPrivate
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.RequestHTTP */
+    /* Methods of Soup-2.4.Soup.RequestHTTP */
     /**
      * Gets a new reference to the #SoupMessage associated to this SoupRequest
      */
     get_message(): Message
-    /* Extended methods of Soup-2.4.Soup.Request */
+    /* Methods of Soup-2.4.Soup.Request */
     /**
      * Gets the length of the data represented by `request`. For most
      * request types, this will not be known until after you call
@@ -17988,7 +16164,7 @@ export class RequestHTTP {
      * a #SoupSessionAsync.
      * @param cancellable a #GCancellable or %NULL
      */
-    send(cancellable: Gio.Cancellable | null): Gio.InputStream
+    send(cancellable?: Gio.Cancellable | null): Gio.InputStream
     /**
      * Begins an asynchronously request for the URI pointed to by
      * `request`.
@@ -17998,13 +16174,13 @@ export class RequestHTTP {
      * @param cancellable a #GCancellable or %NULL
      * @param callback a #GAsyncReadyCallback
      */
-    send_async(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    send_async(cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the result of a soup_request_send_async().
      * @param result the #GAsyncResult
      */
     send_finish(result: Gio.AsyncResult): Gio.InputStream
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -18050,7 +16226,7 @@ export class RequestHTTP {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -18219,7 +16395,7 @@ export class RequestHTTP {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -18307,8 +16483,8 @@ export class RequestHTTP {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Gio-2.0.Gio.Initable */
+    watch_closure(closure: Function): void
+    /* Methods of Gio-2.0.Gio.Initable */
     /**
      * Initializes the object implementing the interface.
      * 
@@ -18350,8 +16526,8 @@ export class RequestHTTP {
      * instance.
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    init(cancellable: Gio.Cancellable | null): boolean
-    /* Own virtual methods of Soup-2.4.Soup.RequestHTTP */
+    init(cancellable?: Gio.Cancellable | null): boolean
+    /* Virtual methods of Soup-2.4.Soup.RequestHTTP */
     /**
      * Initializes the object implementing the interface.
      * 
@@ -18391,17 +16567,15 @@ export class RequestHTTP {
      * In this pattern, a caller would expect to be able to call g_initable_init()
      * on the result of g_object_new(), regardless of whether it is in fact a new
      * instance.
-     * @virtual 
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    vfunc_init(cancellable: Gio.Cancellable | null): boolean
-    /* Extended virtual methods of Soup-2.4.Soup.Request */
+    vfunc_init(cancellable?: Gio.Cancellable | null): boolean
+    /* Virtual methods of Soup-2.4.Soup.Request */
     vfunc_check_uri(uri: URI): boolean
     /**
      * Gets the length of the data represented by `request`. For most
      * request types, this will not be known until after you call
      * soup_request_send() or soup_request_send_finish().
-     * @virtual 
      */
     vfunc_get_content_length(): number
     /**
@@ -18411,7 +16585,6 @@ export class RequestHTTP {
      * 
      * As in the HTTP Content-Type header, this may include parameters
      * after the MIME type.
-     * @virtual 
      */
     vfunc_get_content_type(): string | null
     /**
@@ -18420,24 +16593,21 @@ export class RequestHTTP {
      * 
      * Note that you cannot use this method with #SoupRequests attached to
      * a #SoupSessionAsync.
-     * @virtual 
      * @param cancellable a #GCancellable or %NULL
      */
-    vfunc_send(cancellable: Gio.Cancellable | null): Gio.InputStream
+    vfunc_send(cancellable?: Gio.Cancellable | null): Gio.InputStream
     /**
      * Begins an asynchronously request for the URI pointed to by
      * `request`.
      * 
      * Note that you cannot use this method with #SoupRequests attached to
      * a #SoupSessionSync.
-     * @virtual 
      * @param cancellable a #GCancellable or %NULL
      * @param callback a #GAsyncReadyCallback
      */
-    vfunc_send_async(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    vfunc_send_async(cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the result of a soup_request_send_async().
-     * @virtual 
      * @param result the #GAsyncResult
      */
     vfunc_send_finish(result: Gio.AsyncResult): Gio.InputStream
@@ -18480,11 +16650,10 @@ export class RequestHTTP {
      * In this pattern, a caller would expect to be able to call g_initable_init()
      * on the result of g_object_new(), regardless of whether it is in fact a new
      * instance.
-     * @virtual 
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    vfunc_init(cancellable: Gio.Cancellable | null): boolean
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    vfunc_init(cancellable?: Gio.Cancellable | null): boolean
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -18501,12 +16670,11 @@ export class RequestHTTP {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -18533,7 +16701,6 @@ export class RequestHTTP {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: RequestHTTP, pspec: GObject.ParamSpec) => void)): number
@@ -18543,8 +16710,8 @@ export class RequestHTTP {
     connect_after(sigName: "notify::session", callback: (($obj: RequestHTTP, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::uri", callback: (($obj: RequestHTTP, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::uri", callback: (($obj: RequestHTTP, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -18559,21 +16726,18 @@ export class RequestHTTP {
      * @param parameters the parameters to use to construct the object
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    static newv(object_type: GObject.GType, parameters: GObject.Parameter[], cancellable: Gio.Cancellable | null): GObject.Object
-    static $gtype: GObject.GType<RequestHTTP>
+    static newv(object_type: GObject.Type, parameters: GObject.Parameter[], cancellable?: Gio.Cancellable | null): GObject.Object
+    static $gtype: GObject.Type
 }
 export interface Requester_ConstructProps extends GObject.Object_ConstructProps {
 }
 export class Requester {
-    /* Own fields of Soup-2.4.Soup.Requester */
-    parent: GObject.Object
-    priv: RequesterPrivate
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.Requester */
+    /* Methods of Soup-2.4.Soup.Requester */
     request(uri_string: string): Request
     request_uri(uri: URI): Request
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -18619,7 +16783,7 @@ export class Requester {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -18788,7 +16952,7 @@ export class Requester {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -18876,8 +17040,8 @@ export class Requester {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    watch_closure(closure: Function): void
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -18885,7 +17049,7 @@ export class Requester {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -18893,43 +17057,40 @@ export class Requester {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.Requester */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.Requester */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -18946,12 +17107,11 @@ export class Requester {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -18978,14 +17138,13 @@ export class Requester {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Requester, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Requester, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -18993,7 +17152,7 @@ export class Requester {
     _init (config?: Requester_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(): Requester
-    static $gtype: GObject.GType<Requester>
+    static $gtype: GObject.Type
 }
 export interface Server_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.Server */
@@ -19003,7 +17162,7 @@ export interface Server_ConstructProps extends GObject.Object_ConstructProps {
      * the #GMainContext that was the thread-default context at
      * the time soup_server_listen() was called.
      */
-    async_context?: object | null
+    async_context?: object
     /**
      * A %NULL-terminated array of URI schemes that should be
      * considered to be aliases for "http". Eg, if this included
@@ -19021,7 +17180,7 @@ export interface Server_ConstructProps extends GObject.Object_ConstructProps {
      * 
      * See also #SoupServer:https-aliases.
      */
-    http_aliases?: string[] | null
+    http_aliases?: string[]
     /**
      * A comma-delimited list of URI schemes that should be
      * considered to be aliases for "https". See
@@ -19030,21 +17189,21 @@ export interface Server_ConstructProps extends GObject.Object_ConstructProps {
      * The default value is %NULL, meaning that no URI schemes
      * are considered aliases for "https".
      */
-    https_aliases?: string[] | null
+    https_aliases?: string[]
     /**
      * The address of the network interface the server is
      * listening on, if you are using the old #SoupServer API.
      * (This will not be set if you use soup_server_listen(),
      * etc.)
      */
-    interface?: Address | null
+    interface?: Address
     /**
      * The port the server is listening on, if you are using the
      * old #SoupServer API. (This will not be set if you use
      * soup_server_listen(), etc.)
      */
-    port?: number | null
-    raw_paths?: boolean | null
+    port?: number
+    raw_paths?: boolean
     /**
      * If non-%NULL, the value to use for the "Server" header on
      * #SoupMessage<!-- -->s processed by this server.
@@ -19071,7 +17230,7 @@ export interface Server_ConstructProps extends GObject.Object_ConstructProps {
      * "<literal>libsoup/2.3.2</literal>") to the end of the
      * header for you.
      */
-    server_header?: string | null
+    server_header?: string
     /**
      * Path to a file containing a PEM-encoded certificate.
      * 
@@ -19082,13 +17241,13 @@ export interface Server_ConstructProps extends GObject.Object_ConstructProps {
      * newer versions of glib, since returning %NULL from a
      * constructor is illegal).
      */
-    ssl_cert_file?: string | null
+    ssl_cert_file?: string
     /**
      * Path to a file containing a PEM-encoded private key. See
      * #SoupServer:ssl-cert-file for more information about how this
      * is used.
      */
-    ssl_key_file?: string | null
+    ssl_key_file?: string
     /**
      * A #GTlsCertificate that has a #GTlsCertificate:private-key
      * set. If this is set, then the server will be able to speak
@@ -19097,10 +17256,10 @@ export interface Server_ConstructProps extends GObject.Object_ConstructProps {
      * Alternatively, you can call soup_server_set_ssl_cert_file()
      * to have #SoupServer read in a a certificate from a file.
      */
-    tls_certificate?: Gio.TlsCertificate | null
+    tls_certificate?: Gio.TlsCertificate
 }
 export class Server {
-    /* Own properties of Soup-2.4.Soup.Server */
+    /* Properties of Soup-2.4.Soup.Server */
     /**
      * The server's #GMainContext, if you are using the old API.
      * Servers created using soup_server_listen() will listen on
@@ -19202,18 +17361,16 @@ export class Server {
      * to have #SoupServer read in a a certificate from a file.
      */
     readonly tls_certificate: Gio.TlsCertificate
-    /* Own fields of Soup-2.4.Soup.Server */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.Server */
+    /* Methods of Soup-2.4.Soup.Server */
     /**
      * Add a new client stream to the `server`.
      * @param stream a #GIOStream
      * @param local_addr the local #GSocketAddress associated with the `stream`
      * @param remote_addr the remote #GSocketAddress associated with the `stream`
      */
-    accept_iostream(stream: Gio.IOStream, local_addr: Gio.SocketAddress | null, remote_addr: Gio.SocketAddress | null): boolean
+    accept_iostream(stream: Gio.IOStream, local_addr?: Gio.SocketAddress | null, remote_addr?: Gio.SocketAddress | null): boolean
     /**
      * Adds an authentication domain to `server`. Each auth domain will
      * have the chance to require authentication for each request that
@@ -19315,7 +17472,7 @@ export class Server {
      * soup_server_remove_websocket_extension() if you want to disable it.
      * @param extension_type a #GType
      */
-    add_websocket_extension(extension_type: GObject.GType): void
+    add_websocket_extension(extension_type: GObject.Type): void
     /**
      * Adds a WebSocket handler to `server` for requests under `path`. (If
      * `path` is %NULL or "/", then this will be the default handler for
@@ -19528,7 +17685,7 @@ export class Server {
      * property.
      * @param extension_type a #GType
      */
-    remove_websocket_extension(extension_type: GObject.GType): void
+    remove_websocket_extension(extension_type: GObject.Type): void
     /**
      * Starts `server,` if you are using the old API, causing it to listen
      * for and process incoming connections. Unlike
@@ -19572,7 +17729,7 @@ export class Server {
      * @param msg a #SoupMessage associated with `server`.
      */
     unpause_message(msg: Message): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -19618,7 +17775,7 @@ export class Server {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -19787,7 +17944,7 @@ export class Server {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -19875,13 +18032,13 @@ export class Server {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Soup-2.4.Soup.Server */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.Server */
     vfunc_request_aborted(msg: Message, client: ClientContext): void
     vfunc_request_finished(msg: Message, client: ClientContext): void
     vfunc_request_read(msg: Message, client: ClientContext): void
     vfunc_request_started(msg: Message, client: ClientContext): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -19898,12 +18055,11 @@ export class Server {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Soup-2.4.Soup.Server */
+    /* Signals of Soup-2.4.Soup.Server */
     /**
      * Emitted when processing has failed for a message; this
      * could mean either that it could not be read (if
@@ -19916,7 +18072,6 @@ export class Server {
      * emitted; the signal exists primarily to allow the server to
      * free any state that it may have allocated in
      * #SoupServer::request_started.
-     * @signal 
      * @param message the message
      * @param client the client context
      */
@@ -19926,7 +18081,6 @@ export class Server {
     /**
      * Emitted when the server has finished writing a response to
      * a request.
-     * @signal 
      * @param message the message
      * @param client the client context
      */
@@ -19941,7 +18095,6 @@ export class Server {
      * before any (non-early) handlers are called for the message,
      * and if it sets the message's #status_code, then normal
      * handler processing will be skipped.
-     * @signal 
      * @param message the message
      * @param client the client context
      */
@@ -19960,14 +18113,13 @@ export class Server {
      * a #SoupServer::request_finished signal. If a network error
      * occurs, the processing will instead end with
      * #SoupServer::request_aborted.
-     * @signal 
      * @param message the new message
      * @param client the client context
      */
     connect(sigName: "request-started", callback: (($obj: Server, message: Message, client: ClientContext) => void)): number
     connect_after(sigName: "request-started", callback: (($obj: Server, message: Message, client: ClientContext) => void)): number
     emit(sigName: "request-started", message: Message, client: ClientContext): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -19994,7 +18146,6 @@ export class Server {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Server, pspec: GObject.ParamSpec) => void)): number
@@ -20020,14 +18171,14 @@ export class Server {
     connect_after(sigName: "notify::ssl-key-file", callback: (($obj: Server, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::tls-certificate", callback: (($obj: Server, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::tls-certificate", callback: (($obj: Server, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: Server_ConstructProps)
     _init (config?: Server_ConstructProps): void
-    static $gtype: GObject.GType<Server>
+    static $gtype: GObject.Type
 }
 export interface Session_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.Session */
@@ -20038,7 +18189,7 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * Setting this will disable
      * #SoupSession:accept-language-auto.
      */
-    accept_language?: string | null
+    accept_language?: string
     /**
      * If %TRUE, #SoupSession will automatically set the string
      * for the "Accept-Language" header on every #SoupMessage
@@ -20047,7 +18198,7 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * Setting this will override any previous value of
      * #SoupSession:accept-language.
      */
-    accept_language_auto?: boolean | null
+    accept_language_auto?: boolean
     /**
      * The #GMainContext that miscellaneous session-related
      * asynchronous callbacks are invoked on. (Eg, setting
@@ -20063,7 +18214,7 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * If #SoupSession:use-thread-context is %FALSE, this context
      * will also be used for asynchronous HTTP I/O.
      */
-    async_context?: object | null
+    async_context?: object
     /**
      * A %NULL-terminated array of URI schemes that should be
      * considered to be aliases for "http". Eg, if this included
@@ -20081,7 +18232,7 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * 
      * See also #SoupSession:https-aliases.
      */
-    http_aliases?: string[] | null
+    http_aliases?: string[]
     /**
      * A comma-delimited list of URI schemes that should be
      * considered to be aliases for "https". See
@@ -20090,7 +18241,7 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * The default value is %NULL, meaning that no URI schemes
      * are considered aliases for "https".
      */
-    https_aliases?: string[] | null
+    https_aliases?: string[]
     /**
      * Connection lifetime (in seconds) when idle. Any connection
      * left idle longer than this will be closed.
@@ -20106,7 +18257,7 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * #SoupSessionSync, the default value is 0 (meaning idle
      * connections will never time out).
      */
-    idle_timeout?: number | null
+    idle_timeout?: number
     /**
      * Sets the #SoupAddress to use for the client side of
      * the connection.
@@ -20114,9 +18265,9 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * Use this property if you want for instance to bind the
      * local socket to a specific IP address.
      */
-    local_address?: Address | null
-    max_conns?: number | null
-    max_conns_per_host?: number | null
+    local_address?: Address
+    max_conns?: number
+    max_conns_per_host?: number
     /**
      * A #GProxyResolver to use with this session. Setting this
      * will clear the #SoupSession:proxy-uri property, and remove
@@ -20129,7 +18280,7 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * #GProxyResolver if you want to control what proxies get
      * used.
      */
-    proxy_resolver?: Gio.ProxyResolver | null
+    proxy_resolver?: Gio.ProxyResolver
     /**
      * A proxy to use for all http and https requests in this
      * session. Setting this will clear the
@@ -20149,7 +18300,7 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * proxies, you can create a #GSimpleProxyResolver and set the
      * #SoupSession:proxy-resolver property.
      */
-    proxy_uri?: URI | null
+    proxy_uri?: URI
     /**
      * File containing SSL CA certificates.
      * 
@@ -20158,7 +18309,7 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * though it had read in a empty CA file, meaning that all SSL
      * certificates will be considered invalid.
      */
-    ssl_ca_file?: string | null
+    ssl_ca_file?: string
     /**
      * Normally, if #SoupSession:tls-database is set (including if
      * it was set via #SoupSession:ssl-use-system-ca-file or
@@ -20183,7 +18334,7 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * no CA file or TLS database, then all certificates are always
      * accepted, and this property has no effect.
      */
-    ssl_strict?: boolean | null
+    ssl_strict?: boolean
     /**
      * Setting this to %TRUE is equivalent to setting
      * #SoupSession:tls-database to the default system CA database.
@@ -20202,7 +18353,7 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * #SoupSessionSync, the default value is %FALSE, for backward
      * compatibility.
      */
-    ssl_use_system_ca_file?: boolean | null
+    ssl_use_system_ca_file?: boolean
     /**
      * The timeout (in seconds) for socket I/O operations
      * (including connecting to a server, and waiting for a reply
@@ -20223,7 +18374,7 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * the length of time that idle persistent connections will be
      * kept open).
      */
-    timeout?: number | null
+    timeout?: number
     /**
      * Sets the #GTlsDatabase to use for validating SSL/TLS
      * certificates.
@@ -20242,17 +18393,17 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * CA database. If you are using #SoupSessionAsync or
      * #SoupSessionSync, this property will be %NULL by default.
      */
-    tls_database?: Gio.TlsDatabase | null
+    tls_database?: Gio.TlsDatabase
     /**
      * A #GTlsInteraction object that will be passed on to any
      * #GTlsConnections created by the session. (This can be used to
      * provide client-side certificates, for example.)
      */
-    tls_interaction?: Gio.TlsInteraction | null
+    tls_interaction?: Gio.TlsInteraction
     /**
      * Whether or not to use NTLM authentication.
      */
-    use_ntlm?: boolean | null
+    use_ntlm?: boolean
     /**
      * If %TRUE (which it always is on a plain #SoupSession),
      * asynchronous HTTP requests in this session will run in
@@ -20260,7 +18411,7 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * they are started, rather than always occurring in
      * #SoupSession:async-context.
      */
-    use_thread_context?: boolean | null
+    use_thread_context?: boolean
     /**
      * If non-%NULL, the value to use for the "User-Agent" header
      * on #SoupMessage<!-- -->s sent from this session.
@@ -20286,10 +18437,10 @@ export interface Session_ConstructProps extends GObject.Object_ConstructProps {
      * (eg, "<literal>libsoup/2.3.2</literal>") to the end of the
      * header for you.
      */
-    user_agent?: string | null
+    user_agent?: string
 }
 export class Session {
-    /* Own properties of Soup-2.4.Soup.Session */
+    /* Properties of Soup-2.4.Soup.Session */
     /**
      * If non-%NULL, the value to use for the "Accept-Language" header
      * on #SoupMessage<!-- -->s sent from this session.
@@ -20546,11 +18697,9 @@ export class Session {
      * header for you.
      */
     user_agent: string
-    /* Own fields of Soup-2.4.Soup.Session */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.Session */
+    /* Methods of Soup-2.4.Soup.Session */
     /**
      * Cancels all pending requests in `session` and closes all idle
      * persistent connections.
@@ -20590,7 +18739,7 @@ export class Session {
      * features are present in sessions by default.
      * @param feature_type a #GType
      */
-    add_feature_by_type(feature_type: GObject.GType): void
+    add_feature_by_type(feature_type: GObject.Type): void
     /**
      * Causes `session` to immediately finish processing `msg` (regardless
      * of its current state) with a final status_code of `status_code`. You
@@ -20628,7 +18777,7 @@ export class Session {
      * @param progress_callback a #SoupSessionConnectProgressCallback which will be called for every network event that occurs during the connection.
      * @param callback the callback to invoke when the operation finishes
      */
-    connect_async(uri: URI, cancellable: Gio.Cancellable | null, progress_callback: SessionConnectProgressCallback | null, callback: Gio.AsyncReadyCallback | null): void
+    connect_async(uri: URI, cancellable?: Gio.Cancellable | null, progress_callback?: SessionConnectProgressCallback | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the #GIOStream created for the connection to communicate with the server.
      * @param result the #GAsyncResult passed to your callback
@@ -20649,7 +18798,7 @@ export class Session {
      * use soup_session_get_features().
      * @param feature_type the #GType of the feature to get
      */
-    get_feature(feature_type: GObject.GType): SessionFeature | null
+    get_feature(feature_type: GObject.Type): SessionFeature | null
     /**
      * Gets the first feature in `session` of type `feature_type,` provided
      * that it is not disabled for `msg`. As with
@@ -20661,14 +18810,14 @@ export class Session {
      * @param feature_type the #GType of the feature to get
      * @param msg a #SoupMessage
      */
-    get_feature_for_message(feature_type: GObject.GType, msg: Message): SessionFeature | null
+    get_feature_for_message(feature_type: GObject.Type, msg: Message): SessionFeature | null
     /**
      * Generates a list of `session'`s features of type `feature_type`. (If
      * you want to see all features, you can pass %SOUP_TYPE_SESSION_FEATURE
      * for `feature_type`.)
      * @param feature_type the #GType of the class of features to get
      */
-    get_features(feature_type: GObject.GType): SessionFeature[]
+    get_features(feature_type: GObject.Type): SessionFeature[]
     /**
      * Tests if `session` has at a feature of type `feature_type` (which can
      * be the type of either a #SoupSessionFeature, or else a subtype of
@@ -20676,7 +18825,7 @@ export class Session {
      * #SoupRequest).
      * @param feature_type the #GType of the class of features to check for
      */
-    has_feature(feature_type: GObject.GType): boolean
+    has_feature(feature_type: GObject.Type): boolean
     /**
      * Pauses HTTP I/O on `msg`. Call soup_session_unpause_message() to
      * resume I/O.
@@ -20699,7 +18848,7 @@ export class Session {
      * @param cancellable a #GCancellable object, or %NULL
      * @param callback callback to call with the     result, or %NULL
      */
-    prefetch_dns(hostname: string, cancellable: Gio.Cancellable | null, callback: AddressCallback | null): void
+    prefetch_dns(hostname: string, cancellable?: Gio.Cancellable | null, callback?: AddressCallback | null): void
     /**
      * Tells `session` that `uri` may be requested shortly, and so the
      * session can try to prepare (resolving the domain name, obtaining
@@ -20732,7 +18881,7 @@ export class Session {
      * @param msg the message to queue
      * @param callback a #SoupSessionCallback which will be called after the message completes or when an unrecoverable error occurs.
      */
-    queue_message(msg: Message, callback: SessionCallback | null): void
+    queue_message(msg: Message, callback?: SessionCallback | null): void
     /**
      * Updates `msg'`s URI according to its status code and "Location"
      * header, and requeues it on `session`. Use this when you have set
@@ -20761,7 +18910,7 @@ export class Session {
      * %SOUP_SESSION_REMOVE_FEATURE_BY_TYPE property.
      * @param feature_type a #GType
      */
-    remove_feature_by_type(feature_type: GObject.GType): void
+    remove_feature_by_type(feature_type: GObject.Type): void
     /**
      * Creates a #SoupRequest for retrieving `uri_string`.
      * @param uri_string a URI, in string form
@@ -20823,7 +18972,7 @@ export class Session {
      * @param msg a #SoupMessage
      * @param cancellable a #GCancellable
      */
-    send(msg: Message, cancellable: Gio.Cancellable | null): Gio.InputStream
+    send(msg: Message, cancellable?: Gio.Cancellable | null): Gio.InputStream
     /**
      * Asynchronously sends `msg` and waits for the beginning of a
      * response. When `callback` is called, then either `msg` has been sent,
@@ -20845,7 +18994,7 @@ export class Session {
      * @param cancellable a #GCancellable
      * @param callback the callback to invoke
      */
-    send_async(msg: Message, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    send_async(msg: Message, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the response to a soup_session_send_async() call and (if
      * successful), returns a #GInputStream that can be used to read the
@@ -20923,7 +19072,7 @@ export class Session {
      * @param cancellable a #GCancellable
      * @param callback the callback to invoke
      */
-    websocket_connect_async(msg: Message, origin: string | null, protocols: string[] | null, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    websocket_connect_async(msg: Message, origin?: string | null, protocols?: string[] | null, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the #SoupWebsocketConnection response to a
      * soup_session_websocket_connect_async() call and (if successful),
@@ -20939,7 +19088,7 @@ export class Session {
      * @param msg a #SoupMessage that has response headers
      */
     would_redirect(msg: Message): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -20985,7 +19134,7 @@ export class Session {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -21154,7 +19303,7 @@ export class Session {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -21242,8 +19391,8 @@ export class Session {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Soup-2.4.Soup.Session */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.Session */
     vfunc_auth_required(msg: Message, auth: Auth, retrying: boolean): void
     vfunc_authenticate(msg: Message, auth: Auth, retrying: boolean): void
     /**
@@ -21269,7 +19418,6 @@ export class Session {
      * #SoupSession does not have this behavior; cancelling an
      * asynchronous message will merely queue its callback to be run after
      * returning to the main loop.
-     * @virtual 
      * @param msg the message to cancel
      * @param status_code status code to set on `msg` (generally %SOUP_STATUS_CANCELLED)
      */
@@ -21297,16 +19445,14 @@ export class Session {
      * asynchronously sends a message, but returns before reading the
      * response body, and allows you to read the response via a
      * #GInputStream.
-     * @virtual 
      * @param msg the message to queue
      * @param callback a #SoupSessionCallback which will be called after the message completes or when an unrecoverable error occurs.
      */
-    vfunc_queue_message(msg: Message, callback: SessionCallback | null): void
+    vfunc_queue_message(msg: Message, callback?: SessionCallback | null): void
     vfunc_request_started(msg: Message, socket: Socket): void
     /**
      * This causes `msg` to be placed back on the queue to be attempted
      * again.
-     * @virtual 
      * @param msg the message to requeue
      */
     vfunc_requeue_message(msg: Message): void
@@ -21327,11 +19473,10 @@ export class Session {
      * synchronously sends a message, but returns before reading the
      * response body, and allows you to read the response via a
      * #GInputStream.
-     * @virtual 
      * @param msg the message to send
      */
     vfunc_send_message(msg: Message): number
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -21348,12 +19493,11 @@ export class Session {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Soup-2.4.Soup.Session */
+    /* Signals of Soup-2.4.Soup.Session */
     /**
      * Emitted when the session requires authentication. If
      * credentials are available call soup_auth_authenticate() on
@@ -21370,7 +19514,6 @@ export class Session {
      * (as long as you g_object_ref() it to make sure it doesn't
      * get destroyed), and then unpause `msg` when you are ready
      * for it to continue.
-     * @signal 
      * @param msg the #SoupMessage being sent
      * @param auth the #SoupAuth to authenticate
      * @param retrying %TRUE if this is the second (or later) attempt
@@ -21382,7 +19525,6 @@ export class Session {
      * Emitted when a new connection is created. This is an
      * internal signal intended only to be used for debugging
      * purposes, and may go away in the future.
-     * @signal 
      * @param connection the connection
      */
     connect(sigName: "connection-created", callback: (($obj: Session, connection: GObject.Object) => void)): number
@@ -21424,7 +19566,6 @@ export class Session {
      * exactly once, but #SoupSession::request_started and
      * #SoupMessage::finished (and all of the other #SoupMessage
      * signals) may be invoked multiple times for a given message.
-     * @signal 
      * @param msg the request that was queued
      */
     connect(sigName: "request-queued", callback: (($obj: Session, msg: Message) => void)): number
@@ -21434,7 +19575,6 @@ export class Session {
      * Emitted just before a request is sent. See
      * #SoupSession::request_queued for a detailed description of
      * the message lifecycle within a session.
-     * @signal 
      * @param msg the request being sent
      * @param socket the socket the request is being sent on
      */
@@ -21446,7 +19586,6 @@ export class Session {
      * indicating that `session` is done with it. See
      * #SoupSession::request_queued for a detailed description of the
      * message lifecycle within a session.
-     * @signal 
      * @param msg the request that was unqueued
      */
     connect(sigName: "request-unqueued", callback: (($obj: Session, msg: Message) => void)): number
@@ -21456,13 +19595,12 @@ export class Session {
      * Emitted when an SSL tunnel is being created on a proxy
      * connection. This is an internal signal intended only to be
      * used for debugging purposes, and may go away in the future.
-     * @signal 
      * @param connection the connection
      */
     connect(sigName: "tunneling", callback: (($obj: Session, connection: GObject.Object) => void)): number
     connect_after(sigName: "tunneling", callback: (($obj: Session, connection: GObject.Object) => void)): number
     emit(sigName: "tunneling", connection: GObject.Object): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -21489,7 +19627,6 @@ export class Session {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Session, pspec: GObject.ParamSpec) => void)): number
@@ -21535,8 +19672,8 @@ export class Session {
     connect_after(sigName: "notify::use-thread-context", callback: (($obj: Session, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::user-agent", callback: (($obj: Session, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::user-agent", callback: (($obj: Session, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -21544,12 +19681,12 @@ export class Session {
     _init (config?: Session_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(): Session
-    static $gtype: GObject.GType<Session>
+    static $gtype: GObject.Type
 }
 export interface SessionAsync_ConstructProps extends Session_ConstructProps {
 }
 export class SessionAsync {
-    /* Extended properties of Soup-2.4.Soup.Session */
+    /* Properties of Soup-2.4.Soup.Session */
     /**
      * If non-%NULL, the value to use for the "Accept-Language" header
      * on #SoupMessage<!-- -->s sent from this session.
@@ -21806,11 +19943,11 @@ export class SessionAsync {
      * header for you.
      */
     user_agent: string
-    /* Own fields of Soup-2.4.Soup.SessionAsync */
-    parent: Session
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of Soup-2.4.Soup.Session */
+    parent: GObject.Object
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Soup-2.4.Soup.Session */
+    /* Methods of Soup-2.4.Soup.Session */
     /**
      * Cancels all pending requests in `session` and closes all idle
      * persistent connections.
@@ -21850,7 +19987,7 @@ export class SessionAsync {
      * features are present in sessions by default.
      * @param feature_type a #GType
      */
-    add_feature_by_type(feature_type: GObject.GType): void
+    add_feature_by_type(feature_type: GObject.Type): void
     /**
      * Causes `session` to immediately finish processing `msg` (regardless
      * of its current state) with a final status_code of `status_code`. You
@@ -21888,7 +20025,7 @@ export class SessionAsync {
      * @param progress_callback a #SoupSessionConnectProgressCallback which will be called for every network event that occurs during the connection.
      * @param callback the callback to invoke when the operation finishes
      */
-    connect_async(uri: URI, cancellable: Gio.Cancellable | null, progress_callback: SessionConnectProgressCallback | null, callback: Gio.AsyncReadyCallback | null): void
+    connect_async(uri: URI, cancellable?: Gio.Cancellable | null, progress_callback?: SessionConnectProgressCallback | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the #GIOStream created for the connection to communicate with the server.
      * @param result the #GAsyncResult passed to your callback
@@ -21909,7 +20046,7 @@ export class SessionAsync {
      * use soup_session_get_features().
      * @param feature_type the #GType of the feature to get
      */
-    get_feature(feature_type: GObject.GType): SessionFeature | null
+    get_feature(feature_type: GObject.Type): SessionFeature | null
     /**
      * Gets the first feature in `session` of type `feature_type,` provided
      * that it is not disabled for `msg`. As with
@@ -21921,14 +20058,14 @@ export class SessionAsync {
      * @param feature_type the #GType of the feature to get
      * @param msg a #SoupMessage
      */
-    get_feature_for_message(feature_type: GObject.GType, msg: Message): SessionFeature | null
+    get_feature_for_message(feature_type: GObject.Type, msg: Message): SessionFeature | null
     /**
      * Generates a list of `session'`s features of type `feature_type`. (If
      * you want to see all features, you can pass %SOUP_TYPE_SESSION_FEATURE
      * for `feature_type`.)
      * @param feature_type the #GType of the class of features to get
      */
-    get_features(feature_type: GObject.GType): SessionFeature[]
+    get_features(feature_type: GObject.Type): SessionFeature[]
     /**
      * Tests if `session` has at a feature of type `feature_type` (which can
      * be the type of either a #SoupSessionFeature, or else a subtype of
@@ -21936,7 +20073,7 @@ export class SessionAsync {
      * #SoupRequest).
      * @param feature_type the #GType of the class of features to check for
      */
-    has_feature(feature_type: GObject.GType): boolean
+    has_feature(feature_type: GObject.Type): boolean
     /**
      * Pauses HTTP I/O on `msg`. Call soup_session_unpause_message() to
      * resume I/O.
@@ -21959,7 +20096,7 @@ export class SessionAsync {
      * @param cancellable a #GCancellable object, or %NULL
      * @param callback callback to call with the     result, or %NULL
      */
-    prefetch_dns(hostname: string, cancellable: Gio.Cancellable | null, callback: AddressCallback | null): void
+    prefetch_dns(hostname: string, cancellable?: Gio.Cancellable | null, callback?: AddressCallback | null): void
     /**
      * Tells `session` that `uri` may be requested shortly, and so the
      * session can try to prepare (resolving the domain name, obtaining
@@ -21992,7 +20129,7 @@ export class SessionAsync {
      * @param msg the message to queue
      * @param callback a #SoupSessionCallback which will be called after the message completes or when an unrecoverable error occurs.
      */
-    queue_message(msg: Message, callback: SessionCallback | null): void
+    queue_message(msg: Message, callback?: SessionCallback | null): void
     /**
      * Updates `msg'`s URI according to its status code and "Location"
      * header, and requeues it on `session`. Use this when you have set
@@ -22021,7 +20158,7 @@ export class SessionAsync {
      * %SOUP_SESSION_REMOVE_FEATURE_BY_TYPE property.
      * @param feature_type a #GType
      */
-    remove_feature_by_type(feature_type: GObject.GType): void
+    remove_feature_by_type(feature_type: GObject.Type): void
     /**
      * Creates a #SoupRequest for retrieving `uri_string`.
      * @param uri_string a URI, in string form
@@ -22083,7 +20220,7 @@ export class SessionAsync {
      * @param msg a #SoupMessage
      * @param cancellable a #GCancellable
      */
-    send(msg: Message, cancellable: Gio.Cancellable | null): Gio.InputStream
+    send(msg: Message, cancellable?: Gio.Cancellable | null): Gio.InputStream
     /**
      * Asynchronously sends `msg` and waits for the beginning of a
      * response. When `callback` is called, then either `msg` has been sent,
@@ -22105,7 +20242,7 @@ export class SessionAsync {
      * @param cancellable a #GCancellable
      * @param callback the callback to invoke
      */
-    send_async(msg: Message, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    send_async(msg: Message, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the response to a soup_session_send_async() call and (if
      * successful), returns a #GInputStream that can be used to read the
@@ -22183,7 +20320,7 @@ export class SessionAsync {
      * @param cancellable a #GCancellable
      * @param callback the callback to invoke
      */
-    websocket_connect_async(msg: Message, origin: string | null, protocols: string[] | null, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    websocket_connect_async(msg: Message, origin?: string | null, protocols?: string[] | null, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the #SoupWebsocketConnection response to a
      * soup_session_websocket_connect_async() call and (if successful),
@@ -22199,7 +20336,7 @@ export class SessionAsync {
      * @param msg a #SoupMessage that has response headers
      */
     would_redirect(msg: Message): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -22245,7 +20382,7 @@ export class SessionAsync {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -22414,7 +20551,7 @@ export class SessionAsync {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -22502,8 +20639,8 @@ export class SessionAsync {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Soup-2.4.Soup.Session */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.Session */
     vfunc_auth_required(msg: Message, auth: Auth, retrying: boolean): void
     vfunc_authenticate(msg: Message, auth: Auth, retrying: boolean): void
     /**
@@ -22529,7 +20666,6 @@ export class SessionAsync {
      * #SoupSession does not have this behavior; cancelling an
      * asynchronous message will merely queue its callback to be run after
      * returning to the main loop.
-     * @virtual 
      * @param msg the message to cancel
      * @param status_code status code to set on `msg` (generally %SOUP_STATUS_CANCELLED)
      */
@@ -22557,16 +20693,14 @@ export class SessionAsync {
      * asynchronously sends a message, but returns before reading the
      * response body, and allows you to read the response via a
      * #GInputStream.
-     * @virtual 
      * @param msg the message to queue
      * @param callback a #SoupSessionCallback which will be called after the message completes or when an unrecoverable error occurs.
      */
-    vfunc_queue_message(msg: Message, callback: SessionCallback | null): void
+    vfunc_queue_message(msg: Message, callback?: SessionCallback | null): void
     vfunc_request_started(msg: Message, socket: Socket): void
     /**
      * This causes `msg` to be placed back on the queue to be attempted
      * again.
-     * @virtual 
      * @param msg the message to requeue
      */
     vfunc_requeue_message(msg: Message): void
@@ -22587,11 +20721,10 @@ export class SessionAsync {
      * synchronously sends a message, but returns before reading the
      * response body, and allows you to read the response via a
      * #GInputStream.
-     * @virtual 
      * @param msg the message to send
      */
     vfunc_send_message(msg: Message): number
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -22608,12 +20741,11 @@ export class SessionAsync {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Soup-2.4.Soup.Session */
+    /* Signals of Soup-2.4.Soup.Session */
     /**
      * Emitted when the session requires authentication. If
      * credentials are available call soup_auth_authenticate() on
@@ -22630,7 +20762,6 @@ export class SessionAsync {
      * (as long as you g_object_ref() it to make sure it doesn't
      * get destroyed), and then unpause `msg` when you are ready
      * for it to continue.
-     * @signal 
      * @param msg the #SoupMessage being sent
      * @param auth the #SoupAuth to authenticate
      * @param retrying %TRUE if this is the second (or later) attempt
@@ -22642,7 +20773,6 @@ export class SessionAsync {
      * Emitted when a new connection is created. This is an
      * internal signal intended only to be used for debugging
      * purposes, and may go away in the future.
-     * @signal 
      * @param connection the connection
      */
     connect(sigName: "connection-created", callback: (($obj: SessionAsync, connection: GObject.Object) => void)): number
@@ -22684,7 +20814,6 @@ export class SessionAsync {
      * exactly once, but #SoupSession::request_started and
      * #SoupMessage::finished (and all of the other #SoupMessage
      * signals) may be invoked multiple times for a given message.
-     * @signal 
      * @param msg the request that was queued
      */
     connect(sigName: "request-queued", callback: (($obj: SessionAsync, msg: Message) => void)): number
@@ -22694,7 +20823,6 @@ export class SessionAsync {
      * Emitted just before a request is sent. See
      * #SoupSession::request_queued for a detailed description of
      * the message lifecycle within a session.
-     * @signal 
      * @param msg the request being sent
      * @param socket the socket the request is being sent on
      */
@@ -22706,7 +20834,6 @@ export class SessionAsync {
      * indicating that `session` is done with it. See
      * #SoupSession::request_queued for a detailed description of the
      * message lifecycle within a session.
-     * @signal 
      * @param msg the request that was unqueued
      */
     connect(sigName: "request-unqueued", callback: (($obj: SessionAsync, msg: Message) => void)): number
@@ -22716,13 +20843,12 @@ export class SessionAsync {
      * Emitted when an SSL tunnel is being created on a proxy
      * connection. This is an internal signal intended only to be
      * used for debugging purposes, and may go away in the future.
-     * @signal 
      * @param connection the connection
      */
     connect(sigName: "tunneling", callback: (($obj: SessionAsync, connection: GObject.Object) => void)): number
     connect_after(sigName: "tunneling", callback: (($obj: SessionAsync, connection: GObject.Object) => void)): number
     emit(sigName: "tunneling", connection: GObject.Object): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -22749,7 +20875,6 @@ export class SessionAsync {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: SessionAsync, pspec: GObject.ParamSpec) => void)): number
@@ -22795,8 +20920,8 @@ export class SessionAsync {
     connect_after(sigName: "notify::use-thread-context", callback: (($obj: SessionAsync, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::user-agent", callback: (($obj: SessionAsync, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::user-agent", callback: (($obj: SessionAsync, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -22804,12 +20929,12 @@ export class SessionAsync {
     _init (config?: SessionAsync_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(): SessionAsync
-    static $gtype: GObject.GType<SessionAsync>
+    static $gtype: GObject.Type
 }
 export interface SessionSync_ConstructProps extends Session_ConstructProps {
 }
 export class SessionSync {
-    /* Extended properties of Soup-2.4.Soup.Session */
+    /* Properties of Soup-2.4.Soup.Session */
     /**
      * If non-%NULL, the value to use for the "Accept-Language" header
      * on #SoupMessage<!-- -->s sent from this session.
@@ -23066,11 +21191,11 @@ export class SessionSync {
      * header for you.
      */
     user_agent: string
-    /* Own fields of Soup-2.4.Soup.SessionSync */
-    parent: Session
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of Soup-2.4.Soup.Session */
+    parent: GObject.Object
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Soup-2.4.Soup.Session */
+    /* Methods of Soup-2.4.Soup.Session */
     /**
      * Cancels all pending requests in `session` and closes all idle
      * persistent connections.
@@ -23110,7 +21235,7 @@ export class SessionSync {
      * features are present in sessions by default.
      * @param feature_type a #GType
      */
-    add_feature_by_type(feature_type: GObject.GType): void
+    add_feature_by_type(feature_type: GObject.Type): void
     /**
      * Causes `session` to immediately finish processing `msg` (regardless
      * of its current state) with a final status_code of `status_code`. You
@@ -23148,7 +21273,7 @@ export class SessionSync {
      * @param progress_callback a #SoupSessionConnectProgressCallback which will be called for every network event that occurs during the connection.
      * @param callback the callback to invoke when the operation finishes
      */
-    connect_async(uri: URI, cancellable: Gio.Cancellable | null, progress_callback: SessionConnectProgressCallback | null, callback: Gio.AsyncReadyCallback | null): void
+    connect_async(uri: URI, cancellable?: Gio.Cancellable | null, progress_callback?: SessionConnectProgressCallback | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the #GIOStream created for the connection to communicate with the server.
      * @param result the #GAsyncResult passed to your callback
@@ -23169,7 +21294,7 @@ export class SessionSync {
      * use soup_session_get_features().
      * @param feature_type the #GType of the feature to get
      */
-    get_feature(feature_type: GObject.GType): SessionFeature | null
+    get_feature(feature_type: GObject.Type): SessionFeature | null
     /**
      * Gets the first feature in `session` of type `feature_type,` provided
      * that it is not disabled for `msg`. As with
@@ -23181,14 +21306,14 @@ export class SessionSync {
      * @param feature_type the #GType of the feature to get
      * @param msg a #SoupMessage
      */
-    get_feature_for_message(feature_type: GObject.GType, msg: Message): SessionFeature | null
+    get_feature_for_message(feature_type: GObject.Type, msg: Message): SessionFeature | null
     /**
      * Generates a list of `session'`s features of type `feature_type`. (If
      * you want to see all features, you can pass %SOUP_TYPE_SESSION_FEATURE
      * for `feature_type`.)
      * @param feature_type the #GType of the class of features to get
      */
-    get_features(feature_type: GObject.GType): SessionFeature[]
+    get_features(feature_type: GObject.Type): SessionFeature[]
     /**
      * Tests if `session` has at a feature of type `feature_type` (which can
      * be the type of either a #SoupSessionFeature, or else a subtype of
@@ -23196,7 +21321,7 @@ export class SessionSync {
      * #SoupRequest).
      * @param feature_type the #GType of the class of features to check for
      */
-    has_feature(feature_type: GObject.GType): boolean
+    has_feature(feature_type: GObject.Type): boolean
     /**
      * Pauses HTTP I/O on `msg`. Call soup_session_unpause_message() to
      * resume I/O.
@@ -23219,7 +21344,7 @@ export class SessionSync {
      * @param cancellable a #GCancellable object, or %NULL
      * @param callback callback to call with the     result, or %NULL
      */
-    prefetch_dns(hostname: string, cancellable: Gio.Cancellable | null, callback: AddressCallback | null): void
+    prefetch_dns(hostname: string, cancellable?: Gio.Cancellable | null, callback?: AddressCallback | null): void
     /**
      * Tells `session` that `uri` may be requested shortly, and so the
      * session can try to prepare (resolving the domain name, obtaining
@@ -23252,7 +21377,7 @@ export class SessionSync {
      * @param msg the message to queue
      * @param callback a #SoupSessionCallback which will be called after the message completes or when an unrecoverable error occurs.
      */
-    queue_message(msg: Message, callback: SessionCallback | null): void
+    queue_message(msg: Message, callback?: SessionCallback | null): void
     /**
      * Updates `msg'`s URI according to its status code and "Location"
      * header, and requeues it on `session`. Use this when you have set
@@ -23281,7 +21406,7 @@ export class SessionSync {
      * %SOUP_SESSION_REMOVE_FEATURE_BY_TYPE property.
      * @param feature_type a #GType
      */
-    remove_feature_by_type(feature_type: GObject.GType): void
+    remove_feature_by_type(feature_type: GObject.Type): void
     /**
      * Creates a #SoupRequest for retrieving `uri_string`.
      * @param uri_string a URI, in string form
@@ -23343,7 +21468,7 @@ export class SessionSync {
      * @param msg a #SoupMessage
      * @param cancellable a #GCancellable
      */
-    send(msg: Message, cancellable: Gio.Cancellable | null): Gio.InputStream
+    send(msg: Message, cancellable?: Gio.Cancellable | null): Gio.InputStream
     /**
      * Asynchronously sends `msg` and waits for the beginning of a
      * response. When `callback` is called, then either `msg` has been sent,
@@ -23365,7 +21490,7 @@ export class SessionSync {
      * @param cancellable a #GCancellable
      * @param callback the callback to invoke
      */
-    send_async(msg: Message, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    send_async(msg: Message, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the response to a soup_session_send_async() call and (if
      * successful), returns a #GInputStream that can be used to read the
@@ -23443,7 +21568,7 @@ export class SessionSync {
      * @param cancellable a #GCancellable
      * @param callback the callback to invoke
      */
-    websocket_connect_async(msg: Message, origin: string | null, protocols: string[] | null, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void
+    websocket_connect_async(msg: Message, origin?: string | null, protocols?: string[] | null, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null): void
     /**
      * Gets the #SoupWebsocketConnection response to a
      * soup_session_websocket_connect_async() call and (if successful),
@@ -23459,7 +21584,7 @@ export class SessionSync {
      * @param msg a #SoupMessage that has response headers
      */
     would_redirect(msg: Message): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -23505,7 +21630,7 @@ export class SessionSync {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -23674,7 +21799,7 @@ export class SessionSync {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -23762,8 +21887,8 @@ export class SessionSync {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Soup-2.4.Soup.Session */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.Session */
     vfunc_auth_required(msg: Message, auth: Auth, retrying: boolean): void
     vfunc_authenticate(msg: Message, auth: Auth, retrying: boolean): void
     /**
@@ -23789,7 +21914,6 @@ export class SessionSync {
      * #SoupSession does not have this behavior; cancelling an
      * asynchronous message will merely queue its callback to be run after
      * returning to the main loop.
-     * @virtual 
      * @param msg the message to cancel
      * @param status_code status code to set on `msg` (generally %SOUP_STATUS_CANCELLED)
      */
@@ -23817,16 +21941,14 @@ export class SessionSync {
      * asynchronously sends a message, but returns before reading the
      * response body, and allows you to read the response via a
      * #GInputStream.
-     * @virtual 
      * @param msg the message to queue
      * @param callback a #SoupSessionCallback which will be called after the message completes or when an unrecoverable error occurs.
      */
-    vfunc_queue_message(msg: Message, callback: SessionCallback | null): void
+    vfunc_queue_message(msg: Message, callback?: SessionCallback | null): void
     vfunc_request_started(msg: Message, socket: Socket): void
     /**
      * This causes `msg` to be placed back on the queue to be attempted
      * again.
-     * @virtual 
      * @param msg the message to requeue
      */
     vfunc_requeue_message(msg: Message): void
@@ -23847,11 +21969,10 @@ export class SessionSync {
      * synchronously sends a message, but returns before reading the
      * response body, and allows you to read the response via a
      * #GInputStream.
-     * @virtual 
      * @param msg the message to send
      */
     vfunc_send_message(msg: Message): number
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -23868,12 +21989,11 @@ export class SessionSync {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Soup-2.4.Soup.Session */
+    /* Signals of Soup-2.4.Soup.Session */
     /**
      * Emitted when the session requires authentication. If
      * credentials are available call soup_auth_authenticate() on
@@ -23890,7 +22010,6 @@ export class SessionSync {
      * (as long as you g_object_ref() it to make sure it doesn't
      * get destroyed), and then unpause `msg` when you are ready
      * for it to continue.
-     * @signal 
      * @param msg the #SoupMessage being sent
      * @param auth the #SoupAuth to authenticate
      * @param retrying %TRUE if this is the second (or later) attempt
@@ -23902,7 +22021,6 @@ export class SessionSync {
      * Emitted when a new connection is created. This is an
      * internal signal intended only to be used for debugging
      * purposes, and may go away in the future.
-     * @signal 
      * @param connection the connection
      */
     connect(sigName: "connection-created", callback: (($obj: SessionSync, connection: GObject.Object) => void)): number
@@ -23944,7 +22062,6 @@ export class SessionSync {
      * exactly once, but #SoupSession::request_started and
      * #SoupMessage::finished (and all of the other #SoupMessage
      * signals) may be invoked multiple times for a given message.
-     * @signal 
      * @param msg the request that was queued
      */
     connect(sigName: "request-queued", callback: (($obj: SessionSync, msg: Message) => void)): number
@@ -23954,7 +22071,6 @@ export class SessionSync {
      * Emitted just before a request is sent. See
      * #SoupSession::request_queued for a detailed description of
      * the message lifecycle within a session.
-     * @signal 
      * @param msg the request being sent
      * @param socket the socket the request is being sent on
      */
@@ -23966,7 +22082,6 @@ export class SessionSync {
      * indicating that `session` is done with it. See
      * #SoupSession::request_queued for a detailed description of the
      * message lifecycle within a session.
-     * @signal 
      * @param msg the request that was unqueued
      */
     connect(sigName: "request-unqueued", callback: (($obj: SessionSync, msg: Message) => void)): number
@@ -23976,13 +22091,12 @@ export class SessionSync {
      * Emitted when an SSL tunnel is being created on a proxy
      * connection. This is an internal signal intended only to be
      * used for debugging purposes, and may go away in the future.
-     * @signal 
      * @param connection the connection
      */
     connect(sigName: "tunneling", callback: (($obj: SessionSync, connection: GObject.Object) => void)): number
     connect_after(sigName: "tunneling", callback: (($obj: SessionSync, connection: GObject.Object) => void)): number
     emit(sigName: "tunneling", connection: GObject.Object): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -24009,7 +22123,6 @@ export class SessionSync {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: SessionSync, pspec: GObject.ParamSpec) => void)): number
@@ -24055,8 +22168,8 @@ export class SessionSync {
     connect_after(sigName: "notify::use-thread-context", callback: (($obj: SessionSync, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::user-agent", callback: (($obj: SessionSync, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::user-agent", callback: (($obj: SessionSync, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -24064,16 +22177,16 @@ export class SessionSync {
     _init (config?: SessionSync_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(): SessionSync
-    static $gtype: GObject.GType<SessionSync>
+    static $gtype: GObject.Type
 }
 export interface Socket_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.Socket */
-    async_context?: object | null
-    fd?: number | null
-    gsocket?: Gio.Socket | null
-    iostream?: Gio.IOStream | null
-    ipv6_only?: boolean | null
-    local_address?: Address | null
+    async_context?: object
+    fd?: number
+    gsocket?: Gio.Socket
+    iostream?: Gio.IOStream
+    ipv6_only?: boolean
+    local_address?: Address
     /**
      * Whether or not the socket uses non-blocking I/O.
      * 
@@ -24096,19 +22209,19 @@ export interface Socket_ConstructProps extends GObject.Object_ConstructProps {
      * simply never return %SOUP_SOCKET_WOULD_BLOCK, and so the
      * code that handles that case just won't get used for them.
      */
-    non_blocking?: boolean | null
-    remote_address?: Address | null
-    ssl_creds?: object | null
-    ssl_fallback?: boolean | null
-    ssl_strict?: boolean | null
-    timeout?: number | null
+    non_blocking?: boolean
+    remote_address?: Address
+    ssl_creds?: object
+    ssl_fallback?: boolean
+    ssl_strict?: boolean
+    timeout?: number
     /**
      * Use g_main_context_get_thread_default().
      */
-    use_thread_context?: boolean | null
+    use_thread_context?: boolean
 }
 export class Socket {
-    /* Own properties of Soup-2.4.Soup.Socket */
+    /* Properties of Soup-2.4.Soup.Socket */
     readonly async_context: object
     readonly fd: number
     readonly gsocket: Gio.Socket
@@ -24160,11 +22273,9 @@ export class Socket {
      * Use g_main_context_get_thread_default().
      */
     readonly use_thread_context: boolean
-    /* Own fields of Soup-2.4.Soup.Socket */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.Socket */
+    /* Methods of Soup-2.4.Soup.Socket */
     /**
      * Begins asynchronously connecting to `sock'`s remote address. The
      * socket will call `callback` when it succeeds or fails (but not
@@ -24185,7 +22296,7 @@ export class Socket {
      * %SOUP_STATUS_CANCELLED.
      * @param cancellable a #GCancellable, or %NULL
      */
-    connect_sync(cancellable: Gio.Cancellable | null): number
+    connect_sync(cancellable?: Gio.Cancellable | null): number
     /**
      * Disconnects `sock`. Any further read or write attempts on it will
      * fail.
@@ -24241,7 +22352,7 @@ export class Socket {
      * @param buffer buffer to read   into
      * @param cancellable a #GCancellable, or %NULL
      */
-    read(buffer: Uint8Array, cancellable: Gio.Cancellable | null): [ /* returnType */ SocketIOStatus, /* nread */ number ]
+    read(buffer: Uint8Array, cancellable?: Gio.Cancellable | null): [ /* returnType */ SocketIOStatus, /* nread */ number ]
     /**
      * Like soup_socket_read(), but reads no further than the first
      * occurrence of `boundary`. (If the boundary is found, it will be
@@ -24261,19 +22372,19 @@ export class Socket {
      * @param got_boundary on return, whether or not the data in `buffer` ends with the boundary string
      * @param cancellable a #GCancellable, or %NULL
      */
-    read_until(buffer: Uint8Array, boundary: object | null, boundary_len: number, got_boundary: boolean, cancellable: Gio.Cancellable | null): [ /* returnType */ SocketIOStatus, /* nread */ number ]
+    read_until(buffer: Uint8Array, boundary: object | null, boundary_len: number, got_boundary: boolean, cancellable?: Gio.Cancellable | null): [ /* returnType */ SocketIOStatus, /* nread */ number ]
     /**
      * Starts using SSL on `socket,` expecting to find a host named
      * `ssl_host`.
      * @param ssl_host hostname of the SSL server
      * @param cancellable a #GCancellable
      */
-    start_proxy_ssl(ssl_host: string, cancellable: Gio.Cancellable | null): boolean
+    start_proxy_ssl(ssl_host: string, cancellable?: Gio.Cancellable | null): boolean
     /**
      * Starts using SSL on `socket`.
      * @param cancellable a #GCancellable
      */
-    start_ssl(cancellable: Gio.Cancellable | null): boolean
+    start_ssl(cancellable?: Gio.Cancellable | null): boolean
     /**
      * Attempts to write `len` bytes from `buffer` to `sock`. If some data is
      * successfully written, the return status will be %SOUP_SOCKET_OK,
@@ -24290,8 +22401,8 @@ export class Socket {
      * @param buffer data to write
      * @param cancellable a #GCancellable, or %NULL
      */
-    write(buffer: Uint8Array, cancellable: Gio.Cancellable | null): [ /* returnType */ SocketIOStatus, /* nwrote */ number ]
-    /* Extended methods of GObject-2.0.GObject.Object */
+    write(buffer: Uint8Array, cancellable?: Gio.Cancellable | null): [ /* returnType */ SocketIOStatus, /* nwrote */ number ]
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -24337,7 +22448,7 @@ export class Socket {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -24506,7 +22617,7 @@ export class Socket {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -24594,8 +22705,8 @@ export class Socket {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Gio-2.0.Gio.Initable */
+    watch_closure(closure: Function): void
+    /* Methods of Gio-2.0.Gio.Initable */
     /**
      * Initializes the object implementing the interface.
      * 
@@ -24637,8 +22748,8 @@ export class Socket {
      * instance.
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    init(cancellable: Gio.Cancellable | null): boolean
-    /* Own virtual methods of Soup-2.4.Soup.Socket */
+    init(cancellable?: Gio.Cancellable | null): boolean
+    /* Virtual methods of Soup-2.4.Soup.Socket */
     vfunc_disconnected(): void
     vfunc_new_connection(new_sock: Socket): void
     vfunc_readable(): void
@@ -24682,11 +22793,10 @@ export class Socket {
      * In this pattern, a caller would expect to be able to call g_initable_init()
      * on the result of g_object_new(), regardless of whether it is in fact a new
      * instance.
-     * @virtual 
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    vfunc_init(cancellable: Gio.Cancellable | null): boolean
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    vfunc_init(cancellable?: Gio.Cancellable | null): boolean
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -24703,16 +22813,14 @@ export class Socket {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Soup-2.4.Soup.Socket */
+    /* Signals of Soup-2.4.Soup.Socket */
     /**
      * Emitted when the socket is disconnected, for whatever
      * reason.
-     * @signal 
      */
     connect(sigName: "disconnected", callback: (($obj: Socket) => void)): number
     connect_after(sigName: "disconnected", callback: (($obj: Socket) => void)): number
@@ -24720,7 +22828,6 @@ export class Socket {
     /**
      * Emitted when a network-related event occurs. See
      * #GSocketClient::event for more details.
-     * @signal 
      * @param event the event that occurred
      * @param connection the current connection state
      */
@@ -24733,7 +22840,6 @@ export class Socket {
      * 
      * You must ref the `new` if you want to keep it; otherwise it
      * will be destroyed after the signal is emitted.
-     * @signal 
      * @param new_ the new socket
      */
     connect(sigName: "new-connection", callback: (($obj: Socket, new_: Socket) => void)): number
@@ -24743,7 +22849,6 @@ export class Socket {
      * Emitted when an async socket is readable. See
      * soup_socket_read(), soup_socket_read_until() and
      * #SoupSocket:non-blocking.
-     * @signal 
      */
     connect(sigName: "readable", callback: (($obj: Socket) => void)): number
     connect_after(sigName: "readable", callback: (($obj: Socket) => void)): number
@@ -24751,12 +22856,11 @@ export class Socket {
     /**
      * Emitted when an async socket is writable. See
      * soup_socket_write() and #SoupSocket:non-blocking.
-     * @signal 
      */
     connect(sigName: "writable", callback: (($obj: Socket) => void)): number
     connect_after(sigName: "writable", callback: (($obj: Socket) => void)): number
     emit(sigName: "writable"): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -24783,7 +22887,6 @@ export class Socket {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Socket, pspec: GObject.ParamSpec) => void)): number
@@ -24823,8 +22926,8 @@ export class Socket {
     connect_after(sigName: "notify::trusted-certificate", callback: (($obj: Socket, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::use-thread-context", callback: (($obj: Socket, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::use-thread-context", callback: (($obj: Socket, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -24839,59 +22942,56 @@ export class Socket {
      * @param parameters the parameters to use to construct the object
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    static newv(object_type: GObject.GType, parameters: GObject.Parameter[], cancellable: Gio.Cancellable | null): GObject.Object
-    static $gtype: GObject.GType<Socket>
+    static newv(object_type: GObject.Type, parameters: GObject.Parameter[], cancellable?: Gio.Cancellable | null): GObject.Object
+    static $gtype: GObject.Type
 }
 export interface WebsocketConnection_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Soup-2.4.Soup.WebsocketConnection */
     /**
      * The type of connection (client/server).
      */
-    connection_type?: WebsocketConnectionType | null
+    connection_type?: WebsocketConnectionType
     /**
      * List of #SoupWebsocketExtension objects that are active in the connection.
      */
-    extensions?: object | null
+    extensions?: object
     /**
      * The underlying IO stream the WebSocket is communicating
      * over.
      * 
      * The input and output streams must be pollable streams.
      */
-    io_stream?: Gio.IOStream | null
+    io_stream?: Gio.IOStream
     /**
      * Interval in seconds on when to send a ping message which will
      * serve as a keepalive message. If set to 0 the keepalive message is
      * disabled.
      */
-    keepalive_interval?: number | null
+    keepalive_interval?: number
     /**
      * The maximum payload size for incoming packets the protocol expects
      * or 0 to not limit it.
      */
-    max_incoming_payload_size?: number | null
+    max_incoming_payload_size?: number
     /**
      * The client's Origin.
      */
-    origin?: string | null
+    origin?: string
     /**
      * The chosen protocol, or %NULL if a protocol was not agreed
      * upon.
      */
-    protocol?: string | null
+    protocol?: string
     /**
      * The URI of the WebSocket.
      * 
      * For servers this represents the address of the WebSocket,
      * and for clients it is the address connected to.
      */
-    uri?: URI | null
+    uri?: URI
 }
-/**
- * A class representing a WebSocket connection.
- */
 export class WebsocketConnection {
-    /* Own properties of Soup-2.4.Soup.WebsocketConnection */
+    /* Properties of Soup-2.4.Soup.WebsocketConnection */
     /**
      * The type of connection (client/server).
      */
@@ -24938,11 +23038,9 @@ export class WebsocketConnection {
      * and for clients it is the address connected to.
      */
     readonly uri: URI
-    /* Own fields of Soup-2.4.Soup.WebsocketConnection */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.WebsocketConnection */
+    /* Methods of Soup-2.4.Soup.WebsocketConnection */
     /**
      * Close the connection in an orderly fashion.
      * 
@@ -24957,7 +23055,7 @@ export class WebsocketConnection {
      * @param code close code
      * @param data close data
      */
-    close(code: number, data: string | null): void
+    close(code: number, data?: string | null): void
     /**
      * Get the close code received from the WebSocket peer.
      * 
@@ -25054,7 +23152,7 @@ export class WebsocketConnection {
      * @param max_incoming_payload_size the maximum payload size
      */
     set_max_incoming_payload_size(max_incoming_payload_size: number): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -25100,7 +23198,7 @@ export class WebsocketConnection {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -25269,7 +23367,7 @@ export class WebsocketConnection {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -25357,14 +23455,14 @@ export class WebsocketConnection {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Soup-2.4.Soup.WebsocketConnection */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.WebsocketConnection */
     vfunc_closed(): void
     vfunc_closing(): void
     vfunc_error(error: GLib.Error): void
     vfunc_message(type: WebsocketDataType, message: GLib.Bytes): void
     vfunc_pong(message: GLib.Bytes): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -25381,12 +23479,11 @@ export class WebsocketConnection {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Soup-2.4.Soup.WebsocketConnection */
+    /* Signals of Soup-2.4.Soup.WebsocketConnection */
     /**
      * Emitted when the connection has completely closed, either
      * due to an orderly close from the peer, one initiated via
@@ -25394,14 +23491,12 @@ export class WebsocketConnection {
      * condition that caused a close.
      * 
      * This signal will be emitted once.
-     * @signal 
      */
     connect(sigName: "closed", callback: (($obj: WebsocketConnection) => void)): number
     connect_after(sigName: "closed", callback: (($obj: WebsocketConnection) => void)): number
     emit(sigName: "closed"): void
     /**
      * This signal will be emitted during an orderly close.
-     * @signal 
      */
     connect(sigName: "closing", callback: (($obj: WebsocketConnection) => void)): number
     connect_after(sigName: "closing", callback: (($obj: WebsocketConnection) => void)): number
@@ -25410,7 +23505,6 @@ export class WebsocketConnection {
      * Emitted when an error occurred on the WebSocket. This may
      * be fired multiple times. Fatal errors will be followed by
      * the #SoupWebsocketConnection::closed signal being emitted.
-     * @signal 
      * @param error the error that occured
      */
     connect(sigName: "error", callback: (($obj: WebsocketConnection, error: GLib.Error) => void)): number
@@ -25422,7 +23516,6 @@ export class WebsocketConnection {
      * As a convenience, the `message` data will always be
      * NUL-terminated, but the NUL byte will not be included in
      * the length count.
-     * @signal 
      * @param type the type of message contents
      * @param message the message data
      */
@@ -25436,13 +23529,12 @@ export class WebsocketConnection {
      * As a convenience, the `message` data will always be
      * NUL-terminated, but the NUL byte will not be included in
      * the length count.
-     * @signal 
      * @param message the application data (if any)
      */
     connect(sigName: "pong", callback: (($obj: WebsocketConnection, message: GLib.Bytes) => void)): number
     connect_after(sigName: "pong", callback: (($obj: WebsocketConnection, message: GLib.Bytes) => void)): number
     emit(sigName: "pong", message: GLib.Bytes): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -25469,7 +23561,6 @@ export class WebsocketConnection {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: WebsocketConnection, pspec: GObject.ParamSpec) => void)): number
@@ -25493,32 +23584,30 @@ export class WebsocketConnection {
     connect_after(sigName: "notify::state", callback: (($obj: WebsocketConnection, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::uri", callback: (($obj: WebsocketConnection, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::uri", callback: (($obj: WebsocketConnection, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: WebsocketConnection_ConstructProps)
     _init (config?: WebsocketConnection_ConstructProps): void
     /* Static methods and pseudo-constructors */
-    static new(stream: Gio.IOStream, uri: URI, type: WebsocketConnectionType, origin: string | null, protocol: string | null): WebsocketConnection
+    static new(stream: Gio.IOStream, uri: URI, type: WebsocketConnectionType, origin?: string | null, protocol?: string | null): WebsocketConnection
     static new_with_extensions(stream: Gio.IOStream, uri: URI, type: WebsocketConnectionType, origin: string | null, protocol: string | null, extensions: WebsocketExtension[]): WebsocketConnection
-    static $gtype: GObject.GType<WebsocketConnection>
+    static $gtype: GObject.Type
 }
 export interface WebsocketExtension_ConstructProps extends GObject.Object_ConstructProps {
 }
 export class WebsocketExtension {
-    /* Own fields of Soup-2.4.Soup.WebsocketExtension */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Soup-2.4.Soup.WebsocketExtension */
+    /* Methods of Soup-2.4.Soup.WebsocketExtension */
     /**
      * Configures `extension` with the given `params`
      * @param connection_type either %SOUP_WEBSOCKET_CONNECTION_CLIENT or %SOUP_WEBSOCKET_CONNECTION_SERVER
      * @param params the parameters, or %NULL
      */
-    configure(connection_type: WebsocketConnectionType, params: GLib.HashTable | null): boolean
+    configure(connection_type: WebsocketConnectionType, params?: GLib.HashTable | null): boolean
     /**
      * Get the parameters strings to be included in the request header. If the extension
      * doesn't include any parameter in the request, this function returns %NULL.
@@ -25549,7 +23638,7 @@ export class WebsocketExtension {
      * @param payload the payload data
      */
     process_outgoing_message(header: number, payload: GLib.Bytes): [ /* returnType */ GLib.Bytes, /* header */ number ]
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -25595,7 +23684,7 @@ export class WebsocketExtension {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -25764,7 +23853,7 @@ export class WebsocketExtension {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -25852,25 +23941,22 @@ export class WebsocketExtension {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Soup-2.4.Soup.WebsocketExtension */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.WebsocketExtension */
     /**
      * Configures `extension` with the given `params`
-     * @virtual 
      * @param connection_type either %SOUP_WEBSOCKET_CONNECTION_CLIENT or %SOUP_WEBSOCKET_CONNECTION_SERVER
      * @param params the parameters, or %NULL
      */
-    vfunc_configure(connection_type: WebsocketConnectionType, params: GLib.HashTable | null): boolean
+    vfunc_configure(connection_type: WebsocketConnectionType, params?: GLib.HashTable | null): boolean
     /**
      * Get the parameters strings to be included in the request header. If the extension
      * doesn't include any parameter in the request, this function returns %NULL.
-     * @virtual 
      */
     vfunc_get_request_params(): string | null
     /**
      * Get the parameters strings to be included in the response header. If the extension
      * doesn't include any parameter in the response, this function returns %NULL.
-     * @virtual 
      */
     vfunc_get_response_params(): string | null
     /**
@@ -25879,7 +23965,6 @@ export class WebsocketExtension {
      * `payload` and a new #GBytes is returned with the new data.
      * 
      * Extensions using reserved bits of the header will reset them in `header`.
-     * @virtual 
      * @param header the message header
      * @param payload the payload data
      */
@@ -25890,12 +23975,11 @@ export class WebsocketExtension {
      * `payload` and a new #GBytes is returned with the new data.
      * 
      * Extensions using reserved bits of the header will change them in `header`.
-     * @virtual 
      * @param header the message header
      * @param payload the payload data
      */
     vfunc_process_outgoing_message(header: number, payload: GLib.Bytes): [ /* returnType */ GLib.Bytes, /* header */ number ]
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -25912,12 +23996,11 @@ export class WebsocketExtension {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -25944,35 +24027,34 @@ export class WebsocketExtension {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: WebsocketExtension, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: WebsocketExtension, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: WebsocketExtension_ConstructProps)
     _init (config?: WebsocketExtension_ConstructProps): void
-    static $gtype: GObject.GType<WebsocketExtension>
+    static $gtype: GObject.Type
 }
 export interface WebsocketExtensionDeflate_ConstructProps extends WebsocketExtension_ConstructProps {
 }
 export class WebsocketExtensionDeflate {
-    /* Own fields of Soup-2.4.Soup.WebsocketExtensionDeflate */
-    parent: WebsocketExtension
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of Soup-2.4.Soup.WebsocketExtension */
+    parent: GObject.Object
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Soup-2.4.Soup.WebsocketExtension */
+    /* Methods of Soup-2.4.Soup.WebsocketExtension */
     /**
      * Configures `extension` with the given `params`
      * @param connection_type either %SOUP_WEBSOCKET_CONNECTION_CLIENT or %SOUP_WEBSOCKET_CONNECTION_SERVER
      * @param params the parameters, or %NULL
      */
-    configure(connection_type: WebsocketConnectionType, params: GLib.HashTable | null): boolean
+    configure(connection_type: WebsocketConnectionType, params?: GLib.HashTable | null): boolean
     /**
      * Get the parameters strings to be included in the request header. If the extension
      * doesn't include any parameter in the request, this function returns %NULL.
@@ -26003,7 +24085,7 @@ export class WebsocketExtensionDeflate {
      * @param payload the payload data
      */
     process_outgoing_message(header: number, payload: GLib.Bytes): [ /* returnType */ GLib.Bytes, /* header */ number ]
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -26049,7 +24131,7 @@ export class WebsocketExtensionDeflate {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -26218,7 +24300,7 @@ export class WebsocketExtensionDeflate {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -26306,25 +24388,22 @@ export class WebsocketExtensionDeflate {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Soup-2.4.Soup.WebsocketExtension */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Soup-2.4.Soup.WebsocketExtension */
     /**
      * Configures `extension` with the given `params`
-     * @virtual 
      * @param connection_type either %SOUP_WEBSOCKET_CONNECTION_CLIENT or %SOUP_WEBSOCKET_CONNECTION_SERVER
      * @param params the parameters, or %NULL
      */
-    vfunc_configure(connection_type: WebsocketConnectionType, params: GLib.HashTable | null): boolean
+    vfunc_configure(connection_type: WebsocketConnectionType, params?: GLib.HashTable | null): boolean
     /**
      * Get the parameters strings to be included in the request header. If the extension
      * doesn't include any parameter in the request, this function returns %NULL.
-     * @virtual 
      */
     vfunc_get_request_params(): string | null
     /**
      * Get the parameters strings to be included in the response header. If the extension
      * doesn't include any parameter in the response, this function returns %NULL.
-     * @virtual 
      */
     vfunc_get_response_params(): string | null
     /**
@@ -26333,7 +24412,6 @@ export class WebsocketExtensionDeflate {
      * `payload` and a new #GBytes is returned with the new data.
      * 
      * Extensions using reserved bits of the header will reset them in `header`.
-     * @virtual 
      * @param header the message header
      * @param payload the payload data
      */
@@ -26344,12 +24422,11 @@ export class WebsocketExtensionDeflate {
      * `payload` and a new #GBytes is returned with the new data.
      * 
      * Extensions using reserved bits of the header will change them in `header`.
-     * @virtual 
      * @param header the message header
      * @param payload the payload data
      */
     vfunc_process_outgoing_message(header: number, payload: GLib.Bytes): [ /* returnType */ GLib.Bytes, /* header */ number ]
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -26366,12 +24443,11 @@ export class WebsocketExtensionDeflate {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -26398,29 +24474,26 @@ export class WebsocketExtensionDeflate {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: WebsocketExtensionDeflate, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: WebsocketExtensionDeflate, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: WebsocketExtensionDeflate_ConstructProps)
     _init (config?: WebsocketExtensionDeflate_ConstructProps): void
-    static $gtype: GObject.GType<WebsocketExtensionDeflate>
+    static $gtype: GObject.Type
 }
 export interface WebsocketExtensionManager_ConstructProps extends GObject.Object_ConstructProps {
 }
 export class WebsocketExtensionManager {
-    /* Own fields of Soup-2.4.Soup.WebsocketExtensionManager */
-    parent: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -26466,7 +24539,7 @@ export class WebsocketExtensionManager {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -26635,7 +24708,7 @@ export class WebsocketExtensionManager {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -26723,8 +24796,8 @@ export class WebsocketExtensionManager {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Soup-2.4.Soup.SessionFeature */
+    watch_closure(closure: Function): void
+    /* Methods of Soup-2.4.Soup.SessionFeature */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
@@ -26732,7 +24805,7 @@ export class WebsocketExtensionManager {
      * with subtypes of #SoupAuth.
      * @param type the #GType of a "sub-feature"
      */
-    add_feature(type: GObject.GType): boolean
+    add_feature(type: GObject.Type): boolean
     attach(session: Session): void
     detach(session: Session): void
     /**
@@ -26740,43 +24813,40 @@ export class WebsocketExtensionManager {
      * soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    has_feature(type: GObject.GType): boolean
+    has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
      * @param type the #GType of a "sub-feature"
      */
-    remove_feature(type: GObject.GType): boolean
-    /* Own virtual methods of Soup-2.4.Soup.WebsocketExtensionManager */
+    remove_feature(type: GObject.Type): boolean
+    /* Virtual methods of Soup-2.4.Soup.WebsocketExtensionManager */
     /**
      * Adds a "sub-feature" of type `type` to the base feature `feature`.
      * This is used for features that can be extended with multiple
      * different types. Eg, the authentication manager can be extended
      * with subtypes of #SoupAuth.
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_add_feature(type: GObject.GType): boolean
+    vfunc_add_feature(type: GObject.Type): boolean
     vfunc_attach(session: Session): void
     vfunc_detach(session: Session): void
     /**
      * Tests if `feature` has a "sub-feature" of type `type`. See
      * soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_has_feature(type: GObject.GType): boolean
+    vfunc_has_feature(type: GObject.Type): boolean
     /**
      * Removes the "sub-feature" of type `type` from the base feature
      * `feature`. See soup_session_feature_add_feature().
-     * @virtual 
      * @param type the #GType of a "sub-feature"
      */
-    vfunc_remove_feature(type: GObject.GType): boolean
+    vfunc_remove_feature(type: GObject.Type): boolean
     vfunc_request_queued(session: Session, msg: Message): void
     vfunc_request_started(session: Session, msg: Message, socket: Socket): void
     vfunc_request_unqueued(session: Session, msg: Message): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -26793,12 +24863,11 @@ export class WebsocketExtensionManager {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -26825,28 +24894,27 @@ export class WebsocketExtensionManager {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: WebsocketExtensionManager, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: WebsocketExtensionManager, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: WebsocketExtensionManager_ConstructProps)
     _init (config?: WebsocketExtensionManager_ConstructProps): void
-    static $gtype: GObject.GType<WebsocketExtensionManager>
+    static $gtype: GObject.Type
 }
 export abstract class AddressClass {
-    /* Own fields of Soup-2.4.Soup.AddressClass */
+    /* Fields of Soup-2.4.Soup.AddressClass */
     parent_class: GObject.ObjectClass
     static name: string
 }
 export abstract class AuthClass {
-    /* Own fields of Soup-2.4.Soup.AuthClass */
+    /* Fields of Soup-2.4.Soup.AuthClass */
     parent_class: GObject.ObjectClass
     scheme_name: string
     strength: number
@@ -26860,12 +24928,12 @@ export abstract class AuthClass {
     static name: string
 }
 export abstract class AuthDomainBasicClass {
-    /* Own fields of Soup-2.4.Soup.AuthDomainBasicClass */
+    /* Fields of Soup-2.4.Soup.AuthDomainBasicClass */
     parent_class: AuthDomainClass
     static name: string
 }
 export abstract class AuthDomainClass {
-    /* Own fields of Soup-2.4.Soup.AuthDomainClass */
+    /* Fields of Soup-2.4.Soup.AuthDomainClass */
     parent_class: GObject.ObjectClass
     accepts: (domain: AuthDomain, msg: Message, header: string) => string
     challenge: (domain: AuthDomain, msg: Message) => string
@@ -26873,12 +24941,12 @@ export abstract class AuthDomainClass {
     static name: string
 }
 export abstract class AuthDomainDigestClass {
-    /* Own fields of Soup-2.4.Soup.AuthDomainDigestClass */
+    /* Fields of Soup-2.4.Soup.AuthDomainDigestClass */
     parent_class: AuthDomainClass
     static name: string
 }
 export abstract class AuthManagerClass {
-    /* Own fields of Soup-2.4.Soup.AuthManagerClass */
+    /* Fields of Soup-2.4.Soup.AuthManagerClass */
     parent_class: GObject.ObjectClass
     authenticate: (manager: AuthManager, msg: Message, auth: Auth, retrying: boolean) => void
     static name: string
@@ -26886,15 +24954,8 @@ export abstract class AuthManagerClass {
 export class AuthManagerPrivate {
     static name: string
 }
-/**
- * A data buffer, generally used to represent a chunk of a
- * #SoupMessageBody.
- * 
- * `data` is a #char because that's generally convenient; in some
- * situations you may need to cast it to #guchar or another type.
- */
 export class Buffer {
-    /* Own fields of Soup-2.4.Soup.Buffer */
+    /* Fields of Soup-2.4.Soup.Buffer */
     /**
      * the data
      */
@@ -26903,7 +24964,7 @@ export class Buffer {
      * length of `data`
      */
     length: number
-    /* Owm methods of Soup-2.4.Soup.Buffer */
+    /* Methods of Soup-2.4.Soup.Buffer */
     /**
      * Makes a copy of `buffer`. In reality, #SoupBuffer is a refcounted
      * type, and calling soup_buffer_copy() will normally just increment
@@ -26950,10 +25011,10 @@ export class Buffer {
     constructor(data: Uint8Array)
     /* Static methods and pseudo-constructors */
     static new(data: Uint8Array): Buffer
-    static new_with_owner(data: Uint8Array, owner: object | null, owner_dnotify: GLib.DestroyNotify | null): Buffer
+    static new_with_owner(data: Uint8Array, owner?: object | null, owner_dnotify?: GLib.DestroyNotify | null): Buffer
 }
 export abstract class CacheClass {
-    /* Own fields of Soup-2.4.Soup.CacheClass */
+    /* Fields of Soup-2.4.Soup.CacheClass */
     parent_class: GObject.ObjectClass
     get_cacheability: (cache: Cache, msg: Message) => Cacheability
     static name: string
@@ -26961,21 +25022,8 @@ export abstract class CacheClass {
 export class CachePrivate {
     static name: string
 }
-/**
- * A #SoupClientContext provides additional information about the
- * client making a particular request. In particular, you can use
- * soup_client_context_get_auth_domain() and
- * soup_client_context_get_auth_user() to determine if HTTP
- * authentication was used successfully.
- * 
- * soup_client_context_get_remote_address() and/or
- * soup_client_context_get_host() can be used to get information for
- * logging or debugging purposes. soup_client_context_get_gsocket() may
- * also be of use in some situations (eg, tracking when multiple
- * requests are made on the same connection).
- */
 export class ClientContext {
-    /* Owm methods of Soup-2.4.Soup.ClientContext */
+    /* Methods of Soup-2.4.Soup.ClientContext */
     /**
      * Retrieves the #SoupAddress associated with the remote end
      * of a connection.
@@ -27051,7 +25099,7 @@ export class Connection {
     static name: string
 }
 export abstract class ContentDecoderClass {
-    /* Own fields of Soup-2.4.Soup.ContentDecoderClass */
+    /* Fields of Soup-2.4.Soup.ContentDecoderClass */
     parent_class: GObject.ObjectClass
     static name: string
 }
@@ -27059,39 +25107,17 @@ export class ContentDecoderPrivate {
     static name: string
 }
 export abstract class ContentSnifferClass {
-    /* Own fields of Soup-2.4.Soup.ContentSnifferClass */
+    /* Fields of Soup-2.4.Soup.ContentSnifferClass */
     parent_class: GObject.ObjectClass
-    sniff: (sniffer: ContentSniffer, msg: Message, buffer: Buffer) => [ /* returnType */ string, /* params */ GLib.HashTable ]
+    sniff: (sniffer: ContentSniffer, msg: Message, buffer: Buffer) => [ /* returnType */ string, /* params */ GLib.HashTable | null ]
     get_buffer_size: (sniffer: ContentSniffer) => number
     static name: string
 }
 export class ContentSnifferPrivate {
     static name: string
 }
-/**
- * An HTTP cookie.
- * 
- * `name` and `value` will be set for all cookies. If the cookie is
- * generated from a string that appears to have no name, then `name`
- * will be the empty string.
- * 
- * `domain` and `path` give the host or domain, and path within that
- * host/domain, to restrict this cookie to. If `domain` starts with
- * ".", that indicates a domain (which matches the string after the
- * ".", or any hostname that has `domain` as a suffix). Otherwise, it
- * is a hostname and must match exactly.
- * 
- * `expires` will be non-%NULL if the cookie uses either the original
- * "expires" attribute, or the newer "max-age" attribute. If `expires`
- * is %NULL, it indicates that neither "expires" nor "max-age" was
- * specified, and the cookie expires at the end of the session.
- * 
- * If `http_only` is set, the cookie should not be exposed to untrusted
- * code (eg, javascript), so as to minimize the danger posed by
- * cross-site scripting attacks.
- */
 export class Cookie {
-    /* Own fields of Soup-2.4.Soup.Cookie */
+    /* Fields of Soup-2.4.Soup.Cookie */
     /**
      * the cookie name
      */
@@ -27121,7 +25147,7 @@ export class Cookie {
      * %TRUE if the cookie should not be exposed to scripts
      */
     http_only: boolean
-    /* Owm methods of Soup-2.4.Soup.Cookie */
+    /* Methods of Soup-2.4.Soup.Cookie */
     /**
      * Tests if `cookie` should be sent to `uri`.
      * 
@@ -27277,7 +25303,7 @@ export class Cookie {
     static parse(header: string, origin: URI): Cookie | null
 }
 export abstract class CookieJarClass {
-    /* Own fields of Soup-2.4.Soup.CookieJarClass */
+    /* Fields of Soup-2.4.Soup.CookieJarClass */
     parent_class: GObject.ObjectClass
     save: (jar: CookieJar) => void
     is_persistent: (jar: CookieJar) => boolean
@@ -27285,26 +25311,17 @@ export abstract class CookieJarClass {
     static name: string
 }
 export abstract class CookieJarDBClass {
-    /* Own fields of Soup-2.4.Soup.CookieJarDBClass */
+    /* Fields of Soup-2.4.Soup.CookieJarDBClass */
     parent_class: CookieJarClass
     static name: string
 }
 export abstract class CookieJarTextClass {
-    /* Own fields of Soup-2.4.Soup.CookieJarTextClass */
+    /* Fields of Soup-2.4.Soup.CookieJarTextClass */
     parent_class: CookieJarClass
     static name: string
 }
-/**
- * A date and time. The date is assumed to be in the (proleptic)
- * Gregorian calendar. The time is in UTC if `utc` is %TRUE. Otherwise,
- * the time is a local time, and `offset` gives the offset from UTC in
- * minutes (such that adding `offset` to the time would give the
- * correct UTC time). If `utc` is %FALSE and `offset` is 0, then the
- * %SoupDate represents a "floating" time with no associated timezone
- * information.
- */
 export class Date {
-    /* Own fields of Soup-2.4.Soup.Date */
+    /* Fields of Soup-2.4.Soup.Date */
     /**
      * the year, 1 to 9999
      */
@@ -27337,7 +25354,7 @@ export class Date {
      * offset from UTC
      */
     offset: number
-    /* Owm methods of Soup-2.4.Soup.Date */
+    /* Methods of Soup-2.4.Soup.Date */
     /**
      * Copies `date`.
      */
@@ -27410,7 +25427,7 @@ export class Date {
     static new_from_time_t(when: number): Date
 }
 export abstract class HSTSEnforcerClass {
-    /* Own fields of Soup-2.4.Soup.HSTSEnforcerClass */
+    /* Fields of Soup-2.4.Soup.HSTSEnforcerClass */
     /**
      * The parent class.
      */
@@ -27422,7 +25439,7 @@ export abstract class HSTSEnforcerClass {
     static name: string
 }
 export abstract class HSTSEnforcerDBClass {
-    /* Own fields of Soup-2.4.Soup.HSTSEnforcerDBClass */
+    /* Fields of Soup-2.4.Soup.HSTSEnforcerDBClass */
     parent_class: HSTSEnforcerClass
     static name: string
 }
@@ -27432,26 +25449,8 @@ export class HSTSEnforcerDBPrivate {
 export class HSTSEnforcerPrivate {
     static name: string
 }
-/**
- * An HTTP Strict Transport Security policy.
- * 
- * `domain` represents the host that this policy applies to. The domain
- * must be IDNA-canonicalized. soup_hsts_policy_new() and related methods
- * will do this for you.
- * 
- * `max_age` contains the 'max-age' value from the Strict Transport
- * Security header and indicates the time to live of this policy,
- * in seconds.
- * 
- * `expires` will be non-%NULL if the policy has been set by the host and
- * hence has an expiry time. If `expires` is %NULL, it indicates that the
- * policy is a permanent session policy set by the user agent.
- * 
- * If `include_subdomains` is %TRUE, the Strict Transport Security policy
- * must also be enforced on subdomains of `domain`.
- */
 export class HSTSPolicy {
-    /* Own fields of Soup-2.4.Soup.HSTSPolicy */
+    /* Fields of Soup-2.4.Soup.HSTSPolicy */
     /**
      * The domain or hostname that the policy applies to
      */
@@ -27468,7 +25467,7 @@ export class HSTSPolicy {
      * %TRUE if the policy applies on subdomains
      */
     include_subdomains: boolean
-    /* Owm methods of Soup-2.4.Soup.HSTSPolicy */
+    /* Methods of Soup-2.4.Soup.HSTSPolicy */
     /**
      * Copies `policy`.
      */
@@ -27510,27 +25509,12 @@ export class HSTSPolicy {
     static new_session_policy(domain: string, include_subdomains: boolean): HSTSPolicy
 }
 export abstract class LoggerClass {
-    /* Own fields of Soup-2.4.Soup.LoggerClass */
+    /* Fields of Soup-2.4.Soup.LoggerClass */
     parent_class: GObject.ObjectClass
     static name: string
 }
-/**
- * A #SoupMessage request or response body.
- * 
- * Note that while `length` always reflects the full length of the
- * message body, `data` is normally %NULL, and will only be filled in
- * after soup_message_body_flatten() is called. For client-side
- * messages, this automatically happens for the response body after it
- * has been fully read, unless you set the
- * %SOUP_MESSAGE_OVERWRITE_CHUNKS flags. Likewise, for server-side
- * messages, the request body is automatically filled in after being
- * read.
- * 
- * As an added bonus, when `data` is filled in, it is always terminated
- * with a '\0' byte (which is not reflected in `length)`.
- */
 export class MessageBody {
-    /* Own fields of Soup-2.4.Soup.MessageBody */
+    /* Fields of Soup-2.4.Soup.MessageBody */
     /**
      * the data
      */
@@ -27539,7 +25523,7 @@ export class MessageBody {
      * length of `data`
      */
     length: number
-    /* Owm methods of Soup-2.4.Soup.MessageBody */
+    /* Methods of Soup-2.4.Soup.MessageBody */
     /**
      * Appends the data from `buffer` to `body`. (#SoupMessageBody uses
      * #SoupBuffers internally, so this is normally a constant-time
@@ -27663,7 +25647,7 @@ export class MessageBody {
     static new(): MessageBody
 }
 export abstract class MessageClass {
-    /* Own fields of Soup-2.4.Soup.MessageClass */
+    /* Fields of Soup-2.4.Soup.MessageClass */
     parent_class: GObject.ObjectClass
     wrote_informational: (msg: Message) => void
     wrote_headers: (msg: Message) => void
@@ -27678,11 +25662,8 @@ export abstract class MessageClass {
     starting: (msg: Message) => void
     static name: string
 }
-/**
- * The HTTP message headers associated with a request or response.
- */
 export class MessageHeaders {
-    /* Owm methods of Soup-2.4.Soup.MessageHeaders */
+    /* Methods of Soup-2.4.Soup.MessageHeaders */
     /**
      * Appends a new header with name `name` and value `value` to `hdrs`. (If
      * there is an existing header with name `name,` then this creates a
@@ -27771,13 +25752,13 @@ export class MessageHeaders {
      * `end,` and `total_length`. If the total length field in the header
      * was specified as "*", then `total_length` will be set to -1.
      */
-    get_content_range(): [ /* returnType */ boolean, /* start */ number, /* end */ number, /* total_length */ number ]
+    get_content_range(): [ /* returnType */ boolean, /* start */ number, /* end */ number, /* total_length */ number | null ]
     /**
      * Looks up the "Content-Type" header in `hdrs,` parses it, and returns
      * its value in *`content_type` and *`params`. `params` can be %NULL if you
      * are only interested in the content type itself.
      */
-    get_content_type(): [ /* returnType */ string | null, /* params */ GLib.HashTable ]
+    get_content_type(): [ /* returnType */ string | null, /* params */ GLib.HashTable | null ]
     /**
      * Gets the message body encoding that `hdrs` declare. This may not
      * always correspond to the encoding used on the wire; eg, a HEAD
@@ -27899,7 +25880,7 @@ export class MessageHeaders {
      * @param disposition the disposition-type
      * @param params additional parameters, or %NULL
      */
-    set_content_disposition(disposition: string, params: GLib.HashTable | null): void
+    set_content_disposition(disposition: string, params?: GLib.HashTable | null): void
     /**
      * Sets the message body length that `hdrs` will declare, and sets
      * `hdrs'`s encoding to %SOUP_ENCODING_CONTENT_LENGTH.
@@ -27936,7 +25917,7 @@ export class MessageHeaders {
      * @param content_type the MIME type
      * @param params additional parameters, or %NULL
      */
-    set_content_type(content_type: string, params: GLib.HashTable | null): void
+    set_content_type(content_type: string, params?: GLib.HashTable | null): void
     /**
      * Sets the message body encoding that `hdrs` will declare. In particular,
      * you should use this if you are going to send a request or response in
@@ -27982,18 +25963,8 @@ export class MessageHeaders {
     /* Static methods and pseudo-constructors */
     static new(type: MessageHeadersType): MessageHeaders
 }
-/**
- * An opaque type used to iterate over a %SoupMessageHeaders
- * structure.
- * 
- * After intializing the iterator with
- * soup_message_headers_iter_init(), call
- * soup_message_headers_iter_next() to fetch data from it.
- * 
- * You may not modify the headers while iterating over them.
- */
 export class MessageHeadersIter {
-    /* Owm methods of Soup-2.4.Soup.MessageHeadersIter */
+    /* Methods of Soup-2.4.Soup.MessageHeadersIter */
     /**
      * Yields the next name/value pair in the %SoupMessageHeaders being
      * iterated by `iter`. If `iter` has already yielded the last header,
@@ -28015,21 +25986,8 @@ export class MessageQueue {
 export class MessageQueueItem {
     static name: string
 }
-/**
- * Represents a multipart HTTP message body, parsed according to the
- * syntax of RFC 2046. Of particular interest to HTTP are
- * <literal>multipart/byte-ranges</literal> and
- * <literal>multipart/form-data</literal>.
- * 
- * Although the headers of a #SoupMultipart body part will contain the
- * full headers from that body part, libsoup does not interpret them
- * according to MIME rules. For example, each body part is assumed to
- * have "binary" Content-Transfer-Encoding, even if its headers
- * explicitly state otherwise. In other words, don't try to use
- * #SoupMultipart for handling real MIME multiparts.
- */
 export class Multipart {
-    /* Owm methods of Soup-2.4.Soup.Multipart */
+    /* Methods of Soup-2.4.Soup.Multipart */
     /**
      * Adds a new MIME part containing `body` to `multipart,` using
      * "Content-Disposition: form-data", as per the HTML forms
@@ -28086,7 +26044,7 @@ export class Multipart {
     static new_from_message(headers: MessageHeaders, body: MessageBody): Multipart
 }
 export abstract class MultipartInputStreamClass {
-    /* Own fields of Soup-2.4.Soup.MultipartInputStreamClass */
+    /* Fields of Soup-2.4.Soup.MultipartInputStreamClass */
     parent_class: Gio.FilterInputStreamClass
     static name: string
 }
@@ -28094,49 +26052,33 @@ export class MultipartInputStreamPrivate {
     static name: string
 }
 export abstract class PasswordManagerInterface {
-    /* Own fields of Soup-2.4.Soup.PasswordManagerInterface */
+    /* Fields of Soup-2.4.Soup.PasswordManagerInterface */
     base: GObject.TypeInterface
     get_passwords_async: (password_manager: PasswordManager, msg: Message, auth: Auth, retrying: boolean, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: PasswordManagerCallback) => void
-    get_passwords_sync: (password_manager: PasswordManager, msg: Message, auth: Auth, cancellable: Gio.Cancellable | null) => void
+    get_passwords_sync: (password_manager: PasswordManager, msg: Message, auth: Auth, cancellable?: Gio.Cancellable | null) => void
     static name: string
 }
 export abstract class ProxyResolverDefaultClass {
-    /* Own fields of Soup-2.4.Soup.ProxyResolverDefaultClass */
+    /* Fields of Soup-2.4.Soup.ProxyResolverDefaultClass */
     parent_class: GObject.ObjectClass
     static name: string
 }
 export abstract class ProxyResolverInterface {
-    /* Own fields of Soup-2.4.Soup.ProxyResolverInterface */
+    /* Fields of Soup-2.4.Soup.ProxyResolverInterface */
     base: GObject.TypeInterface
     get_proxy_async: (proxy_resolver: ProxyResolver, msg: Message, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: ProxyResolverCallback) => void
-    get_proxy_sync: (proxy_resolver: ProxyResolver, msg: Message, cancellable: Gio.Cancellable | null) => [ /* returnType */ number, /* addr */ Address ]
+    get_proxy_sync: (proxy_resolver: ProxyResolver, msg: Message, cancellable?: Gio.Cancellable | null) => [ /* returnType */ number, /* addr */ Address ]
     static name: string
 }
 export abstract class ProxyURIResolverInterface {
-    /* Own fields of Soup-2.4.Soup.ProxyURIResolverInterface */
+    /* Fields of Soup-2.4.Soup.ProxyURIResolverInterface */
     base: GObject.TypeInterface
     get_proxy_uri_async: (proxy_uri_resolver: ProxyURIResolver, uri: URI, async_context: GLib.MainContext | null, cancellable: Gio.Cancellable | null, callback: ProxyURIResolverCallback) => void
-    get_proxy_uri_sync: (proxy_uri_resolver: ProxyURIResolver, uri: URI, cancellable: Gio.Cancellable | null) => [ /* returnType */ number, /* proxy_uri */ URI ]
+    get_proxy_uri_sync: (proxy_uri_resolver: ProxyURIResolver, uri: URI, cancellable?: Gio.Cancellable | null) => [ /* returnType */ number, /* proxy_uri */ URI ]
     static name: string
 }
-/**
- * Represents a byte range as used in the Range header.
- * 
- * If `end` is non-negative, then `start` and `end` represent the bounds
- * of of the range, counting from 0. (Eg, the first 500 bytes would be
- * represented as `start` = 0 and `end` = 499.)
- * 
- * If `end` is -1 and `start` is non-negative, then this represents a
- * range starting at `start` and ending with the last byte of the
- * requested resource body. (Eg, all but the first 500 bytes would be
- * `start` = 500, and `end` = -1.)
- * 
- * If `end` is -1 and `start` is negative, then it represents a "suffix
- * range", referring to the last -`start` bytes of the resource body.
- * (Eg, the last 500 bytes would be `start` = -500 and `end` = -1.)
- */
 export class Range {
-    /* Own fields of Soup-2.4.Soup.Range */
+    /* Fields of Soup-2.4.Soup.Range */
     /**
      * the start of the range
      */
@@ -28148,19 +26090,19 @@ export class Range {
     static name: string
 }
 export abstract class RequestClass {
-    /* Own fields of Soup-2.4.Soup.RequestClass */
+    /* Fields of Soup-2.4.Soup.RequestClass */
     parent: GObject.ObjectClass
     schemes: string
     check_uri: (req_base: Request, uri: URI) => boolean
-    send: (request: Request, cancellable: Gio.Cancellable | null) => Gio.InputStream
-    send_async: (request: Request, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null) => void
+    send: (request: Request, cancellable?: Gio.Cancellable | null) => Gio.InputStream
+    send_async: (request: Request, cancellable?: Gio.Cancellable | null, callback?: Gio.AsyncReadyCallback | null) => void
     send_finish: (request: Request, result: Gio.AsyncResult) => Gio.InputStream
     get_content_length: (request: Request) => number
     get_content_type: (request: Request) => string | null
     static name: string
 }
 export abstract class RequestDataClass {
-    /* Own fields of Soup-2.4.Soup.RequestDataClass */
+    /* Fields of Soup-2.4.Soup.RequestDataClass */
     parent: RequestClass
     static name: string
 }
@@ -28168,7 +26110,7 @@ export class RequestDataPrivate {
     static name: string
 }
 export abstract class RequestFileClass {
-    /* Own fields of Soup-2.4.Soup.RequestFileClass */
+    /* Fields of Soup-2.4.Soup.RequestFileClass */
     parent: RequestClass
     static name: string
 }
@@ -28176,7 +26118,7 @@ export class RequestFilePrivate {
     static name: string
 }
 export abstract class RequestHTTPClass {
-    /* Own fields of Soup-2.4.Soup.RequestHTTPClass */
+    /* Fields of Soup-2.4.Soup.RequestHTTPClass */
     parent: RequestClass
     static name: string
 }
@@ -28187,7 +26129,7 @@ export class RequestPrivate {
     static name: string
 }
 export abstract class RequesterClass {
-    /* Own fields of Soup-2.4.Soup.RequesterClass */
+    /* Fields of Soup-2.4.Soup.RequesterClass */
     parent_class: GObject.ObjectClass
     static name: string
 }
@@ -28195,7 +26137,7 @@ export class RequesterPrivate {
     static name: string
 }
 export abstract class ServerClass {
-    /* Own fields of Soup-2.4.Soup.ServerClass */
+    /* Fields of Soup-2.4.Soup.ServerClass */
     parent_class: GObject.ObjectClass
     request_started: (server: Server, msg: Message, client: ClientContext) => void
     request_read: (server: Server, msg: Message, client: ClientContext) => void
@@ -28204,16 +26146,16 @@ export abstract class ServerClass {
     static name: string
 }
 export abstract class SessionAsyncClass {
-    /* Own fields of Soup-2.4.Soup.SessionAsyncClass */
+    /* Fields of Soup-2.4.Soup.SessionAsyncClass */
     parent_class: SessionClass
     static name: string
 }
 export abstract class SessionClass {
-    /* Own fields of Soup-2.4.Soup.SessionClass */
+    /* Fields of Soup-2.4.Soup.SessionClass */
     parent_class: GObject.ObjectClass
     request_started: (session: Session, msg: Message, socket: Socket) => void
     authenticate: (session: Session, msg: Message, auth: Auth, retrying: boolean) => void
-    queue_message: (session: Session, msg: Message, callback: SessionCallback | null) => void
+    queue_message: (session: Session, msg: Message, callback?: SessionCallback | null) => void
     requeue_message: (session: Session, msg: Message) => void
     send_message: (session: Session, msg: Message) => number
     cancel_message: (session: Session, msg: Message, status_code: number) => void
@@ -28222,11 +26164,8 @@ export abstract class SessionClass {
     kick: (session: Session) => void
     static name: string
 }
-/**
- * The interface implemented by #SoupSessionFeature<!-- -->s.
- */
 export abstract class SessionFeatureInterface {
-    /* Own fields of Soup-2.4.Soup.SessionFeatureInterface */
+    /* Fields of Soup-2.4.Soup.SessionFeatureInterface */
     /**
      * The parent interface.
      */
@@ -28236,18 +26175,18 @@ export abstract class SessionFeatureInterface {
     request_queued: (feature: SessionFeature, session: Session, msg: Message) => void
     request_started: (feature: SessionFeature, session: Session, msg: Message, socket: Socket) => void
     request_unqueued: (feature: SessionFeature, session: Session, msg: Message) => void
-    add_feature: (feature: SessionFeature, type: GObject.GType) => boolean
-    remove_feature: (feature: SessionFeature, type: GObject.GType) => boolean
-    has_feature: (feature: SessionFeature, type: GObject.GType) => boolean
+    add_feature: (feature: SessionFeature, type: GObject.Type) => boolean
+    remove_feature: (feature: SessionFeature, type: GObject.Type) => boolean
+    has_feature: (feature: SessionFeature, type: GObject.Type) => boolean
     static name: string
 }
 export abstract class SessionSyncClass {
-    /* Own fields of Soup-2.4.Soup.SessionSyncClass */
+    /* Fields of Soup-2.4.Soup.SessionSyncClass */
     parent_class: SessionClass
     static name: string
 }
 export abstract class SocketClass {
-    /* Own fields of Soup-2.4.Soup.SocketClass */
+    /* Fields of Soup-2.4.Soup.SocketClass */
     parent_class: GObject.ObjectClass
     readable: (sock: Socket) => void
     writable: (sock: Socket) => void
@@ -28255,51 +26194,8 @@ export abstract class SocketClass {
     new_connection: (listener: Socket, new_sock: Socket) => void
     static name: string
 }
-/**
- * A #SoupURI represents a (parsed) URI. #SoupURI supports RFC 3986
- * (URI Generic Syntax), and can parse any valid URI. However, libsoup
- * only uses "http" and "https" URIs internally; You can use
- * SOUP_URI_VALID_FOR_HTTP() to test if a #SoupURI is a valid HTTP
- * URI.
- * 
- * `scheme` will always be set in any URI. It is an interned string and
- * is always all lowercase. (If you parse a URI with a non-lowercase
- * scheme, it will be converted to lowercase.) The macros
- * %SOUP_URI_SCHEME_HTTP and %SOUP_URI_SCHEME_HTTPS provide the
- * interned values for "http" and "https" and can be compared against
- * URI `scheme` values.
- * 
- * `user` and `password` are parsed as defined in the older URI specs
- * (ie, separated by a colon; RFC 3986 only talks about a single
- * "userinfo" field). Note that `password` is not included in the
- * output of soup_uri_to_string(). libsoup does not normally use these
- * fields; authentication is handled via #SoupSession signals.
- * 
- * `host` contains the hostname, and `port` the port specified in the
- * URI. If the URI doesn't contain a hostname, `host` will be %NULL,
- * and if it doesn't specify a port, `port` may be 0. However, for
- * "http" and "https" URIs, `host` is guaranteed to be non-%NULL
- * (trying to parse an http URI with no `host` will return %NULL), and
- * `port` will always be non-0 (because libsoup knows the default value
- * to use when it is not specified in the URI).
- * 
- * `path` is always non-%NULL. For http/https URIs, `path` will never be
- * an empty string either; if the input URI has no path, the parsed
- * #SoupURI will have a `path` of "/".
- * 
- * `query` and `fragment` are optional for all URI types.
- * soup_form_decode() may be useful for parsing `query`.
- * 
- * Note that `path,` `query,` and `fragment` may contain
- * %<!-- -->-encoded characters. soup_uri_new() calls
- * soup_uri_normalize() on them, but not soup_uri_decode(). This is
- * necessary to ensure that soup_uri_to_string() will generate a URI
- * that has exactly the same meaning as the original. (In theory,
- * #SoupURI should leave `user,` `password,` and `host` partially-encoded
- * as well, but this would be more annoying than useful.)
- */
 export class URI {
-    /* Own fields of Soup-2.4.Soup.URI */
+    /* Fields of Soup-2.4.Soup.URI */
     /**
      * the URI scheme (eg, "http")
      */
@@ -28332,7 +26228,7 @@ export class URI {
      * a fragment identifier within `path,` or %NULL
      */
     fragment: string
-    /* Owm methods of Soup-2.4.Soup.URI */
+    /* Methods of Soup-2.4.Soup.URI */
     /**
      * Copies `uri`
      */
@@ -28395,7 +26291,7 @@ export class URI {
      * Sets `uri'`s fragment to `fragment`.
      * @param fragment the fragment
      */
-    set_fragment(fragment: string | null): void
+    set_fragment(fragment?: string | null): void
     /**
      * Sets `uri'`s host to `host`.
      * 
@@ -28406,12 +26302,12 @@ export class URI {
      * http and https URIs should not have a %NULL `host`.
      * @param host the hostname or IP address, or %NULL
      */
-    set_host(host: string | null): void
+    set_host(host?: string | null): void
     /**
      * Sets `uri'`s password to `password`.
      * @param password the password, or %NULL
      */
-    set_password(password: string | null): void
+    set_password(password?: string | null): void
     /**
      * Sets `uri'`s path to `path`.
      * @param path the non-%NULL path
@@ -28427,7 +26323,7 @@ export class URI {
      * Sets `uri'`s query to `query`.
      * @param query the query
      */
-    set_query(query: string | null): void
+    set_query(query?: string | null): void
     /**
      * Sets `uri'`s query to the result of encoding `form` according to the
      * HTML form rules. See soup_form_encode_hash() for more information.
@@ -28444,7 +26340,7 @@ export class URI {
      * Sets `uri'`s user to `user`.
      * @param user the username, or %NULL
      */
-    set_user(user: string | null): void
+    set_user(user?: string | null): void
     /**
      * Returns a string representing `uri`.
      * 
@@ -28464,10 +26360,10 @@ export class URI {
      */
     uses_default_port(): boolean
     static name: string
-    static new(uri_string: string | null): URI
-    constructor(uri_string: string | null)
+    static new(uri_string?: string | null): URI
+    constructor(uri_string?: string | null)
     /* Static methods and pseudo-constructors */
-    static new(uri_string: string | null): URI
+    static new(uri_string?: string | null): URI
     static new_with_base(base: URI, uri_string: string): URI
     /**
      * Fully %<!-- -->-decodes `part`.
@@ -28485,7 +26381,7 @@ export class URI {
      * @param part a URI part
      * @param escape_extra additional reserved characters to escape (or %NULL)
      */
-    static encode(part: string, escape_extra: string | null): string
+    static encode(part: string, escape_extra?: string | null): string
     /**
      * %<!-- -->-decodes any "unreserved" characters (or characters in
      * `unescape_extra)` in `part,` and %<!-- -->-encodes any non-ASCII
@@ -28507,13 +26403,10 @@ export class URI {
      * @param part a URI part
      * @param unescape_extra reserved characters to unescape (or %NULL)
      */
-    static normalize(part: string, unescape_extra: string | null): string
+    static normalize(part: string, unescape_extra?: string | null): string
 }
-/**
- * The abstract base class for #SoupWebsocketConnection
- */
 export abstract class WebsocketConnectionClass {
-    /* Own fields of Soup-2.4.Soup.WebsocketConnectionClass */
+    /* Fields of Soup-2.4.Soup.WebsocketConnectionClass */
     parent: GObject.ObjectClass
     message: (self: WebsocketConnection, type: WebsocketDataType, message: GLib.Bytes) => void
     error: (self: WebsocketConnection, error: GLib.Error) => void
@@ -28525,17 +26418,14 @@ export abstract class WebsocketConnectionClass {
 export class WebsocketConnectionPrivate {
     static name: string
 }
-/**
- * The class structure for the SoupWebsocketExtension.
- */
 export abstract class WebsocketExtensionClass {
-    /* Own fields of Soup-2.4.Soup.WebsocketExtensionClass */
+    /* Fields of Soup-2.4.Soup.WebsocketExtensionClass */
     /**
      * the parent class
      */
     parent_class: GObject.ObjectClass
     name: string
-    configure: (extension: WebsocketExtension, connection_type: WebsocketConnectionType, params: GLib.HashTable | null) => boolean
+    configure: (extension: WebsocketExtension, connection_type: WebsocketConnectionType, params?: GLib.HashTable | null) => boolean
     get_request_params: (extension: WebsocketExtension) => string | null
     get_response_params: (extension: WebsocketExtension) => string | null
     process_outgoing_message: (extension: WebsocketExtension, header: number, payload: GLib.Bytes) => [ /* returnType */ GLib.Bytes, /* header */ number ]
@@ -28543,22 +26433,17 @@ export abstract class WebsocketExtensionClass {
     static name: string
 }
 export abstract class WebsocketExtensionDeflateClass {
-    /* Own fields of Soup-2.4.Soup.WebsocketExtensionDeflateClass */
+    /* Fields of Soup-2.4.Soup.WebsocketExtensionDeflateClass */
     parent_class: WebsocketExtensionClass
     static name: string
 }
 export abstract class WebsocketExtensionManagerClass {
-    /* Own fields of Soup-2.4.Soup.WebsocketExtensionManagerClass */
+    /* Fields of Soup-2.4.Soup.WebsocketExtensionManagerClass */
     parent_class: GObject.ObjectClass
     static name: string
 }
-/**
- * Opaque structure containing XML-RPC methodCall parameter values.
- * Can be parsed using soup_xmlrpc_params_parse() and freed with
- * soup_xmlrpc_params_free().
- */
 export class XMLRPCParams {
-    /* Owm methods of Soup-2.4.Soup.XMLRPCParams */
+    /* Methods of Soup-2.4.Soup.XMLRPCParams */
     /**
      * Free a #SoupXMLRPCParams returned by soup_xmlrpc_parse_request().
      */
@@ -28586,6 +26471,6 @@ export class XMLRPCParams {
      *  - Dictionaries must have string keys, otherwise an error is returned.
      * @param signature A valid #GVariant type string, or %NULL
      */
-    parse(signature: string | null): GLib.Variant
+    parse(signature?: string | null): GLib.Variant
     static name: string
 }

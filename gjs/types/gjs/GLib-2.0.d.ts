@@ -2524,9 +2524,6 @@ export enum VariantParseError {
      */
     RECURSION,
 }
-/**
- * @bitfield 
- */
 export enum AsciiType {
     ALNUM,
     ALPHA,
@@ -2542,7 +2539,6 @@ export enum AsciiType {
 }
 /**
  * A test to perform on a file using g_file_test().
- * @bitfield 
  */
 export enum FileTest {
     /**
@@ -2571,7 +2567,6 @@ export enum FileTest {
 }
 /**
  * Flags to modify the format of the string returned by g_format_size_full().
- * @bitfield 
  */
 export enum FormatSizeFlags {
     /**
@@ -2598,7 +2593,6 @@ export enum FormatSizeFlags {
 }
 /**
  * Flags used internally in the #GHook implementation.
- * @bitfield 
  */
 export enum HookFlagMask {
     /**
@@ -2618,7 +2612,6 @@ export enum HookFlagMask {
 /**
  * A bitwise combination representing a condition to watch for on an
  * event source.
- * @bitfield 
  */
 export enum IOCondition {
     /**
@@ -2651,7 +2644,6 @@ export enum IOCondition {
  * Specifies properties of a #GIOChannel. Some of the flags can only be
  * read with g_io_channel_get_flags(), but not changed with
  * g_io_channel_set_flags().
- * @bitfield 
  */
 export enum IOFlags {
     /**
@@ -2704,7 +2696,6 @@ export enum IOFlags {
 }
 /**
  * Flags which influence the parsing.
- * @bitfield 
  */
 export enum KeyFileFlags {
     /**
@@ -2731,7 +2722,6 @@ export enum KeyFileFlags {
  * 
  * It is possible to change how GLib treats messages of the various
  * levels using g_log_set_handler() and g_log_set_fatal_mask().
- * @bitfield 
  */
 export enum LogLevelFlags {
     /**
@@ -2782,7 +2772,6 @@ export enum LogLevelFlags {
  * 
  * It is likely that this enum will be extended in the future to
  * support other types.
- * @bitfield 
  */
 export enum MarkupCollectType {
     /**
@@ -2827,7 +2816,6 @@ export enum MarkupCollectType {
 }
 /**
  * Flags that affect the behaviour of the parser.
- * @bitfield 
  */
 export enum MarkupParseFlags {
     /**
@@ -2860,7 +2848,6 @@ export enum MarkupParseFlags {
 }
 /**
  * Flags which modify individual options.
- * @bitfield 
  */
 export enum OptionFlags {
     /**
@@ -2912,7 +2899,6 @@ export enum OptionFlags {
 }
 /**
  * Flags specifying compile-time options.
- * @bitfield 
  */
 export enum RegexCompileFlags {
     /**
@@ -3041,7 +3027,6 @@ export enum RegexCompileFlags {
 }
 /**
  * Flags specifying match-time options.
- * @bitfield 
  */
 export enum RegexMatchFlags {
     /**
@@ -3151,7 +3136,6 @@ export enum RegexMatchFlags {
 }
 /**
  * Flags passed to g_spawn_sync(), g_spawn_async() and g_spawn_async_with_pipes().
- * @bitfield 
  */
 export enum SpawnFlags {
     /**
@@ -3213,7 +3197,6 @@ export enum SpawnFlags {
  * 
  * Note that in contrast with g_test_trap_fork(), the default is to
  * not show stdout and stderr.
- * @bitfield 
  */
 export enum TestSubprocessFlags {
     /**
@@ -3240,7 +3223,6 @@ export enum TestSubprocessFlags {
 /**
  * Test traps are guards around forked tests.
  * These flags determine what traps to set.
- * @bitfield 
  */
 export enum TestTrapFlags {
     /**
@@ -3267,7 +3249,6 @@ export enum TestTrapFlags {
 /**
  * Specifies which nodes are visited during several of the tree
  * functions, including g_node_traverse() and g_node_find().
- * @bitfield 
  */
 export enum TraverseFlags {
     /**
@@ -4005,12 +3986,12 @@ export function ascii_dtostr(buffer: string, buf_len: number, d: number): string
 export function ascii_formatd(buffer: string, buf_len: number, format: string, d: number): string
 export function ascii_strcasecmp(s1: string, s2: string): number
 export function ascii_strdown(str: string, len: number): string
-export function ascii_string_to_signed(str: string, base: number, min: number, max: number): [ /* returnType */ boolean, /* out_num */ number ]
-export function ascii_string_to_unsigned(str: string, base: number, min: number, max: number): [ /* returnType */ boolean, /* out_num */ number ]
+export function ascii_string_to_signed(str: string, base: number, min: number, max: number): [ /* returnType */ boolean, /* out_num */ number | null ]
+export function ascii_string_to_unsigned(str: string, base: number, min: number, max: number): [ /* returnType */ boolean, /* out_num */ number | null ]
 export function ascii_strncasecmp(s1: string, s2: string, n: number): number
-export function ascii_strtod(nptr: string): [ /* returnType */ number, /* endptr */ string ]
-export function ascii_strtoll(nptr: string, base: number): [ /* returnType */ number, /* endptr */ string ]
-export function ascii_strtoull(nptr: string, base: number): [ /* returnType */ number, /* endptr */ string ]
+export function ascii_strtod(nptr: string): [ /* returnType */ number, /* endptr */ string | null ]
+export function ascii_strtoll(nptr: string, base: number): [ /* returnType */ number, /* endptr */ string | null ]
+export function ascii_strtoull(nptr: string, base: number): [ /* returnType */ number, /* endptr */ string | null ]
 export function ascii_strup(str: string, len: number): string
 export function ascii_tolower(c: number): number
 export function ascii_toupper(c: number): number
@@ -4032,10 +4013,10 @@ export function atomic_int_set(atomic: number, newval: number): void
 export function atomic_int_xor(atomic: number, val: number): number
 export function atomic_pointer_add(atomic: object, val: number): number
 export function atomic_pointer_and(atomic: object, val: number): number
-export function atomic_pointer_compare_and_exchange(atomic: object, oldval: object | null, newval: object | null): boolean
+export function atomic_pointer_compare_and_exchange(atomic: object, oldval?: object | null, newval?: object | null): boolean
 export function atomic_pointer_get(atomic: object): object | null
 export function atomic_pointer_or(atomic: object, val: number): number
-export function atomic_pointer_set(atomic: object, newval: object | null): void
+export function atomic_pointer_set(atomic: object, newval?: object | null): void
 export function atomic_pointer_xor(atomic: object, val: number): number
 export function atomic_rc_box_acquire(mem_block: object): object
 export function atomic_rc_box_alloc(block_size: number): object
@@ -4067,9 +4048,9 @@ export function byte_array_free(array: Uint8Array, free_segment: boolean): numbe
 export function byte_array_free_to_bytes(array: Uint8Array): Bytes
 export function byte_array_new(): Uint8Array
 export function byte_array_new_take(data: Uint8Array): Uint8Array
-export function byte_array_steal(array: Uint8Array): [ /* returnType */ number, /* len */ number ]
+export function byte_array_steal(array: Uint8Array): [ /* returnType */ number, /* len */ number | null ]
 export function byte_array_unref(array: Uint8Array): void
-export function canonicalize_filename(filename: string, relative_to: string | null): string
+export function canonicalize_filename(filename: string, relative_to?: string | null): string
 export function chdir(path: string): number
 export function check_version(required_major: number, required_minor: number, required_micro: number): string
 export function checksum_type_get_length(checksum_type: ChecksumType): number
@@ -4083,9 +4064,9 @@ export function compute_checksum_for_string(checksum_type: ChecksumType, str: st
 export function compute_hmac_for_bytes(digest_type: ChecksumType, key: Bytes, data: Bytes): string
 export function compute_hmac_for_data(digest_type: ChecksumType, key: Uint8Array, data: Uint8Array): string
 export function compute_hmac_for_string(digest_type: ChecksumType, key: Uint8Array, str: string, length: number): string
-export function convert(str: Uint8Array, to_codeset: string, from_codeset: string): [ /* returnType */ Uint8Array, /* bytes_read */ number ]
+export function convert(str: Uint8Array, to_codeset: string, from_codeset: string): [ /* returnType */ Uint8Array, /* bytes_read */ number | null ]
 export function convert_error_quark(): Quark
-export function convert_with_fallback(str: Uint8Array, to_codeset: string, from_codeset: string, fallback: string): [ /* returnType */ Uint8Array, /* bytes_read */ number ]
+export function convert_with_fallback(str: Uint8Array, to_codeset: string, from_codeset: string, fallback: string): [ /* returnType */ Uint8Array, /* bytes_read */ number | null ]
 export function datalist_foreach(datalist: Data, func: DataForeachFunc): void
 export function datalist_get_data(datalist: Data, key: string): object | null
 export function datalist_get_flags(datalist: Data): number
@@ -4111,9 +4092,9 @@ export function date_valid_weekday(weekday: DateWeekday): boolean
 export function date_valid_year(year: DateYear): boolean
 export function dcgettext(domain: string | null, msgid: string, category: number): string
 export function dgettext(domain: string | null, msgid: string): string
-export function dir_make_tmp(tmpl: string | null): string
-export function direct_equal(v1: object | null, v2: object | null): boolean
-export function direct_hash(v: object | null): number
+export function dir_make_tmp(tmpl?: string | null): string
+export function direct_equal(v1?: object | null, v2?: object | null): boolean
+export function direct_hash(v?: object | null): number
 export function dngettext(domain: string | null, msgid: string, msgid_plural: string, n: number): string
 export function double_equal(v1: object, v2: object): boolean
 export function double_hash(v: object): number
@@ -4125,25 +4106,25 @@ export function environ_unsetenv(envp: string[] | null, variable: string): strin
 export function file_error_from_errno(err_no: number): FileError
 export function file_error_quark(): Quark
 export function file_get_contents(filename: string): [ /* returnType */ boolean, /* contents */ Uint8Array ]
-export function file_open_tmp(tmpl: string | null): [ /* returnType */ number, /* name_used */ string ]
+export function file_open_tmp(tmpl?: string | null): [ /* returnType */ number, /* name_used */ string ]
 export function file_read_link(filename: string): string
 export function file_set_contents(filename: string, contents: Uint8Array): boolean
 export function file_test(filename: string, test: FileTest): boolean
 export function filename_display_basename(filename: string): string
 export function filename_display_name(filename: string): string
 export function filename_from_uri(uri: string): [ /* returnType */ string, /* hostname */ string | null ]
-export function filename_from_utf8(utf8string: string, len: number): [ /* returnType */ string, /* bytes_read */ number, /* bytes_written */ number ]
-export function filename_to_uri(filename: string, hostname: string | null): string
-export function filename_to_utf8(opsysstring: string, len: number): [ /* returnType */ string, /* bytes_read */ number, /* bytes_written */ number ]
+export function filename_from_utf8(utf8string: string, len: number): [ /* returnType */ string, /* bytes_read */ number | null, /* bytes_written */ number | null ]
+export function filename_to_uri(filename: string, hostname?: string | null): string
+export function filename_to_utf8(opsysstring: string, len: number): [ /* returnType */ string, /* bytes_read */ number | null, /* bytes_written */ number | null ]
 export function find_program_in_path(program: string): string | null
 export function format_size(size: number): string
 export function format_size_for_display(size: number): string
 export function format_size_full(size: number, flags: FormatSizeFlags): string
-export function free(mem: object | null): void
+export function free(mem?: object | null): void
 export function get_application_name(): string | null
-export function get_charset(): [ /* returnType */ boolean, /* charset */ string ]
+export function get_charset(): [ /* returnType */ boolean, /* charset */ string | null ]
 export function get_codeset(): string
-export function get_console_charset(): [ /* returnType */ boolean, /* charset */ string ]
+export function get_console_charset(): [ /* returnType */ boolean, /* charset */ string | null ]
 export function get_current_dir(): string
 export function get_current_time(result: TimeVal): void
 export function get_environ(): string[]
@@ -4169,19 +4150,19 @@ export function get_user_name(): string
 export function get_user_runtime_dir(): string
 export function get_user_special_dir(directory: UserDirectory): string
 export function getenv(variable: string): string
-export function hash_table_add(hash_table: HashTable, key: object | null): boolean
-export function hash_table_contains(hash_table: HashTable, key: object | null): boolean
+export function hash_table_add(hash_table: HashTable, key?: object | null): boolean
+export function hash_table_contains(hash_table: HashTable, key?: object | null): boolean
 export function hash_table_destroy(hash_table: HashTable): void
-export function hash_table_insert(hash_table: HashTable, key: object | null, value: object | null): boolean
-export function hash_table_lookup(hash_table: HashTable, key: object | null): object | null
-export function hash_table_lookup_extended(hash_table: HashTable, lookup_key: object | null): [ /* returnType */ boolean, /* orig_key */ object | null, /* value */ object | null ]
-export function hash_table_remove(hash_table: HashTable, key: object | null): boolean
+export function hash_table_insert(hash_table: HashTable, key?: object | null, value?: object | null): boolean
+export function hash_table_lookup(hash_table: HashTable, key?: object | null): object | null
+export function hash_table_lookup_extended(hash_table: HashTable, lookup_key?: object | null): [ /* returnType */ boolean, /* orig_key */ object | null, /* value */ object | null ]
+export function hash_table_remove(hash_table: HashTable, key?: object | null): boolean
 export function hash_table_remove_all(hash_table: HashTable): void
-export function hash_table_replace(hash_table: HashTable, key: object | null, value: object | null): boolean
+export function hash_table_replace(hash_table: HashTable, key?: object | null, value?: object | null): boolean
 export function hash_table_size(hash_table: HashTable): number
-export function hash_table_steal(hash_table: HashTable, key: object | null): boolean
+export function hash_table_steal(hash_table: HashTable, key?: object | null): boolean
 export function hash_table_steal_all(hash_table: HashTable): void
-export function hash_table_steal_extended(hash_table: HashTable, lookup_key: object | null): [ /* returnType */ boolean, /* stolen_key */ object | null, /* stolen_value */ object | null ]
+export function hash_table_steal_extended(hash_table: HashTable, lookup_key?: object | null): [ /* returnType */ boolean, /* stolen_key */ object | null, /* stolen_value */ object | null ]
 export function hash_table_unref(hash_table: HashTable): void
 export function hook_destroy(hook_list: HookList, hook_id: number): boolean
 export function hook_destroy_link(hook_list: HookList, hook: Hook): void
@@ -4195,23 +4176,23 @@ export function hostname_is_non_ascii(hostname: string): boolean
 export function hostname_to_ascii(hostname: string): string
 export function hostname_to_unicode(hostname: string): string
 export function idle_add(priority: number, function_: SourceFunc): number
-export function idle_remove_by_data(data: object | null): boolean
+export function idle_remove_by_data(data?: object | null): boolean
 export function idle_source_new(): Source
 export function int64_equal(v1: object, v2: object): boolean
 export function int64_hash(v: object): number
 export function int_equal(v1: object, v2: object): boolean
 export function int_hash(v: object): number
-export function intern_static_string(string: string | null): string
-export function intern_string(string: string | null): string
+export function intern_static_string(string?: string | null): string
+export function intern_string(string?: string | null): string
 export function io_add_watch(channel: IOChannel, priority: number, condition: IOCondition, func: IOFunc): number
 export function io_channel_error_from_errno(en: number): IOChannelError
 export function io_channel_error_quark(): Quark
 export function io_create_watch(channel: IOChannel, condition: IOCondition): Source
 export function key_file_error_quark(): Quark
 export function listenv(): string[]
-export function locale_from_utf8(utf8string: string, len: number): [ /* returnType */ Uint8Array, /* bytes_read */ number ]
-export function locale_to_utf8(opsysstring: Uint8Array): [ /* returnType */ string, /* bytes_read */ number, /* bytes_written */ number ]
-export function log_default_handler(log_domain: string | null, log_level: LogLevelFlags, message: string | null, unused_data: object | null): void
+export function locale_from_utf8(utf8string: string, len: number): [ /* returnType */ Uint8Array, /* bytes_read */ number | null ]
+export function locale_to_utf8(opsysstring: Uint8Array): [ /* returnType */ string, /* bytes_read */ number | null, /* bytes_written */ number | null ]
+export function log_default_handler(log_domain: string | null, log_level: LogLevelFlags, message?: string | null, unused_data?: object | null): void
 export function log_remove_handler(log_domain: string, handler_id: number): void
 export function log_set_always_fatal(fatal_mask: LogLevelFlags): LogLevelFlags
 export function log_set_fatal_mask(log_domain: string, fatal_mask: LogLevelFlags): LogLevelFlags
@@ -4219,11 +4200,11 @@ export function log_set_handler(log_domain: string | null, log_levels: LogLevelF
 export function log_set_writer_func(): void
 export function log_structured_array(log_level: LogLevelFlags, fields: LogField[]): void
 export function log_variant(log_domain: string | null, log_level: LogLevelFlags, fields: Variant): void
-export function log_writer_default(log_level: LogLevelFlags, fields: LogField[], user_data: object | null): LogWriterOutput
+export function log_writer_default(log_level: LogLevelFlags, fields: LogField[], user_data?: object | null): LogWriterOutput
 export function log_writer_format_fields(log_level: LogLevelFlags, fields: LogField[], use_color: boolean): string
 export function log_writer_is_journald(output_fd: number): boolean
-export function log_writer_journald(log_level: LogLevelFlags, fields: LogField[], user_data: object | null): LogWriterOutput
-export function log_writer_standard_streams(log_level: LogLevelFlags, fields: LogField[], user_data: object | null): LogWriterOutput
+export function log_writer_journald(log_level: LogLevelFlags, fields: LogField[], user_data?: object | null): LogWriterOutput
+export function log_writer_standard_streams(log_level: LogLevelFlags, fields: LogField[], user_data?: object | null): LogWriterOutput
 export function log_writer_supports_color(output_fd: number): boolean
 export function main_context_default(): MainContext
 export function main_context_get_thread_default(): MainContext
@@ -4253,7 +4234,7 @@ export function path_get_basename(file_name: string): string
 export function path_get_dirname(file_name: string): string
 export function path_is_absolute(file_name: string): boolean
 export function path_skip_root(file_name: string): string | null
-export function pattern_match(pspec: PatternSpec, string_length: number, string: string, string_reversed: string | null): boolean
+export function pattern_match(pspec: PatternSpec, string_length: number, string: string, string_reversed?: string | null): boolean
 export function pattern_match_simple(pattern: string, string: string): boolean
 export function pattern_match_string(pspec: PatternSpec, string: string): boolean
 export function pointer_bit_lock(address: object, lock_bit: number): void
@@ -4261,10 +4242,10 @@ export function pointer_bit_trylock(address: object, lock_bit: number): boolean
 export function pointer_bit_unlock(address: object, lock_bit: number): void
 export function poll(fds: PollFD, nfds: number, timeout: number): number
 export function propagate_error(src: Error): /* dest */ Error | null
-export function quark_from_static_string(string: string | null): Quark
-export function quark_from_string(string: string | null): Quark
+export function quark_from_static_string(string?: string | null): Quark
+export function quark_from_string(string?: string | null): Quark
 export function quark_to_string(quark: Quark): string
-export function quark_try_string(string: string | null): Quark
+export function quark_try_string(string?: string | null): Quark
 export function random_double(): number
 export function random_double_range(begin: number, end: number): number
 export function random_int(): number
@@ -4289,7 +4270,7 @@ export function ref_string_new(str: string): string
 export function ref_string_new_intern(str: string): string
 export function ref_string_new_len(str: string, len: number): string
 export function ref_string_release(str: string): void
-export function regex_check_replacement(replacement: string): [ /* returnType */ boolean, /* has_references */ boolean ]
+export function regex_check_replacement(replacement: string): [ /* returnType */ boolean, /* has_references */ boolean | null ]
 export function regex_error_quark(): Quark
 export function regex_escape_nul(string: string, length: number): string
 export function regex_escape_string(string: string[]): string
@@ -4298,45 +4279,45 @@ export function regex_split_simple(pattern: string, string: string, compile_opti
 export function reload_user_special_dirs_cache(): void
 export function rmdir(filename: string): number
 export function sequence_get(iter: SequenceIter): object | null
-export function sequence_insert_before(iter: SequenceIter, data: object | null): SequenceIter
+export function sequence_insert_before(iter: SequenceIter, data?: object | null): SequenceIter
 export function sequence_move(src: SequenceIter, dest: SequenceIter): void
 export function sequence_move_range(dest: SequenceIter, begin: SequenceIter, end: SequenceIter): void
 export function sequence_range_get_midpoint(begin: SequenceIter, end: SequenceIter): SequenceIter
 export function sequence_remove(iter: SequenceIter): void
 export function sequence_remove_range(begin: SequenceIter, end: SequenceIter): void
-export function sequence_set(iter: SequenceIter, data: object | null): void
+export function sequence_set(iter: SequenceIter, data?: object | null): void
 export function sequence_swap(a: SequenceIter, b: SequenceIter): void
 export function set_application_name(application_name: string): void
-export function set_error_literal(domain: Quark, code: number, message: string): /* err */ Error
+export function set_error_literal(domain: Quark, code: number, message: string): /* err */ Error | null
 export function set_prgname(prgname: string): void
 export function setenv(variable: string, value: string, overwrite: boolean): boolean
 export function shell_error_quark(): Quark
-export function shell_parse_argv(command_line: string): [ /* returnType */ boolean, /* argvp */ string[] ]
+export function shell_parse_argv(command_line: string): [ /* returnType */ boolean, /* argvp */ string[] | null ]
 export function shell_quote(unquoted_string: string): string
 export function shell_unquote(quoted_string: string): string
 export function slice_alloc(block_size: number): object | null
 export function slice_alloc0(block_size: number): object | null
-export function slice_copy(block_size: number, mem_block: object | null): object | null
-export function slice_free1(block_size: number, mem_block: object | null): void
+export function slice_copy(block_size: number, mem_block?: object | null): object | null
+export function slice_free1(block_size: number, mem_block?: object | null): void
 export function slice_free_chain_with_offset(block_size: number, mem_chain: object | null, next_offset: number): void
 export function slice_get_config(ckey: SliceConfig): number
 export function slice_get_config_state(ckey: SliceConfig, address: number, n_values: number): number
 export function slice_set_config(ckey: SliceConfig, value: number): void
 export function source_remove(tag: number): boolean
-export function source_remove_by_funcs_user_data(funcs: SourceFuncs, user_data: object | null): boolean
-export function source_remove_by_user_data(user_data: object | null): boolean
+export function source_remove_by_funcs_user_data(funcs: SourceFuncs, user_data?: object | null): boolean
+export function source_remove_by_user_data(user_data?: object | null): boolean
 export function source_set_name_by_id(tag: number, name: string): void
 export function spaced_primes_closest(num: number): number
-export function spawn_async(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup: SpawnChildSetupFunc | null): [ /* returnType */ boolean, /* child_pid */ Pid ]
-export function spawn_async_with_fds(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup: SpawnChildSetupFunc | null, stdin_fd: number, stdout_fd: number, stderr_fd: number): [ /* returnType */ boolean, /* child_pid */ Pid ]
-export function spawn_async_with_pipes(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup: SpawnChildSetupFunc | null): [ /* returnType */ boolean, /* child_pid */ Pid, /* standard_input */ number, /* standard_output */ number, /* standard_error */ number ]
+export function spawn_async(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup?: SpawnChildSetupFunc | null): [ /* returnType */ boolean, /* child_pid */ Pid | null ]
+export function spawn_async_with_fds(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup: SpawnChildSetupFunc | null, stdin_fd: number, stdout_fd: number, stderr_fd: number): [ /* returnType */ boolean, /* child_pid */ Pid | null ]
+export function spawn_async_with_pipes(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup?: SpawnChildSetupFunc | null): [ /* returnType */ boolean, /* child_pid */ Pid | null, /* standard_input */ number | null, /* standard_output */ number | null, /* standard_error */ number | null ]
 export function spawn_check_exit_status(exit_status: number): boolean
 export function spawn_close_pid(pid: Pid): void
 export function spawn_command_line_async(command_line: string): boolean
-export function spawn_command_line_sync(command_line: string): [ /* returnType */ boolean, /* standard_output */ Uint8Array, /* standard_error */ Uint8Array, /* exit_status */ number ]
+export function spawn_command_line_sync(command_line: string): [ /* returnType */ boolean, /* standard_output */ Uint8Array | null, /* standard_error */ Uint8Array | null, /* exit_status */ number | null ]
 export function spawn_error_quark(): Quark
 export function spawn_exit_error_quark(): Quark
-export function spawn_sync(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup: SpawnChildSetupFunc | null): [ /* returnType */ boolean, /* standard_output */ Uint8Array, /* standard_error */ Uint8Array, /* exit_status */ number ]
+export function spawn_sync(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup?: SpawnChildSetupFunc | null): [ /* returnType */ boolean, /* standard_output */ Uint8Array | null, /* standard_error */ Uint8Array | null, /* exit_status */ number | null ]
 export function stpcpy(dest: string, src: string): string
 export function str_equal(v1: object, v2: object): boolean
 export function str_has_prefix(str: string, prefix: string): boolean
@@ -4344,21 +4325,21 @@ export function str_has_suffix(str: string, suffix: string): boolean
 export function str_hash(v: object): number
 export function str_is_ascii(str: string): boolean
 export function str_match_string(search_term: string, potential_hit: string, accept_alternates: boolean): boolean
-export function str_to_ascii(str: string, from_locale: string | null): string
-export function str_tokenize_and_fold(string: string, translit_locale: string | null): [ /* returnType */ string[], /* ascii_alternates */ string[] ]
+export function str_to_ascii(str: string, from_locale?: string | null): string
+export function str_tokenize_and_fold(string: string, translit_locale?: string | null): [ /* returnType */ string[], /* ascii_alternates */ string[] ]
 export function strcanon(string: string, valid_chars: string, substitutor: number): string
 export function strcasecmp(s1: string, s2: string): number
 export function strchomp(string: string): string
 export function strchug(string: string): string
-export function strcmp0(str1: string | null, str2: string | null): number
+export function strcmp0(str1?: string | null, str2?: string | null): number
 export function strcompress(source: string): string
 export function strdelimit(string: string, delimiters: string | null, new_delimiter: number): string
 export function strdown(string: string): string
-export function strdup(str: string | null): string
+export function strdup(str?: string | null): string
 export function strerror(errnum: number): string
-export function strescape(source: string, exceptions: string | null): string
-export function strfreev(str_array: string | null): void
-export function string_new(init: string | null): String
+export function strescape(source: string, exceptions?: string | null): string
+export function strfreev(str_array?: string | null): void
+export function string_new(init?: string | null): String
 export function string_new_len(init: string, len: number): String
 export function string_sized_new(dfl_size: number): String
 export function strip_context(msgid: string, msgval: string): string
@@ -4373,11 +4354,11 @@ export function strrstr(haystack: string, needle: string): string
 export function strrstr_len(haystack: string, haystack_len: number, needle: string): string
 export function strsignal(signum: number): string
 export function strstr_len(haystack: string, haystack_len: number, needle: string): string
-export function strtod(nptr: string): [ /* returnType */ number, /* endptr */ string ]
+export function strtod(nptr: string): [ /* returnType */ number, /* endptr */ string | null ]
 export function strup(string: string): string
 export function strv_contains(strv: string, str: string): boolean
 export function strv_equal(strv1: string, strv2: string): boolean
-export function strv_get_type(): GObject.GType
+export function strv_get_type(): GObject.Type
 export function strv_length(str_array: string): number
 export function test_add_data_func(testpath: string, test_data: object | null, test_func: TestDataFunc): void
 export function test_add_data_func_full(testpath: string, test_data: object | null, test_func: TestDataFunc): void
@@ -4389,10 +4370,10 @@ export function test_expect_message(log_domain: string | null, log_level: LogLev
 export function test_fail(): void
 export function test_failed(): boolean
 export function test_get_dir(file_type: TestFileType): string
-export function test_incomplete(msg: string | null): void
+export function test_incomplete(msg?: string | null): void
 export function test_log_type_name(log_type: TestLogType): string
-export function test_queue_destroy(destroy_func: DestroyNotify, destroy_data: object | null): void
-export function test_queue_free(gfree_pointer: object | null): void
+export function test_queue_destroy(destroy_func: DestroyNotify, destroy_data?: object | null): void
+export function test_queue_free(gfree_pointer?: object | null): void
 export function test_rand_double(): number
 export function test_rand_double_range(range_start: number, range_end: number): number
 export function test_rand_int(): number
@@ -4400,7 +4381,7 @@ export function test_rand_int_range(begin: number, end: number): number
 export function test_run(): number
 export function test_run_suite(suite: TestSuite): number
 export function test_set_nonfatal_assertions(): void
-export function test_skip(msg: string | null): void
+export function test_skip(msg?: string | null): void
 export function test_subprocess(): boolean
 export function test_summary(summary: string): void
 export function test_timer_elapsed(): number
@@ -4412,7 +4393,7 @@ export function test_trap_has_passed(): boolean
 export function test_trap_reached_timeout(): boolean
 export function test_trap_subprocess(test_path: string | null, usec_timeout: number, test_flags: TestSubprocessFlags): void
 export function thread_error_quark(): Quark
-export function thread_exit(retval: object | null): void
+export function thread_exit(retval?: object | null): void
 export function thread_pool_get_max_idle_time(): number
 export function thread_pool_get_max_unused_threads(): number
 export function thread_pool_get_num_unused_threads(): number
@@ -4436,42 +4417,42 @@ export function try_malloc0_n(n_blocks: number, n_block_bytes: number): object |
 export function try_malloc_n(n_blocks: number, n_block_bytes: number): object | null
 export function try_realloc(mem: object | null, n_bytes: number): object | null
 export function try_realloc_n(mem: object | null, n_blocks: number, n_block_bytes: number): object | null
-export function ucs4_to_utf16(str: string, len: number): [ /* returnType */ number, /* items_read */ number, /* items_written */ number ]
-export function ucs4_to_utf8(str: string, len: number): [ /* returnType */ string, /* items_read */ number, /* items_written */ number ]
-export function unichar_break_type(c: string): UnicodeBreakType
-export function unichar_combining_class(uc: string): number
-export function unichar_compose(a: string, b: string): [ /* returnType */ boolean, /* ch */ string ]
-export function unichar_decompose(ch: string): [ /* returnType */ boolean, /* a */ string, /* b */ string ]
-export function unichar_digit_value(c: string): number
-export function unichar_fully_decompose(ch: string, compat: boolean, result_len: number): [ /* returnType */ number, /* result */ string ]
-export function unichar_get_mirror_char(ch: string, mirrored_ch: string): boolean
-export function unichar_get_script(ch: string): UnicodeScript
-export function unichar_isalnum(c: string): boolean
-export function unichar_isalpha(c: string): boolean
-export function unichar_iscntrl(c: string): boolean
-export function unichar_isdefined(c: string): boolean
-export function unichar_isdigit(c: string): boolean
-export function unichar_isgraph(c: string): boolean
-export function unichar_islower(c: string): boolean
-export function unichar_ismark(c: string): boolean
-export function unichar_isprint(c: string): boolean
-export function unichar_ispunct(c: string): boolean
-export function unichar_isspace(c: string): boolean
-export function unichar_istitle(c: string): boolean
-export function unichar_isupper(c: string): boolean
-export function unichar_iswide(c: string): boolean
-export function unichar_iswide_cjk(c: string): boolean
-export function unichar_isxdigit(c: string): boolean
-export function unichar_iszerowidth(c: string): boolean
-export function unichar_to_utf8(c: string): [ /* returnType */ number, /* outbuf */ string ]
-export function unichar_tolower(c: string): string
-export function unichar_totitle(c: string): string
-export function unichar_toupper(c: string): string
-export function unichar_type(c: string): UnicodeType
-export function unichar_validate(ch: string): boolean
-export function unichar_xdigit_value(c: string): number
-export function unicode_canonical_decomposition(ch: string, result_len: number): string
-export function unicode_canonical_ordering(string: string, len: number): void
+export function ucs4_to_utf16(str: number, len: number): [ /* returnType */ number, /* items_read */ number | null, /* items_written */ number | null ]
+export function ucs4_to_utf8(str: number, len: number): [ /* returnType */ string, /* items_read */ number | null, /* items_written */ number | null ]
+export function unichar_break_type(c: number): UnicodeBreakType
+export function unichar_combining_class(uc: number): number
+export function unichar_compose(a: number, b: number): [ /* returnType */ boolean, /* ch */ number ]
+export function unichar_decompose(ch: number): [ /* returnType */ boolean, /* a */ number, /* b */ number ]
+export function unichar_digit_value(c: number): number
+export function unichar_fully_decompose(ch: number, compat: boolean, result_len: number): [ /* returnType */ number, /* result */ number | null ]
+export function unichar_get_mirror_char(ch: number, mirrored_ch: number): boolean
+export function unichar_get_script(ch: number): UnicodeScript
+export function unichar_isalnum(c: number): boolean
+export function unichar_isalpha(c: number): boolean
+export function unichar_iscntrl(c: number): boolean
+export function unichar_isdefined(c: number): boolean
+export function unichar_isdigit(c: number): boolean
+export function unichar_isgraph(c: number): boolean
+export function unichar_islower(c: number): boolean
+export function unichar_ismark(c: number): boolean
+export function unichar_isprint(c: number): boolean
+export function unichar_ispunct(c: number): boolean
+export function unichar_isspace(c: number): boolean
+export function unichar_istitle(c: number): boolean
+export function unichar_isupper(c: number): boolean
+export function unichar_iswide(c: number): boolean
+export function unichar_iswide_cjk(c: number): boolean
+export function unichar_isxdigit(c: number): boolean
+export function unichar_iszerowidth(c: number): boolean
+export function unichar_to_utf8(c: number): [ /* returnType */ number, /* outbuf */ string | null ]
+export function unichar_tolower(c: number): number
+export function unichar_totitle(c: number): number
+export function unichar_toupper(c: number): number
+export function unichar_type(c: number): UnicodeType
+export function unichar_validate(ch: number): boolean
+export function unichar_xdigit_value(c: number): number
+export function unicode_canonical_decomposition(ch: number, result_len: number): number
+export function unicode_canonical_ordering(string: number, len: number): void
 export function unicode_script_from_iso15924(iso15924: number): UnicodeScript
 export function unicode_script_to_iso15924(script: UnicodeScript): number
 export function unix_error_quark(): Quark
@@ -4487,55 +4468,54 @@ export function unsetenv(variable: string): void
 export function uri_escape_string(unescaped: string, reserved_chars_allowed: string | null, allow_utf8: boolean): string
 export function uri_list_extract_uris(uri_list: string): string[]
 export function uri_parse_scheme(uri: string): string
-export function uri_unescape_segment(escaped_string: string | null, escaped_string_end: string | null, illegal_characters: string | null): string
-export function uri_unescape_string(escaped_string: string, illegal_characters: string | null): string
+export function uri_unescape_segment(escaped_string?: string | null, escaped_string_end?: string | null, illegal_characters?: string | null): string
+export function uri_unescape_string(escaped_string: string, illegal_characters?: string | null): string
 export function usleep(microseconds: number): void
-export function utf16_to_ucs4(str: number, len: number): [ /* returnType */ string, /* items_read */ number, /* items_written */ number ]
-export function utf16_to_utf8(str: number, len: number): [ /* returnType */ string, /* items_read */ number, /* items_written */ number ]
+export function utf16_to_ucs4(str: number, len: number): [ /* returnType */ number, /* items_read */ number | null, /* items_written */ number | null ]
+export function utf16_to_utf8(str: number, len: number): [ /* returnType */ string, /* items_read */ number | null, /* items_written */ number | null ]
 export function utf8_casefold(str: string, len: number): string
 export function utf8_collate(str1: string, str2: string): number
 export function utf8_collate_key(str: string, len: number): string
 export function utf8_collate_key_for_filename(str: string, len: number): string
-export function utf8_find_next_char(p: string, end: string | null): string | null
+export function utf8_find_next_char(p: string, end?: string | null): string | null
 export function utf8_find_prev_char(str: string, p: string): string | null
-export function utf8_get_char(p: string): string
-export function utf8_get_char_validated(p: string, max_len: number): string
+export function utf8_get_char(p: string): number
+export function utf8_get_char_validated(p: string, max_len: number): number
 export function utf8_make_valid(str: string, len: number): string
 export function utf8_normalize(str: string, len: number, mode: NormalizeMode): string | null
 export function utf8_offset_to_pointer(str: string, offset: number): string
 export function utf8_pointer_to_offset(str: string, pos: string): number
 export function utf8_prev_char(p: string): string
-export function utf8_strchr(p: string, len: number, c: string): string | null
+export function utf8_strchr(p: string, len: number, c: number): string | null
 export function utf8_strdown(str: string, len: number): string
 export function utf8_strlen(p: string, max: number): number
 export function utf8_strncpy(dest: string, src: string, n: number): string
-export function utf8_strrchr(p: string, len: number, c: string): string | null
+export function utf8_strrchr(p: string, len: number, c: number): string | null
 export function utf8_strreverse(str: string, len: number): string
 export function utf8_strup(str: string, len: number): string
 export function utf8_substring(str: string, start_pos: number, end_pos: number): string
-export function utf8_to_ucs4(str: string, len: number): [ /* returnType */ string, /* items_read */ number, /* items_written */ number ]
-export function utf8_to_ucs4_fast(str: string, len: number): [ /* returnType */ string, /* items_written */ number ]
-export function utf8_to_utf16(str: string, len: number): [ /* returnType */ number, /* items_read */ number, /* items_written */ number ]
-export function utf8_validate(str: Uint8Array): [ /* returnType */ boolean, /* end */ string ]
-export function utf8_validate_len(str: Uint8Array): [ /* returnType */ boolean, /* end */ string ]
+export function utf8_to_ucs4(str: string, len: number): [ /* returnType */ number, /* items_read */ number | null, /* items_written */ number | null ]
+export function utf8_to_ucs4_fast(str: string, len: number): [ /* returnType */ number, /* items_written */ number | null ]
+export function utf8_to_utf16(str: string, len: number): [ /* returnType */ number, /* items_read */ number | null, /* items_written */ number | null ]
+export function utf8_validate(str: Uint8Array): [ /* returnType */ boolean, /* end */ string | null ]
+export function utf8_validate_len(str: Uint8Array): [ /* returnType */ boolean, /* end */ string | null ]
 export function uuid_string_is_valid(str: string): boolean
 export function uuid_string_random(): string
-export function variant_get_gtype(): GObject.GType
+export function variant_get_gtype(): GObject.Type
 export function variant_is_object_path(string: string): boolean
 export function variant_is_signature(string: string): boolean
-export function variant_parse(type: VariantType | null, text: string, limit: string | null, endptr: string | null): Variant
+export function variant_parse(type: VariantType | null, text: string, limit?: string | null, endptr?: string | null): Variant
 export function variant_parse_error_print_context(error: Error, source_str: string): string
 export function variant_parse_error_quark(): Quark
 export function variant_parser_get_error_quark(): Quark
 export function variant_type_checked_(arg0: string): VariantType
 export function variant_type_string_get_depth_(type_string: string): number
 export function variant_type_string_is_valid(type_string: string): boolean
-export function variant_type_string_scan(string: string, limit: string | null): [ /* returnType */ boolean, /* endptr */ string ]
+export function variant_type_string_scan(string: string, limit?: string | null): [ /* returnType */ boolean, /* endptr */ string | null ]
 /**
  * Prototype of a #GChildWatchSource callback, called when a child
  * process has exited.  To interpret `status,` see the documentation
  * for g_spawn_check_exit_status().
- * @callback 
  */
 export interface ChildWatchFunc {
     (pid: Pid, status: number): void
@@ -4545,7 +4525,6 @@ export interface ChildWatchFunc {
  * The implementation is expected to free the resource identified
  * by `handle_id;` for instance, if `handle_id` is a #GSource ID,
  * g_source_remove() can be used.
- * @callback 
  */
 export interface ClearHandleFunc {
     (handle_id: number): void
@@ -4555,91 +4534,81 @@ export interface ClearHandleFunc {
  * values.  The function should return a negative integer if the first
  * value comes before the second, 0 if they are equal, or a positive
  * integer if the first value comes after the second.
- * @callback 
  */
 export interface CompareDataFunc {
-    (a: object | null, b: object | null): number
+    (a?: object | null, b?: object | null): number
 }
 /**
  * Specifies the type of a comparison function used to compare two
  * values.  The function should return a negative integer if the first
  * value comes before the second, 0 if they are equal, or a positive
  * integer if the first value comes after the second.
- * @callback 
  */
 export interface CompareFunc {
-    (a: object | null, b: object | null): number
+    (a?: object | null, b?: object | null): number
 }
 /**
  * A function of this signature is used to copy the node data
  * when doing a deep-copy of a tree.
- * @callback 
  */
 export interface CopyFunc {
-    (src: object, data: object | null): object
+    (src: object, data?: object | null): object
 }
 /**
  * Specifies the type of function passed to g_dataset_foreach(). It is
  * called with each #GQuark id and associated data element, together
  * with the `user_data` parameter supplied to g_dataset_foreach().
- * @callback 
  */
 export interface DataForeachFunc {
-    (key_id: Quark, data: object | null): void
+    (key_id: Quark, data?: object | null): void
 }
 /**
  * Specifies the type of function which is called when a data element
  * is destroyed. It is passed the pointer to the data element and
  * should free any memory and resources allocated for it.
- * @callback 
  */
 export interface DestroyNotify {
-    (data: object | null): void
+    (data?: object | null): void
 }
 /**
  * The type of functions that are used to 'duplicate' an object.
  * What this means depends on the context, it could just be
  * incrementing the reference count, if `data` is a ref-counted
  * object.
- * @callback 
  */
 export interface DuplicateFunc {
-    (data: object | null): object | null
+    (data?: object | null): object | null
 }
 /**
  * Specifies the type of a function used to test two values for
  * equality. The function should return %TRUE if both values are equal
  * and %FALSE otherwise.
- * @callback 
  */
 export interface EqualFunc {
-    (a: object | null, b: object | null): boolean
+    (a?: object | null, b?: object | null): boolean
 }
 /**
  * Declares a type of function which takes an arbitrary
  * data pointer argument and has no return value. It is
  * not currently used in GLib or GTK+.
- * @callback 
  */
 export interface FreeFunc {
-    (data: object | null): void
+    (data?: object | null): void
 }
 /**
  * Specifies the type of functions passed to g_list_foreach() and
  * g_slist_foreach().
- * @callback 
  */
 export interface Func {
-    (data: object | null): void
+    (data?: object | null): void
 }
 /**
  * Specifies the type of the function passed to g_hash_table_foreach().
  * It is called with each key/value pair, together with the `user_data`
  * parameter which is passed to g_hash_table_foreach().
- * @callback 
  */
 export interface HFunc {
-    (key: object | null, value: object | null): void
+    (key?: object | null, value?: object | null): void
 }
 /**
  * Specifies the type of the function passed to
@@ -4647,10 +4616,9 @@ export interface HFunc {
  * pair, together with the `user_data` parameter passed to
  * g_hash_table_foreach_remove(). It should return %TRUE if the
  * key/value pair should be removed from the #GHashTable.
- * @callback 
  */
 export interface HRFunc {
-    (key: object | null, value: object | null): boolean
+    (key?: object | null, value?: object | null): boolean
 }
 /**
  * Specifies the type of the hash function which is passed to
@@ -4683,30 +4651,26 @@ export interface HRFunc {
  * cryptographic hashes are very easy to find collisions for when the
  * remainder is taken modulo a somewhat predictable prime number.  There
  * must be an element of randomness that an attacker is unable to guess.
- * @callback 
  */
 export interface HashFunc {
-    (key: object | null): number
+    (key?: object | null): number
 }
 /**
  * Defines the type of a hook function that can be invoked
  * by g_hook_list_invoke_check().
- * @callback 
  */
 export interface HookCheckFunc {
-    (data: object | null): boolean
+    (data?: object | null): boolean
 }
 /**
  * Defines the type of function used by g_hook_list_marshal_check().
- * @callback 
  */
 export interface HookCheckMarshaller {
-    (hook: Hook, marshal_data: object | null): boolean
+    (hook: Hook, marshal_data?: object | null): boolean
 }
 /**
  * Defines the type of function used to compare #GHook elements in
  * g_hook_insert_sorted().
- * @callback 
  */
 export interface HookCompareFunc {
     (new_hook: Hook, sibling: Hook): number
@@ -4714,41 +4678,36 @@ export interface HookCompareFunc {
 /**
  * Defines the type of function to be called when a hook in a
  * list of hooks gets finalized.
- * @callback 
  */
 export interface HookFinalizeFunc {
     (hook_list: HookList, hook: Hook): void
 }
 /**
  * Defines the type of the function passed to g_hook_find().
- * @callback 
  */
 export interface HookFindFunc {
-    (hook: Hook, data: object | null): boolean
+    (hook: Hook, data?: object | null): boolean
 }
 /**
  * Defines the type of a hook function that can be invoked
  * by g_hook_list_invoke().
- * @callback 
  */
 export interface HookFunc {
-    (data: object | null): void
+    (data?: object | null): void
 }
 /**
  * Defines the type of function used by g_hook_list_marshal().
- * @callback 
  */
 export interface HookMarshaller {
-    (hook: Hook, marshal_data: object | null): void
+    (hook: Hook, marshal_data?: object | null): void
 }
 /**
  * Specifies the type of function passed to g_io_add_watch() or
  * g_io_add_watch_full(), which is called when the requested condition
  * on a #GIOChannel is satisfied.
- * @callback 
  */
 export interface IOFunc {
-    (source: IOChannel, condition: IOCondition, data: object | null): boolean
+    (source: IOChannel, condition: IOCondition, data?: object | null): boolean
 }
 /**
  * Specifies the prototype of log handler functions.
@@ -4761,7 +4720,6 @@ export interface IOFunc {
  * 
  * This is not used if structured logging is enabled; see
  * [Using Structured Logging][using-structured-logging].
- * @callback 
  */
 export interface LogFunc {
     (log_domain: string, log_level: LogLevelFlags, message: string): void
@@ -4785,7 +4743,6 @@ export interface LogFunc {
  * send messages to a remote logging server and there is a network error), it
  * should return %G_LOG_WRITER_UNHANDLED. This allows writer functions to be
  * chained and fall back to simpler handlers in case of failure.
- * @callback 
  */
 export interface LogWriterFunc {
     (log_level: LogLevelFlags, fields: LogField[]): LogWriterOutput
@@ -4794,47 +4751,41 @@ export interface LogWriterFunc {
  * Specifies the type of function passed to g_node_children_foreach().
  * The function is called with each child node, together with the user
  * data passed to g_node_children_foreach().
- * @callback 
  */
 export interface NodeForeachFunc {
-    (node: Node, data: object | null): void
+    (node: Node, data?: object | null): void
 }
 /**
  * Specifies the type of function passed to g_node_traverse(). The
  * function is called with each of the nodes visited, together with the
  * user data passed to g_node_traverse(). If the function returns
  * %TRUE, then the traversal is stopped.
- * @callback 
  */
 export interface NodeTraverseFunc {
-    (node: Node, data: object | null): boolean
+    (node: Node, data?: object | null): boolean
 }
 /**
  * The type of function to be passed as callback for %G_OPTION_ARG_CALLBACK
  * options.
- * @callback 
  */
 export interface OptionArgFunc {
-    (option_name: string, value: string, data: object | null): boolean
+    (option_name: string, value: string, data?: object | null): boolean
 }
 /**
  * The type of function to be used as callback when a parse error occurs.
- * @callback 
  */
 export interface OptionErrorFunc {
-    (context: OptionContext, group: OptionGroup, data: object | null): void
+    (context: OptionContext, group: OptionGroup, data?: object | null): void
 }
 /**
  * The type of function that can be called before and after parsing.
- * @callback 
  */
 export interface OptionParseFunc {
-    (context: OptionContext, group: OptionGroup, data: object | null): boolean
+    (context: OptionContext, group: OptionGroup, data?: object | null): boolean
 }
 /**
  * Specifies the type of function passed to g_main_context_set_poll_func().
  * The semantics of the function should match those of the poll() system call.
- * @callback 
  */
 export interface PollFunc {
     (ufds: PollFD, nfsd: number, timeout_: number): number
@@ -4842,7 +4793,6 @@ export interface PollFunc {
 /**
  * Specifies the type of the print handler functions.
  * These are called with the complete formatted string to output.
- * @callback 
  */
 export interface PrintFunc {
     (string: string): void
@@ -4852,14 +4802,12 @@ export interface PrintFunc {
  * It is called for each occurrence of the pattern in the string passed
  * to g_regex_replace_eval(), and it should append the replacement to
  * `result`.
- * @callback 
  */
 export interface RegexEvalCallback {
     (match_info: MatchInfo, result: String): boolean
 }
 /**
  * Specifies the type of the message handler function.
- * @callback 
  */
 export interface ScannerMsgFunc {
     (scanner: Scanner, message: string, error: boolean): void
@@ -4868,15 +4816,13 @@ export interface ScannerMsgFunc {
  * A #GSequenceIterCompareFunc is a function used to compare iterators.
  * It must return zero if the iterators compare equal, a negative value
  * if `a` comes before `b,` and a positive value if `b` comes before `a`.
- * @callback 
  */
 export interface SequenceIterCompareFunc {
-    (a: SequenceIter, b: SequenceIter, data: object | null): number
+    (a: SequenceIter, b: SequenceIter, data?: object | null): number
 }
 /**
  * Dispose function for `source`. See g_source_set_dispose_function() for
  * details.
- * @callback 
  */
 export interface SourceDisposeFunc {
     (source: Source): void
@@ -4884,7 +4830,6 @@ export interface SourceDisposeFunc {
 /**
  * This is just a placeholder for #GClosureMarshal,
  * which cannot be used here for dependency reasons.
- * @callback 
  */
 export interface SourceDummyMarshal {
     (): void
@@ -4896,7 +4841,6 @@ export interface SourceDummyMarshal {
  * When calling g_source_set_callback(), you may need to cast a function of a
  * different type to this type. Use G_SOURCE_FUNC() to avoid warnings about
  * incompatible function types.
- * @callback 
  */
 export interface SourceFunc {
     (): boolean
@@ -4932,7 +4876,6 @@ export interface SourceFunc {
  * the parent, you should use g_get_environ(), g_environ_setenv(),
  * and g_environ_unsetenv(), and then pass the complete environment
  * list to the `g_spawn...` function.
- * @callback 
  */
 export interface SpawnChildSetupFunc {
     (): void
@@ -4940,7 +4883,6 @@ export interface SpawnChildSetupFunc {
 /**
  * The type used for test case functions that take an extra pointer
  * argument.
- * @callback 
  */
 export interface TestDataFunc {
     (): void
@@ -4956,21 +4898,18 @@ export interface TestDataFunc {
  * `fixture` will be a pointer to the area of memory allocated by the
  * test framework, of the size requested.  If the requested size was
  * zero then `fixture` will be equal to `user_data`.
- * @callback 
  */
 export interface TestFixtureFunc {
     (fixture: object): void
 }
 /**
  * The type used for test case functions.
- * @callback 
  */
 export interface TestFunc {
     (): void
 }
 /**
  * Specifies the prototype of fatal log handler functions.
- * @callback 
  */
 export interface TestLogFatalFunc {
     (log_domain: string, log_level: LogLevelFlags, message: string): boolean
@@ -4978,33 +4917,29 @@ export interface TestLogFatalFunc {
 /**
  * Specifies the type of the `func` functions passed to g_thread_new()
  * or g_thread_try_new().
- * @callback 
  */
 export interface ThreadFunc {
-    (data: object | null): object | null
+    (data?: object | null): object | null
 }
 /**
  * The type of functions which are used to translate user-visible
  * strings, for <option>--help</option> output.
- * @callback 
  */
 export interface TranslateFunc {
-    (str: string, data: object | null): string
+    (str: string, data?: object | null): string
 }
 /**
  * Specifies the type of function passed to g_tree_traverse(). It is
  * passed the key and value of each node, together with the `user_data`
  * parameter passed to g_tree_traverse(). If the function returns
  * %TRUE, the traversal is stopped.
- * @callback 
  */
 export interface TraverseFunc {
-    (key: object | null, value: object | null, data: object | null): boolean
+    (key?: object | null, value?: object | null, data?: object | null): boolean
 }
 /**
  * The type of functions to be called when a UNIX fd watch source
  * triggers.
- * @callback 
  */
 export interface UnixFDSourceFunc {
     (fd: number, condition: IOCondition): boolean
@@ -5013,16 +4948,12 @@ export interface UnixFDSourceFunc {
  * Declares a type of function which takes no arguments
  * and has no return value. It is used to specify the type
  * function passed to g_atexit().
- * @callback 
  */
 export interface VoidFunc {
     (): void
 }
-/**
- * Contains the public fields of a GArray.
- */
 export class Array {
-    /* Own fields of GLib-2.0.GLib.Array */
+    /* Fields of GLib-2.0.GLib.Array */
     /**
      * a pointer to the element data. The data may be moved as
      *     elements are added to the #GArray.
@@ -5035,13 +4966,8 @@ export class Array {
     len: number
     static name: string
 }
-/**
- * The GAsyncQueue struct is an opaque data structure which represents
- * an asynchronous queue. It should only be accessed through the
- * g_async_queue_* functions.
- */
 export class AsyncQueue {
-    /* Owm methods of GLib-2.0.GLib.AsyncQueue */
+    /* Methods of GLib-2.0.GLib.AsyncQueue */
     /**
      * Returns the length of the queue.
      * 
@@ -5094,7 +5020,7 @@ export class AsyncQueue {
      * Pushes the `data` into the `queue`. `data` must not be %NULL.
      * @param data `data` to push into the `queue`
      */
-    push(data: object | null): void
+    push(data?: object | null): void
     /**
      * Pushes the `item` into the `queue`. `item` must not be %NULL.
      * In contrast to g_async_queue_push(), this function
@@ -5102,7 +5028,7 @@ export class AsyncQueue {
      * so that it will be the next one to be popped off the queue.
      * @param item data to push into the `queue`
      */
-    push_front(item: object | null): void
+    push_front(item?: object | null): void
     /**
      * Pushes the `item` into the `queue`. `item` must not be %NULL.
      * In contrast to g_async_queue_push_unlocked(), this function
@@ -5112,14 +5038,14 @@ export class AsyncQueue {
      * This function must be called while holding the `queue'`s lock.
      * @param item data to push into the `queue`
      */
-    push_front_unlocked(item: object | null): void
+    push_front_unlocked(item?: object | null): void
     /**
      * Pushes the `data` into the `queue`. `data` must not be %NULL.
      * 
      * This function must be called while holding the `queue'`s lock.
      * @param data `data` to push into the `queue`
      */
-    push_unlocked(data: object | null): void
+    push_unlocked(data?: object | null): void
     /**
      * Increases the reference count of the asynchronous `queue` by 1.
      */
@@ -5128,14 +5054,14 @@ export class AsyncQueue {
      * Remove an item from the queue.
      * @param item the data to remove from the `queue`
      */
-    remove(item: object | null): boolean
+    remove(item?: object | null): boolean
     /**
      * Remove an item from the queue.
      * 
      * This function must be called while holding the `queue'`s lock.
      * @param item the data to remove from the `queue`
      */
-    remove_unlocked(item: object | null): boolean
+    remove_unlocked(item?: object | null): boolean
     /**
      * Pops data from the `queue`. If the queue is empty, blocks until
      * `end_time` or until data becomes available.
@@ -5216,12 +5142,8 @@ export class AsyncQueue {
     unref_and_unlock(): void
     static name: string
 }
-/**
- * The `GBookmarkFile` structure contains only
- * private data and should not be directly accessed.
- */
 export class BookmarkFile {
-    /* Owm methods of GLib-2.0.GLib.BookmarkFile */
+    /* Methods of GLib-2.0.GLib.BookmarkFile */
     /**
      * Adds the application with `name` and `exec` to the list of
      * applications that have registered a bookmark for `uri` into
@@ -5249,7 +5171,7 @@ export class BookmarkFile {
      * @param name the name of the application registering the bookmark   or %NULL
      * @param exec command line to be used to launch the bookmark or %NULL
      */
-    add_application(uri: string, name: string | null, exec: string | null): void
+    add_application(uri: string, name?: string | null, exec?: string | null): void
     /**
      * Adds `group` to the list of groups to which the bookmark for `uri`
      * belongs to.
@@ -5288,7 +5210,7 @@ export class BookmarkFile {
      * @param uri a valid URI
      * @param name an application's name
      */
-    get_app_info(uri: string, name: string): [ /* returnType */ boolean, /* exec */ string, /* count */ number, /* stamp */ number ]
+    get_app_info(uri: string, name: string): [ /* returnType */ boolean, /* exec */ string | null, /* count */ number | null, /* stamp */ number | null ]
     /**
      * Retrieves the names of the applications that have registered the
      * bookmark for `uri`.
@@ -5324,7 +5246,7 @@ export class BookmarkFile {
      * `error` is set to #G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
      * @param uri a valid URI
      */
-    get_icon(uri: string): [ /* returnType */ boolean, /* href */ string, /* mime_type */ string ]
+    get_icon(uri: string): [ /* returnType */ boolean, /* href */ string | null, /* mime_type */ string | null ]
     /**
      * Gets whether the private flag of the bookmark for `uri` is set.
      * 
@@ -5366,7 +5288,7 @@ export class BookmarkFile {
      * `error` is set to #G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
      * @param uri a valid URI or %NULL
      */
-    get_title(uri: string | null): string
+    get_title(uri?: string | null): string
     /**
      * Returns all URIs of the bookmarks in the bookmark file `bookmark`.
      * The array of returned URIs will be %NULL-terminated, so `length` may
@@ -5421,7 +5343,7 @@ export class BookmarkFile {
      * set to either a #GFileError or #GBookmarkFileError.
      * @param file a relative path to a filename to open and parse
      */
-    load_from_data_dirs(file: string): [ /* returnType */ boolean, /* full_path */ string ]
+    load_from_data_dirs(file: string): [ /* returnType */ boolean, /* full_path */ string | null ]
     /**
      * Loads a desktop bookmark file into an empty #GBookmarkFile structure.
      * If the file could not be loaded then `error` is set to either a #GFileError
@@ -5439,7 +5361,7 @@ export class BookmarkFile {
      * @param old_uri a valid URI
      * @param new_uri a valid URI, or %NULL
      */
-    move_item(old_uri: string, new_uri: string | null): boolean
+    move_item(old_uri: string, new_uri?: string | null): boolean
     /**
      * Removes application registered with `name` from the list of applications
      * that have registered a bookmark for `uri` inside `bookmark`.
@@ -5612,11 +5534,8 @@ export class BookmarkFile {
     /* Static methods and pseudo-constructors */
     static error_quark(): Quark
 }
-/**
- * Contains the public fields of a GByteArray.
- */
 export class ByteArray {
-    /* Own fields of GLib-2.0.GLib.ByteArray */
+    /* Fields of GLib-2.0.GLib.ByteArray */
     /**
      * a pointer to the element data. The data may be moved as
      *     elements are added to the #GByteArray
@@ -5661,7 +5580,7 @@ export class ByteArray {
      * to the caller.
      * @param array a #GByteArray.
      */
-    static steal(array: Uint8Array): [ /* returnType */ number, /* len */ number ]
+    static steal(array: Uint8Array): [ /* returnType */ number, /* len */ number | null ]
     /**
      * Atomically decrements the reference count of `array` by one. If the
      * reference count drops to 0, all memory allocated by the array is
@@ -5671,34 +5590,8 @@ export class ByteArray {
      */
     static unref(array: Uint8Array): void
 }
-/**
- * A simple refcounted data type representing an immutable sequence of zero or
- * more bytes from an unspecified origin.
- * 
- * The purpose of a #GBytes is to keep the memory region that it holds
- * alive for as long as anyone holds a reference to the bytes.  When
- * the last reference count is dropped, the memory is released. Multiple
- * unrelated callers can use byte data in the #GBytes without coordinating
- * their activities, resting assured that the byte data will not change or
- * move while they hold a reference.
- * 
- * A #GBytes can come from many different origins that may have
- * different procedures for freeing the memory region.  Examples are
- * memory from g_malloc(), from memory slices, from a #GMappedFile or
- * memory from other allocators.
- * 
- * #GBytes work well as keys in #GHashTable. Use g_bytes_equal() and
- * g_bytes_hash() as parameters to g_hash_table_new() or g_hash_table_new_full().
- * #GBytes can also be used as keys in a #GTree by passing the g_bytes_compare()
- * function to g_tree_new().
- * 
- * The data pointed to by this bytes must not be modified. For a mutable
- * array of bytes see #GByteArray. Use g_bytes_unref_to_array() to create a
- * mutable array for a #GBytes sequence. To create an immutable #GBytes from
- * a mutable #GByteArray, use the g_byte_array_free_to_bytes() function.
- */
 export class Bytes {
-    /* Owm methods of GLib-2.0.GLib.Bytes */
+    /* Methods of GLib-2.0.GLib.Bytes */
     /**
      * Compares the two #GBytes values.
      * 
@@ -5796,13 +5689,8 @@ export class Bytes {
     static new(data: Uint8Array | null): Bytes
     static new_take(data: Uint8Array | null): Bytes
 }
-/**
- * An opaque structure representing a checksumming operation.
- * To create a new GChecksum, use g_checksum_new(). To free
- * a GChecksum, use g_checksum_free().
- */
 export class Checksum {
-    /* Owm methods of GLib-2.0.GLib.Checksum */
+    /* Methods of GLib-2.0.GLib.Checksum */
     /**
      * Copies a #GChecksum. If `checksum` has been closed, by calling
      * g_checksum_get_string() or g_checksum_get_digest(), the copied
@@ -5844,77 +5732,8 @@ export class Checksum {
      */
     static type_get_length(checksum_type: ChecksumType): number
 }
-/**
- * The #GCond struct is an opaque data structure that represents a
- * condition. Threads can block on a #GCond if they find a certain
- * condition to be false. If other threads change the state of this
- * condition they signal the #GCond, and that causes the waiting
- * threads to be woken up.
- * 
- * Consider the following example of a shared variable.  One or more
- * threads can wait for data to be published to the variable and when
- * another thread publishes the data, it can signal one of the waiting
- * threads to wake up to collect the data.
- * 
- * Here is an example for using GCond to block a thread until a condition
- * is satisfied:
- * 
- * ```c
- *   gpointer current_data = NULL;
- *   GMutex data_mutex;
- *   GCond data_cond;
- * 
- *   void
- *   push_data (gpointer data)
- *   {
- *     g_mutex_lock (&data_mutex);
- *     current_data = data;
- *     g_cond_signal (&data_cond);
- *     g_mutex_unlock (&data_mutex);
- *   }
- * 
- *   gpointer
- *   pop_data (void)
- *   {
- *     gpointer data;
- * 
- *     g_mutex_lock (&data_mutex);
- *     while (!current_data)
- *       g_cond_wait (&data_cond, &data_mutex);
- *     data = current_data;
- *     current_data = NULL;
- *     g_mutex_unlock (&data_mutex);
- * 
- *     return data;
- *   }
- * ```
- * 
- * Whenever a thread calls pop_data() now, it will wait until
- * current_data is non-%NULL, i.e. until some other thread
- * has called push_data().
- * 
- * The example shows that use of a condition variable must always be
- * paired with a mutex.  Without the use of a mutex, there would be a
- * race between the check of `current_data` by the while loop in
- * pop_data() and waiting. Specifically, another thread could set
- * `current_data` after the check, and signal the cond (with nobody
- * waiting on it) before the first thread goes to sleep. #GCond is
- * specifically useful for its ability to release the mutex and go
- * to sleep atomically.
- * 
- * It is also important to use the g_cond_wait() and g_cond_wait_until()
- * functions only inside a loop which checks for the condition to be
- * true.  See g_cond_wait() for an explanation of why the condition may
- * not be true even after it returns.
- * 
- * If a #GCond is allocated in static storage then it can be used
- * without initialisation.  Otherwise, you should call g_cond_init()
- * on it and g_cond_clear() when done.
- * 
- * A #GCond should only be accessed via the g_cond_ functions.
- */
 export class Cond {
-    /* Owm methods of GLib-2.0.GLib.Cond */
+    /* Methods of GLib-2.0.GLib.Cond */
     /**
      * If threads are waiting for `cond,` all of them are unblocked.
      * If no threads are waiting for `cond,` this function has no effect.
@@ -6028,29 +5847,11 @@ export class Cond {
     wait_until(mutex: Mutex, end_time: number): boolean
     static name: string
 }
-/**
- * The #GData struct is an opaque data structure to represent a
- * [Keyed Data List][glib-Keyed-Data-Lists]. It should only be
- * accessed via the following functions.
- */
 export class Data {
     static name: string
 }
-/**
- * Represents a day between January 1, Year 1 and a few thousand years in
- * the future. None of its members should be accessed directly.
- * 
- * If the #GDate-struct is obtained from g_date_new(), it will be safe
- * to mutate but invalid and thus not safe for calendrical computations.
- * 
- * If it's declared on the stack, it will contain garbage so must be
- * initialized with g_date_clear(). g_date_clear() makes the date invalid
- * but sane. An invalid date doesn't represent a day, it's "empty." A date
- * becomes valid after you set it to a Julian day or you set a day, month,
- * and year.
- */
 export class Date {
-    /* Own fields of GLib-2.0.GLib.Date */
+    /* Fields of GLib-2.0.GLib.Date */
     /**
      * the Julian representation of the date
      */
@@ -6077,7 +5878,7 @@ export class Date {
      * the day of the day-month-year representation of the date
      */
     year: number
-    /* Owm methods of GLib-2.0.GLib.Date */
+    /* Methods of GLib-2.0.GLib.Date */
     /**
      * Increments a date some number of days.
      * To move forward by weeks, add weeks*7 days.
@@ -6426,12 +6227,8 @@ export class Date {
      */
     static valid_year(year: DateYear): boolean
 }
-/**
- * `GDateTime` is an opaque structure whose members
- * cannot be accessed directly.
- */
 export class DateTime {
-    /* Owm methods of GLib-2.0.GLib.DateTime */
+    /* Methods of GLib-2.0.GLib.DateTime */
     /**
      * Creates a copy of `datetime` and adds the specified timespan to the copy.
      * @param timespan a #GTimeSpan
@@ -6733,7 +6530,7 @@ export class DateTime {
     /**
      * Retrieves the Gregorian day, month, and year of a given #GDateTime.
      */
-    get_ymd(): [ /* year */ number, /* month */ number, /* day */ number ]
+    get_ymd(): [ /* year */ number | null, /* month */ number | null, /* day */ number | null ]
     /**
      * Determines if daylight savings time is in effect at the time and in
      * the time zone of `datetime`.
@@ -6809,7 +6606,7 @@ export class DateTime {
     constructor(tz: TimeZone, year: number, month: number, day: number, hour: number, minute: number, seconds: number)
     /* Static methods and pseudo-constructors */
     static new(tz: TimeZone, year: number, month: number, day: number, hour: number, minute: number, seconds: number): DateTime
-    static new_from_iso8601(text: string, default_tz: TimeZone | null): DateTime
+    static new_from_iso8601(text: string, default_tz?: TimeZone | null): DateTime
     static new_from_timeval_local(tv: TimeVal): DateTime
     static new_from_timeval_utc(tv: TimeVal): DateTime
     static new_from_unix_local(t: number): DateTime
@@ -6841,12 +6638,8 @@ export class DateTime {
      */
     static hash(datetime: object): number
 }
-/**
- * Associates a string with a bit flag.
- * Used in g_parse_debug_string().
- */
 export class DebugKey {
-    /* Own fields of GLib-2.0.GLib.DebugKey */
+    /* Fields of GLib-2.0.GLib.DebugKey */
     /**
      * the string
      */
@@ -6857,11 +6650,8 @@ export class DebugKey {
     value: number
     static name: string
 }
-/**
- * An opaque structure representing an opened directory.
- */
 export class Dir {
-    /* Owm methods of GLib-2.0.GLib.Dir */
+    /* Methods of GLib-2.0.GLib.Dir */
     /**
      * Closes the directory and deallocates all related resources.
      */
@@ -6903,14 +6693,10 @@ export class Dir {
      * modified, and might thus be a read-only literal string.
      * @param tmpl Template for directory name,     as in g_mkdtemp(), basename only, or %NULL for a default template
      */
-    static make_tmp(tmpl: string | null): string
+    static make_tmp(tmpl?: string | null): string
 }
-/**
- * The `GError` structure contains information about
- * an error that has occurred.
- */
 export class Error {
-    /* Own fields of GLib-2.0.GLib.Error */
+    /* Fields of GLib-2.0.GLib.Error */
     /**
      * error domain, e.g. #G_FILE_ERROR
      */
@@ -6923,7 +6709,7 @@ export class Error {
      * human-readable informative error message
      */
     message: string
-    /* Owm methods of GLib-2.0.GLib.Error */
+    /* Methods of GLib-2.0.GLib.Error */
     /**
      * Makes a copy of `error`.
      */
@@ -6951,12 +6737,7 @@ export class Error {
     /* Static methods and pseudo-constructors */
     static new_literal(domain: Quark, code: number, message: string): Error
 }
-/**
- * The #GHashTable struct is an opaque data structure to represent a
- * [Hash Table][glib-Hash-Tables]. It should only be accessed via the
- * following functions.
- */
-export class HashTable<A = symbol | string | number, B = string | number | boolean> {
+export class HashTable {
     static name: string
     /* Static methods and pseudo-constructors */
     /**
@@ -6978,13 +6759,13 @@ export class HashTable<A = symbol | string | number, B = string | number | boole
      * @param hash_table a #GHashTable
      * @param key a key to insert
      */
-    static add(hash_table: HashTable, key: object | null): boolean
+    static add(hash_table: HashTable, key?: object | null): boolean
     /**
      * Checks if `key` is in `hash_table`.
      * @param hash_table a #GHashTable
      * @param key a key to check
      */
-    static contains(hash_table: HashTable, key: object | null): boolean
+    static contains(hash_table: HashTable, key?: object | null): boolean
     /**
      * Destroys all keys and values in the #GHashTable and decrements its
      * reference count by 1. If keys and/or values are dynamically allocated,
@@ -7012,7 +6793,7 @@ export class HashTable<A = symbol | string | number, B = string | number | boole
      * @param key a key to insert
      * @param value the value to associate with the key
      */
-    static insert(hash_table: HashTable, key: object | null, value: object | null): boolean
+    static insert(hash_table: HashTable, key?: object | null, value?: object | null): boolean
     /**
      * Looks up a key in a #GHashTable. Note that this function cannot
      * distinguish between a key that is not present and one which is present
@@ -7021,7 +6802,7 @@ export class HashTable<A = symbol | string | number, B = string | number | boole
      * @param hash_table a #GHashTable
      * @param key the key to look up
      */
-    static lookup(hash_table: HashTable, key: object | null): object | null
+    static lookup(hash_table: HashTable, key?: object | null): object | null
     /**
      * Looks up a key in the #GHashTable, returning the original key and the
      * associated value and a #gboolean which is %TRUE if the key was found. This
@@ -7034,7 +6815,7 @@ export class HashTable<A = symbol | string | number, B = string | number | boole
      * @param hash_table a #GHashTable
      * @param lookup_key the key to look up
      */
-    static lookup_extended(hash_table: HashTable, lookup_key: object | null): [ /* returnType */ boolean, /* orig_key */ object | null, /* value */ object | null ]
+    static lookup_extended(hash_table: HashTable, lookup_key?: object | null): [ /* returnType */ boolean, /* orig_key */ object | null, /* value */ object | null ]
     /**
      * Removes a key and its associated value from a #GHashTable.
      * 
@@ -7045,7 +6826,7 @@ export class HashTable<A = symbol | string | number, B = string | number | boole
      * @param hash_table a #GHashTable
      * @param key the key to remove
      */
-    static remove(hash_table: HashTable, key: object | null): boolean
+    static remove(hash_table: HashTable, key?: object | null): boolean
     /**
      * Removes all keys and their associated values from a #GHashTable.
      * 
@@ -7072,7 +6853,7 @@ export class HashTable<A = symbol | string | number, B = string | number | boole
      * @param key a key to insert
      * @param value the value to associate with the key
      */
-    static replace(hash_table: HashTable, key: object | null, value: object | null): boolean
+    static replace(hash_table: HashTable, key?: object | null, value?: object | null): boolean
     /**
      * Returns the number of elements contained in the #GHashTable.
      * @param hash_table a #GHashTable
@@ -7084,7 +6865,7 @@ export class HashTable<A = symbol | string | number, B = string | number | boole
      * @param hash_table a #GHashTable
      * @param key the key to remove
      */
-    static steal(hash_table: HashTable, key: object | null): boolean
+    static steal(hash_table: HashTable, key?: object | null): boolean
     /**
      * Removes all keys and their associated values from a #GHashTable
      * without calling the key and value destroy functions.
@@ -7105,7 +6886,7 @@ export class HashTable<A = symbol | string | number, B = string | number | boole
      * @param hash_table a #GHashTable
      * @param lookup_key the key to look up
      */
-    static steal_extended(hash_table: HashTable, lookup_key: object | null): [ /* returnType */ boolean, /* stolen_key */ object | null, /* stolen_value */ object | null ]
+    static steal_extended(hash_table: HashTable, lookup_key?: object | null): [ /* returnType */ boolean, /* stolen_key */ object | null, /* stolen_value */ object | null ]
     /**
      * Atomically decrements the reference count of `hash_table` by one.
      * If the reference count drops to 0, all keys and values will be
@@ -7115,17 +6896,8 @@ export class HashTable<A = symbol | string | number, B = string | number | boole
      */
     static unref(hash_table: HashTable): void
 }
-/**
- * A GHashTableIter structure represents an iterator that can be used
- * to iterate over the elements of a #GHashTable. GHashTableIter
- * structures are typically allocated on the stack and then initialized
- * with g_hash_table_iter_init().
- * 
- * The iteration order of a #GHashTableIter over the keys/values in a hash
- * table is not defined.
- */
 export class HashTableIter {
-    /* Owm methods of GLib-2.0.GLib.HashTableIter */
+    /* Methods of GLib-2.0.GLib.HashTableIter */
     /**
      * Initializes a key/value pair iterator and associates it with
      * `hash_table`. Modifying the hash table after calling this function
@@ -7187,7 +6959,7 @@ export class HashTableIter {
      * #GHashTable, the old value is freed using that function.
      * @param value the value to replace with
      */
-    replace(value: object | null): void
+    replace(value?: object | null): void
     /**
      * Removes the key/value pair currently pointed to by the
      * iterator from its associated #GHashTable, without calling
@@ -7198,13 +6970,8 @@ export class HashTableIter {
     steal(): void
     static name: string
 }
-/**
- * An opaque structure representing a HMAC operation.
- * To create a new GHmac, use g_hmac_new(). To free
- * a GHmac, use g_hmac_unref().
- */
 export class Hmac {
-    /* Owm methods of GLib-2.0.GLib.Hmac */
+    /* Methods of GLib-2.0.GLib.Hmac */
     /**
      * Gets the digest from `checksum` as a raw binary array and places it
      * into `buffer`. The size of the digest depends on the type of checksum.
@@ -7242,11 +7009,8 @@ export class Hmac {
     update(data: Uint8Array): void
     static name: string
 }
-/**
- * The #GHook struct represents a single hook function in a #GHookList.
- */
 export class Hook {
-    /* Own fields of GLib-2.0.GLib.Hook */
+    /* Fields of GLib-2.0.GLib.Hook */
     /**
      * data which is passed to func when this hook is invoked
      */
@@ -7282,7 +7046,7 @@ export class Hook {
      *     this member of the hook that is being finalized
      */
     destroy: DestroyNotify
-    /* Owm methods of GLib-2.0.GLib.Hook */
+    /* Methods of GLib-2.0.GLib.Hook */
     /**
      * Compares the ids of two #GHook elements, returning a negative value
      * if the second id is greater than the first.
@@ -7333,11 +7097,8 @@ export class Hook {
      */
     static unref(hook_list: HookList, hook: Hook): void
 }
-/**
- * The #GHookList struct represents a list of hook functions.
- */
 export class HookList {
-    /* Own fields of GLib-2.0.GLib.HookList */
+    /* Fields of GLib-2.0.GLib.HookList */
     /**
      * the next free #GHook id
      */
@@ -7367,7 +7128,7 @@ export class HookList {
      * unused
      */
     dummy: object[]
-    /* Owm methods of GLib-2.0.GLib.HookList */
+    /* Methods of GLib-2.0.GLib.HookList */
     /**
      * Removes all the #GHook elements from a #GHookList.
      */
@@ -7391,20 +7152,11 @@ export class HookList {
     invoke_check(may_recurse: boolean): void
     static name: string
 }
-/**
- * The GIConv struct wraps an iconv() conversion descriptor. It contains
- * private data and should only be accessed using the following functions.
- */
 export class IConv {
     static name: string
 }
-/**
- * A data structure representing an IO Channel. The fields should be
- * considered private and should only be accessed with the following
- * functions.
- */
 export class IOChannel {
-    /* Owm methods of GLib-2.0.GLib.IOChannel */
+    /* Methods of GLib-2.0.GLib.IOChannel */
     /**
      * Close an IO channel. Any pending data to be written will be
      * flushed, ignoring errors. The channel will not be freed until the
@@ -7479,20 +7231,20 @@ export class IOChannel {
     /**
      * Replacement for g_io_channel_read() with the new API.
      */
-    read_chars(): [ /* returnType */ IOStatus, /* buf */ Uint8Array, /* bytes_read */ number ]
+    read_chars(): [ /* returnType */ IOStatus, /* buf */ Uint8Array, /* bytes_read */ number | null ]
     /**
      * Reads a line, including the terminating character(s),
      * from a #GIOChannel into a newly-allocated string.
      * `str_return` will contain allocated memory if the return
      * is %G_IO_STATUS_NORMAL.
      */
-    read_line(): [ /* returnType */ IOStatus, /* str_return */ string, /* length */ number, /* terminator_pos */ number ]
+    read_line(): [ /* returnType */ IOStatus, /* str_return */ string, /* length */ number | null, /* terminator_pos */ number | null ]
     /**
      * Reads a line from a #GIOChannel, using a #GString as a buffer.
      * @param buffer a #GString into which the line will be written.          If `buffer` already contains data, the old data will          be overwritten.
      * @param terminator_pos location to store position of line terminator, or %NULL
      */
-    read_line_string(buffer: String, terminator_pos: number | null): IOStatus
+    read_line_string(buffer: String, terminator_pos?: number | null): IOStatus
     /**
      * Reads all the remaining data from the file.
      */
@@ -7501,7 +7253,7 @@ export class IOChannel {
      * Reads a Unicode character from `channel`.
      * This function cannot be called on a channel with %NULL encoding.
      */
-    read_unichar(): [ /* returnType */ IOStatus, /* thechar */ string ]
+    read_unichar(): [ /* returnType */ IOStatus, /* thechar */ number ]
     /**
      * Increments the reference count of a #GIOChannel.
      */
@@ -7594,7 +7346,7 @@ export class IOChannel {
      * calling one of the API "read" functions.
      * @param encoding the encoding type
      */
-    set_encoding(encoding: string | null): IOStatus
+    set_encoding(encoding?: string | null): IOStatus
     /**
      * Sets the (writeable) flags in `channel` to (`flags` & %G_IO_FLAG_SET_MASK).
      * @param flags the flags to set on the IO channel
@@ -7648,7 +7400,7 @@ export class IOChannel {
      * This function cannot be called on a channel with %NULL encoding.
      * @param thechar a character
      */
-    write_unichar(thechar: string): IOStatus
+    write_unichar(thechar: number): IOStatus
     static name: string
     /* Static methods and pseudo-constructors */
     static new_file(filename: string, mode: string): IOChannel
@@ -7660,12 +7412,8 @@ export class IOChannel {
     static error_from_errno(en: number): IOChannelError
     static error_quark(): Quark
 }
-/**
- * A table of functions used to handle different types of #GIOChannel
- * in a generic way.
- */
 export class IOFuncs {
-    /* Own fields of GLib-2.0.GLib.IOFuncs */
+    /* Fields of GLib-2.0.GLib.IOFuncs */
     io_read: (channel: IOChannel, buf: string, count: number, bytes_read: number) => IOStatus
     io_write: (channel: IOChannel, buf: string, count: number, bytes_written: number) => IOStatus
     io_seek: (channel: IOChannel, offset: number, type: SeekType) => IOStatus
@@ -7676,12 +7424,8 @@ export class IOFuncs {
     io_get_flags: (channel: IOChannel) => IOFlags
     static name: string
 }
-/**
- * The GKeyFile struct contains only private data
- * and should not be accessed directly.
- */
 export class KeyFile {
-    /* Owm methods of GLib-2.0.GLib.KeyFile */
+    /* Methods of GLib-2.0.GLib.KeyFile */
     /**
      * Returns the value associated with `key` under `group_name` as a
      * boolean.
@@ -7748,7 +7492,7 @@ export class KeyFile {
      * The array of returned groups will be %NULL-terminated, so
      * `length` may optionally be %NULL.
      */
-    get_groups(): [ /* returnType */ string[], /* length */ number ]
+    get_groups(): [ /* returnType */ string[], /* length */ number | null ]
     /**
      * Returns the value associated with `key` under `group_name` as a signed
      * 64-bit integer. This is similar to g_key_file_get_integer() but can return
@@ -7791,7 +7535,7 @@ export class KeyFile {
      * #G_KEY_FILE_ERROR_GROUP_NOT_FOUND.
      * @param group_name a group name
      */
-    get_keys(group_name: string): [ /* returnType */ string[], /* length */ number ]
+    get_keys(group_name: string): [ /* returnType */ string[], /* length */ number | null ]
     /**
      * Returns the actual locale which the result of
      * g_key_file_get_locale_string() or g_key_file_get_locale_string_list()
@@ -7806,7 +7550,7 @@ export class KeyFile {
      * @param key a key
      * @param locale a locale identifier or %NULL
      */
-    get_locale_for_key(group_name: string, key: string, locale: string | null): string | null
+    get_locale_for_key(group_name: string, key: string, locale?: string | null): string | null
     /**
      * Returns the value associated with `key` under `group_name`
      * translated in the given `locale` if available.  If `locale` is
@@ -7824,7 +7568,7 @@ export class KeyFile {
      * @param key a key
      * @param locale a locale identifier or %NULL
      */
-    get_locale_string(group_name: string, key: string, locale: string | null): string
+    get_locale_string(group_name: string, key: string, locale?: string | null): string
     /**
      * Returns the values associated with `key` under `group_name`
      * translated in the given `locale` if available.  If `locale` is
@@ -7844,7 +7588,7 @@ export class KeyFile {
      * @param key a key
      * @param locale a locale identifier or %NULL
      */
-    get_locale_string_list(group_name: string, key: string, locale: string | null): string[]
+    get_locale_string_list(group_name: string, key: string, locale?: string | null): string[]
     /**
      * Returns the name of the start group of the file.
      */
@@ -7922,7 +7666,7 @@ export class KeyFile {
      * @param file a relative path to a filename to open and parse
      * @param flags flags from #GKeyFileFlags
      */
-    load_from_data_dirs(file: string, flags: KeyFileFlags): [ /* returnType */ boolean, /* full_path */ string ]
+    load_from_data_dirs(file: string, flags: KeyFileFlags): [ /* returnType */ boolean, /* full_path */ string | null ]
     /**
      * This function looks for a key file named `file` in the paths
      * specified in `search_dirs,` loads the file into `key_file` and
@@ -7937,7 +7681,7 @@ export class KeyFile {
      * @param search_dirs %NULL-terminated array of directories to search
      * @param flags flags from #GKeyFileFlags
      */
-    load_from_dirs(file: string, search_dirs: string[], flags: KeyFileFlags): [ /* returnType */ boolean, /* full_path */ string ]
+    load_from_dirs(file: string, search_dirs: string[], flags: KeyFileFlags): [ /* returnType */ boolean, /* full_path */ string | null ]
     /**
      * Loads a key file into an empty #GKeyFile structure.
      * 
@@ -7959,7 +7703,7 @@ export class KeyFile {
      * @param group_name a group name, or %NULL
      * @param key a key
      */
-    remove_comment(group_name: string | null, key: string | null): boolean
+    remove_comment(group_name?: string | null, key?: string | null): boolean
     /**
      * Removes the specified group, `group_name,`
      * from the key file.
@@ -8124,7 +7868,7 @@ export class KeyFile {
      * Note that this function never reports an error,
      * so it is safe to pass %NULL as `error`.
      */
-    to_data(): [ /* returnType */ string, /* length */ number ]
+    to_data(): [ /* returnType */ string, /* length */ number | null ]
     /**
      * Decreases the reference count of `key_file` by 1. If the reference count
      * reaches zero, frees the key file and all its allocated memory.
@@ -8137,11 +7881,8 @@ export class KeyFile {
     static new(): KeyFile
     static error_quark(): Quark
 }
-/**
- * The #GList struct is used for each element in a doubly-linked list.
- */
-export class List<A = any> {
-    /* Own fields of GLib-2.0.GLib.List */
+export class List {
+    /* Fields of GLib-2.0.GLib.List */
     /**
      * holds the element's data, which can be a pointer to any kind
      *        of data, or any integer value using the
@@ -8158,17 +7899,8 @@ export class List<A = any> {
     prev: object[]
     static name: string
 }
-/**
- * Structure representing a single field in a structured log entry. See
- * g_log_structured() for details.
- * 
- * Log fields may contain arbitrary values, including binary with embedded nul
- * bytes. If the field contains a string, the string must be UTF-8 encoded and
- * have a trailing nul byte. Otherwise, `length` must be set to a non-negative
- * value.
- */
 export class LogField {
-    /* Own fields of GLib-2.0.GLib.LogField */
+    /* Fields of GLib-2.0.GLib.LogField */
     /**
      * field name (UTF-8 string)
      */
@@ -8183,12 +7915,8 @@ export class LogField {
     length: number
     static name: string
 }
-/**
- * The `GMainContext` struct is an opaque data
- * type representing a set of sources to be handled in a main loop.
- */
 export class MainContext {
-    /* Owm methods of GLib-2.0.GLib.MainContext */
+    /* Methods of GLib-2.0.GLib.MainContext */
     /**
      * Tries to become the owner of the specified context.
      * If some other thread is the owner of the context,
@@ -8233,7 +7961,7 @@ export class MainContext {
      * @param funcs the `source_funcs` passed to g_source_new().
      * @param user_data the user data from the callback.
      */
-    find_source_by_funcs_user_data(funcs: SourceFuncs, user_data: object | null): Source
+    find_source_by_funcs_user_data(funcs: SourceFuncs, user_data?: object | null): Source
     /**
      * Finds a #GSource given a pair of context and ID.
      * 
@@ -8256,7 +7984,7 @@ export class MainContext {
      * one found will be returned.
      * @param user_data the user_data for the callback.
      */
-    find_source_by_user_data(user_data: object | null): Source
+    find_source_by_user_data(user_data?: object | null): Source
     /**
      * Invokes a function in such a way that `context` is owned during the
      * invocation of `function`.
@@ -8310,7 +8038,7 @@ export class MainContext {
      * You must have successfully acquired the context with
      * g_main_context_acquire() before you may call this function.
      */
-    prepare(): [ /* returnType */ boolean, /* priority */ number ]
+    prepare(): [ /* returnType */ boolean, /* priority */ number | null ]
     /**
      * Acquires `context` and sets it as the thread-default context for the
      * current thread. This will cause certain asynchronous operations
@@ -8463,12 +8191,8 @@ export class MainContext {
      */
     static ref_thread_default(): MainContext
 }
-/**
- * The `GMainLoop` struct is an opaque data type
- * representing the main event loop of a GLib or GTK+ application.
- */
 export class MainLoop {
-    /* Owm methods of GLib-2.0.GLib.MainLoop */
+    /* Methods of GLib-2.0.GLib.MainLoop */
     /**
      * Returns the #GMainContext of `loop`.
      */
@@ -8507,13 +8231,8 @@ export class MainLoop {
     /* Static methods and pseudo-constructors */
     static new(context: MainContext | null, is_running: boolean): MainLoop
 }
-/**
- * The #GMappedFile represents a file mapping created with
- * g_mapped_file_new(). It has only private members and should
- * not be accessed directly.
- */
 export class MappedFile {
-    /* Owm methods of GLib-2.0.GLib.MappedFile */
+    /* Methods of GLib-2.0.GLib.MappedFile */
     /**
      * This call existed before #GMappedFile had refcounting and is currently
      * exactly the same as g_mapped_file_unref().
@@ -8559,15 +8278,8 @@ export class MappedFile {
     static new(filename: string, writable: boolean): MappedFile
     static new_from_fd(fd: number, writable: boolean): MappedFile
 }
-/**
- * A parse context is used to parse a stream of bytes that
- * you expect to contain marked-up text.
- * 
- * See g_markup_parse_context_new(), #GMarkupParser, and so
- * on for more details.
- */
 export class MarkupParseContext {
-    /* Owm methods of GLib-2.0.GLib.MarkupParseContext */
+    /* Methods of GLib-2.0.GLib.MarkupParseContext */
     /**
      * Signals to the #GMarkupParseContext that all data has been
      * fed into the parse context with g_markup_parse_context_parse().
@@ -8597,7 +8309,7 @@ export class MarkupParseContext {
      * semantics for what constitutes the "current" line number other than
      * "the best number we could come up with for error messages."
      */
-    get_position(): [ /* line_number */ number, /* char_number */ number ]
+    get_position(): [ /* line_number */ number | null, /* char_number */ number | null ]
     /**
      * Returns the user_data associated with `context`.
      * 
@@ -8761,7 +8473,7 @@ export class MarkupParseContext {
      * @param parser a #GMarkupParser
      * @param user_data user data to pass to #GMarkupParser functions
      */
-    push(parser: MarkupParser, user_data: object | null): void
+    push(parser: MarkupParser, user_data?: object | null): void
     /**
      * Increases the reference count of `context`.
      */
@@ -8777,17 +8489,8 @@ export class MarkupParseContext {
     /* Static methods and pseudo-constructors */
     static new(parser: MarkupParser, flags: MarkupParseFlags, user_data: object | null, user_data_dnotify: DestroyNotify): MarkupParseContext
 }
-/**
- * Any of the fields in #GMarkupParser can be %NULL, in which case they
- * will be ignored. Except for the `error` function, any of these callbacks
- * can set an error; in particular the %G_MARKUP_ERROR_UNKNOWN_ELEMENT,
- * %G_MARKUP_ERROR_UNKNOWN_ATTRIBUTE, and %G_MARKUP_ERROR_INVALID_CONTENT
- * errors are intended to be set from these callbacks. If you set an error
- * from a callback, g_markup_parse_context_parse() will report that error
- * back to its caller.
- */
 export class MarkupParser {
-    /* Own fields of GLib-2.0.GLib.MarkupParser */
+    /* Fields of GLib-2.0.GLib.MarkupParser */
     start_element: (context: MarkupParseContext, element_name: string, attribute_names: string, attribute_values: string) => void
     end_element: (context: MarkupParseContext, element_name: string) => void
     text: (context: MarkupParseContext, text: string, text_len: number) => void
@@ -8795,12 +8498,8 @@ export class MarkupParser {
     error: (context: MarkupParseContext, error: Error) => void
     static name: string
 }
-/**
- * A GMatchInfo is an opaque struct used to return information about
- * matches.
- */
 export class MatchInfo {
-    /* Owm methods of GLib-2.0.GLib.MatchInfo */
+    /* Methods of GLib-2.0.GLib.MatchInfo */
     /**
      * Returns a new string containing the text in `string_to_expand` with
      * references and escape sequences expanded. References refer to the last
@@ -8881,7 +8580,7 @@ export class MatchInfo {
      * then `start_pos` and `end_pos` are set to -1 and %TRUE is returned.
      * @param name name of the subexpression
      */
-    fetch_named_pos(name: string): [ /* returnType */ boolean, /* start_pos */ number, /* end_pos */ number ]
+    fetch_named_pos(name: string): [ /* returnType */ boolean, /* start_pos */ number | null, /* end_pos */ number | null ]
     /**
      * Retrieves the position in bytes of the `match_num'`th capturing
      * parentheses. 0 is the full text of the match, 1 is the first
@@ -8898,7 +8597,7 @@ export class MatchInfo {
      * 0 is the longest match.
      * @param match_num number of the sub expression
      */
-    fetch_pos(match_num: number): [ /* returnType */ boolean, /* start_pos */ number, /* end_pos */ number ]
+    fetch_pos(match_num: number): [ /* returnType */ boolean, /* start_pos */ number | null, /* end_pos */ number | null ]
     /**
      * If `match_info` is not %NULL, calls g_match_info_unref(); otherwise does
      * nothing.
@@ -8987,15 +8686,8 @@ export class MatchInfo {
     unref(): void
     static name: string
 }
-/**
- * A set of functions used to perform memory allocation. The same #GMemVTable must
- * be used for all allocations in the same program; a call to g_mem_set_vtable(),
- * if it exists, should be prior to any use of GLib.
- * 
- * This functions related to this has been deprecated in 2.46, and no longer work.
- */
 export class MemVTable {
-    /* Own fields of GLib-2.0.GLib.MemVTable */
+    /* Fields of GLib-2.0.GLib.MemVTable */
     malloc: (n_bytes: number) => object
     realloc: (mem: object, n_bytes: number) => object
     free: (mem: object) => void
@@ -9004,11 +8696,8 @@ export class MemVTable {
     try_realloc: (mem: object, n_bytes: number) => object
     static name: string
 }
-/**
- * The #GNode struct represents one node in a [n-ary tree][glib-N-ary-Trees].
- */
 export class Node {
-    /* Own fields of GLib-2.0.GLib.Node */
+    /* Fields of GLib-2.0.GLib.Node */
     /**
      * contains the actual data of the node.
      */
@@ -9033,13 +8722,13 @@ export class Node {
      *            child.
      */
     children: Node
-    /* Owm methods of GLib-2.0.GLib.Node */
+    /* Methods of GLib-2.0.GLib.Node */
     /**
      * Gets the position of the first child of a #GNode
      * which contains the given data.
      * @param data the data to find
      */
-    child_index(data: object | null): number
+    child_index(data?: object | null): number
     /**
      * Gets the position of a #GNode with respect to its siblings.
      * `child` must be a child of `node`. The first child is numbered 0,
@@ -9094,13 +8783,8 @@ export class Node {
     unlink(): void
     static name: string
 }
-/**
- * A #GOnce struct controls a one-time initialization function. Any
- * one-time initialization function must have its own unique #GOnce
- * struct.
- */
 export class Once {
-    /* Own fields of GLib-2.0.GLib.Once */
+    /* Fields of GLib-2.0.GLib.Once */
     /**
      * the status of the #GOnce
      */
@@ -9151,13 +8835,8 @@ export class Once {
      */
     static init_leave(location: object, result: number): void
 }
-/**
- * A `GOptionContext` struct defines which options
- * are accepted by the commandline option parser. The struct has only private
- * fields and should not be directly accessed.
- */
 export class OptionContext {
-    /* Owm methods of GLib-2.0.GLib.OptionContext */
+    /* Methods of GLib-2.0.GLib.OptionContext */
     /**
      * Adds a #GOptionGroup to the `context,` so that parsing with `context`
      * will recognize the options in the group. Note that this will take
@@ -9171,7 +8850,7 @@ export class OptionContext {
      * @param entries a %NULL-terminated array of #GOptionEntrys
      * @param translation_domain a translation domain to use for translating    the `--help` output for the options in `entries`    with gettext(), or %NULL
      */
-    add_main_entries(entries: OptionEntry[], translation_domain: string | null): void
+    add_main_entries(entries: OptionEntry[], translation_domain?: string | null): void
     /**
      * Frees context and all the groups which have been
      * added to it.
@@ -9195,7 +8874,7 @@ export class OptionContext {
      * @param main_help if %TRUE, only include the main group
      * @param group the #GOptionGroup to create help for, or %NULL
      */
-    get_help(main_help: boolean, group: OptionGroup | null): string
+    get_help(main_help: boolean, group?: OptionGroup | null): string
     /**
      * Returns whether automatic `--help` generation
      * is turned on for `context`. See g_option_context_set_help_enabled().
@@ -9244,7 +8923,7 @@ export class OptionContext {
      * arguments.
      * @param argv a pointer to the array of command line arguments
      */
-    parse(argv?: string[]): [ /* returnType */ boolean, /* argv */ string[] ]
+    parse(argv?: string[] | null): [ /* returnType */ boolean, /* argv */ string[] | null ]
     /**
      * Parses the command line arguments.
      * 
@@ -9264,7 +8943,7 @@ export class OptionContext {
      * #GApplication.
      * @param arguments_ a pointer    to the command line arguments (which must be in UTF-8 on Windows).    Starting with GLib 2.62, `arguments` can be %NULL, which matches    g_option_context_parse().
      */
-    parse_strv(arguments_?: string[]): [ /* returnType */ boolean, /* arguments_ */ string[] ]
+    parse_strv(arguments_?: string[] | null): [ /* returnType */ boolean, /* arguments_ */ string[] | null ]
     /**
      * Adds a string to be displayed in `--help` output after the list
      * of options. This text often includes a bug reporting address.
@@ -9273,7 +8952,7 @@ export class OptionContext {
      * g_option_context_set_translate_func()).
      * @param description a string to be shown in `--help` output   after the list of options, or %NULL
      */
-    set_description(description: string | null): void
+    set_description(description?: string | null): void
     /**
      * Enables or disables automatic generation of `--help` output.
      * By default, g_option_context_parse() recognizes `--help`, `-h`,
@@ -9338,7 +9017,7 @@ export class OptionContext {
      * g_option_context_set_translation_domain()).
      * @param summary a string to be shown in `--help` output  before the list of options, or %NULL
      */
-    set_summary(summary: string | null): void
+    set_summary(summary?: string | null): void
     /**
      * Sets the function which is used to translate the contexts
      * user-visible strings, for `--help` output. If `func` is %NULL,
@@ -9353,7 +9032,7 @@ export class OptionContext {
      * domain, see g_option_context_set_translation_domain().
      * @param func the #GTranslateFunc, or %NULL
      */
-    set_translate_func(func: TranslateFunc | null): void
+    set_translate_func(func?: TranslateFunc | null): void
     /**
      * A convenience function to use gettext() for translating
      * user-visible strings.
@@ -9362,13 +9041,8 @@ export class OptionContext {
     set_translation_domain(domain: string): void
     static name: string
 }
-/**
- * A GOptionEntry struct defines a single option. To have an effect, they
- * must be added to a #GOptionGroup with g_option_context_add_main_entries()
- * or g_option_group_add_entries().
- */
 export class OptionEntry {
-    /* Own fields of GLib-2.0.GLib.OptionEntry */
+    /* Fields of GLib-2.0.GLib.OptionEntry */
     /**
      * The long name of an option can be used to specify it
      *     in a commandline as `--long_name`. Every option must have a
@@ -9427,17 +9101,8 @@ export class OptionEntry {
     arg_description: string
     static name: string
 }
-/**
- * A `GOptionGroup` struct defines the options in a single
- * group. The struct has only private fields and should not be directly accessed.
- * 
- * All options in a group share the same translation function. Libraries which
- * need to parse commandline options are expected to provide a function for
- * getting a `GOptionGroup` holding their options, which
- * the application can then add to its #GOptionContext.
- */
 export class OptionGroup {
-    /* Owm methods of GLib-2.0.GLib.OptionGroup */
+    /* Methods of GLib-2.0.GLib.OptionGroup */
     /**
      * Adds the options specified in `entries` to `group`.
      * @param entries a %NULL-terminated array of #GOptionEntrys
@@ -9461,7 +9126,7 @@ export class OptionGroup {
      * domain, see g_option_group_set_translation_domain().
      * @param func the #GTranslateFunc, or %NULL
      */
-    set_translate_func(func: TranslateFunc | null): void
+    set_translate_func(func?: TranslateFunc | null): void
     /**
      * A convenience function to use gettext() for translating
      * user-visible strings.
@@ -9475,17 +9140,13 @@ export class OptionGroup {
      */
     unref(): void
     static name: string
-    static new(name: string, description: string, help_description: string, user_data: object | null, destroy: DestroyNotify | null): OptionGroup
-    constructor(name: string, description: string, help_description: string, user_data: object | null, destroy: DestroyNotify | null)
+    static new(name: string, description: string, help_description: string, user_data?: object | null, destroy?: DestroyNotify | null): OptionGroup
+    constructor(name: string, description: string, help_description: string, user_data?: object | null, destroy?: DestroyNotify | null)
     /* Static methods and pseudo-constructors */
-    static new(name: string, description: string, help_description: string, user_data: object | null, destroy: DestroyNotify | null): OptionGroup
+    static new(name: string, description: string, help_description: string, user_data?: object | null, destroy?: DestroyNotify | null): OptionGroup
 }
-/**
- * A GPatternSpec struct is the 'compiled' form of a pattern. This
- * structure is opaque and its fields cannot be accessed directly.
- */
 export class PatternSpec {
-    /* Owm methods of GLib-2.0.GLib.PatternSpec */
+    /* Methods of GLib-2.0.GLib.PatternSpec */
     /**
      * Compares two compiled pattern specs and returns whether they will
      * match the same set of strings.
@@ -9498,12 +9159,8 @@ export class PatternSpec {
     free(): void
     static name: string
 }
-/**
- * Represents a file descriptor, which events to poll for, and which events
- * occurred.
- */
 export class PollFD {
-    /* Own fields of GLib-2.0.GLib.PollFD */
+    /* Fields of GLib-2.0.GLib.PollFD */
     /**
      * the file descriptor to poll (or a HANDLE on Win32)
      */
@@ -9522,27 +9179,8 @@ export class PollFD {
     revents: number
     static name: string
 }
-/**
- * The #GPrivate struct is an opaque data structure to represent a
- * thread-local data key. It is approximately equivalent to the
- * pthread_setspecific()/pthread_getspecific() APIs on POSIX and to
- * TlsSetValue()/TlsGetValue() on Windows.
- * 
- * If you don't already know why you might want this functionality,
- * then you probably don't need it.
- * 
- * #GPrivate is a very limited resource (as far as 128 per program,
- * shared between all libraries). It is also not possible to destroy a
- * #GPrivate after it has been used. As such, it is only ever acceptable
- * to use #GPrivate in static scope, and even then sparingly so.
- * 
- * See G_PRIVATE_INIT() for a couple of examples.
- * 
- * The #GPrivate structure should be considered opaque.  It should only
- * be accessed via the g_private_ functions.
- */
 export class Private {
-    /* Owm methods of GLib-2.0.GLib.Private */
+    /* Methods of GLib-2.0.GLib.Private */
     /**
      * Returns the current value of the thread local variable `key`.
      * 
@@ -9560,7 +9198,7 @@ export class Private {
      * `key` is run on it.
      * @param value the new value
      */
-    replace(value: object | null): void
+    replace(value?: object | null): void
     /**
      * Sets the thread local variable `key` to have the value `value` in the
      * current thread.
@@ -9569,14 +9207,11 @@ export class Private {
      * the #GDestroyNotify for `key` is not called on the old value.
      * @param value the new value
      */
-    set(value: object | null): void
+    set(value?: object | null): void
     static name: string
 }
-/**
- * Contains the public fields of a pointer array.
- */
 export class PtrArray {
-    /* Own fields of GLib-2.0.GLib.PtrArray */
+    /* Fields of GLib-2.0.GLib.PtrArray */
     /**
      * points to the array of pointers, which may be moved when the
      *     array grows
@@ -9588,12 +9223,8 @@ export class PtrArray {
     len: number
     static name: string
 }
-/**
- * Contains the public fields of a
- * [Queue][glib-Double-ended-Queues].
- */
 export class Queue {
-    /* Own fields of GLib-2.0.GLib.Queue */
+    /* Fields of GLib-2.0.GLib.Queue */
     /**
      * a pointer to the first element of the queue
      */
@@ -9606,7 +9237,7 @@ export class Queue {
      * the number of elements in the queue
      */
     length: number
-    /* Owm methods of GLib-2.0.GLib.Queue */
+    /* Methods of GLib-2.0.GLib.Queue */
     /**
      * Removes all the elements in `queue`. If queue elements contain
      * dynamically-allocated memory, they should be freed first.
@@ -9617,7 +9248,7 @@ export class Queue {
      * and calls the provided `free_func` on each item in the #GQueue.
      * @param free_func the function to be called to free memory allocated
      */
-    clear_full(free_func: DestroyNotify | null): void
+    clear_full(free_func?: DestroyNotify | null): void
     /**
      * Frees the memory allocated for the #GQueue. Only call this function
      * if `queue` was created with g_queue_new(). If queue elements contain
@@ -9644,7 +9275,7 @@ export class Queue {
      * Returns the position of the first element in `queue` which contains `data`.
      * @param data the data to find
      */
-    index(data: object | null): number
+    index(data?: object | null): number
     /**
      * A statically-allocated #GQueue must be initialized with this function
      * before it can be used. Alternatively you can initialize it with
@@ -9686,7 +9317,7 @@ export class Queue {
      * Adds a new element at the head of the queue.
      * @param data the data for the new element.
      */
-    push_head(data: object | null): void
+    push_head(data?: object | null): void
     /**
      * Inserts a new element into `queue` at the given position.
      * @param data the data for the new element
@@ -9697,92 +9328,25 @@ export class Queue {
      * Adds a new element at the tail of the queue.
      * @param data the data for the new element
      */
-    push_tail(data: object | null): void
+    push_tail(data?: object | null): void
     /**
      * Removes the first element in `queue` that contains `data`.
      * @param data the data to remove
      */
-    remove(data: object | null): boolean
+    remove(data?: object | null): boolean
     /**
      * Remove all elements whose data equals `data` from `queue`.
      * @param data the data to remove
      */
-    remove_all(data: object | null): number
+    remove_all(data?: object | null): number
     /**
      * Reverses the order of the items in `queue`.
      */
     reverse(): void
     static name: string
 }
-/**
- * The GRWLock struct is an opaque data structure to represent a
- * reader-writer lock. It is similar to a #GMutex in that it allows
- * multiple threads to coordinate access to a shared resource.
- * 
- * The difference to a mutex is that a reader-writer lock discriminates
- * between read-only ('reader') and full ('writer') access. While only
- * one thread at a time is allowed write access (by holding the 'writer'
- * lock via g_rw_lock_writer_lock()), multiple threads can gain
- * simultaneous read-only access (by holding the 'reader' lock via
- * g_rw_lock_reader_lock()).
- * 
- * It is unspecified whether readers or writers have priority in acquiring the
- * lock when a reader already holds the lock and a writer is queued to acquire
- * it.
- * 
- * Here is an example for an array with access functions:
- * 
- * ```c
- *   GRWLock lock;
- *   GPtrArray *array;
- * 
- *   gpointer
- *   my_array_get (guint index)
- *   {
- *     gpointer retval = NULL;
- * 
- *     if (!array)
- *       return NULL;
- * 
- *     g_rw_lock_reader_lock (&lock);
- *     if (index < array->len)
- *       retval = g_ptr_array_index (array, index);
- *     g_rw_lock_reader_unlock (&lock);
- * 
- *     return retval;
- *   }
- * 
- *   void
- *   my_array_set (guint index, gpointer data)
- *   {
- *     g_rw_lock_writer_lock (&lock);
- * 
- *     if (!array)
- *       array = g_ptr_array_new ();
- * 
- *     if (index >= array->len)
- *       g_ptr_array_set_size (array, index+1);
- *     g_ptr_array_index (array, index) = data;
- * 
- *     g_rw_lock_writer_unlock (&lock);
- *   }
- *  ```
- * 
- * This example shows an array which can be accessed by many readers
- * (the my_array_get() function) simultaneously, whereas the writers
- * (the my_array_set() function) will only be allowed one at a time
- * and only if no readers currently access the array. This is because
- * of the potentially dangerous resizing of the array. Using these
- * functions is fully multi-thread safe now.
- * 
- * If a #GRWLock is allocated in static storage then it can be used
- * without initialisation.  Otherwise, you should call
- * g_rw_lock_init() on it and g_rw_lock_clear() when done.
- * 
- * A GRWLock should only be accessed with the g_rw_lock_ functions.
- */
 export class RWLock {
-    /* Owm methods of GLib-2.0.GLib.RWLock */
+    /* Methods of GLib-2.0.GLib.RWLock */
     /**
      * Frees the resources allocated to a lock with g_rw_lock_init().
      * 
@@ -9870,12 +9434,8 @@ export class RWLock {
     writer_unlock(): void
     static name: string
 }
-/**
- * The GRand struct is an opaque data structure. It should only be
- * accessed through the g_rand_* functions.
- */
 export class Rand {
-    /* Owm methods of GLib-2.0.GLib.Rand */
+    /* Methods of GLib-2.0.GLib.Rand */
     /**
      * Returns the next random #gdouble from `rand_` equally distributed over
      * the range [0..1).
@@ -9921,22 +9481,8 @@ export class Rand {
     set_seed_array(seed: number, seed_length: number): void
     static name: string
 }
-/**
- * The GRecMutex struct is an opaque data structure to represent a
- * recursive mutex. It is similar to a #GMutex with the difference
- * that it is possible to lock a GRecMutex multiple times in the same
- * thread without deadlock. When doing so, care has to be taken to
- * unlock the recursive mutex as often as it has been locked.
- * 
- * If a #GRecMutex is allocated in static storage then it can be used
- * without initialisation.  Otherwise, you should call
- * g_rec_mutex_init() on it and g_rec_mutex_clear() when done.
- * 
- * A GRecMutex should only be accessed with the
- * g_rec_mutex_ functions.
- */
 export class RecMutex {
-    /* Owm methods of GLib-2.0.GLib.RecMutex */
+    /* Methods of GLib-2.0.GLib.RecMutex */
     /**
      * Frees the resources allocated to a recursive mutex with
      * g_rec_mutex_init().
@@ -10007,75 +9553,8 @@ export class RecMutex {
     unlock(): void
     static name: string
 }
-/**
- * The g_regex_*() functions implement regular
- * expression pattern matching using syntax and semantics similar to
- * Perl regular expression.
- * 
- * Some functions accept a `start_position` argument, setting it differs
- * from just passing over a shortened string and setting #G_REGEX_MATCH_NOTBOL
- * in the case of a pattern that begins with any kind of lookbehind assertion.
- * For example, consider the pattern "\Biss\B" which finds occurrences of "iss"
- * in the middle of words. ("\B" matches only if the current position in the
- * subject is not a word boundary.) When applied to the string "Mississipi"
- * from the fourth byte, namely "issipi", it does not match, because "\B" is
- * always false at the start of the subject, which is deemed to be a word
- * boundary. However, if the entire string is passed , but with
- * `start_position` set to 4, it finds the second occurrence of "iss" because
- * it is able to look behind the starting point to discover that it is
- * preceded by a letter.
- * 
- * Note that, unless you set the #G_REGEX_RAW flag, all the strings passed
- * to these functions must be encoded in UTF-8. The lengths and the positions
- * inside the strings are in bytes and not in characters, so, for instance,
- * "\xc3\xa0" (i.e. "à") is two bytes long but it is treated as a
- * single character. If you set #G_REGEX_RAW the strings can be non-valid
- * UTF-8 strings and a byte is treated as a character, so "\xc3\xa0" is two
- * bytes and two characters long.
- * 
- * When matching a pattern, "\n" matches only against a "\n" character in
- * the string, and "\r" matches only a "\r" character. To match any newline
- * sequence use "\R". This particular group matches either the two-character
- * sequence CR + LF ("\r\n"), or one of the single characters LF (linefeed,
- * U+000A, "\n"), VT vertical tab, U+000B, "\v"), FF (formfeed, U+000C, "\f"),
- * CR (carriage return, U+000D, "\r"), NEL (next line, U+0085), LS (line
- * separator, U+2028), or PS (paragraph separator, U+2029).
- * 
- * The behaviour of the dot, circumflex, and dollar metacharacters are
- * affected by newline characters, the default is to recognize any newline
- * character (the same characters recognized by "\R"). This can be changed
- * with #G_REGEX_NEWLINE_CR, #G_REGEX_NEWLINE_LF and #G_REGEX_NEWLINE_CRLF
- * compile options, and with #G_REGEX_MATCH_NEWLINE_ANY,
- * #G_REGEX_MATCH_NEWLINE_CR, #G_REGEX_MATCH_NEWLINE_LF and
- * #G_REGEX_MATCH_NEWLINE_CRLF match options. These settings are also
- * relevant when compiling a pattern if #G_REGEX_EXTENDED is set, and an
- * unescaped "#" outside a character class is encountered. This indicates
- * a comment that lasts until after the next newline.
- * 
- * When setting the %G_REGEX_JAVASCRIPT_COMPAT flag, pattern syntax and pattern
- * matching is changed to be compatible with the way that regular expressions
- * work in JavaScript. More precisely, a lonely ']' character in the pattern
- * is a syntax error; the '\x' escape only allows 0 to 2 hexadecimal digits, and
- * you must use the '\u' escape sequence with 4 hex digits to specify a unicode
- * codepoint instead of '\x' or 'x{....}'. If '\x' or '\u' are not followed by
- * the specified number of hex digits, they match 'x' and 'u' literally; also
- * '\U' always matches 'U' instead of being an error in the pattern. Finally,
- * pattern matching is modified so that back references to an unset subpattern
- * group produces a match with the empty string instead of an error. See
- * pcreapi(3) for more information.
- * 
- * Creating and manipulating the same #GRegex structure from different
- * threads is not a problem as #GRegex does not modify its internal
- * state between creation and destruction, on the other hand #GMatchInfo
- * is not threadsafe.
- * 
- * The regular expressions low-level functionalities are obtained through
- * the excellent
- * [PCRE](http://www.pcre.org/)
- * library written by Philip Hazel.
- */
 export class Regex {
-    /* Owm methods of GLib-2.0.GLib.Regex */
+    /* Methods of GLib-2.0.GLib.Regex */
     /**
      * Returns the number of capturing subpatterns in the pattern.
      */
@@ -10164,7 +9643,7 @@ export class Regex {
      * @param string the string to scan for matches
      * @param match_options match options
      */
-    match(string: string, match_options: RegexMatchFlags): [ /* returnType */ boolean, /* match_info */ MatchInfo ]
+    match(string: string, match_options: RegexMatchFlags): [ /* returnType */ boolean, /* match_info */ MatchInfo | null ]
     /**
      * Using the standard algorithm for regular expression matching only
      * the longest match in the string is retrieved. This function uses
@@ -10183,7 +9662,7 @@ export class Regex {
      * @param string the string to scan for matches
      * @param match_options match options
      */
-    match_all(string: string, match_options: RegexMatchFlags): [ /* returnType */ boolean, /* match_info */ MatchInfo ]
+    match_all(string: string, match_options: RegexMatchFlags): [ /* returnType */ boolean, /* match_info */ MatchInfo | null ]
     /**
      * Using the standard algorithm for regular expression matching only
      * the longest match in the `string` is retrieved, it is not possible
@@ -10227,7 +9706,7 @@ export class Regex {
      * @param start_position starting index of the string to match, in bytes
      * @param match_options match options
      */
-    match_all_full(string: string[], start_position: number, match_options: RegexMatchFlags): [ /* returnType */ boolean, /* match_info */ MatchInfo ]
+    match_all_full(string: string[], start_position: number, match_options: RegexMatchFlags): [ /* returnType */ boolean, /* match_info */ MatchInfo | null ]
     /**
      * Scans for a match in `string` for the pattern in `regex`.
      * The `match_options` are combined with the match options specified
@@ -10286,7 +9765,7 @@ export class Regex {
      * @param start_position starting index of the string to match, in bytes
      * @param match_options match options
      */
-    match_full(string: string[], start_position: number, match_options: RegexMatchFlags): [ /* returnType */ boolean, /* match_info */ MatchInfo ]
+    match_full(string: string[], start_position: number, match_options: RegexMatchFlags): [ /* returnType */ boolean, /* match_info */ MatchInfo | null ]
     /**
      * Increases reference count of `regex` by 1.
      */
@@ -10411,7 +9890,7 @@ export class Regex {
      * subpattern) requires valid #GMatchInfo object.
      * @param replacement the replacement string
      */
-    static check_replacement(replacement: string): [ /* returnType */ boolean, /* has_references */ boolean ]
+    static check_replacement(replacement: string): [ /* returnType */ boolean, /* has_references */ boolean | null ]
     static error_quark(): Quark
     /**
      * Escapes the nul characters in `string` to "\x00".  It can be used
@@ -10486,12 +9965,8 @@ export class Regex {
      */
     static split_simple(pattern: string, string: string, compile_options: RegexCompileFlags, match_options: RegexMatchFlags): string[]
 }
-/**
- * The #GSList struct is used for each element in the singly-linked
- * list.
- */
 export class SList {
-    /* Own fields of GLib-2.0.GLib.SList */
+    /* Fields of GLib-2.0.GLib.SList */
     /**
      * holds the element's data, which can be a pointer to any kind
      *        of data, or any integer value using the
@@ -10504,24 +9979,8 @@ export class SList {
     next: object[]
     static name: string
 }
-/**
- * The data structure representing a lexical scanner.
- * 
- * You should set `input_name` after creating the scanner, since
- * it is used by the default message handler when displaying
- * warnings and errors. If you are scanning a file, the filename
- * would be a good choice.
- * 
- * The `user_data` and `max_parse_errors` fields are not used.
- * If you need to associate extra data with the scanner you
- * can place them here.
- * 
- * If you want to use your own message handler you can set the
- * `msg_handler` field. The type of the message handler function
- * is declared by #GScannerMsgFunc.
- */
 export class Scanner {
-    /* Own fields of GLib-2.0.GLib.Scanner */
+    /* Fields of GLib-2.0.GLib.Scanner */
     /**
      * unused
      */
@@ -10582,7 +10041,7 @@ export class Scanner {
      * handler function for _warn and _error
      */
     msg_handler: ScannerMsgFunc
-    /* Owm methods of GLib-2.0.GLib.Scanner */
+    /* Methods of GLib-2.0.GLib.Scanner */
     /**
      * Returns the current line in the input stream (counting
      * from 1). This is the line of the last token parsed via
@@ -10654,7 +10113,7 @@ export class Scanner {
      * @param symbol the symbol to add
      * @param value the value of the symbol
      */
-    scope_add_symbol(scope_id: number, symbol: string, value: object | null): void
+    scope_add_symbol(scope_id: number, symbol: string, value?: object | null): void
     /**
      * Looks up a symbol in a scope and return its value. If the
      * symbol is not bound in the scope, %NULL is returned.
@@ -10698,13 +10157,8 @@ export class Scanner {
     unexp_token(expected_token: TokenType, identifier_spec: string, symbol_spec: string, symbol_name: string, message: string, is_error: number): void
     static name: string
 }
-/**
- * Specifies the #GScanner parser configuration. Most settings can
- * be changed during the parsing phase and will affect the lexical
- * parsing of the next unpeeked token.
- */
 export class ScannerConfig {
-    /* Own fields of GLib-2.0.GLib.ScannerConfig */
+    /* Fields of GLib-2.0.GLib.ScannerConfig */
     /**
      * specifies which characters should be skipped
      *     by the scanner (the default is the whitespace characters: space,
@@ -10841,17 +10295,13 @@ export class ScannerConfig {
     store_int64: number
     static name: string
 }
-/**
- * The #GSequence struct is an opaque data type representing a
- * [sequence][glib-Sequences] data type.
- */
 export class Sequence {
-    /* Owm methods of GLib-2.0.GLib.Sequence */
+    /* Methods of GLib-2.0.GLib.Sequence */
     /**
      * Adds a new item to the end of `seq`.
      * @param data the data for the new item
      */
-    append(data: object | null): SequenceIter
+    append(data?: object | null): SequenceIter
     /**
      * Frees the memory allocated for `seq`. If `seq` has a data destroy
      * function associated with it, that function is called on all items
@@ -10890,7 +10340,7 @@ export class Sequence {
      * Adds a new item to the front of `seq`
      * @param data the data for the new item
      */
-    prepend(data: object | null): SequenceIter
+    prepend(data?: object | null): SequenceIter
     static name: string
     /* Static methods and pseudo-constructors */
     /**
@@ -10903,7 +10353,7 @@ export class Sequence {
      * @param iter a #GSequenceIter
      * @param data the data for the new item
      */
-    static insert_before(iter: SequenceIter, data: object | null): SequenceIter
+    static insert_before(iter: SequenceIter, data?: object | null): SequenceIter
     /**
      * Moves the item pointed to by `src` to the position indicated by `dest`.
      * After calling this function `dest` will point to the position immediately
@@ -10963,7 +10413,7 @@ export class Sequence {
      * @param iter a #GSequenceIter
      * @param data new data for the item
      */
-    static set(iter: SequenceIter, data: object | null): void
+    static set(iter: SequenceIter, data?: object | null): void
     /**
      * Swaps the items pointed to by `a` and `b`. It is allowed for `a` and `b`
      * to point into difference sequences.
@@ -10972,12 +10422,8 @@ export class Sequence {
      */
     static swap(a: SequenceIter, b: SequenceIter): void
 }
-/**
- * The #GSequenceIter struct is an opaque data type representing an
- * iterator pointing into a #GSequence.
- */
 export class SequenceIter {
-    /* Owm methods of GLib-2.0.GLib.SequenceIter */
+    /* Methods of GLib-2.0.GLib.SequenceIter */
     /**
      * Returns a negative number if `a` comes before `b,` 0 if they are equal,
      * and a positive number if `a` comes after `b`.
@@ -11022,12 +10468,8 @@ export class SequenceIter {
     prev(): SequenceIter
     static name: string
 }
-/**
- * The `GSource` struct is an opaque data type
- * representing an event source.
- */
 export class Source {
-    /* Owm methods of GLib-2.0.GLib.Source */
+    /* Methods of GLib-2.0.GLib.Source */
     /**
      * Adds `child_source` to `source` as a "polled" source; when `source` is
      * added to a #GMainContext, `child_source` will be automatically added
@@ -11091,7 +10533,7 @@ export class Source {
      * the `context` is running in.
      * @param context a #GMainContext (if %NULL, the default context will be used)
      */
-    attach(context: MainContext | null): number
+    attach(context?: MainContext | null): number
     /**
      * Removes a source from its #GMainContext, if any, and mark it as
      * destroyed.  The source cannot be subsequently added to another
@@ -11453,14 +10895,14 @@ export class Source {
      * @param funcs The `source_funcs` passed to g_source_new()
      * @param user_data the user data for the callback
      */
-    static remove_by_funcs_user_data(funcs: SourceFuncs, user_data: object | null): boolean
+    static remove_by_funcs_user_data(funcs: SourceFuncs, user_data?: object | null): boolean
     /**
      * Removes a source from the default main loop context given the user
      * data for the callback. If multiple sources exist with the same user
      * data, only one will be destroyed.
      * @param user_data the user_data for the callback.
      */
-    static remove_by_user_data(user_data: object | null): boolean
+    static remove_by_user_data(user_data?: object | null): boolean
     /**
      * Sets the name of a source using its ID.
      * 
@@ -11483,40 +10925,14 @@ export class Source {
      */
     static set_name_by_id(tag: number, name: string): void
 }
-/**
- * The `GSourceCallbackFuncs` struct contains
- * functions for managing callback objects.
- */
 export class SourceCallbackFuncs {
-    /* Own fields of GLib-2.0.GLib.SourceCallbackFuncs */
+    /* Fields of GLib-2.0.GLib.SourceCallbackFuncs */
     ref: (cb_data: object) => void
     unref: (cb_data: object) => void
     static name: string
 }
-/**
- * The `GSourceFuncs` struct contains a table of
- * functions used to handle event sources in a generic manner.
- * 
- * For idle sources, the prepare and check functions always return %TRUE
- * to indicate that the source is always ready to be processed. The prepare
- * function also returns a timeout value of 0 to ensure that the poll() call
- * doesn't block (since that would be time wasted which could have been spent
- * running the idle function).
- * 
- * For timeout sources, the prepare and check functions both return %TRUE
- * if the timeout interval has expired. The prepare function also returns
- * a timeout value to ensure that the poll() call doesn't block too long
- * and miss the next timeout.
- * 
- * For file descriptor sources, the prepare function typically returns %FALSE,
- * since it must wait until poll() has been called before it knows whether
- * any events need to be processed. It sets the returned timeout to -1 to
- * indicate that it doesn't mind how long the poll() call blocks. In the
- * check function, it tests the results of the poll() call to see if the
- * required condition has been met, and returns %TRUE if so.
- */
 export class SourceFuncs {
-    /* Own fields of GLib-2.0.GLib.SourceFuncs */
+    /* Fields of GLib-2.0.GLib.SourceFuncs */
     prepare: (source: Source, timeout_: number) => boolean
     check: (source: Source) => boolean
     finalize: (source: Source) => void
@@ -11525,20 +10941,11 @@ export class SourceFuncs {
 export class SourcePrivate {
     static name: string
 }
-/**
- * A type corresponding to the appropriate struct type for the stat()
- * system call, depending on the platform and/or compiler being used.
- * 
- * See g_stat() for more information.
- */
 export class StatBuf {
     static name: string
 }
-/**
- * The GString struct contains the public fields of a GString.
- */
 export class String {
-    /* Own fields of GLib-2.0.GLib.String */
+    /* Fields of GLib-2.0.GLib.String */
     /**
      * points to the character data. It may move as text is added.
      *   The `str` field is null-terminated and so
@@ -11555,7 +10962,7 @@ export class String {
      *   string before it needs to be reallocated. May be larger than `len`.
      */
     allocated_len: number
-    /* Owm methods of GLib-2.0.GLib.String */
+    /* Methods of GLib-2.0.GLib.String */
     /**
      * Adds a string onto the end of a #GString, expanding
      * it if necessary.
@@ -11587,7 +10994,7 @@ export class String {
      * to the string.
      * @param wc a Unicode character
      */
-    append_unichar(wc: string): String
+    append_unichar(wc: number): String
     /**
      * Appends `unescaped` to `string,` escaped any characters that
      * are reserved in URIs using URI-style escape sequences.
@@ -11687,7 +11094,7 @@ export class String {
      * @param pos the position at which to insert character, or -1     to append at the end of the string
      * @param wc a Unicode character
      */
-    insert_unichar(pos: number, wc: string): String
+    insert_unichar(pos: number, wc: number): String
     /**
      * Overwrites part of a string, lengthening it if necessary.
      * @param pos the position at which to start overwriting
@@ -11733,7 +11140,7 @@ export class String {
      * to the string.
      * @param wc a Unicode character
      */
-    prepend_unichar(wc: string): String
+    prepend_unichar(wc: number): String
     /**
      * Sets the length of a #GString. If the length is less than
      * the current length, the string will be truncated. If the
@@ -11754,12 +11161,8 @@ export class String {
     up(): String
     static name: string
 }
-/**
- * An opaque data structure representing String Chunks.
- * It should only be accessed by using the following functions.
- */
 export class StringChunk {
-    /* Owm methods of GLib-2.0.GLib.StringChunk */
+    /* Methods of GLib-2.0.GLib.StringChunk */
     /**
      * Frees all strings contained within the #GStringChunk.
      * After calling g_string_chunk_clear() it is not safe to
@@ -11820,14 +11223,11 @@ export class StringChunk {
     insert_len(string: string, len: number): string
     static name: string
 }
-/**
- * An opaque structure representing a test case.
- */
 export class TestCase {
     static name: string
 }
 export class TestConfig {
-    /* Own fields of GLib-2.0.GLib.TestConfig */
+    /* Fields of GLib-2.0.GLib.TestConfig */
     test_initialized: boolean
     test_quick: boolean
     test_perf: boolean
@@ -11837,7 +11237,7 @@ export class TestConfig {
     static name: string
 }
 export class TestLogBuffer {
-    /* Owm methods of GLib-2.0.GLib.TestLogBuffer */
+    /* Methods of GLib-2.0.GLib.TestLogBuffer */
     /**
      * Internal function for gtester to free test log messages, no ABI guarantees provided.
      */
@@ -11851,23 +11251,20 @@ export class TestLogBuffer {
     static name: string
 }
 export class TestLogMsg {
-    /* Own fields of GLib-2.0.GLib.TestLogMsg */
+    /* Fields of GLib-2.0.GLib.TestLogMsg */
     log_type: TestLogType
     n_strings: number
     strings: string
     n_nums: number
-    /* Owm methods of GLib-2.0.GLib.TestLogMsg */
+    /* Methods of GLib-2.0.GLib.TestLogMsg */
     /**
      * Internal function for gtester to free test log messages, no ABI guarantees provided.
      */
     free(): void
     static name: string
 }
-/**
- * An opaque structure representing a test suite.
- */
 export class TestSuite {
-    /* Owm methods of GLib-2.0.GLib.TestSuite */
+    /* Methods of GLib-2.0.GLib.TestSuite */
     /**
      * Adds `test_case` to `suite`.
      * @param test_case a #GTestCase
@@ -11880,23 +11277,8 @@ export class TestSuite {
     add_suite(nestedsuite: TestSuite): void
     static name: string
 }
-/**
- * The #GThread struct represents a running thread. This struct
- * is returned by g_thread_new() or g_thread_try_new(). You can
- * obtain the #GThread struct representing the current thread by
- * calling g_thread_self().
- * 
- * GThread is refcounted, see g_thread_ref() and g_thread_unref().
- * The thread represented by it holds a reference while it is running,
- * and g_thread_join() consumes the reference that it is given, so
- * it is normally not necessary to manage GThread references
- * explicitly.
- * 
- * The structure is opaque -- none of its fields may be directly
- * accessed.
- */
 export class Thread {
-    /* Owm methods of GLib-2.0.GLib.Thread */
+    /* Methods of GLib-2.0.GLib.Thread */
     /**
      * Waits until `thread` finishes, i.e. the function `func,` as
      * given to g_thread_new(), returns or g_thread_exit() is called.
@@ -11948,7 +11330,7 @@ export class Thread {
      * or or from within a #GThreadPool.
      * @param retval the return value of this thread
      */
-    static exit(retval: object | null): void
+    static exit(retval?: object | null): void
     /**
      * This function returns the #GThread corresponding to the
      * current thread. Note that this function does not increase
@@ -11969,13 +11351,8 @@ export class Thread {
      */
     static yield(): void
 }
-/**
- * The #GThreadPool struct represents a thread pool. It has three
- * public read-only members, but the underlying struct is bigger,
- * so you must not copy this struct.
- */
 export class ThreadPool {
-    /* Own fields of GLib-2.0.GLib.ThreadPool */
+    /* Fields of GLib-2.0.GLib.ThreadPool */
     /**
      * the function to execute in the threads of this pool
      */
@@ -11988,7 +11365,7 @@ export class ThreadPool {
      * are all threads exclusive to this pool
      */
     exclusive: boolean
-    /* Owm methods of GLib-2.0.GLib.ThreadPool */
+    /* Methods of GLib-2.0.GLib.ThreadPool */
     /**
      * Frees all resources allocated for `pool`.
      * 
@@ -12021,7 +11398,7 @@ export class ThreadPool {
      * items, so that it will be processed next.
      * @param data an unprocessed item in the pool
      */
-    move_to_front(data: object | null): boolean
+    move_to_front(data?: object | null): boolean
     /**
      * Inserts `data` into the list of tasks to be executed by `pool`.
      * 
@@ -12039,7 +11416,7 @@ export class ThreadPool {
      * Before version 2.32, this function did not return a success status.
      * @param data a new task for `pool`
      */
-    push(data: object | null): boolean
+    push(data?: object | null): boolean
     /**
      * Sets the maximal allowed number of threads for `pool`.
      * A value of -1 means that the maximal number of threads
@@ -12116,19 +11493,8 @@ export class ThreadPool {
      */
     static stop_unused_threads(): void
 }
-/**
- * Represents a precise time, with seconds and microseconds.
- * Similar to the struct timeval returned by the gettimeofday()
- * UNIX system call.
- * 
- * GLib is attempting to unify around the use of 64-bit integers to
- * represent microsecond-precision time. As such, this type will be
- * removed from a future version of GLib. A consequence of using `glong` for
- * `tv_sec` is that on 32-bit systems `GTimeVal` is subject to the year 2038
- * problem.
- */
 export class TimeVal {
-    /* Own fields of GLib-2.0.GLib.TimeVal */
+    /* Fields of GLib-2.0.GLib.TimeVal */
     /**
      * seconds
      */
@@ -12137,7 +11503,7 @@ export class TimeVal {
      * microseconds
      */
     tv_usec: number
-    /* Owm methods of GLib-2.0.GLib.TimeVal */
+    /* Methods of GLib-2.0.GLib.TimeVal */
     /**
      * Adds the given number of microseconds to `time_`. `microseconds` can
      * also be negative to decrease the value of `time_`.
@@ -12207,12 +11573,8 @@ export class TimeVal {
      */
     static from_iso8601(iso_date: string): [ /* returnType */ boolean, /* time_ */ TimeVal ]
 }
-/**
- * #GTimeZone is an opaque structure whose members cannot be accessed
- * directly.
- */
 export class TimeZone {
-    /* Owm methods of GLib-2.0.GLib.TimeZone */
+    /* Methods of GLib-2.0.GLib.TimeZone */
     /**
      * Finds an interval within `tz` that corresponds to the given `time_,`
      * possibly adjusting `time_` if required to fit into an interval.
@@ -12303,19 +11665,16 @@ export class TimeZone {
      */
     unref(): void
     static name: string
-    static new(identifier: string | null): TimeZone
-    constructor(identifier: string | null)
+    static new(identifier?: string | null): TimeZone
+    constructor(identifier?: string | null)
     /* Static methods and pseudo-constructors */
-    static new(identifier: string | null): TimeZone
+    static new(identifier?: string | null): TimeZone
     static new_local(): TimeZone
     static new_offset(seconds: number): TimeZone
     static new_utc(): TimeZone
 }
-/**
- * Opaque datatype that records a start time.
- */
 export class Timer {
-    /* Owm methods of GLib-2.0.GLib.Timer */
+    /* Methods of GLib-2.0.GLib.Timer */
     /**
      * Resumes a timer that has previously been stopped with
      * g_timer_stop(). g_timer_stop() must be called before using this
@@ -12360,12 +11719,8 @@ export class Timer {
     stop(): void
     static name: string
 }
-/**
- * Each piece of memory that is pushed onto the stack
- * is cast to a GTrashStack*.
- */
 export class TrashStack {
-    /* Own fields of GLib-2.0.GLib.TrashStack */
+    /* Fields of GLib-2.0.GLib.TrashStack */
     /**
      * pointer to the previous element of the stack,
      *     gets stored in the first `sizeof (gpointer)`
@@ -12400,13 +11755,8 @@ export class TrashStack {
      */
     static push(stack_p: TrashStack, data_p: object): void
 }
-/**
- * The GTree struct is an opaque data structure representing a
- * [balanced binary tree][glib-Balanced-Binary-Trees]. It should be
- * accessed only by using the following functions.
- */
 export class Tree {
-    /* Owm methods of GLib-2.0.GLib.Tree */
+    /* Methods of GLib-2.0.GLib.Tree */
     /**
      * Removes all keys and values from the #GTree and decreases its
      * reference count by one. If keys and/or values are dynamically
@@ -12438,14 +11788,14 @@ export class Tree {
      * @param key the key to insert
      * @param value the value corresponding to the key
      */
-    insert(key: object | null, value: object | null): void
+    insert(key?: object | null, value?: object | null): void
     /**
      * Gets the value corresponding to the given key. Since a #GTree is
      * automatically balanced as key/value pairs are added, key lookup
      * is O(log n) (where n is the number of key/value pairs in the tree).
      * @param key the key to look up
      */
-    lookup(key: object | null): object | null
+    lookup(key?: object | null): object | null
     /**
      * Looks up a key in the #GTree, returning the original key and the
      * associated value. This is useful if you need to free the memory
@@ -12453,7 +11803,7 @@ export class Tree {
      * g_tree_remove().
      * @param lookup_key the key to look up
      */
-    lookup_extended(lookup_key: object | null): [ /* returnType */ boolean, /* orig_key */ object | null, /* value */ object | null ]
+    lookup_extended(lookup_key?: object | null): [ /* returnType */ boolean, /* orig_key */ object | null, /* value */ object | null ]
     /**
      * Gets the number of nodes in a #GTree.
      */
@@ -12467,7 +11817,7 @@ export class Tree {
      * If the key does not exist in the #GTree, the function does nothing.
      * @param key the key to remove
      */
-    remove(key: object | null): boolean
+    remove(key?: object | null): boolean
     /**
      * Inserts a new key and value into a #GTree similar to g_tree_insert().
      * The difference is that if the key already exists in the #GTree, it gets
@@ -12481,7 +11831,7 @@ export class Tree {
      * @param key the key to insert
      * @param value the value corresponding to the key
      */
-    replace(key: object | null, value: object | null): void
+    replace(key?: object | null, value?: object | null): void
     /**
      * Removes a key and its associated value from a #GTree without calling
      * the key and value destroy functions.
@@ -12489,7 +11839,7 @@ export class Tree {
      * If the key does not exist in the #GTree, the function does nothing.
      * @param key the key to remove
      */
-    steal(key: object | null): boolean
+    steal(key?: object | null): boolean
     /**
      * Decrements the reference count of `tree` by one.
      * If the reference count drops to 0, all keys and values will
@@ -12501,254 +11851,8 @@ export class Tree {
     unref(): void
     static name: string
 }
-/**
- * #GVariant is a variant datatype; it can contain one or more values
- * along with information about the type of the values.
- * 
- * A #GVariant may contain simple types, like an integer, or a boolean value;
- * or complex types, like an array of two strings, or a dictionary of key
- * value pairs. A #GVariant is also immutable: once it's been created neither
- * its type nor its content can be modified further.
- * 
- * GVariant is useful whenever data needs to be serialized, for example when
- * sending method parameters in DBus, or when saving settings using GSettings.
- * 
- * When creating a new #GVariant, you pass the data you want to store in it
- * along with a string representing the type of data you wish to pass to it.
- * 
- * For instance, if you want to create a #GVariant holding an integer value you
- * can use:
- * 
- * 
- * ```c
- *   GVariant *v = g_variant_new ("u", 40);
- * ```
- * 
- * 
- * The string "u" in the first argument tells #GVariant that the data passed to
- * the constructor (40) is going to be an unsigned integer.
- * 
- * More advanced examples of #GVariant in use can be found in documentation for
- * [GVariant format strings][gvariant-format-strings-pointers].
- * 
- * The range of possible values is determined by the type.
- * 
- * The type system used by #GVariant is #GVariantType.
- * 
- * #GVariant instances always have a type and a value (which are given
- * at construction time).  The type and value of a #GVariant instance
- * can never change other than by the #GVariant itself being
- * destroyed.  A #GVariant cannot contain a pointer.
- * 
- * #GVariant is reference counted using g_variant_ref() and
- * g_variant_unref().  #GVariant also has floating reference counts --
- * see g_variant_ref_sink().
- * 
- * #GVariant is completely threadsafe.  A #GVariant instance can be
- * concurrently accessed in any way from any number of threads without
- * problems.
- * 
- * #GVariant is heavily optimised for dealing with data in serialised
- * form.  It works particularly well with data located in memory-mapped
- * files.  It can perform nearly all deserialisation operations in a
- * small constant time, usually touching only a single memory page.
- * Serialised #GVariant data can also be sent over the network.
- * 
- * #GVariant is largely compatible with D-Bus.  Almost all types of
- * #GVariant instances can be sent over D-Bus.  See #GVariantType for
- * exceptions.  (However, #GVariant's serialisation format is not the same
- * as the serialisation format of a D-Bus message body: use #GDBusMessage,
- * in the gio library, for those.)
- * 
- * For space-efficiency, the #GVariant serialisation format does not
- * automatically include the variant's length, type or endianness,
- * which must either be implied from context (such as knowledge that a
- * particular file format always contains a little-endian
- * %G_VARIANT_TYPE_VARIANT which occupies the whole length of the file)
- * or supplied out-of-band (for instance, a length, type and/or endianness
- * indicator could be placed at the beginning of a file, network message
- * or network stream).
- * 
- * A #GVariant's size is limited mainly by any lower level operating
- * system constraints, such as the number of bits in #gsize.  For
- * example, it is reasonable to have a 2GB file mapped into memory
- * with #GMappedFile, and call g_variant_new_from_data() on it.
- * 
- * For convenience to C programmers, #GVariant features powerful
- * varargs-based value construction and destruction.  This feature is
- * designed to be embedded in other libraries.
- * 
- * There is a Python-inspired text language for describing #GVariant
- * values.  #GVariant includes a printer for this language and a parser
- * with type inferencing.
- * 
- * ## Memory Use
- * 
- * #GVariant tries to be quite efficient with respect to memory use.
- * This section gives a rough idea of how much memory is used by the
- * current implementation.  The information here is subject to change
- * in the future.
- * 
- * The memory allocated by #GVariant can be grouped into 4 broad
- * purposes: memory for serialised data, memory for the type
- * information cache, buffer management memory and memory for the
- * #GVariant structure itself.
- * 
- * ## Serialised Data Memory
- * 
- * This is the memory that is used for storing GVariant data in
- * serialised form.  This is what would be sent over the network or
- * what would end up on disk, not counting any indicator of the
- * endianness, or of the length or type of the top-level variant.
- * 
- * The amount of memory required to store a boolean is 1 byte. 16,
- * 32 and 64 bit integers and double precision floating point numbers
- * use their "natural" size.  Strings (including object path and
- * signature strings) are stored with a nul terminator, and as such
- * use the length of the string plus 1 byte.
- * 
- * Maybe types use no space at all to represent the null value and
- * use the same amount of space (sometimes plus one byte) as the
- * equivalent non-maybe-typed value to represent the non-null case.
- * 
- * Arrays use the amount of space required to store each of their
- * members, concatenated.  Additionally, if the items stored in an
- * array are not of a fixed-size (ie: strings, other arrays, etc)
- * then an additional framing offset is stored for each item.  The
- * size of this offset is either 1, 2 or 4 bytes depending on the
- * overall size of the container.  Additionally, extra padding bytes
- * are added as required for alignment of child values.
- * 
- * Tuples (including dictionary entries) use the amount of space
- * required to store each of their members, concatenated, plus one
- * framing offset (as per arrays) for each non-fixed-sized item in
- * the tuple, except for the last one.  Additionally, extra padding
- * bytes are added as required for alignment of child values.
- * 
- * Variants use the same amount of space as the item inside of the
- * variant, plus 1 byte, plus the length of the type string for the
- * item inside the variant.
- * 
- * As an example, consider a dictionary mapping strings to variants.
- * In the case that the dictionary is empty, 0 bytes are required for
- * the serialisation.
- * 
- * If we add an item "width" that maps to the int32 value of 500 then
- * we will use 4 byte to store the int32 (so 6 for the variant
- * containing it) and 6 bytes for the string.  The variant must be
- * aligned to 8 after the 6 bytes of the string, so that's 2 extra
- * bytes.  6 (string) + 2 (padding) + 6 (variant) is 14 bytes used
- * for the dictionary entry.  An additional 1 byte is added to the
- * array as a framing offset making a total of 15 bytes.
- * 
- * If we add another entry, "title" that maps to a nullable string
- * that happens to have a value of null, then we use 0 bytes for the
- * null value (and 3 bytes for the variant to contain it along with
- * its type string) plus 6 bytes for the string.  Again, we need 2
- * padding bytes.  That makes a total of 6 + 2 + 3 = 11 bytes.
- * 
- * We now require extra padding between the two items in the array.
- * After the 14 bytes of the first item, that's 2 bytes required.
- * We now require 2 framing offsets for an extra two
- * bytes. 14 + 2 + 11 + 2 = 29 bytes to encode the entire two-item
- * dictionary.
- * 
- * ## Type Information Cache
- * 
- * For each GVariant type that currently exists in the program a type
- * information structure is kept in the type information cache.  The
- * type information structure is required for rapid deserialisation.
- * 
- * Continuing with the above example, if a #GVariant exists with the
- * type "a{sv}" then a type information struct will exist for
- * "a{sv}", "{sv}", "s", and "v".  Multiple uses of the same type
- * will share the same type information.  Additionally, all
- * single-digit types are stored in read-only static memory and do
- * not contribute to the writable memory footprint of a program using
- * #GVariant.
- * 
- * Aside from the type information structures stored in read-only
- * memory, there are two forms of type information.  One is used for
- * container types where there is a single element type: arrays and
- * maybe types.  The other is used for container types where there
- * are multiple element types: tuples and dictionary entries.
- * 
- * Array type info structures are 6 * sizeof (void *), plus the
- * memory required to store the type string itself.  This means that
- * on 32-bit systems, the cache entry for "a{sv}" would require 30
- * bytes of memory (plus malloc overhead).
- * 
- * Tuple type info structures are 6 * sizeof (void *), plus 4 *
- * sizeof (void *) for each item in the tuple, plus the memory
- * required to store the type string itself.  A 2-item tuple, for
- * example, would have a type information structure that consumed
- * writable memory in the size of 14 * sizeof (void *) (plus type
- * string)  This means that on 32-bit systems, the cache entry for
- * "{sv}" would require 61 bytes of memory (plus malloc overhead).
- * 
- * This means that in total, for our "a{sv}" example, 91 bytes of
- * type information would be allocated.
- * 
- * The type information cache, additionally, uses a #GHashTable to
- * store and look up the cached items and stores a pointer to this
- * hash table in static storage.  The hash table is freed when there
- * are zero items in the type cache.
- * 
- * Although these sizes may seem large it is important to remember
- * that a program will probably only have a very small number of
- * different types of values in it and that only one type information
- * structure is required for many different values of the same type.
- * 
- * ## Buffer Management Memory
- * 
- * #GVariant uses an internal buffer management structure to deal
- * with the various different possible sources of serialised data
- * that it uses.  The buffer is responsible for ensuring that the
- * correct call is made when the data is no longer in use by
- * #GVariant.  This may involve a g_free() or a g_slice_free() or
- * even g_mapped_file_unref().
- * 
- * One buffer management structure is used for each chunk of
- * serialised data.  The size of the buffer management structure
- * is 4 * (void *).  On 32-bit systems, that's 16 bytes.
- * 
- * ## GVariant structure
- * 
- * The size of a #GVariant structure is 6 * (void *).  On 32-bit
- * systems, that's 24 bytes.
- * 
- * #GVariant structures only exist if they are explicitly created
- * with API calls.  For example, if a #GVariant is constructed out of
- * serialised data for the example given above (with the dictionary)
- * then although there are 9 individual values that comprise the
- * entire dictionary (two keys, two values, two variants containing
- * the values, two dictionary entries, plus the dictionary itself),
- * only 1 #GVariant instance exists -- the one referring to the
- * dictionary.
- * 
- * If calls are made to start accessing the other values then
- * #GVariant instances will exist for those values only for as long
- * as they are in use (ie: until you call g_variant_unref()).  The
- * type information is shared.  The serialised data and the buffer
- * management structure for that serialised data is shared by the
- * child.
- * 
- * ## Summary
- * 
- * To put the entire example together, for our dictionary mapping
- * strings to variants (with two entries, as given above), we are
- * using 91 bytes of memory for type information, 29 bytes of memory
- * for the serialised data, 16 bytes for buffer management and 24
- * bytes for the #GVariant instance, or a total of 160 bytes, plus
- * malloc overhead.  If we were to use g_variant_get_child_value() to
- * access the two dictionary entries, we would use an additional 48
- * bytes.  If we were to have other dictionaries of the same type, we
- * would use more memory for the serialised data and buffer
- * management for those dictionaries, but the type information would
- * be shared.
- */
 export class Variant {
-    /* Owm methods of GLib-2.0.GLib.Variant */
+    /* Methods of GLib-2.0.GLib.Variant */
     /**
      * Performs a byteswapping operation on the contents of `value`.  The
      * result is that all multi-byte numeric data contained in `value` is
@@ -13089,7 +12193,7 @@ export class Variant {
      * 
      * The return value remains valid as long as `value` exists.
      */
-    get_string(): [ /* returnType */ string, /* length */ number ]
+    get_string(): [ /* returnType */ string, /* length */ number | null ]
     /**
      * Gets the contents of an array of strings #GVariant.  This call
      * makes a shallow copy; the return result should be released with
@@ -13216,7 +12320,7 @@ export class Variant {
      * @param key the key to look up in the dictionary
      * @param expected_type a #GVariantType, or %NULL
      */
-    lookup_value(key: string, expected_type: VariantType | null): Variant
+    lookup_value(key: string, expected_type?: VariantType | null): Variant
     /**
      * Determines the number of children in a container #GVariant instance.
      * This includes variants, maybes, arrays, tuples and dictionary
@@ -13337,12 +12441,12 @@ export class Variant {
     static new_double(value: number): Variant
     static new_fixed_array(element_type: VariantType, elements: object | null, n_elements: number, element_size: number): Variant
     static new_from_bytes(type: VariantType, bytes: Bytes, trusted: boolean): Variant
-    static new_from_data(type: VariantType, data: Uint8Array, trusted: boolean, notify: DestroyNotify, user_data: object | null): Variant
+    static new_from_data(type: VariantType, data: Uint8Array, trusted: boolean, notify: DestroyNotify, user_data?: object | null): Variant
     static new_handle(value: number): Variant
     static new_int16(value: number): Variant
     static new_int32(value: number): Variant
     static new_int64(value: number): Variant
-    static new_maybe(child_type: VariantType | null, child: Variant | null): Variant
+    static new_maybe(child_type?: VariantType | null, child?: Variant | null): Variant
     static new_object_path(object_path: string): Variant
     static new_objv(strv: string[]): Variant
     static new_signature(signature: string): Variant
@@ -13416,7 +12520,7 @@ export class Variant {
      * @param limit a pointer to the end of `text,` or %NULL
      * @param endptr a location to store the end pointer, or %NULL
      */
-    static parse(type: VariantType | null, text: string, limit: string | null, endptr: string | null): Variant
+    static parse(type: VariantType | null, text: string, limit?: string | null, endptr?: string | null): Variant
     /**
      * Pretty-prints a message showing the context of a #GVariant parse
      * error within the string for which parsing was attempted.
@@ -13459,17 +12563,8 @@ export class Variant {
      */
     static parser_get_error_quark(): Quark
 }
-/**
- * A utility type for constructing container-type #GVariant instances.
- * 
- * This is an opaque structure and may only be accessed using the
- * following functions.
- * 
- * #GVariantBuilder is not threadsafe in any way.  Do not attempt to
- * access it from more than one thread.
- */
 export class VariantBuilder {
-    /* Owm methods of GLib-2.0.GLib.VariantBuilder */
+    /* Methods of GLib-2.0.GLib.VariantBuilder */
     /**
      * Adds `value` to `builder`.
      * 
@@ -13578,103 +12673,8 @@ export class VariantBuilder {
     /* Static methods and pseudo-constructors */
     static new(type: VariantType): VariantBuilder
 }
-/**
- * #GVariantDict is a mutable interface to #GVariant dictionaries.
- * 
- * It can be used for doing a sequence of dictionary lookups in an
- * efficient way on an existing #GVariant dictionary or it can be used
- * to construct new dictionaries with a hashtable-like interface.  It
- * can also be used for taking existing dictionaries and modifying them
- * in order to create new ones.
- * 
- * #GVariantDict can only be used with %G_VARIANT_TYPE_VARDICT
- * dictionaries.
- * 
- * It is possible to use #GVariantDict allocated on the stack or on the
- * heap.  When using a stack-allocated #GVariantDict, you begin with a
- * call to g_variant_dict_init() and free the resources with a call to
- * g_variant_dict_clear().
- * 
- * Heap-allocated #GVariantDict follows normal refcounting rules: you
- * allocate it with g_variant_dict_new() and use g_variant_dict_ref()
- * and g_variant_dict_unref().
- * 
- * g_variant_dict_end() is used to convert the #GVariantDict back into a
- * dictionary-type #GVariant.  When used with stack-allocated instances,
- * this also implicitly frees all associated memory, but for
- * heap-allocated instances, you must still call g_variant_dict_unref()
- * afterwards.
- * 
- * You will typically want to use a heap-allocated #GVariantDict when
- * you expose it as part of an API.  For most other uses, the
- * stack-allocated form will be more convenient.
- * 
- * Consider the following two examples that do the same thing in each
- * style: take an existing dictionary and look up the "count" uint32
- * key, adding 1 to it if it is found, or returning an error if the
- * key is not found.  Each returns the new dictionary as a floating
- * #GVariant.
- * 
- * ## Using a stack-allocated GVariantDict
- * 
- * 
- * ```c
- *   GVariant *
- *   add_to_count (GVariant  *orig,
- *                 GError   **error)
- *   {
- *     GVariantDict dict;
- *     guint32 count;
- * 
- *     g_variant_dict_init (&dict, orig);
- *     if (!g_variant_dict_lookup (&dict, "count", "u", &count))
- *       {
- *         g_set_error (...);
- *         g_variant_dict_clear (&dict);
- *         return NULL;
- *       }
- * 
- *     g_variant_dict_insert (&dict, "count", "u", count + 1);
- * 
- *     return g_variant_dict_end (&dict);
- *   }
- * ```
- * 
- * 
- * ## Using heap-allocated GVariantDict
- * 
- * 
- * ```c
- *   GVariant *
- *   add_to_count (GVariant  *orig,
- *                 GError   **error)
- *   {
- *     GVariantDict *dict;
- *     GVariant *result;
- *     guint32 count;
- * 
- *     dict = g_variant_dict_new (orig);
- * 
- *     if (g_variant_dict_lookup (dict, "count", "u", &count))
- *       {
- *         g_variant_dict_insert (dict, "count", "u", count + 1);
- *         result = g_variant_dict_end (dict);
- *       }
- *     else
- *       {
- *         g_set_error (...);
- *         result = NULL;
- *       }
- * 
- *     g_variant_dict_unref (dict);
- * 
- *     return result;
- *   }
- * ```
- * 
- */
 export class VariantDict {
-    /* Owm methods of GLib-2.0.GLib.VariantDict */
+    /* Methods of GLib-2.0.GLib.VariantDict */
     /**
      * Releases all memory associated with a #GVariantDict without freeing
      * the #GVariantDict structure itself.
@@ -13730,7 +12730,7 @@ export class VariantDict {
      * @param key the key to look up in the dictionary
      * @param expected_type a #GVariantType, or %NULL
      */
-    lookup_value(key: string, expected_type: VariantType | null): Variant
+    lookup_value(key: string, expected_type?: VariantType | null): Variant
     /**
      * Increases the reference count on `dict`.
      * 
@@ -13754,17 +12754,13 @@ export class VariantDict {
      */
     unref(): void
     static name: string
-    static new(from_asv: Variant | null): VariantDict
-    constructor(from_asv: Variant | null)
+    static new(from_asv?: Variant | null): VariantDict
+    constructor(from_asv?: Variant | null)
     /* Static methods and pseudo-constructors */
-    static new(from_asv: Variant | null): VariantDict
+    static new(from_asv?: Variant | null): VariantDict
 }
-/**
- * #GVariantIter is an opaque data structure and can only be accessed
- * using the following functions.
- */
 export class VariantIter {
-    /* Owm methods of GLib-2.0.GLib.VariantIter */
+    /* Methods of GLib-2.0.GLib.VariantIter */
     /**
      * Frees a heap-allocated #GVariantIter.  Only call this function on
      * iterators that were returned by g_variant_iter_new() or
@@ -13813,157 +12809,8 @@ export class VariantIter {
     next_value(): Variant | null
     static name: string
 }
-/**
- * This section introduces the GVariant type system. It is based, in
- * large part, on the D-Bus type system, with two major changes and
- * some minor lifting of restrictions. The
- * [D-Bus specification](http://dbus.freedesktop.org/doc/dbus-specification.html),
- * therefore, provides a significant amount of
- * information that is useful when working with GVariant.
- * 
- * The first major change with respect to the D-Bus type system is the
- * introduction of maybe (or "nullable") types.  Any type in GVariant can be
- * converted to a maybe type, in which case, "nothing" (or "null") becomes a
- * valid value.  Maybe types have been added by introducing the
- * character "m" to type strings.
- * 
- * The second major change is that the GVariant type system supports the
- * concept of "indefinite types" -- types that are less specific than
- * the normal types found in D-Bus.  For example, it is possible to speak
- * of "an array of any type" in GVariant, where the D-Bus type system
- * would require you to speak of "an array of integers" or "an array of
- * strings".  Indefinite types have been added by introducing the
- * characters "*", "?" and "r" to type strings.
- * 
- * Finally, all arbitrary restrictions relating to the complexity of
- * types are lifted along with the restriction that dictionary entries
- * may only appear nested inside of arrays.
- * 
- * Just as in D-Bus, GVariant types are described with strings ("type
- * strings").  Subject to the differences mentioned above, these strings
- * are of the same form as those found in DBus.  Note, however: D-Bus
- * always works in terms of messages and therefore individual type
- * strings appear nowhere in its interface.  Instead, "signatures"
- * are a concatenation of the strings of the type of each argument in a
- * message.  GVariant deals with single values directly so GVariant type
- * strings always describe the type of exactly one value.  This means
- * that a D-Bus signature string is generally not a valid GVariant type
- * string -- except in the case that it is the signature of a message
- * containing exactly one argument.
- * 
- * An indefinite type is similar in spirit to what may be called an
- * abstract type in other type systems.  No value can exist that has an
- * indefinite type as its type, but values can exist that have types
- * that are subtypes of indefinite types.  That is to say,
- * g_variant_get_type() will never return an indefinite type, but
- * calling g_variant_is_of_type() with an indefinite type may return
- * %TRUE.  For example, you cannot have a value that represents "an
- * array of no particular type", but you can have an "array of integers"
- * which certainly matches the type of "an array of no particular type",
- * since "array of integers" is a subtype of "array of no particular
- * type".
- * 
- * This is similar to how instances of abstract classes may not
- * directly exist in other type systems, but instances of their
- * non-abstract subtypes may.  For example, in GTK, no object that has
- * the type of #GtkBin can exist (since #GtkBin is an abstract class),
- * but a #GtkWindow can certainly be instantiated, and you would say
- * that the #GtkWindow is a #GtkBin (since #GtkWindow is a subclass of
- * #GtkBin).
- * 
- * ## GVariant Type Strings
- * 
- * A GVariant type string can be any of the following:
- * 
- * - any basic type string (listed below)
- * 
- * - "v", "r" or "*"
- * 
- * - one of the characters 'a' or 'm', followed by another type string
- * 
- * - the character '(', followed by a concatenation of zero or more other
- *   type strings, followed by the character ')'
- * 
- * - the character '{', followed by a basic type string (see below),
- *   followed by another type string, followed by the character '}'
- * 
- * A basic type string describes a basic type (as per
- * g_variant_type_is_basic()) and is always a single character in length.
- * The valid basic type strings are "b", "y", "n", "q", "i", "u", "x", "t",
- * "h", "d", "s", "o", "g" and "?".
- * 
- * The above definition is recursive to arbitrary depth. "aaaaai" and
- * "(ui(nq((y)))s)" are both valid type strings, as is
- * "a(aa(ui)(qna{ya(yd)}))". In order to not hit memory limits, #GVariant
- * imposes a limit on recursion depth of 65 nested containers. This is the
- * limit in the D-Bus specification (64) plus one to allow a #GDBusMessage to
- * be nested in a top-level tuple.
- * 
- * The meaning of each of the characters is as follows:
- * - `b`: the type string of %G_VARIANT_TYPE_BOOLEAN; a boolean value.
- * - `y`: the type string of %G_VARIANT_TYPE_BYTE; a byte.
- * - `n`: the type string of %G_VARIANT_TYPE_INT16; a signed 16 bit integer.
- * - `q`: the type string of %G_VARIANT_TYPE_UINT16; an unsigned 16 bit integer.
- * - `i`: the type string of %G_VARIANT_TYPE_INT32; a signed 32 bit integer.
- * - `u`: the type string of %G_VARIANT_TYPE_UINT32; an unsigned 32 bit integer.
- * - `x`: the type string of %G_VARIANT_TYPE_INT64; a signed 64 bit integer.
- * - `t`: the type string of %G_VARIANT_TYPE_UINT64; an unsigned 64 bit integer.
- * - `h`: the type string of %G_VARIANT_TYPE_HANDLE; a signed 32 bit value
- *   that, by convention, is used as an index into an array of file
- *   descriptors that are sent alongside a D-Bus message.
- * - `d`: the type string of %G_VARIANT_TYPE_DOUBLE; a double precision
- *   floating point value.
- * - `s`: the type string of %G_VARIANT_TYPE_STRING; a string.
- * - `o`: the type string of %G_VARIANT_TYPE_OBJECT_PATH; a string in the form
- *   of a D-Bus object path.
- * - `g`: the type string of %G_VARIANT_TYPE_SIGNATURE; a string in the form of
- *   a D-Bus type signature.
- * - `?`: the type string of %G_VARIANT_TYPE_BASIC; an indefinite type that
- *   is a supertype of any of the basic types.
- * - `v`: the type string of %G_VARIANT_TYPE_VARIANT; a container type that
- *   contain any other type of value.
- * - `a`: used as a prefix on another type string to mean an array of that
- *   type; the type string "ai", for example, is the type of an array of
- *   signed 32-bit integers.
- * - `m`: used as a prefix on another type string to mean a "maybe", or
- *   "nullable", version of that type; the type string "ms", for example,
- *   is the type of a value that maybe contains a string, or maybe contains
- *   nothing.
- * - `()`: used to enclose zero or more other concatenated type strings to
- *   create a tuple type; the type string "(is)", for example, is the type of
- *   a pair of an integer and a string.
- * - `r`: the type string of %G_VARIANT_TYPE_TUPLE; an indefinite type that is
- *   a supertype of any tuple type, regardless of the number of items.
- * - `{}`: used to enclose a basic type string concatenated with another type
- *   string to create a dictionary entry type, which usually appears inside of
- *   an array to form a dictionary; the type string "a{sd}", for example, is
- *   the type of a dictionary that maps strings to double precision floating
- *   point values.
- * 
- *   The first type (the basic type) is the key type and the second type is
- *   the value type. The reason that the first type is restricted to being a
- *   basic type is so that it can easily be hashed.
- * - `*`: the type string of %G_VARIANT_TYPE_ANY; the indefinite type that is
- *   a supertype of all types.  Note that, as with all type strings, this
- *   character represents exactly one type. It cannot be used inside of tuples
- *   to mean "any number of items".
- * 
- * Any type string of a container that contains an indefinite type is,
- * itself, an indefinite type. For example, the type string "a*"
- * (corresponding to %G_VARIANT_TYPE_ARRAY) is an indefinite type
- * that is a supertype of every array type. "(*s)" is a supertype
- * of all tuples that contain exactly two items where the second
- * item is a string.
- * 
- * "a{?*}" is an indefinite type that is a supertype of all arrays
- * containing dictionary entries where the key is any basic type and
- * the value is any type at all.  This is, by definition, a dictionary,
- * so this type string corresponds to %G_VARIANT_TYPE_DICTIONARY. Note
- * that, due to the restriction that the key of a dictionary entry must
- * be a basic type, "{**}" is not a valid type string.
- */
 export class VariantType {
-    /* Owm methods of GLib-2.0.GLib.VariantType */
+    /* Methods of GLib-2.0.GLib.VariantType */
     /**
      * Makes a copy of a #GVariantType.  It is appropriate to call
      * g_variant_type_free() on the return value.  `type` may not be %NULL.
@@ -14197,88 +13044,16 @@ export class VariantType {
      * @param string a pointer to any string
      * @param limit the end of `string,` or %NULL
      */
-    static string_scan(string: string, limit: string | null): [ /* returnType */ boolean, /* endptr */ string ]
+    static string_scan(string: string, limit?: string | null): [ /* returnType */ boolean, /* endptr */ string | null ]
 }
-/**
- * The #GFloatIEEE754 and #GDoubleIEEE754 unions are used to access the sign,
- * mantissa and exponent of IEEE floats and doubles. These unions are defined
- * as appropriate for a given platform. IEEE floats and doubles are supported
- * (used for storage) by at least Intel, PPC and Sparc.
- */
 export class DoubleIEEE754 {
-    /* Own fields of GLib-2.0.GLib.DoubleIEEE754 */
-    /**
-     * the double value
-     */
-    v_double: number
     static name: string
 }
-/**
- * The #GFloatIEEE754 and #GDoubleIEEE754 unions are used to access the sign,
- * mantissa and exponent of IEEE floats and doubles. These unions are defined
- * as appropriate for a given platform. IEEE floats and doubles are supported
- * (used for storage) by at least Intel, PPC and Sparc.
- */
 export class FloatIEEE754 {
-    /* Own fields of GLib-2.0.GLib.FloatIEEE754 */
-    /**
-     * the double value
-     */
-    v_float: number
     static name: string
 }
-/**
- * The #GMutex struct is an opaque data structure to represent a mutex
- * (mutual exclusion). It can be used to protect data against shared
- * access.
- * 
- * Take for example the following function:
- * 
- * ```c
- *   int
- *   give_me_next_number (void)
- *   {
- *     static int current_number = 0;
- * 
- *     // now do a very complicated calculation to calculate the new
- *     // number, this might for example be a random number generator
- *     current_number = calc_next_number (current_number);
- * 
- *     return current_number;
- *   }
- * ```
- * 
- * It is easy to see that this won't work in a multi-threaded
- * application. There current_number must be protected against shared
- * access. A #GMutex can be used as a solution to this problem:
- * 
- * ```c
- *   int
- *   give_me_next_number (void)
- *   {
- *     static GMutex mutex;
- *     static int current_number = 0;
- *     int ret_val;
- * 
- *     g_mutex_lock (&mutex);
- *     ret_val = current_number = calc_next_number (current_number);
- *     g_mutex_unlock (&mutex);
- * 
- *     return ret_val;
- *   }
- * ```
- * 
- * Notice that the #GMutex is not initialised to any particular value.
- * Its placement in static storage ensures that it will be initialised
- * to all-zeros, which is appropriate.
- * 
- * If a #GMutex is placed in other contexts (eg: embedded in a struct)
- * then it must be explicitly initialised using g_mutex_init().
- * 
- * A #GMutex should only be accessed via g_mutex_ functions.
- */
 export class Mutex {
-    /* Owm methods of GLib-2.0.GLib.Mutex */
+    /* Methods of GLib-2.0.GLib.Mutex */
     /**
      * Frees the resources allocated to a mutex with g_mutex_init().
      * 
@@ -14352,59 +13127,7 @@ export class Mutex {
     unlock(): void
     static name: string
 }
-/**
- * A union holding the value of the token.
- */
 export class TokenValue {
-    /* Own fields of GLib-2.0.GLib.TokenValue */
-    /**
-     * token symbol value
-     */
-    v_symbol: object
-    /**
-     * token identifier value
-     */
-    v_identifier: string
-    /**
-     * token binary integer value
-     */
-    v_binary: number
-    /**
-     * octal integer value
-     */
-    v_octal: number
-    /**
-     * integer value
-     */
-    v_int: number
-    /**
-     * 64-bit integer value
-     */
-    v_int64: number
-    /**
-     * floating point value
-     */
-    v_float: number
-    /**
-     * hex integer value
-     */
-    v_hex: number
-    /**
-     * string value
-     */
-    v_string: string
-    /**
-     * comment value
-     */
-    v_comment: string
-    /**
-     * character value
-     */
-    v_char: number
-    /**
-     * error value
-     */
-    v_error: number
     static name: string
 }
     export type DateDay = number

@@ -27,7 +27,7 @@ export function check_element_push_buffer(element_name: string, buffer_in: Gst.B
 export function check_element_push_buffer_list(element_name: string, buffer_in: Gst.Buffer[], caps_in: Gst.Caps, buffer_out: Gst.Buffer[], caps_out: Gst.Caps, last_flow_return: Gst.FlowReturn): void
 export function check_init(argc: number, argv: string): void
 export function check_message_error(message: Gst.Message, type: Gst.MessageType, domain: GLib.Quark, code: number): void
-export function check_object_destroyed_on_unref(object_to_unref: object | null): void
+export function check_object_destroyed_on_unref(object_to_unref?: object | null): void
 export function check_remove_log_filter(filter: CheckLogFilter): void
 export function check_setup_element(factory: string): Gst.Element
 export function check_setup_events(srcpad: Gst.Pad, element: Gst.Element, caps: Gst.Caps | null, format: Gst.Format): void
@@ -51,26 +51,19 @@ export function harness_stress_thread_stop(t: HarnessThread): number
 /**
  * A function that is called for messages matching the filter added by
  * `gst_check_add_log_filter`.
- * @callback 
  */
 export interface CheckLogFilterFunc {
     (log_domain: string, log_level: GLib.LogLevelFlags, message: string): boolean
 }
-/**
- * @callback 
- */
 export interface HarnessPrepareBufferFunc {
-    (h: Harness, data: object | null): Gst.Buffer
+    (h: Harness, data?: object | null): Gst.Buffer
 }
-/**
- * @callback 
- */
 export interface HarnessPrepareEventFunc {
-    (h: Harness, data: object | null): Gst.Event
+    (h: Harness, data?: object | null): Gst.Event
 }
 export interface TestClock_ConstructProps extends Gst.Clock_ConstructProps {
     /* Constructor properties of GstCheck-1.0.GstCheck.TestClock */
-    clock_type?: Gst.ClockType | null
+    clock_type?: Gst.ClockType
     /**
      * When a #GstTestClock is constructed it will have a certain start time set.
      * If the clock was created using gst_test_clock_new_with_start_time() then
@@ -78,160 +71,10 @@ export interface TestClock_ConstructProps extends Gst.Clock_ConstructProps {
      * gst_test_clock_new() was called the clock started at time zero, and thus
      * this property contains the value 0.
      */
-    start_time?: number | null
+    start_time?: number
 }
-/**
- * GstTestClock is an implementation of #GstClock which has different
- * behaviour compared to #GstSystemClock. Time for #GstSystemClock advances
- * according to the system time, while time for #GstTestClock changes only
- * when gst_test_clock_set_time() or gst_test_clock_advance_time() are
- * called. #GstTestClock provides unit tests with the possibility to
- * precisely advance the time in a deterministic manner, independent of the
- * system time or any other external factors.
- * 
- * ## Advancing the time of a #GstTestClock
- * 
- * 
- * ```c
- *   #include <gst/gst.h>
- *   #include <gst/check/gsttestclock.h>
- * 
- *   GstClock *clock;
- *   GstTestClock *test_clock;
- * 
- *   clock = gst_test_clock_new ();
- *   test_clock = GST_TEST_CLOCK (clock);
- *   GST_INFO ("Time: %" GST_TIME_FORMAT, GST_TIME_ARGS (gst_clock_get_time (clock)));
- *   gst_test_clock_advance_time ( test_clock, 1 * GST_SECOND);
- *   GST_INFO ("Time: %" GST_TIME_FORMAT, GST_TIME_ARGS (gst_clock_get_time (clock)));
- *   g_usleep (10 * G_USEC_PER_SEC);
- *   GST_INFO ("Time: %" GST_TIME_FORMAT, GST_TIME_ARGS (gst_clock_get_time (clock)));
- *   gst_test_clock_set_time (test_clock, 42 * GST_SECOND);
- *   GST_INFO ("Time: %" GST_TIME_FORMAT, GST_TIME_ARGS (gst_clock_get_time (clock)));
- *   ...
- * ```
- * 
- * 
- * #GstClock allows for setting up single shot or periodic clock notifications
- * as well as waiting for these notifications synchronously (using
- * gst_clock_id_wait()) or asynchronously (using gst_clock_id_wait_async() or
- * gst_clock_id_wait_async()). This is used by many GStreamer elements,
- * among them #GstBaseSrc and #GstBaseSink.
- * 
- * #GstTestClock keeps track of these clock notifications. By calling
- * gst_test_clock_wait_for_next_pending_id() or
- * gst_test_clock_wait_for_multiple_pending_ids() a unit tests may wait for the
- * next one or several clock notifications to be requested. Additionally unit
- * tests may release blocked waits in a controlled fashion by calling
- * gst_test_clock_process_next_clock_id(). This way a unit test can control the
- * inaccuracy (jitter) of clock notifications, since the test can decide to
- * release blocked waits when the clock time has advanced exactly to, or past,
- * the requested clock notification time.
- * 
- * There are also interfaces for determining if a notification belongs to a
- * #GstTestClock or not, as well as getting the number of requested clock
- * notifications so far.
- * 
- * N.B.: When a unit test waits for a certain amount of clock notifications to
- * be requested in gst_test_clock_wait_for_next_pending_id() or
- * gst_test_clock_wait_for_multiple_pending_ids() then these functions may block
- * for a long time. If they block forever then the expected clock notifications
- * were never requested from #GstTestClock, and so the assumptions in the code
- * of the unit test are wrong. The unit test case runner in gstcheck is
- * expected to catch these cases either by the default test case timeout or the
- * one set for the unit test by calling tcase_set_timeout\(\).
- * 
- * The sample code below assumes that the element under test will delay a
- * buffer pushed on the source pad by some latency until it arrives on the sink
- * pad. Moreover it is assumed that the element will at some point call
- * gst_clock_id_wait() to synchronously wait for a specific time. The first
- * buffer sent will arrive exactly on time only delayed by the latency. The
- * second buffer will arrive a little late (7ms) due to simulated jitter in the
- * clock notification.
- * 
- * ## Demonstration of how to work with clock notifications and #GstTestClock
- * 
- * 
- * ```c
- *   #include <gst/gst.h>
- *   #include <gst/check/gstcheck.h>
- *   #include <gst/check/gsttestclock.h>
- * 
- *   GstClockTime latency;
- *   GstElement *element;
- *   GstPad *srcpad;
- *   GstClock *clock;
- *   GstTestClock *test_clock;
- *   GstBuffer buf;
- *   GstClockID pending_id;
- *   GstClockID processed_id;
- * 
- *   latency = 42 * GST_MSECOND;
- *   element = create_element (latency, ...);
- *   srcpad = get_source_pad (element);
- * 
- *   clock = gst_test_clock_new ();
- *   test_clock = GST_TEST_CLOCK (clock);
- *   gst_element_set_clock (element, clock);
- * 
- *   GST_INFO ("Set time, create and push the first buffer\n");
- *   gst_test_clock_set_time (test_clock, 0);
- *   buf = create_test_buffer (gst_clock_get_time (clock), ...);
- *   gst_assert_cmpint (gst_pad_push (srcpad, buf), ==, GST_FLOW_OK);
- * 
- *   GST_INFO ("Block until element is waiting for a clock notification\n");
- *   gst_test_clock_wait_for_next_pending_id (test_clock, &pending_id);
- *   GST_INFO ("Advance to the requested time of the clock notification\n");
- *   gst_test_clock_advance_time (test_clock, latency);
- *   GST_INFO ("Release the next blocking wait and make sure it is the one from element\n");
- *   processed_id = gst_test_clock_process_next_clock_id (test_clock);
- *   g_assert (processed_id == pending_id);
- *   g_assert_cmpint (GST_CLOCK_ENTRY_STATUS (processed_id), ==, GST_CLOCK_OK);
- *   gst_clock_id_unref (pending_id);
- *   gst_clock_id_unref (processed_id);
- * 
- *   GST_INFO ("Validate that element produced an output buffer and check its timestamp\n");
- *   g_assert_cmpint (get_number_of_output_buffer (...), ==, 1);
- *   buf = get_buffer_pushed_by_element (element, ...);
- *   g_assert_cmpint (GST_BUFFER_TIMESTAMP (buf), ==, latency);
- *   gst_buffer_unref (buf);
- *   GST_INFO ("Check that element does not wait for any clock notification\n");
- *   g_assert (!gst_test_clock_peek_next_pending_id (test_clock, NULL));
- * 
- *   GST_INFO ("Set time, create and push the second buffer\n");
- *   gst_test_clock_advance_time (test_clock, 10 * GST_SECOND);
- *   buf = create_test_buffer (gst_clock_get_time (clock), ...);
- *   gst_assert_cmpint (gst_pad_push (srcpad, buf), ==, GST_FLOW_OK);
- * 
- *   GST_INFO ("Block until element is waiting for a new clock notification\n");
- *   (gst_test_clock_wait_for_next_pending_id (test_clock, &pending_id);
- *   GST_INFO ("Advance past 7ms beyond the requested time of the clock notification\n");
- *   gst_test_clock_advance_time (test_clock, latency + 7 * GST_MSECOND);
- *   GST_INFO ("Release the next blocking wait and make sure it is the one from element\n");
- *   processed_id = gst_test_clock_process_next_clock_id (test_clock);
- *   g_assert (processed_id == pending_id);
- *   g_assert_cmpint (GST_CLOCK_ENTRY_STATUS (processed_id), ==, GST_CLOCK_OK);
- *   gst_clock_id_unref (pending_id);
- *   gst_clock_id_unref (processed_id);
- * 
- *   GST_INFO ("Validate that element produced an output buffer and check its timestamp\n");
- *   g_assert_cmpint (get_number_of_output_buffer (...), ==, 1);
- *   buf = get_buffer_pushed_by_element (element, ...);
- *   g_assert_cmpint (GST_BUFFER_TIMESTAMP (buf), ==,
- *       10 * GST_SECOND + latency + 7 * GST_MSECOND);
- *   gst_buffer_unref (buf);
- *   GST_INFO ("Check that element does not wait for any clock notification\n");
- *   g_assert (!gst_test_clock_peek_next_pending_id (test_clock, NULL));
- *   ...
- * ```
- * 
- * 
- * Since #GstTestClock is only supposed to be used in unit tests it calls
- * g_assert(), g_assert_cmpint() or g_assert_cmpuint() to validate all function
- * arguments. This will highlight any issues with the unit test code itself.
- */
 export class TestClock {
-    /* Own properties of GstCheck-1.0.GstCheck.TestClock */
+    /* Properties of GstCheck-1.0.GstCheck.TestClock */
     clock_type: Gst.ClockType
     /**
      * When a #GstTestClock is constructed it will have a certain start time set.
@@ -241,15 +84,13 @@ export class TestClock {
      * this property contains the value 0.
      */
     readonly start_time: number
-    /* Extended properties of Gst-1.0.Gst.Clock */
+    /* Properties of Gst-1.0.Gst.Clock */
     timeout: number
     window_size: number
     window_threshold: number
-    /* Own fields of GstCheck-1.0.GstCheck.TestClock */
-    parent: Gst.Clock
-    /* Extended fields of Gst-1.0.Gst.Clock */
+    /* Fields of Gst-1.0.Gst.Clock */
     object: Gst.Object
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
     /**
      * object LOCK
      */
@@ -259,12 +100,16 @@ export class TestClock {
      */
     name: string
     /**
+     * this object's parent, weak ref
+     */
+    parent: Gst.Object
+    /**
      * flags for this object
      */
     flags: number
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GstCheck-1.0.GstCheck.TestClock */
+    /* Methods of GstCheck-1.0.GstCheck.TestClock */
     /**
      * Advances the time of the `test_clock` by the amount given by `delta`. The
      * time of `test_clock` is monotonically increasing, therefore providing a
@@ -310,14 +155,14 @@ export class TestClock {
      * 
      * MT safe.
      */
-    peek_next_pending_id(): [ /* returnType */ boolean, /* pending_id */ Gst.ClockID ]
+    peek_next_pending_id(): [ /* returnType */ boolean, /* pending_id */ Gst.ClockID | null ]
     /**
      * Processes and releases the pending IDs in the list.
      * 
      * MT safe.
      * @param pending_list List     of pending #GstClockIDs
      */
-    process_id_list(pending_list: Gst.ClockID[] | null): number
+    process_id_list(pending_list?: Gst.ClockID[] | null): number
     /**
      * MT safe.
      */
@@ -340,7 +185,7 @@ export class TestClock {
      * @param count the number of pending clock notifications to wait for
      * @param timeout_ms the timeout in milliseconds
      */
-    timed_wait_for_multiple_pending_ids(count: number, timeout_ms: number): [ /* returnType */ boolean, /* pending_list */ Gst.ClockID[] ]
+    timed_wait_for_multiple_pending_ids(count: number, timeout_ms: number): [ /* returnType */ boolean, /* pending_list */ Gst.ClockID[] | null ]
     /**
      * Blocks until at least `count` clock notifications have been requested from
      * `test_clock`. There is no timeout for this wait, see the main description of
@@ -349,7 +194,7 @@ export class TestClock {
      * MT safe.
      * @param count the number of pending clock notifications to wait for
      */
-    wait_for_multiple_pending_ids(count: number): /* pending_list */ Gst.ClockID[]
+    wait_for_multiple_pending_ids(count: number): /* pending_list */ Gst.ClockID[] | null
     /**
      * Waits until a clock notification is requested from `test_clock`. There is no
      * timeout for this wait, see the main description of #GstTestClock. A reference
@@ -357,7 +202,7 @@ export class TestClock {
      * 
      * MT safe.
      */
-    wait_for_next_pending_id(): /* pending_id */ Gst.ClockID
+    wait_for_next_pending_id(): /* pending_id */ Gst.ClockID | null
     /**
      * Blocks until at least `count` clock notifications have been requested from
      * `test_clock`. There is no timeout for this wait, see the main description of
@@ -365,7 +210,7 @@ export class TestClock {
      * @param count the number of pending clock notifications to wait for
      */
     wait_for_pending_id_count(count: number): void
-    /* Extended methods of Gst-1.0.Gst.Clock */
+    /* Methods of Gst-1.0.Gst.Clock */
     /**
      * The time `master` of the master clock and the time `slave` of the slave
      * clock are added to the list of observations. If enough observations
@@ -391,7 +236,7 @@ export class TestClock {
      * @param slave a time on the slave
      * @param master a time on the master
      */
-    add_observation_unapplied(slave: Gst.ClockTime, master: Gst.ClockTime): [ /* returnType */ boolean, /* r_squared */ number, /* internal */ Gst.ClockTime, /* external */ Gst.ClockTime, /* rate_num */ Gst.ClockTime, /* rate_denom */ Gst.ClockTime ]
+    add_observation_unapplied(slave: Gst.ClockTime, master: Gst.ClockTime): [ /* returnType */ boolean, /* r_squared */ number, /* internal */ Gst.ClockTime | null, /* external */ Gst.ClockTime | null, /* rate_num */ Gst.ClockTime | null, /* rate_denom */ Gst.ClockTime | null ]
     /**
      * Converts the given `internal` clock time to the external time, adjusting for the
      * rate and reference time set with gst_clock_set_calibration() and making sure
@@ -426,7 +271,7 @@ export class TestClock {
      * 
      * MT safe.
      */
-    get_calibration(): [ /* internal */ Gst.ClockTime, /* external */ Gst.ClockTime, /* rate_num */ Gst.ClockTime, /* rate_denom */ Gst.ClockTime ]
+    get_calibration(): [ /* internal */ Gst.ClockTime | null, /* external */ Gst.ClockTime | null, /* rate_num */ Gst.ClockTime | null, /* rate_denom */ Gst.ClockTime | null ]
     /**
      * Gets the current internal time of the given clock. The time is returned
      * unadjusted for the offset and the rate.
@@ -530,7 +375,7 @@ export class TestClock {
      * and time offsets.
      * @param master a master #GstClock
      */
-    set_master(master: Gst.Clock | null): boolean
+    set_master(master?: Gst.Clock | null): boolean
     /**
      * Set the accuracy of the clock. Some clocks have the possibility to operate
      * with different accuracy at the expense of more resource usage. There is
@@ -598,7 +443,7 @@ export class TestClock {
      * @param timeout timeout for waiting or %GST_CLOCK_TIME_NONE
      */
     wait_for_sync(timeout: Gst.ClockTime): boolean
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -616,7 +461,7 @@ export class TestClock {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -746,7 +591,7 @@ export class TestClock {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -783,7 +628,7 @@ export class TestClock {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -829,7 +674,7 @@ export class TestClock {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -998,7 +843,7 @@ export class TestClock {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -1076,27 +921,25 @@ export class TestClock {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Gst-1.0.Gst.Clock */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Gst-1.0.Gst.Clock */
     vfunc_change_resolution(old_resolution: Gst.ClockTime, new_resolution: Gst.ClockTime): Gst.ClockTime
     /**
      * Gets the current internal time of the given clock. The time is returned
      * unadjusted for the offset and the rate.
-     * @virtual 
      */
     vfunc_get_internal_time(): Gst.ClockTime
     /**
      * Get the accuracy of the clock. The accuracy of the clock is the granularity
      * of the values returned by gst_clock_get_time().
-     * @virtual 
      */
     vfunc_get_resolution(): Gst.ClockTime
     vfunc_unschedule(entry: Gst.ClockEntry): void
     vfunc_wait(entry: Gst.ClockEntry, jitter: Gst.ClockTimeDiff): Gst.ClockReturn
     vfunc_wait_async(entry: Gst.ClockEntry): Gst.ClockReturn
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -1113,12 +956,11 @@ export class TestClock {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gst-1.0.Gst.Clock */
+    /* Signals of Gst-1.0.Gst.Clock */
     /**
      * Signaled on clocks with GST_CLOCK_FLAG_NEEDS_STARTUP_SYNC set once
      * the clock is synchronized, or when it completely lost synchronization.
@@ -1126,25 +968,23 @@ export class TestClock {
      * 
      * This signal will be emitted from an arbitrary thread, most likely not
      * the application's main thread.
-     * @signal 
      * @param synced if the clock is synced now
      */
     connect(sigName: "synced", callback: (($obj: TestClock, synced: boolean) => void)): number
     connect_after(sigName: "synced", callback: (($obj: TestClock, synced: boolean) => void)): number
     emit(sigName: "synced", synced: boolean): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: TestClock, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: TestClock, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1171,7 +1011,6 @@ export class TestClock {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: TestClock, pspec: GObject.ParamSpec) => void)): number
@@ -1187,8 +1026,8 @@ export class TestClock {
     connect_after(sigName: "notify::window-size", callback: (($obj: TestClock, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::window-threshold", callback: (($obj: TestClock, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::window-threshold", callback: (($obj: TestClock, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -1203,11 +1042,11 @@ export class TestClock {
      * MT safe.
      * @param pending_list List     of of pending #GstClockIDs
      */
-    static id_list_get_latest_time(pending_list: Gst.ClockID[] | null): Gst.ClockTime
-    static $gtype: GObject.GType<TestClock>
+    static id_list_get_latest_time(pending_list?: Gst.ClockID[] | null): Gst.ClockTime
+    static $gtype: GObject.Type
 }
 export class CheckABIStruct {
-    /* Own fields of GstCheck-1.0.GstCheck.CheckABIStruct */
+    /* Fields of GstCheck-1.0.GstCheck.CheckABIStruct */
     name: string
     size: number
     abi_size: number
@@ -1216,107 +1055,8 @@ export class CheckABIStruct {
 export class CheckLogFilter {
     static name: string
 }
-/**
- * #GstHarness is meant to make writing unit test for GStreamer much easier.
- * It can be thought of as a way of treating a #GstElement as a black box,
- * deterministically feeding it data, and controlling what data it outputs.
- * 
- * The basic structure of #GstHarness is two "floating" #GstPads that connect
- * to the harnessed #GstElement src and sink #GstPads like so:
- * 
- * |[
- *           __________________________
- *  _____   |  _____            _____  |   _____
- * |     |  | |     |          |     | |  |     |
- * | src |--+-| sink|  Element | src |-+--| sink|
- * |_____|  | |_____|          |_____| |  |_____|
- *          |__________________________|
- * 
- * ```
- * 
- * 
- * With this, you can now simulate any environment the #GstElement might find
- * itself in. By specifying the #GstCaps of the harness #GstPads, using
- * functions like gst_harness_set_src_caps() or gst_harness_set_sink_caps_str(),
- * you can test how the #GstElement interacts with different caps sets.
- * 
- * Your harnessed #GstElement can of course also be a bin, and using
- * gst_harness_new_parse() supporting standard gst-launch syntax, you can
- * easily test a whole pipeline instead of just one element.
- * 
- * You can then go on to push #GstBuffers and #GstEvents on to the srcpad,
- * using functions like gst_harness_push() and gst_harness_push_event(), and
- * then pull them out to examine them with gst_harness_pull() and
- * gst_harness_pull_event().
- * 
- * ## A simple buffer-in buffer-out example
- * 
- * 
- * ```c
- *   #include <gst/gst.h>
- *   #include <gst/check/gstharness.h>
- *   GstHarness *h;
- *   GstBuffer *in_buf;
- *   GstBuffer *out_buf;
- * 
- *   // attach the harness to the src and sink pad of GstQueue
- *   h = gst_harness_new ("queue");
- * 
- *   // we must specify a caps before pushing buffers
- *   gst_harness_set_src_caps_str (h, "mycaps");
- * 
- *   // create a buffer of size 42
- *   in_buf = gst_harness_create_buffer (h, 42);
- * 
- *   // push the buffer into the queue
- *   gst_harness_push (h, in_buf);
- * 
- *   // pull the buffer from the queue
- *   out_buf = gst_harness_pull (h);
- * 
- *   // validate the buffer in is the same as buffer out
- *   fail_unless (in_buf == out_buf);
- * 
- *   // cleanup
- *   gst_buffer_unref (out_buf);
- *   gst_harness_teardown (h);
- * 
- *   ```
- * 
- * 
- * Another main feature of the #GstHarness is its integration with the
- * #GstTestClock. Operating the #GstTestClock can be very challenging, but
- * #GstHarness simplifies some of the most desired actions a lot, like wanting
- * to manually advance the clock while at the same time releasing a #GstClockID
- * that is waiting, with functions like gst_harness_crank_single_clock_wait().
- * 
- * #GstHarness also supports sub-harnesses, as a way of generating and
- * validating data. A sub-harness is another #GstHarness that is managed by
- * the "parent" harness, and can either be created by using the standard
- * gst_harness_new type functions directly on the (GstHarness *)->src_harness,
- * or using the much more convenient gst_harness_add_src() or
- * gst_harness_add_sink_parse(). If you have a decoder-element you want to test,
- * (like vp8dec) it can be very useful to add a src-harness with both a
- * src-element (videotestsrc) and an encoder (vp8enc) to feed the decoder data
- * with different configurations, by simply doing:
- * 
- * 
- * ```c
- *   GstHarness * h = gst_harness_new (h, "vp8dec");
- *   gst_harness_add_src_parse (h, "videotestsrc is-live=1 ! vp8enc", TRUE);
- * ```
- * 
- * 
- * and then feeding it data with:
- * 
- * 
- * ```c
- * gst_harness_push_from_src (h);
- * ```
- * 
- */
 export class Harness {
-    /* Own fields of GstCheck-1.0.GstCheck.Harness */
+    /* Fields of GstCheck-1.0.GstCheck.Harness */
     /**
      * the element inside the harness
      */
@@ -1337,7 +1077,7 @@ export class Harness {
      * the sink (output) harness (if any)
      */
     sink_harness: Harness
-    /* Owm methods of GstCheck-1.0.GstCheck.Harness */
+    /* Methods of GstCheck-1.0.GstCheck.Harness */
     /**
      * Links the specified #GstPad the `GstHarness` srcpad.
      * 
@@ -1374,7 +1114,7 @@ export class Harness {
      * @param api a metadata API
      * @param params API specific parameters
      */
-    add_propose_allocation_meta(api: GObject.GType, params: Gst.Structure | null): void
+    add_propose_allocation_meta(api: GObject.Type, params?: Gst.Structure | null): void
     /**
      * Similar to gst_harness_add_sink_harness, this is a convenience to
      * directly create a sink-harness using the `sink_element_name` name specified.
@@ -1527,7 +1267,7 @@ export class Harness {
      * 
      * MT safe.
      */
-    get_allocator(): [ /* allocator */ Gst.Allocator, /* params */ Gst.AllocationParams ]
+    get_allocator(): [ /* allocator */ Gst.Allocator | null, /* params */ Gst.AllocationParams | null ]
     /**
      * Get the timestamp of the last #GstBuffer pushed on the #GstHarness srcpad,
      * typically with gst_harness_push or gst_harness_push_from_src.
@@ -1692,7 +1432,7 @@ export class Harness {
      * @param allocator a #GstAllocator
      * @param params a #GstAllocationParams
      */
-    set_propose_allocator(allocator: Gst.Allocator | null, params: Gst.AllocationParams | null): void
+    set_propose_allocator(allocator?: Gst.Allocator | null, params?: Gst.AllocationParams | null): void
     /**
      * Sets the `GstHarness` sinkpad caps.
      * 
@@ -1850,23 +1590,14 @@ export class Harness {
 export class HarnessPrivate {
     static name: string
 }
-/**
- * Opaque handle representing a GstHarness stress testing thread.
- */
 export class HarnessThread {
     static name: string
 }
-/**
- * Opaque consistency checker handle.
- */
 export class StreamConsistency {
     static name: string
 }
-/**
- * The class of a #GstTestClock, which has no virtual methods to override.
- */
 export abstract class TestClockClass {
-    /* Own fields of GstCheck-1.0.GstCheck.TestClockClass */
+    /* Fields of GstCheck-1.0.GstCheck.TestClockClass */
     /**
      * the parent class structure
      */

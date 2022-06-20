@@ -1,4 +1,4 @@
-const _imports = imports || {}
+const imports = imports || {}
 
-export { _imports }
-export default _imports
+export { imports }
+export default imports

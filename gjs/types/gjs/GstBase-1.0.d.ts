@@ -16,7 +16,6 @@ import type * as GModule from './GModule-2.0';
 
 /**
  * Flags to be used in a #GstBaseParseFrame.
- * @bitfield 
  */
 export enum BaseParseFrameFlags {
     /**
@@ -56,7 +55,6 @@ export enum BaseParseFrameFlags {
 }
 /**
  * The #GstElement flags that a basesrc element may have.
- * @bitfield 
  */
 export enum BaseSrcFlags {
     /**
@@ -72,9 +70,6 @@ export enum BaseSrcFlags {
      */
     LAST,
 }
-/**
- * @bitfield 
- */
 export enum CollectPadsStateFlags {
     /**
      * Set if collectdata's pad is EOS.
@@ -112,18 +107,17 @@ export const BASE_TRANSFORM_SINK_NAME: string
  */
 export const BASE_TRANSFORM_SRC_NAME: string
 export function type_find_helper(src: Gst.Pad, size: number): Gst.Caps | null
-export function type_find_helper_for_buffer(obj: Gst.Object | null, buf: Gst.Buffer): [ /* returnType */ Gst.Caps | null, /* prob */ Gst.TypeFindProbability ]
-export function type_find_helper_for_buffer_with_extension(obj: Gst.Object | null, buf: Gst.Buffer, extension: string | null): [ /* returnType */ Gst.Caps | null, /* prob */ Gst.TypeFindProbability ]
-export function type_find_helper_for_data(obj: Gst.Object | null, data: Uint8Array): [ /* returnType */ Gst.Caps | null, /* prob */ Gst.TypeFindProbability ]
-export function type_find_helper_for_data_with_extension(obj: Gst.Object | null, data: Uint8Array, extension: string | null): [ /* returnType */ Gst.Caps | null, /* prob */ Gst.TypeFindProbability ]
+export function type_find_helper_for_buffer(obj: Gst.Object | null, buf: Gst.Buffer): [ /* returnType */ Gst.Caps | null, /* prob */ Gst.TypeFindProbability | null ]
+export function type_find_helper_for_buffer_with_extension(obj: Gst.Object | null, buf: Gst.Buffer, extension?: string | null): [ /* returnType */ Gst.Caps | null, /* prob */ Gst.TypeFindProbability | null ]
+export function type_find_helper_for_data(obj: Gst.Object | null, data: Uint8Array): [ /* returnType */ Gst.Caps | null, /* prob */ Gst.TypeFindProbability | null ]
+export function type_find_helper_for_data_with_extension(obj: Gst.Object | null, data: Uint8Array, extension?: string | null): [ /* returnType */ Gst.Caps | null, /* prob */ Gst.TypeFindProbability | null ]
 export function type_find_helper_for_extension(obj: Gst.Object | null, extension: string): Gst.Caps | null
-export function type_find_helper_get_range(obj: Gst.Object, parent: Gst.Object | null, func: TypeFindHelperGetRangeFunction, size: number, extension: string | null): [ /* returnType */ Gst.Caps | null, /* prob */ Gst.TypeFindProbability ]
-export function type_find_helper_get_range_full(obj: Gst.Object, parent: Gst.Object | null, func: TypeFindHelperGetRangeFunction, size: number, extension: string | null): [ /* returnType */ Gst.FlowReturn, /* caps */ Gst.Caps, /* prob */ Gst.TypeFindProbability ]
+export function type_find_helper_get_range(obj: Gst.Object, parent: Gst.Object | null, func: TypeFindHelperGetRangeFunction, size: number, extension?: string | null): [ /* returnType */ Gst.Caps | null, /* prob */ Gst.TypeFindProbability | null ]
+export function type_find_helper_get_range_full(obj: Gst.Object, parent: Gst.Object | null, func: TypeFindHelperGetRangeFunction, size: number, extension?: string | null): [ /* returnType */ Gst.FlowReturn, /* caps */ Gst.Caps, /* prob */ Gst.TypeFindProbability | null ]
 /**
  * A function that will be called when the #GstCollectData will be freed.
  * It is passed the pointer to the structure and should free any custom
  * memory and resources allocated for it.
- * @callback 
  */
 export interface CollectDataDestroyNotify {
     (data: CollectData): void
@@ -132,7 +126,6 @@ export interface CollectDataDestroyNotify {
  * A function that will be called when a (considered oldest) buffer can be muxed.
  * If all pads have reached EOS, this function is called with %NULL `buffer`
  * and %NULL `data`.
- * @callback 
  */
 export interface CollectPadsBufferFunction {
     (pads: CollectPads, data: CollectData, buffer: Gst.Buffer): Gst.FlowReturn
@@ -146,14 +139,12 @@ export interface CollectPadsBufferFunction {
  * 
  * This function takes ownership of `inbuffer` and should output a buffer in
  * `outbuffer` or return %NULL in `outbuffer` if the buffer should be dropped.
- * @callback 
  */
 export interface CollectPadsClipFunction {
     (pads: CollectPads, data: CollectData, inbuffer: Gst.Buffer): Gst.FlowReturn
 }
 /**
  * A function for comparing two timestamps of buffers or newsegments collected on one pad.
- * @callback 
  */
 export interface CollectPadsCompareFunction {
     (pads: CollectPads, data1: CollectData, timestamp1: Gst.ClockTime, data2: CollectData, timestamp2: Gst.ClockTime): number
@@ -163,7 +154,6 @@ export interface CollectPadsCompareFunction {
  * ownership of the event and is responsible for chaining up (to
  * gst_collect_pads_event_default()) or dropping events (such typical cases
  * being handled by the default handler).
- * @callback 
  */
 export interface CollectPadsEventFunction {
     (pads: CollectPads, pad: CollectData, event: Gst.Event): boolean
@@ -175,14 +165,12 @@ export interface CollectPadsEventFunction {
  * all the pads. It should clear only the state not directly managed by the
  * `pads` object. It is therefore not necessary to call
  * gst_collect_pads_set_flushing nor gst_collect_pads_clear from this function.
- * @callback 
  */
 export interface CollectPadsFlushFunction {
     (pads: CollectPads): void
 }
 /**
  * A function that will be called when all pads have received data.
- * @callback 
  */
 export interface CollectPadsFunction {
     (pads: CollectPads): Gst.FlowReturn
@@ -191,22 +179,15 @@ export interface CollectPadsFunction {
  * A function that will be called while processing a query. It takes
  * ownership of the query and is responsible for chaining up (to
  * events downstream (with gst_pad_event_default()).
- * @callback 
  */
 export interface CollectPadsQueryFunction {
     (pads: CollectPads, pad: CollectData, query: Gst.Query): boolean
 }
-/**
- * @callback 
- */
 export interface DataQueueEmptyCallback {
-    (queue: DataQueue, checkdata: object | null): void
+    (queue: DataQueue, checkdata?: object | null): void
 }
-/**
- * @callback 
- */
 export interface DataQueueFullCallback {
-    (queue: DataQueue, checkdata: object | null): void
+    (queue: DataQueue, checkdata?: object | null): void
 }
 /**
  * This function will be called by gst_type_find_helper_get_range() when
@@ -216,120 +197,16 @@ export interface DataQueueFullCallback {
  * return value.
  * 
  * This function is supposed to behave exactly like a #GstPadGetRangeFunction.
- * @callback 
  */
 export interface TypeFindHelperGetRangeFunction {
     (obj: Gst.Object, parent: Gst.Object | null, offset: number, length: number): Gst.FlowReturn
 }
 export interface Adapter_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * This class is for elements that receive buffers in an undesired size.
- * While for example raw video contains one image per buffer, the same is not
- * true for a lot of other formats, especially those that come directly from
- * a file. So if you have undefined buffer sizes and require a specific size,
- * this object is for you.
- * 
- * An adapter is created with gst_adapter_new(). It can be freed again with
- * g_object_unref().
- * 
- * The theory of operation is like this: All buffers received are put
- * into the adapter using gst_adapter_push() and the data is then read back
- * in chunks of the desired size using gst_adapter_map()/gst_adapter_unmap()
- * and/or gst_adapter_copy(). After the data has been processed, it is freed
- * using gst_adapter_unmap().
- * 
- * Other methods such as gst_adapter_take() and gst_adapter_take_buffer()
- * combine gst_adapter_map() and gst_adapter_unmap() in one method and are
- * potentially more convenient for some use cases.
- * 
- * For example, a sink pad's chain function that needs to pass data to a library
- * in 512-byte chunks could be implemented like this:
- * 
- * ```c
- * static GstFlowReturn
- * sink_pad_chain (GstPad *pad, GstObject *parent, GstBuffer *buffer)
- * {
- *   MyElement *this;
- *   GstAdapter *adapter;
- *   GstFlowReturn ret = GST_FLOW_OK;
- * 
- *   this = MY_ELEMENT (parent);
- * 
- *   adapter = this->adapter;
- * 
- *   // put buffer into adapter
- *   gst_adapter_push (adapter, buffer);
- * 
- *   // while we can read out 512 bytes, process them
- *   while (gst_adapter_available (adapter) >= 512 && ret == GST_FLOW_OK) {
- *     const guint8 *data = gst_adapter_map (adapter, 512);
- *     // use flowreturn as an error value
- *     ret = my_library_foo (data);
- *     gst_adapter_unmap (adapter);
- *     gst_adapter_flush (adapter, 512);
- *   }
- *   return ret;
- * }
- * ```
- * 
- * 
- * For another example, a simple element inside GStreamer that uses #GstAdapter
- * is the libvisual element.
- * 
- * An element using #GstAdapter in its sink pad chain function should ensure that
- * when the FLUSH_STOP event is received, that any queued data is cleared using
- * gst_adapter_clear(). Data should also be cleared or processed on EOS and
- * when changing state from %GST_STATE_PAUSED to %GST_STATE_READY.
- * 
- * Also check the GST_BUFFER_FLAG_DISCONT flag on the buffer. Some elements might
- * need to clear the adapter after a discontinuity.
- * 
- * The adapter will keep track of the timestamps of the buffers
- * that were pushed. The last seen timestamp before the current position
- * can be queried with gst_adapter_prev_pts(). This function can
- * optionally return the number of bytes between the start of the buffer that
- * carried the timestamp and the current adapter position. The distance is
- * useful when dealing with, for example, raw audio samples because it allows
- * you to calculate the timestamp of the current adapter position by using the
- * last seen timestamp and the amount of bytes since.  Additionally, the
- * gst_adapter_prev_pts_at_offset() can be used to determine the last
- * seen timestamp at a particular offset in the adapter.
- * 
- * The adapter will also keep track of the offset of the buffers
- * (#GST_BUFFER_OFFSET) that were pushed. The last seen offset before the
- * current position can be queried with gst_adapter_prev_offset(). This function
- * can optionally return the number of bytes between the start of the buffer
- * that carried the offset and the current adapter position.
- * 
- * Additionally the adapter also keeps track of the PTS, DTS and buffer offset
- * at the last discontinuity, which can be retrieved with
- * gst_adapter_pts_at_discont(), gst_adapter_dts_at_discont() and
- * gst_adapter_offset_at_discont(). The number of bytes that were consumed
- * since then can be queried with gst_adapter_distance_from_discont().
- * 
- * A last thing to note is that while #GstAdapter is pretty optimized,
- * merging buffers still might be an operation that requires a malloc() and
- * memcpy() operation, and these operations are not the fastest. Because of
- * this, some functions like gst_adapter_available_fast() are provided to help
- * speed up such cases should you want to. To avoid repeated memory allocations,
- * gst_adapter_copy() can be used to copy data into a (statically allocated)
- * user provided buffer.
- * 
- * #GstAdapter is not MT safe. All operations on an adapter must be serialized by
- * the caller. This is not normally a problem, however, as the normal use case
- * of #GstAdapter is inside one pad's chain function, in which case access is
- * serialized via the pad's STREAM_LOCK.
- * 
- * Note that gst_adapter_push() takes ownership of the buffer passed. Use
- * gst_buffer_ref() before pushing it into the adapter if you still want to
- * access the buffer later. The adapter will never modify the data in the
- * buffer pushed in it.
- */
 export class Adapter {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GstBase-1.0.GstBase.Adapter */
+    /* Methods of GstBase-1.0.GstBase.Adapter */
     /**
      * Gets the maximum amount of bytes available, that is it returns the maximum
      * value that can be supplied to gst_adapter_map() without that function
@@ -464,7 +341,7 @@ export class Adapter {
      * @param offset offset into the adapter data from which to start scanning, returns          the last scanned position.
      * @param size number of bytes to scan from offset
      */
-    masked_scan_uint32_peek(mask: number, pattern: number, offset: number, size: number): [ /* returnType */ number, /* value */ number ]
+    masked_scan_uint32_peek(mask: number, pattern: number, offset: number, size: number): [ /* returnType */ number, /* value */ number | null ]
     /**
      * Get the offset that was on the last buffer with the GST_BUFFER_FLAG_DISCONT
      * flag, or GST_BUFFER_OFFSET_NONE.
@@ -480,7 +357,7 @@ export class Adapter {
      * the first byte with a dts is removed from the adapter, the dts
      * and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.
      */
-    prev_dts(): [ /* returnType */ Gst.ClockTime, /* distance */ number ]
+    prev_dts(): [ /* returnType */ Gst.ClockTime, /* distance */ number | null ]
     /**
      * Get the dts that was before the byte at offset `offset` in the adapter. When
      * `distance` is given, the amount of bytes between the dts and the current
@@ -492,7 +369,7 @@ export class Adapter {
      * and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.
      * @param offset the offset in the adapter at which to get timestamp
      */
-    prev_dts_at_offset(offset: number): [ /* returnType */ Gst.ClockTime, /* distance */ number ]
+    prev_dts_at_offset(offset: number): [ /* returnType */ Gst.ClockTime, /* distance */ number | null ]
     /**
      * Get the offset that was before the current byte in the adapter. When
      * `distance` is given, the amount of bytes between the offset and the current
@@ -503,7 +380,7 @@ export class Adapter {
      * before the first byte with an offset is removed from the adapter, the offset
      * and distance returned are GST_BUFFER_OFFSET_NONE and 0 respectively.
      */
-    prev_offset(): [ /* returnType */ number, /* distance */ number ]
+    prev_offset(): [ /* returnType */ number, /* distance */ number | null ]
     /**
      * Get the pts that was before the current byte in the adapter. When
      * `distance` is given, the amount of bytes between the pts and the current
@@ -514,7 +391,7 @@ export class Adapter {
      * the first byte with a pts is removed from the adapter, the pts
      * and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.
      */
-    prev_pts(): [ /* returnType */ Gst.ClockTime, /* distance */ number ]
+    prev_pts(): [ /* returnType */ Gst.ClockTime, /* distance */ number | null ]
     /**
      * Get the pts that was before the byte at offset `offset` in the adapter. When
      * `distance` is given, the amount of bytes between the pts and the current
@@ -526,7 +403,7 @@ export class Adapter {
      * and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.
      * @param offset the offset in the adapter at which to get timestamp
      */
-    prev_pts_at_offset(offset: number): [ /* returnType */ Gst.ClockTime, /* distance */ number ]
+    prev_pts_at_offset(offset: number): [ /* returnType */ Gst.ClockTime, /* distance */ number | null ]
     /**
      * Get the PTS that was on the last buffer with the GST_BUFFER_FLAG_DISCONT
      * flag, or GST_CLOCK_TIME_NONE.
@@ -623,7 +500,7 @@ export class Adapter {
      * Releases the memory obtained with the last gst_adapter_map().
      */
     unmap(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -669,7 +546,7 @@ export class Adapter {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -838,7 +715,7 @@ export class Adapter {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -926,8 +803,8 @@ export class Adapter {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -944,12 +821,11 @@ export class Adapter {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -976,14 +852,13 @@ export class Adapter {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Adapter, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Adapter, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -991,11 +866,11 @@ export class Adapter {
     _init (config?: Adapter_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(): Adapter
-    static $gtype: GObject.GType<Adapter>
+    static $gtype: GObject.Type
 }
 export interface Aggregator_ConstructProps extends Gst.Element_ConstructProps {
     /* Constructor properties of GstBase-1.0.GstBase.Aggregator */
-    latency?: number | null
+    latency?: number
     /**
      * Force minimum upstream latency (in nanoseconds). When sources with a
      * higher latency are expected to be plugged in dynamically after the
@@ -1003,53 +878,11 @@ export interface Aggregator_ConstructProps extends Gst.Element_ConstructProps {
      * latency reported by the initial source(s). This is only taken into
      * account when larger than the actually reported minimum latency.
      */
-    min_upstream_latency?: number | null
-    start_time?: number | null
+    min_upstream_latency?: number
+    start_time?: number
 }
-/**
- * Manages a set of pads with the purpose of aggregating their buffers.
- * Control is given to the subclass when all pads have data.
- * 
- *  * Base class for mixers and muxers. Subclasses should at least implement
- *    the #GstAggregatorClass.aggregate() virtual method.
- * 
- *  * Installs a #GstPadChainFunction, a #GstPadEventFullFunction and a
- *    #GstPadQueryFunction to queue all serialized data packets per sink pad.
- *    Subclasses should not overwrite those, but instead implement
- *    #GstAggregatorClass.sink_event() and #GstAggregatorClass.sink_query() as
- *    needed.
- * 
- *  * When data is queued on all pads, the aggregate vmethod is called.
- * 
- *  * One can peek at the data on any given GstAggregatorPad with the
- *    gst_aggregator_pad_peek_buffer () method, and remove it from the pad
- *    with the gst_aggregator_pad_pop_buffer () method. When a buffer
- *    has been taken with pop_buffer (), a new buffer can be queued
- *    on that pad.
- * 
- *  * If the subclass wishes to push a buffer downstream in its aggregate
- *    implementation, it should do so through the
- *    gst_aggregator_finish_buffer () method. This method will take care
- *    of sending and ordering mandatory events such as stream start, caps
- *    and segment.
- * 
- *  * Same goes for EOS events, which should not be pushed directly by the
- *    subclass, it should instead return GST_FLOW_EOS in its aggregate
- *    implementation.
- * 
- *  * Note that the aggregator logic regarding gap event handling is to turn
- *    these into gap buffers with matching PTS and duration. It will also
- *    flag these buffers with GST_BUFFER_FLAG_GAP and GST_BUFFER_FLAG_DROPPABLE
- *    to ease their identification and subsequent processing.
- * 
- *  * Subclasses must use (a subclass of) #GstAggregatorPad for both their
- *    sink and source pads.
- *    See gst_element_class_add_static_pad_template_with_gtype().
- * 
- * This class used to live in gst-plugins-bad and was moved to core.
- */
 export class Aggregator {
-    /* Own properties of GstBase-1.0.GstBase.Aggregator */
+    /* Properties of GstBase-1.0.GstBase.Aggregator */
     latency: number
     /**
      * Force minimum upstream latency (in nanoseconds). When sources with a
@@ -1060,13 +893,7 @@ export class Aggregator {
      */
     min_upstream_latency: number
     start_time: number
-    /* Own fields of GstBase-1.0.GstBase.Aggregator */
-    parent: Gst.Element
-    /**
-     * the aggregator's source pad
-     */
-    srcpad: Gst.Pad
-    /* Extended fields of Gst-1.0.Gst.Element */
+    /* Fields of Gst-1.0.Gst.Element */
     object: Gst.Object
     /**
      * Used to serialize execution of gst_element_set_state()
@@ -1151,7 +978,7 @@ export class Aggregator {
      * list of contexts
      */
     contexts: Gst.Context[]
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
     /**
      * object LOCK
      */
@@ -1161,12 +988,16 @@ export class Aggregator {
      */
     name: string
     /**
+     * this object's parent, weak ref
+     */
+    parent: Gst.Object
+    /**
      * flags for this object
      */
     flags: number
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GstBase-1.0.GstBase.Aggregator */
+    /* Methods of GstBase-1.0.GstBase.Aggregator */
     /**
      * This method will push the provided output buffer downstream. If needed,
      * mandatory events such as stream-start, caps, and segment events will be
@@ -1180,7 +1011,7 @@ export class Aggregator {
      * 
      * Unref the `allocator` after use it.
      */
-    get_allocator(): [ /* allocator */ Gst.Allocator, /* params */ Gst.AllocationParams ]
+    get_allocator(): [ /* allocator */ Gst.Allocator | null, /* params */ Gst.AllocationParams | null ]
     get_buffer_pool(): Gst.BufferPool
     /**
      * Retrieves the latency values reported by `self` in response to the latency
@@ -1212,7 +1043,7 @@ export class Aggregator {
      * and you have a dead line based aggregator subclass.
      */
     simple_get_next_time(): Gst.ClockTime
-    /* Extended methods of Gst-1.0.Gst.Element */
+    /* Methods of Gst-1.0.Gst.Element */
     /**
      * Abort the state change of the element. This function is used
      * by elements that do asynchronous state changes and find out
@@ -1344,7 +1175,7 @@ export class Aggregator {
      * @param pad the #GstPad to find a compatible one for.
      * @param caps the #GstCaps to use as a filter.
      */
-    get_compatible_pad(pad: Gst.Pad, caps: Gst.Caps | null): Gst.Pad | null
+    get_compatible_pad(pad: Gst.Pad, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Retrieves a pad template from `element` that is compatible with `compattempl`.
      * Pads from compatible templates can be linked together.
@@ -1432,7 +1263,7 @@ export class Aggregator {
      * element to playing, the preroll will complete and playback will start.
      * @param timeout a #GstClockTime to specify the timeout for an async           state change or %GST_CLOCK_TIME_NONE for infinite timeout.
      */
-    get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State, /* pending */ Gst.State ]
+    get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State | null, /* pending */ Gst.State | null ]
     /**
      * Retrieves a pad from `element` by name. This version only retrieves
      * already-existing (i.e. 'static') pads.
@@ -1496,7 +1327,7 @@ export class Aggregator {
      * @param dest the #GstElement containing the destination pad.
      * @param filter the #GstCaps to filter the link,     or %NULL for no filter.
      */
-    link_filtered(dest: Gst.Element, filter: Gst.Caps | null): boolean
+    link_filtered(dest: Gst.Element, filter?: Gst.Caps | null): boolean
     /**
      * Links the two named pads of the source and destination elements.
      * Side effect is that if one of the pads has no parent, it becomes a
@@ -1506,7 +1337,7 @@ export class Aggregator {
      * @param dest the #GstElement containing the destination pad.
      * @param destpadname the name of the #GstPad in destination element, or %NULL for any pad.
      */
-    link_pads(srcpadname: string | null, dest: Gst.Element, destpadname: string | null): boolean
+    link_pads(srcpadname: string | null, dest: Gst.Element, destpadname?: string | null): boolean
     /**
      * Links the two named pads of the source and destination elements. Side effect
      * is that if one of the pads has no parent, it becomes a child of the parent of
@@ -1517,7 +1348,7 @@ export class Aggregator {
      * @param destpadname the name of the #GstPad in destination element     or %NULL for any pad.
      * @param filter the #GstCaps to filter the link,     or %NULL for no filter.
      */
-    link_pads_filtered(srcpadname: string | null, dest: Gst.Element, destpadname: string | null, filter: Gst.Caps | null): boolean
+    link_pads_filtered(srcpadname: string | null, dest: Gst.Element, destpadname?: string | null, filter?: Gst.Caps | null): boolean
     /**
      * Links the two named pads of the source and destination elements.
      * Side effect is that if one of the pads has no parent, it becomes a
@@ -1641,7 +1472,7 @@ export class Aggregator {
      * using this function.
      * @param format the #GstFormat requested
      */
-    query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number ]
+    query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number | null ]
     /**
      * Queries an element (usually top-level pipeline or playbin element) for the
      * stream position in nanoseconds. This will be a value between 0 and the
@@ -1654,7 +1485,7 @@ export class Aggregator {
      * it in gst_element_query().
      * @param format the #GstFormat requested
      */
-    query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number ]
+    query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number | null ]
     /**
      * Makes the element free the previously requested pad as obtained
      * with gst_element_request_pad().
@@ -1698,7 +1529,7 @@ export class Aggregator {
      * @param name the name of the request #GstPad to retrieve. Can be %NULL.
      * @param caps the caps of the pad we want to request. Can be %NULL.
      */
-    request_pad(templ: Gst.PadTemplate, name: string | null, caps: Gst.Caps | null): Gst.Pad | null
+    request_pad(templ: Gst.PadTemplate, name?: string | null, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Sends a seek event to an element. See gst_event_new_seek() for the details of
      * the parameters. The seek event is sent to the element using
@@ -1760,14 +1591,14 @@ export class Aggregator {
      * MT safe.
      * @param bus the #GstBus to set.
      */
-    set_bus(bus: Gst.Bus | null): void
+    set_bus(bus?: Gst.Bus | null): void
     /**
      * Sets the clock for the element. This function increases the
      * refcount on the clock. Any previously set clock on the object
      * is unreffed.
      * @param clock the #GstClock to set for the element.
      */
-    set_clock(clock: Gst.Clock | null): boolean
+    set_clock(clock?: Gst.Clock | null): boolean
     /**
      * Sets the context of the element. Increases the refcount of the context.
      * 
@@ -1843,7 +1674,7 @@ export class Aggregator {
      * @param destpadname the name of the #GstPad in destination element.
      */
     unlink_pads(srcpadname: string, dest: Gst.Element, destpadname: string): void
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -1861,7 +1692,7 @@ export class Aggregator {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -1991,7 +1822,7 @@ export class Aggregator {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -2028,7 +1859,7 @@ export class Aggregator {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -2074,7 +1905,7 @@ export class Aggregator {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -2243,7 +2074,7 @@ export class Aggregator {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -2321,8 +2152,8 @@ export class Aggregator {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of GstBase-1.0.GstBase.Aggregator */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GstBase-1.0.GstBase.Aggregator */
     vfunc_aggregate(timeout: boolean): Gst.FlowReturn
     vfunc_clip(aggregator_pad: AggregatorPad, buf: Gst.Buffer): Gst.Buffer
     vfunc_decide_allocation(query: Gst.Query): boolean
@@ -2330,7 +2161,6 @@ export class Aggregator {
      * This method will push the provided output buffer downstream. If needed,
      * mandatory events such as stream-start, caps, and segment events will be
      * sent before pushing the buffer.
-     * @virtual 
      * @param buffer the #GstBuffer to push.
      */
     vfunc_finish_buffer(buffer: Gst.Buffer): Gst.FlowReturn
@@ -2346,14 +2176,13 @@ export class Aggregator {
     vfunc_src_query(query: Gst.Query): boolean
     vfunc_start(): boolean
     vfunc_stop(): boolean
-    vfunc_update_src_caps(caps: Gst.Caps): [ /* returnType */ Gst.FlowReturn, /* ret */ Gst.Caps ]
-    /* Extended virtual methods of Gst-1.0.Gst.Element */
+    vfunc_update_src_caps(caps: Gst.Caps): [ /* returnType */ Gst.FlowReturn, /* ret */ Gst.Caps | null ]
+    /* Virtual methods of Gst-1.0.Gst.Element */
     /**
      * Perform `transition` on `element`.
      * 
      * This function must be called with STATE_LOCK held and is mainly used
      * internally.
-     * @virtual 
      * @param transition the requested transition
      */
     vfunc_change_state(transition: Gst.StateChange): Gst.StateChangeReturn
@@ -2378,10 +2207,9 @@ export class Aggregator {
      * some sink elements might not be able to complete their state change because
      * an element is not producing data to complete the preroll. When setting the
      * element to playing, the preroll will complete and playback will start.
-     * @virtual 
      * @param timeout a #GstClockTime to specify the timeout for an async           state change or %GST_CLOCK_TIME_NONE for infinite timeout.
      */
-    vfunc_get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State, /* pending */ Gst.State ]
+    vfunc_get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State | null, /* pending */ Gst.State | null ]
     /**
      * Use this function to signal that the element does not expect any more pads
      * to show up in the current pipeline. This function should be called whenever
@@ -2392,7 +2220,6 @@ export class Aggregator {
      * This function emits the #GstElement::no-more-pads signal.
      * 
      * MT safe.
-     * @virtual 
      */
     vfunc_no_more_pads(): void
     vfunc_pad_added(pad: Gst.Pad): void
@@ -2401,7 +2228,6 @@ export class Aggregator {
      * Post a message on the element's #GstBus. This function takes ownership of the
      * message; if you want to access the message after this call, you should add an
      * additional reference before calling.
-     * @virtual 
      * @param message a #GstMessage to post
      */
     vfunc_post_message(message: Gst.Message): boolean
@@ -2409,7 +2235,6 @@ export class Aggregator {
      * Get the clock provided by the given element.
      * > An element is only required to provide a clock in the PAUSED
      * > state. Some elements can provide a clock in other states.
-     * @virtual 
      */
     vfunc_provide_clock(): Gst.Clock | null
     /**
@@ -2420,7 +2245,6 @@ export class Aggregator {
      * random linked sinkpad of this element.
      * 
      * Please note that some queries might need a running pipeline to work.
-     * @virtual 
      * @param query the #GstQuery.
      */
     vfunc_query(query: Gst.Query): boolean
@@ -2431,12 +2255,11 @@ export class Aggregator {
      * gst_element_factory_get_static_pad_templates().
      * 
      * The pad should be released with gst_element_release_request_pad().
-     * @virtual 
      * @param templ a #GstPadTemplate of which we want a pad of.
      * @param name the name of the request #GstPad to retrieve. Can be %NULL.
      * @param caps the caps of the pad we want to request. Can be %NULL.
      */
-    vfunc_request_new_pad(templ: Gst.PadTemplate, name: string | null, caps: Gst.Caps | null): Gst.Pad | null
+    vfunc_request_new_pad(templ: Gst.PadTemplate, name?: string | null, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Sends an event to an element. If the element doesn't implement an
      * event handler, the event will be pushed on a random linked sink pad for
@@ -2446,7 +2269,6 @@ export class Aggregator {
      * gst_event_ref() it if you want to reuse the event after this call.
      * 
      * MT safe.
-     * @virtual 
      * @param event the #GstEvent to send to the element.
      */
     vfunc_send_event(event: Gst.Event): boolean
@@ -2455,23 +2277,20 @@ export class Aggregator {
      * For internal use only, unless you're testing elements.
      * 
      * MT safe.
-     * @virtual 
      * @param bus the #GstBus to set.
      */
-    vfunc_set_bus(bus: Gst.Bus | null): void
+    vfunc_set_bus(bus?: Gst.Bus | null): void
     /**
      * Sets the clock for the element. This function increases the
      * refcount on the clock. Any previously set clock on the object
      * is unreffed.
-     * @virtual 
      * @param clock the #GstClock to set for the element.
      */
-    vfunc_set_clock(clock: Gst.Clock | null): boolean
+    vfunc_set_clock(clock?: Gst.Clock | null): boolean
     /**
      * Sets the context of the element. Increases the refcount of the context.
      * 
      * MT safe.
-     * @virtual 
      * @param context the #GstContext to set.
      */
     vfunc_set_context(context: Gst.Context): void
@@ -2489,14 +2308,13 @@ export class Aggregator {
      * 
      * State changes to %GST_STATE_READY or %GST_STATE_NULL never return
      * #GST_STATE_CHANGE_ASYNC.
-     * @virtual 
      * @param state the element's new #GstState.
      */
     vfunc_set_state(state: Gst.State): Gst.StateChangeReturn
     vfunc_state_changed(oldstate: Gst.State, newstate: Gst.State, pending: Gst.State): void
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -2513,17 +2331,15 @@ export class Aggregator {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gst-1.0.Gst.Element */
+    /* Signals of Gst-1.0.Gst.Element */
     /**
      * This signals that the element will not generate more dynamic pads.
      * Note that this signal will usually be emitted from the context of
      * the streaming thread.
-     * @signal 
      */
     connect(sigName: "no-more-pads", callback: (($obj: Aggregator) => void)): number
     connect_after(sigName: "no-more-pads", callback: (($obj: Aggregator) => void)): number
@@ -2534,7 +2350,6 @@ export class Aggregator {
      * mind that if you add new elements to the pipeline in the signal handler
      * you will need to set them to the desired target state with
      * gst_element_set_state() or gst_element_sync_state_with_parent().
-     * @signal 
      * @param new_pad the pad that has been added
      */
     connect(sigName: "pad-added", callback: (($obj: Aggregator, new_pad: Gst.Pad) => void)): number
@@ -2542,25 +2357,23 @@ export class Aggregator {
     emit(sigName: "pad-added", new_pad: Gst.Pad): void
     /**
      * a #GstPad has been removed from the element
-     * @signal 
      * @param old_pad the pad that has been removed
      */
     connect(sigName: "pad-removed", callback: (($obj: Aggregator, old_pad: Gst.Pad) => void)): number
     connect_after(sigName: "pad-removed", callback: (($obj: Aggregator, old_pad: Gst.Pad) => void)): number
     emit(sigName: "pad-removed", old_pad: Gst.Pad): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: Aggregator, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: Aggregator, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -2587,7 +2400,6 @@ export class Aggregator {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Aggregator, pspec: GObject.ParamSpec) => void)): number
@@ -2599,47 +2411,36 @@ export class Aggregator {
     connect_after(sigName: "notify::min-upstream-latency", callback: (($obj: Aggregator, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::start-time", callback: (($obj: Aggregator, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::start-time", callback: (($obj: Aggregator, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: Aggregator_ConstructProps)
     _init (config?: Aggregator_ConstructProps): void
-    static $gtype: GObject.GType<Aggregator>
+    static $gtype: GObject.Type
 }
 export interface AggregatorPad_ConstructProps extends Gst.Pad_ConstructProps {
     /* Constructor properties of GstBase-1.0.GstBase.AggregatorPad */
     /**
      * Enables the emission of signals such as #GstAggregatorPad::buffer-consumed
      */
-    emit_signals?: boolean | null
+    emit_signals?: boolean
 }
-/**
- * Pads managed by a #GstAggregor subclass.
- * 
- * This class used to live in gst-plugins-bad and was moved to core.
- */
 export class AggregatorPad {
-    /* Own properties of GstBase-1.0.GstBase.AggregatorPad */
+    /* Properties of GstBase-1.0.GstBase.AggregatorPad */
     /**
      * Enables the emission of signals such as #GstAggregatorPad::buffer-consumed
      */
     emit_signals: boolean
-    /* Extended properties of Gst-1.0.Gst.Pad */
+    /* Properties of Gst-1.0.Gst.Pad */
     readonly caps: Gst.Caps
     /**
      * The offset that will be applied to the running time of the pad.
      */
     offset: number
     template: Gst.PadTemplate
-    /* Own fields of GstBase-1.0.GstBase.AggregatorPad */
-    parent: Gst.Pad
-    /**
-     * last segment received.
-     */
-    segment: Gst.Segment
-    /* Extended fields of Gst-1.0.Gst.Pad */
+    /* Fields of Gst-1.0.Gst.Pad */
     object: Gst.Object
     /**
      * private data owned by the parent element
@@ -2654,7 +2455,7 @@ export class AggregatorPad {
      *             the pad.
      */
     direction: Gst.PadDirection
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
     /**
      * object LOCK
      */
@@ -2664,12 +2465,16 @@ export class AggregatorPad {
      */
     name: string
     /**
+     * this object's parent, weak ref
+     */
+    parent: Gst.Object
+    /**
      * flags for this object
      */
     flags: number
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GstBase-1.0.GstBase.AggregatorPad */
+    /* Methods of GstBase-1.0.GstBase.AggregatorPad */
     /**
      * Drop the buffer currently queued in `pad`.
      */
@@ -2686,7 +2491,7 @@ export class AggregatorPad {
      * Steal the ref to the buffer currently queued in `pad`.
      */
     pop_buffer(): Gst.Buffer
-    /* Extended methods of Gst-1.0.Gst.Pad */
+    /* Methods of Gst-1.0.Gst.Pad */
     /**
      * Activates or deactivates the given pad in `mode` via dispatching to the
      * pad's activatemodefunc. For use from within pad activation functions only.
@@ -2781,7 +2586,7 @@ export class AggregatorPad {
      * @param parent Parent #GstElement of `pad`
      * @param stream_id The stream-id
      */
-    create_stream_id(parent: Gst.Element, stream_id: string | null): string
+    create_stream_id(parent: Gst.Element, stream_id?: string | null): string
     /**
      * Invokes the default event handler for the given pad.
      * 
@@ -2959,7 +2764,7 @@ export class AggregatorPad {
      * The caller must free this iterator after use with gst_iterator_free().
      * @param parent the parent of `pad` or %NULL
      */
-    iterate_internal_links_default(parent: Gst.Object | null): Gst.Iterator | null
+    iterate_internal_links_default(parent?: Gst.Object | null): Gst.Iterator | null
     /**
      * Links the source pad and the sink pad.
      * @param sinkpad the sink #GstPad to link.
@@ -3047,7 +2852,7 @@ export class AggregatorPad {
      * if it is not %NULL the returned caps will be a subset of `filter`.
      * @param filter a #GstCaps filter, or %NULL.
      */
-    peer_query_caps(filter: Gst.Caps | null): Gst.Caps
+    peer_query_caps(filter?: Gst.Caps | null): Gst.Caps
     /**
      * Queries the peer pad of a given sink pad to convert `src_val` in `src_format`
      * to `dest_format`.
@@ -3060,12 +2865,12 @@ export class AggregatorPad {
      * Queries the peer pad of a given sink pad for the total stream duration.
      * @param format the #GstFormat requested
      */
-    peer_query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number ]
+    peer_query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number | null ]
     /**
      * Queries the peer of a given sink pad for the stream position.
      * @param format the #GstFormat requested
      */
-    peer_query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number ]
+    peer_query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number | null ]
     /**
      * Checks if all internally linked pads of `pad` accepts the caps in `query` and
      * returns the intersection of the results.
@@ -3195,7 +3000,7 @@ export class AggregatorPad {
      * gst_caps_make_writable() before modifying the caps.
      * @param filter suggested #GstCaps, or %NULL
      */
-    query_caps(filter: Gst.Caps | null): Gst.Caps
+    query_caps(filter?: Gst.Caps | null): Gst.Caps
     /**
      * Queries a pad to convert `src_val` in `src_format` to `dest_format`.
      * @param src_format a #GstFormat to convert from.
@@ -3217,12 +3022,12 @@ export class AggregatorPad {
      * Queries a pad for the total stream duration.
      * @param format the #GstFormat requested
      */
-    query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number ]
+    query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number | null ]
     /**
      * Queries a pad for the stream position.
      * @param format the #GstFormat requested
      */
-    query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number ]
+    query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number | null ]
     /**
      * Remove the probe with `id` from `pad`.
      * 
@@ -3301,7 +3106,7 @@ export class AggregatorPad {
      * No locking is performed in this function.
      * @param priv The private data to attach to the pad.
      */
-    set_element_private(priv: object | null): void
+    set_element_private(priv?: object | null): void
     /**
      * Sets the given event handler for the pad.
      * @param event the #GstPadEventFullFunction to set.
@@ -3406,7 +3211,7 @@ export class AggregatorPad {
      * be renegotiated to something else.
      */
     use_fixed_caps(): void
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -3424,7 +3229,7 @@ export class AggregatorPad {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -3554,7 +3359,7 @@ export class AggregatorPad {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -3591,7 +3396,7 @@ export class AggregatorPad {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -3637,7 +3442,7 @@ export class AggregatorPad {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -3806,7 +3611,7 @@ export class AggregatorPad {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -3884,16 +3689,16 @@ export class AggregatorPad {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of GstBase-1.0.GstBase.AggregatorPad */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GstBase-1.0.GstBase.AggregatorPad */
     vfunc_flush(aggregator: Aggregator): Gst.FlowReturn
     vfunc_skip_buffer(aggregator: Aggregator, buffer: Gst.Buffer): boolean
-    /* Extended virtual methods of Gst-1.0.Gst.Pad */
+    /* Virtual methods of Gst-1.0.Gst.Pad */
     vfunc_linked(peer: Gst.Pad): void
     vfunc_unlinked(peer: Gst.Pad): void
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -3910,23 +3715,17 @@ export class AggregatorPad {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of GstBase-1.0.GstBase.AggregatorPad */
-    /**
-     * @signal 
-     * @param object 
-     */
+    /* Signals of GstBase-1.0.GstBase.AggregatorPad */
     connect(sigName: "buffer-consumed", callback: (($obj: AggregatorPad, object: Gst.Buffer) => void)): number
     connect_after(sigName: "buffer-consumed", callback: (($obj: AggregatorPad, object: Gst.Buffer) => void)): number
     emit(sigName: "buffer-consumed", object: Gst.Buffer): void
-    /* Extended signals of Gst-1.0.Gst.Pad */
+    /* Signals of Gst-1.0.Gst.Pad */
     /**
      * Signals that a pad has been linked to the peer pad.
-     * @signal 
      * @param peer the peer pad that has been connected
      */
     connect(sigName: "linked", callback: (($obj: AggregatorPad, peer: Gst.Pad) => void)): number
@@ -3934,25 +3733,23 @@ export class AggregatorPad {
     emit(sigName: "linked", peer: Gst.Pad): void
     /**
      * Signals that a pad has been unlinked from the peer pad.
-     * @signal 
      * @param peer the peer pad that has been disconnected
      */
     connect(sigName: "unlinked", callback: (($obj: AggregatorPad, peer: Gst.Pad) => void)): number
     connect_after(sigName: "unlinked", callback: (($obj: AggregatorPad, peer: Gst.Pad) => void)): number
     emit(sigName: "unlinked", peer: Gst.Pad): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: AggregatorPad, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: AggregatorPad, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -3979,7 +3776,6 @@ export class AggregatorPad {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: AggregatorPad, pspec: GObject.ParamSpec) => void)): number
@@ -3993,14 +3789,14 @@ export class AggregatorPad {
     connect_after(sigName: "notify::offset", callback: (($obj: AggregatorPad, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::template", callback: (($obj: AggregatorPad, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::template", callback: (($obj: AggregatorPad, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: AggregatorPad_ConstructProps)
     _init (config?: AggregatorPad_ConstructProps): void
-    static $gtype: GObject.GType<AggregatorPad>
+    static $gtype: GObject.Type
 }
 export interface BaseParse_ConstructProps extends Gst.Element_ConstructProps {
     /* Constructor properties of GstBase-1.0.GstBase.BaseParse */
@@ -4012,147 +3808,10 @@ export interface BaseParse_ConstructProps extends Gst.Element_ConstructProps {
      * If set to %FALSE, decision of whether to parse the data or not is up to
      * the implementation (standard behaviour).
      */
-    disable_passthrough?: boolean | null
+    disable_passthrough?: boolean
 }
-/**
- * This base class is for parser elements that process data and splits it
- * into separate audio/video/whatever frames.
- * 
- * It provides for:
- * 
- *   * provides one sink pad and one source pad
- *   * handles state changes
- *   * can operate in pull mode or push mode
- *   * handles seeking in both modes
- *   * handles events (SEGMENT/EOS/FLUSH)
- *   * handles queries (POSITION/DURATION/SEEKING/FORMAT/CONVERT)
- *   * handles flushing
- * 
- * The purpose of this base class is to provide the basic functionality of
- * a parser and share a lot of rather complex code.
- * 
- * # Description of the parsing mechanism:
- * 
- * ## Set-up phase
- * 
- *  * #GstBaseParse calls #GstBaseParseClass.start() to inform subclass
- *    that data processing is about to start now.
- * 
- *  * #GstBaseParse class calls #GstBaseParseClass.set_sink_caps() to
- *    inform the subclass about incoming sinkpad caps. Subclass could
- *    already set the srcpad caps accordingly, but this might be delayed
- *    until calling gst_base_parse_finish_frame() with a non-queued frame.
- * 
- *  * At least at this point subclass needs to tell the #GstBaseParse class
- *    how big data chunks it wants to receive (minimum frame size ). It can
- *    do this with gst_base_parse_set_min_frame_size().
- * 
- *  * #GstBaseParse class sets up appropriate data passing mode (pull/push)
- *    and starts to process the data.
- * 
- * ## Parsing phase
- * 
- *  * #GstBaseParse gathers at least min_frame_size bytes of data either
- *    by pulling it from upstream or collecting buffers in an internal
- *    #GstAdapter.
- * 
- *  * A buffer of (at least) min_frame_size bytes is passed to subclass
- *    with #GstBaseParseClass.handle_frame(). Subclass checks the contents
- *    and can optionally return #GST_FLOW_OK along with an amount of data
- *    to be skipped to find a valid frame (which will result in a
- *    subsequent DISCONT).  If, otherwise, the buffer does not hold a
- *    complete frame, #GstBaseParseClass.handle_frame() can merely return
- *    and will be called again when additional data is available.  In push
- *    mode this amounts to an additional input buffer (thus minimal
- *    additional latency), in pull mode this amounts to some arbitrary
- *    reasonable buffer size increase.
- * 
- *    Of course, gst_base_parse_set_min_frame_size() could also be used if
- *    a very specific known amount of additional data is required.  If,
- *    however, the buffer holds a complete valid frame, it can pass the
- *    size of this frame to gst_base_parse_finish_frame().
- * 
- *    If acting as a converter, it can also merely indicate consumed input
- *    data while simultaneously providing custom output data.  Note that
- *    baseclass performs some processing (such as tracking overall consumed
- *    data rate versus duration) for each finished frame, but other state
- *    is only updated upon each call to #GstBaseParseClass.handle_frame()
- *    (such as tracking upstream input timestamp).
- * 
- *    Subclass is also responsible for setting the buffer metadata
- *    (e.g. buffer timestamp and duration, or keyframe if applicable).
- *    (although the latter can also be done by #GstBaseParse if it is
- *    appropriately configured, see below).  Frame is provided with
- *    timestamp derived from upstream (as much as generally possible),
- *    duration obtained from configuration (see below), and offset
- *    if meaningful (in pull mode).
- * 
- *    Note that #GstBaseParseClass.handle_frame() might receive any small
- *    amount of input data when leftover data is being drained (e.g. at
- *    EOS).
- * 
- *  * As part of finish frame processing, just prior to actually pushing
- *    the buffer in question, it is passed to
- *    #GstBaseParseClass.pre_push_frame() which gives subclass yet one last
- *    chance to examine buffer metadata, or to send some custom (tag)
- *    events, or to perform custom (segment) filtering.
- * 
- *  * During the parsing process #GstBaseParseClass will handle both srcpad
- *    and sinkpad events. They will be passed to subclass if
- *    #GstBaseParseClass.event() or #GstBaseParseClass.src_event()
- *    implementations have been provided.
- * 
- * ## Shutdown phase
- * 
- * * #GstBaseParse class calls #GstBaseParseClass.stop() to inform the
- *   subclass that data parsing will be stopped.
- * 
- * Subclass is responsible for providing pad template caps for source and
- * sink pads. The pads need to be named "sink" and "src". It also needs to
- * set the fixed caps on srcpad, when the format is ensured (e.g.  when
- * base class calls subclass' #GstBaseParseClass.set_sink_caps() function).
- * 
- * This base class uses %GST_FORMAT_DEFAULT as a meaning of frames. So,
- * subclass conversion routine needs to know that conversion from
- * %GST_FORMAT_TIME to %GST_FORMAT_DEFAULT must return the
- * frame number that can be found from the given byte position.
- * 
- * #GstBaseParse uses subclasses conversion methods also for seeking (or
- * otherwise uses its own default one, see also below).
- * 
- * Subclass `start` and `stop` functions will be called to inform the beginning
- * and end of data processing.
- * 
- * Things that subclass need to take care of:
- * 
- * * Provide pad templates
- * * Fixate the source pad caps when appropriate
- * * Inform base class how big data chunks should be retrieved. This is
- *   done with gst_base_parse_set_min_frame_size() function.
- * * Examine data chunks passed to subclass with
- *   #GstBaseParseClass.handle_frame() and pass proper frame(s) to
- *   gst_base_parse_finish_frame(), and setting src pad caps and timestamps
- *   on frame.
- * * Provide conversion functions
- * * Update the duration information with gst_base_parse_set_duration()
- * * Optionally passthrough using gst_base_parse_set_passthrough()
- * * Configure various baseparse parameters using
- *   gst_base_parse_set_average_bitrate(), gst_base_parse_set_syncable()
- *   and gst_base_parse_set_frame_rate().
- * 
- * * In particular, if subclass is unable to determine a duration, but
- *   parsing (or specs) yields a frames per seconds rate, then this can be
- *   provided to #GstBaseParse to enable it to cater for buffer time
- *   metadata (which will be taken from upstream as much as
- *   possible). Internally keeping track of frame durations and respective
- *   sizes that have been pushed provides #GstBaseParse with an estimated
- *   bitrate. A default #GstBaseParseClass.convert() (used if not
- *   overridden) will then use these rates to perform obvious conversions.
- *   These rates are also used to update (estimated) duration at regular
- *   frame intervals.
- */
 export class BaseParse {
-    /* Own properties of GstBase-1.0.GstBase.BaseParse */
+    /* Properties of GstBase-1.0.GstBase.BaseParse */
     /**
      * If set to %TRUE, baseparse will unconditionally force parsing of the
      * incoming data. This can be required in the rare cases where the incoming
@@ -4162,16 +3821,7 @@ export class BaseParse {
      * the implementation (standard behaviour).
      */
     disable_passthrough: boolean
-    /* Own fields of GstBase-1.0.GstBase.BaseParse */
-    /**
-     * the parent element.
-     */
-    element: Gst.Element
-    sinkpad: Gst.Pad
-    srcpad: Gst.Pad
-    flags: number
-    segment: Gst.Segment
-    /* Extended fields of Gst-1.0.Gst.Element */
+    /* Fields of Gst-1.0.Gst.Element */
     object: Gst.Object
     /**
      * Used to serialize execution of gst_element_set_state()
@@ -4260,7 +3910,7 @@ export class BaseParse {
      * list of contexts
      */
     contexts: Gst.Context[]
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
     /**
      * object LOCK
      */
@@ -4273,9 +3923,13 @@ export class BaseParse {
      * this object's parent, weak ref
      */
     parent: Gst.Object
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /**
+     * flags for this object
+     */
+    flags: number
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GstBase-1.0.GstBase.BaseParse */
+    /* Methods of GstBase-1.0.GstBase.BaseParse */
     /**
      * Adds an entry to the index associating `offset` to `ts`.  It is recommended
      * to only add keyframe entries.  `force` allows to bypass checks, such as
@@ -4437,7 +4091,7 @@ export class BaseParse {
      * @param offset offset into current buffer
      */
     set_ts_at_offset(offset: number): void
-    /* Extended methods of Gst-1.0.Gst.Element */
+    /* Methods of Gst-1.0.Gst.Element */
     /**
      * Abort the state change of the element. This function is used
      * by elements that do asynchronous state changes and find out
@@ -4569,7 +4223,7 @@ export class BaseParse {
      * @param pad the #GstPad to find a compatible one for.
      * @param caps the #GstCaps to use as a filter.
      */
-    get_compatible_pad(pad: Gst.Pad, caps: Gst.Caps | null): Gst.Pad | null
+    get_compatible_pad(pad: Gst.Pad, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Retrieves a pad template from `element` that is compatible with `compattempl`.
      * Pads from compatible templates can be linked together.
@@ -4657,7 +4311,7 @@ export class BaseParse {
      * element to playing, the preroll will complete and playback will start.
      * @param timeout a #GstClockTime to specify the timeout for an async           state change or %GST_CLOCK_TIME_NONE for infinite timeout.
      */
-    get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State, /* pending */ Gst.State ]
+    get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State | null, /* pending */ Gst.State | null ]
     /**
      * Retrieves a pad from `element` by name. This version only retrieves
      * already-existing (i.e. 'static') pads.
@@ -4721,7 +4375,7 @@ export class BaseParse {
      * @param dest the #GstElement containing the destination pad.
      * @param filter the #GstCaps to filter the link,     or %NULL for no filter.
      */
-    link_filtered(dest: Gst.Element, filter: Gst.Caps | null): boolean
+    link_filtered(dest: Gst.Element, filter?: Gst.Caps | null): boolean
     /**
      * Links the two named pads of the source and destination elements.
      * Side effect is that if one of the pads has no parent, it becomes a
@@ -4731,7 +4385,7 @@ export class BaseParse {
      * @param dest the #GstElement containing the destination pad.
      * @param destpadname the name of the #GstPad in destination element, or %NULL for any pad.
      */
-    link_pads(srcpadname: string | null, dest: Gst.Element, destpadname: string | null): boolean
+    link_pads(srcpadname: string | null, dest: Gst.Element, destpadname?: string | null): boolean
     /**
      * Links the two named pads of the source and destination elements. Side effect
      * is that if one of the pads has no parent, it becomes a child of the parent of
@@ -4742,7 +4396,7 @@ export class BaseParse {
      * @param destpadname the name of the #GstPad in destination element     or %NULL for any pad.
      * @param filter the #GstCaps to filter the link,     or %NULL for no filter.
      */
-    link_pads_filtered(srcpadname: string | null, dest: Gst.Element, destpadname: string | null, filter: Gst.Caps | null): boolean
+    link_pads_filtered(srcpadname: string | null, dest: Gst.Element, destpadname?: string | null, filter?: Gst.Caps | null): boolean
     /**
      * Links the two named pads of the source and destination elements.
      * Side effect is that if one of the pads has no parent, it becomes a
@@ -4866,7 +4520,7 @@ export class BaseParse {
      * using this function.
      * @param format the #GstFormat requested
      */
-    query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number ]
+    query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number | null ]
     /**
      * Queries an element (usually top-level pipeline or playbin element) for the
      * stream position in nanoseconds. This will be a value between 0 and the
@@ -4879,7 +4533,7 @@ export class BaseParse {
      * it in gst_element_query().
      * @param format the #GstFormat requested
      */
-    query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number ]
+    query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number | null ]
     /**
      * Makes the element free the previously requested pad as obtained
      * with gst_element_request_pad().
@@ -4923,7 +4577,7 @@ export class BaseParse {
      * @param name the name of the request #GstPad to retrieve. Can be %NULL.
      * @param caps the caps of the pad we want to request. Can be %NULL.
      */
-    request_pad(templ: Gst.PadTemplate, name: string | null, caps: Gst.Caps | null): Gst.Pad | null
+    request_pad(templ: Gst.PadTemplate, name?: string | null, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Sends a seek event to an element. See gst_event_new_seek() for the details of
      * the parameters. The seek event is sent to the element using
@@ -4985,14 +4639,14 @@ export class BaseParse {
      * MT safe.
      * @param bus the #GstBus to set.
      */
-    set_bus(bus: Gst.Bus | null): void
+    set_bus(bus?: Gst.Bus | null): void
     /**
      * Sets the clock for the element. This function increases the
      * refcount on the clock. Any previously set clock on the object
      * is unreffed.
      * @param clock the #GstClock to set for the element.
      */
-    set_clock(clock: Gst.Clock | null): boolean
+    set_clock(clock?: Gst.Clock | null): boolean
     /**
      * Sets the context of the element. Increases the refcount of the context.
      * 
@@ -5068,7 +4722,7 @@ export class BaseParse {
      * @param destpadname the name of the #GstPad in destination element.
      */
     unlink_pads(srcpadname: string, dest: Gst.Element, destpadname: string): void
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -5086,7 +4740,7 @@ export class BaseParse {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -5216,7 +4870,7 @@ export class BaseParse {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -5253,7 +4907,7 @@ export class BaseParse {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -5299,7 +4953,7 @@ export class BaseParse {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -5468,7 +5122,7 @@ export class BaseParse {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -5546,8 +5200,8 @@ export class BaseParse {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of GstBase-1.0.GstBase.BaseParse */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GstBase-1.0.GstBase.BaseParse */
     vfunc_convert(src_format: Gst.Format, src_value: number, dest_format: Gst.Format, dest_value: number): boolean
     vfunc_detect(buffer: Gst.Buffer): Gst.FlowReturn
     vfunc_get_sink_caps(filter: Gst.Caps): Gst.Caps
@@ -5560,13 +5214,12 @@ export class BaseParse {
     vfunc_src_query(query: Gst.Query): boolean
     vfunc_start(): boolean
     vfunc_stop(): boolean
-    /* Extended virtual methods of Gst-1.0.Gst.Element */
+    /* Virtual methods of Gst-1.0.Gst.Element */
     /**
      * Perform `transition` on `element`.
      * 
      * This function must be called with STATE_LOCK held and is mainly used
      * internally.
-     * @virtual 
      * @param transition the requested transition
      */
     vfunc_change_state(transition: Gst.StateChange): Gst.StateChangeReturn
@@ -5591,10 +5244,9 @@ export class BaseParse {
      * some sink elements might not be able to complete their state change because
      * an element is not producing data to complete the preroll. When setting the
      * element to playing, the preroll will complete and playback will start.
-     * @virtual 
      * @param timeout a #GstClockTime to specify the timeout for an async           state change or %GST_CLOCK_TIME_NONE for infinite timeout.
      */
-    vfunc_get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State, /* pending */ Gst.State ]
+    vfunc_get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State | null, /* pending */ Gst.State | null ]
     /**
      * Use this function to signal that the element does not expect any more pads
      * to show up in the current pipeline. This function should be called whenever
@@ -5605,7 +5257,6 @@ export class BaseParse {
      * This function emits the #GstElement::no-more-pads signal.
      * 
      * MT safe.
-     * @virtual 
      */
     vfunc_no_more_pads(): void
     vfunc_pad_added(pad: Gst.Pad): void
@@ -5614,7 +5265,6 @@ export class BaseParse {
      * Post a message on the element's #GstBus. This function takes ownership of the
      * message; if you want to access the message after this call, you should add an
      * additional reference before calling.
-     * @virtual 
      * @param message a #GstMessage to post
      */
     vfunc_post_message(message: Gst.Message): boolean
@@ -5622,7 +5272,6 @@ export class BaseParse {
      * Get the clock provided by the given element.
      * > An element is only required to provide a clock in the PAUSED
      * > state. Some elements can provide a clock in other states.
-     * @virtual 
      */
     vfunc_provide_clock(): Gst.Clock | null
     /**
@@ -5633,7 +5282,6 @@ export class BaseParse {
      * random linked sinkpad of this element.
      * 
      * Please note that some queries might need a running pipeline to work.
-     * @virtual 
      * @param query the #GstQuery.
      */
     vfunc_query(query: Gst.Query): boolean
@@ -5644,12 +5292,11 @@ export class BaseParse {
      * gst_element_factory_get_static_pad_templates().
      * 
      * The pad should be released with gst_element_release_request_pad().
-     * @virtual 
      * @param templ a #GstPadTemplate of which we want a pad of.
      * @param name the name of the request #GstPad to retrieve. Can be %NULL.
      * @param caps the caps of the pad we want to request. Can be %NULL.
      */
-    vfunc_request_new_pad(templ: Gst.PadTemplate, name: string | null, caps: Gst.Caps | null): Gst.Pad | null
+    vfunc_request_new_pad(templ: Gst.PadTemplate, name?: string | null, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Sends an event to an element. If the element doesn't implement an
      * event handler, the event will be pushed on a random linked sink pad for
@@ -5659,7 +5306,6 @@ export class BaseParse {
      * gst_event_ref() it if you want to reuse the event after this call.
      * 
      * MT safe.
-     * @virtual 
      * @param event the #GstEvent to send to the element.
      */
     vfunc_send_event(event: Gst.Event): boolean
@@ -5668,23 +5314,20 @@ export class BaseParse {
      * For internal use only, unless you're testing elements.
      * 
      * MT safe.
-     * @virtual 
      * @param bus the #GstBus to set.
      */
-    vfunc_set_bus(bus: Gst.Bus | null): void
+    vfunc_set_bus(bus?: Gst.Bus | null): void
     /**
      * Sets the clock for the element. This function increases the
      * refcount on the clock. Any previously set clock on the object
      * is unreffed.
-     * @virtual 
      * @param clock the #GstClock to set for the element.
      */
-    vfunc_set_clock(clock: Gst.Clock | null): boolean
+    vfunc_set_clock(clock?: Gst.Clock | null): boolean
     /**
      * Sets the context of the element. Increases the refcount of the context.
      * 
      * MT safe.
-     * @virtual 
      * @param context the #GstContext to set.
      */
     vfunc_set_context(context: Gst.Context): void
@@ -5702,14 +5345,13 @@ export class BaseParse {
      * 
      * State changes to %GST_STATE_READY or %GST_STATE_NULL never return
      * #GST_STATE_CHANGE_ASYNC.
-     * @virtual 
      * @param state the element's new #GstState.
      */
     vfunc_set_state(state: Gst.State): Gst.StateChangeReturn
     vfunc_state_changed(oldstate: Gst.State, newstate: Gst.State, pending: Gst.State): void
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -5726,17 +5368,15 @@ export class BaseParse {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gst-1.0.Gst.Element */
+    /* Signals of Gst-1.0.Gst.Element */
     /**
      * This signals that the element will not generate more dynamic pads.
      * Note that this signal will usually be emitted from the context of
      * the streaming thread.
-     * @signal 
      */
     connect(sigName: "no-more-pads", callback: (($obj: BaseParse) => void)): number
     connect_after(sigName: "no-more-pads", callback: (($obj: BaseParse) => void)): number
@@ -5747,7 +5387,6 @@ export class BaseParse {
      * mind that if you add new elements to the pipeline in the signal handler
      * you will need to set them to the desired target state with
      * gst_element_set_state() or gst_element_sync_state_with_parent().
-     * @signal 
      * @param new_pad the pad that has been added
      */
     connect(sigName: "pad-added", callback: (($obj: BaseParse, new_pad: Gst.Pad) => void)): number
@@ -5755,25 +5394,23 @@ export class BaseParse {
     emit(sigName: "pad-added", new_pad: Gst.Pad): void
     /**
      * a #GstPad has been removed from the element
-     * @signal 
      * @param old_pad the pad that has been removed
      */
     connect(sigName: "pad-removed", callback: (($obj: BaseParse, old_pad: Gst.Pad) => void)): number
     connect_after(sigName: "pad-removed", callback: (($obj: BaseParse, old_pad: Gst.Pad) => void)): number
     emit(sigName: "pad-removed", old_pad: Gst.Pad): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: BaseParse, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: BaseParse, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -5800,7 +5437,6 @@ export class BaseParse {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: BaseParse, pspec: GObject.ParamSpec) => void)): number
@@ -5808,14 +5444,14 @@ export class BaseParse {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::disable-passthrough", callback: (($obj: BaseParse, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::disable-passthrough", callback: (($obj: BaseParse, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: BaseParse_ConstructProps)
     _init (config?: BaseParse_ConstructProps): void
-    static $gtype: GObject.GType<BaseParse>
+    static $gtype: GObject.Type
 }
 export interface BaseSink_ConstructProps extends Gst.Element_ConstructProps {
     /* Constructor properties of GstBase-1.0.GstBase.BaseSink */
@@ -5825,171 +5461,54 @@ export interface BaseSink_ConstructProps extends Gst.Element_ConstructProps {
      * Use this option when dealing with sparse streams or when synchronisation is
      * not required.
      */
-    async?: boolean | null
+    async?: boolean
     /**
      * The amount of bytes to pull when operating in pull mode.
      */
-    blocksize?: number | null
+    blocksize?: number
     /**
      * Enable the last-sample property. If %FALSE, basesink doesn't keep a
      * reference to the last buffer arrived and the last-sample property is always
      * set to %NULL. This can be useful if you need buffers to be released as soon
      * as possible, eg. if you're using a buffer pool.
      */
-    enable_last_sample?: boolean | null
+    enable_last_sample?: boolean
     /**
      * Control the maximum amount of bits that will be rendered per second.
      * Setting this property to a value bigger than 0 will make the sink delay
      * rendering of the buffers when it would exceed to max-bitrate.
      */
-    max_bitrate?: number | null
-    max_lateness?: number | null
+    max_bitrate?: number
+    max_lateness?: number
     /**
      * Maximum amount of time (in nanoseconds) that the pipeline can take
      * for processing the buffer. This is added to the latency of live
      * pipelines.
      */
-    processing_deadline?: number | null
-    qos?: boolean | null
+    processing_deadline?: number
+    qos?: boolean
     /**
      * The additional delay between synchronisation and actual rendering of the
      * media. This property will add additional latency to the device in order to
      * make other sinks compensate for the delay.
      */
-    render_delay?: number | null
-    sync?: boolean | null
+    render_delay?: number
+    sync?: boolean
     /**
      * The time to insert between buffers. This property can be used to control
      * the maximum amount of buffers per second to render. Setting this property
      * to a value bigger than 0 will make the sink create THROTTLE QoS events.
      */
-    throttle_time?: number | null
+    throttle_time?: number
     /**
      * Controls the final synchronisation, a negative value will render the buffer
      * earlier while a positive value delays playback. This property can be
      * used to fix synchronisation in bad files.
      */
-    ts_offset?: number | null
+    ts_offset?: number
 }
-/**
- * #GstBaseSink is the base class for sink elements in GStreamer, such as
- * xvimagesink or filesink. It is a layer on top of #GstElement that provides a
- * simplified interface to plugin writers. #GstBaseSink handles many details
- * for you, for example: preroll, clock synchronization, state changes,
- * activation in push or pull mode, and queries.
- * 
- * In most cases, when writing sink elements, there is no need to implement
- * class methods from #GstElement or to set functions on pads, because the
- * #GstBaseSink infrastructure should be sufficient.
- * 
- * #GstBaseSink provides support for exactly one sink pad, which should be
- * named "sink". A sink implementation (subclass of #GstBaseSink) should
- * install a pad template in its class_init function, like so:
- * 
- * ```c
- * static void
- * my_element_class_init (GstMyElementClass *klass)
- * {
- *   GstElementClass *gstelement_class = GST_ELEMENT_CLASS (klass);
- * 
- *   // sinktemplate should be a #GstStaticPadTemplate with direction
- *   // %GST_PAD_SINK and name "sink"
- *   gst_element_class_add_static_pad_template (gstelement_class, &amp;sinktemplate);
- * 
- *   gst_element_class_set_static_metadata (gstelement_class,
- *       "Sink name",
- *       "Sink",
- *       "My Sink element",
- *       "The author <my.sink`my`.email>");
- * }
- * ```
- * 
- * 
- * #GstBaseSink will handle the prerolling correctly. This means that it will
- * return %GST_STATE_CHANGE_ASYNC from a state change to PAUSED until the first
- * buffer arrives in this element. The base class will call the
- * #GstBaseSinkClass.preroll() vmethod with this preroll buffer and will then
- * commit the state change to the next asynchronously pending state.
- * 
- * When the element is set to PLAYING, #GstBaseSink will synchronise on the
- * clock using the times returned from #GstBaseSinkClass.get_times(). If this
- * function returns %GST_CLOCK_TIME_NONE for the start time, no synchronisation
- * will be done. Synchronisation can be disabled entirely by setting the object
- * #GstBaseSink:sync property to %FALSE.
- * 
- * After synchronisation the virtual method #GstBaseSinkClass.render() will be
- * called. Subclasses should minimally implement this method.
- * 
- * Subclasses that synchronise on the clock in the #GstBaseSinkClass.render()
- * method are supported as well. These classes typically receive a buffer in
- * the render method and can then potentially block on the clock while
- * rendering. A typical example is an audiosink.
- * These subclasses can use gst_base_sink_wait_preroll() to perform the
- * blocking wait.
- * 
- * Upon receiving the EOS event in the PLAYING state, #GstBaseSink will wait
- * for the clock to reach the time indicated by the stop time of the last
- * #GstBaseSinkClass.get_times() call before posting an EOS message. When the
- * element receives EOS in PAUSED, preroll completes, the event is queued and an
- * EOS message is posted when going to PLAYING.
- * 
- * #GstBaseSink will internally use the %GST_EVENT_SEGMENT events to schedule
- * synchronisation and clipping of buffers. Buffers that fall completely outside
- * of the current segment are dropped. Buffers that fall partially in the
- * segment are rendered (and prerolled). Subclasses should do any subbuffer
- * clipping themselves when needed.
- * 
- * #GstBaseSink will by default report the current playback position in
- * %GST_FORMAT_TIME based on the current clock time and segment information.
- * If no clock has been set on the element, the query will be forwarded
- * upstream.
- * 
- * The #GstBaseSinkClass.set_caps() function will be called when the subclass
- * should configure itself to process a specific media type.
- * 
- * The #GstBaseSinkClass.start() and #GstBaseSinkClass.stop() virtual methods
- * will be called when resources should be allocated. Any
- * #GstBaseSinkClass.preroll(), #GstBaseSinkClass.render() and
- * #GstBaseSinkClass.set_caps() function will be called between the
- * #GstBaseSinkClass.start() and #GstBaseSinkClass.stop() calls.
- * 
- * The #GstBaseSinkClass.event() virtual method will be called when an event is
- * received by #GstBaseSink. Normally this method should only be overridden by
- * very specific elements (such as file sinks) which need to handle the
- * newsegment event specially.
- * 
- * The #GstBaseSinkClass.unlock() method is called when the elements should
- * unblock any blocking operations they perform in the
- * #GstBaseSinkClass.render() method. This is mostly useful when the
- * #GstBaseSinkClass.render() method performs a blocking write on a file
- * descriptor, for example.
- * 
- * The #GstBaseSink:max-lateness property affects how the sink deals with
- * buffers that arrive too late in the sink. A buffer arrives too late in the
- * sink when the presentation time (as a combination of the last segment, buffer
- * timestamp and element base_time) plus the duration is before the current
- * time of the clock.
- * If the frame is later than max-lateness, the sink will drop the buffer
- * without calling the render method.
- * This feature is disabled if sync is disabled, the
- * #GstBaseSinkClass.get_times() method does not return a valid start time or
- * max-lateness is set to -1 (the default).
- * Subclasses can use gst_base_sink_set_max_lateness() to configure the
- * max-lateness value.
- * 
- * The #GstBaseSink:qos property will enable the quality-of-service features of
- * the basesink which gather statistics about the real-time performance of the
- * clock synchronisation. For each buffer received in the sink, statistics are
- * gathered and a QOS event is sent upstream with these numbers. This
- * information can then be used by upstream elements to reduce their processing
- * rate, for example.
- * 
- * The #GstBaseSink:async property can be used to instruct the sink to never
- * perform an ASYNC state change. This feature is mostly usable when dealing
- * with non-synchronized streams or sparse streams.
- */
 export class BaseSink {
-    /* Own properties of GstBase-1.0.GstBase.BaseSink */
+    /* Properties of GstBase-1.0.GstBase.BaseSink */
     /**
      * If set to %TRUE, the basesink will perform asynchronous state changes.
      * When set to %FALSE, the sink will not signal the parent when it prerolls.
@@ -6047,22 +5566,7 @@ export class BaseSink {
      * used to fix synchronisation in bad files.
      */
     ts_offset: number
-    /* Own fields of GstBase-1.0.GstBase.BaseSink */
-    element: Gst.Element
-    sinkpad: Gst.Pad
-    pad_mode: Gst.PadMode
-    offset: number
-    can_activate_pull: boolean
-    can_activate_push: boolean
-    preroll_lock: GLib.Mutex
-    preroll_cond: GLib.Cond
-    eos: boolean
-    need_preroll: boolean
-    have_preroll: boolean
-    playing_async: boolean
-    have_newsegment: boolean
-    segment: Gst.Segment
-    /* Extended fields of Gst-1.0.Gst.Element */
+    /* Fields of Gst-1.0.Gst.Element */
     object: Gst.Object
     /**
      * Used to serialize execution of gst_element_set_state()
@@ -6151,7 +5655,7 @@ export class BaseSink {
      * list of contexts
      */
     contexts: Gst.Context[]
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
     /**
      * object LOCK
      */
@@ -6168,9 +5672,9 @@ export class BaseSink {
      * flags for this object
      */
     flags: number
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GstBase-1.0.GstBase.BaseSink */
+    /* Methods of GstBase-1.0.GstBase.BaseSink */
     /**
      * If the `sink` spawns its own thread for pulling buffers from upstream it
      * should call this method after it has pulled a buffer. If the element needed
@@ -6265,7 +5769,7 @@ export class BaseSink {
      * 
      * This function is mostly used by subclasses.
      */
-    query_latency(): [ /* returnType */ boolean, /* live */ boolean, /* upstream_live */ boolean, /* min_latency */ Gst.ClockTime, /* max_latency */ Gst.ClockTime ]
+    query_latency(): [ /* returnType */ boolean, /* live */ boolean | null, /* upstream_live */ boolean | null, /* min_latency */ Gst.ClockTime | null, /* max_latency */ Gst.ClockTime | null ]
     /**
      * Configures `sink` to perform all state changes asynchronously. When async is
      * disabled, the sink will immediately go to PAUSED instead of waiting for a
@@ -6369,7 +5873,7 @@ export class BaseSink {
      * and will be adjusted with any latency and offset configured in the sink.
      * @param time the running_time to be reached
      */
-    wait(time: Gst.ClockTime): [ /* returnType */ Gst.FlowReturn, /* jitter */ Gst.ClockTimeDiff ]
+    wait(time: Gst.ClockTime): [ /* returnType */ Gst.FlowReturn, /* jitter */ Gst.ClockTimeDiff | null ]
     /**
      * This function will block until `time` is reached. It is usually called by
      * subclasses that use their own internal synchronisation.
@@ -6388,7 +5892,7 @@ export class BaseSink {
      * sink.
      * @param time the running_time to be reached
      */
-    wait_clock(time: Gst.ClockTime): [ /* returnType */ Gst.ClockReturn, /* jitter */ Gst.ClockTimeDiff ]
+    wait_clock(time: Gst.ClockTime): [ /* returnType */ Gst.ClockReturn, /* jitter */ Gst.ClockTimeDiff | null ]
     /**
      * If the #GstBaseSinkClass.render() method performs its own synchronisation
      * against the clock it must unblock when going from PLAYING to the PAUSED state
@@ -6410,7 +5914,7 @@ export class BaseSink {
      * render function.
      */
     wait_preroll(): Gst.FlowReturn
-    /* Extended methods of Gst-1.0.Gst.Element */
+    /* Methods of Gst-1.0.Gst.Element */
     /**
      * Abort the state change of the element. This function is used
      * by elements that do asynchronous state changes and find out
@@ -6542,7 +6046,7 @@ export class BaseSink {
      * @param pad the #GstPad to find a compatible one for.
      * @param caps the #GstCaps to use as a filter.
      */
-    get_compatible_pad(pad: Gst.Pad, caps: Gst.Caps | null): Gst.Pad | null
+    get_compatible_pad(pad: Gst.Pad, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Retrieves a pad template from `element` that is compatible with `compattempl`.
      * Pads from compatible templates can be linked together.
@@ -6630,7 +6134,7 @@ export class BaseSink {
      * element to playing, the preroll will complete and playback will start.
      * @param timeout a #GstClockTime to specify the timeout for an async           state change or %GST_CLOCK_TIME_NONE for infinite timeout.
      */
-    get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State, /* pending */ Gst.State ]
+    get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State | null, /* pending */ Gst.State | null ]
     /**
      * Retrieves a pad from `element` by name. This version only retrieves
      * already-existing (i.e. 'static') pads.
@@ -6694,7 +6198,7 @@ export class BaseSink {
      * @param dest the #GstElement containing the destination pad.
      * @param filter the #GstCaps to filter the link,     or %NULL for no filter.
      */
-    link_filtered(dest: Gst.Element, filter: Gst.Caps | null): boolean
+    link_filtered(dest: Gst.Element, filter?: Gst.Caps | null): boolean
     /**
      * Links the two named pads of the source and destination elements.
      * Side effect is that if one of the pads has no parent, it becomes a
@@ -6704,7 +6208,7 @@ export class BaseSink {
      * @param dest the #GstElement containing the destination pad.
      * @param destpadname the name of the #GstPad in destination element, or %NULL for any pad.
      */
-    link_pads(srcpadname: string | null, dest: Gst.Element, destpadname: string | null): boolean
+    link_pads(srcpadname: string | null, dest: Gst.Element, destpadname?: string | null): boolean
     /**
      * Links the two named pads of the source and destination elements. Side effect
      * is that if one of the pads has no parent, it becomes a child of the parent of
@@ -6715,7 +6219,7 @@ export class BaseSink {
      * @param destpadname the name of the #GstPad in destination element     or %NULL for any pad.
      * @param filter the #GstCaps to filter the link,     or %NULL for no filter.
      */
-    link_pads_filtered(srcpadname: string | null, dest: Gst.Element, destpadname: string | null, filter: Gst.Caps | null): boolean
+    link_pads_filtered(srcpadname: string | null, dest: Gst.Element, destpadname?: string | null, filter?: Gst.Caps | null): boolean
     /**
      * Links the two named pads of the source and destination elements.
      * Side effect is that if one of the pads has no parent, it becomes a
@@ -6839,7 +6343,7 @@ export class BaseSink {
      * using this function.
      * @param format the #GstFormat requested
      */
-    query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number ]
+    query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number | null ]
     /**
      * Queries an element (usually top-level pipeline or playbin element) for the
      * stream position in nanoseconds. This will be a value between 0 and the
@@ -6852,7 +6356,7 @@ export class BaseSink {
      * it in gst_element_query().
      * @param format the #GstFormat requested
      */
-    query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number ]
+    query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number | null ]
     /**
      * Makes the element free the previously requested pad as obtained
      * with gst_element_request_pad().
@@ -6896,7 +6400,7 @@ export class BaseSink {
      * @param name the name of the request #GstPad to retrieve. Can be %NULL.
      * @param caps the caps of the pad we want to request. Can be %NULL.
      */
-    request_pad(templ: Gst.PadTemplate, name: string | null, caps: Gst.Caps | null): Gst.Pad | null
+    request_pad(templ: Gst.PadTemplate, name?: string | null, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Sends a seek event to an element. See gst_event_new_seek() for the details of
      * the parameters. The seek event is sent to the element using
@@ -6958,14 +6462,14 @@ export class BaseSink {
      * MT safe.
      * @param bus the #GstBus to set.
      */
-    set_bus(bus: Gst.Bus | null): void
+    set_bus(bus?: Gst.Bus | null): void
     /**
      * Sets the clock for the element. This function increases the
      * refcount on the clock. Any previously set clock on the object
      * is unreffed.
      * @param clock the #GstClock to set for the element.
      */
-    set_clock(clock: Gst.Clock | null): boolean
+    set_clock(clock?: Gst.Clock | null): boolean
     /**
      * Sets the context of the element. Increases the refcount of the context.
      * 
@@ -7041,7 +6545,7 @@ export class BaseSink {
      * @param destpadname the name of the #GstPad in destination element.
      */
     unlink_pads(srcpadname: string, dest: Gst.Element, destpadname: string): void
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -7059,7 +6563,7 @@ export class BaseSink {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -7189,7 +6693,7 @@ export class BaseSink {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -7226,7 +6730,7 @@ export class BaseSink {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -7272,7 +6776,7 @@ export class BaseSink {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -7441,7 +6945,7 @@ export class BaseSink {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -7519,8 +7023,8 @@ export class BaseSink {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of GstBase-1.0.GstBase.BaseSink */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GstBase-1.0.GstBase.BaseSink */
     vfunc_activate_pull(active: boolean): boolean
     vfunc_event(event: Gst.Event): boolean
     vfunc_fixate(caps: Gst.Caps): Gst.Caps
@@ -7540,7 +7044,6 @@ export class BaseSink {
      * random linked sinkpad of this element.
      * 
      * Please note that some queries might need a running pipeline to work.
-     * @virtual 
      * @param query the #GstQuery.
      */
     vfunc_query(query: Gst.Query): boolean
@@ -7552,13 +7055,12 @@ export class BaseSink {
     vfunc_unlock(): boolean
     vfunc_unlock_stop(): boolean
     vfunc_wait_event(event: Gst.Event): Gst.FlowReturn
-    /* Extended virtual methods of Gst-1.0.Gst.Element */
+    /* Virtual methods of Gst-1.0.Gst.Element */
     /**
      * Perform `transition` on `element`.
      * 
      * This function must be called with STATE_LOCK held and is mainly used
      * internally.
-     * @virtual 
      * @param transition the requested transition
      */
     vfunc_change_state(transition: Gst.StateChange): Gst.StateChangeReturn
@@ -7583,10 +7085,9 @@ export class BaseSink {
      * some sink elements might not be able to complete their state change because
      * an element is not producing data to complete the preroll. When setting the
      * element to playing, the preroll will complete and playback will start.
-     * @virtual 
      * @param timeout a #GstClockTime to specify the timeout for an async           state change or %GST_CLOCK_TIME_NONE for infinite timeout.
      */
-    vfunc_get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State, /* pending */ Gst.State ]
+    vfunc_get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State | null, /* pending */ Gst.State | null ]
     /**
      * Use this function to signal that the element does not expect any more pads
      * to show up in the current pipeline. This function should be called whenever
@@ -7597,7 +7098,6 @@ export class BaseSink {
      * This function emits the #GstElement::no-more-pads signal.
      * 
      * MT safe.
-     * @virtual 
      */
     vfunc_no_more_pads(): void
     vfunc_pad_added(pad: Gst.Pad): void
@@ -7606,7 +7106,6 @@ export class BaseSink {
      * Post a message on the element's #GstBus. This function takes ownership of the
      * message; if you want to access the message after this call, you should add an
      * additional reference before calling.
-     * @virtual 
      * @param message a #GstMessage to post
      */
     vfunc_post_message(message: Gst.Message): boolean
@@ -7614,7 +7113,6 @@ export class BaseSink {
      * Get the clock provided by the given element.
      * > An element is only required to provide a clock in the PAUSED
      * > state. Some elements can provide a clock in other states.
-     * @virtual 
      */
     vfunc_provide_clock(): Gst.Clock | null
     /**
@@ -7625,7 +7123,6 @@ export class BaseSink {
      * random linked sinkpad of this element.
      * 
      * Please note that some queries might need a running pipeline to work.
-     * @virtual 
      * @param query the #GstQuery.
      */
     vfunc_query(query: Gst.Query): boolean
@@ -7636,12 +7133,11 @@ export class BaseSink {
      * gst_element_factory_get_static_pad_templates().
      * 
      * The pad should be released with gst_element_release_request_pad().
-     * @virtual 
      * @param templ a #GstPadTemplate of which we want a pad of.
      * @param name the name of the request #GstPad to retrieve. Can be %NULL.
      * @param caps the caps of the pad we want to request. Can be %NULL.
      */
-    vfunc_request_new_pad(templ: Gst.PadTemplate, name: string | null, caps: Gst.Caps | null): Gst.Pad | null
+    vfunc_request_new_pad(templ: Gst.PadTemplate, name?: string | null, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Sends an event to an element. If the element doesn't implement an
      * event handler, the event will be pushed on a random linked sink pad for
@@ -7651,7 +7147,6 @@ export class BaseSink {
      * gst_event_ref() it if you want to reuse the event after this call.
      * 
      * MT safe.
-     * @virtual 
      * @param event the #GstEvent to send to the element.
      */
     vfunc_send_event(event: Gst.Event): boolean
@@ -7660,23 +7155,20 @@ export class BaseSink {
      * For internal use only, unless you're testing elements.
      * 
      * MT safe.
-     * @virtual 
      * @param bus the #GstBus to set.
      */
-    vfunc_set_bus(bus: Gst.Bus | null): void
+    vfunc_set_bus(bus?: Gst.Bus | null): void
     /**
      * Sets the clock for the element. This function increases the
      * refcount on the clock. Any previously set clock on the object
      * is unreffed.
-     * @virtual 
      * @param clock the #GstClock to set for the element.
      */
-    vfunc_set_clock(clock: Gst.Clock | null): boolean
+    vfunc_set_clock(clock?: Gst.Clock | null): boolean
     /**
      * Sets the context of the element. Increases the refcount of the context.
      * 
      * MT safe.
-     * @virtual 
      * @param context the #GstContext to set.
      */
     vfunc_set_context(context: Gst.Context): void
@@ -7694,14 +7186,13 @@ export class BaseSink {
      * 
      * State changes to %GST_STATE_READY or %GST_STATE_NULL never return
      * #GST_STATE_CHANGE_ASYNC.
-     * @virtual 
      * @param state the element's new #GstState.
      */
     vfunc_set_state(state: Gst.State): Gst.StateChangeReturn
     vfunc_state_changed(oldstate: Gst.State, newstate: Gst.State, pending: Gst.State): void
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -7718,17 +7209,15 @@ export class BaseSink {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gst-1.0.Gst.Element */
+    /* Signals of Gst-1.0.Gst.Element */
     /**
      * This signals that the element will not generate more dynamic pads.
      * Note that this signal will usually be emitted from the context of
      * the streaming thread.
-     * @signal 
      */
     connect(sigName: "no-more-pads", callback: (($obj: BaseSink) => void)): number
     connect_after(sigName: "no-more-pads", callback: (($obj: BaseSink) => void)): number
@@ -7739,7 +7228,6 @@ export class BaseSink {
      * mind that if you add new elements to the pipeline in the signal handler
      * you will need to set them to the desired target state with
      * gst_element_set_state() or gst_element_sync_state_with_parent().
-     * @signal 
      * @param new_pad the pad that has been added
      */
     connect(sigName: "pad-added", callback: (($obj: BaseSink, new_pad: Gst.Pad) => void)): number
@@ -7747,25 +7235,23 @@ export class BaseSink {
     emit(sigName: "pad-added", new_pad: Gst.Pad): void
     /**
      * a #GstPad has been removed from the element
-     * @signal 
      * @param old_pad the pad that has been removed
      */
     connect(sigName: "pad-removed", callback: (($obj: BaseSink, old_pad: Gst.Pad) => void)): number
     connect_after(sigName: "pad-removed", callback: (($obj: BaseSink, old_pad: Gst.Pad) => void)): number
     emit(sigName: "pad-removed", old_pad: Gst.Pad): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: BaseSink, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: BaseSink, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -7792,7 +7278,6 @@ export class BaseSink {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: BaseSink, pspec: GObject.ParamSpec) => void)): number
@@ -7822,161 +7307,29 @@ export class BaseSink {
     connect_after(sigName: "notify::throttle-time", callback: (($obj: BaseSink, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::ts-offset", callback: (($obj: BaseSink, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::ts-offset", callback: (($obj: BaseSink, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: BaseSink_ConstructProps)
     _init (config?: BaseSink_ConstructProps): void
-    static $gtype: GObject.GType<BaseSink>
+    static $gtype: GObject.Type
 }
 export interface BaseSrc_ConstructProps extends Gst.Element_ConstructProps {
     /* Constructor properties of GstBase-1.0.GstBase.BaseSrc */
-    blocksize?: number | null
-    do_timestamp?: boolean | null
-    num_buffers?: number | null
-    typefind?: boolean | null
+    blocksize?: number
+    do_timestamp?: boolean
+    num_buffers?: number
+    typefind?: boolean
 }
-/**
- * This is a generic base class for source elements. The following
- * types of sources are supported:
- * 
- *   * random access sources like files
- *   * seekable sources
- *   * live sources
- * 
- * The source can be configured to operate in any #GstFormat with the
- * gst_base_src_set_format() method. The currently set format determines
- * the format of the internal #GstSegment and any %GST_EVENT_SEGMENT
- * events. The default format for #GstBaseSrc is %GST_FORMAT_BYTES.
- * 
- * #GstBaseSrc always supports push mode scheduling. If the following
- * conditions are met, it also supports pull mode scheduling:
- * 
- *   * The format is set to %GST_FORMAT_BYTES (default).
- *   * #GstBaseSrcClass.is_seekable() returns %TRUE.
- * 
- * If all the conditions are met for operating in pull mode, #GstBaseSrc is
- * automatically seekable in push mode as well. The following conditions must
- * be met to make the element seekable in push mode when the format is not
- * %GST_FORMAT_BYTES:
- * 
- * * #GstBaseSrcClass.is_seekable() returns %TRUE.
- * * #GstBaseSrcClass.query() can convert all supported seek formats to the
- *   internal format as set with gst_base_src_set_format().
- * * #GstBaseSrcClass.do_seek() is implemented, performs the seek and returns
- *    %TRUE.
- * 
- * When the element does not meet the requirements to operate in pull mode, the
- * offset and length in the #GstBaseSrcClass.create() method should be ignored.
- * It is recommended to subclass #GstPushSrc instead, in this situation. If the
- * element can operate in pull mode but only with specific offsets and
- * lengths, it is allowed to generate an error when the wrong values are passed
- * to the #GstBaseSrcClass.create() function.
- * 
- * #GstBaseSrc has support for live sources. Live sources are sources that when
- * paused discard data, such as audio or video capture devices. A typical live
- * source also produces data at a fixed rate and thus provides a clock to publish
- * this rate.
- * Use gst_base_src_set_live() to activate the live source mode.
- * 
- * A live source does not produce data in the PAUSED state. This means that the
- * #GstBaseSrcClass.create() method will not be called in PAUSED but only in
- * PLAYING. To signal the pipeline that the element will not produce data, the
- * return value from the READY to PAUSED state will be
- * %GST_STATE_CHANGE_NO_PREROLL.
- * 
- * A typical live source will timestamp the buffers it creates with the
- * current running time of the pipeline. This is one reason why a live source
- * can only produce data in the PLAYING state, when the clock is actually
- * distributed and running.
- * 
- * Live sources that synchronize and block on the clock (an audio source, for
- * example) can use gst_base_src_wait_playing() when the
- * #GstBaseSrcClass.create() function was interrupted by a state change to
- * PAUSED.
- * 
- * The #GstBaseSrcClass.get_times() method can be used to implement pseudo-live
- * sources. It only makes sense to implement the #GstBaseSrcClass.get_times()
- * function if the source is a live source. The #GstBaseSrcClass.get_times()
- * function should return timestamps starting from 0, as if it were a non-live
- * source. The base class will make sure that the timestamps are transformed
- * into the current running_time. The base source will then wait for the
- * calculated running_time before pushing out the buffer.
- * 
- * For live sources, the base class will by default report a latency of 0.
- * For pseudo live sources, the base class will by default measure the difference
- * between the first buffer timestamp and the start time of get_times and will
- * report this value as the latency.
- * Subclasses should override the query function when this behaviour is not
- * acceptable.
- * 
- * There is only support in #GstBaseSrc for exactly one source pad, which
- * should be named "src". A source implementation (subclass of #GstBaseSrc)
- * should install a pad template in its class_init function, like so:
- * 
- * ```c
- * static void
- * my_element_class_init (GstMyElementClass *klass)
- * {
- *   GstElementClass *gstelement_class = GST_ELEMENT_CLASS (klass);
- *   // srctemplate should be a #GstStaticPadTemplate with direction
- *   // %GST_PAD_SRC and name "src"
- *   gst_element_class_add_static_pad_template (gstelement_class, &amp;srctemplate);
- * 
- *   gst_element_class_set_static_metadata (gstelement_class,
- *      "Source name",
- *      "Source",
- *      "My Source element",
- *      "The author <my.sink`my`.email>");
- * }
- * ```
- * 
- * 
- * ## Controlled shutdown of live sources in applications
- * 
- * Applications that record from a live source may want to stop recording
- * in a controlled way, so that the recording is stopped, but the data
- * already in the pipeline is processed to the end (remember that many live
- * sources would go on recording forever otherwise). For that to happen the
- * application needs to make the source stop recording and send an EOS
- * event down the pipeline. The application would then wait for an
- * EOS message posted on the pipeline's bus to know when all data has
- * been processed and the pipeline can safely be stopped.
- * 
- * An application may send an EOS event to a source element to make it
- * perform the EOS logic (send EOS event downstream or post a
- * %GST_MESSAGE_SEGMENT_DONE on the bus). This can typically be done
- * with the gst_element_send_event() function on the element or its parent bin.
- * 
- * After the EOS has been sent to the element, the application should wait for
- * an EOS message to be posted on the pipeline's bus. Once this EOS message is
- * received, it may safely shut down the entire pipeline.
- */
 export class BaseSrc {
-    /* Own properties of GstBase-1.0.GstBase.BaseSrc */
-    do_timestamp: boolean
-    /* Own fields of GstBase-1.0.GstBase.BaseSrc */
-    element: Gst.Element
-    srcpad: Gst.Pad
-    live_lock: GLib.Mutex
-    live_cond: GLib.Cond
-    is_live: boolean
-    live_running: boolean
+    /* Properties of GstBase-1.0.GstBase.BaseSrc */
     blocksize: number
-    can_activate_push: boolean
-    random_access: boolean
-    clock_id: Gst.ClockID
-    segment: Gst.Segment
-    need_newsegment: boolean
+    do_timestamp: boolean
     num_buffers: number
-    num_buffers_left: number
     typefind: boolean
-    running: boolean
-    pending_seek: Gst.Event
-    priv: BaseSrcPrivate
-    /* Extended fields of Gst-1.0.Gst.Element */
+    /* Fields of Gst-1.0.Gst.Element */
     object: Gst.Object
     /**
      * Used to serialize execution of gst_element_set_state()
@@ -8065,7 +7418,7 @@ export class BaseSrc {
      * list of contexts
      */
     contexts: Gst.Context[]
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
     /**
      * object LOCK
      */
@@ -8082,16 +7435,16 @@ export class BaseSrc {
      * flags for this object
      */
     flags: number
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GstBase-1.0.GstBase.BaseSrc */
+    /* Methods of GstBase-1.0.GstBase.BaseSrc */
     /**
      * Lets #GstBaseSrc sub-classes to know the memory `allocator`
      * used by the base class and its `params`.
      * 
      * Unref the `allocator` after usage.
      */
-    get_allocator(): [ /* allocator */ Gst.Allocator, /* params */ Gst.AllocationParams ]
+    get_allocator(): [ /* allocator */ Gst.Allocator | null, /* params */ Gst.AllocationParams | null ]
     /**
      * Get the number of bytes that `src` will push out with each buffer.
      */
@@ -8105,6 +7458,10 @@ export class BaseSrc {
      * Get the current async behaviour of `src`. See also gst_base_src_set_async().
      */
     is_async(): boolean
+    /**
+     * Check if an element is in live mode.
+     */
+    is_live(): boolean
     /**
      * Prepare a new seamless segment for emission downstream. This function must
      * only be called by derived sub-classes, and only from the create() function,
@@ -8125,7 +7482,7 @@ export class BaseSrc {
      * 
      * This function is mostly used by subclasses.
      */
-    query_latency(): [ /* returnType */ boolean, /* live */ boolean, /* min_latency */ Gst.ClockTime, /* max_latency */ Gst.ClockTime ]
+    query_latency(): [ /* returnType */ boolean, /* live */ boolean | null, /* min_latency */ Gst.ClockTime | null, /* max_latency */ Gst.ClockTime | null ]
     /**
      * Configure async behaviour in `src,` no state change will block. The open,
      * close, start, stop, play and pause virtual methods will be executed in a
@@ -8239,7 +7596,7 @@ export class BaseSrc {
      * returns %GST_FLOW_FLUSHING).
      */
     wait_playing(): Gst.FlowReturn
-    /* Extended methods of Gst-1.0.Gst.Element */
+    /* Methods of Gst-1.0.Gst.Element */
     /**
      * Abort the state change of the element. This function is used
      * by elements that do asynchronous state changes and find out
@@ -8371,7 +7728,7 @@ export class BaseSrc {
      * @param pad the #GstPad to find a compatible one for.
      * @param caps the #GstCaps to use as a filter.
      */
-    get_compatible_pad(pad: Gst.Pad, caps: Gst.Caps | null): Gst.Pad | null
+    get_compatible_pad(pad: Gst.Pad, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Retrieves a pad template from `element` that is compatible with `compattempl`.
      * Pads from compatible templates can be linked together.
@@ -8459,7 +7816,7 @@ export class BaseSrc {
      * element to playing, the preroll will complete and playback will start.
      * @param timeout a #GstClockTime to specify the timeout for an async           state change or %GST_CLOCK_TIME_NONE for infinite timeout.
      */
-    get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State, /* pending */ Gst.State ]
+    get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State | null, /* pending */ Gst.State | null ]
     /**
      * Retrieves a pad from `element` by name. This version only retrieves
      * already-existing (i.e. 'static') pads.
@@ -8523,7 +7880,7 @@ export class BaseSrc {
      * @param dest the #GstElement containing the destination pad.
      * @param filter the #GstCaps to filter the link,     or %NULL for no filter.
      */
-    link_filtered(dest: Gst.Element, filter: Gst.Caps | null): boolean
+    link_filtered(dest: Gst.Element, filter?: Gst.Caps | null): boolean
     /**
      * Links the two named pads of the source and destination elements.
      * Side effect is that if one of the pads has no parent, it becomes a
@@ -8533,7 +7890,7 @@ export class BaseSrc {
      * @param dest the #GstElement containing the destination pad.
      * @param destpadname the name of the #GstPad in destination element, or %NULL for any pad.
      */
-    link_pads(srcpadname: string | null, dest: Gst.Element, destpadname: string | null): boolean
+    link_pads(srcpadname: string | null, dest: Gst.Element, destpadname?: string | null): boolean
     /**
      * Links the two named pads of the source and destination elements. Side effect
      * is that if one of the pads has no parent, it becomes a child of the parent of
@@ -8544,7 +7901,7 @@ export class BaseSrc {
      * @param destpadname the name of the #GstPad in destination element     or %NULL for any pad.
      * @param filter the #GstCaps to filter the link,     or %NULL for no filter.
      */
-    link_pads_filtered(srcpadname: string | null, dest: Gst.Element, destpadname: string | null, filter: Gst.Caps | null): boolean
+    link_pads_filtered(srcpadname: string | null, dest: Gst.Element, destpadname?: string | null, filter?: Gst.Caps | null): boolean
     /**
      * Links the two named pads of the source and destination elements.
      * Side effect is that if one of the pads has no parent, it becomes a
@@ -8668,7 +8025,7 @@ export class BaseSrc {
      * using this function.
      * @param format the #GstFormat requested
      */
-    query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number ]
+    query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number | null ]
     /**
      * Queries an element (usually top-level pipeline or playbin element) for the
      * stream position in nanoseconds. This will be a value between 0 and the
@@ -8681,7 +8038,7 @@ export class BaseSrc {
      * it in gst_element_query().
      * @param format the #GstFormat requested
      */
-    query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number ]
+    query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number | null ]
     /**
      * Makes the element free the previously requested pad as obtained
      * with gst_element_request_pad().
@@ -8725,7 +8082,7 @@ export class BaseSrc {
      * @param name the name of the request #GstPad to retrieve. Can be %NULL.
      * @param caps the caps of the pad we want to request. Can be %NULL.
      */
-    request_pad(templ: Gst.PadTemplate, name: string | null, caps: Gst.Caps | null): Gst.Pad | null
+    request_pad(templ: Gst.PadTemplate, name?: string | null, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Sends a seek event to an element. See gst_event_new_seek() for the details of
      * the parameters. The seek event is sent to the element using
@@ -8787,14 +8144,14 @@ export class BaseSrc {
      * MT safe.
      * @param bus the #GstBus to set.
      */
-    set_bus(bus: Gst.Bus | null): void
+    set_bus(bus?: Gst.Bus | null): void
     /**
      * Sets the clock for the element. This function increases the
      * refcount on the clock. Any previously set clock on the object
      * is unreffed.
      * @param clock the #GstClock to set for the element.
      */
-    set_clock(clock: Gst.Clock | null): boolean
+    set_clock(clock?: Gst.Clock | null): boolean
     /**
      * Sets the context of the element. Increases the refcount of the context.
      * 
@@ -8870,7 +8227,7 @@ export class BaseSrc {
      * @param destpadname the name of the #GstPad in destination element.
      */
     unlink_pads(srcpadname: string, dest: Gst.Element, destpadname: string): void
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -8888,7 +8245,7 @@ export class BaseSrc {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -9018,7 +8375,7 @@ export class BaseSrc {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -9055,7 +8412,7 @@ export class BaseSrc {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -9101,7 +8458,7 @@ export class BaseSrc {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -9270,7 +8627,7 @@ export class BaseSrc {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -9348,13 +8705,12 @@ export class BaseSrc {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of GstBase-1.0.GstBase.BaseSrc */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GstBase-1.0.GstBase.BaseSrc */
     vfunc_alloc(offset: number, size: number, buf: Gst.Buffer): Gst.FlowReturn
     /**
      * Ask the subclass to create a buffer with `offset` and `size,` the default
      * implementation will call alloc and fill.
-     * @virtual 
      * @param offset 
      * @param size 
      */
@@ -9369,7 +8725,6 @@ export class BaseSrc {
     /**
      * Given `buffer,` return `start` and `end` time when it should be pushed
      * out. The base class will sync on the clock using these times.
-     * @virtual 
      * @param buffer 
      */
     vfunc_get_times(buffer: Gst.Buffer): [ /* start */ Gst.ClockTime, /* end */ Gst.ClockTime ]
@@ -9386,13 +8741,11 @@ export class BaseSrc {
      * random linked sinkpad of this element.
      * 
      * Please note that some queries might need a running pipeline to work.
-     * @virtual 
      * @param query the #GstQuery.
      */
     vfunc_query(query: Gst.Query): boolean
     /**
      * Set new caps on the basesrc source pad.
-     * @virtual 
      * @param caps a #GstCaps
      */
     vfunc_set_caps(caps: Gst.Caps): boolean
@@ -9400,13 +8753,12 @@ export class BaseSrc {
     vfunc_stop(): boolean
     vfunc_unlock(): boolean
     vfunc_unlock_stop(): boolean
-    /* Extended virtual methods of Gst-1.0.Gst.Element */
+    /* Virtual methods of Gst-1.0.Gst.Element */
     /**
      * Perform `transition` on `element`.
      * 
      * This function must be called with STATE_LOCK held and is mainly used
      * internally.
-     * @virtual 
      * @param transition the requested transition
      */
     vfunc_change_state(transition: Gst.StateChange): Gst.StateChangeReturn
@@ -9431,10 +8783,9 @@ export class BaseSrc {
      * some sink elements might not be able to complete their state change because
      * an element is not producing data to complete the preroll. When setting the
      * element to playing, the preroll will complete and playback will start.
-     * @virtual 
      * @param timeout a #GstClockTime to specify the timeout for an async           state change or %GST_CLOCK_TIME_NONE for infinite timeout.
      */
-    vfunc_get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State, /* pending */ Gst.State ]
+    vfunc_get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State | null, /* pending */ Gst.State | null ]
     /**
      * Use this function to signal that the element does not expect any more pads
      * to show up in the current pipeline. This function should be called whenever
@@ -9445,7 +8796,6 @@ export class BaseSrc {
      * This function emits the #GstElement::no-more-pads signal.
      * 
      * MT safe.
-     * @virtual 
      */
     vfunc_no_more_pads(): void
     vfunc_pad_added(pad: Gst.Pad): void
@@ -9454,7 +8804,6 @@ export class BaseSrc {
      * Post a message on the element's #GstBus. This function takes ownership of the
      * message; if you want to access the message after this call, you should add an
      * additional reference before calling.
-     * @virtual 
      * @param message a #GstMessage to post
      */
     vfunc_post_message(message: Gst.Message): boolean
@@ -9462,7 +8811,6 @@ export class BaseSrc {
      * Get the clock provided by the given element.
      * > An element is only required to provide a clock in the PAUSED
      * > state. Some elements can provide a clock in other states.
-     * @virtual 
      */
     vfunc_provide_clock(): Gst.Clock | null
     /**
@@ -9473,7 +8821,6 @@ export class BaseSrc {
      * random linked sinkpad of this element.
      * 
      * Please note that some queries might need a running pipeline to work.
-     * @virtual 
      * @param query the #GstQuery.
      */
     vfunc_query(query: Gst.Query): boolean
@@ -9484,12 +8831,11 @@ export class BaseSrc {
      * gst_element_factory_get_static_pad_templates().
      * 
      * The pad should be released with gst_element_release_request_pad().
-     * @virtual 
      * @param templ a #GstPadTemplate of which we want a pad of.
      * @param name the name of the request #GstPad to retrieve. Can be %NULL.
      * @param caps the caps of the pad we want to request. Can be %NULL.
      */
-    vfunc_request_new_pad(templ: Gst.PadTemplate, name: string | null, caps: Gst.Caps | null): Gst.Pad | null
+    vfunc_request_new_pad(templ: Gst.PadTemplate, name?: string | null, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Sends an event to an element. If the element doesn't implement an
      * event handler, the event will be pushed on a random linked sink pad for
@@ -9499,7 +8845,6 @@ export class BaseSrc {
      * gst_event_ref() it if you want to reuse the event after this call.
      * 
      * MT safe.
-     * @virtual 
      * @param event the #GstEvent to send to the element.
      */
     vfunc_send_event(event: Gst.Event): boolean
@@ -9508,23 +8853,20 @@ export class BaseSrc {
      * For internal use only, unless you're testing elements.
      * 
      * MT safe.
-     * @virtual 
      * @param bus the #GstBus to set.
      */
-    vfunc_set_bus(bus: Gst.Bus | null): void
+    vfunc_set_bus(bus?: Gst.Bus | null): void
     /**
      * Sets the clock for the element. This function increases the
      * refcount on the clock. Any previously set clock on the object
      * is unreffed.
-     * @virtual 
      * @param clock the #GstClock to set for the element.
      */
-    vfunc_set_clock(clock: Gst.Clock | null): boolean
+    vfunc_set_clock(clock?: Gst.Clock | null): boolean
     /**
      * Sets the context of the element. Increases the refcount of the context.
      * 
      * MT safe.
-     * @virtual 
      * @param context the #GstContext to set.
      */
     vfunc_set_context(context: Gst.Context): void
@@ -9542,14 +8884,13 @@ export class BaseSrc {
      * 
      * State changes to %GST_STATE_READY or %GST_STATE_NULL never return
      * #GST_STATE_CHANGE_ASYNC.
-     * @virtual 
      * @param state the element's new #GstState.
      */
     vfunc_set_state(state: Gst.State): Gst.StateChangeReturn
     vfunc_state_changed(oldstate: Gst.State, newstate: Gst.State, pending: Gst.State): void
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -9566,17 +8907,15 @@ export class BaseSrc {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gst-1.0.Gst.Element */
+    /* Signals of Gst-1.0.Gst.Element */
     /**
      * This signals that the element will not generate more dynamic pads.
      * Note that this signal will usually be emitted from the context of
      * the streaming thread.
-     * @signal 
      */
     connect(sigName: "no-more-pads", callback: (($obj: BaseSrc) => void)): number
     connect_after(sigName: "no-more-pads", callback: (($obj: BaseSrc) => void)): number
@@ -9587,7 +8926,6 @@ export class BaseSrc {
      * mind that if you add new elements to the pipeline in the signal handler
      * you will need to set them to the desired target state with
      * gst_element_set_state() or gst_element_sync_state_with_parent().
-     * @signal 
      * @param new_pad the pad that has been added
      */
     connect(sigName: "pad-added", callback: (($obj: BaseSrc, new_pad: Gst.Pad) => void)): number
@@ -9595,25 +8933,23 @@ export class BaseSrc {
     emit(sigName: "pad-added", new_pad: Gst.Pad): void
     /**
      * a #GstPad has been removed from the element
-     * @signal 
      * @param old_pad the pad that has been removed
      */
     connect(sigName: "pad-removed", callback: (($obj: BaseSrc, old_pad: Gst.Pad) => void)): number
     connect_after(sigName: "pad-removed", callback: (($obj: BaseSrc, old_pad: Gst.Pad) => void)): number
     emit(sigName: "pad-removed", old_pad: Gst.Pad): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: BaseSrc, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: BaseSrc, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -9640,144 +8976,36 @@ export class BaseSrc {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: BaseSrc, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: BaseSrc, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
+    connect(sigName: "notify::blocksize", callback: (($obj: BaseSrc, pspec: GObject.ParamSpec) => void)): number
+    connect_after(sigName: "notify::blocksize", callback: (($obj: BaseSrc, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::do-timestamp", callback: (($obj: BaseSrc, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::do-timestamp", callback: (($obj: BaseSrc, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: "notify::num-buffers", callback: (($obj: BaseSrc, pspec: GObject.ParamSpec) => void)): number
+    connect_after(sigName: "notify::num-buffers", callback: (($obj: BaseSrc, pspec: GObject.ParamSpec) => void)): number
+    connect(sigName: "notify::typefind", callback: (($obj: BaseSrc, pspec: GObject.ParamSpec) => void)): number
+    connect_after(sigName: "notify::typefind", callback: (($obj: BaseSrc, pspec: GObject.ParamSpec) => void)): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: BaseSrc_ConstructProps)
     _init (config?: BaseSrc_ConstructProps): void
-    static $gtype: GObject.GType<BaseSrc>
+    static $gtype: GObject.Type
 }
 export interface BaseTransform_ConstructProps extends Gst.Element_ConstructProps {
     /* Constructor properties of GstBase-1.0.GstBase.BaseTransform */
-    qos?: boolean | null
+    qos?: boolean
 }
-/**
- * This base class is for filter elements that process data. Elements
- * that are suitable for implementation using #GstBaseTransform are ones
- * where the size and caps of the output is known entirely from the input
- * caps and buffer sizes. These include elements that directly transform
- * one buffer into another, modify the contents of a buffer in-place, as
- * well as elements that collate multiple input buffers into one output buffer,
- * or that expand one input buffer into multiple output buffers. See below
- * for more concrete use cases.
- * 
- * It provides for:
- * 
- * * one sinkpad and one srcpad
- * * Possible formats on sink and source pad implemented
- *   with custom transform_caps function. By default uses
- *   same format on sink and source.
- * 
- * * Handles state changes
- * * Does flushing
- * * Push mode
- * * Pull mode if the sub-class transform can operate on arbitrary data
- * 
- * # Use Cases
- * 
- * ## Passthrough mode
- * 
- *   * Element has no interest in modifying the buffer. It may want to inspect it,
- *     in which case the element should have a transform_ip function. If there
- *     is no transform_ip function in passthrough mode, the buffer is pushed
- *     intact.
- * 
- *   * The #GstBaseTransformClass.passthrough_on_same_caps variable
- *     will automatically set/unset passthrough based on whether the
- *     element negotiates the same caps on both pads.
- * 
- *   * #GstBaseTransformClass.passthrough_on_same_caps on an element that
- *     doesn't implement a transform_caps function is useful for elements that
- *     only inspect data (such as level)
- * 
- *   * Example elements
- * 
- *     * Level
- *     * Videoscale, audioconvert, videoconvert, audioresample in certain modes.
- * 
- * ## Modifications in-place - input buffer and output buffer are the same thing.
- * 
- * * The element must implement a transform_ip function.
- * * Output buffer size must <= input buffer size
- * * If the always_in_place flag is set, non-writable buffers will be copied
- *   and passed to the transform_ip function, otherwise a new buffer will be
- *   created and the transform function called.
- * 
- * * Incoming writable buffers will be passed to the transform_ip function
- *   immediately.
- * * only implementing transform_ip and not transform implies always_in_place = %TRUE
- * 
- *   * Example elements:
- *     * Volume
- *     * Audioconvert in certain modes (signed/unsigned conversion)
- *     * videoconvert in certain modes (endianness swapping)
- * 
- * ## Modifications only to the caps/metadata of a buffer
- * 
- * * The element does not require writable data, but non-writable buffers
- *   should be subbuffered so that the meta-information can be replaced.
- * 
- * * Elements wishing to operate in this mode should replace the
- *   prepare_output_buffer method to create subbuffers of the input buffer
- *   and set always_in_place to %TRUE
- * 
- * * Example elements
- *   * Capsfilter when setting caps on outgoing buffers that have
- *     none.
- *   * identity when it is going to re-timestamp buffers by
- *     datarate.
- * 
- * ## Normal mode
- *   * always_in_place flag is not set, or there is no transform_ip function
- *   * Element will receive an input buffer and output buffer to operate on.
- *   * Output buffer is allocated by calling the prepare_output_buffer function.
- *   * Example elements:
- *     * Videoscale, videoconvert, audioconvert when doing
- *     scaling/conversions
- * 
- * ## Special output buffer allocations
- *   * Elements which need to do special allocation of their output buffers
- *     beyond allocating output buffers via the negotiated allocator or
- *     buffer pool should implement the prepare_output_buffer method.
- * 
- *   * Example elements:
- *     * efence
- * 
- * # Sub-class settable flags on GstBaseTransform
- * 
- * * passthrough
- * 
- *   * Implies that in the current configuration, the sub-class is not interested in modifying the buffers.
- *   * Elements which are always in passthrough mode whenever the same caps has been negotiated on both pads can set the class variable passthrough_on_same_caps to have this behaviour automatically.
- * 
- * * always_in_place
- *   * Determines whether a non-writable buffer will be copied before passing
- *     to the transform_ip function.
- * 
- *   * Implied %TRUE if no transform function is implemented.
- *   * Implied %FALSE if ONLY transform function is implemented.
- */
 export class BaseTransform {
-    /* Own properties of GstBase-1.0.GstBase.BaseTransform */
+    /* Properties of GstBase-1.0.GstBase.BaseTransform */
     qos: boolean
-    /* Own fields of GstBase-1.0.GstBase.BaseTransform */
-    element: Gst.Element
-    sinkpad: Gst.Pad
-    srcpad: Gst.Pad
-    have_segment: boolean
-    segment: Gst.Segment
-    queued_buf: Gst.Buffer
-    /* Extended fields of Gst-1.0.Gst.Element */
+    /* Fields of Gst-1.0.Gst.Element */
     object: Gst.Object
     /**
      * Used to serialize execution of gst_element_set_state()
@@ -9866,7 +9094,7 @@ export class BaseTransform {
      * list of contexts
      */
     contexts: Gst.Context[]
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
     /**
      * object LOCK
      */
@@ -9883,16 +9111,16 @@ export class BaseTransform {
      * flags for this object
      */
     flags: number
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GstBase-1.0.GstBase.BaseTransform */
+    /* Methods of GstBase-1.0.GstBase.BaseTransform */
     /**
      * Lets #GstBaseTransform sub-classes to know the memory `allocator`
      * used by the base class and its `params`.
      * 
      * Unref the `allocator` after use it.
      */
-    get_allocator(): [ /* allocator */ Gst.Allocator, /* params */ Gst.AllocationParams ]
+    get_allocator(): [ /* allocator */ Gst.Allocator | null, /* params */ Gst.AllocationParams | null ]
     get_buffer_pool(): Gst.BufferPool
     /**
      * See if `trans` is configured as a in_place transform.
@@ -9994,7 +9222,7 @@ export class BaseTransform {
      * @param updated_caps An updated version of the srcpad caps to be pushed downstream
      */
     update_src_caps(updated_caps: Gst.Caps): boolean
-    /* Extended methods of Gst-1.0.Gst.Element */
+    /* Methods of Gst-1.0.Gst.Element */
     /**
      * Abort the state change of the element. This function is used
      * by elements that do asynchronous state changes and find out
@@ -10126,7 +9354,7 @@ export class BaseTransform {
      * @param pad the #GstPad to find a compatible one for.
      * @param caps the #GstCaps to use as a filter.
      */
-    get_compatible_pad(pad: Gst.Pad, caps: Gst.Caps | null): Gst.Pad | null
+    get_compatible_pad(pad: Gst.Pad, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Retrieves a pad template from `element` that is compatible with `compattempl`.
      * Pads from compatible templates can be linked together.
@@ -10214,7 +9442,7 @@ export class BaseTransform {
      * element to playing, the preroll will complete and playback will start.
      * @param timeout a #GstClockTime to specify the timeout for an async           state change or %GST_CLOCK_TIME_NONE for infinite timeout.
      */
-    get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State, /* pending */ Gst.State ]
+    get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State | null, /* pending */ Gst.State | null ]
     /**
      * Retrieves a pad from `element` by name. This version only retrieves
      * already-existing (i.e. 'static') pads.
@@ -10278,7 +9506,7 @@ export class BaseTransform {
      * @param dest the #GstElement containing the destination pad.
      * @param filter the #GstCaps to filter the link,     or %NULL for no filter.
      */
-    link_filtered(dest: Gst.Element, filter: Gst.Caps | null): boolean
+    link_filtered(dest: Gst.Element, filter?: Gst.Caps | null): boolean
     /**
      * Links the two named pads of the source and destination elements.
      * Side effect is that if one of the pads has no parent, it becomes a
@@ -10288,7 +9516,7 @@ export class BaseTransform {
      * @param dest the #GstElement containing the destination pad.
      * @param destpadname the name of the #GstPad in destination element, or %NULL for any pad.
      */
-    link_pads(srcpadname: string | null, dest: Gst.Element, destpadname: string | null): boolean
+    link_pads(srcpadname: string | null, dest: Gst.Element, destpadname?: string | null): boolean
     /**
      * Links the two named pads of the source and destination elements. Side effect
      * is that if one of the pads has no parent, it becomes a child of the parent of
@@ -10299,7 +9527,7 @@ export class BaseTransform {
      * @param destpadname the name of the #GstPad in destination element     or %NULL for any pad.
      * @param filter the #GstCaps to filter the link,     or %NULL for no filter.
      */
-    link_pads_filtered(srcpadname: string | null, dest: Gst.Element, destpadname: string | null, filter: Gst.Caps | null): boolean
+    link_pads_filtered(srcpadname: string | null, dest: Gst.Element, destpadname?: string | null, filter?: Gst.Caps | null): boolean
     /**
      * Links the two named pads of the source and destination elements.
      * Side effect is that if one of the pads has no parent, it becomes a
@@ -10423,7 +9651,7 @@ export class BaseTransform {
      * using this function.
      * @param format the #GstFormat requested
      */
-    query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number ]
+    query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number | null ]
     /**
      * Queries an element (usually top-level pipeline or playbin element) for the
      * stream position in nanoseconds. This will be a value between 0 and the
@@ -10436,7 +9664,7 @@ export class BaseTransform {
      * it in gst_element_query().
      * @param format the #GstFormat requested
      */
-    query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number ]
+    query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number | null ]
     /**
      * Makes the element free the previously requested pad as obtained
      * with gst_element_request_pad().
@@ -10480,7 +9708,7 @@ export class BaseTransform {
      * @param name the name of the request #GstPad to retrieve. Can be %NULL.
      * @param caps the caps of the pad we want to request. Can be %NULL.
      */
-    request_pad(templ: Gst.PadTemplate, name: string | null, caps: Gst.Caps | null): Gst.Pad | null
+    request_pad(templ: Gst.PadTemplate, name?: string | null, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Sends a seek event to an element. See gst_event_new_seek() for the details of
      * the parameters. The seek event is sent to the element using
@@ -10542,14 +9770,14 @@ export class BaseTransform {
      * MT safe.
      * @param bus the #GstBus to set.
      */
-    set_bus(bus: Gst.Bus | null): void
+    set_bus(bus?: Gst.Bus | null): void
     /**
      * Sets the clock for the element. This function increases the
      * refcount on the clock. Any previously set clock on the object
      * is unreffed.
      * @param clock the #GstClock to set for the element.
      */
-    set_clock(clock: Gst.Clock | null): boolean
+    set_clock(clock?: Gst.Clock | null): boolean
     /**
      * Sets the context of the element. Increases the refcount of the context.
      * 
@@ -10625,7 +9853,7 @@ export class BaseTransform {
      * @param destpadname the name of the #GstPad in destination element.
      */
     unlink_pads(srcpadname: string, dest: Gst.Element, destpadname: string): void
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -10643,7 +9871,7 @@ export class BaseTransform {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -10773,7 +10001,7 @@ export class BaseTransform {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -10810,7 +10038,7 @@ export class BaseTransform {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -10856,7 +10084,7 @@ export class BaseTransform {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -11025,7 +10253,7 @@ export class BaseTransform {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -11103,13 +10331,13 @@ export class BaseTransform {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of GstBase-1.0.GstBase.BaseTransform */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GstBase-1.0.GstBase.BaseTransform */
     vfunc_accept_caps(direction: Gst.PadDirection, caps: Gst.Caps): boolean
     vfunc_before_transform(buffer: Gst.Buffer): void
     vfunc_copy_metadata(input: Gst.Buffer, outbuf: Gst.Buffer): boolean
     vfunc_decide_allocation(query: Gst.Query): boolean
-    vfunc_filter_meta(query: Gst.Query, api: GObject.GType, params: Gst.Structure): boolean
+    vfunc_filter_meta(query: Gst.Query, api: GObject.Type, params: Gst.Structure): boolean
     vfunc_fixate_caps(direction: Gst.PadDirection, caps: Gst.Caps, othercaps: Gst.Caps): Gst.Caps
     vfunc_generate_output(): [ /* returnType */ Gst.FlowReturn, /* outbuf */ Gst.Buffer ]
     vfunc_get_unit_size(caps: Gst.Caps): [ /* returnType */ boolean, /* size */ number ]
@@ -11125,7 +10353,6 @@ export class BaseTransform {
      * random linked sinkpad of this element.
      * 
      * Please note that some queries might need a running pipeline to work.
-     * @virtual 
      * @param query the #GstQuery.
      */
     vfunc_query(query: Gst.Query): boolean
@@ -11140,13 +10367,12 @@ export class BaseTransform {
     vfunc_transform_ip(buf: Gst.Buffer): Gst.FlowReturn
     vfunc_transform_meta(outbuf: Gst.Buffer, meta: Gst.Meta, inbuf: Gst.Buffer): boolean
     vfunc_transform_size(direction: Gst.PadDirection, caps: Gst.Caps, size: number, othercaps: Gst.Caps): [ /* returnType */ boolean, /* othersize */ number ]
-    /* Extended virtual methods of Gst-1.0.Gst.Element */
+    /* Virtual methods of Gst-1.0.Gst.Element */
     /**
      * Perform `transition` on `element`.
      * 
      * This function must be called with STATE_LOCK held and is mainly used
      * internally.
-     * @virtual 
      * @param transition the requested transition
      */
     vfunc_change_state(transition: Gst.StateChange): Gst.StateChangeReturn
@@ -11171,10 +10397,9 @@ export class BaseTransform {
      * some sink elements might not be able to complete their state change because
      * an element is not producing data to complete the preroll. When setting the
      * element to playing, the preroll will complete and playback will start.
-     * @virtual 
      * @param timeout a #GstClockTime to specify the timeout for an async           state change or %GST_CLOCK_TIME_NONE for infinite timeout.
      */
-    vfunc_get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State, /* pending */ Gst.State ]
+    vfunc_get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State | null, /* pending */ Gst.State | null ]
     /**
      * Use this function to signal that the element does not expect any more pads
      * to show up in the current pipeline. This function should be called whenever
@@ -11185,7 +10410,6 @@ export class BaseTransform {
      * This function emits the #GstElement::no-more-pads signal.
      * 
      * MT safe.
-     * @virtual 
      */
     vfunc_no_more_pads(): void
     vfunc_pad_added(pad: Gst.Pad): void
@@ -11194,7 +10418,6 @@ export class BaseTransform {
      * Post a message on the element's #GstBus. This function takes ownership of the
      * message; if you want to access the message after this call, you should add an
      * additional reference before calling.
-     * @virtual 
      * @param message a #GstMessage to post
      */
     vfunc_post_message(message: Gst.Message): boolean
@@ -11202,7 +10425,6 @@ export class BaseTransform {
      * Get the clock provided by the given element.
      * > An element is only required to provide a clock in the PAUSED
      * > state. Some elements can provide a clock in other states.
-     * @virtual 
      */
     vfunc_provide_clock(): Gst.Clock | null
     /**
@@ -11213,7 +10435,6 @@ export class BaseTransform {
      * random linked sinkpad of this element.
      * 
      * Please note that some queries might need a running pipeline to work.
-     * @virtual 
      * @param query the #GstQuery.
      */
     vfunc_query(query: Gst.Query): boolean
@@ -11224,12 +10445,11 @@ export class BaseTransform {
      * gst_element_factory_get_static_pad_templates().
      * 
      * The pad should be released with gst_element_release_request_pad().
-     * @virtual 
      * @param templ a #GstPadTemplate of which we want a pad of.
      * @param name the name of the request #GstPad to retrieve. Can be %NULL.
      * @param caps the caps of the pad we want to request. Can be %NULL.
      */
-    vfunc_request_new_pad(templ: Gst.PadTemplate, name: string | null, caps: Gst.Caps | null): Gst.Pad | null
+    vfunc_request_new_pad(templ: Gst.PadTemplate, name?: string | null, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Sends an event to an element. If the element doesn't implement an
      * event handler, the event will be pushed on a random linked sink pad for
@@ -11239,7 +10459,6 @@ export class BaseTransform {
      * gst_event_ref() it if you want to reuse the event after this call.
      * 
      * MT safe.
-     * @virtual 
      * @param event the #GstEvent to send to the element.
      */
     vfunc_send_event(event: Gst.Event): boolean
@@ -11248,23 +10467,20 @@ export class BaseTransform {
      * For internal use only, unless you're testing elements.
      * 
      * MT safe.
-     * @virtual 
      * @param bus the #GstBus to set.
      */
-    vfunc_set_bus(bus: Gst.Bus | null): void
+    vfunc_set_bus(bus?: Gst.Bus | null): void
     /**
      * Sets the clock for the element. This function increases the
      * refcount on the clock. Any previously set clock on the object
      * is unreffed.
-     * @virtual 
      * @param clock the #GstClock to set for the element.
      */
-    vfunc_set_clock(clock: Gst.Clock | null): boolean
+    vfunc_set_clock(clock?: Gst.Clock | null): boolean
     /**
      * Sets the context of the element. Increases the refcount of the context.
      * 
      * MT safe.
-     * @virtual 
      * @param context the #GstContext to set.
      */
     vfunc_set_context(context: Gst.Context): void
@@ -11282,14 +10498,13 @@ export class BaseTransform {
      * 
      * State changes to %GST_STATE_READY or %GST_STATE_NULL never return
      * #GST_STATE_CHANGE_ASYNC.
-     * @virtual 
      * @param state the element's new #GstState.
      */
     vfunc_set_state(state: Gst.State): Gst.StateChangeReturn
     vfunc_state_changed(oldstate: Gst.State, newstate: Gst.State, pending: Gst.State): void
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -11306,17 +10521,15 @@ export class BaseTransform {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gst-1.0.Gst.Element */
+    /* Signals of Gst-1.0.Gst.Element */
     /**
      * This signals that the element will not generate more dynamic pads.
      * Note that this signal will usually be emitted from the context of
      * the streaming thread.
-     * @signal 
      */
     connect(sigName: "no-more-pads", callback: (($obj: BaseTransform) => void)): number
     connect_after(sigName: "no-more-pads", callback: (($obj: BaseTransform) => void)): number
@@ -11327,7 +10540,6 @@ export class BaseTransform {
      * mind that if you add new elements to the pipeline in the signal handler
      * you will need to set them to the desired target state with
      * gst_element_set_state() or gst_element_sync_state_with_parent().
-     * @signal 
      * @param new_pad the pad that has been added
      */
     connect(sigName: "pad-added", callback: (($obj: BaseTransform, new_pad: Gst.Pad) => void)): number
@@ -11335,25 +10547,23 @@ export class BaseTransform {
     emit(sigName: "pad-added", new_pad: Gst.Pad): void
     /**
      * a #GstPad has been removed from the element
-     * @signal 
      * @param old_pad the pad that has been removed
      */
     connect(sigName: "pad-removed", callback: (($obj: BaseTransform, old_pad: Gst.Pad) => void)): number
     connect_after(sigName: "pad-removed", callback: (($obj: BaseTransform, old_pad: Gst.Pad) => void)): number
     emit(sigName: "pad-removed", old_pad: Gst.Pad): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: BaseTransform, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: BaseTransform, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -11380,7 +10590,6 @@ export class BaseTransform {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: BaseTransform, pspec: GObject.ParamSpec) => void)): number
@@ -11388,64 +10597,20 @@ export class BaseTransform {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::qos", callback: (($obj: BaseTransform, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::qos", callback: (($obj: BaseTransform, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: BaseTransform_ConstructProps)
     _init (config?: BaseTransform_ConstructProps): void
-    static $gtype: GObject.GType<BaseTransform>
+    static $gtype: GObject.Type
 }
 export interface CollectPads_ConstructProps extends Gst.Object_ConstructProps {
 }
-/**
- * Manages a set of pads that operate in collect mode. This means that control
- * is given to the manager of this object when all pads have data.
- * 
- *   * Collectpads are created with gst_collect_pads_new(). A callback should then
- *     be installed with gst_collect_pads_set_function ().
- * 
- *   * Pads are added to the collection with gst_collect_pads_add_pad()/
- *     gst_collect_pads_remove_pad(). The pad has to be a sinkpad. When added,
- *     the chain, event and query functions of the pad are overridden. The
- *     element_private of the pad is used to store private information for the
- *     collectpads.
- * 
- *   * For each pad, data is queued in the _chain function or by
- *     performing a pull_range.
- * 
- *   * When data is queued on all pads in waiting mode, the callback function is called.
- * 
- *   * Data can be dequeued from the pad with the gst_collect_pads_pop() method.
- *     One can peek at the data with the gst_collect_pads_peek() function.
- *     These functions will return %NULL if the pad received an EOS event. When all
- *     pads return %NULL from a gst_collect_pads_peek(), the element can emit an EOS
- *     event itself.
- * 
- *   * Data can also be dequeued in byte units using the gst_collect_pads_available(),
- *     gst_collect_pads_read_buffer() and gst_collect_pads_flush() calls.
- * 
- *   * Elements should call gst_collect_pads_start() and gst_collect_pads_stop() in
- *     their state change functions to start and stop the processing of the collectpads.
- *     The gst_collect_pads_stop() call should be called before calling the parent
- *     element state change function in the PAUSED_TO_READY state change to ensure
- *     no pad is blocked and the element can finish streaming.
- * 
- *   * gst_collect_pads_set_waiting() sets a pad to waiting or non-waiting mode.
- *     CollectPads element is not waiting for data to be collected on non-waiting pads.
- *     Thus these pads may but need not have data when the callback is called.
- *     All pads are in waiting mode by default.
- */
 export class CollectPads {
-    /* Own fields of GstBase-1.0.GstBase.CollectPads */
-    object: Gst.Object
-    /**
-     * #GList of #GstCollectData managed
-     *   by this #GstCollectPads.
-     */
-    data: CollectData[]
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
+    object: GObject.InitiallyUnowned
     /**
      * object LOCK
      */
@@ -11462,9 +10627,9 @@ export class CollectPads {
      * flags for this object
      */
     flags: number
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GstBase-1.0.GstBase.CollectPads */
+    /* Methods of GstBase-1.0.GstBase.CollectPads */
     /**
      * Add a pad to the collection of collect pads. The pad has to be
      * a sinkpad. The refcount of the pad is incremented. Use
@@ -11519,7 +10684,7 @@ export class CollectPads {
      * @param buf buffer being clipped
      * @param user_data user data (unused)
      */
-    clip_running_time(cdata: CollectData, buf: Gst.Buffer, user_data: object | null): [ /* returnType */ Gst.FlowReturn, /* outbuf */ Gst.Buffer ]
+    clip_running_time(cdata: CollectData, buf: Gst.Buffer, user_data?: object | null): [ /* returnType */ Gst.FlowReturn, /* outbuf */ Gst.Buffer | null ]
     /**
      * Default #GstCollectPads event handling that elements should always
      * chain up to to ensure proper operation.  Element might however indicate
@@ -11715,7 +10880,7 @@ export class CollectPads {
      * @param size the number of bytes to read
      */
     take_buffer(data: CollectData, size: number): Gst.Buffer | null
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -11733,7 +10898,7 @@ export class CollectPads {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -11863,7 +11028,7 @@ export class CollectPads {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -11900,7 +11065,7 @@ export class CollectPads {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -11946,7 +11111,7 @@ export class CollectPads {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -12115,7 +11280,7 @@ export class CollectPads {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -12193,10 +11358,10 @@ export class CollectPads {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -12213,24 +11378,22 @@ export class CollectPads {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: CollectPads, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: CollectPads, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -12257,14 +11420,13 @@ export class CollectPads {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: CollectPads, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: CollectPads, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -12272,28 +11434,18 @@ export class CollectPads {
     _init (config?: CollectPads_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(): CollectPads
-    static $gtype: GObject.GType<CollectPads>
+    static $gtype: GObject.Type
 }
 export interface DataQueue_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * #GstDataQueue is an object that handles threadsafe queueing of objects. It
- * also provides size-related functionality. This object should be used for
- * any #GstElement that wishes to provide some sort of queueing functionality.
- */
 export class DataQueue {
-    /* Own properties of GstBase-1.0.GstBase.DataQueue */
+    /* Properties of GstBase-1.0.GstBase.DataQueue */
     readonly current_level_bytes: number
     readonly current_level_time: number
     readonly current_level_visible: number
-    /* Own fields of GstBase-1.0.GstBase.DataQueue */
-    /**
-     * the parent structure
-     */
-    object: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -12339,7 +11491,7 @@ export class DataQueue {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -12508,7 +11660,7 @@ export class DataQueue {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -12596,11 +11748,11 @@ export class DataQueue {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of GstBase-1.0.GstBase.DataQueue */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GstBase-1.0.GstBase.DataQueue */
     vfunc_empty(): void
     vfunc_full(): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -12617,18 +11769,16 @@ export class DataQueue {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of GstBase-1.0.GstBase.DataQueue */
+    /* Signals of GstBase-1.0.GstBase.DataQueue */
     /**
      * Reports that the queue became empty (empty).
      * A queue is empty if the total amount of visible items inside it (num-visible, time,
      * size) is lower than the boundary values which can be set through the GObject
      * properties.
-     * @signal 
      */
     connect(sigName: "empty", callback: (($obj: DataQueue) => void)): number
     connect_after(sigName: "empty", callback: (($obj: DataQueue) => void)): number
@@ -12638,12 +11788,11 @@ export class DataQueue {
      * A queue is full if the total amount of data inside it (num-visible, time,
      * size) is higher than the boundary values which can be set through the GObject
      * properties.
-     * @signal 
      */
     connect(sigName: "full", callback: (($obj: DataQueue) => void)): number
     connect_after(sigName: "full", callback: (($obj: DataQueue) => void)): number
     emit(sigName: "full"): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -12670,7 +11819,6 @@ export class DataQueue {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: DataQueue, pspec: GObject.ParamSpec) => void)): number
@@ -12682,44 +11830,21 @@ export class DataQueue {
     connect_after(sigName: "notify::current-level-time", callback: (($obj: DataQueue, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::current-level-visible", callback: (($obj: DataQueue, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::current-level-visible", callback: (($obj: DataQueue, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: DataQueue_ConstructProps)
     _init (config?: DataQueue_ConstructProps): void
-    static $gtype: GObject.GType<DataQueue>
+    static $gtype: GObject.Type
 }
 export interface PushSrc_ConstructProps extends BaseSrc_ConstructProps {
 }
-/**
- * This class is mostly useful for elements that cannot do
- * random access, or at least very slowly. The source usually
- * prefers to push out a fixed size buffer.
- * 
- * Subclasses usually operate in a format that is different from the
- * default GST_FORMAT_BYTES format of #GstBaseSrc.
- * 
- * Classes extending this base class will usually be scheduled
- * in a push based mode. If the peer accepts to operate without
- * offsets and within the limits of the allowed block size, this
- * class can operate in getrange based mode automatically. To make
- * this possible, the subclass should implement and override the
- * SCHEDULING query.
- * 
- * The subclass should extend the methods from the baseclass in
- * addition to the ::create method.
- * 
- * Seeking, flushing, scheduling and sync is all handled by this
- * base class.
- */
 export class PushSrc {
-    /* Extended properties of GstBase-1.0.GstBase.BaseSrc */
+    /* Properties of GstBase-1.0.GstBase.BaseSrc */
     do_timestamp: boolean
-    /* Own fields of GstBase-1.0.GstBase.PushSrc */
-    parent: BaseSrc
-    /* Extended fields of GstBase-1.0.GstBase.BaseSrc */
+    /* Fields of GstBase-1.0.GstBase.BaseSrc */
     element: Gst.Element
     srcpad: Gst.Pad
     live_lock: GLib.Mutex
@@ -12738,7 +11863,7 @@ export class PushSrc {
     running: boolean
     pending_seek: Gst.Event
     priv: BaseSrcPrivate
-    /* Extended fields of Gst-1.0.Gst.Element */
+    /* Fields of Gst-1.0.Gst.Element */
     object: Gst.Object
     /**
      * Used to serialize execution of gst_element_set_state()
@@ -12827,7 +11952,7 @@ export class PushSrc {
      * list of contexts
      */
     contexts: Gst.Context[]
-    /* Extended fields of Gst-1.0.Gst.Object */
+    /* Fields of Gst-1.0.Gst.Object */
     /**
      * object LOCK
      */
@@ -12837,19 +11962,23 @@ export class PushSrc {
      */
     name: string
     /**
+     * this object's parent, weak ref
+     */
+    parent: Gst.Object
+    /**
      * flags for this object
      */
     flags: number
-    /* Extended fields of GObject-2.0.GObject.InitiallyUnowned */
+    /* Fields of GObject-2.0.GObject.InitiallyUnowned */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of GstBase-1.0.GstBase.BaseSrc */
+    /* Methods of GstBase-1.0.GstBase.BaseSrc */
     /**
      * Lets #GstBaseSrc sub-classes to know the memory `allocator`
      * used by the base class and its `params`.
      * 
      * Unref the `allocator` after usage.
      */
-    get_allocator(): [ /* allocator */ Gst.Allocator, /* params */ Gst.AllocationParams ]
+    get_allocator(): [ /* allocator */ Gst.Allocator | null, /* params */ Gst.AllocationParams | null ]
     /**
      * Get the number of bytes that `src` will push out with each buffer.
      */
@@ -12883,7 +12012,7 @@ export class PushSrc {
      * 
      * This function is mostly used by subclasses.
      */
-    query_latency(): [ /* returnType */ boolean, /* live */ boolean, /* min_latency */ Gst.ClockTime, /* max_latency */ Gst.ClockTime ]
+    query_latency(): [ /* returnType */ boolean, /* live */ boolean | null, /* min_latency */ Gst.ClockTime | null, /* max_latency */ Gst.ClockTime | null ]
     /**
      * Configure async behaviour in `src,` no state change will block. The open,
      * close, start, stop, play and pause virtual methods will be executed in a
@@ -12997,7 +12126,7 @@ export class PushSrc {
      * returns %GST_FLOW_FLUSHING).
      */
     wait_playing(): Gst.FlowReturn
-    /* Extended methods of Gst-1.0.Gst.Element */
+    /* Methods of Gst-1.0.Gst.Element */
     /**
      * Abort the state change of the element. This function is used
      * by elements that do asynchronous state changes and find out
@@ -13129,7 +12258,7 @@ export class PushSrc {
      * @param pad the #GstPad to find a compatible one for.
      * @param caps the #GstCaps to use as a filter.
      */
-    get_compatible_pad(pad: Gst.Pad, caps: Gst.Caps | null): Gst.Pad | null
+    get_compatible_pad(pad: Gst.Pad, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Retrieves a pad template from `element` that is compatible with `compattempl`.
      * Pads from compatible templates can be linked together.
@@ -13217,7 +12346,7 @@ export class PushSrc {
      * element to playing, the preroll will complete and playback will start.
      * @param timeout a #GstClockTime to specify the timeout for an async           state change or %GST_CLOCK_TIME_NONE for infinite timeout.
      */
-    get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State, /* pending */ Gst.State ]
+    get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State | null, /* pending */ Gst.State | null ]
     /**
      * Retrieves a pad from `element` by name. This version only retrieves
      * already-existing (i.e. 'static') pads.
@@ -13281,7 +12410,7 @@ export class PushSrc {
      * @param dest the #GstElement containing the destination pad.
      * @param filter the #GstCaps to filter the link,     or %NULL for no filter.
      */
-    link_filtered(dest: Gst.Element, filter: Gst.Caps | null): boolean
+    link_filtered(dest: Gst.Element, filter?: Gst.Caps | null): boolean
     /**
      * Links the two named pads of the source and destination elements.
      * Side effect is that if one of the pads has no parent, it becomes a
@@ -13291,7 +12420,7 @@ export class PushSrc {
      * @param dest the #GstElement containing the destination pad.
      * @param destpadname the name of the #GstPad in destination element, or %NULL for any pad.
      */
-    link_pads(srcpadname: string | null, dest: Gst.Element, destpadname: string | null): boolean
+    link_pads(srcpadname: string | null, dest: Gst.Element, destpadname?: string | null): boolean
     /**
      * Links the two named pads of the source and destination elements. Side effect
      * is that if one of the pads has no parent, it becomes a child of the parent of
@@ -13302,7 +12431,7 @@ export class PushSrc {
      * @param destpadname the name of the #GstPad in destination element     or %NULL for any pad.
      * @param filter the #GstCaps to filter the link,     or %NULL for no filter.
      */
-    link_pads_filtered(srcpadname: string | null, dest: Gst.Element, destpadname: string | null, filter: Gst.Caps | null): boolean
+    link_pads_filtered(srcpadname: string | null, dest: Gst.Element, destpadname?: string | null, filter?: Gst.Caps | null): boolean
     /**
      * Links the two named pads of the source and destination elements.
      * Side effect is that if one of the pads has no parent, it becomes a
@@ -13426,7 +12555,7 @@ export class PushSrc {
      * using this function.
      * @param format the #GstFormat requested
      */
-    query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number ]
+    query_duration(format: Gst.Format): [ /* returnType */ boolean, /* duration */ number | null ]
     /**
      * Queries an element (usually top-level pipeline or playbin element) for the
      * stream position in nanoseconds. This will be a value between 0 and the
@@ -13439,7 +12568,7 @@ export class PushSrc {
      * it in gst_element_query().
      * @param format the #GstFormat requested
      */
-    query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number ]
+    query_position(format: Gst.Format): [ /* returnType */ boolean, /* cur */ number | null ]
     /**
      * Makes the element free the previously requested pad as obtained
      * with gst_element_request_pad().
@@ -13483,7 +12612,7 @@ export class PushSrc {
      * @param name the name of the request #GstPad to retrieve. Can be %NULL.
      * @param caps the caps of the pad we want to request. Can be %NULL.
      */
-    request_pad(templ: Gst.PadTemplate, name: string | null, caps: Gst.Caps | null): Gst.Pad | null
+    request_pad(templ: Gst.PadTemplate, name?: string | null, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Sends a seek event to an element. See gst_event_new_seek() for the details of
      * the parameters. The seek event is sent to the element using
@@ -13545,14 +12674,14 @@ export class PushSrc {
      * MT safe.
      * @param bus the #GstBus to set.
      */
-    set_bus(bus: Gst.Bus | null): void
+    set_bus(bus?: Gst.Bus | null): void
     /**
      * Sets the clock for the element. This function increases the
      * refcount on the clock. Any previously set clock on the object
      * is unreffed.
      * @param clock the #GstClock to set for the element.
      */
-    set_clock(clock: Gst.Clock | null): boolean
+    set_clock(clock?: Gst.Clock | null): boolean
     /**
      * Sets the context of the element. Increases the refcount of the context.
      * 
@@ -13628,7 +12757,7 @@ export class PushSrc {
      * @param destpadname the name of the #GstPad in destination element.
      */
     unlink_pads(srcpadname: string, dest: Gst.Element, destpadname: string): void
-    /* Extended methods of Gst-1.0.Gst.Object */
+    /* Methods of Gst-1.0.Gst.Object */
     /**
      * Attach the #GstControlBinding to the object. If there already was a
      * #GstControlBinding for this property it will be replaced.
@@ -13646,7 +12775,7 @@ export class PushSrc {
      * @param error the GError.
      * @param debug an additional debug information string, or %NULL
      */
-    default_error(error: GLib.Error, debug: string | null): void
+    default_error(error: GLib.Error, debug?: string | null): void
     /**
      * Gets the corresponding #GstControlBinding for the property. This should be
      * unreferenced again after use.
@@ -13776,7 +12905,7 @@ export class PushSrc {
      * retains ownership of the name it sent.
      * @param name new name of object
      */
-    set_name(name: string | null): boolean
+    set_name(name?: string | null): boolean
     /**
      * Sets the parent of `object` to `parent`. The object's reference count will
      * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
@@ -13813,7 +12942,7 @@ export class PushSrc {
      * this might deadlock the dispose function.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -13859,7 +12988,7 @@ export class PushSrc {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -14028,7 +13157,7 @@ export class PushSrc {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -14106,8 +13235,8 @@ export class PushSrc {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of GstBase-1.0.GstBase.PushSrc */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GstBase-1.0.GstBase.PushSrc */
     vfunc_alloc(buf: Gst.Buffer): Gst.FlowReturn
     /* Function overloads */
     vfunc_alloc(offset: number, size: number, buf: Gst.Buffer): Gst.FlowReturn
@@ -14116,7 +13245,6 @@ export class PushSrc {
     /**
      * Ask the subclass to create a buffer with `offset` and `size,` the default
      * implementation will call alloc and fill.
-     * @virtual 
      * @param offset 
      * @param size 
      */
@@ -14134,16 +13262,14 @@ export class PushSrc {
      * random linked sinkpad of this element.
      * 
      * Please note that some queries might need a running pipeline to work.
-     * @virtual 
      * @param query the #GstQuery.
      */
     vfunc_query(query: Gst.Query): boolean
-    /* Extended virtual methods of GstBase-1.0.GstBase.BaseSrc */
+    /* Virtual methods of GstBase-1.0.GstBase.BaseSrc */
     vfunc_alloc(offset: number, size: number, buf: Gst.Buffer): Gst.FlowReturn
     /**
      * Ask the subclass to create a buffer with `offset` and `size,` the default
      * implementation will call alloc and fill.
-     * @virtual 
      * @param offset 
      * @param size 
      */
@@ -14158,7 +13284,6 @@ export class PushSrc {
     /**
      * Given `buffer,` return `start` and `end` time when it should be pushed
      * out. The base class will sync on the clock using these times.
-     * @virtual 
      * @param buffer 
      */
     vfunc_get_times(buffer: Gst.Buffer): [ /* start */ Gst.ClockTime, /* end */ Gst.ClockTime ]
@@ -14175,13 +13300,11 @@ export class PushSrc {
      * random linked sinkpad of this element.
      * 
      * Please note that some queries might need a running pipeline to work.
-     * @virtual 
      * @param query the #GstQuery.
      */
     vfunc_query(query: Gst.Query): boolean
     /**
      * Set new caps on the basesrc source pad.
-     * @virtual 
      * @param caps a #GstCaps
      */
     vfunc_set_caps(caps: Gst.Caps): boolean
@@ -14189,13 +13312,12 @@ export class PushSrc {
     vfunc_stop(): boolean
     vfunc_unlock(): boolean
     vfunc_unlock_stop(): boolean
-    /* Extended virtual methods of Gst-1.0.Gst.Element */
+    /* Virtual methods of Gst-1.0.Gst.Element */
     /**
      * Perform `transition` on `element`.
      * 
      * This function must be called with STATE_LOCK held and is mainly used
      * internally.
-     * @virtual 
      * @param transition the requested transition
      */
     vfunc_change_state(transition: Gst.StateChange): Gst.StateChangeReturn
@@ -14220,10 +13342,9 @@ export class PushSrc {
      * some sink elements might not be able to complete their state change because
      * an element is not producing data to complete the preroll. When setting the
      * element to playing, the preroll will complete and playback will start.
-     * @virtual 
      * @param timeout a #GstClockTime to specify the timeout for an async           state change or %GST_CLOCK_TIME_NONE for infinite timeout.
      */
-    vfunc_get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State, /* pending */ Gst.State ]
+    vfunc_get_state(timeout: Gst.ClockTime): [ /* returnType */ Gst.StateChangeReturn, /* state */ Gst.State | null, /* pending */ Gst.State | null ]
     /**
      * Use this function to signal that the element does not expect any more pads
      * to show up in the current pipeline. This function should be called whenever
@@ -14234,7 +13355,6 @@ export class PushSrc {
      * This function emits the #GstElement::no-more-pads signal.
      * 
      * MT safe.
-     * @virtual 
      */
     vfunc_no_more_pads(): void
     vfunc_pad_added(pad: Gst.Pad): void
@@ -14243,7 +13363,6 @@ export class PushSrc {
      * Post a message on the element's #GstBus. This function takes ownership of the
      * message; if you want to access the message after this call, you should add an
      * additional reference before calling.
-     * @virtual 
      * @param message a #GstMessage to post
      */
     vfunc_post_message(message: Gst.Message): boolean
@@ -14251,7 +13370,6 @@ export class PushSrc {
      * Get the clock provided by the given element.
      * > An element is only required to provide a clock in the PAUSED
      * > state. Some elements can provide a clock in other states.
-     * @virtual 
      */
     vfunc_provide_clock(): Gst.Clock | null
     /**
@@ -14262,7 +13380,6 @@ export class PushSrc {
      * random linked sinkpad of this element.
      * 
      * Please note that some queries might need a running pipeline to work.
-     * @virtual 
      * @param query the #GstQuery.
      */
     vfunc_query(query: Gst.Query): boolean
@@ -14273,12 +13390,11 @@ export class PushSrc {
      * gst_element_factory_get_static_pad_templates().
      * 
      * The pad should be released with gst_element_release_request_pad().
-     * @virtual 
      * @param templ a #GstPadTemplate of which we want a pad of.
      * @param name the name of the request #GstPad to retrieve. Can be %NULL.
      * @param caps the caps of the pad we want to request. Can be %NULL.
      */
-    vfunc_request_new_pad(templ: Gst.PadTemplate, name: string | null, caps: Gst.Caps | null): Gst.Pad | null
+    vfunc_request_new_pad(templ: Gst.PadTemplate, name?: string | null, caps?: Gst.Caps | null): Gst.Pad | null
     /**
      * Sends an event to an element. If the element doesn't implement an
      * event handler, the event will be pushed on a random linked sink pad for
@@ -14288,7 +13404,6 @@ export class PushSrc {
      * gst_event_ref() it if you want to reuse the event after this call.
      * 
      * MT safe.
-     * @virtual 
      * @param event the #GstEvent to send to the element.
      */
     vfunc_send_event(event: Gst.Event): boolean
@@ -14297,23 +13412,20 @@ export class PushSrc {
      * For internal use only, unless you're testing elements.
      * 
      * MT safe.
-     * @virtual 
      * @param bus the #GstBus to set.
      */
-    vfunc_set_bus(bus: Gst.Bus | null): void
+    vfunc_set_bus(bus?: Gst.Bus | null): void
     /**
      * Sets the clock for the element. This function increases the
      * refcount on the clock. Any previously set clock on the object
      * is unreffed.
-     * @virtual 
      * @param clock the #GstClock to set for the element.
      */
-    vfunc_set_clock(clock: Gst.Clock | null): boolean
+    vfunc_set_clock(clock?: Gst.Clock | null): boolean
     /**
      * Sets the context of the element. Increases the refcount of the context.
      * 
      * MT safe.
-     * @virtual 
      * @param context the #GstContext to set.
      */
     vfunc_set_context(context: Gst.Context): void
@@ -14331,14 +13443,13 @@ export class PushSrc {
      * 
      * State changes to %GST_STATE_READY or %GST_STATE_NULL never return
      * #GST_STATE_CHANGE_ASYNC.
-     * @virtual 
      * @param state the element's new #GstState.
      */
     vfunc_set_state(state: Gst.State): Gst.StateChangeReturn
     vfunc_state_changed(oldstate: Gst.State, newstate: Gst.State, pending: Gst.State): void
-    /* Extended virtual methods of Gst-1.0.Gst.Object */
+    /* Virtual methods of Gst-1.0.Gst.Object */
     vfunc_deep_notify(orig: Gst.Object, pspec: GObject.ParamSpec): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -14355,17 +13466,15 @@ export class PushSrc {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gst-1.0.Gst.Element */
+    /* Signals of Gst-1.0.Gst.Element */
     /**
      * This signals that the element will not generate more dynamic pads.
      * Note that this signal will usually be emitted from the context of
      * the streaming thread.
-     * @signal 
      */
     connect(sigName: "no-more-pads", callback: (($obj: PushSrc) => void)): number
     connect_after(sigName: "no-more-pads", callback: (($obj: PushSrc) => void)): number
@@ -14376,7 +13485,6 @@ export class PushSrc {
      * mind that if you add new elements to the pipeline in the signal handler
      * you will need to set them to the desired target state with
      * gst_element_set_state() or gst_element_sync_state_with_parent().
-     * @signal 
      * @param new_pad the pad that has been added
      */
     connect(sigName: "pad-added", callback: (($obj: PushSrc, new_pad: Gst.Pad) => void)): number
@@ -14384,25 +13492,23 @@ export class PushSrc {
     emit(sigName: "pad-added", new_pad: Gst.Pad): void
     /**
      * a #GstPad has been removed from the element
-     * @signal 
      * @param old_pad the pad that has been removed
      */
     connect(sigName: "pad-removed", callback: (($obj: PushSrc, old_pad: Gst.Pad) => void)): number
     connect_after(sigName: "pad-removed", callback: (($obj: PushSrc, old_pad: Gst.Pad) => void)): number
     emit(sigName: "pad-removed", old_pad: Gst.Pad): void
-    /* Extended signals of Gst-1.0.Gst.Object */
+    /* Signals of Gst-1.0.Gst.Object */
     /**
      * The deep notify signal is used to be notified of property changes. It is
      * typically attached to the toplevel bin to receive notifications from all
      * the elements contained in that bin.
-     * @signal 
      * @param prop_object the object that originated the signal
      * @param prop the property that changed
      */
     connect(sigName: "deep-notify", callback: (($obj: PushSrc, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     connect_after(sigName: "deep-notify", callback: (($obj: PushSrc, prop_object: Gst.Object, prop: GObject.ParamSpec) => void)): number
     emit(sigName: "deep-notify", prop_object: Gst.Object, prop: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -14429,7 +13535,6 @@ export class PushSrc {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: PushSrc, pspec: GObject.ParamSpec) => void)): number
@@ -14437,31 +13542,20 @@ export class PushSrc {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::do-timestamp", callback: (($obj: PushSrc, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::do-timestamp", callback: (($obj: PushSrc, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: PushSrc_ConstructProps)
     _init (config?: PushSrc_ConstructProps): void
-    static $gtype: GObject.GType<PushSrc>
+    static $gtype: GObject.Type
 }
 export abstract class AdapterClass {
     static name: string
 }
-/**
- * The aggregator base class will handle in a thread-safe way all manners of
- * concurrent flushes, seeks, pad additions and removals, leaving to the
- * subclass the responsibility of clipping buffers, and aggregating buffers in
- * the way the implementor sees fit.
- * 
- * It will also take care of event ordering (stream-start, segment, eos).
- * 
- * Basically, a simple implementation will override `aggregate,` and call
- * _finish_buffer from inside that function.
- */
 export abstract class AggregatorClass {
-    /* Own fields of GstBase-1.0.GstBase.AggregatorClass */
+    /* Fields of GstBase-1.0.GstBase.AggregatorClass */
     parent_class: Gst.ElementClass
     flush: (aggregator: Aggregator) => Gst.FlowReturn
     clip: (aggregator: Aggregator, aggregator_pad: AggregatorPad, buf: Gst.Buffer) => Gst.Buffer
@@ -14475,7 +13569,7 @@ export abstract class AggregatorClass {
     stop: (aggregator: Aggregator) => boolean
     start: (aggregator: Aggregator) => boolean
     get_next_time: (aggregator: Aggregator) => Gst.ClockTime
-    update_src_caps: (self: Aggregator, caps: Gst.Caps) => [ /* returnType */ Gst.FlowReturn, /* ret */ Gst.Caps ]
+    update_src_caps: (self: Aggregator, caps: Gst.Caps) => [ /* returnType */ Gst.FlowReturn, /* ret */ Gst.Caps | null ]
     fixate_src_caps: (self: Aggregator, caps: Gst.Caps) => Gst.Caps
     negotiated_src_caps: (self: Aggregator, caps: Gst.Caps) => boolean
     decide_allocation: (self: Aggregator, query: Gst.Query) => boolean
@@ -14483,7 +13577,7 @@ export abstract class AggregatorClass {
     static name: string
 }
 export abstract class AggregatorPadClass {
-    /* Own fields of GstBase-1.0.GstBase.AggregatorPadClass */
+    /* Fields of GstBase-1.0.GstBase.AggregatorPadClass */
     parent_class: Gst.PadClass
     flush: (aggpad: AggregatorPad, aggregator: Aggregator) => Gst.FlowReturn
     skip_buffer: (aggpad: AggregatorPad, aggregator: Aggregator, buffer: Gst.Buffer) => boolean
@@ -14495,12 +13589,8 @@ export class AggregatorPadPrivate {
 export class AggregatorPrivate {
     static name: string
 }
-/**
- * Subclasses can override any of the available virtual methods or not, as
- * needed. At minimum `handle_frame` needs to be overridden.
- */
 export abstract class BaseParseClass {
-    /* Own fields of GstBase-1.0.GstBase.BaseParseClass */
+    /* Fields of GstBase-1.0.GstBase.BaseParseClass */
     /**
      * the parent class
      */
@@ -14519,17 +13609,8 @@ export abstract class BaseParseClass {
     src_query: (parse: BaseParse, query: Gst.Query) => boolean
     static name: string
 }
-/**
- * Frame (context) data passed to each frame parsing virtual methods.  In
- * addition to providing the data to be checked for a valid frame or an already
- * identified frame, it conveys additional metadata or control information
- * from and to the subclass w.r.t. the particular frame in question (rather
- * than global parameters).  Some of these may apply to each parsing stage, others
- * only to some a particular one.  These parameters are effectively zeroed at start
- * of each frame's processing, i.e. parsing virtual method invocation sequence.
- */
 export class BaseParseFrame {
-    /* Own fields of GstBase-1.0.GstBase.BaseParseFrame */
+    /* Fields of GstBase-1.0.GstBase.BaseParseFrame */
     /**
      * input data to be parsed for frames.
      */
@@ -14556,7 +13637,7 @@ export class BaseParseFrame {
      *   skipped in bitrate calculation.
      */
     overhead: number
-    /* Owm methods of GstBase-1.0.GstBase.BaseParseFrame */
+    /* Methods of GstBase-1.0.GstBase.BaseParseFrame */
     /**
      * Copies a #GstBaseParseFrame.
      */
@@ -14582,13 +13663,8 @@ export class BaseParseFrame {
 export class BaseParsePrivate {
     static name: string
 }
-/**
- * Subclasses can override any of the available virtual methods or not, as
- * needed. At the minimum, the `render` method should be overridden to
- * output/present buffers.
- */
 export abstract class BaseSinkClass {
-    /* Own fields of GstBase-1.0.GstBase.BaseSinkClass */
+    /* Fields of GstBase-1.0.GstBase.BaseSinkClass */
     /**
      * Element parent class
      */
@@ -14616,13 +13692,8 @@ export abstract class BaseSinkClass {
 export class BaseSinkPrivate {
     static name: string
 }
-/**
- * Subclasses can override any of the available virtual methods or not, as
- * needed. At the minimum, the `create` method should be overridden to produce
- * buffers.
- */
 export abstract class BaseSrcClass {
-    /* Own fields of GstBase-1.0.GstBase.BaseSrcClass */
+    /* Fields of GstBase-1.0.GstBase.BaseSrcClass */
     /**
      * Element parent class
      */
@@ -14651,14 +13722,8 @@ export abstract class BaseSrcClass {
 export class BaseSrcPrivate {
     static name: string
 }
-/**
- * Subclasses can override any of the available virtual methods or not, as
- * needed. At minimum either `transform` or `transform_ip` need to be overridden.
- * If the element can overwrite the input data with the results (data is of the
- * same type and quantity) it should provide `transform_ip`.
- */
 export abstract class BaseTransformClass {
-    /* Own fields of GstBase-1.0.GstBase.BaseTransformClass */
+    /* Fields of GstBase-1.0.GstBase.BaseTransformClass */
     /**
      * Element parent class
      */
@@ -14683,7 +13748,7 @@ export abstract class BaseTransformClass {
     set_caps: (trans: BaseTransform, incaps: Gst.Caps, outcaps: Gst.Caps) => boolean
     query: (trans: BaseTransform, direction: Gst.PadDirection, query: Gst.Query) => boolean
     decide_allocation: (trans: BaseTransform, query: Gst.Query) => boolean
-    filter_meta: (trans: BaseTransform, query: Gst.Query, api: GObject.GType, params: Gst.Structure) => boolean
+    filter_meta: (trans: BaseTransform, query: Gst.Query, api: GObject.Type, params: Gst.Structure) => boolean
     propose_allocation: (trans: BaseTransform, decide_query: Gst.Query, query: Gst.Query) => boolean
     transform_size: (trans: BaseTransform, direction: Gst.PadDirection, caps: Gst.Caps, size: number, othercaps: Gst.Caps) => [ /* returnType */ boolean, /* othersize */ number ]
     get_unit_size: (trans: BaseTransform, caps: Gst.Caps) => [ /* returnType */ boolean, /* size */ number ]
@@ -14704,13 +13769,8 @@ export abstract class BaseTransformClass {
 export class BaseTransformPrivate {
     static name: string
 }
-/**
- * #GstBitReader provides a bit reader that can read any number of bits
- * from a memory buffer. It provides functions for reading any number of bits
- * into 8, 16, 32 and 64 bit variables.
- */
 export class BitReader {
-    /* Own fields of GstBase-1.0.GstBase.BitReader */
+    /* Fields of GstBase-1.0.GstBase.BitReader */
     /**
      * Data from which the bit reader will
      *   read
@@ -14728,7 +13788,7 @@ export class BitReader {
      * Bit position in the current byte
      */
     bit: number
-    /* Owm methods of GstBase-1.0.GstBase.BitReader */
+    /* Methods of GstBase-1.0.GstBase.BitReader */
     /**
      * Frees a #GstBitReader instance, which was previously allocated by
      * gst_bit_reader_new().
@@ -14808,13 +13868,8 @@ export class BitReader {
     skip_to_byte(): boolean
     static name: string
 }
-/**
- * #GstBitWriter provides a bit writer that can write any number of
- * bits into a memory buffer. It provides functions for writing any
- * number of bits into 8, 16, 32 and 64 bit variables.
- */
 export class BitWriter {
-    /* Own fields of GstBase-1.0.GstBase.BitWriter */
+    /* Fields of GstBase-1.0.GstBase.BitWriter */
     /**
      * Allocated `data` for bit writer to write
      */
@@ -14823,7 +13878,7 @@ export class BitWriter {
      * Size of written `data` in bits
      */
     bit_size: number
-    /* Owm methods of GstBase-1.0.GstBase.BitWriter */
+    /* Methods of GstBase-1.0.GstBase.BitWriter */
     /**
      * Write trailing bit to align last byte of `data`. `trailing_bit` can
      * only be 1 or 0.
@@ -14906,16 +13961,8 @@ export class BitWriter {
     set_pos(pos: number): boolean
     static name: string
 }
-/**
- * #GstByteReader provides a byte reader that can read different integer and
- * floating point types from a memory buffer. It provides functions for reading
- * signed/unsigned, little/big endian integers of 8, 16, 24, 32 and 64 bits
- * and functions for reading little/big endian floating points numbers of
- * 32 and 64 bits. It also provides functions to read NUL-terminated strings
- * in various character encodings.
- */
 export class ByteReader {
-    /* Own fields of GstBase-1.0.GstBase.ByteReader */
+    /* Fields of GstBase-1.0.GstBase.ByteReader */
     /**
      * Data from which the bit reader will
      *   read
@@ -14929,7 +13976,7 @@ export class ByteReader {
      * Current byte position
      */
     byte: number
-    /* Owm methods of GstBase-1.0.GstBase.ByteReader */
+    /* Methods of GstBase-1.0.GstBase.ByteReader */
     /**
      * Free-function: g_free
      * 
@@ -15331,16 +14378,8 @@ export class ByteReader {
     skip_string_utf8(): boolean
     static name: string
 }
-/**
- * #GstByteWriter provides a byte writer and reader that can write/read different
- * integer and floating point types to/from a memory buffer. It provides functions
- * for writing/reading signed/unsigned, little/big endian integers of 8, 16, 24,
- * 32 and 64 bits and functions for reading little/big endian floating points numbers of
- * 32 and 64 bits. It also provides functions to write/read NUL-terminated strings
- * in various character encodings.
- */
 export class ByteWriter {
-    /* Own fields of GstBase-1.0.GstBase.ByteWriter */
+    /* Fields of GstBase-1.0.GstBase.ByteWriter */
     /**
      * #GstByteReader parent
      */
@@ -15357,7 +14396,7 @@ export class ByteWriter {
      * If %FALSE no reallocations are allowed and copies of data are returned
      */
     owned: boolean
-    /* Owm methods of GstBase-1.0.GstBase.ByteWriter */
+    /* Methods of GstBase-1.0.GstBase.ByteWriter */
     /**
      * Checks if enough free space from the current write cursor is
      * available and reallocates if necessary.
@@ -15567,11 +14606,8 @@ export class ByteWriter {
     reset_and_get_data(): Uint8Array
     static name: string
 }
-/**
- * Structure used by the collect_pads.
- */
 export class CollectData {
-    /* Own fields of GstBase-1.0.GstBase.CollectData */
+    /* Fields of GstBase-1.0.GstBase.CollectData */
     /**
      * owner #GstCollectPads
      */
@@ -15598,7 +14634,7 @@ export class CollectDataPrivate {
     static name: string
 }
 export abstract class CollectPadsClass {
-    /* Own fields of GstBase-1.0.GstBase.CollectPadsClass */
+    /* Fields of GstBase-1.0.GstBase.CollectPadsClass */
     parent_class: Gst.ObjectClass
     static name: string
 }
@@ -15606,19 +14642,15 @@ export class CollectPadsPrivate {
     static name: string
 }
 export abstract class DataQueueClass {
-    /* Own fields of GstBase-1.0.GstBase.DataQueueClass */
+    /* Fields of GstBase-1.0.GstBase.DataQueueClass */
     parent_class: GObject.ObjectClass
     empty: (queue: DataQueue) => void
     full: (queue: DataQueue) => void
     _gst_reserved: object[]
     static name: string
 }
-/**
- * Structure used by #GstDataQueue. You can supply a different structure, as
- * long as the top of the structure is identical to this structure.
- */
 export class DataQueueItem {
-    /* Own fields of GstBase-1.0.GstBase.DataQueueItem */
+    /* Fields of GstBase-1.0.GstBase.DataQueueItem */
     /**
      * the #GstMiniObject to queue.
      */
@@ -15647,11 +14679,8 @@ export class DataQueueItem {
 export class DataQueuePrivate {
     static name: string
 }
-/**
- * Structure describing the size of a queue.
- */
 export class DataQueueSize {
-    /* Own fields of GstBase-1.0.GstBase.DataQueueSize */
+    /* Fields of GstBase-1.0.GstBase.DataQueueSize */
     /**
      * number of buffers
      */
@@ -15666,41 +14695,8 @@ export class DataQueueSize {
     time: number
     static name: string
 }
-/**
- * Utility struct to help handling #GstFlowReturn combination. Useful for
- * #GstElement<!-- -->s that have multiple source pads and need to combine
- * the different #GstFlowReturn for those pads.
- * 
- * #GstFlowCombiner works by using the last #GstFlowReturn for all #GstPad
- * it has in its list and computes the combined return value and provides
- * it to the caller.
- * 
- * To add a new pad to the #GstFlowCombiner use gst_flow_combiner_add_pad().
- * The new #GstPad is stored with a default value of %GST_FLOW_OK.
- * 
- * In case you want a #GstPad to be removed, use gst_flow_combiner_remove_pad().
- * 
- * Please be aware that this struct isn't thread safe as its designed to be
- *  used by demuxers, those usually will have a single thread operating it.
- * 
- * These functions will take refs on the passed #GstPad<!-- -->s.
- * 
- * Aside from reducing the user's code size, the main advantage of using this
- * helper struct is to follow the standard rules for #GstFlowReturn combination.
- * These rules are:
- * 
- * * %GST_FLOW_EOS: only if all returns are EOS too
- * * %GST_FLOW_NOT_LINKED: only if all returns are NOT_LINKED too
- * * %GST_FLOW_ERROR or below: if at least one returns an error return
- * * %GST_FLOW_NOT_NEGOTIATED: if at least one returns a not-negotiated return
- * * %GST_FLOW_FLUSHING: if at least one returns flushing
- * * %GST_FLOW_OK: otherwise
- * 
- * %GST_FLOW_ERROR or below, GST_FLOW_NOT_NEGOTIATED and GST_FLOW_FLUSHING are
- * returned immediately from the gst_flow_combiner_update_flow() function.
- */
 export class FlowCombiner {
-    /* Owm methods of GstBase-1.0.GstBase.FlowCombiner */
+    /* Methods of GstBase-1.0.GstBase.FlowCombiner */
     /**
      * Adds a new #GstPad to the #GstFlowCombiner.
      * @param pad the #GstPad that is being added
@@ -15759,13 +14755,8 @@ export class FlowCombiner {
     /* Static methods and pseudo-constructors */
     static new(): FlowCombiner
 }
-/**
- * Subclasses can override any of the available virtual methods or not, as
- * needed. At the minimum, the `fill` method should be overridden to produce
- * buffers.
- */
 export abstract class PushSrcClass {
-    /* Own fields of GstBase-1.0.GstBase.PushSrcClass */
+    /* Fields of GstBase-1.0.GstBase.PushSrcClass */
     /**
      * Element parent class
      */
@@ -15775,13 +14766,8 @@ export abstract class PushSrcClass {
     fill: (src: PushSrc, buf: Gst.Buffer) => Gst.FlowReturn
     static name: string
 }
-/**
- * #GstQueueArray is an object that provides standard queue functionality
- * based on an array instead of linked lists. This reduces the overhead
- * caused by memory management by a large factor.
- */
 export class QueueArray {
-    /* Owm methods of GstBase-1.0.GstBase.QueueArray */
-    push_tail_struct(p_struct: object | null): void
+    /* Methods of GstBase-1.0.GstBase.QueueArray */
+    push_tail_struct(p_struct?: object | null): void
     static name: string
 }

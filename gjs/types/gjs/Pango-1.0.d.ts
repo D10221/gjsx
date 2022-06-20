@@ -1111,7 +1111,6 @@ export enum WrapMode {
 /**
  * The bits in a #PangoFontMask correspond to fields in a
  * #PangoFontDescription that have been set.
- * @bitfield 
  */
 export enum FontMask {
     /**
@@ -1150,7 +1149,6 @@ export enum FontMask {
 /**
  * Flags influencing the shaping process.
  * These can be passed to pango_shape_with_flags().
- * @bitfield 
  */
 export enum ShapeFlags {
     /**
@@ -1168,7 +1166,6 @@ export enum ShapeFlags {
 /**
  * These flags affect how Pango treats characters that are normally
  * not visible in the output.
- * @bitfield 
  */
 export enum ShowFlags {
     /**
@@ -1292,7 +1289,7 @@ export function attr_letter_spacing_new(letter_spacing: number): Attribute
 export function attr_rise_new(rise: number): Attribute
 export function attr_scale_new(scale_factor: number): Attribute
 export function attr_shape_new(ink_rect: Rectangle, logical_rect: Rectangle): Attribute
-export function attr_shape_new_with_data(ink_rect: Rectangle, logical_rect: Rectangle, data: object | null, copy_func: AttrDataCopyFunc | null): Attribute
+export function attr_shape_new_with_data(ink_rect: Rectangle, logical_rect: Rectangle, data?: object | null, copy_func?: AttrDataCopyFunc | null): Attribute
 export function attr_show_new(flags: ShowFlags): Attribute
 export function attr_size_new(size: number): Attribute
 export function attr_size_new_absolute(size: number): Attribute
@@ -1306,29 +1303,29 @@ export function attr_underline_color_new(red: number, green: number, blue: numbe
 export function attr_underline_new(underline: Underline): Attribute
 export function attr_variant_new(variant: Variant): Attribute
 export function attr_weight_new(weight: Weight): Attribute
-export function bidi_type_for_unichar(ch: string): BidiType
+export function bidi_type_for_unichar(ch: number): BidiType
 export function break_TODO(text: string, length: number, analysis: Analysis, attrs: LogAttr[]): void
 export function default_break(text: string, length: number, analysis: Analysis | null, attrs: LogAttr, attrs_len: number): void
-export function extents_to_pixels(inclusive: Rectangle | null, nearest: Rectangle | null): void
+export function extents_to_pixels(inclusive?: Rectangle | null, nearest?: Rectangle | null): void
 export function find_base_dir(text: string, length: number): Direction
 export function find_paragraph_boundary(text: string, length: number): [ /* paragraph_delimiter_index */ number, /* next_paragraph_start */ number ]
 export function font_description_from_string(str: string): FontDescription
 export function get_log_attrs(text: string, length: number, level: number, language: Language, log_attrs: LogAttr[]): void
-export function get_mirror_char(ch: string, mirrored_ch: string): boolean
-export function gravity_get_for_matrix(matrix: Matrix | null): Gravity
+export function get_mirror_char(ch: number, mirrored_ch: number): boolean
+export function gravity_get_for_matrix(matrix?: Matrix | null): Gravity
 export function gravity_get_for_script(script: Script, base_gravity: Gravity, hint: GravityHint): Gravity
 export function gravity_get_for_script_and_width(script: Script, wide: boolean, base_gravity: Gravity, hint: GravityHint): Gravity
 export function gravity_to_rotation(gravity: Gravity): number
-export function is_zero_width(ch: string): boolean
-export function itemize(context: Context, text: string, start_index: number, length: number, attrs: AttrList, cached_iter: AttrIterator | null): Item[]
-export function itemize_with_base_dir(context: Context, base_dir: Direction, text: string, start_index: number, length: number, attrs: AttrList, cached_iter: AttrIterator | null): Item[]
-export function language_from_string(language: string | null): Language | null
+export function is_zero_width(ch: number): boolean
+export function itemize(context: Context, text: string, start_index: number, length: number, attrs: AttrList, cached_iter?: AttrIterator | null): Item[]
+export function itemize_with_base_dir(context: Context, base_dir: Direction, text: string, start_index: number, length: number, attrs: AttrList, cached_iter?: AttrIterator | null): Item[]
+export function language_from_string(language?: string | null): Language | null
 export function language_get_default(): Language
 export function log2vis_get_embedding_levels(text: string, length: number, pbase_dir: Direction): number
-export function markup_parser_finish(context: GLib.MarkupParseContext): [ /* returnType */ boolean, /* attr_list */ AttrList, /* text */ string, /* accel_char */ string ]
-export function markup_parser_new(accel_marker: string): GLib.MarkupParseContext
-export function parse_enum(type: GObject.GType, str: string | null, warn: boolean): [ /* returnType */ boolean, /* value */ number, /* possible_values */ string ]
-export function parse_markup(markup_text: string, length: number, accel_marker: string): [ /* returnType */ boolean, /* attr_list */ AttrList, /* text */ string, /* accel_char */ string ]
+export function markup_parser_finish(context: GLib.MarkupParseContext): [ /* returnType */ boolean, /* attr_list */ AttrList | null, /* text */ string | null, /* accel_char */ number | null ]
+export function markup_parser_new(accel_marker: number): GLib.MarkupParseContext
+export function parse_enum(type: GObject.Type, str: string | null, warn: boolean): [ /* returnType */ boolean, /* value */ number | null, /* possible_values */ string | null ]
+export function parse_markup(markup_text: string, length: number, accel_marker: number): [ /* returnType */ boolean, /* attr_list */ AttrList | null, /* text */ string | null, /* accel_char */ number | null ]
 export function parse_stretch(str: string, warn: boolean): [ /* returnType */ boolean, /* stretch */ Stretch ]
 export function parse_style(str: string, warn: boolean): [ /* returnType */ boolean, /* style */ Style ]
 export function parse_variant(str: string, warn: boolean): [ /* returnType */ boolean, /* variant */ Variant ]
@@ -1339,7 +1336,7 @@ export function reorder_items(logical_items: Item[]): Item[]
 export function scan_int(pos: string): [ /* returnType */ boolean, /* pos */ string, /* out */ number ]
 export function scan_string(pos: string, out: GLib.String): [ /* returnType */ boolean, /* pos */ string ]
 export function scan_word(pos: string, out: GLib.String): [ /* returnType */ boolean, /* pos */ string ]
-export function script_for_unichar(ch: string): Script
+export function script_for_unichar(ch: number): Script
 export function script_get_sample_language(script: Script): Language | null
 export function shape(text: string, length: number, analysis: Analysis, glyphs: GlyphString): void
 export function shape_full(item_text: string, item_length: number, paragraph_text: string | null, paragraph_length: number, analysis: Analysis, glyphs: GlyphString): void
@@ -1348,7 +1345,7 @@ export function skip_space(pos: string): [ /* returnType */ boolean, /* pos */ s
 export function split_file_list(str: string): string[]
 export function tailor_break(text: string, length: number, analysis: Analysis, offset: number, log_attrs: LogAttr[]): void
 export function trim_string(str: string): string
-export function unichar_direction(ch: string): Direction
+export function unichar_direction(ch: number): Direction
 export function units_from_double(d: number): number
 export function units_to_double(i: number): number
 export function version(): number
@@ -1356,14 +1353,12 @@ export function version_check(required_major: number, required_minor: number, re
 export function version_string(): string
 /**
  * Type of a function that can duplicate user data for an attribute.
- * @callback 
  */
 export interface AttrDataCopyFunc {
     (): object | null
 }
 /**
  * Type of a function filtering a list of attributes.
- * @callback 
  */
 export interface AttrFilterFunc {
     (attribute: Attribute): boolean
@@ -1371,21 +1366,16 @@ export interface AttrFilterFunc {
 /**
  * A callback function used by pango_fontset_foreach() when enumerating
  * the fonts in a fontset.
- * @callback 
  */
 export interface FontsetForeachFunc {
     (fontset: Fontset, font: Font): boolean
 }
 export interface Context_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * The #PangoContext structure stores global information
- * used to control the itemization process.
- */
 export class Context {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Pango-1.0.Pango.Context */
+    /* Methods of Pango-1.0.Pango.Context */
     /**
      * Forces a change in the context, which will cause any #PangoLayout
      * using this context to re-layout.
@@ -1451,7 +1441,7 @@ export class Context {
      * @param desc a #PangoFontDescription structure.  %NULL means that the            font description from the context will be used.
      * @param language language tag used to determine which script to get            the metrics for. %NULL means that the language tag from the context            will be used. If no language tag is set on the context, metrics            for the default language (as determined by pango_language_get_default())            will be returned.
      */
-    get_metrics(desc: FontDescription | null, language: Language | null): FontMetrics
+    get_metrics(desc?: FontDescription | null, language?: Language | null): FontMetrics
     /**
      * Returns whether font rendering with this context should
      * round glyph positions and widths.
@@ -1543,7 +1533,7 @@ export class Context {
      * matrices, depending on how the text is fit to the pixel grid.
      * @param matrix a #PangoMatrix, or %NULL to unset any existing matrix. (No matrix set is the same as setting the identity matrix.)
      */
-    set_matrix(matrix: Matrix | null): void
+    set_matrix(matrix?: Matrix | null): void
     /**
      * Sets whether font rendering with this context should
      * round glyph positions and widths to integral positions,
@@ -1557,7 +1547,7 @@ export class Context {
      * @param round_positions whether to round glyph positions
      */
     set_round_glyph_positions(round_positions: boolean): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -1603,7 +1593,7 @@ export class Context {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -1772,7 +1762,7 @@ export class Context {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -1860,8 +1850,8 @@ export class Context {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -1878,12 +1868,11 @@ export class Context {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1910,14 +1899,13 @@ export class Context {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Context, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Context, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -1925,18 +1913,14 @@ export class Context {
     _init (config?: Context_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(): Context
-    static $gtype: GObject.GType<Context>
+    static $gtype: GObject.Type
 }
 export interface Coverage_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * The #PangoCoverage structure represents a map from Unicode characters
- * to #PangoCoverageLevel. It is an opaque structure with no public fields.
- */
 export class Coverage {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Pango-1.0.Pango.Coverage */
+    /* Methods of Pango-1.0.Pango.Coverage */
     /**
      * Copy an existing #PangoCoverage. (This function may now be unnecessary
      * since we refcount the structure. File a bug if you use it.)
@@ -1973,7 +1957,7 @@ export class Coverage {
      * If the result is zero, free the coverage and all associated memory.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -2019,7 +2003,7 @@ export class Coverage {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -2188,7 +2172,7 @@ export class Coverage {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -2266,8 +2250,8 @@ export class Coverage {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -2284,12 +2268,11 @@ export class Coverage {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -2316,14 +2299,13 @@ export class Coverage {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Coverage, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Coverage, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -2337,18 +2319,14 @@ export class Coverage {
      * @param bytes binary data   representing a #PangoCoverage
      */
     static from_bytes(bytes: Uint8Array): Coverage | null
-    static $gtype: GObject.GType<Coverage>
+    static $gtype: GObject.Type
 }
 export interface Engine_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * #PangoEngine is the base class for all types of language and
- * script specific engines. It has no functionality by itself.
- */
 export class Engine {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -2394,7 +2372,7 @@ export class Engine {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -2563,7 +2541,7 @@ export class Engine {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -2651,8 +2629,8 @@ export class Engine {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -2669,12 +2647,11 @@ export class Engine {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -2701,35 +2678,26 @@ export class Engine {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Engine, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Engine, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: Engine_ConstructProps)
     _init (config?: Engine_ConstructProps): void
-    static $gtype: GObject.GType<Engine>
+    static $gtype: GObject.Type
 }
 export interface EngineLang_ConstructProps extends Engine_ConstructProps {
 }
-/**
- * The #PangoEngineLang class is implemented by engines that
- * customize the rendering-system independent part of the
- * Pango pipeline for a particular script or language. For
- * instance, a custom #PangoEngineLang could be provided for
- * Thai to implement the dictionary-based word boundary
- * lookups needed for that language.
- */
 export class EngineLang {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -2775,7 +2743,7 @@ export class EngineLang {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -2944,7 +2912,7 @@ export class EngineLang {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -3032,10 +3000,10 @@ export class EngineLang {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Pango-1.0.Pango.EngineLang */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Pango-1.0.Pango.EngineLang */
     vfunc_script_break(text: string, len: number, analysis: Analysis, attrs: LogAttr, attrs_len: number): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -3052,12 +3020,11 @@ export class EngineLang {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -3084,39 +3051,26 @@ export class EngineLang {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: EngineLang, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: EngineLang, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: EngineLang_ConstructProps)
     _init (config?: EngineLang_ConstructProps): void
-    static $gtype: GObject.GType<EngineLang>
+    static $gtype: GObject.Type
 }
 export interface EngineShape_ConstructProps extends Engine_ConstructProps {
 }
-/**
- * The #PangoEngineShape class is implemented by engines that
- * customize the rendering-system dependent part of the
- * Pango pipeline for a particular script or language.
- * A #PangoEngineShape implementation is then specific to both
- * a particular rendering system or group of rendering systems
- * and to a particular script. For instance, there is one
- * #PangoEngineShape implementation to handle shaping Arabic
- * for Fontconfig-based backends.
- */
 export class EngineShape {
-    /* Own fields of Pango-1.0.Pango.EngineShape */
-    parent_instance: Engine
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -3162,7 +3116,7 @@ export class EngineShape {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -3331,7 +3285,7 @@ export class EngineShape {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -3419,11 +3373,11 @@ export class EngineShape {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Pango-1.0.Pango.EngineShape */
-    vfunc_covers(font: Font, language: Language, wc: string): CoverageLevel
+    watch_closure(closure: Function): void
+    /* Virtual methods of Pango-1.0.Pango.EngineShape */
+    vfunc_covers(font: Font, language: Language, wc: number): CoverageLevel
     vfunc_script_shape(font: Font, item_text: string, item_length: number, analysis: Analysis, glyphs: GlyphString, paragraph_text: string, paragraph_length: number): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -3440,12 +3394,11 @@ export class EngineShape {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -3472,43 +3425,26 @@ export class EngineShape {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: EngineShape, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: EngineShape, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: EngineShape_ConstructProps)
     _init (config?: EngineShape_ConstructProps): void
-    static $gtype: GObject.GType<EngineShape>
+    static $gtype: GObject.Type
 }
 export interface Font_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * The #PangoFont structure is used to represent
- * a font in a rendering-system-independent matter.
- * To create an implementation of a #PangoFont,
- * the rendering-system specific code should allocate
- * a larger structure that contains a nested
- * #PangoFont, fill in the <structfield>klass</structfield> member of
- * the nested #PangoFont with a pointer to
- * a appropriate #PangoFontClass, then call
- * pango_font_init() on the structure.
- * 
- * The #PangoFont structure contains one member
- * which the implementation fills in.
- */
 export class Font {
-    /* Own fields of Pango-1.0.Pango.Font */
-    parent_instance: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Pango-1.0.Pango.Font */
+    /* Methods of Pango-1.0.Pango.Font */
     /**
      * Returns a description of the font, with font size set in points.
      * Use pango_font_describe_with_absolute_size() if you want the font
@@ -3558,7 +3494,7 @@ export class Font {
      * output variables and returns.
      * @param glyph the glyph index
      */
-    get_glyph_extents(glyph: Glyph): [ /* ink_rect */ Rectangle, /* logical_rect */ Rectangle ]
+    get_glyph_extents(glyph: Glyph): [ /* ink_rect */ Rectangle | null, /* logical_rect */ Rectangle | null ]
     /**
      * Gets overall metric information for a font. Since the metrics may be
      * substantially different for different scripts, a language tag can
@@ -3569,15 +3505,15 @@ export class Font {
      * output variables and returns.
      * @param language language tag used to determine which script to get the metrics            for, or %NULL to indicate to get the metrics for the entire font.
      */
-    get_metrics(language: Language | null): FontMetrics
+    get_metrics(language?: Language | null): FontMetrics
     /**
      * Returns whether the font provides a glyph for this character.
      * 
      * Returns %TRUE if `font` can render `wc`
      * @param wc a Unicode character
      */
-    has_char(wc: string): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    has_char(wc: number): boolean
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -3623,7 +3559,7 @@ export class Font {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -3792,7 +3728,7 @@ export class Font {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -3880,19 +3816,17 @@ export class Font {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Pango-1.0.Pango.Font */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Pango-1.0.Pango.Font */
     /**
      * Returns a description of the font, with font size set in points.
      * Use pango_font_describe_with_absolute_size() if you want the font
      * size in device units.
-     * @virtual 
      */
     vfunc_describe(): FontDescription
     vfunc_describe_absolute(): FontDescription
     /**
      * Computes the coverage map for a given font and language tag.
-     * @virtual 
      * @param language the language tag
      */
     vfunc_get_coverage(language: Language): Coverage
@@ -3906,7 +3840,6 @@ export class Font {
      * It is the responsibility of the user to ensure that the font map is kept
      * alive.  In most uses this is not an issue as a #PangoContext holds
      * a reference to the font map.
-     * @virtual 
      */
     vfunc_get_font_map(): FontMap | null
     /**
@@ -3920,10 +3853,9 @@ export class Font {
      * 
      * If `font` is %NULL, this function gracefully sets some sane values in the
      * output variables and returns.
-     * @virtual 
      * @param glyph the glyph index
      */
-    vfunc_get_glyph_extents(glyph: Glyph): [ /* ink_rect */ Rectangle, /* logical_rect */ Rectangle ]
+    vfunc_get_glyph_extents(glyph: Glyph): [ /* ink_rect */ Rectangle | null, /* logical_rect */ Rectangle | null ]
     /**
      * Gets overall metric information for a font. Since the metrics may be
      * substantially different for different scripts, a language tag can
@@ -3932,11 +3864,10 @@ export class Font {
      * 
      * If `font` is %NULL, this function gracefully sets some sane values in the
      * output variables and returns.
-     * @virtual 
      * @param language language tag used to determine which script to get the metrics            for, or %NULL to indicate to get the metrics for the entire font.
      */
-    vfunc_get_metrics(language: Language | null): FontMetrics
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    vfunc_get_metrics(language?: Language | null): FontMetrics
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -3953,12 +3884,11 @@ export class Font {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -3985,14 +3915,13 @@ export class Font {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Font, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Font, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -4004,20 +3933,14 @@ export class Font {
      * @param descs a pointer to an array of #PangoFontDescription, may be %NULL
      */
     static descriptions_free(descs: FontDescription[] | null): void
-    static $gtype: GObject.GType<Font>
+    static $gtype: GObject.Type
 }
 export interface FontFace_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * The #PangoFontFace structure is used to represent a group of fonts with
- * the same family, slant, weight, width, but varying sizes.
- */
 export class FontFace {
-    /* Own fields of Pango-1.0.Pango.FontFace */
-    parent_instance: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Pango-1.0.Pango.FontFace */
+    /* Methods of Pango-1.0.Pango.FontFace */
     /**
      * Returns the family, style, variant, weight and stretch of
      * a #PangoFontFace. The size field of the resulting font description
@@ -4044,7 +3967,7 @@ export class FontFace {
      * are in Pango units and are sorted in ascending order.
      */
     list_sizes(): /* sizes */ number[] | null
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -4090,7 +4013,7 @@ export class FontFace {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -4259,7 +4182,7 @@ export class FontFace {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -4347,13 +4270,12 @@ export class FontFace {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Pango-1.0.Pango.FontFace */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Pango-1.0.Pango.FontFace */
     /**
      * Returns the family, style, variant, weight and stretch of
      * a #PangoFontFace. The size field of the resulting font description
      * will be unset.
-     * @virtual 
      */
     vfunc_describe(): FontDescription
     /**
@@ -4361,14 +4283,12 @@ export class FontFace {
      * different faces in the #PangoFontFamily for the face. This
      * name is unique among all faces in the family and is suitable
      * for displaying to users.
-     * @virtual 
      */
     vfunc_get_face_name(): string
     /**
      * Returns whether a #PangoFontFace is synthesized by the underlying
      * font rendering engine from another face, perhaps by shearing, emboldening,
      * or lightening it.
-     * @virtual 
      */
     vfunc_is_synthesized(): boolean
     /**
@@ -4376,10 +4296,9 @@ export class FontFace {
      * fonts. For scalable fonts, stores %NULL at the location pointed to by
      * `sizes` and 0 at the location pointed to by `n_sizes`. The sizes returned
      * are in Pango units and are sorted in ascending order.
-     * @virtual 
      */
     vfunc_list_sizes(): /* sizes */ number[] | null
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -4396,12 +4315,11 @@ export class FontFace {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -4428,34 +4346,26 @@ export class FontFace {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: FontFace, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: FontFace, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: FontFace_ConstructProps)
     _init (config?: FontFace_ConstructProps): void
-    static $gtype: GObject.GType<FontFace>
+    static $gtype: GObject.Type
 }
 export interface FontFamily_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * The #PangoFontFamily structure is used to represent a family of related
- * font faces. The faces in a family share a common design, but differ in
- * slant, weight, width and other aspects.
- */
 export class FontFamily {
-    /* Own fields of Pango-1.0.Pango.FontFamily */
-    parent_instance: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Pango-1.0.Pango.FontFamily */
+    /* Methods of Pango-1.0.Pango.FontFamily */
     /**
      * Gets the name of the family. The name is unique among all
      * fonts for the font backend and can be used in a #PangoFontDescription
@@ -4487,8 +4397,8 @@ export class FontFamily {
      * in a family share a common design, but differ in slant, weight,
      * width and other aspects.
      */
-    list_faces(): /* faces */ FontFace[]
-    /* Extended methods of GObject-2.0.GObject.Object */
+    list_faces(): /* faces */ FontFace[] | null
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -4534,7 +4444,7 @@ export class FontFamily {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -4703,7 +4613,7 @@ export class FontFamily {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -4791,13 +4701,12 @@ export class FontFamily {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Pango-1.0.Pango.FontFamily */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Pango-1.0.Pango.FontFamily */
     /**
      * Gets the name of the family. The name is unique among all
      * fonts for the font backend and can be used in a #PangoFontDescription
      * to specify that a face from this family is desired.
-     * @virtual 
      */
     vfunc_get_name(): string
     /**
@@ -4813,23 +4722,20 @@ export class FontFamily {
      * pango_font_metrics_get_approximate_digit_width(), since the results
      * of pango_font_metrics_get_approximate_char_width() may be affected
      * by double-width characters.
-     * @virtual 
      */
     vfunc_is_monospace(): boolean
     /**
      * A variable font is a font which has axes that can be modified to
      * produce different faces.
-     * @virtual 
      */
     vfunc_is_variable(): boolean
     /**
      * Lists the different font faces that make up `family`. The faces
      * in a family share a common design, but differ in slant, weight,
      * width and other aspects.
-     * @virtual 
      */
-    vfunc_list_faces(): /* faces */ FontFace[]
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    vfunc_list_faces(): /* faces */ FontFace[] | null
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -4846,12 +4752,11 @@ export class FontFamily {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -4878,42 +4783,26 @@ export class FontFamily {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: FontFamily, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: FontFamily, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: FontFamily_ConstructProps)
     _init (config?: FontFamily_ConstructProps): void
-    static $gtype: GObject.GType<FontFamily>
+    static $gtype: GObject.Type
 }
 export interface FontMap_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * The #PangoFontMap represents the set of fonts available for a
- * particular rendering system. This is a virtual object with
- * implementations being specific to particular rendering systems.  To
- * create an implementation of a #PangoFontMap, the rendering-system
- * specific code should allocate a larger structure that contains a nested
- * #PangoFontMap, fill in the <structfield>klass</structfield> member of the nested #PangoFontMap with a
- * pointer to a appropriate #PangoFontMapClass, then call
- * pango_font_map_init() on the structure.
- * 
- * The #PangoFontMap structure contains one member which the implementation
- * fills in.
- */
 export class FontMap {
-    /* Own fields of Pango-1.0.Pango.FontMap */
-    parent_instance: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Pango-1.0.Pango.FontMap */
+    /* Methods of Pango-1.0.Pango.FontMap */
     /**
      * Forces a change in the context, which will cause any #PangoContext
      * using this fontmap to change.
@@ -4967,7 +4856,7 @@ export class FontMap {
      * @param language a #PangoLanguage the fonts will be used for
      */
     load_fontset(context: Context, desc: FontDescription, language: Language): Fontset | null
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -5013,7 +4902,7 @@ export class FontMap {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -5182,7 +5071,7 @@ export class FontMap {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -5270,8 +5159,8 @@ export class FontMap {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Pango-1.0.Pango.FontMap */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Pango-1.0.Pango.FontMap */
     /**
      * Forces a change in the context, which will cause any #PangoContext
      * using this fontmap to change.
@@ -5280,7 +5169,6 @@ export class FontMap {
      * for Pango, something applications won't do. Backends should
      * call this function if they have attached extra data to the context
      * and such data is changed.
-     * @virtual 
      */
     vfunc_changed(): void
     /**
@@ -5295,17 +5183,14 @@ export class FontMap {
      * 
      * This can be used to automatically detect changes to a #PangoFontMap, like
      * in #PangoContext.
-     * @virtual 
      */
     vfunc_get_serial(): number
     /**
      * List all families for a fontmap.
-     * @virtual 
      */
     vfunc_list_families(): /* families */ FontFamily[]
     /**
      * Load the font in the fontmap that is the closest match for `desc`.
-     * @virtual 
      * @param context the #PangoContext the font will be used with
      * @param desc a #PangoFontDescription describing the font to load
      */
@@ -5313,13 +5198,12 @@ export class FontMap {
     /**
      * Load a set of fonts in the fontmap that can be used to render
      * a font matching `desc`.
-     * @virtual 
      * @param context the #PangoContext the font will be used with
      * @param desc a #PangoFontDescription describing the font to load
      * @param language a #PangoLanguage the fonts will be used for
      */
     vfunc_load_fontset(context: Context, desc: FontDescription, language: Language): Fontset | null
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -5336,12 +5220,11 @@ export class FontMap {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -5368,37 +5251,26 @@ export class FontMap {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: FontMap, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: FontMap, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: FontMap_ConstructProps)
     _init (config?: FontMap_ConstructProps): void
-    static $gtype: GObject.GType<FontMap>
+    static $gtype: GObject.Type
 }
 export interface Fontset_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * A #PangoFontset represents a set of #PangoFont to use
- * when rendering text. It is the result of resolving a
- * #PangoFontDescription against a particular #PangoContext.
- * It has operations for finding the component font for
- * a particular Unicode character, and for finding a composite
- * set of metrics for the entire fontset.
- */
 export class Fontset {
-    /* Own fields of Pango-1.0.Pango.Fontset */
-    parent_instance: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Pango-1.0.Pango.Fontset */
+    /* Methods of Pango-1.0.Pango.Fontset */
     /**
      * Iterates through all the fonts in a fontset, calling `func` for
      * each one. If `func` returns %TRUE, that stops the iteration.
@@ -5415,7 +5287,7 @@ export class Fontset {
      * Get overall metric information for the fonts in the fontset.
      */
     get_metrics(): FontMetrics
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -5461,7 +5333,7 @@ export class Fontset {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -5630,7 +5502,7 @@ export class Fontset {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -5718,29 +5590,26 @@ export class Fontset {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Pango-1.0.Pango.Fontset */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Pango-1.0.Pango.Fontset */
     /**
      * Iterates through all the fonts in a fontset, calling `func` for
      * each one. If `func` returns %TRUE, that stops the iteration.
-     * @virtual 
      * @param func Callback function
      */
     vfunc_foreach(func: FontsetForeachFunc): void
     /**
      * Returns the font in the fontset that contains the best glyph for the
      * Unicode character `wc`.
-     * @virtual 
      * @param wc a Unicode character
      */
     vfunc_get_font(wc: number): Font
     vfunc_get_language(): Language
     /**
      * Get overall metric information for the fonts in the fontset.
-     * @virtual 
      */
     vfunc_get_metrics(): FontMetrics
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -5757,12 +5626,11 @@ export class Fontset {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -5789,35 +5657,28 @@ export class Fontset {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Fontset, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Fontset, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: Fontset_ConstructProps)
     _init (config?: Fontset_ConstructProps): void
-    static $gtype: GObject.GType<Fontset>
+    static $gtype: GObject.Type
 }
 export interface FontsetSimple_ConstructProps extends Fontset_ConstructProps {
 }
-/**
- * #PangoFontsetSimple is a implementation of the abstract
- * #PangoFontset base class in terms of an array of fonts,
- * which the creator provides when constructing the
- * #PangoFontsetSimple.
- */
 export class FontsetSimple {
-    /* Extended fields of Pango-1.0.Pango.Fontset */
+    /* Fields of Pango-1.0.Pango.Fontset */
     parent_instance: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Pango-1.0.Pango.FontsetSimple */
+    /* Methods of Pango-1.0.Pango.FontsetSimple */
     /**
      * Adds a font to the fontset.
      * @param font a #PangoFont.
@@ -5827,7 +5688,7 @@ export class FontsetSimple {
      * Returns the number of fonts in the fontset.
      */
     size(): number
-    /* Extended methods of Pango-1.0.Pango.Fontset */
+    /* Methods of Pango-1.0.Pango.Fontset */
     /**
      * Iterates through all the fonts in a fontset, calling `func` for
      * each one. If `func` returns %TRUE, that stops the iteration.
@@ -5844,7 +5705,7 @@ export class FontsetSimple {
      * Get overall metric information for the fonts in the fontset.
      */
     get_metrics(): FontMetrics
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -5890,7 +5751,7 @@ export class FontsetSimple {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -6059,7 +5920,7 @@ export class FontsetSimple {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -6147,29 +6008,26 @@ export class FontsetSimple {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Pango-1.0.Pango.Fontset */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Pango-1.0.Pango.Fontset */
     /**
      * Iterates through all the fonts in a fontset, calling `func` for
      * each one. If `func` returns %TRUE, that stops the iteration.
-     * @virtual 
      * @param func Callback function
      */
     vfunc_foreach(func: FontsetForeachFunc): void
     /**
      * Returns the font in the fontset that contains the best glyph for the
      * Unicode character `wc`.
-     * @virtual 
      * @param wc a Unicode character
      */
     vfunc_get_font(wc: number): Font
     vfunc_get_language(): Language
     /**
      * Get overall metric information for the fonts in the fontset.
-     * @virtual 
      */
     vfunc_get_metrics(): FontMetrics
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -6186,12 +6044,11 @@ export class FontsetSimple {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -6218,14 +6075,13 @@ export class FontsetSimple {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: FontsetSimple, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: FontsetSimple, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -6233,36 +6089,14 @@ export class FontsetSimple {
     _init (config?: FontsetSimple_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(language: Language): FontsetSimple
-    static $gtype: GObject.GType<FontsetSimple>
+    static $gtype: GObject.Type
 }
 export interface Layout_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * The #PangoLayout structure represents an entire paragraph
- * of text. It is initialized with a #PangoContext, UTF-8 string
- * and set of attributes for that string. Once that is done, the
- * set of formatted lines can be extracted from the object,
- * the layout can be rendered, and conversion between logical
- * character positions within the layout's text, and the physical
- * position of the resulting glyphs can be made.
- * 
- * There are also a number of parameters to adjust the formatting
- * of a #PangoLayout, which are illustrated in <xref linkend="parameters"/>.
- * It is possible, as well, to ignore the 2-D setup, and simply
- * treat the results of a #PangoLayout as a list of lines.
- * 
- * <figure id="parameters">
- * <title>Adjustable parameters (on the left) and font metrics (on the right) for a PangoLayout</title>
- * <graphic fileref="layout.png" format="PNG"></graphic>
- * </figure>
- * 
- * The #PangoLayout structure is opaque, and has no user-visible
- * fields.
- */
 export class Layout {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Pango-1.0.Pango.Layout */
+    /* Methods of Pango-1.0.Pango.Layout */
     /**
      * Forces recomputation of any state in the #PangoLayout that
      * might depend on the layout's context. This function should
@@ -6315,7 +6149,7 @@ export class Layout {
      * direction of the layout are inserted.
      * @param index_ the byte index of the cursor
      */
-    get_cursor_pos(index_: number): [ /* strong_pos */ Rectangle, /* weak_pos */ Rectangle ]
+    get_cursor_pos(index_: number): [ /* strong_pos */ Rectangle | null, /* weak_pos */ Rectangle | null ]
     /**
      * Gets the type of ellipsization being performed for `layout`.
      * See pango_layout_set_ellipsize()
@@ -6332,7 +6166,7 @@ export class Layout {
      * The extents are given in layout coordinates and in Pango units; layout
      * coordinates begin at the top left corner of the layout.
      */
-    get_extents(): [ /* ink_rect */ Rectangle, /* logical_rect */ Rectangle ]
+    get_extents(): [ /* ink_rect */ Rectangle | null, /* logical_rect */ Rectangle | null ]
     /**
      * Gets the font description for the layout, if any.
      */
@@ -6423,7 +6257,7 @@ export class Layout {
      * such that the rounded rectangles fully contain the unrounded one (that is,
      * passes them as first argument to pango_extents_to_pixels()).
      */
-    get_pixel_extents(): [ /* ink_rect */ Rectangle, /* logical_rect */ Rectangle ]
+    get_pixel_extents(): [ /* ink_rect */ Rectangle | null, /* logical_rect */ Rectangle | null ]
     /**
      * Determines the logical width and height of a #PangoLayout
      * in device units. (pango_layout_get_size() returns the width
@@ -6431,7 +6265,7 @@ export class Layout {
      * is simply a convenience function around
      * pango_layout_get_pixel_extents().
      */
-    get_pixel_size(): [ /* width */ number, /* height */ number ]
+    get_pixel_size(): [ /* width */ number | null, /* height */ number | null ]
     /**
      * Returns the current serial number of `layout`.  The serial number is
      * initialized to an small number  larger than zero when a new layout
@@ -6454,7 +6288,7 @@ export class Layout {
      * in Pango units (device units scaled by %PANGO_SCALE). This
      * is simply a convenience function around pango_layout_get_extents().
      */
-    get_size(): [ /* width */ number, /* height */ number ]
+    get_size(): [ /* width */ number | null, /* height */ number | null ]
     /**
      * Gets the amount of spacing between the lines of the layout.
      */
@@ -6499,7 +6333,7 @@ export class Layout {
      * @param index_ the byte index of a grapheme within the layout.
      * @param trailing an integer indicating the edge of the grapheme to retrieve the             position of. If > 0, the trailing edge of the grapheme, if 0,             the leading of the grapheme.
      */
-    index_to_line_x(index_: number, trailing: boolean): [ /* line */ number, /* x_pos */ number ]
+    index_to_line_x(index_: number, trailing: boolean): [ /* line */ number | null, /* x_pos */ number | null ]
     /**
      * Converts from an index within a #PangoLayout to the onscreen position
      * corresponding to the grapheme at that index, which is represented
@@ -6562,7 +6396,7 @@ export class Layout {
      * References `attrs,` so the caller can unref its reference.
      * @param attrs a #PangoAttrList, can be %NULL
      */
-    set_attributes(attrs: AttrList | null): void
+    set_attributes(attrs?: AttrList | null): void
     /**
      * Sets whether to calculate the bidirectional base direction
      * for the layout according to the contents of the layout;
@@ -6604,7 +6438,7 @@ export class Layout {
      * the layout's context is used.
      * @param desc the new #PangoFontDescription, or %NULL to unset the        current font description
      */
-    set_font_description(desc: FontDescription | null): void
+    set_font_description(desc?: FontDescription | null): void
     /**
      * Sets the height to which the #PangoLayout should be ellipsized at.  There
      * are two different behaviors, based on whether `height` is positive or
@@ -6699,7 +6533,7 @@ export class Layout {
      * @param length length of marked-up text in bytes, or -1 if `markup` is          null-terminated
      * @param accel_marker marker for accelerators in the text
      */
-    set_markup_with_accel(markup: string, length: number, accel_marker: string): /* accel_char */ string
+    set_markup_with_accel(markup: string, length: number, accel_marker: number): /* accel_char */ number | null
     /**
      * If `setting` is %TRUE, do not treat newlines and similar characters
      * as paragraph separators; instead, keep all text in a single paragraph,
@@ -6730,7 +6564,7 @@ export class Layout {
      * free your copy of `tabs` yourself.
      * @param tabs a #PangoTabArray, or %NULL
      */
-    set_tabs(tabs: TabArray | null): void
+    set_tabs(tabs?: TabArray | null): void
     /**
      * Sets the text of the layout.
      * 
@@ -6772,7 +6606,7 @@ export class Layout {
      * @param y the Y offset (in Pango units)             from the top edge of the layout
      */
     xy_to_index(x: number, y: number): [ /* returnType */ boolean, /* index_ */ number, /* trailing */ number ]
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -6818,7 +6652,7 @@ export class Layout {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -6987,7 +6821,7 @@ export class Layout {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -7075,8 +6909,8 @@ export class Layout {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -7093,12 +6927,11 @@ export class Layout {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -7125,14 +6958,13 @@ export class Layout {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Layout, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Layout, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -7140,26 +6972,14 @@ export class Layout {
     _init (config?: Layout_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(context: Context): Layout
-    static $gtype: GObject.GType<Layout>
+    static $gtype: GObject.Type
 }
 export interface Renderer_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * #PangoRenderer is a base class for objects that are used to
- * render Pango objects such as #PangoGlyphString and
- * #PangoLayout.
- */
 export class Renderer {
-    /* Own fields of Pango-1.0.Pango.Renderer */
-    /**
-     * the current transformation matrix for
-     *    the Renderer; may be %NULL, which should be treated the
-     *    same as the identity matrix.
-     */
-    matrix: Matrix
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Pango-1.0.Pango.Renderer */
+    /* Methods of Pango-1.0.Pango.Renderer */
     /**
      * Does initial setup before rendering operations on `renderer`.
      * pango_renderer_deactivate() should be called when done drawing.
@@ -7327,13 +7147,13 @@ export class Renderer {
      * @param part the part to change the color of
      * @param color the new color or %NULL to unset the current color
      */
-    set_color(part: RenderPart, color: Color | null): void
+    set_color(part: RenderPart, color?: Color | null): void
     /**
      * Sets the transformation matrix that will be applied when rendering.
      * @param matrix a #PangoMatrix, or %NULL to unset any existing matrix.  (No matrix set is the same as setting the identity matrix.)
      */
-    set_matrix(matrix: Matrix | null): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    set_matrix(matrix?: Matrix | null): void
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -7379,7 +7199,7 @@ export class Renderer {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -7548,7 +7368,7 @@ export class Renderer {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -7636,8 +7456,8 @@ export class Renderer {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Pango-1.0.Pango.Renderer */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Pango-1.0.Pango.Renderer */
     vfunc_begin(): void
     /**
      * Draw a squiggly line that approximately covers the given rectangle
@@ -7648,7 +7468,6 @@ export class Renderer {
      * 
      * This should be called while `renderer` is already active.  Use
      * pango_renderer_activate() to activate a renderer.
-     * @virtual 
      * @param x X coordinate of underline, in Pango units in user coordinate system
      * @param y Y coordinate of underline, in Pango units in user coordinate system
      * @param width width of underline, in Pango units in user coordinate system
@@ -7657,7 +7476,6 @@ export class Renderer {
     vfunc_draw_error_underline(x: number, y: number, width: number, height: number): void
     /**
      * Draws a single glyph with coordinates in device space.
-     * @virtual 
      * @param font a #PangoFont
      * @param glyph the glyph index of a single glyph
      * @param x X coordinate of left edge of baseline of glyph
@@ -7676,7 +7494,6 @@ export class Renderer {
      * 
      * The default implementation of this method simply falls back to
      * pango_renderer_draw_glyphs().
-     * @virtual 
      * @param text the UTF-8 text that `glyph_item` refers to, or %NULL
      * @param glyph_item a #PangoGlyphItem
      * @param x X position of left edge of baseline, in user space coordinates   in Pango units.
@@ -7685,7 +7502,6 @@ export class Renderer {
     vfunc_draw_glyph_item(text: string | null, glyph_item: GlyphItem, x: number, y: number): void
     /**
      * Draws the glyphs in `glyphs` with the specified #PangoRenderer.
-     * @virtual 
      * @param font a #PangoFont
      * @param glyphs a #PangoGlyphString
      * @param x X position of left edge of baseline, in user space coordinates   in Pango units.
@@ -7698,7 +7514,6 @@ export class Renderer {
      * 
      * This should be called while `renderer` is already active.  Use
      * pango_renderer_activate() to activate a renderer.
-     * @virtual 
      * @param part type of object this rectangle is part of
      * @param x X position at which to draw rectangle, in user space coordinates in Pango units
      * @param y Y position at which to draw rectangle, in user space coordinates in Pango units
@@ -7710,7 +7525,6 @@ export class Renderer {
     /**
      * Draws a trapezoid with the parallel sides aligned with the X axis
      * using the given #PangoRenderer; coordinates are in device space.
-     * @virtual 
      * @param part type of object this trapezoid is part of
      * @param y1_ Y coordinate of top of trapezoid
      * @param x11 X coordinate of left end of top of trapezoid
@@ -7735,12 +7549,11 @@ export class Renderer {
      * When the stipple changes or underlines with different stipples
      * might be joined together. Pango automatically calls this for
      * changes to colors. (See pango_renderer_set_color())
-     * @virtual 
      * @param part the part for which rendering has changed.
      */
     vfunc_part_changed(part: RenderPart): void
     vfunc_prepare_run(run: LayoutRun): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -7757,12 +7570,11 @@ export class Renderer {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -7789,27 +7601,22 @@ export class Renderer {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Renderer, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Renderer, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: Renderer_ConstructProps)
     _init (config?: Renderer_ConstructProps): void
-    static $gtype: GObject.GType<Renderer>
+    static $gtype: GObject.Type
 }
-/**
- * The #PangoAnalysis structure stores information about
- * the properties of a segment of text.
- */
 export class Analysis {
-    /* Own fields of Pango-1.0.Pango.Analysis */
+    /* Fields of Pango-1.0.Pango.Analysis */
     /**
      * unused
      */
@@ -7848,14 +7655,8 @@ export class Analysis {
     extra_attrs: object[]
     static name: string
 }
-/**
- * The #PangoAttrClass structure stores the type and operations for
- * a particular type of attribute. The functions in this structure should
- * not be called directly. Instead, one should use the wrapper functions
- * provided for #PangoAttribute.
- */
 export class AttrClass {
-    /* Own fields of Pango-1.0.Pango.AttrClass */
+    /* Fields of Pango-1.0.Pango.AttrClass */
     /**
      * the type ID for this attribute
      */
@@ -7865,12 +7666,8 @@ export class AttrClass {
     equal: (attr1: Attribute, attr2: Attribute) => boolean
     static name: string
 }
-/**
- * The #PangoAttrColor structure is used to represent attributes that
- * are colors.
- */
 export class AttrColor {
-    /* Own fields of Pango-1.0.Pango.AttrColor */
+    /* Fields of Pango-1.0.Pango.AttrColor */
     /**
      * the common portion of the attribute
      */
@@ -7881,12 +7678,8 @@ export class AttrColor {
     color: Color
     static name: string
 }
-/**
- * The #PangoAttrFloat structure is used to represent attributes with
- * a float or double value.
- */
 export class AttrFloat {
-    /* Own fields of Pango-1.0.Pango.AttrFloat */
+    /* Fields of Pango-1.0.Pango.AttrFloat */
     /**
      * the common portion of the attribute
      */
@@ -7897,12 +7690,8 @@ export class AttrFloat {
     value: number
     static name: string
 }
-/**
- * The #PangoAttrFontDesc structure is used to store an attribute that
- * sets all aspects of the font description at once.
- */
 export class AttrFontDesc {
-    /* Own fields of Pango-1.0.Pango.AttrFontDesc */
+    /* Fields of Pango-1.0.Pango.AttrFontDesc */
     /**
      * the common portion of the attribute
      */
@@ -7913,12 +7702,8 @@ export class AttrFontDesc {
     desc: FontDescription
     static name: string
 }
-/**
- * The #PangoAttrFontFeatures structure is used to represent OpenType
- * font features as an attribute.
- */
 export class AttrFontFeatures {
-    /* Own fields of Pango-1.0.Pango.AttrFontFeatures */
+    /* Fields of Pango-1.0.Pango.AttrFontFeatures */
     /**
      * the common portion of the attribute
      */
@@ -7929,12 +7714,8 @@ export class AttrFontFeatures {
     features: string
     static name: string
 }
-/**
- * The #PangoAttrInt structure is used to represent attributes with
- * an integer or enumeration value.
- */
 export class AttrInt {
-    /* Own fields of Pango-1.0.Pango.AttrInt */
+    /* Fields of Pango-1.0.Pango.AttrInt */
     /**
      * the common portion of the attribute
      */
@@ -7945,17 +7726,8 @@ export class AttrInt {
     value: number
     static name: string
 }
-/**
- * The #PangoAttrIterator structure is used to represent an
- * iterator through a #PangoAttrList. A new iterator is created
- * with pango_attr_list_get_iterator(). Once the iterator
- * is created, it can be advanced through the style changes
- * in the text using pango_attr_iterator_next(). At each
- * style change, the range of the current style segment and the
- * attributes currently in effect can be queried.
- */
 export class AttrIterator {
-    /* Owm methods of Pango-1.0.Pango.AttrIterator */
+    /* Methods of Pango-1.0.Pango.AttrIterator */
     /**
      * Copy a #PangoAttrIterator
      */
@@ -7983,7 +7755,7 @@ export class AttrIterator {
      * @param language if non-%NULL, location to store language tag for item, or %NULL            if none is found.
      * @param extra_attrs if non-%NULL,           location in which to store a list of non-font           attributes at the the current position; only the highest priority           value of each attribute will be added to this list. In order           to free this value, you must call pango_attribute_destroy() on           each member.
      */
-    get_font(desc: FontDescription, language: Language | null, extra_attrs: Attribute[] | null): void
+    get_font(desc: FontDescription, language?: Language | null, extra_attrs?: Attribute[] | null): void
     /**
      * Advance the iterator until the next change of style.
      */
@@ -7998,12 +7770,8 @@ export class AttrIterator {
     range(): [ /* start */ number, /* end */ number ]
     static name: string
 }
-/**
- * The #PangoAttrLanguage structure is used to represent attributes that
- * are languages.
- */
 export class AttrLanguage {
-    /* Own fields of Pango-1.0.Pango.AttrLanguage */
+    /* Fields of Pango-1.0.Pango.AttrLanguage */
     /**
      * the common portion of the attribute
      */
@@ -8014,20 +7782,8 @@ export class AttrLanguage {
     value: Language
     static name: string
 }
-/**
- * The #PangoAttrList structure represents a list of attributes
- * that apply to a section of text. The attributes are, in general,
- * allowed to overlap in an arbitrary fashion, however, if the
- * attributes are manipulated only through pango_attr_list_change(),
- * the overlap between properties will meet stricter criteria.
- * 
- * Since the #PangoAttrList structure is stored as a linear list,
- * it is not suitable for storing attributes for large amounts
- * of text. In general, you should not use a single #PangoAttrList
- * for more than one paragraph of text.
- */
 export class AttrList {
-    /* Owm methods of Pango-1.0.Pango.AttrList */
+    /* Methods of Pango-1.0.Pango.AttrList */
     /**
      * Insert the given attribute into the #PangoAttrList. It will
      * replace any attributes of the same type on that segment
@@ -8129,12 +7885,8 @@ export class AttrList {
     /* Static methods and pseudo-constructors */
     static new(): AttrList
 }
-/**
- * The #PangoAttrShape structure is used to represent attributes which
- * impose shape restrictions.
- */
 export class AttrShape {
-    /* Own fields of Pango-1.0.Pango.AttrShape */
+    /* Fields of Pango-1.0.Pango.AttrShape */
     /**
      * the common portion of the attribute
      */
@@ -8170,14 +7922,10 @@ export class AttrShape {
      * @param data user data pointer
      * @param copy_func function to copy `data` when the                attribute is copied. If %NULL, `data` is simply                copied as a pointer.
      */
-    static new_with_data(ink_rect: Rectangle, logical_rect: Rectangle, data: object | null, copy_func: AttrDataCopyFunc | null): Attribute
+    static new_with_data(ink_rect: Rectangle, logical_rect: Rectangle, data?: object | null, copy_func?: AttrDataCopyFunc | null): Attribute
 }
-/**
- * The #PangoAttrSize structure is used to represent attributes which
- * set font size.
- */
 export class AttrSize {
-    /* Own fields of Pango-1.0.Pango.AttrSize */
+    /* Fields of Pango-1.0.Pango.AttrSize */
     /**
      * the common portion of the attribute
      */
@@ -8202,12 +7950,8 @@ export class AttrSize {
      */
     static new_absolute(size: number): Attribute
 }
-/**
- * The #PangoAttrString structure is used to represent attributes with
- * a string value.
- */
 export class AttrString {
-    /* Own fields of Pango-1.0.Pango.AttrString */
+    /* Fields of Pango-1.0.Pango.AttrString */
     /**
      * the common portion of the attribute
      */
@@ -8218,16 +7962,8 @@ export class AttrString {
     value: string
     static name: string
 }
-/**
- * The #PangoAttribute structure represents the common portions of all
- * attributes. Particular types of attributes include this structure
- * as their initial portion. The common portion of the attribute holds
- * the range to which the value in the type-specific part of the attribute
- * applies and should be initialized using pango_attribute_init().
- * By default an attribute will have an all-inclusive range of [0,%G_MAXUINT].
- */
 export class Attribute {
-    /* Own fields of Pango-1.0.Pango.Attribute */
+    /* Fields of Pango-1.0.Pango.Attribute */
     /**
      * the class structure holding information about the type of the attribute
      */
@@ -8241,7 +7977,7 @@ export class Attribute {
      * is not included in the range.
      */
     end_index: number
-    /* Owm methods of Pango-1.0.Pango.Attribute */
+    /* Methods of Pango-1.0.Pango.Attribute */
     /**
      * Make a copy of an attribute.
      */
@@ -8268,12 +8004,8 @@ export class Attribute {
     init(klass: AttrClass): void
     static name: string
 }
-/**
- * The #PangoColor structure is used to
- * represent a color in an uncalibrated RGB color-space.
- */
 export class Color {
-    /* Own fields of Pango-1.0.Pango.Color */
+    /* Fields of Pango-1.0.Pango.Color */
     /**
      * value of red component
      */
@@ -8286,7 +8018,7 @@ export class Color {
      * value of blue component
      */
     blue: number
-    /* Owm methods of Pango-1.0.Pango.Color */
+    /* Methods of Pango-1.0.Pango.Color */
     /**
      * Creates a copy of `src,` which should be freed with
      * pango_color_free(). Primarily used by language bindings,
@@ -8322,18 +8054,11 @@ export class Color {
 export abstract class ContextClass {
     static name: string
 }
-/**
- * Class structure for #PangoEngine
- */
 export abstract class EngineClass {
     static name: string
 }
-/**
- * The #PangoEngineInfo structure contains information about a particular
- * engine. It contains the following fields:
- */
 export class EngineInfo {
-    /* Own fields of Pango-1.0.Pango.EngineInfo */
+    /* Fields of Pango-1.0.Pango.EngineInfo */
     /**
      * a unique string ID for the engine.
      */
@@ -8356,20 +8081,13 @@ export class EngineInfo {
     n_scripts: number
     static name: string
 }
-/**
- * Class structure for #PangoEngineLang
- */
 export abstract class EngineLangClass {
-    /* Own fields of Pango-1.0.Pango.EngineLangClass */
+    /* Fields of Pango-1.0.Pango.EngineLangClass */
     script_break: (engine: EngineLang, text: string, len: number, analysis: Analysis, attrs: LogAttr, attrs_len: number) => void
     static name: string
 }
-/**
- * The #PangoEngineScriptInfo structure contains
- * information about how the shaper covers a particular script.
- */
 export class EngineScriptInfo {
-    /* Own fields of Pango-1.0.Pango.EngineScriptInfo */
+    /* Fields of Pango-1.0.Pango.EngineScriptInfo */
     /**
      * a #PangoScript. The value %PANGO_SCRIPT_COMMON has
      * the special meaning here of "all scripts"
@@ -8389,34 +8107,25 @@ export class EngineScriptInfo {
     langs: string
     static name: string
 }
-/**
- * Class structure for #PangoEngineShape
- */
 export abstract class EngineShapeClass {
-    /* Own fields of Pango-1.0.Pango.EngineShapeClass */
+    /* Fields of Pango-1.0.Pango.EngineShapeClass */
     script_shape: (engine: EngineShape, font: Font, item_text: string, item_length: number, analysis: Analysis, glyphs: GlyphString, paragraph_text: string, paragraph_length: number) => void
-    covers: (engine: EngineShape, font: Font, language: Language, wc: string) => CoverageLevel
+    covers: (engine: EngineShape, font: Font, language: Language, wc: number) => CoverageLevel
     static name: string
 }
 export abstract class FontClass {
-    /* Own fields of Pango-1.0.Pango.FontClass */
+    /* Fields of Pango-1.0.Pango.FontClass */
     parent_class: GObject.ObjectClass
     describe: (font: Font) => FontDescription
     get_coverage: (font: Font, language: Language) => Coverage
-    get_glyph_extents: (font: Font | null, glyph: Glyph) => [ /* ink_rect */ Rectangle, /* logical_rect */ Rectangle ]
-    get_metrics: (font: Font | null, language: Language | null) => FontMetrics
-    get_font_map: (font: Font | null) => FontMap | null
+    get_glyph_extents: (font: Font | null, glyph: Glyph) => [ /* ink_rect */ Rectangle | null, /* logical_rect */ Rectangle | null ]
+    get_metrics: (font?: Font | null, language?: Language | null) => FontMetrics
+    get_font_map: (font?: Font | null) => FontMap | null
     describe_absolute: (font: Font) => FontDescription
     static name: string
 }
-/**
- * The #PangoFontDescription structure represents the description
- * of an ideal font. These structures are used both to list
- * what fonts are available on the system and also for specifying
- * the characteristics of a font to load.
- */
 export class FontDescription {
-    /* Owm methods of Pango-1.0.Pango.FontDescription */
+    /* Methods of Pango-1.0.Pango.FontDescription */
     /**
      * Determines if the style attributes of `new_match` are a closer match
      * for `desc` than those of `old_match` are, or if `old_match` is %NULL,
@@ -8706,7 +8415,7 @@ export class FontDescription {
     static from_string(str: string): FontDescription
 }
 export abstract class FontFaceClass {
-    /* Own fields of Pango-1.0.Pango.FontFaceClass */
+    /* Fields of Pango-1.0.Pango.FontFaceClass */
     parent_class: GObject.ObjectClass
     get_face_name: (face: FontFace) => string
     describe: (face: FontFace) => FontDescription
@@ -8715,20 +8424,16 @@ export abstract class FontFaceClass {
     static name: string
 }
 export abstract class FontFamilyClass {
-    /* Own fields of Pango-1.0.Pango.FontFamilyClass */
+    /* Fields of Pango-1.0.Pango.FontFamilyClass */
     parent_class: GObject.ObjectClass
-    list_faces: (family: FontFamily) => /* faces */ FontFace[]
+    list_faces: (family: FontFamily) => /* faces */ FontFace[] | null
     get_name: (family: FontFamily) => string
     is_monospace: (family: FontFamily) => boolean
     is_variable: (family: FontFamily) => boolean
     static name: string
 }
-/**
- * The #PangoFontMapClass structure holds the virtual functions for
- * a particular #PangoFontMap implementation.
- */
 export abstract class FontMapClass {
-    /* Own fields of Pango-1.0.Pango.FontMapClass */
+    /* Fields of Pango-1.0.Pango.FontMapClass */
     /**
      * parent #GObjectClass.
      */
@@ -8745,15 +8450,8 @@ export abstract class FontMapClass {
     changed: (fontmap: FontMap) => void
     static name: string
 }
-/**
- * A #PangoFontMetrics structure holds the overall metric information
- * for a font (possibly restricted to a script). The fields of this
- * structure are private to implementations of a font backend. See
- * the documentation of the corresponding getters for documentation
- * of their meaning.
- */
 export class FontMetrics {
-    /* Owm methods of Pango-1.0.Pango.FontMetrics */
+    /* Methods of Pango-1.0.Pango.FontMetrics */
     /**
      * Gets the approximate character width for a font metrics structure.
      * This is merely a representative value useful, for example, for
@@ -8828,12 +8526,8 @@ export class FontMetrics {
     unref(): void
     static name: string
 }
-/**
- * The #PangoFontsetClass structure holds the virtual functions for
- * a particular #PangoFontset implementation.
- */
 export abstract class FontsetClass {
-    /* Own fields of Pango-1.0.Pango.FontsetClass */
+    /* Fields of Pango-1.0.Pango.FontsetClass */
     /**
      * parent #GObjectClass.
      */
@@ -8847,12 +8541,8 @@ export abstract class FontsetClass {
 export abstract class FontsetSimpleClass {
     static name: string
 }
-/**
- * The #PangoGlyphGeometry structure contains width and positioning
- * information for a single glyph.
- */
 export class GlyphGeometry {
-    /* Own fields of Pango-1.0.Pango.GlyphGeometry */
+    /* Fields of Pango-1.0.Pango.GlyphGeometry */
     /**
      * the logical width to use for the the character.
      */
@@ -8867,13 +8557,8 @@ export class GlyphGeometry {
     y_offset: GlyphUnit
     static name: string
 }
-/**
- * The #PangoGlyphInfo structure represents a single glyph together with
- * positioning information and visual attributes.
- * It contains the following fields.
- */
 export class GlyphInfo {
-    /* Own fields of Pango-1.0.Pango.GlyphInfo */
+    /* Fields of Pango-1.0.Pango.GlyphInfo */
     /**
      * the glyph itself.
      */
@@ -8888,15 +8573,8 @@ export class GlyphInfo {
     attr: GlyphVisAttr
     static name: string
 }
-/**
- * A #PangoGlyphItem is a pair of a #PangoItem and the glyphs
- * resulting from shaping the text corresponding to an item.
- * As an example of the usage of #PangoGlyphItem, the results
- * of shaping text with #PangoLayout is a list of #PangoLayoutLine,
- * each of which contains a list of #PangoGlyphItem.
- */
 export class GlyphItem {
-    /* Own fields of Pango-1.0.Pango.GlyphItem */
+    /* Fields of Pango-1.0.Pango.GlyphItem */
     /**
      * corresponding #PangoItem.
      */
@@ -8905,7 +8583,7 @@ export class GlyphItem {
      * corresponding #PangoGlyphString.
      */
     glyphs: GlyphString
-    /* Owm methods of Pango-1.0.Pango.GlyphItem */
+    /* Methods of Pango-1.0.Pango.GlyphItem */
     /**
      * Splits a shaped item (PangoGlyphItem) into multiple items based
      * on an attribute list. The idea is that if you have attributes
@@ -8971,47 +8649,8 @@ export class GlyphItem {
     split(text: string, split_index: number): GlyphItem
     static name: string
 }
-/**
- * A #PangoGlyphItemIter is an iterator over the clusters in a
- * #PangoGlyphItem.  The <firstterm>forward direction</firstterm> of the
- * iterator is the logical direction of text.  That is, with increasing
- * `start_index` and `start_char` values.  If `glyph_item` is right-to-left
- * (that is, if <literal>`glyph_item->`item->analysis.level</literal> is odd),
- * then `start_glyph` decreases as the iterator moves forward.  Moreover,
- * in right-to-left cases, `start_glyph` is greater than `end_glyph`.
- * 
- * An iterator should be initialized using either of
- * pango_glyph_item_iter_init_start() and
- * pango_glyph_item_iter_init_end(), for forward and backward iteration
- * respectively, and walked over using any desired mixture of
- * pango_glyph_item_iter_next_cluster() and
- * pango_glyph_item_iter_prev_cluster().  A common idiom for doing a
- * forward iteration over the clusters is:
- * <programlisting>
- * PangoGlyphItemIter cluster_iter;
- * gboolean have_cluster;
- * 
- * for (have_cluster = pango_glyph_item_iter_init_start (&amp;cluster_iter,
- *                                                       glyph_item, text);
- *      have_cluster;
- *      have_cluster = pango_glyph_item_iter_next_cluster (&amp;cluster_iter))
- * {
- *   ...
- * }
- * </programlisting>
- * 
- * Note that `text` is the start of the text for layout, which is then
- * indexed by <literal>`glyph_item->`item->offset</literal> to get to the
- * text of `glyph_item`.  The `start_index` and `end_index` values can directly
- * index into `text`.  The `start_glyph,` `end_glyph,` `start_char,` and `end_char`
- * values however are zero-based for the `glyph_item`.  For each cluster, the
- * item pointed at by the start variables is included in the cluster while
- * the one pointed at by end variables is not.
- * 
- * None of the members of a #PangoGlyphItemIter should be modified manually.
- */
 export class GlyphItemIter {
-    /* Own fields of Pango-1.0.Pango.GlyphItemIter */
+    /* Fields of Pango-1.0.Pango.GlyphItemIter */
     glyph_item: GlyphItem
     text: string
     start_glyph: number
@@ -9020,7 +8659,7 @@ export class GlyphItemIter {
     end_glyph: number
     end_index: number
     end_char: number
-    /* Owm methods of Pango-1.0.Pango.GlyphItemIter */
+    /* Methods of Pango-1.0.Pango.GlyphItemIter */
     /**
      * Make a shallow copy of an existing #PangoGlyphItemIter structure.
      */
@@ -9057,14 +8696,8 @@ export class GlyphItemIter {
     prev_cluster(): boolean
     static name: string
 }
-/**
- * The #PangoGlyphString structure is used to store strings
- * of glyphs with geometry and visual attribute information.
- * The storage for the glyph information is owned
- * by the structure which simplifies memory management.
- */
 export class GlyphString {
-    /* Own fields of Pango-1.0.Pango.GlyphString */
+    /* Fields of Pango-1.0.Pango.GlyphString */
     /**
      * number of the glyphs in this glyph string.
      */
@@ -9079,7 +8712,7 @@ export class GlyphString {
      *                within the text corresponding to the glyph string.
      */
     log_clusters: number
-    /* Owm methods of Pango-1.0.Pango.GlyphString */
+    /* Methods of Pango-1.0.Pango.GlyphString */
     /**
      * Copy a glyph string and associated storage.
      */
@@ -9094,7 +8727,7 @@ export class GlyphString {
      * ![](rects1.png) ![](rects2.png)
      * @param font a #PangoFont
      */
-    extents(font: Font): [ /* ink_rect */ Rectangle, /* logical_rect */ Rectangle ]
+    extents(font: Font): [ /* ink_rect */ Rectangle | null, /* logical_rect */ Rectangle | null ]
     /**
      * Computes the extents of a sub-portion of a glyph string. The extents are
      * relative to the start of the glyph string range (the origin of their
@@ -9104,7 +8737,7 @@ export class GlyphString {
      * @param end end index (the range is the set of bytes with 	      indices such that start <= index < end)
      * @param font a #PangoFont
      */
-    extents_range(start: number, end: number, font: Font): [ /* ink_rect */ Rectangle, /* logical_rect */ Rectangle ]
+    extents_range(start: number, end: number, font: Font): [ /* ink_rect */ Rectangle | null, /* logical_rect */ Rectangle | null ]
     /**
      * Free a glyph string and associated storage.
      */
@@ -9164,13 +8797,8 @@ export class GlyphString {
     /* Static methods and pseudo-constructors */
     static new(): GlyphString
 }
-/**
- * The PangoGlyphVisAttr is used to communicate information between
- * the shaping phase and the rendering phase.  More attributes may be
- * added in the future.
- */
 export class GlyphVisAttr {
-    /* Own fields of Pango-1.0.Pango.GlyphVisAttr */
+    /* Fields of Pango-1.0.Pango.GlyphVisAttr */
     /**
      * set for the first logical glyph in each cluster. (Clusters
      * are stored in visual order, within the cluster, glyphs
@@ -9181,23 +8809,15 @@ export class GlyphVisAttr {
     is_cluster_start: number
     static name: string
 }
-/**
- * The #PangoIncludedModule structure for a statically linked module
- * contains the functions that would otherwise be loaded from a dynamically
- * loaded module.
- */
 export class IncludedModule {
-    /* Own fields of Pango-1.0.Pango.IncludedModule */
+    /* Fields of Pango-1.0.Pango.IncludedModule */
     list: (engines: EngineInfo, n_engines: number) => void
     init: (module: GObject.TypeModule) => void
     exit: () => void
     static name: string
 }
-/**
- * The #PangoItem structure stores information about a segment of text.
- */
 export class Item {
-    /* Own fields of Pango-1.0.Pango.Item */
+    /* Fields of Pango-1.0.Pango.Item */
     /**
      * byte offset of the start of this item in text.
      */
@@ -9214,7 +8834,7 @@ export class Item {
      * analysis results for the item.
      */
     analysis: Analysis
-    /* Owm methods of Pango-1.0.Pango.Item */
+    /* Methods of Pango-1.0.Pango.Item */
     /**
      * Add attributes to a PangoItem. The idea is that you have
      * attributes that don't affect itemization, such as font features,
@@ -9258,15 +8878,8 @@ export class Item {
     /* Static methods and pseudo-constructors */
     static new(): Item
 }
-/**
- * The #PangoLanguage structure is used to
- * represent a language.
- * 
- * #PangoLanguage pointers can be efficiently
- * copied and compared with each other.
- */
 export class Language {
-    /* Owm methods of Pango-1.0.Pango.Language */
+    /* Methods of Pango-1.0.Pango.Language */
     /**
      * Get a string that is representative of the characters needed to
      * render a particular language.
@@ -9358,7 +8971,7 @@ export class Language {
      * the current locale of the process.
      * @param language a string representing a language tag, or %NULL
      */
-    static from_string(language: string | null): Language | null
+    static from_string(language?: string | null): Language | null
     /**
      * Returns the #PangoLanguage for the current locale of the process.
      * Note that this can change over the life of an application.
@@ -9392,15 +9005,8 @@ export class Language {
 export abstract class LayoutClass {
     static name: string
 }
-/**
- * A #PangoLayoutIter structure can be used to
- * iterate over the visual extents of a #PangoLayout.
- * 
- * The #PangoLayoutIter structure is opaque, and
- * has no user-visible fields.
- */
 export class LayoutIter {
-    /* Owm methods of Pango-1.0.Pango.LayoutIter */
+    /* Methods of Pango-1.0.Pango.LayoutIter */
     /**
      * Determines whether `iter` is on the last line of the layout.
      */
@@ -9429,7 +9035,7 @@ export class LayoutIter {
      * Gets the extents of the current cluster, in layout coordinates
      * (origin is the top left of the entire layout).
      */
-    get_cluster_extents(): [ /* ink_rect */ Rectangle, /* logical_rect */ Rectangle ]
+    get_cluster_extents(): [ /* ink_rect */ Rectangle | null, /* logical_rect */ Rectangle | null ]
     /**
      * Gets the current byte index. Note that iterating forward by char
      * moves in visual order, not logical order, so indexes may not be
@@ -9446,7 +9052,7 @@ export class LayoutIter {
      * over. `ink_rect` or `logical_rect` can be %NULL if you
      * aren't interested in them.
      */
-    get_layout_extents(): [ /* ink_rect */ Rectangle, /* logical_rect */ Rectangle ]
+    get_layout_extents(): [ /* ink_rect */ Rectangle | null, /* logical_rect */ Rectangle | null ]
     /**
      * Gets the current line.
      * 
@@ -9462,7 +9068,7 @@ export class LayoutIter {
      * the same width/height but not at the same x/y as the extents
      * returned from pango_layout_line_get_extents().
      */
-    get_line_extents(): [ /* ink_rect */ Rectangle, /* logical_rect */ Rectangle ]
+    get_line_extents(): [ /* ink_rect */ Rectangle | null, /* logical_rect */ Rectangle | null ]
     /**
      * Gets the current line for read-only access.
      * 
@@ -9484,7 +9090,7 @@ export class LayoutIter {
      * and there may be gaps between the ranges returned by this
      * function.
      */
-    get_line_yrange(): [ /* y0_ */ number, /* y1_ */ number ]
+    get_line_yrange(): [ /* y0_ */ number | null, /* y1_ */ number | null ]
     /**
      * Gets the current run. When iterating by run, at the end of each
      * line, there's a position with a %NULL run, so this function can return
@@ -9499,7 +9105,7 @@ export class LayoutIter {
      * Gets the extents of the current run in layout coordinates
      * (origin is the top left of the entire layout).
      */
-    get_run_extents(): [ /* ink_rect */ Rectangle, /* logical_rect */ Rectangle ]
+    get_run_extents(): [ /* ink_rect */ Rectangle | null, /* logical_rect */ Rectangle | null ]
     /**
      * Gets the current run. When iterating by run, at the end of each
      * line, there's a position with a %NULL run, so this function can return
@@ -9533,18 +9139,8 @@ export class LayoutIter {
     next_run(): boolean
     static name: string
 }
-/**
- * The #PangoLayoutLine structure represents one of the lines resulting
- * from laying out a paragraph via #PangoLayout. #PangoLayoutLine
- * structures are obtained by calling pango_layout_get_line() and
- * are only valid until the text, attributes, or settings of the
- * parent #PangoLayout are modified.
- * 
- * Routines for rendering PangoLayout objects are provided in
- * code specific to each rendering system.
- */
 export class LayoutLine {
-    /* Own fields of Pango-1.0.Pango.LayoutLine */
+    /* Fields of Pango-1.0.Pango.LayoutLine */
     /**
      * the layout this line belongs to, might be %NULL
      */
@@ -9570,18 +9166,18 @@ export class LayoutLine {
      * #Resolved PangoDirection of line
      */
     resolved_dir: number
-    /* Owm methods of Pango-1.0.Pango.LayoutLine */
+    /* Methods of Pango-1.0.Pango.LayoutLine */
     /**
      * Computes the logical and ink extents of a layout line. See
      * pango_font_get_glyph_extents() for details about the interpretation
      * of the rectangles.
      */
-    get_extents(): [ /* ink_rect */ Rectangle, /* logical_rect */ Rectangle ]
+    get_extents(): [ /* ink_rect */ Rectangle | null, /* logical_rect */ Rectangle | null ]
     /**
      * Computes the height of the line, ie the distance between
      * this and the previous lines baseline.
      */
-    get_height(): /* height */ number
+    get_height(): /* height */ number | null
     /**
      * Computes the logical and ink extents of `layout_line` in device units.
      * This function just calls pango_layout_line_get_extents() followed by
@@ -9589,7 +9185,7 @@ export class LayoutLine {
      * such that the rounded rectangles fully contain the unrounded one (that is,
      * passes them as first argument to pango_extents_to_pixels()).
      */
-    get_pixel_extents(): [ /* ink_rect */ Rectangle, /* logical_rect */ Rectangle ]
+    get_pixel_extents(): [ /* ink_rect */ Rectangle | null, /* logical_rect */ Rectangle | null ]
     /**
      * Gets a list of visual ranges corresponding to a given logical range.
      * This list is not necessarily minimal - there may be consecutive
@@ -9632,12 +9228,8 @@ export class LayoutLine {
     x_to_index(x_pos: number): [ /* returnType */ boolean, /* index_ */ number, /* trailing */ number ]
     static name: string
 }
-/**
- * The #PangoLogAttr structure stores information
- * about the attributes of a single character.
- */
 export class LogAttr {
-    /* Own fields of Pango-1.0.Pango.LogAttr */
+    /* Fields of Pango-1.0.Pango.LogAttr */
     /**
      * if set, can break line in front of character
      */
@@ -9732,18 +9324,8 @@ export class Map {
 export class MapEntry {
     static name: string
 }
-/**
- * A structure specifying a transformation between user-space
- * coordinates and device coordinates. The transformation
- * is given by
- * 
- * <programlisting>
- * x_device = x_user * matrix->xx + y_user * matrix->xy + matrix->x0;
- * y_device = x_user * matrix->yx + y_user * matrix->yy + matrix->y0;
- * </programlisting>
- */
 export class Matrix {
-    /* Own fields of Pango-1.0.Pango.Matrix */
+    /* Fields of Pango-1.0.Pango.Matrix */
     /**
      * 1st component of the transformation matrix
      */
@@ -9768,7 +9350,7 @@ export class Matrix {
      * y translation
      */
     y0: number
-    /* Owm methods of Pango-1.0.Pango.Matrix */
+    /* Methods of Pango-1.0.Pango.Matrix */
     /**
      * Changes the transformation represented by `matrix` to be the
      * transformation given by first applying transformation
@@ -9799,7 +9381,7 @@ export class Matrix {
      * 
      * Note that output numbers will always be non-negative.
      */
-    get_font_scale_factors(): [ /* xscale */ number, /* yscale */ number ]
+    get_font_scale_factors(): [ /* xscale */ number | null, /* yscale */ number | null ]
     /**
      * Changes the transformation represented by `matrix` to be the
      * transformation given by first rotating by `degrees` degrees
@@ -9849,7 +9431,7 @@ export class Matrix {
      * using pango_extents_to_pixels()'s first argument.
      * @param rect in/out bounding box in device units, or %NULL
      */
-    transform_pixel_rectangle(rect: Rectangle | null): /* rect */ Rectangle | null
+    transform_pixel_rectangle(rect?: Rectangle | null): /* rect */ Rectangle | null
     /**
      * Transforms the point (`x,` `y)` by `matrix`.
      * @param x in/out X position
@@ -9877,7 +9459,7 @@ export class Matrix {
      * example).
      * @param rect in/out bounding box in Pango units, or %NULL
      */
-    transform_rectangle(rect: Rectangle | null): /* rect */ Rectangle | null
+    transform_rectangle(rect?: Rectangle | null): /* rect */ Rectangle | null
     /**
      * Changes the transformation represented by `matrix` to be the
      * transformation given by first translating by (`tx,` `ty)`
@@ -9888,13 +9470,8 @@ export class Matrix {
     translate(tx: number, ty: number): void
     static name: string
 }
-/**
- * The #PangoRectangle structure represents a rectangle. It is frequently
- * used to represent the logical or ink extents of a single glyph or section
- * of text. (See, for instance, pango_font_get_glyph_extents())
- */
 export class Rectangle {
-    /* Own fields of Pango-1.0.Pango.Rectangle */
+    /* Fields of Pango-1.0.Pango.Rectangle */
     /**
      * X coordinate of the left side of the rectangle.
      */
@@ -9913,26 +9490,8 @@ export class Rectangle {
     height: number
     static name: string
 }
-/**
- * Class structure for #PangoRenderer.
- * 
- * The following vfuncs take user space coordinates in Pango units
- * and have default implementations:
- * - draw_glyphs
- * - draw_rectangle
- * - draw_error_underline
- * - draw_shape
- * - draw_glyph_item
- * 
- * The default draw_shape implementation draws nothing.
- * 
- * The following vfuncs take device space coordinates as doubles
- * and must be implemented:
- * - draw_trapezoid
- * - draw_glyph
- */
 export abstract class RendererClass {
-    /* Own fields of Pango-1.0.Pango.RendererClass */
+    /* Fields of Pango-1.0.Pango.RendererClass */
     draw_glyphs: (renderer: Renderer, font: Font, glyphs: GlyphString, x: number, y: number) => void
     draw_rectangle: (renderer: Renderer, part: RenderPart, x: number, y: number, width: number, height: number) => void
     draw_error_underline: (renderer: Renderer, x: number, y: number, width: number, height: number) => void
@@ -9949,12 +9508,8 @@ export abstract class RendererClass {
 export class RendererPrivate {
     static name: string
 }
-/**
- * A #PangoScriptIter is used to iterate through a string
- * and identify ranges in different scripts.
- */
 export class ScriptIter {
-    /* Owm methods of Pango-1.0.Pango.ScriptIter */
+    /* Methods of Pango-1.0.Pango.ScriptIter */
     /**
      * Frees a #PangoScriptIter created with pango_script_iter_new().
      */
@@ -9969,7 +9524,7 @@ export class ScriptIter {
      * GUnicodeScript values. Callers must be prepared to handle unknown
      * values.
      */
-    get_range(): [ /* start */ string, /* end */ string, /* script */ Script ]
+    get_range(): [ /* start */ string | null, /* end */ string | null, /* script */ Script | null ]
     /**
      * Advances a #PangoScriptIter to the next range. If `iter`
      * is already at the end, it is left unchanged and %FALSE
@@ -9982,12 +9537,8 @@ export class ScriptIter {
     /* Static methods and pseudo-constructors */
     static new(text: string, length: number): ScriptIter
 }
-/**
- * A #PangoTabArray struct contains an array
- * of tab stops. Each tab stop has an alignment and a position.
- */
 export class TabArray {
-    /* Owm methods of Pango-1.0.Pango.TabArray */
+    /* Methods of Pango-1.0.Pango.TabArray */
     /**
      * Copies a #PangoTabArray
      */
@@ -10009,13 +9560,13 @@ export class TabArray {
      * Gets the alignment and position of a tab stop.
      * @param tab_index tab stop index
      */
-    get_tab(tab_index: number): [ /* alignment */ TabAlign, /* location */ number ]
+    get_tab(tab_index: number): [ /* alignment */ TabAlign | null, /* location */ number | null ]
     /**
      * If non-%NULL, `alignments` and `locations` are filled with allocated
      * arrays of length pango_tab_array_get_size(). You must free the
      * returned array.
      */
-    get_tabs(): [ /* alignments */ TabAlign, /* locations */ number[] ]
+    get_tabs(): [ /* alignments */ TabAlign | null, /* locations */ number[] | null ]
     /**
      * Resizes a tab array. You must subsequently initialize any tabs that
      * were added as a result of growing the array.

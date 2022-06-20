@@ -29,22 +29,18 @@ export function render_transformed(bitmap: freetype2.Bitmap, matrix: Pango.Matri
 export function shutdown_display(): void
 /**
  * Function type for doing final config tweaking on prepared FcPatterns.
- * @callback 
  */
 export interface SubstituteFunc {
-    (pattern: fontconfig.Pattern, data: object | null): void
+    (pattern: fontconfig.Pattern, data?: object | null): void
 }
 export interface FontMap_ConstructProps extends PangoFc.FontMap_ConstructProps {
 }
-/**
- * The #PangoFT2FontMap is the #PangoFontMap implementation for FreeType fonts.
- */
 export class FontMap {
-    /* Extended fields of Pango-1.0.Pango.FontMap */
+    /* Fields of Pango-1.0.Pango.FontMap */
     parent_instance: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of PangoFT2-1.0.PangoFT2.FontMap */
+    /* Methods of PangoFT2-1.0.PangoFT2.FontMap */
     /**
      * Sets a function that will be called to do final configuration
      * substitution on a #FcPattern before it is used to load
@@ -67,7 +63,7 @@ export class FontMap {
      * results for the same input pattern, you must call this function.
      */
     substitute_changed(): void
-    /* Extended methods of PangoFc-1.0.PangoFc.FontMap */
+    /* Methods of PangoFc-1.0.PangoFc.FontMap */
     /**
      * Clear all cached information and fontsets for this font map;
      * this should be called whenever there is a change in the
@@ -98,7 +94,7 @@ export class FontMap {
      * only for backend implementations deriving from #PangoFcFontMap.
      */
     shutdown(): void
-    /* Extended methods of Pango-1.0.Pango.FontMap */
+    /* Methods of Pango-1.0.Pango.FontMap */
     /**
      * Forces a change in the context, which will cause any #PangoContext
      * using this fontmap to change.
@@ -152,7 +148,7 @@ export class FontMap {
      * @param language a #PangoLanguage the fonts will be used for
      */
     load_fontset(context: Pango.Context, desc: Pango.FontDescription, language: Pango.Language): Pango.Fontset | null
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -198,7 +194,7 @@ export class FontMap {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -367,7 +363,7 @@ export class FontMap {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -455,8 +451,8 @@ export class FontMap {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Pango-1.0.Pango.FontMap */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Pango-1.0.Pango.FontMap */
     /**
      * Forces a change in the context, which will cause any #PangoContext
      * using this fontmap to change.
@@ -465,7 +461,6 @@ export class FontMap {
      * for Pango, something applications won't do. Backends should
      * call this function if they have attached extra data to the context
      * and such data is changed.
-     * @virtual 
      */
     vfunc_changed(): void
     /**
@@ -480,17 +475,14 @@ export class FontMap {
      * 
      * This can be used to automatically detect changes to a #PangoFontMap, like
      * in #PangoContext.
-     * @virtual 
      */
     vfunc_get_serial(): number
     /**
      * List all families for a fontmap.
-     * @virtual 
      */
     vfunc_list_families(): /* families */ Pango.FontFamily[]
     /**
      * Load the font in the fontmap that is the closest match for `desc`.
-     * @virtual 
      * @param context the #PangoContext the font will be used with
      * @param desc a #PangoFontDescription describing the font to load
      */
@@ -498,13 +490,12 @@ export class FontMap {
     /**
      * Load a set of fonts in the fontmap that can be used to render
      * a font matching `desc`.
-     * @virtual 
      * @param context the #PangoContext the font will be used with
      * @param desc a #PangoFontDescription describing the font to load
      * @param language a #PangoLanguage the fonts will be used for
      */
     vfunc_load_fontset(context: Pango.Context, desc: Pango.FontDescription, language: Pango.Language): Pango.Fontset | null
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -521,12 +512,11 @@ export class FontMap {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -553,14 +543,13 @@ export class FontMap {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: FontMap, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: FontMap, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -568,5 +557,5 @@ export class FontMap {
     _init (config?: FontMap_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static new(): FontMap
-    static $gtype: GObject.GType<FontMap>
+    static $gtype: GObject.Type
 }

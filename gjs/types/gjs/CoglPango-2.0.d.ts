@@ -32,21 +32,21 @@ export function show_layout(framebuffer: Cogl.Framebuffer, layout: Pango.Layout,
 export function show_layout_line(framebuffer: Cogl.Framebuffer, line: Pango.LayoutLine, x: number, y: number, color: Cogl.Color): void
 export interface Renderer_ConstructProps extends Pango.Renderer_ConstructProps {
     /* Constructor properties of CoglPango-2.0.CoglPango.Renderer */
-    context?: object | null
+    context?: object
 }
 export class Renderer {
-    /* Own properties of CoglPango-2.0.CoglPango.Renderer */
+    /* Properties of CoglPango-2.0.CoglPango.Renderer */
     readonly context: object
-    /* Extended fields of Pango-1.0.Pango.Renderer */
+    /* Fields of Pango-1.0.Pango.Renderer */
     /**
      * the current transformation matrix for
      *    the Renderer; may be %NULL, which should be treated the
      *    same as the identity matrix.
      */
     matrix: Pango.Matrix
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Pango-1.0.Pango.Renderer */
+    /* Methods of Pango-1.0.Pango.Renderer */
     /**
      * Does initial setup before rendering operations on `renderer`.
      * pango_renderer_deactivate() should be called when done drawing.
@@ -214,13 +214,13 @@ export class Renderer {
      * @param part the part to change the color of
      * @param color the new color or %NULL to unset the current color
      */
-    set_color(part: Pango.RenderPart, color: Pango.Color | null): void
+    set_color(part: Pango.RenderPart, color?: Pango.Color | null): void
     /**
      * Sets the transformation matrix that will be applied when rendering.
      * @param matrix a #PangoMatrix, or %NULL to unset any existing matrix.  (No matrix set is the same as setting the identity matrix.)
      */
-    set_matrix(matrix: Pango.Matrix | null): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    set_matrix(matrix?: Pango.Matrix | null): void
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -266,7 +266,7 @@ export class Renderer {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -435,7 +435,7 @@ export class Renderer {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -523,8 +523,8 @@ export class Renderer {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Pango-1.0.Pango.Renderer */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Pango-1.0.Pango.Renderer */
     vfunc_begin(): void
     /**
      * Draw a squiggly line that approximately covers the given rectangle
@@ -535,7 +535,6 @@ export class Renderer {
      * 
      * This should be called while `renderer` is already active.  Use
      * pango_renderer_activate() to activate a renderer.
-     * @virtual 
      * @param x X coordinate of underline, in Pango units in user coordinate system
      * @param y Y coordinate of underline, in Pango units in user coordinate system
      * @param width width of underline, in Pango units in user coordinate system
@@ -544,7 +543,6 @@ export class Renderer {
     vfunc_draw_error_underline(x: number, y: number, width: number, height: number): void
     /**
      * Draws a single glyph with coordinates in device space.
-     * @virtual 
      * @param font a #PangoFont
      * @param glyph the glyph index of a single glyph
      * @param x X coordinate of left edge of baseline of glyph
@@ -563,7 +561,6 @@ export class Renderer {
      * 
      * The default implementation of this method simply falls back to
      * pango_renderer_draw_glyphs().
-     * @virtual 
      * @param text the UTF-8 text that `glyph_item` refers to, or %NULL
      * @param glyph_item a #PangoGlyphItem
      * @param x X position of left edge of baseline, in user space coordinates   in Pango units.
@@ -572,7 +569,6 @@ export class Renderer {
     vfunc_draw_glyph_item(text: string | null, glyph_item: Pango.GlyphItem, x: number, y: number): void
     /**
      * Draws the glyphs in `glyphs` with the specified #PangoRenderer.
-     * @virtual 
      * @param font a #PangoFont
      * @param glyphs a #PangoGlyphString
      * @param x X position of left edge of baseline, in user space coordinates   in Pango units.
@@ -585,7 +581,6 @@ export class Renderer {
      * 
      * This should be called while `renderer` is already active.  Use
      * pango_renderer_activate() to activate a renderer.
-     * @virtual 
      * @param part type of object this rectangle is part of
      * @param x X position at which to draw rectangle, in user space coordinates in Pango units
      * @param y Y position at which to draw rectangle, in user space coordinates in Pango units
@@ -597,7 +592,6 @@ export class Renderer {
     /**
      * Draws a trapezoid with the parallel sides aligned with the X axis
      * using the given #PangoRenderer; coordinates are in device space.
-     * @virtual 
      * @param part type of object this trapezoid is part of
      * @param y1_ Y coordinate of top of trapezoid
      * @param x11 X coordinate of left end of top of trapezoid
@@ -622,12 +616,11 @@ export class Renderer {
      * When the stipple changes or underlines with different stipples
      * might be joined together. Pango automatically calls this for
      * changes to colors. (See pango_renderer_set_color())
-     * @virtual 
      * @param part the part for which rendering has changed.
      */
     vfunc_part_changed(part: Pango.RenderPart): void
     vfunc_prepare_run(run: Pango.LayoutRun): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -644,12 +637,11 @@ export class Renderer {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -676,7 +668,6 @@ export class Renderer {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Renderer, pspec: GObject.ParamSpec) => void)): number
@@ -684,14 +675,14 @@ export class Renderer {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::context", callback: (($obj: Renderer, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::context", callback: (($obj: Renderer, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: Renderer_ConstructProps)
     _init (config?: Renderer_ConstructProps): void
-    static $gtype: GObject.GType<Renderer>
+    static $gtype: GObject.Type
 }
 export abstract class RendererClass {
     static name: string

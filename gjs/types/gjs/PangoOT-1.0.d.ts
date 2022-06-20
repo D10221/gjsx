@@ -65,16 +65,16 @@ export const NO_FEATURE: number
  * this value, so no special handling is required by the user.
  */
 export const NO_SCRIPT: number
-export function tag_from_language(language: Pango.Language | null): Tag
+export function tag_from_language(language?: Pango.Language | null): Tag
 export function tag_from_script(script: Pango.Script): Tag
 export function tag_to_language(language_tag: Tag): Pango.Language
 export function tag_to_script(script_tag: Tag): Pango.Script
 export interface Info_ConstructProps extends GObject.Object_ConstructProps {
 }
 export class Info {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of PangoOT-1.0.PangoOT.Info */
+    /* Methods of PangoOT-1.0.PangoOT.Info */
     /**
      * Finds the index of a feature.  If the feature is not found, sets
      * `feature_index` to PANGO_OT_NO_FEATURE, which is safe to pass to
@@ -90,7 +90,7 @@ export class Info {
      * @param script_index the index of the script.
      * @param language_index the index of the language whose features are searched,     or %PANGO_OT_DEFAULT_LANGUAGE to use the default language of the script.
      */
-    find_feature(table_type: TableType, feature_tag: Tag, script_index: number, language_index: number): [ /* returnType */ boolean, /* feature_index */ number ]
+    find_feature(table_type: TableType, feature_tag: Tag, script_index: number, language_index: number): [ /* returnType */ boolean, /* feature_index */ number | null ]
     /**
      * Finds the index of a language and its required feature index.
      * If the language is not found, sets `language_index` to
@@ -104,7 +104,7 @@ export class Info {
      * @param script_index the index of the script whose languages are searched.
      * @param language_tag the tag of the language to find.
      */
-    find_language(table_type: TableType, script_index: number, language_tag: Tag): [ /* returnType */ boolean, /* language_index */ number, /* required_feature_index */ number ]
+    find_language(table_type: TableType, script_index: number, language_tag: Tag): [ /* returnType */ boolean, /* language_index */ number | null, /* required_feature_index */ number | null ]
     /**
      * Finds the index of a script.  If not found, tries to find the 'DFLT'
      * and then 'dflt' scripts and return the index of that in `script_index`.
@@ -118,7 +118,7 @@ export class Info {
      * @param table_type the table type to obtain information about.
      * @param script_tag the tag of the script to find.
      */
-    find_script(table_type: TableType, script_tag: Tag): [ /* returnType */ boolean, /* script_index */ number ]
+    find_script(table_type: TableType, script_tag: Tag): [ /* returnType */ boolean, /* script_index */ number | null ]
     /**
      * Obtains the list of features for the given language of the given script.
      * @param table_type the table type to obtain information about.
@@ -139,7 +139,7 @@ export class Info {
      * @param table_type the table type to obtain information about.
      */
     list_scripts(table_type: TableType): Tag
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -185,7 +185,7 @@ export class Info {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -354,7 +354,7 @@ export class Info {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -442,8 +442,8 @@ export class Info {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -460,12 +460,11 @@ export class Info {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -492,14 +491,13 @@ export class Info {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Info, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Info, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -511,24 +509,14 @@ export class Info {
      * @param face a <type>FT_Face</type>.
      */
     static get(face: freetype2.Face): Info
-    static $gtype: GObject.GType<Info>
+    static $gtype: GObject.Type
 }
 export interface Ruleset_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * The #PangoOTRuleset structure holds a
- * set of features selected from the tables in an OpenType font.
- * (A feature is an operation such as adjusting glyph positioning
- * that should be applied to a text feature such as a certain
- * type of accent.) A #PangoOTRuleset
- * is created with pango_ot_ruleset_new(), features are added
- * to it with pango_ot_ruleset_add_feature(), then it is
- * applied to a #PangoGlyphString with pango_ot_ruleset_shape().
- */
 export class Ruleset {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of PangoOT-1.0.PangoOT.Ruleset */
+    /* Methods of PangoOT-1.0.PangoOT.Ruleset */
     /**
      * Adds a feature to the ruleset.
      * @param table_type the table type to add a feature to.
@@ -539,7 +527,7 @@ export class Ruleset {
     /**
      * Gets the number of GSUB and GPOS features in the ruleset.
      */
-    get_feature_count(): [ /* returnType */ number, /* n_gsub_features */ number, /* n_gpos_features */ number ]
+    get_feature_count(): [ /* returnType */ number, /* n_gsub_features */ number | null, /* n_gpos_features */ number | null ]
     /**
      * This is a convenience function that first tries to find the feature
      * using pango_ot_info_find_feature() and the ruleset script and language
@@ -575,7 +563,7 @@ export class Ruleset {
      * @param buffer a #PangoOTBuffer.
      */
     substitute(buffer: Buffer): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -621,7 +609,7 @@ export class Ruleset {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -790,7 +778,7 @@ export class Ruleset {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -878,8 +866,8 @@ export class Ruleset {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -896,12 +884,11 @@ export class Ruleset {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -928,14 +915,13 @@ export class Ruleset {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Ruleset, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Ruleset, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -957,10 +943,10 @@ export class Ruleset {
      * @param desc a #PangoOTRulesetDescription.
      */
     static get_for_description(info: Info, desc: RulesetDescription): Ruleset
-    static $gtype: GObject.GType<Ruleset>
+    static $gtype: GObject.Type
 }
 export class Buffer {
-    /* Owm methods of PangoOT-1.0.PangoOT.Buffer */
+    /* Methods of PangoOT-1.0.PangoOT.Buffer */
     /**
      * Appends a glyph to a #PangoOTBuffer, with `properties` identifying which
      * features should be applied on this glyph.  See pango_ot_ruleset_add_feature().
@@ -982,7 +968,7 @@ export class Buffer {
      * owned by the buffer and should not be freed, and are only valid as long
      * as buffer is not modified.
      */
-    get_glyphs(): /* glyphs */ Glyph[]
+    get_glyphs(): /* glyphs */ Glyph[] | null
     /**
      * Exports the glyphs in a #PangoOTBuffer into a #PangoGlyphString.  This is
      * typically used after the OpenType layout processing is over, to convert the
@@ -1006,13 +992,8 @@ export class Buffer {
     set_zero_width_marks(zero_width_marks: boolean): void
     static name: string
 }
-/**
- * The #PangoOTFeatureMap typedef is used to represent an OpenType
- * feature with the property bit associated with it.  The feature tag is
- * represented as a char array instead of a #PangoOTTag for convenience.
- */
 export class FeatureMap {
-    /* Own fields of PangoOT-1.0.PangoOT.FeatureMap */
+    /* Fields of PangoOT-1.0.PangoOT.FeatureMap */
     /**
      * feature tag in represented as four-letter ASCII string.
      */
@@ -1024,13 +1005,8 @@ export class FeatureMap {
     property_bit: number
     static name: string
 }
-/**
- * The #PangoOTGlyph structure represents a single glyph together with
- * information used for OpenType layout processing of the glyph.
- * It contains the following fields.
- */
 export class Glyph {
-    /* Own fields of PangoOT-1.0.PangoOT.Glyph */
+    /* Fields of PangoOT-1.0.PangoOT.Glyph */
     /**
      * the glyph itself.
      */
@@ -1058,16 +1034,8 @@ export class Glyph {
     internal: number
     static name: string
 }
-/**
- * The #PangoOTRuleset structure holds all the information needed
- * to build a complete #PangoOTRuleset from an OpenType font.
- * The main use of this struct is to act as the key for a per-font
- * hash of rulesets.  The user populates a ruleset description and
- * gets the ruleset using pango_ot_ruleset_get_for_description()
- * or create a new one using pango_ot_ruleset_new_from_description().
- */
 export class RulesetDescription {
-    /* Own fields of PangoOT-1.0.PangoOT.RulesetDescription */
+    /* Fields of PangoOT-1.0.PangoOT.RulesetDescription */
     /**
      * a #PangoScript.
      */
@@ -1105,7 +1073,7 @@ export class RulesetDescription {
      * length of `other_features,` or 0.
      */
     n_other_features: number
-    /* Owm methods of PangoOT-1.0.PangoOT.RulesetDescription */
+    /* Methods of PangoOT-1.0.PangoOT.RulesetDescription */
     /**
      * Compares two ruleset descriptions for equality.
      * Two ruleset descriptions are considered equal if the rulesets

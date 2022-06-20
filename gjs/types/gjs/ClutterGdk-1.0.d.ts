@@ -27,9 +27,9 @@ import type * as Atk from './Atk-1.0';
 
 export function disable_event_retrieval(): void
 export function get_default_display(): Gdk.Display
-export function get_stage_from_window(window: Gdk.Window): Clutter.Stage
-export function get_stage_window(stage: Clutter.Stage): Gdk.Window
+export function get_stage_from_window(window: Gdk.Window): any
+export function get_stage_window(stage: any): Gdk.Window
 export function get_visual(): Gdk.Visual
 export function handle_event(event: Gdk.Event): Gdk.FilterReturn
 export function set_display(display: Gdk.Display): void
-export function set_stage_foreign(stage: Clutter.Stage, window: Gdk.Window): boolean
+export function set_stage_foreign(stage: any, window: Gdk.Window): boolean

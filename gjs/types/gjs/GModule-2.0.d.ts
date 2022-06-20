@@ -15,7 +15,6 @@ import type * as GObject from './GObject-2.0';
 /**
  * Flags passed to g_module_open().
  * Note that these flags are not supported on all platforms.
- * @bitfield 
  */
 export enum ModuleFlags {
     /**
@@ -45,7 +44,6 @@ export function module_supported(): boolean
  * automatically when the module is loaded. It is passed the #GModule structure
  * and should return %NULL on success or a string describing the initialization
  * error.
- * @callback 
  */
 export interface ModuleCheckInit {
     (module: Module): string
@@ -55,18 +53,12 @@ export interface ModuleCheckInit {
  * If a module contains a function named g_module_unload() it is called
  * automatically when the module is unloaded.
  * It is passed the #GModule structure.
- * @callback 
  */
 export interface ModuleUnload {
     (module: Module): void
 }
-/**
- * The #GModule struct is an opaque data structure to represent a
- * [dynamically-loaded module][glib-Dynamic-Loading-of-Modules].
- * It should only be accessed via the following functions.
- */
 export class Module {
-    /* Owm methods of GModule-2.0.GModule.Module */
+    /* Methods of GModule-2.0.GModule.Module */
     /**
      * Closes a module.
      */

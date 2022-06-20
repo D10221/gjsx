@@ -1559,7 +1559,6 @@ export enum WindowWindowClass {
  * 
  * In general, when multiple flags are set, flipping should take precedence over
  * sliding, which should take precedence over resizing.
- * @bitfield 
  */
 export enum AnchorHints {
     /**
@@ -1601,7 +1600,6 @@ export enum AnchorHints {
 }
 /**
  * Flags describing the current capabilities of a device/tool.
- * @bitfield 
  */
 export enum AxisFlags {
     /**
@@ -1644,7 +1642,6 @@ export enum AxisFlags {
 /**
  * Used in #GdkDragContext to indicate what the destination
  * should do with the dropped data.
- * @bitfield 
  */
 export enum DragAction {
     /**
@@ -1702,7 +1699,6 @@ export enum DragAction {
  * type %GDK_TOUCH_BEGIN and %GDK_TOUCH_END (or %GDK_TOUCH_CANCEL).
  * gdk_event_get_event_sequence() returns the event sequence for these
  * events, so different sequences may be distinguished.
- * @bitfield 
  */
 export enum EventMask {
     /**
@@ -1815,7 +1811,6 @@ export enum EventMask {
  * #GdkFrameClockPhase is used to represent the different paint clock
  * phases that can be requested. The elements of the enumeration
  * correspond to the signals of #GdkFrameClock.
- * @bitfield 
  */
 export enum FrameClockPhase {
     /**
@@ -1870,7 +1865,6 @@ export enum FrameClockPhase {
  * Also note that the GDK X backend interprets button press events for button
  * 4-7 as scroll events, so %GDK_BUTTON4_MASK and %GDK_BUTTON5_MASK will never
  * be set.
- * @bitfield 
  */
 export enum ModifierType {
     /**
@@ -2012,7 +2006,6 @@ export enum ModifierType {
 }
 /**
  * Flags describing the seat capabilities.
- * @bitfield 
  */
 export enum SeatCapabilities {
     /**
@@ -2048,7 +2041,6 @@ export enum SeatCapabilities {
  * These are hints originally defined by the Motif toolkit.
  * The window manager can use them when determining how to decorate
  * the window. The hint must be set before mapping the window.
- * @bitfield 
  */
 export enum WMDecoration {
     /**
@@ -2084,7 +2076,6 @@ export enum WMDecoration {
  * These are hints originally defined by the Motif toolkit. The window manager
  * can use them when determining the functions to offer for the window. The
  * hint must be set before mapping the window.
- * @bitfield 
  */
 export enum WMFunction {
     /**
@@ -2119,7 +2110,6 @@ export enum WMFunction {
  * #GdkWindowAttr not covered by a bit in this enum are required; for example,
  * the `width/``height,` `wclass,` and `window_type` fields are required, they have
  * no corresponding flag in #GdkWindowAttributesType.
- * @bitfield 
  */
 export enum WindowAttributesType {
     /**
@@ -2164,7 +2154,6 @@ export enum WindowAttributesType {
  * `GDK_HINT_USER_POS` and `GDK_HINT_USER_SIZE` should be set if the user
  * specified a size/position using a --geometry command-line argument;
  * gtk_window_parse_geometry() automatically sets these flags.
- * @bitfield 
  */
 export enum WindowHints {
     /**
@@ -2208,7 +2197,6 @@ export enum WindowHints {
 }
 /**
  * Specifies the state of a toplevel window.
- * @bitfield 
  */
 export enum WindowState {
     /**
@@ -4601,7 +4589,7 @@ export function atom_intern_static_string(atom_name: string): Atom
 export function beep(): void
 export function cairo_create(window: Window): cairo.Context
 export function cairo_draw_from_gl(cr: cairo.Context, window: Window, source: number, source_type: number, buffer_scale: number, x: number, y: number, width: number, height: number): void
-export function cairo_get_clip_rectangle(cr: cairo.Context): [ /* returnType */ boolean, /* rect */ Rectangle ]
+export function cairo_get_clip_rectangle(cr: cairo.Context): [ /* returnType */ boolean, /* rect */ Rectangle | null ]
 export function cairo_get_drawing_context(cr: cairo.Context): DrawingContext | null
 export function cairo_rectangle(cr: cairo.Context, rectangle: Rectangle): void
 export function cairo_region(cr: cairo.Context, region: cairo.Region): void
@@ -4610,7 +4598,7 @@ export function cairo_set_source_color(cr: cairo.Context, color: Color): void
 export function cairo_set_source_pixbuf(cr: cairo.Context, pixbuf: GdkPixbuf.Pixbuf, pixbuf_x: number, pixbuf_y: number): void
 export function cairo_set_source_rgba(cr: cairo.Context, rgba: RGBA): void
 export function cairo_set_source_window(cr: cairo.Context, window: Window, x: number, y: number): void
-export function cairo_surface_create_from_pixbuf(pixbuf: GdkPixbuf.Pixbuf, scale: number, for_window: Window | null): cairo.Surface
+export function cairo_surface_create_from_pixbuf(pixbuf: GdkPixbuf.Pixbuf, scale: number, for_window?: Window | null): cairo.Surface
 export function color_parse(spec: string): [ /* returnType */ boolean, /* color */ Color ]
 export function disable_multidevice(): void
 export function drag_abort(context: DragContext, time_: number): void
@@ -4704,7 +4692,6 @@ export function utf8_to_string_target(str: string): string | null
 /**
  * Specifies the type of function passed to gdk_event_handler_set() to
  * handle all GDK events.
- * @callback 
  */
 export interface EventFunc {
     (event: Event): void
@@ -4718,7 +4705,6 @@ export interface EventFunc {
  * event to a GDK event and store the result in `event,` or handle it without
  * translation. If the filter translates the event and processing should
  * continue, it should return %GDK_FILTER_TRANSLATE.
- * @callback 
  */
 export interface FilterFunc {
     (xevent: XEvent, event: Event): FilterReturn
@@ -4728,7 +4714,6 @@ export interface FilterFunc {
  * grabbed. A typical action would be ensuring the window is
  * visible, although there's room for other initialization
  * actions.
- * @callback 
  */
 export interface SeatGrabPrepareFunc {
     (seat: Seat, window: Window): void
@@ -4737,7 +4722,6 @@ export interface SeatGrabPrepareFunc {
  * A function of this type is passed to gdk_window_invalidate_maybe_recurse().
  * It gets called for each child of the window to determine whether to
  * recursively invalidate it or now.
- * @callback 
  */
 export interface WindowChildFunc {
     (window: Window): boolean
@@ -4749,80 +4733,14 @@ export interface WindowChildFunc {
  * keep track of the dirty region, or you can actually change
  * `region` in case you are doing display tricks like showing
  * a child in multiple places.
- * @callback 
  */
 export interface WindowInvalidateHandlerFunc {
     (window: Window, region: cairo.Region): void
 }
-export interface DevicePad_ConstructProps extends GObject.Object_ConstructProps {
-    /* Implemented constructor properties of Gdk-3.0.Gdk.Device */
-    /**
-     * The #GdkDeviceManager the #GdkDevice pertains to.
-     */
-    device_manager?: DeviceManager | null
-    /**
-     * The #GdkDisplay the #GdkDevice pertains to.
-     */
-    display?: Display | null
-    /**
-     * Whether the device is represented by a cursor on the screen. Devices of type
-     * %GDK_DEVICE_TYPE_MASTER will have %TRUE here.
-     */
-    has_cursor?: boolean | null
-    input_mode?: InputMode | null
-    /**
-     * Source type for the device.
-     */
-    input_source?: InputSource | null
-    /**
-     * The device name.
-     */
-    name?: string | null
-    /**
-     * The maximal number of concurrent touches on a touch device.
-     * Will be 0 if the device is not a touch device or if the number
-     * of touches is unknown.
-     */
-    num_touches?: number | null
-    /**
-     * Product ID of this device, see gdk_device_get_product_id().
-     */
-    product_id?: string | null
-    /**
-     * #GdkSeat of this device.
-     */
-    seat?: Seat | null
-    /**
-     * Device role in the device manager.
-     */
-    type?: DeviceType | null
-    /**
-     * Vendor ID of this device, see gdk_device_get_vendor_id().
-     */
-    vendor_id?: string | null
+export interface DevicePad_ConstructProps extends Device_ConstructProps {
 }
-/**
- * #GdkDevicePad is an interface implemented by devices of type
- * %GDK_SOURCE_TABLET_PAD, it allows querying the features provided
- * by the pad device.
- * 
- * Tablet pads may contain one or more groups, each containing a subset
- * of the buttons/rings/strips available. gdk_device_pad_get_n_groups()
- * can be used to obtain the number of groups, gdk_device_pad_get_n_features()
- * and gdk_device_pad_get_feature_group() can be combined to find out the
- * number of buttons/rings/strips the device has, and how are they grouped.
- * 
- * Each of those groups have different modes, which may be used to map
- * each individual pad feature to multiple actions. Only one mode is
- * effective (current) for each given group, different groups may have
- * different current modes. The number of available modes in a group can
- * be found out through gdk_device_pad_get_group_n_modes(), and the current
- * mode for a given group will be notified through the #GdkEventPadGroupMode
- * event.
- * @interface 
- */
 export class DevicePad {
-    /* Implemented properties of Gdk-3.0.Gdk.Device */
+    /* Properties of Gdk-3.0.Gdk.Device */
     /**
      * Associated pointer or keyboard with this device, if any. Devices of type #GDK_DEVICE_TYPE_MASTER
      * always come in keyboard/pointer pairs. Other device types will have a %NULL associated device.
@@ -4881,9 +4799,9 @@ export class DevicePad {
      * Vendor ID of this device, see gdk_device_get_vendor_id().
      */
     readonly vendor_id: string
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.DevicePad */
+    /* Methods of Gdk-3.0.Gdk.DevicePad */
     /**
      * Returns the group the given `feature` and `idx` belong to,
      * or -1 if feature/index do not exist in `pad`.
@@ -4908,7 +4826,238 @@ export class DevicePad {
      * current mode.
      */
     get_n_groups(): number
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of Gdk-3.0.Gdk.Device */
+    /**
+     * Returns the associated device to `device,` if `device` is of type
+     * %GDK_DEVICE_TYPE_MASTER, it will return the paired pointer or
+     * keyboard.
+     * 
+     * If `device` is of type %GDK_DEVICE_TYPE_SLAVE, it will return
+     * the master device to which `device` is attached to.
+     * 
+     * If `device` is of type %GDK_DEVICE_TYPE_FLOATING, %NULL will be
+     * returned, as there is no associated device.
+     */
+    get_associated_device(): Device | null
+    /**
+     * Returns the axes currently available on the device.
+     */
+    get_axes(): AxisFlags
+    /**
+     * Returns the axis use for `index_`.
+     * @param index_ the index of the axis.
+     */
+    get_axis_use(index_: number): AxisUse
+    /**
+     * Returns the device type for `device`.
+     */
+    get_device_type(): DeviceType
+    /**
+     * Returns the #GdkDisplay to which `device` pertains.
+     */
+    get_display(): Display
+    /**
+     * Determines whether the pointer follows device motion.
+     * This is not meaningful for keyboard devices, which don't have a pointer.
+     */
+    get_has_cursor(): boolean
+    /**
+     * If `index_` has a valid keyval, this function will return %TRUE
+     * and fill in `keyval` and `modifiers` with the keyval settings.
+     * @param index_ the index of the macro button to get.
+     */
+    get_key(index_: number): [ /* returnType */ boolean, /* keyval */ number, /* modifiers */ ModifierType ]
+    /**
+     * Gets information about which window the given pointer device is in, based on events
+     * that have been received so far from the display server. If another application
+     * has a pointer grab, or this application has a grab with owner_events = %FALSE,
+     * %NULL may be returned even if the pointer is physically over one of this
+     * application's windows.
+     */
+    get_last_event_window(): Window | null
+    /**
+     * Determines the mode of the device.
+     */
+    get_mode(): InputMode
+    /**
+     * Returns the number of axes the device currently has.
+     */
+    get_n_axes(): number
+    /**
+     * Returns the number of keys the device currently has.
+     */
+    get_n_keys(): number
+    /**
+     * Determines the name of the device.
+     */
+    get_name(): string
+    /**
+     * Gets the current location of `device`. As a slave device
+     * coordinates are those of its master pointer, This function
+     * may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
+     * unless there is an ongoing grab on them, see gdk_device_grab().
+     */
+    get_position(): [ /* screen */ Screen | null, /* x */ number | null, /* y */ number | null ]
+    /**
+     * Gets the current location of `device` in double precision. As a slave device's
+     * coordinates are those of its master pointer, this function
+     * may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
+     * unless there is an ongoing grab on them. See gdk_device_grab().
+     */
+    get_position_double(): [ /* screen */ Screen | null, /* x */ number | null, /* y */ number | null ]
+    /**
+     * Returns the product ID of this device, or %NULL if this information couldn't
+     * be obtained. This ID is retrieved from the device, and is thus constant for
+     * it. See gdk_device_get_vendor_id() for more information.
+     */
+    get_product_id(): string | null
+    /**
+     * Returns the #GdkSeat the device belongs to.
+     */
+    get_seat(): Seat
+    /**
+     * Determines the type of the device.
+     */
+    get_source(): InputSource
+    /**
+     * Returns the vendor ID of this device, or %NULL if this information couldn't
+     * be obtained. This ID is retrieved from the device, and is thus constant for
+     * it.
+     * 
+     * This function, together with gdk_device_get_product_id(), can be used to eg.
+     * compose #GSettings paths to store settings for this device.
+     * 
+     * 
+     * ```c
+     *  static GSettings *
+     *  get_device_settings (GdkDevice *device)
+     *  {
+     *    const gchar *vendor, *product;
+     *    GSettings *settings;
+     *    GdkDevice *device;
+     *    gchar *path;
+     * 
+     *    vendor = gdk_device_get_vendor_id (device);
+     *    product = gdk_device_get_product_id (device);
+     * 
+     *    path = g_strdup_printf ("/org/example/app/devices/%s:%s/", vendor, product);
+     *    settings = g_settings_new_with_path (DEVICE_SCHEMA, path);
+     *    g_free (path);
+     * 
+     *    return settings;
+     *  }
+     * ```
+     * 
+     */
+    get_vendor_id(): string | null
+    /**
+     * Obtains the window underneath `device,` returning the location of the device in `win_x` and `win_y`. Returns
+     * %NULL if the window tree under `device` is not known to GDK (for example, belongs to another application).
+     * 
+     * As a slave device coordinates are those of its master pointer, This
+     * function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
+     * unless there is an ongoing grab on them, see gdk_device_grab().
+     */
+    get_window_at_position(): [ /* returnType */ Window | null, /* win_x */ number | null, /* win_y */ number | null ]
+    /**
+     * Obtains the window underneath `device,` returning the location of the device in `win_x` and `win_y` in
+     * double precision. Returns %NULL if the window tree under `device` is not known to GDK (for example,
+     * belongs to another application).
+     * 
+     * As a slave device coordinates are those of its master pointer, This
+     * function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
+     * unless there is an ongoing grab on them, see gdk_device_grab().
+     */
+    get_window_at_position_double(): [ /* returnType */ Window | null, /* win_x */ number | null, /* win_y */ number | null ]
+    /**
+     * Grabs the device so that all events coming from this device are passed to
+     * this application until the device is ungrabbed with gdk_device_ungrab(),
+     * or the window becomes unviewable. This overrides any previous grab on the device
+     * by this client.
+     * 
+     * Note that `device` and `window` need to be on the same display.
+     * 
+     * Device grabs are used for operations which need complete control over the
+     * given device events (either pointer or keyboard). For example in GTK+ this
+     * is used for Drag and Drop operations, popup menus and such.
+     * 
+     * Note that if the event mask of an X window has selected both button press
+     * and button release events, then a button press event will cause an automatic
+     * pointer grab until the button is released. X does this automatically since
+     * most applications expect to receive button press and release events in pairs.
+     * It is equivalent to a pointer grab on the window with `owner_events` set to
+     * %TRUE.
+     * 
+     * If you set up anything at the time you take the grab that needs to be
+     * cleaned up when the grab ends, you should handle the #GdkEventGrabBroken
+     * events that are emitted when the grab ends unvoluntarily.
+     * @param window the #GdkWindow which will own the grab (the grab window)
+     * @param grab_ownership specifies the grab ownership.
+     * @param owner_events if %FALSE then all device events are reported with respect to                `window` and are only reported if selected by `event_mask`. If                %TRUE then pointer events for this application are reported                as normal, but pointer events outside this application are                reported with respect to `window` and only if selected by                `event_mask`. In either mode, unreported events are discarded.
+     * @param event_mask specifies the event mask, which is used in accordance with              `owner_events`.
+     * @param cursor the cursor to display while the grab is active if the device is          a pointer. If this is %NULL then the normal cursors are used for          `window` and its descendants, and the cursor for `window` is used          elsewhere.
+     * @param time_ the timestamp of the event which led to this pointer grab. This         usually comes from the #GdkEvent struct, though %GDK_CURRENT_TIME         can be used if the time isn’t known.
+     */
+    grab(window: Window, grab_ownership: GrabOwnership, owner_events: boolean, event_mask: EventMask, cursor: Cursor | null, time_: number): GrabStatus
+    /**
+     * Returns a #GList of #GdkAtoms, containing the labels for
+     * the axes that `device` currently has.
+     */
+    list_axes(): Atom[]
+    /**
+     * If the device if of type %GDK_DEVICE_TYPE_MASTER, it will return
+     * the list of slave devices attached to it, otherwise it will return
+     * %NULL
+     */
+    list_slave_devices(): Device[] | null
+    /**
+     * Specifies how an axis of a device is used.
+     * @param index_ the index of the axis
+     * @param use specifies how the axis is used
+     */
+    set_axis_use(index_: number, use: AxisUse): void
+    /**
+     * Specifies the X key event to generate when a macro button of a device
+     * is pressed.
+     * @param index_ the index of the macro button to set
+     * @param keyval the keyval to generate
+     * @param modifiers the modifiers to set
+     */
+    set_key(index_: number, keyval: number, modifiers: ModifierType): void
+    /**
+     * Sets a the mode of an input device. The mode controls if the
+     * device is active and whether the device’s range is mapped to the
+     * entire screen or to a single window.
+     * 
+     * Note: This is only meaningful for floating devices, master devices (and
+     * slaves connected to these) drive the pointer cursor, which is not limited
+     * by the input mode.
+     * @param mode the input mode.
+     */
+    set_mode(mode: InputMode): boolean
+    /**
+     * Release any grab on `device`.
+     * @param time_ a timestap (e.g. %GDK_CURRENT_TIME).
+     */
+    ungrab(time_: number): void
+    /**
+     * Warps `device` in `display` to the point `x,``y` on
+     * the screen `screen,` unless the device is confined
+     * to a window by a grab, in which case it will be moved
+     * as far as allowed by the grab. Warping the pointer
+     * creates events as if the user had moved the mouse
+     * instantaneously to the destination.
+     * 
+     * Note that the pointer should normally be under the
+     * control of the user. This function was added to cover
+     * some rare use cases like keyboard navigation support
+     * for the color picker in the #GtkColorSelectionDialog.
+     * @param screen the screen to warp `device` to.
+     * @param x the X coordinate of the destination.
+     * @param y the Y coordinate of the destination.
+     */
+    warp(screen: Screen, x: number, y: number): void
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -4954,7 +5103,7 @@ export class DevicePad {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -5123,7 +5272,7 @@ export class DevicePad {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -5211,239 +5360,8 @@ export class DevicePad {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Implemented methods of Gdk-3.0.Gdk.Device */
-    /**
-     * Returns the associated device to `device,` if `device` is of type
-     * %GDK_DEVICE_TYPE_MASTER, it will return the paired pointer or
-     * keyboard.
-     * 
-     * If `device` is of type %GDK_DEVICE_TYPE_SLAVE, it will return
-     * the master device to which `device` is attached to.
-     * 
-     * If `device` is of type %GDK_DEVICE_TYPE_FLOATING, %NULL will be
-     * returned, as there is no associated device.
-     */
-    get_associated_device(): Device | null
-    /**
-     * Returns the axes currently available on the device.
-     */
-    get_axes(): AxisFlags
-    /**
-     * Returns the axis use for `index_`.
-     * @param index_ the index of the axis.
-     */
-    get_axis_use(index_: number): AxisUse
-    /**
-     * Returns the device type for `device`.
-     */
-    get_device_type(): DeviceType
-    /**
-     * Returns the #GdkDisplay to which `device` pertains.
-     */
-    get_display(): Display
-    /**
-     * Determines whether the pointer follows device motion.
-     * This is not meaningful for keyboard devices, which don't have a pointer.
-     */
-    get_has_cursor(): boolean
-    /**
-     * If `index_` has a valid keyval, this function will return %TRUE
-     * and fill in `keyval` and `modifiers` with the keyval settings.
-     * @param index_ the index of the macro button to get.
-     */
-    get_key(index_: number): [ /* returnType */ boolean, /* keyval */ number, /* modifiers */ ModifierType ]
-    /**
-     * Gets information about which window the given pointer device is in, based on events
-     * that have been received so far from the display server. If another application
-     * has a pointer grab, or this application has a grab with owner_events = %FALSE,
-     * %NULL may be returned even if the pointer is physically over one of this
-     * application's windows.
-     */
-    get_last_event_window(): Window | null
-    /**
-     * Determines the mode of the device.
-     */
-    get_mode(): InputMode
-    /**
-     * Returns the number of axes the device currently has.
-     */
-    get_n_axes(): number
-    /**
-     * Returns the number of keys the device currently has.
-     */
-    get_n_keys(): number
-    /**
-     * Determines the name of the device.
-     */
-    get_name(): string
-    /**
-     * Gets the current location of `device`. As a slave device
-     * coordinates are those of its master pointer, This function
-     * may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
-     * unless there is an ongoing grab on them, see gdk_device_grab().
-     */
-    get_position(): [ /* screen */ Screen, /* x */ number, /* y */ number ]
-    /**
-     * Gets the current location of `device` in double precision. As a slave device's
-     * coordinates are those of its master pointer, this function
-     * may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
-     * unless there is an ongoing grab on them. See gdk_device_grab().
-     */
-    get_position_double(): [ /* screen */ Screen, /* x */ number, /* y */ number ]
-    /**
-     * Returns the product ID of this device, or %NULL if this information couldn't
-     * be obtained. This ID is retrieved from the device, and is thus constant for
-     * it. See gdk_device_get_vendor_id() for more information.
-     */
-    get_product_id(): string | null
-    /**
-     * Returns the #GdkSeat the device belongs to.
-     */
-    get_seat(): Seat
-    /**
-     * Determines the type of the device.
-     */
-    get_source(): InputSource
-    /**
-     * Returns the vendor ID of this device, or %NULL if this information couldn't
-     * be obtained. This ID is retrieved from the device, and is thus constant for
-     * it.
-     * 
-     * This function, together with gdk_device_get_product_id(), can be used to eg.
-     * compose #GSettings paths to store settings for this device.
-     * 
-     * 
-     * ```c
-     *  static GSettings *
-     *  get_device_settings (GdkDevice *device)
-     *  {
-     *    const gchar *vendor, *product;
-     *    GSettings *settings;
-     *    GdkDevice *device;
-     *    gchar *path;
-     * 
-     *    vendor = gdk_device_get_vendor_id (device);
-     *    product = gdk_device_get_product_id (device);
-     * 
-     *    path = g_strdup_printf ("/org/example/app/devices/%s:%s/", vendor, product);
-     *    settings = g_settings_new_with_path (DEVICE_SCHEMA, path);
-     *    g_free (path);
-     * 
-     *    return settings;
-     *  }
-     * ```
-     * 
-     */
-    get_vendor_id(): string | null
-    /**
-     * Obtains the window underneath `device,` returning the location of the device in `win_x` and `win_y`. Returns
-     * %NULL if the window tree under `device` is not known to GDK (for example, belongs to another application).
-     * 
-     * As a slave device coordinates are those of its master pointer, This
-     * function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
-     * unless there is an ongoing grab on them, see gdk_device_grab().
-     */
-    get_window_at_position(): [ /* returnType */ Window | null, /* win_x */ number, /* win_y */ number ]
-    /**
-     * Obtains the window underneath `device,` returning the location of the device in `win_x` and `win_y` in
-     * double precision. Returns %NULL if the window tree under `device` is not known to GDK (for example,
-     * belongs to another application).
-     * 
-     * As a slave device coordinates are those of its master pointer, This
-     * function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
-     * unless there is an ongoing grab on them, see gdk_device_grab().
-     */
-    get_window_at_position_double(): [ /* returnType */ Window | null, /* win_x */ number, /* win_y */ number ]
-    /**
-     * Grabs the device so that all events coming from this device are passed to
-     * this application until the device is ungrabbed with gdk_device_ungrab(),
-     * or the window becomes unviewable. This overrides any previous grab on the device
-     * by this client.
-     * 
-     * Note that `device` and `window` need to be on the same display.
-     * 
-     * Device grabs are used for operations which need complete control over the
-     * given device events (either pointer or keyboard). For example in GTK+ this
-     * is used for Drag and Drop operations, popup menus and such.
-     * 
-     * Note that if the event mask of an X window has selected both button press
-     * and button release events, then a button press event will cause an automatic
-     * pointer grab until the button is released. X does this automatically since
-     * most applications expect to receive button press and release events in pairs.
-     * It is equivalent to a pointer grab on the window with `owner_events` set to
-     * %TRUE.
-     * 
-     * If you set up anything at the time you take the grab that needs to be
-     * cleaned up when the grab ends, you should handle the #GdkEventGrabBroken
-     * events that are emitted when the grab ends unvoluntarily.
-     * @param window the #GdkWindow which will own the grab (the grab window)
-     * @param grab_ownership specifies the grab ownership.
-     * @param owner_events if %FALSE then all device events are reported with respect to                `window` and are only reported if selected by `event_mask`. If                %TRUE then pointer events for this application are reported                as normal, but pointer events outside this application are                reported with respect to `window` and only if selected by                `event_mask`. In either mode, unreported events are discarded.
-     * @param event_mask specifies the event mask, which is used in accordance with              `owner_events`.
-     * @param cursor the cursor to display while the grab is active if the device is          a pointer. If this is %NULL then the normal cursors are used for          `window` and its descendants, and the cursor for `window` is used          elsewhere.
-     * @param time_ the timestamp of the event which led to this pointer grab. This         usually comes from the #GdkEvent struct, though %GDK_CURRENT_TIME         can be used if the time isn’t known.
-     */
-    grab(window: Window, grab_ownership: GrabOwnership, owner_events: boolean, event_mask: EventMask, cursor: Cursor | null, time_: number): GrabStatus
-    /**
-     * Returns a #GList of #GdkAtoms, containing the labels for
-     * the axes that `device` currently has.
-     */
-    list_axes(): Atom[]
-    /**
-     * If the device if of type %GDK_DEVICE_TYPE_MASTER, it will return
-     * the list of slave devices attached to it, otherwise it will return
-     * %NULL
-     */
-    list_slave_devices(): Device[] | null
-    /**
-     * Specifies how an axis of a device is used.
-     * @param index_ the index of the axis
-     * @param use specifies how the axis is used
-     */
-    set_axis_use(index_: number, use: AxisUse): void
-    /**
-     * Specifies the X key event to generate when a macro button of a device
-     * is pressed.
-     * @param index_ the index of the macro button to set
-     * @param keyval the keyval to generate
-     * @param modifiers the modifiers to set
-     */
-    set_key(index_: number, keyval: number, modifiers: ModifierType): void
-    /**
-     * Sets a the mode of an input device. The mode controls if the
-     * device is active and whether the device’s range is mapped to the
-     * entire screen or to a single window.
-     * 
-     * Note: This is only meaningful for floating devices, master devices (and
-     * slaves connected to these) drive the pointer cursor, which is not limited
-     * by the input mode.
-     * @param mode the input mode.
-     */
-    set_mode(mode: InputMode): boolean
-    /**
-     * Release any grab on `device`.
-     * @param time_ a timestap (e.g. %GDK_CURRENT_TIME).
-     */
-    ungrab(time_: number): void
-    /**
-     * Warps `device` in `display` to the point `x,``y` on
-     * the screen `screen,` unless the device is confined
-     * to a window by a grab, in which case it will be moved
-     * as far as allowed by the grab. Warping the pointer
-     * creates events as if the user had moved the mouse
-     * instantaneously to the destination.
-     * 
-     * Note that the pointer should normally be under the
-     * control of the user. This function was added to cover
-     * some rare use cases like keyboard navigation support
-     * for the color picker in the #GtkColorSelectionDialog.
-     * @param screen the screen to warp `device` to.
-     * @param x the X coordinate of the destination.
-     * @param y the Y coordinate of the destination.
-     */
-    warp(screen: Screen, x: number, y: number): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -5460,12 +5378,32 @@ export class DevicePad {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of Gdk-3.0.Gdk.Device */
+    /**
+     * The ::changed signal is emitted either when the #GdkDevice
+     * has changed the number of either axes or keys. For example
+     * In X this will normally happen when the slave device routing
+     * events through the master device changes (for example, user
+     * switches from the USB mouse to a tablet), in that case the
+     * master device will change to reflect the new slave device
+     * axes and keys.
+     */
+    connect(sigName: "changed", callback: (($obj: DevicePad) => void)): number
+    connect_after(sigName: "changed", callback: (($obj: DevicePad) => void)): number
+    emit(sigName: "changed"): void
+    /**
+     * The ::tool-changed signal is emitted on pen/eraser
+     * #GdkDevices whenever tools enter or leave proximity.
+     * @param tool The new current tool
+     */
+    connect(sigName: "tool-changed", callback: (($obj: DevicePad, tool: DeviceTool) => void)): number
+    connect_after(sigName: "tool-changed", callback: (($obj: DevicePad, tool: DeviceTool) => void)): number
+    emit(sigName: "tool-changed", tool: DeviceTool): void
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -5492,35 +5430,11 @@ export class DevicePad {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: DevicePad, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: DevicePad, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    /* Implemented signals of Gdk-3.0.Gdk.Device */
-    /**
-     * The ::changed signal is emitted either when the #GdkDevice
-     * has changed the number of either axes or keys. For example
-     * In X this will normally happen when the slave device routing
-     * events through the master device changes (for example, user
-     * switches from the USB mouse to a tablet), in that case the
-     * master device will change to reflect the new slave device
-     * axes and keys.
-     * @signal 
-     */
-    connect(sigName: "changed", callback: (($obj: DevicePad) => void)): number
-    connect_after(sigName: "changed", callback: (($obj: DevicePad) => void)): number
-    emit(sigName: "changed"): void
-    /**
-     * The ::tool-changed signal is emitted on pen/eraser
-     * #GdkDevices whenever tools enter or leave proximity.
-     * @signal 
-     * @param tool The new current tool
-     */
-    connect(sigName: "tool-changed", callback: (($obj: DevicePad, tool: DeviceTool) => void)): number
-    connect_after(sigName: "tool-changed", callback: (($obj: DevicePad, tool: DeviceTool) => void)): number
-    emit(sigName: "tool-changed", tool: DeviceTool): void
     connect(sigName: "notify::associated-device", callback: (($obj: DevicePad, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::associated-device", callback: (($obj: DevicePad, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::axes", callback: (($obj: DevicePad, pspec: GObject.ParamSpec) => void)): number
@@ -5551,59 +5465,27 @@ export class DevicePad {
     connect_after(sigName: "notify::type", callback: (($obj: DevicePad, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::vendor-id", callback: (($obj: DevicePad, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::vendor-id", callback: (($obj: DevicePad, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: DevicePad_ConstructProps)
     _init (config?: DevicePad_ConstructProps): void
-    /* Static methods and pseudo-constructors */
-    /**
-     * Determines information about the current keyboard grab.
-     * This is not public API and must not be used by applications.
-     * @param display the display for which to get the grab information
-     * @param device device to get the grab information from
-     */
-    static grab_info_libgtk_only(display: Display, device: Device): [ /* returnType */ boolean, /* grab_window */ Window, /* owner_events */ boolean ]
-    static $gtype: GObject.GType<DevicePad>
+    static $gtype: GObject.Type
 }
 export interface AppLaunchContext_ConstructProps extends Gio.AppLaunchContext_ConstructProps {
     /* Constructor properties of Gdk-3.0.Gdk.AppLaunchContext */
-    display?: Display | null
+    display?: Display
 }
-/**
- * GdkAppLaunchContext is an implementation of #GAppLaunchContext that
- * handles launching an application in a graphical context. It provides
- * startup notification and allows to launch applications on a specific
- * screen or workspace.
- * 
- * ## Launching an application
- * 
- * 
- * ```c
- * GdkAppLaunchContext *context;
- * 
- * context = gdk_display_get_app_launch_context (display);
- * 
- * gdk_app_launch_context_set_screen (screen);
- * gdk_app_launch_context_set_timestamp (event->time);
- * 
- * if (!g_app_info_launch_default_for_uri ("http://www.gtk.org", context, &error))
- *   g_warning ("Launching failed: %s\n", error->message);
- * 
- * g_object_unref (context);
- * ```
- * 
- */
 export class AppLaunchContext {
-    /* Own properties of Gdk-3.0.Gdk.AppLaunchContext */
+    /* Properties of Gdk-3.0.Gdk.AppLaunchContext */
     readonly display: Display
-    /* Extended fields of Gio-2.0.Gio.AppLaunchContext */
+    /* Fields of Gio-2.0.Gio.AppLaunchContext */
     parent_instance: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.AppLaunchContext */
+    /* Methods of Gdk-3.0.Gdk.AppLaunchContext */
     /**
      * Sets the workspace on which applications will be launched when
      * using this context when running under a window manager that
@@ -5632,7 +5514,7 @@ export class AppLaunchContext {
      * See also gdk_app_launch_context_set_icon_name().
      * @param icon a #GIcon, or %NULL
      */
-    set_icon(icon: Gio.Icon | null): void
+    set_icon(icon?: Gio.Icon | null): void
     /**
      * Sets the icon for applications that are launched with this context.
      * The `icon_name` will be interpreted in the same way as the Icon field
@@ -5644,7 +5526,7 @@ export class AppLaunchContext {
      * for the launched application itself.
      * @param icon_name an icon name, or %NULL
      */
-    set_icon_name(icon_name: string | null): void
+    set_icon_name(icon_name?: string | null): void
     /**
      * Sets the screen on which applications will be launched when
      * using this context. See also gdk_app_launch_context_set_display().
@@ -5666,7 +5548,7 @@ export class AppLaunchContext {
      * @param timestamp a timestamp
      */
     set_timestamp(timestamp: number): void
-    /* Extended methods of Gio-2.0.Gio.AppLaunchContext */
+    /* Methods of Gio-2.0.Gio.AppLaunchContext */
     /**
      * Gets the display string for the `context`. This is used to ensure new
      * applications are started on the same display as the launching
@@ -5711,7 +5593,7 @@ export class AppLaunchContext {
      * @param variable the environment variable to remove
      */
     unsetenv(variable: string): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -5757,7 +5639,7 @@ export class AppLaunchContext {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -5926,7 +5808,7 @@ export class AppLaunchContext {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -6014,13 +5896,12 @@ export class AppLaunchContext {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Gio-2.0.Gio.AppLaunchContext */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Gio-2.0.Gio.AppLaunchContext */
     /**
      * Gets the display string for the `context`. This is used to ensure new
      * applications are started on the same display as the launching
      * application, by setting the `DISPLAY` environment variable.
-     * @virtual 
      * @param info a #GAppInfo
      * @param files a #GList of #GFile objects
      */
@@ -6031,7 +5912,6 @@ export class AppLaunchContext {
      * 
      * Startup notification IDs are defined in the
      * [FreeDesktop.Org Startup Notifications standard](http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt).
-     * @virtual 
      * @param info a #GAppInfo
      * @param files a #GList of of #GFile objects
      */
@@ -6039,12 +5919,11 @@ export class AppLaunchContext {
     /**
      * Called when an application has failed to launch, so that it can cancel
      * the application startup notification started in g_app_launch_context_get_startup_notify_id().
-     * @virtual 
      * @param startup_notify_id the startup notification id that was returned by g_app_launch_context_get_startup_notify_id().
      */
     vfunc_launch_failed(startup_notify_id: string): void
     vfunc_launched(info: Gio.AppInfo, platform_data: GLib.Variant): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -6061,17 +5940,15 @@ export class AppLaunchContext {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gio-2.0.Gio.AppLaunchContext */
+    /* Signals of Gio-2.0.Gio.AppLaunchContext */
     /**
      * The ::launch-failed signal is emitted when a #GAppInfo launch
      * fails. The startup notification id is provided, so that the launcher
      * can cancel the startup notification.
-     * @signal 
      * @param startup_notify_id the startup notification id for the failed launch
      */
     connect(sigName: "launch-failed", callback: (($obj: AppLaunchContext, startup_notify_id: string) => void)): number
@@ -6083,14 +5960,13 @@ export class AppLaunchContext {
      * strings to variants (ie a{sv}), which contains additional,
      * platform-specific data about this launch. On UNIX, at least the
      * "pid" and "startup-notification-id" keys will be present.
-     * @signal 
      * @param info the #GAppInfo that was just launched
      * @param platform_data additional platform-specific data for this launch
      */
     connect(sigName: "launched", callback: (($obj: AppLaunchContext, info: Gio.AppInfo, platform_data: GLib.Variant) => void)): number
     connect_after(sigName: "launched", callback: (($obj: AppLaunchContext, info: Gio.AppInfo, platform_data: GLib.Variant) => void)): number
     emit(sigName: "launched", info: Gio.AppInfo, platform_data: GLib.Variant): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -6117,7 +5993,6 @@ export class AppLaunchContext {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: AppLaunchContext, pspec: GObject.ParamSpec) => void)): number
@@ -6125,8 +6000,8 @@ export class AppLaunchContext {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::display", callback: (($obj: AppLaunchContext, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::display", callback: (($obj: AppLaunchContext, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -6136,23 +6011,20 @@ export class AppLaunchContext {
     static new(): AppLaunchContext
     /* Function overloads */
     static new(): AppLaunchContext
-    static $gtype: GObject.GType<AppLaunchContext>
+    static $gtype: GObject.Type
 }
 export interface Cursor_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Gdk-3.0.Gdk.Cursor */
-    cursor_type?: CursorType | null
-    display?: Display | null
+    cursor_type?: CursorType
+    display?: Display
 }
-/**
- * A #GdkCursor represents a cursor. Its contents are private.
- */
 export class Cursor {
-    /* Own properties of Gdk-3.0.Gdk.Cursor */
+    /* Properties of Gdk-3.0.Gdk.Cursor */
     readonly cursor_type: CursorType
     readonly display: Display
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.Cursor */
+    /* Methods of Gdk-3.0.Gdk.Cursor */
     /**
      * Returns the cursor type for this cursor.
      */
@@ -6176,7 +6048,7 @@ export class Cursor {
      * on the cursor, GDK may not be able to obtain the image data. In this
      * case, %NULL is returned.
      */
-    get_surface(): [ /* returnType */ cairo.Surface | null, /* x_hot */ number, /* y_hot */ number ]
+    get_surface(): [ /* returnType */ cairo.Surface | null, /* x_hot */ number | null, /* y_hot */ number | null ]
     /**
      * Adds a reference to `cursor`.
      */
@@ -6186,7 +6058,7 @@ export class Cursor {
      * if no references remain.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -6232,7 +6104,7 @@ export class Cursor {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -6401,7 +6273,7 @@ export class Cursor {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -6479,8 +6351,8 @@ export class Cursor {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -6497,12 +6369,11 @@ export class Cursor {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -6529,7 +6400,6 @@ export class Cursor {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Cursor, pspec: GObject.ParamSpec) => void)): number
@@ -6539,8 +6409,8 @@ export class Cursor {
     connect_after(sigName: "notify::cursor-type", callback: (($obj: Cursor, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::display", callback: (($obj: Cursor, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::display", callback: (($obj: Cursor, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -6552,65 +6422,57 @@ export class Cursor {
     static new_from_name(display: Display, name: string): Cursor
     static new_from_pixbuf(display: Display, pixbuf: GdkPixbuf.Pixbuf, x: number, y: number): Cursor
     static new_from_surface(display: Display, surface: cairo.Surface, x: number, y: number): Cursor
-    static $gtype: GObject.GType<Cursor>
+    static $gtype: GObject.Type
 }
 export interface Device_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Gdk-3.0.Gdk.Device */
     /**
      * The #GdkDeviceManager the #GdkDevice pertains to.
      */
-    device_manager?: DeviceManager | null
+    device_manager?: DeviceManager
     /**
      * The #GdkDisplay the #GdkDevice pertains to.
      */
-    display?: Display | null
+    display?: Display
     /**
      * Whether the device is represented by a cursor on the screen. Devices of type
      * %GDK_DEVICE_TYPE_MASTER will have %TRUE here.
      */
-    has_cursor?: boolean | null
-    input_mode?: InputMode | null
+    has_cursor?: boolean
+    input_mode?: InputMode
     /**
      * Source type for the device.
      */
-    input_source?: InputSource | null
+    input_source?: InputSource
     /**
      * The device name.
      */
-    name?: string | null
+    name?: string
     /**
      * The maximal number of concurrent touches on a touch device.
      * Will be 0 if the device is not a touch device or if the number
      * of touches is unknown.
      */
-    num_touches?: number | null
+    num_touches?: number
     /**
      * Product ID of this device, see gdk_device_get_product_id().
      */
-    product_id?: string | null
+    product_id?: string
     /**
      * #GdkSeat of this device.
      */
-    seat?: Seat | null
+    seat?: Seat
     /**
      * Device role in the device manager.
      */
-    type?: DeviceType | null
+    type?: DeviceType
     /**
      * Vendor ID of this device, see gdk_device_get_vendor_id().
      */
-    vendor_id?: string | null
+    vendor_id?: string
 }
-/**
- * The #GdkDevice object represents a single input device, such
- * as a keyboard, a mouse, a touchpad, etc.
- * 
- * See the #GdkDeviceManager documentation for more information
- * about the various kinds of master and slave devices, and their
- * relationships.
- */
 export class Device {
-    /* Own properties of Gdk-3.0.Gdk.Device */
+    /* Properties of Gdk-3.0.Gdk.Device */
     /**
      * Associated pointer or keyboard with this device, if any. Devices of type #GDK_DEVICE_TYPE_MASTER
      * always come in keyboard/pointer pairs. Other device types will have a %NULL associated device.
@@ -6669,9 +6531,9 @@ export class Device {
      * Vendor ID of this device, see gdk_device_get_vendor_id().
      */
     readonly vendor_id: string
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.Device */
+    /* Methods of Gdk-3.0.Gdk.Device */
     /**
      * Returns the associated device to `device,` if `device` is of type
      * %GDK_DEVICE_TYPE_MASTER, it will return the paired pointer or
@@ -6742,14 +6604,14 @@ export class Device {
      * may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
      * unless there is an ongoing grab on them, see gdk_device_grab().
      */
-    get_position(): [ /* screen */ Screen, /* x */ number, /* y */ number ]
+    get_position(): [ /* screen */ Screen | null, /* x */ number | null, /* y */ number | null ]
     /**
      * Gets the current location of `device` in double precision. As a slave device's
      * coordinates are those of its master pointer, this function
      * may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
      * unless there is an ongoing grab on them. See gdk_device_grab().
      */
-    get_position_double(): [ /* screen */ Screen, /* x */ number, /* y */ number ]
+    get_position_double(): [ /* screen */ Screen | null, /* x */ number | null, /* y */ number | null ]
     /**
      * Returns the product ID of this device, or %NULL if this information couldn't
      * be obtained. This ID is retrieved from the device, and is thus constant for
@@ -6803,7 +6665,7 @@ export class Device {
      * function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
      * unless there is an ongoing grab on them, see gdk_device_grab().
      */
-    get_window_at_position(): [ /* returnType */ Window | null, /* win_x */ number, /* win_y */ number ]
+    get_window_at_position(): [ /* returnType */ Window | null, /* win_x */ number | null, /* win_y */ number | null ]
     /**
      * Obtains the window underneath `device,` returning the location of the device in `win_x` and `win_y` in
      * double precision. Returns %NULL if the window tree under `device` is not known to GDK (for example,
@@ -6813,7 +6675,7 @@ export class Device {
      * function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
      * unless there is an ongoing grab on them, see gdk_device_grab().
      */
-    get_window_at_position_double(): [ /* returnType */ Window | null, /* win_x */ number, /* win_y */ number ]
+    get_window_at_position_double(): [ /* returnType */ Window | null, /* win_x */ number | null, /* win_y */ number | null ]
     /**
      * Grabs the device so that all events coming from this device are passed to
      * this application until the device is ungrabbed with gdk_device_ungrab(),
@@ -6902,7 +6764,7 @@ export class Device {
      * @param y the Y coordinate of the destination.
      */
     warp(screen: Screen, x: number, y: number): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -6948,7 +6810,7 @@ export class Device {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -7117,7 +6979,7 @@ export class Device {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -7205,8 +7067,8 @@ export class Device {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -7223,12 +7085,11 @@ export class Device {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Gdk-3.0.Gdk.Device */
+    /* Signals of Gdk-3.0.Gdk.Device */
     /**
      * The ::changed signal is emitted either when the #GdkDevice
      * has changed the number of either axes or keys. For example
@@ -7237,7 +7098,6 @@ export class Device {
      * switches from the USB mouse to a tablet), in that case the
      * master device will change to reflect the new slave device
      * axes and keys.
-     * @signal 
      */
     connect(sigName: "changed", callback: (($obj: Device) => void)): number
     connect_after(sigName: "changed", callback: (($obj: Device) => void)): number
@@ -7245,13 +7105,12 @@ export class Device {
     /**
      * The ::tool-changed signal is emitted on pen/eraser
      * #GdkDevices whenever tools enter or leave proximity.
-     * @signal 
      * @param tool The new current tool
      */
     connect(sigName: "tool-changed", callback: (($obj: Device, tool: DeviceTool) => void)): number
     connect_after(sigName: "tool-changed", callback: (($obj: Device, tool: DeviceTool) => void)): number
     emit(sigName: "tool-changed", tool: DeviceTool): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -7278,7 +7137,6 @@ export class Device {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Device, pspec: GObject.ParamSpec) => void)): number
@@ -7314,8 +7172,8 @@ export class Device {
     connect_after(sigName: "notify::type", callback: (($obj: Device, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::vendor-id", callback: (($obj: Device, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::vendor-id", callback: (($obj: Device, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -7329,135 +7187,18 @@ export class Device {
      * @param device device to get the grab information from
      */
     static grab_info_libgtk_only(display: Display, device: Device): [ /* returnType */ boolean, /* grab_window */ Window, /* owner_events */ boolean ]
-    static $gtype: GObject.GType<Device>
+    static $gtype: GObject.Type
 }
 export interface DeviceManager_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Gdk-3.0.Gdk.DeviceManager */
-    display?: Display | null
+    display?: Display
 }
-/**
- * In addition to a single pointer and keyboard for user interface input,
- * GDK contains support for a variety of input devices, including graphics
- * tablets, touchscreens and multiple pointers/keyboards interacting
- * simultaneously with the user interface. Such input devices often have
- * additional features, such as sub-pixel positioning information and
- * additional device-dependent information.
- * 
- * In order to query the device hierarchy and be aware of changes in the
- * device hierarchy (such as virtual devices being created or removed, or
- * physical devices being plugged or unplugged), GDK provides
- * #GdkDeviceManager.
- * 
- * By default, and if the platform supports it, GDK is aware of multiple
- * keyboard/pointer pairs and multitouch devices. This behavior can be
- * changed by calling gdk_disable_multidevice() before gdk_display_open().
- * There should rarely be a need to do that though, since GDK defaults
- * to a compatibility mode in which it will emit just one enter/leave
- * event pair for all devices on a window. To enable per-device
- * enter/leave events and other multi-pointer interaction features,
- * gdk_window_set_support_multidevice() must be called on
- * #GdkWindows (or gtk_widget_set_support_multidevice() on widgets).
- * window. See the gdk_window_set_support_multidevice() documentation
- * for more information.
- * 
- * On X11, multi-device support is implemented through XInput 2.
- * Unless gdk_disable_multidevice() is called, the XInput 2
- * #GdkDeviceManager implementation will be used as the input source.
- * Otherwise either the core or XInput 1 implementations will be used.
- * 
- * For simple applications that don’t have any special interest in
- * input devices, the so-called “client pointer”
- * provides a reasonable approximation to a simple setup with a single
- * pointer and keyboard. The device that has been set as the client
- * pointer can be accessed via gdk_device_manager_get_client_pointer().
- * 
- * Conceptually, in multidevice mode there are 2 device types. Virtual
- * devices (or master devices) are represented by the pointer cursors
- * and keyboard foci that are seen on the screen. Physical devices (or
- * slave devices) represent the hardware that is controlling the virtual
- * devices, and thus have no visible cursor on the screen.
- * 
- * Virtual devices are always paired, so there is a keyboard device for every
- * pointer device. Associations between devices may be inspected through
- * gdk_device_get_associated_device().
- * 
- * There may be several virtual devices, and several physical devices could
- * be controlling each of these virtual devices. Physical devices may also
- * be “floating”, which means they are not attached to any virtual device.
- * 
- * # Master and slave devices
- * 
- * |[
- * carlos`sacarino:`~$ xinput list
- * ⎡ Virtual core pointer                          id=2    [master pointer  (3)]
- * ⎜   ↳ Virtual core XTEST pointer                id=4    [slave  pointer  (2)]
- * ⎜   ↳ Wacom ISDv4 E6 Pen stylus                 id=10   [slave  pointer  (2)]
- * ⎜   ↳ Wacom ISDv4 E6 Finger touch               id=11   [slave  pointer  (2)]
- * ⎜   ↳ SynPS/2 Synaptics TouchPad                id=13   [slave  pointer  (2)]
- * ⎜   ↳ TPPS/2 IBM TrackPoint                     id=14   [slave  pointer  (2)]
- * ⎜   ↳ Wacom ISDv4 E6 Pen eraser                 id=16   [slave  pointer  (2)]
- * ⎣ Virtual core keyboard                         id=3    [master keyboard (2)]
- *     ↳ Virtual core XTEST keyboard               id=5    [slave  keyboard (3)]
- *     ↳ Power Button                              id=6    [slave  keyboard (3)]
- *     ↳ Video Bus                                 id=7    [slave  keyboard (3)]
- *     ↳ Sleep Button                              id=8    [slave  keyboard (3)]
- *     ↳ Integrated Camera                         id=9    [slave  keyboard (3)]
- *     ↳ AT Translated Set 2 keyboard              id=12   [slave  keyboard (3)]
- *     ↳ ThinkPad Extra Buttons                    id=15   [slave  keyboard (3)]
- * ```
- * 
- * 
- * By default, GDK will automatically listen for events coming from all
- * master devices, setting the #GdkDevice for all events coming from input
- * devices. Events containing device information are #GDK_MOTION_NOTIFY,
- * #GDK_BUTTON_PRESS, #GDK_2BUTTON_PRESS, #GDK_3BUTTON_PRESS,
- * #GDK_BUTTON_RELEASE, #GDK_SCROLL, #GDK_KEY_PRESS, #GDK_KEY_RELEASE,
- * #GDK_ENTER_NOTIFY, #GDK_LEAVE_NOTIFY, #GDK_FOCUS_CHANGE,
- * #GDK_PROXIMITY_IN, #GDK_PROXIMITY_OUT, #GDK_DRAG_ENTER, #GDK_DRAG_LEAVE,
- * #GDK_DRAG_MOTION, #GDK_DRAG_STATUS, #GDK_DROP_START, #GDK_DROP_FINISHED
- * and #GDK_GRAB_BROKEN. When dealing with an event on a master device,
- * it is possible to get the source (slave) device that the event originated
- * from via gdk_event_get_source_device().
- * 
- * On a standard session, all physical devices are connected by default to
- * the "Virtual Core Pointer/Keyboard" master devices, hence routing all events
- * through these. This behavior is only modified by device grabs, where the
- * slave device is temporarily detached for as long as the grab is held, and
- * more permanently by user modifications to the device hierarchy.
- * 
- * On certain application specific setups, it may make sense
- * to detach a physical device from its master pointer, and mapping it to
- * an specific window. This can be achieved by the combination of
- * gdk_device_grab() and gdk_device_set_mode().
- * 
- * In order to listen for events coming from devices
- * other than a virtual device, gdk_window_set_device_events() must be
- * called. Generally, this function can be used to modify the event mask
- * for any given device.
- * 
- * Input devices may also provide additional information besides X/Y.
- * For example, graphics tablets may also provide pressure and X/Y tilt
- * information. This information is device-dependent, and may be
- * queried through gdk_device_get_axis(). In multidevice mode, virtual
- * devices will change axes in order to always represent the physical
- * device that is routing events through it. Whenever the physical device
- * changes, the #GdkDevice:n-axes property will be notified, and
- * gdk_device_list_axes() will return the new device axes.
- * 
- * Devices may also have associated “keys” or
- * macro buttons. Such keys can be globally set to map into normal X
- * keyboard events. The mapping is set using gdk_device_set_key().
- * 
- * In GTK+ 3.20, a new #GdkSeat object has been introduced that
- * supersedes #GdkDeviceManager and should be preferred in newly
- * written code.
- */
 export class DeviceManager {
-    /* Own properties of Gdk-3.0.Gdk.DeviceManager */
+    /* Properties of Gdk-3.0.Gdk.DeviceManager */
     readonly display: Display
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.DeviceManager */
+    /* Methods of Gdk-3.0.Gdk.DeviceManager */
     /**
      * Returns the client pointer, that is, the master pointer that acts as the core pointer
      * for this application. In X11, window managers may change this depending on the interaction
@@ -7477,7 +7218,7 @@ export class DeviceManager {
      * @param type device type to get.
      */
     list_devices(type: DeviceType): Device[]
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -7523,7 +7264,7 @@ export class DeviceManager {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -7692,7 +7433,7 @@ export class DeviceManager {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -7780,8 +7521,8 @@ export class DeviceManager {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -7798,17 +7539,15 @@ export class DeviceManager {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Gdk-3.0.Gdk.DeviceManager */
+    /* Signals of Gdk-3.0.Gdk.DeviceManager */
     /**
      * The ::device-added signal is emitted either when a new master
      * pointer is created, or when a slave (Hardware) input device
      * is plugged in.
-     * @signal 
      * @param device the newly added #GdkDevice.
      */
     connect(sigName: "device-added", callback: (($obj: DeviceManager, device: Device) => void)): number
@@ -7825,7 +7564,6 @@ export class DeviceManager {
      * (gdk_device_get_associated_device() returns %NULL), its
      * #GdkDeviceType will change to %GDK_DEVICE_TYPE_FLOATING,
      * if it's attached, it will change to %GDK_DEVICE_TYPE_SLAVE.
-     * @signal 
      * @param device the #GdkDevice that changed.
      */
     connect(sigName: "device-changed", callback: (($obj: DeviceManager, device: Device) => void)): number
@@ -7835,13 +7573,12 @@ export class DeviceManager {
      * The ::device-removed signal is emitted either when a master
      * pointer is removed, or when a slave (Hardware) input device
      * is unplugged.
-     * @signal 
      * @param device the just removed #GdkDevice.
      */
     connect(sigName: "device-removed", callback: (($obj: DeviceManager, device: Device) => void)): number
     connect_after(sigName: "device-removed", callback: (($obj: DeviceManager, device: Device) => void)): number
     emit(sigName: "device-removed", device: Device): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -7868,7 +7605,6 @@ export class DeviceManager {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: DeviceManager, pspec: GObject.ParamSpec) => void)): number
@@ -7876,31 +7612,31 @@ export class DeviceManager {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::display", callback: (($obj: DeviceManager, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::display", callback: (($obj: DeviceManager, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: DeviceManager_ConstructProps)
     _init (config?: DeviceManager_ConstructProps): void
-    static $gtype: GObject.GType<DeviceManager>
+    static $gtype: GObject.Type
 }
 export interface DeviceTool_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Gdk-3.0.Gdk.DeviceTool */
-    axes?: AxisFlags | null
-    hardware_id?: number | null
-    serial?: number | null
-    tool_type?: DeviceToolType | null
+    axes?: AxisFlags
+    hardware_id?: number
+    serial?: number
+    tool_type?: DeviceToolType
 }
 export class DeviceTool {
-    /* Own properties of Gdk-3.0.Gdk.DeviceTool */
+    /* Properties of Gdk-3.0.Gdk.DeviceTool */
     readonly axes: AxisFlags
     readonly hardware_id: number
     readonly serial: number
     readonly tool_type: DeviceToolType
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.DeviceTool */
+    /* Methods of Gdk-3.0.Gdk.DeviceTool */
     /**
      * Gets the hardware ID of this tool, or 0 if it's not known. When
      * non-zero, the identificator is unique for the given tool model,
@@ -7922,7 +7658,7 @@ export class DeviceTool {
      * Gets the #GdkDeviceToolType of the tool.
      */
     get_tool_type(): DeviceToolType
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -7968,7 +7704,7 @@ export class DeviceTool {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -8137,7 +7873,7 @@ export class DeviceTool {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -8225,8 +7961,8 @@ export class DeviceTool {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -8243,12 +7979,11 @@ export class DeviceTool {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -8275,7 +8010,6 @@ export class DeviceTool {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: DeviceTool, pspec: GObject.ParamSpec) => void)): number
@@ -8289,41 +8023,21 @@ export class DeviceTool {
     connect_after(sigName: "notify::serial", callback: (($obj: DeviceTool, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::tool-type", callback: (($obj: DeviceTool, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::tool-type", callback: (($obj: DeviceTool, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: DeviceTool_ConstructProps)
     _init (config?: DeviceTool_ConstructProps): void
-    static $gtype: GObject.GType<DeviceTool>
+    static $gtype: GObject.Type
 }
 export interface Display_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * #GdkDisplay objects purpose are two fold:
- * 
- * - To manage and provide information about input devices (pointers and keyboards)
- * 
- * - To manage and provide information about the available #GdkScreens
- * 
- * GdkDisplay objects are the GDK representation of an X Display,
- * which can be described as a workstation consisting of
- * a keyboard, a pointing device (such as a mouse) and one or more
- * screens.
- * It is used to open and keep track of various GdkScreen objects
- * currently instantiated by the application. It is also used to
- * access the keyboard(s) and mouse pointer(s) of the display.
- * 
- * Most of the input device handling has been factored out into
- * the separate #GdkDeviceManager object. Every display has a
- * device manager, which you can obtain using
- * gdk_display_get_device_manager().
- */
 export class Display {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.Display */
+    /* Methods of Gdk-3.0.Gdk.Display */
     /**
      * Emits a short beep on `display`
      */
@@ -8424,7 +8138,7 @@ export class Display {
      * Gets the current location of the pointer and the current modifier
      * mask for a given display.
      */
-    get_pointer(): [ /* screen */ Screen, /* x */ number, /* y */ number, /* mask */ ModifierType ]
+    get_pointer(): [ /* screen */ Screen | null, /* x */ number | null, /* y */ number | null, /* mask */ ModifierType | null ]
     /**
      * Gets the primary monitor for the display.
      * 
@@ -8445,7 +8159,7 @@ export class Display {
      * if the window under the mouse pointer is not known to GDK (for example,
      * belongs to another application).
      */
-    get_window_at_pointer(): [ /* returnType */ Window | null, /* win_x */ number, /* win_y */ number ]
+    get_window_at_pointer(): [ /* returnType */ Window | null, /* win_x */ number | null, /* win_y */ number | null ]
     /**
      * Returns whether the display has events that are waiting
      * to be processed.
@@ -8606,7 +8320,7 @@ export class Display {
      * @param y the y coordinate of the destination
      */
     warp_pointer(screen: Screen, x: number, y: number): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -8652,7 +8366,7 @@ export class Display {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -8821,7 +8535,7 @@ export class Display {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -8909,8 +8623,8 @@ export class Display {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -8927,16 +8641,14 @@ export class Display {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Gdk-3.0.Gdk.Display */
+    /* Signals of Gdk-3.0.Gdk.Display */
     /**
      * The ::closed signal is emitted when the connection to the windowing
      * system for `display` is closed.
-     * @signal 
      * @param is_error %TRUE if the display was closed due to an error
      */
     connect(sigName: "closed", callback: (($obj: Display, is_error: boolean) => void)): number
@@ -8945,7 +8657,6 @@ export class Display {
     /**
      * The ::monitor-added signal is emitted whenever a monitor is
      * added.
-     * @signal 
      * @param monitor the monitor that was just added
      */
     connect(sigName: "monitor-added", callback: (($obj: Display, monitor: Monitor) => void)): number
@@ -8954,7 +8665,6 @@ export class Display {
     /**
      * The ::monitor-removed signal is emitted whenever a monitor is
      * removed.
-     * @signal 
      * @param monitor the monitor that was just removed
      */
     connect(sigName: "monitor-removed", callback: (($obj: Display, monitor: Monitor) => void)): number
@@ -8963,7 +8673,6 @@ export class Display {
     /**
      * The ::opened signal is emitted when the connection to the windowing
      * system for `display` is opened.
-     * @signal 
      */
     connect(sigName: "opened", callback: (($obj: Display) => void)): number
     connect_after(sigName: "opened", callback: (($obj: Display) => void)): number
@@ -8971,7 +8680,6 @@ export class Display {
     /**
      * The ::seat-added signal is emitted whenever a new seat is made
      * known to the windowing system.
-     * @signal 
      * @param seat the seat that was just added
      */
     connect(sigName: "seat-added", callback: (($obj: Display, seat: Seat) => void)): number
@@ -8980,13 +8688,12 @@ export class Display {
     /**
      * The ::seat-removed signal is emitted whenever a seat is removed
      * by the windowing system.
-     * @signal 
      * @param seat the seat that was just removed
      */
     connect(sigName: "seat-removed", callback: (($obj: Display, seat: Seat) => void)): number
     connect_after(sigName: "seat-removed", callback: (($obj: Display, seat: Seat) => void)): number
     emit(sigName: "seat-removed", seat: Seat): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -9013,14 +8720,13 @@ export class Display {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Display, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Display, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -9046,61 +8752,18 @@ export class Display {
      * function that should not be used by applications.
      */
     static open_default_libgtk_only(): Display | null
-    static $gtype: GObject.GType<Display>
+    static $gtype: GObject.Type
 }
 export interface DisplayManager_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Gdk-3.0.Gdk.DisplayManager */
-    default_display?: Display | null
+    default_display?: Display
 }
-/**
- * The purpose of the #GdkDisplayManager singleton object is to offer
- * notification when displays appear or disappear or the default display
- * changes.
- * 
- * You can use gdk_display_manager_get() to obtain the #GdkDisplayManager
- * singleton, but that should be rarely necessary. Typically, initializing
- * GTK+ opens a display that you can work with without ever accessing the
- * #GdkDisplayManager.
- * 
- * The GDK library can be built with support for multiple backends.
- * The #GdkDisplayManager object determines which backend is used
- * at runtime.
- * 
- * When writing backend-specific code that is supposed to work with
- * multiple GDK backends, you have to consider both compile time and
- * runtime. At compile time, use the #GDK_WINDOWING_X11, #GDK_WINDOWING_WIN32
- * macros, etc. to find out which backends are present in the GDK library
- * you are building your application against. At runtime, use type-check
- * macros like GDK_IS_X11_DISPLAY() to find out which backend is in use:
- * 
- * ## Backend-specific code ## {#backend-specific}
- * 
- * 
- * ```c
- * #ifdef GDK_WINDOWING_X11
- *   if (GDK_IS_X11_DISPLAY (display))
- *     {
- *       // make X11-specific calls here
- *     }
- *   else
- * #endif
- * #ifdef GDK_WINDOWING_QUARTZ
- *   if (GDK_IS_QUARTZ_DISPLAY (display))
- *     {
- *       // make Quartz-specific calls here
- *     }
- *   else
- * #endif
- *   g_error ("Unsupported GDK backend");
- * ```
- * 
- */
 export class DisplayManager {
-    /* Own properties of Gdk-3.0.Gdk.DisplayManager */
+    /* Properties of Gdk-3.0.Gdk.DisplayManager */
     default_display: Display
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.DisplayManager */
+    /* Methods of Gdk-3.0.Gdk.DisplayManager */
     /**
      * Gets the default #GdkDisplay.
      */
@@ -9119,7 +8782,7 @@ export class DisplayManager {
      * @param display a #GdkDisplay
      */
     set_default_display(display: Display): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -9165,7 +8828,7 @@ export class DisplayManager {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -9334,7 +8997,7 @@ export class DisplayManager {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -9422,8 +9085,8 @@ export class DisplayManager {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -9440,21 +9103,19 @@ export class DisplayManager {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Gdk-3.0.Gdk.DisplayManager */
+    /* Signals of Gdk-3.0.Gdk.DisplayManager */
     /**
      * The ::display-opened signal is emitted when a display is opened.
-     * @signal 
      * @param display the opened display
      */
     connect(sigName: "display-opened", callback: (($obj: DisplayManager, display: Display) => void)): number
     connect_after(sigName: "display-opened", callback: (($obj: DisplayManager, display: Display) => void)): number
     emit(sigName: "display-opened", display: Display): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -9481,7 +9142,6 @@ export class DisplayManager {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: DisplayManager, pspec: GObject.ParamSpec) => void)): number
@@ -9489,8 +9149,8 @@ export class DisplayManager {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::default-display", callback: (($obj: DisplayManager, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::default-display", callback: (($obj: DisplayManager, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -9507,14 +9167,14 @@ export class DisplayManager {
      * to limit what backends can be used.
      */
     static get(): DisplayManager
-    static $gtype: GObject.GType<DisplayManager>
+    static $gtype: GObject.Type
 }
 export interface DragContext_ConstructProps extends GObject.Object_ConstructProps {
 }
 export class DragContext {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.DragContext */
+    /* Methods of Gdk-3.0.Gdk.DragContext */
     /**
      * Determines the bitmask of actions proposed by the source if
      * gdk_drag_context_get_suggested_action() returns %GDK_ACTION_ASK.
@@ -9592,7 +9252,7 @@ export class DragContext {
      * @param hot_y y coordinate of the drag window hotspot
      */
     set_hotspot(hot_x: number, hot_y: number): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -9638,7 +9298,7 @@ export class DragContext {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -9807,7 +9467,7 @@ export class DragContext {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -9895,8 +9555,8 @@ export class DragContext {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -9913,19 +9573,17 @@ export class DragContext {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Gdk-3.0.Gdk.DragContext */
+    /* Signals of Gdk-3.0.Gdk.DragContext */
     /**
      * A new action is being chosen for the drag and drop operation.
      * 
      * This signal will only be emitted if the #GdkDragContext manages
      * the drag and drop operation. See gdk_drag_context_manage_dnd()
      * for more information.
-     * @signal 
      * @param action The action currently chosen
      */
     connect(sigName: "action-changed", callback: (($obj: DragContext, action: DragAction) => void)): number
@@ -9937,7 +9595,6 @@ export class DragContext {
      * This signal will only be emitted if the #GdkDragContext manages
      * the drag and drop operation. See gdk_drag_context_manage_dnd()
      * for more information.
-     * @signal 
      * @param reason The reason the context was cancelled
      */
     connect(sigName: "cancel", callback: (($obj: DragContext, reason: DragCancelReason) => void)): number
@@ -9951,7 +9608,6 @@ export class DragContext {
      * This signal will only be emitted if the #GdkDragContext manages
      * the drag and drop operation. See gdk_drag_context_manage_dnd()
      * for more information.
-     * @signal 
      */
     connect(sigName: "dnd-finished", callback: (($obj: DragContext) => void)): number
     connect_after(sigName: "dnd-finished", callback: (($obj: DragContext) => void)): number
@@ -9962,13 +9618,12 @@ export class DragContext {
      * This signal will only be emitted if the #GdkDragContext manages
      * the drag and drop operation. See gdk_drag_context_manage_dnd()
      * for more information.
-     * @signal 
      * @param time the time at which the drop happened.
      */
     connect(sigName: "drop-performed", callback: (($obj: DragContext, time: number) => void)): number
     connect_after(sigName: "drop-performed", callback: (($obj: DragContext, time: number) => void)): number
     emit(sigName: "drop-performed", time: number): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -9995,46 +9650,33 @@ export class DragContext {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: DragContext, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: DragContext, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: DragContext_ConstructProps)
     _init (config?: DragContext_ConstructProps): void
-    static $gtype: GObject.GType<DragContext>
+    static $gtype: GObject.Type
 }
 export interface DrawingContext_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Gdk-3.0.Gdk.DrawingContext */
     /**
      * The clip region applied to the drawing context.
      */
-    clip?: cairo.Region | null
+    clip?: cairo.Region
     /**
      * The #GdkWindow that created the drawing context.
      */
-    window?: Window | null
+    window?: Window
 }
-/**
- * #GdkDrawingContext is an object that represents the current drawing
- * state of a #GdkWindow.
- * 
- * It's possible to use a #GdkDrawingContext to draw on a #GdkWindow
- * via rendering API like Cairo or OpenGL.
- * 
- * A #GdkDrawingContext can only be created by calling gdk_window_begin_draw_frame()
- * and will be valid until a call to gdk_window_end_draw_frame().
- * 
- * #GdkDrawingContext is available since GDK 3.22
- */
 export class DrawingContext {
-    /* Own properties of Gdk-3.0.Gdk.DrawingContext */
+    /* Properties of Gdk-3.0.Gdk.DrawingContext */
     /**
      * The clip region applied to the drawing context.
      */
@@ -10043,9 +9685,9 @@ export class DrawingContext {
      * The #GdkWindow that created the drawing context.
      */
     readonly window: Window
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.DrawingContext */
+    /* Methods of Gdk-3.0.Gdk.DrawingContext */
     /**
      * Retrieves a Cairo context to be used to draw on the #GdkWindow
      * that created the #GdkDrawingContext.
@@ -10067,7 +9709,7 @@ export class DrawingContext {
      * Checks whether the given #GdkDrawingContext is valid.
      */
     is_valid(): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -10113,7 +9755,7 @@ export class DrawingContext {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -10282,7 +9924,7 @@ export class DrawingContext {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -10370,8 +10012,8 @@ export class DrawingContext {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -10388,12 +10030,11 @@ export class DrawingContext {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -10420,7 +10061,6 @@ export class DrawingContext {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: DrawingContext, pspec: GObject.ParamSpec) => void)): number
@@ -10430,56 +10070,21 @@ export class DrawingContext {
     connect_after(sigName: "notify::clip", callback: (($obj: DrawingContext, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::window", callback: (($obj: DrawingContext, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::window", callback: (($obj: DrawingContext, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: DrawingContext_ConstructProps)
     _init (config?: DrawingContext_ConstructProps): void
-    static $gtype: GObject.GType<DrawingContext>
+    static $gtype: GObject.Type
 }
 export interface FrameClock_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * A #GdkFrameClock tells the application when to update and repaint a
- * window. This may be synced to the vertical refresh rate of the
- * monitor, for example. Even when the frame clock uses a simple timer
- * rather than a hardware-based vertical sync, the frame clock helps
- * because it ensures everything paints at the same time (reducing the
- * total number of frames). The frame clock can also automatically
- * stop painting when it knows the frames will not be visible, or
- * scale back animation framerates.
- * 
- * #GdkFrameClock is designed to be compatible with an OpenGL-based
- * implementation or with mozRequestAnimationFrame in Firefox,
- * for example.
- * 
- * A frame clock is idle until someone requests a frame with
- * gdk_frame_clock_request_phase(). At some later point that makes
- * sense for the synchronization being implemented, the clock will
- * process a frame and emit signals for each phase that has been
- * requested. (See the signals of the #GdkFrameClock class for
- * documentation of the phases. %GDK_FRAME_CLOCK_PHASE_UPDATE and the
- * #GdkFrameClock::update signal are most interesting for application
- * writers, and are used to update the animations, using the frame time
- * given by gdk_frame_clock_get_frame_time().
- * 
- * The frame time is reported in microseconds and generally in the same
- * timescale as g_get_monotonic_time(), however, it is not the same
- * as g_get_monotonic_time(). The frame time does not advance during
- * the time a frame is being painted, and outside of a frame, an attempt
- * is made so that all calls to gdk_frame_clock_get_frame_time() that
- * are called at a “similar” time get the same value. This means that
- * if different animations are timed by looking at the difference in
- * time between an initial value from gdk_frame_clock_get_frame_time()
- * and the value inside the #GdkFrameClock::update signal of the clock,
- * they will stay exactly synchronized.
- */
 export class FrameClock {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.FrameClock */
+    /* Methods of Gdk-3.0.Gdk.FrameClock */
     /**
      * Starts updates for an animation. Until a matching call to
      * gdk_frame_clock_end_updating() is made, the frame clock will continually
@@ -10529,7 +10134,7 @@ export class FrameClock {
      * interval after the last presentation time, and later than `base_time`.
      * @param base_time base time for determining a presentaton time
      */
-    get_refresh_info(base_time: number): [ /* refresh_interval_return */ number, /* presentation_time_return */ number ]
+    get_refresh_info(base_time: number): [ /* refresh_interval_return */ number | null, /* presentation_time_return */ number ]
     /**
      * Retrieves a #GdkFrameTimings object holding timing information
      * for the current frame or a recent frame. The #GdkFrameTimings
@@ -10551,7 +10156,7 @@ export class FrameClock {
      * @param phase the phase that is requested
      */
     request_phase(phase: FrameClockPhase): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -10597,7 +10202,7 @@ export class FrameClock {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -10766,7 +10371,7 @@ export class FrameClock {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -10854,8 +10459,8 @@ export class FrameClock {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -10872,16 +10477,14 @@ export class FrameClock {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Gdk-3.0.Gdk.FrameClock */
+    /* Signals of Gdk-3.0.Gdk.FrameClock */
     /**
      * This signal ends processing of the frame. Applications
      * should generally not handle this signal.
-     * @signal 
      */
     connect(sigName: "after-paint", callback: (($obj: FrameClock) => void)): number
     connect_after(sigName: "after-paint", callback: (($obj: FrameClock) => void)): number
@@ -10889,7 +10492,6 @@ export class FrameClock {
     /**
      * This signal begins processing of the frame. Applications
      * should generally not handle this signal.
-     * @signal 
      */
     connect(sigName: "before-paint", callback: (($obj: FrameClock) => void)): number
     connect_after(sigName: "before-paint", callback: (($obj: FrameClock) => void)): number
@@ -10898,7 +10500,6 @@ export class FrameClock {
      * This signal is used to flush pending motion events that
      * are being batched up and compressed together. Applications
      * should not handle this signal.
-     * @signal 
      */
     connect(sigName: "flush-events", callback: (($obj: FrameClock) => void)): number
     connect_after(sigName: "flush-events", callback: (($obj: FrameClock) => void)): number
@@ -10908,7 +10509,6 @@ export class FrameClock {
      * application processing of the frame. Any work to update
      * sizes and positions of application elements should be
      * performed. GTK+ normally handles this internally.
-     * @signal 
      */
     connect(sigName: "layout", callback: (($obj: FrameClock) => void)): number
     connect_after(sigName: "layout", callback: (($obj: FrameClock) => void)): number
@@ -10919,7 +10519,6 @@ export class FrameClock {
      * repainted. GDK normally handles this internally and
      * produces expose events, which are turned into GTK+
      * #GtkWidget::draw signals.
-     * @signal 
      */
     connect(sigName: "paint", callback: (($obj: FrameClock) => void)): number
     connect_after(sigName: "paint", callback: (($obj: FrameClock) => void)): number
@@ -10928,7 +10527,6 @@ export class FrameClock {
      * This signal is emitted after processing of the frame is
      * finished, and is handled internally by GTK+ to resume normal
      * event processing. Applications should not handle this signal.
-     * @signal 
      */
     connect(sigName: "resume-events", callback: (($obj: FrameClock) => void)): number
     connect_after(sigName: "resume-events", callback: (($obj: FrameClock) => void)): number
@@ -10940,12 +10538,11 @@ export class FrameClock {
      * Applications can connect directly to this signal, or
      * use gtk_widget_add_tick_callback() as a more convenient
      * interface.
-     * @signal 
      */
     connect(sigName: "update", callback: (($obj: FrameClock) => void)): number
     connect_after(sigName: "update", callback: (($obj: FrameClock) => void)): number
     emit(sigName: "update"): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -10972,93 +10569,37 @@ export class FrameClock {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: FrameClock, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: FrameClock, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: FrameClock_ConstructProps)
     _init (config?: FrameClock_ConstructProps): void
-    static $gtype: GObject.GType<FrameClock>
+    static $gtype: GObject.Type
 }
 export interface GLContext_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Gdk-3.0.Gdk.GLContext */
     /**
      * The #GdkDisplay used to create the #GdkGLContext.
      */
-    display?: Display | null
+    display?: Display
     /**
      * The #GdkGLContext that this context is sharing data with, or %NULL
      */
-    shared_context?: GLContext | null
+    shared_context?: GLContext
     /**
      * The #GdkWindow the gl context is bound to.
      */
-    window?: Window | null
+    window?: Window
 }
-/**
- * #GdkGLContext is an object representing the platform-specific
- * OpenGL drawing context.
- * 
- * #GdkGLContexts are created for a #GdkWindow using
- * gdk_window_create_gl_context(), and the context will match
- * the #GdkVisual of the window.
- * 
- * A #GdkGLContext is not tied to any particular normal framebuffer.
- * For instance, it cannot draw to the #GdkWindow back buffer. The GDK
- * repaint system is in full control of the painting to that. Instead,
- * you can create render buffers or textures and use gdk_cairo_draw_from_gl()
- * in the draw function of your widget to draw them. Then GDK will handle
- * the integration of your rendering with that of other widgets.
- * 
- * Support for #GdkGLContext is platform-specific, context creation
- * can fail, returning %NULL context.
- * 
- * A #GdkGLContext has to be made "current" in order to start using
- * it, otherwise any OpenGL call will be ignored.
- * 
- * ## Creating a new OpenGL context ##
- * 
- * In order to create a new #GdkGLContext instance you need a
- * #GdkWindow, which you typically get during the realize call
- * of a widget.
- * 
- * A #GdkGLContext is not realized until either gdk_gl_context_make_current(),
- * or until it is realized using gdk_gl_context_realize(). It is possible to
- * specify details of the GL context like the OpenGL version to be used, or
- * whether the GL context should have extra state validation enabled after
- * calling gdk_window_create_gl_context() by calling gdk_gl_context_realize().
- * If the realization fails you have the option to change the settings of the
- * #GdkGLContext and try again.
- * 
- * ## Using a GdkGLContext ##
- * 
- * You will need to make the #GdkGLContext the current context
- * before issuing OpenGL calls; the system sends OpenGL commands to
- * whichever context is current. It is possible to have multiple
- * contexts, so you always need to ensure that the one which you
- * want to draw with is the current one before issuing commands:
- * 
- * 
- * ```c
- *   gdk_gl_context_make_current (context);
- * ```
- * 
- * 
- * You can now perform your drawing using OpenGL commands.
- * 
- * You can check which #GdkGLContext is the current one by using
- * gdk_gl_context_get_current(); you can also unset any #GdkGLContext
- * that is currently set by calling gdk_gl_context_clear_current().
- */
 export class GLContext {
-    /* Own properties of Gdk-3.0.Gdk.GLContext */
+    /* Properties of Gdk-3.0.Gdk.GLContext */
     /**
      * The #GdkDisplay used to create the #GdkGLContext.
      */
@@ -11071,9 +10612,9 @@ export class GLContext {
      * The #GdkWindow the gl context is bound to.
      */
     readonly window: Window
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.GLContext */
+    /* Methods of Gdk-3.0.Gdk.GLContext */
     /**
      * Retrieves the value set using gdk_gl_context_set_debug_enabled().
      */
@@ -11188,7 +10729,7 @@ export class GLContext {
      * @param use_es whether the context should use OpenGL ES instead of OpenGL,   or -1 to allow auto-detection
      */
     set_use_es(use_es: number): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -11234,7 +10775,7 @@ export class GLContext {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -11403,7 +10944,7 @@ export class GLContext {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -11491,8 +11032,8 @@ export class GLContext {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -11509,12 +11050,11 @@ export class GLContext {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -11541,7 +11081,6 @@ export class GLContext {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: GLContext, pspec: GObject.ParamSpec) => void)): number
@@ -11553,8 +11092,8 @@ export class GLContext {
     connect_after(sigName: "notify::shared-context", callback: (($obj: GLContext, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::window", callback: (($obj: GLContext, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::window", callback: (($obj: GLContext, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -11572,22 +11111,14 @@ export class GLContext {
      * Retrieves the current #GdkGLContext.
      */
     static get_current(): GLContext | null
-    static $gtype: GObject.GType<GLContext>
+    static $gtype: GObject.Type
 }
 export interface Keymap_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * A #GdkKeymap defines the translation from keyboard state
- * (including a hardware key, a modifier mask, and active keyboard group)
- * to a keyval. This translation has two phases. The first phase is
- * to determine the effective keyboard group and level for the keyboard
- * state; the second phase is to look up the keycode/group/level triplet
- * in the keymap and see what keyval it corresponds to.
- */
 export class Keymap {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.Keymap */
+    /* Methods of Gdk-3.0.Gdk.Keymap */
     /**
      * Maps the non-virtual modifiers (i.e Mod2, Mod3, ...) which are set
      * in `state` to the virtual modifiers (i.e. Super, Hyper and Meta) and
@@ -11619,7 +11150,7 @@ export class Keymap {
      * keyboard group and level. See gdk_keymap_translate_keyboard_state().
      * @param hardware_keycode a keycode
      */
-    get_entries_for_keycode(hardware_keycode: number): [ /* returnType */ boolean, /* keys */ KeymapKey[], /* keyvals */ number[] ]
+    get_entries_for_keycode(hardware_keycode: number): [ /* returnType */ boolean, /* keys */ KeymapKey[] | null, /* keyvals */ number[] | null ]
     /**
      * Obtains a list of keycode/group/level combinations that will
      * generate `keyval`. Groups and levels are two kinds of keyboard mode;
@@ -11740,8 +11271,8 @@ export class Keymap {
      * @param state a modifier state
      * @param group active keyboard group
      */
-    translate_keyboard_state(hardware_keycode: number, state: ModifierType, group: number): [ /* returnType */ boolean, /* keyval */ number, /* effective_group */ number, /* level */ number, /* consumed_modifiers */ ModifierType ]
-    /* Extended methods of GObject-2.0.GObject.Object */
+    translate_keyboard_state(hardware_keycode: number, state: ModifierType, group: number): [ /* returnType */ boolean, /* keyval */ number | null, /* effective_group */ number | null, /* level */ number | null, /* consumed_modifiers */ ModifierType | null ]
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -11787,7 +11318,7 @@ export class Keymap {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -11956,7 +11487,7 @@ export class Keymap {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -12044,8 +11575,8 @@ export class Keymap {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -12062,16 +11593,14 @@ export class Keymap {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Gdk-3.0.Gdk.Keymap */
+    /* Signals of Gdk-3.0.Gdk.Keymap */
     /**
      * The ::direction-changed signal gets emitted when the direction of
      * the keymap changes.
-     * @signal 
      */
     connect(sigName: "direction-changed", callback: (($obj: Keymap) => void)): number
     connect_after(sigName: "direction-changed", callback: (($obj: Keymap) => void)): number
@@ -12079,7 +11608,6 @@ export class Keymap {
     /**
      * The ::keys-changed signal is emitted when the mapping represented by
      * `keymap` changes.
-     * @signal 
      */
     connect(sigName: "keys-changed", callback: (($obj: Keymap) => void)): number
     connect_after(sigName: "keys-changed", callback: (($obj: Keymap) => void)): number
@@ -12088,12 +11616,11 @@ export class Keymap {
      * The ::state-changed signal is emitted when the state of the
      * keyboard changes, e.g when Caps Lock is turned on or off.
      * See gdk_keymap_get_caps_lock_state().
-     * @signal 
      */
     connect(sigName: "state-changed", callback: (($obj: Keymap) => void)): number
     connect_after(sigName: "state-changed", callback: (($obj: Keymap) => void)): number
     emit(sigName: "state-changed"): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -12120,14 +11647,13 @@ export class Keymap {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Keymap, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Keymap, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -12143,24 +11669,14 @@ export class Keymap {
      * @param display the #GdkDisplay.
      */
     static get_for_display(display: Display): Keymap
-    static $gtype: GObject.GType<Keymap>
+    static $gtype: GObject.Type
 }
 export interface Monitor_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Gdk-3.0.Gdk.Monitor */
-    display?: Display | null
+    display?: Display
 }
-/**
- * GdkMonitor objects represent the individual outputs that are
- * associated with a #GdkDisplay. GdkDisplay has APIs to enumerate
- * monitors with gdk_display_get_n_monitors() and gdk_display_get_monitor(), and
- * to find particular monitors with gdk_display_get_primary_monitor() or
- * gdk_display_get_monitor_at_window().
- * 
- * GdkMonitor was introduced in GTK+ 3.22 and supersedes earlier
- * APIs in GdkScreen to obtain monitor-related information.
- */
 export class Monitor {
-    /* Own properties of Gdk-3.0.Gdk.Monitor */
+    /* Properties of Gdk-3.0.Gdk.Monitor */
     readonly display: Display
     readonly geometry: Rectangle
     readonly height_mm: number
@@ -12171,9 +11687,9 @@ export class Monitor {
     readonly subpixel_layout: SubpixelLayout
     readonly width_mm: number
     readonly workarea: Rectangle
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.Monitor */
+    /* Methods of Gdk-3.0.Gdk.Monitor */
     /**
      * Gets the display that this monitor belongs to.
      */
@@ -12247,7 +11763,7 @@ export class Monitor {
      * (see gdk_display_get_primary_monitor()).
      */
     is_primary(): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -12293,7 +11809,7 @@ export class Monitor {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -12462,7 +11978,7 @@ export class Monitor {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -12550,8 +12066,8 @@ export class Monitor {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -12568,19 +12084,15 @@ export class Monitor {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Gdk-3.0.Gdk.Monitor */
-    /**
-     * @signal 
-     */
+    /* Signals of Gdk-3.0.Gdk.Monitor */
     connect(sigName: "invalidate", callback: (($obj: Monitor) => void)): number
     connect_after(sigName: "invalidate", callback: (($obj: Monitor) => void)): number
     emit(sigName: "invalidate"): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -12607,7 +12119,6 @@ export class Monitor {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Monitor, pspec: GObject.ParamSpec) => void)): number
@@ -12633,40 +12144,27 @@ export class Monitor {
     connect_after(sigName: "notify::width-mm", callback: (($obj: Monitor, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::workarea", callback: (($obj: Monitor, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::workarea", callback: (($obj: Monitor, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: Monitor_ConstructProps)
     _init (config?: Monitor_ConstructProps): void
-    static $gtype: GObject.GType<Monitor>
+    static $gtype: GObject.Type
 }
 export interface Screen_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Gdk-3.0.Gdk.Screen */
-    font_options?: object | null
-    resolution?: number | null
+    font_options?: object
+    resolution?: number
 }
-/**
- * #GdkScreen objects are the GDK representation of the screen on
- * which windows can be displayed and on which the pointer moves.
- * X originally identified screens with physical screens, but
- * nowadays it is more common to have a single #GdkScreen which
- * combines several physical monitors (see gdk_screen_get_n_monitors()).
- * 
- * GdkScreen is used throughout GDK and GTK+ to specify which screen
- * the top level windows are to be displayed on. it is also used to
- * query the screen specification and default settings such as
- * the default visual (gdk_screen_get_system_visual()), the dimensions
- * of the physical monitors (gdk_screen_get_monitor_geometry()), etc.
- */
 export class Screen {
-    /* Own properties of Gdk-3.0.Gdk.Screen */
+    /* Properties of Gdk-3.0.Gdk.Screen */
     font_options: object
     resolution: number
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.Screen */
+    /* Methods of Gdk-3.0.Gdk.Screen */
     /**
      * Returns the screen’s currently active window.
      * 
@@ -12731,7 +12229,7 @@ export class Screen {
      * gdk_screen_get_width() and gdk_screen_get_height().
      * @param monitor_num the monitor number
      */
-    get_monitor_geometry(monitor_num: number): /* dest */ Rectangle
+    get_monitor_geometry(monitor_num: number): /* dest */ Rectangle | null
     /**
      * Gets the height in millimeters of the specified monitor.
      * @param monitor_num number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)
@@ -12778,7 +12276,7 @@ export class Screen {
      * `screen,` use gdk_screen_get_n_monitors().
      * @param monitor_num the monitor number
      */
-    get_monitor_workarea(monitor_num: number): /* dest */ Rectangle
+    get_monitor_workarea(monitor_num: number): /* dest */ Rectangle | null
     /**
      * Returns the number of monitors which `screen` consists of.
      */
@@ -12912,7 +12410,7 @@ export class Screen {
      * have already been created.
      * @param options a #cairo_font_options_t, or %NULL to unset any   previously set default font options.
      */
-    set_font_options(options: cairo.FontOptions | null): void
+    set_font_options(options?: cairo.FontOptions | null): void
     /**
      * Sets the resolution for font handling on the screen. This is a
      * scale factor between points specified in a #PangoFontDescription
@@ -12921,7 +12419,7 @@ export class Screen {
      * @param dpi the resolution in “dots per inch”. (Physical inches aren’t actually   involved; the terminology is conventional.)
      */
     set_resolution(dpi: number): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -12967,7 +12465,7 @@ export class Screen {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -13136,7 +12634,7 @@ export class Screen {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -13224,8 +12722,8 @@ export class Screen {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -13242,16 +12740,14 @@ export class Screen {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Gdk-3.0.Gdk.Screen */
+    /* Signals of Gdk-3.0.Gdk.Screen */
     /**
      * The ::composited-changed signal is emitted when the composited
      * status of the screen changes
-     * @signal 
      */
     connect(sigName: "composited-changed", callback: (($obj: Screen) => void)): number
     connect_after(sigName: "composited-changed", callback: (($obj: Screen) => void)): number
@@ -13262,7 +12758,6 @@ export class Screen {
      * 
      * Only for X11 and OS X for now. A future implementation for Win32
      * may be a possibility.
-     * @signal 
      */
     connect(sigName: "monitors-changed", callback: (($obj: Screen) => void)): number
     connect_after(sigName: "monitors-changed", callback: (($obj: Screen) => void)): number
@@ -13270,12 +12765,11 @@ export class Screen {
     /**
      * The ::size-changed signal is emitted when the pixel width or
      * height of a screen changes.
-     * @signal 
      */
     connect(sigName: "size-changed", callback: (($obj: Screen) => void)): number
     connect_after(sigName: "size-changed", callback: (($obj: Screen) => void)): number
     emit(sigName: "size-changed"): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -13302,7 +12796,6 @@ export class Screen {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Screen, pspec: GObject.ParamSpec) => void)): number
@@ -13312,8 +12805,8 @@ export class Screen {
     connect_after(sigName: "notify::font-options", callback: (($obj: Screen, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::resolution", callback: (($obj: Screen, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::resolution", callback: (($obj: Screen, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -13347,30 +12840,24 @@ export class Screen {
      * Note that on many X servers this value will not be correct.
      */
     static width_mm(): number
-    static $gtype: GObject.GType<Screen>
+    static $gtype: GObject.Type
 }
 export interface Seat_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Gdk-3.0.Gdk.Seat */
     /**
      * #GdkDisplay of this seat.
      */
-    display?: Display | null
+    display?: Display
 }
-/**
- * The #GdkSeat object represents a collection of input devices
- * that belong to a user.
- */
 export class Seat {
-    /* Own properties of Gdk-3.0.Gdk.Seat */
+    /* Properties of Gdk-3.0.Gdk.Seat */
     /**
      * #GdkDisplay of this seat.
      */
     readonly display: Display
-    /* Own fields of Gdk-3.0.Gdk.Seat */
-    parent_instance: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.Seat */
+    /* Methods of Gdk-3.0.Gdk.Seat */
     /**
      * Returns the capabilities this #GdkSeat currently has.
      */
@@ -13424,12 +12911,12 @@ export class Seat {
      * @param event the event that is triggering the grab, or %NULL if none         is available.
      * @param prepare_func function to                prepare the window to be grabbed, it can be %NULL if `window` is                visible before this call.
      */
-    grab(window: Window, capabilities: SeatCapabilities, owner_events: boolean, cursor: Cursor | null, event: Event | null, prepare_func: SeatGrabPrepareFunc | null): GrabStatus
+    grab(window: Window, capabilities: SeatCapabilities, owner_events: boolean, cursor?: Cursor | null, event?: Event | null, prepare_func?: SeatGrabPrepareFunc | null): GrabStatus
     /**
      * Releases a grab added through gdk_seat_grab().
      */
     ungrab(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -13475,7 +12962,7 @@ export class Seat {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -13644,7 +13131,7 @@ export class Seat {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -13732,8 +13219,8 @@ export class Seat {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -13750,16 +13237,14 @@ export class Seat {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Gdk-3.0.Gdk.Seat */
+    /* Signals of Gdk-3.0.Gdk.Seat */
     /**
      * The ::device-added signal is emitted when a new input
      * device is related to this seat.
-     * @signal 
      * @param device the newly added #GdkDevice.
      */
     connect(sigName: "device-added", callback: (($obj: Seat, device: Device) => void)): number
@@ -13768,7 +13253,6 @@ export class Seat {
     /**
      * The ::device-removed signal is emitted when an
      * input device is removed (e.g. unplugged).
-     * @signal 
      * @param device the just removed #GdkDevice.
      */
     connect(sigName: "device-removed", callback: (($obj: Seat, device: Device) => void)): number
@@ -13781,7 +13265,6 @@ export class Seat {
      * will emit the #GdkDevice::tool-changed signal accordingly.
      * 
      * A same tool may be used by several devices.
-     * @signal 
      * @param tool the new #GdkDeviceTool known to the seat
      */
     connect(sigName: "tool-added", callback: (($obj: Seat, tool: DeviceTool) => void)): number
@@ -13790,13 +13273,12 @@ export class Seat {
     /**
      * This signal is emitted whenever a tool is no longer known
      * to this `seat`.
-     * @signal 
      * @param tool the just removed #GdkDeviceTool
      */
     connect(sigName: "tool-removed", callback: (($obj: Seat, tool: DeviceTool) => void)): number
     connect_after(sigName: "tool-removed", callback: (($obj: Seat, tool: DeviceTool) => void)): number
     emit(sigName: "tool-removed", tool: DeviceTool): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -13823,7 +13305,6 @@ export class Seat {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Seat, pspec: GObject.ParamSpec) => void)): number
@@ -13831,25 +13312,21 @@ export class Seat {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::display", callback: (($obj: Seat, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::display", callback: (($obj: Seat, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: Seat_ConstructProps)
     _init (config?: Seat_ConstructProps): void
-    static $gtype: GObject.GType<Seat>
+    static $gtype: GObject.Type
 }
 export interface Visual_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * A #GdkVisual contains information about
- * a particular visual.
- */
 export class Visual {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.Visual */
+    /* Methods of Gdk-3.0.Gdk.Visual */
     /**
      * Returns the number of significant bits per red, green and blue value.
      * 
@@ -13863,7 +13340,7 @@ export class Visual {
      * to be in position (according to the "mask"). Finally, "precision" refers
      * to how much precision the pixel value contains for a particular primary.
      */
-    get_blue_pixel_details(): [ /* mask */ number, /* shift */ number, /* precision */ number ]
+    get_blue_pixel_details(): [ /* mask */ number | null, /* shift */ number | null, /* precision */ number | null ]
     /**
      * Returns the byte order of this visual.
      * 
@@ -13889,7 +13366,7 @@ export class Visual {
      * to be in position (according to the "mask"). Finally, "precision" refers
      * to how much precision the pixel value contains for a particular primary.
      */
-    get_green_pixel_details(): [ /* mask */ number, /* shift */ number, /* precision */ number ]
+    get_green_pixel_details(): [ /* mask */ number | null, /* shift */ number | null, /* precision */ number | null ]
     /**
      * Obtains values that are needed to calculate red pixel values in TrueColor
      * and DirectColor. The “mask” is the significant bits within the pixel.
@@ -13897,7 +13374,7 @@ export class Visual {
      * to be in position (according to the "mask"). Finally, "precision" refers
      * to how much precision the pixel value contains for a particular primary.
      */
-    get_red_pixel_details(): [ /* mask */ number, /* shift */ number, /* precision */ number ]
+    get_red_pixel_details(): [ /* mask */ number | null, /* shift */ number | null, /* precision */ number | null ]
     /**
      * Gets the screen to which this visual belongs
      */
@@ -13906,7 +13383,7 @@ export class Visual {
      * Returns the type of visual this is (PseudoColor, TrueColor, etc).
      */
     get_visual_type(): VisualType
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -13952,7 +13429,7 @@ export class Visual {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -14121,7 +13598,7 @@ export class Visual {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -14209,8 +13686,8 @@ export class Visual {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -14227,12 +13704,11 @@ export class Visual {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -14259,14 +13735,13 @@ export class Visual {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Visual, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Visual, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -14317,7 +13792,7 @@ export class Visual {
      * The return value should not be freed.
      */
     static get_system(): Visual
-    static $gtype: GObject.GType<Visual>
+    static $gtype: GObject.Type
 }
 export interface Window_ConstructProps extends GObject.Object_ConstructProps {
     /* Constructor properties of Gdk-3.0.Gdk.Window */
@@ -14325,18 +13800,18 @@ export interface Window_ConstructProps extends GObject.Object_ConstructProps {
      * The mouse pointer for a #GdkWindow. See gdk_window_set_cursor() and
      * gdk_window_get_cursor() for details.
      */
-    cursor?: Cursor | null
+    cursor?: Cursor
 }
 export class Window {
-    /* Own properties of Gdk-3.0.Gdk.Window */
+    /* Properties of Gdk-3.0.Gdk.Window */
     /**
      * The mouse pointer for a #GdkWindow. See gdk_window_set_cursor() and
      * gdk_window_get_cursor() for details.
      */
     cursor: Cursor
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of Gdk-3.0.Gdk.Window */
+    /* Methods of Gdk-3.0.Gdk.Window */
     /**
      * Emits a short beep associated to `window` in the appropriate
      * display, if supported. Otherwise, emits a short beep on
@@ -14500,7 +13975,7 @@ export class Window {
      * @param parent_x X coordinate in parent’s coordinate system
      * @param parent_y Y coordinate in parent’s coordinate system
      */
-    coords_from_parent(parent_x: number, parent_y: number): [ /* x */ number, /* y */ number ]
+    coords_from_parent(parent_x: number, parent_y: number): [ /* x */ number | null, /* y */ number | null ]
     /**
      * Transforms window coordinates from a child window to its parent
      * window, where the parent window is the normal parent as returned by
@@ -14521,7 +13996,7 @@ export class Window {
      * @param x X coordinate in child’s coordinate system
      * @param y Y coordinate in child’s coordinate system
      */
-    coords_to_parent(x: number, y: number): [ /* parent_x */ number, /* parent_y */ number ]
+    coords_to_parent(x: number, y: number): [ /* parent_x */ number | null, /* parent_y */ number | null ]
     /**
      * Creates a new #GdkGLContext matching the
      * framebuffer format to the visual of the #GdkWindow. The context
@@ -14729,7 +14204,7 @@ export class Window {
      * lowest window is first.
      * @param user_data user data to look for
      */
-    get_children_with_user_data(user_data: object | null): Window[]
+    get_children_with_user_data(user_data?: object | null): Window[]
     /**
      * Computes the region of a window that potentially can be written
      * to by drawing primitives. This region may not take into account
@@ -14777,14 +14252,14 @@ export class Window {
      * Use gdk_window_get_device_position_double() if you need subpixel precision.
      * @param device pointer #GdkDevice to query to.
      */
-    get_device_position(device: Device): [ /* returnType */ Window | null, /* x */ number, /* y */ number, /* mask */ ModifierType ]
+    get_device_position(device: Device): [ /* returnType */ Window | null, /* x */ number | null, /* y */ number | null, /* mask */ ModifierType | null ]
     /**
      * Obtains the current device position in doubles and modifier state.
      * The position is given in coordinates relative to the upper left
      * corner of `window`.
      * @param device pointer #GdkDevice to query to.
      */
-    get_device_position_double(device: Device): [ /* returnType */ Window | null, /* x */ number, /* y */ number, /* mask */ ModifierType ]
+    get_device_position_double(device: Device): [ /* returnType */ Window | null, /* x */ number | null, /* y */ number | null, /* mask */ ModifierType | null ]
     /**
      * Gets the #GdkDisplay associated with a #GdkWindow.
      */
@@ -14792,7 +14267,7 @@ export class Window {
     /**
      * Finds out the DND protocol supported by a window.
      */
-    get_drag_protocol(): [ /* returnType */ DragProtocol, /* target */ Window ]
+    get_drag_protocol(): [ /* returnType */ DragProtocol, /* target */ Window | null ]
     /**
      * Obtains the parent of `window,` as known to GDK. Works like
      * gdk_window_get_parent() for normal windows, but returns the
@@ -14863,7 +14338,7 @@ export class Window {
      * coordinate space, whereas gdk_window_get_geometry() is restricted to
      * the 16-bit coordinates of X11.
      */
-    get_geometry(): [ /* x */ number, /* y */ number, /* width */ number, /* height */ number ]
+    get_geometry(): [ /* x */ number | null, /* y */ number | null, /* width */ number | null, /* height */ number | null ]
     /**
      * Returns the group leader window for `window`. See gdk_window_set_group().
      */
@@ -14887,7 +14362,7 @@ export class Window {
      * gdk_window_get_geometry() which return the position of a window
      * relative to its parent window.)
      */
-    get_origin(): [ /* returnType */ number, /* x */ number, /* y */ number ]
+    get_origin(): [ /* returnType */ number, /* x */ number | null, /* y */ number | null ]
     /**
      * Obtains the parent of `window,` as known to GDK. Does not query the
      * X server; thus this returns the parent as passed to gdk_window_new(),
@@ -14914,7 +14389,7 @@ export class Window {
      * The position is given in coordinates relative to the upper left
      * corner of `window`.
      */
-    get_pointer(): [ /* returnType */ Window | null, /* x */ number, /* y */ number, /* mask */ ModifierType ]
+    get_pointer(): [ /* returnType */ Window | null, /* x */ number | null, /* y */ number | null, /* mask */ ModifierType | null ]
     /**
      * Obtains the position of the window as reported in the
      * most-recently-processed #GdkEventConfigure. Contrast with
@@ -14924,7 +14399,7 @@ export class Window {
      * 
      * The position coordinates are relative to the window’s parent window.
      */
-    get_position(): [ /* x */ number, /* y */ number ]
+    get_position(): [ /* x */ number | null, /* y */ number | null ]
     /**
      * Obtains the position of a window position in root
      * window coordinates. This is similar to
@@ -15090,7 +14565,7 @@ export class Window {
      * @param region a #cairo_region_t
      * @param child_func function to use to decide if to     recurse to a child, %NULL means never recurse.
      */
-    invalidate_maybe_recurse(region: cairo.Region, child_func: WindowChildFunc | null): void
+    invalidate_maybe_recurse(region: cairo.Region, child_func?: WindowChildFunc | null): void
     /**
      * A convenience wrapper around gdk_window_invalidate_region() which
      * invalidates a rectangular region. See
@@ -15378,7 +14853,7 @@ export class Window {
      * when the window is obscured then exposed.
      * @param pattern a pattern to use, or %NULL
      */
-    set_background_pattern(pattern: cairo.Pattern | null): void
+    set_background_pattern(pattern?: cairo.Pattern | null): void
     /**
      * Sets the background color of `window`.
      * 
@@ -15438,7 +14913,7 @@ export class Window {
      * should use this default.
      * @param cursor a cursor
      */
-    set_cursor(cursor: Cursor | null): void
+    set_cursor(cursor?: Cursor | null): void
     /**
      * “Decorations” are the features the window manager adds to a toplevel #GdkWindow.
      * This function sets the traditional Motif window manager hints that tell the
@@ -15592,7 +15067,7 @@ export class Window {
      * if your application pretends to be multiple applications.
      * @param leader group leader window, or %NULL to restore the default group leader window
      */
-    set_group(leader: Window | null): void
+    set_group(leader?: Window | null): void
     /**
      * Sets a list of icons for the window. One of these will be used
      * to represent the window when it has been iconified. The icon is
@@ -15621,7 +15096,7 @@ export class Window {
      * Note that some platforms don't support window icons.
      * @param name name of window while iconified (minimized)
      */
-    set_icon_name(name: string | null): void
+    set_icon_name(name?: string | null): void
     /**
      * Set if `window` must be kept above other windows. If the
      * window was already above, then this function does nothing.
@@ -15698,7 +15173,7 @@ export class Window {
      * property in your #GtkWidget::style-updated handler.
      * @param region a region, or %NULL
      */
-    set_opaque_region(region: cairo.Region | null): void
+    set_opaque_region(region?: cairo.Region | null): void
     /**
      * An override redirect window is not under the control of the window manager.
      * This means it won’t have a titlebar, won’t be minimizable, etc. - it will
@@ -15864,7 +15339,7 @@ export class Window {
      * user data is a #GtkWidget, and forward the event to that widget.
      * @param user_data user data
      */
-    set_user_data(user_data: GObject.Object | null): void
+    set_user_data(user_data?: GObject.Object | null): void
     /**
      * Makes pixels in `window` outside `shape_region` be transparent,
      * so that the window may be nonrectangular.
@@ -15978,7 +15453,7 @@ export class Window {
      * withdraws toplevel windows before hiding them.
      */
     withdraw(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -16024,7 +15499,7 @@ export class Window {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -16193,7 +15668,7 @@ export class Window {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -16281,12 +15756,12 @@ export class Window {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of Gdk-3.0.Gdk.Window */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Gdk-3.0.Gdk.Window */
     vfunc_create_surface(width: number, height: number): cairo.Surface
     vfunc_from_embedder(embedder_x: number, embedder_y: number, offscreen_x: number, offscreen_y: number): void
     vfunc_to_embedder(offscreen_x: number, offscreen_y: number, embedder_x: number, embedder_y: number): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -16303,12 +15778,11 @@ export class Window {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of Gdk-3.0.Gdk.Window */
+    /* Signals of Gdk-3.0.Gdk.Window */
     /**
      * The ::create-surface signal is emitted when an offscreen window
      * needs its surface (re)created, which happens either when the
@@ -16320,7 +15794,6 @@ export class Window {
      * Note that it is not possible to access the window's previous
      * surface from within any callback of this signal. Calling
      * gdk_offscreen_window_get_surface() will lead to a crash.
-     * @signal 
      * @param width the width of the offscreen surface to create
      * @param height the height of the offscreen surface to create
      */
@@ -16332,7 +15805,6 @@ export class Window {
      * in the embedder of an offscreen window to the offscreen window.
      * 
      * See also #GdkWindow::to-embedder.
-     * @signal 
      * @param embedder_x x coordinate in the embedder window
      * @param embedder_y y coordinate in the embedder window
      */
@@ -16351,7 +15823,6 @@ export class Window {
      * flipping, but before any possible sliding. `final_rect` is `flipped_rect,`
      * but possibly translated in the case that flipping is still ineffective in
      * keeping `window` on-screen.
-     * @signal 
      * @param flipped_rect the position of `window` after any possible                flipping or %NULL if the backend can't obtain it
      * @param final_rect the final position of `window` or %NULL if the              backend can't obtain it
      * @param flipped_x %TRUE if the anchors were flipped horizontally
@@ -16363,26 +15834,24 @@ export class Window {
     /**
      * The ::pick-embedded-child signal is emitted to find an embedded
      * child at the given position.
-     * @signal 
      * @param x x coordinate in the window
      * @param y y coordinate in the window
      */
-    connect(sigName: "pick-embedded-child", callback: (($obj: Window, x: number, y: number) => Window)): number
-    connect_after(sigName: "pick-embedded-child", callback: (($obj: Window, x: number, y: number) => Window)): number
+    connect(sigName: "pick-embedded-child", callback: (($obj: Window, x: number, y: number) => Window | null)): number
+    connect_after(sigName: "pick-embedded-child", callback: (($obj: Window, x: number, y: number) => Window | null)): number
     emit(sigName: "pick-embedded-child", x: number, y: number): void
     /**
      * The ::to-embedder signal is emitted to translate coordinates
      * in an offscreen window to its embedder.
      * 
      * See also #GdkWindow::from-embedder.
-     * @signal 
      * @param offscreen_x x coordinate in the offscreen window
      * @param offscreen_y y coordinate in the offscreen window
      */
     connect(sigName: "to-embedder", callback: (($obj: Window, offscreen_x: number, offscreen_y: number) => void)): number
     connect_after(sigName: "to-embedder", callback: (($obj: Window, offscreen_x: number, offscreen_y: number) => void)): number
     emit(sigName: "to-embedder", offscreen_x: number, offscreen_y: number): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -16409,7 +15878,6 @@ export class Window {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Window, pspec: GObject.ParamSpec) => void)): number
@@ -16417,8 +15885,8 @@ export class Window {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::cursor", callback: (($obj: Window, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::cursor", callback: (($obj: Window, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -16436,7 +15904,7 @@ export class Window {
      * NOTE: For multihead-aware widgets or applications use
      * gdk_display_get_window_at_pointer() instead.
      */
-    static at_pointer(): [ /* returnType */ Window, /* win_x */ number, /* win_y */ number ]
+    static at_pointer(): [ /* returnType */ Window, /* win_x */ number | null, /* win_y */ number | null ]
     /**
      * Constrains a desired width and height according to a
      * set of geometry hints (such as minimum and maximum size).
@@ -16474,14 +15942,10 @@ export class Window {
      * @param setting %TRUE to turn on update debugging
      */
     static set_debug_updates(setting: boolean): void
-    static $gtype: GObject.GType<Window>
+    static $gtype: GObject.Type
 }
-/**
- * An opaque type representing a string as an index into a table
- * of strings on the X server.
- */
 export class Atom {
-    /* Owm methods of Gdk-3.0.Gdk.Atom */
+    /* Methods of Gdk-3.0.Gdk.Atom */
     /**
      * Determines the string corresponding to an atom.
      */
@@ -16509,12 +15973,8 @@ export class Atom {
      */
     static intern_static_string(atom_name: string): Atom
 }
-/**
- * A #GdkColor is used to describe a color,
- * similar to the XColor struct used in the X11 drawing API.
- */
 export class Color {
-    /* Own fields of Gdk-3.0.Gdk.Color */
+    /* Fields of Gdk-3.0.Gdk.Color */
     /**
      * For allocated colors, the pixel value used to
      *     draw this color on the screen. Not used anymore.
@@ -16534,7 +15994,7 @@ export class Color {
      * The blue component of the color
      */
     blue: number
-    /* Owm methods of Gdk-3.0.Gdk.Color */
+    /* Methods of Gdk-3.0.Gdk.Color */
     /**
      * Makes a copy of a #GdkColor.
      * 
@@ -16586,13 +16046,8 @@ export abstract class DevicePadInterface {
 export abstract class DrawingContextClass {
     static name: string
 }
-/**
- * Contains the fields which are common to all event structs.
- * Any event pointer can safely be cast to a pointer to a #GdkEventAny to
- * access these fields.
- */
 export class EventAny {
-    /* Own fields of Gdk-3.0.Gdk.EventAny */
+    /* Fields of Gdk-3.0.Gdk.EventAny */
     /**
      * the type of the event.
      */
@@ -16607,43 +16062,8 @@ export class EventAny {
     send_event: number
     static name: string
 }
-/**
- * Used for button press and button release events. The
- * `type` field will be one of %GDK_BUTTON_PRESS,
- * %GDK_2BUTTON_PRESS, %GDK_3BUTTON_PRESS or %GDK_BUTTON_RELEASE,
- * 
- * Double and triple-clicks result in a sequence of events being received.
- * For double-clicks the order of events will be:
- * 
- * - %GDK_BUTTON_PRESS
- * - %GDK_BUTTON_RELEASE
- * - %GDK_BUTTON_PRESS
- * - %GDK_2BUTTON_PRESS
- * - %GDK_BUTTON_RELEASE
- * 
- * Note that the first click is received just like a normal
- * button press, while the second click results in a %GDK_2BUTTON_PRESS
- * being received just after the %GDK_BUTTON_PRESS.
- * 
- * Triple-clicks are very similar to double-clicks, except that
- * %GDK_3BUTTON_PRESS is inserted after the third click. The order of the
- * events is:
- * 
- * - %GDK_BUTTON_PRESS
- * - %GDK_BUTTON_RELEASE
- * - %GDK_BUTTON_PRESS
- * - %GDK_2BUTTON_PRESS
- * - %GDK_BUTTON_RELEASE
- * - %GDK_BUTTON_PRESS
- * - %GDK_3BUTTON_PRESS
- * - %GDK_BUTTON_RELEASE
- * 
- * For a double click to occur, the second button press must occur within
- * 1/4 of a second of the first. For a triple click to occur, the third
- * button press must also occur within 1/2 second of the first button press.
- */
 export class EventButton {
-    /* Own fields of Gdk-3.0.Gdk.EventButton */
+    /* Fields of Gdk-3.0.Gdk.EventButton */
     /**
      * the type of the event (%GDK_BUTTON_PRESS, %GDK_2BUTTON_PRESS,
      *   %GDK_3BUTTON_PRESS or %GDK_BUTTON_RELEASE).
@@ -16704,11 +16124,8 @@ export class EventButton {
     y_root: number
     static name: string
 }
-/**
- * Generated when a window size or position has changed.
- */
 export class EventConfigure {
-    /* Own fields of Gdk-3.0.Gdk.EventConfigure */
+    /* Fields of Gdk-3.0.Gdk.EventConfigure */
     /**
      * the type of the event (%GDK_CONFIGURE).
      */
@@ -16739,11 +16156,8 @@ export class EventConfigure {
     height: number
     static name: string
 }
-/**
- * Generated when the pointer enters or leaves a window.
- */
 export class EventCrossing {
-    /* Own fields of Gdk-3.0.Gdk.EventCrossing */
+    /* Fields of Gdk-3.0.Gdk.EventCrossing */
     /**
      * the type of the event (%GDK_ENTER_NOTIFY or %GDK_LEAVE_NOTIFY).
      */
@@ -16806,11 +16220,8 @@ export class EventCrossing {
     state: ModifierType
     static name: string
 }
-/**
- * Generated during DND operations.
- */
 export class EventDND {
-    /* Own fields of Gdk-3.0.Gdk.EventDND */
+    /* Fields of Gdk-3.0.Gdk.EventDND */
     /**
      * the type of the event (%GDK_DRAG_ENTER, %GDK_DRAG_LEAVE,
      *   %GDK_DRAG_MOTION, %GDK_DRAG_STATUS, %GDK_DROP_START or
@@ -16845,12 +16256,8 @@ export class EventDND {
     y_root: number
     static name: string
 }
-/**
- * Generated when all or part of a window becomes visible and needs to be
- * redrawn.
- */
 export class EventExpose {
-    /* Own fields of Gdk-3.0.Gdk.EventExpose */
+    /* Fields of Gdk-3.0.Gdk.EventExpose */
     /**
      * the type of the event (%GDK_EXPOSE or %GDK_DAMAGE).
      */
@@ -16880,11 +16287,8 @@ export class EventExpose {
     count: number
     static name: string
 }
-/**
- * Describes a change of keyboard focus.
- */
 export class EventFocus {
-    /* Own fields of Gdk-3.0.Gdk.EventFocus */
+    /* Fields of Gdk-3.0.Gdk.EventFocus */
     /**
      * the type of the event (%GDK_FOCUS_CHANGE).
      */
@@ -16904,15 +16308,8 @@ export class EventFocus {
     in_: number
     static name: string
 }
-/**
- * Generated when a pointer or keyboard grab is broken. On X11, this happens
- * when the grab window becomes unviewable (i.e. it or one of its ancestors
- * is unmapped), or if the same application grabs the pointer or keyboard
- * again. Note that implicit grabs (which are initiated by button presses)
- * can also cause #GdkEventGrabBroken events.
- */
 export class EventGrabBroken {
-    /* Own fields of Gdk-3.0.Gdk.EventGrabBroken */
+    /* Fields of Gdk-3.0.Gdk.EventGrabBroken */
     /**
      * the type of the event (%GDK_GRAB_BROKEN)
      */
@@ -16943,11 +16340,8 @@ export class EventGrabBroken {
     grab_window: Window
     static name: string
 }
-/**
- * Describes a key press or key release event.
- */
 export class EventKey {
-    /* Own fields of Gdk-3.0.Gdk.EventKey */
+    /* Fields of Gdk-3.0.Gdk.EventKey */
     /**
      * the type of the event (%GDK_KEY_PRESS or %GDK_KEY_RELEASE).
      */
@@ -17009,11 +16403,8 @@ export class EventKey {
     is_modifier: number
     static name: string
 }
-/**
- * Generated when the pointer moves.
- */
 export class EventMotion {
-    /* Own fields of Gdk-3.0.Gdk.EventMotion */
+    /* Fields of Gdk-3.0.Gdk.EventMotion */
     /**
      * the type of the event.
      */
@@ -17071,13 +16462,8 @@ export class EventMotion {
     y_root: number
     static name: string
 }
-/**
- * Generated when the owner of a selection changes. On X11, this
- * information is only available if the X server supports the XFIXES
- * extension.
- */
 export class EventOwnerChange {
-    /* Own fields of Gdk-3.0.Gdk.EventOwnerChange */
+    /* Fields of Gdk-3.0.Gdk.EventOwnerChange */
     /**
      * the type of the event (%GDK_OWNER_CHANGE).
      */
@@ -17113,11 +16499,8 @@ export class EventOwnerChange {
     selection_time: number
     static name: string
 }
-/**
- * Generated during %GDK_SOURCE_TABLET_PAD interaction with tactile sensors.
- */
 export class EventPadAxis {
-    /* Own fields of Gdk-3.0.Gdk.EventPadAxis */
+    /* Fields of Gdk-3.0.Gdk.EventPadAxis */
     /**
      * the type of the event (%GDK_PAD_RING or %GDK_PAD_STRIP).
      */
@@ -17155,11 +16538,8 @@ export class EventPadAxis {
     value: number
     static name: string
 }
-/**
- * Generated during %GDK_SOURCE_TABLET_PAD button presses and releases.
- */
 export class EventPadButton {
-    /* Own fields of Gdk-3.0.Gdk.EventPadButton */
+    /* Fields of Gdk-3.0.Gdk.EventPadButton */
     /**
      * the type of the event (%GDK_PAD_BUTTON_PRESS or %GDK_PAD_BUTTON_RELEASE).
      */
@@ -17192,11 +16572,8 @@ export class EventPadButton {
     mode: number
     static name: string
 }
-/**
- * Generated during %GDK_SOURCE_TABLET_PAD mode switches in a group.
- */
 export class EventPadGroupMode {
-    /* Own fields of Gdk-3.0.Gdk.EventPadGroupMode */
+    /* Fields of Gdk-3.0.Gdk.EventPadGroupMode */
     /**
      * the type of the event (%GDK_PAD_GROUP_MODE).
      */
@@ -17226,11 +16603,8 @@ export class EventPadGroupMode {
     mode: number
     static name: string
 }
-/**
- * Describes a property change on a window.
- */
 export class EventProperty {
-    /* Own fields of Gdk-3.0.Gdk.EventProperty */
+    /* Fields of Gdk-3.0.Gdk.EventProperty */
     /**
      * the type of the event (%GDK_PROPERTY_NOTIFY).
      */
@@ -17258,19 +16632,8 @@ export class EventProperty {
     state: PropertyState
     static name: string
 }
-/**
- * Proximity events are generated when using GDK’s wrapper for the
- * XInput extension. The XInput extension is an add-on for standard X
- * that allows you to use nonstandard devices such as graphics tablets.
- * A proximity event indicates that the stylus has moved in or out of
- * contact with the tablet, or perhaps that the user’s finger has moved
- * in or out of contact with a touch screen.
- * 
- * This event type will be used pretty rarely. It only is important for
- * XInput aware programs that are drawing their own cursor.
- */
 export class EventProximity {
-    /* Own fields of Gdk-3.0.Gdk.EventProximity */
+    /* Fields of Gdk-3.0.Gdk.EventProximity */
     /**
      * the type of the event (%GDK_PROXIMITY_IN or %GDK_PROXIMITY_OUT).
      */
@@ -17294,18 +16657,8 @@ export class EventProximity {
     device: Device
     static name: string
 }
-/**
- * Generated from button presses for the buttons 4 to 7. Wheel mice are
- * usually configured to generate button press events for buttons 4 and 5
- * when the wheel is turned.
- * 
- * Some GDK backends can also generate “smooth” scroll events, which
- * can be recognized by the %GDK_SCROLL_SMOOTH scroll direction. For
- * these, the scroll deltas can be obtained with
- * gdk_event_get_scroll_deltas().
- */
 export class EventScroll {
-    /* Own fields of Gdk-3.0.Gdk.EventScroll */
+    /* Fields of Gdk-3.0.Gdk.EventScroll */
     /**
      * the type of the event (%GDK_SCROLL).
      */
@@ -17368,12 +16721,8 @@ export class EventScroll {
     is_stop: number
     static name: string
 }
-/**
- * Generated when a selection is requested or ownership of a selection
- * is taken over by another client application.
- */
 export class EventSelection {
-    /* Own fields of Gdk-3.0.Gdk.EventSelection */
+    /* Fields of Gdk-3.0.Gdk.EventSelection */
     /**
      * the type of the event (%GDK_SELECTION_CLEAR,
      *   %GDK_SELECTION_NOTIFY or %GDK_SELECTION_REQUEST).
@@ -17412,11 +16761,8 @@ export class EventSelection {
 export class EventSequence {
     static name: string
 }
-/**
- * Generated when a setting is modified.
- */
 export class EventSetting {
-    /* Own fields of Gdk-3.0.Gdk.EventSetting */
+    /* Fields of Gdk-3.0.Gdk.EventSetting */
     /**
      * the type of the event (%GDK_SETTING).
      */
@@ -17440,20 +16786,8 @@ export class EventSetting {
     name: string
     static name: string
 }
-/**
- * Used for touch events.
- * `type` field will be one of %GDK_TOUCH_BEGIN, %GDK_TOUCH_UPDATE,
- * %GDK_TOUCH_END or %GDK_TOUCH_CANCEL.
- * 
- * Touch events are grouped into sequences by means of the `sequence`
- * field, which can also be obtained with gdk_event_get_event_sequence().
- * Each sequence begins with a %GDK_TOUCH_BEGIN event, followed by
- * any number of %GDK_TOUCH_UPDATE events, and ends with a %GDK_TOUCH_END
- * (or %GDK_TOUCH_CANCEL) event. With multitouch devices, there may be
- * several active sequences at the same time.
- */
 export class EventTouch {
-    /* Own fields of Gdk-3.0.Gdk.EventTouch */
+    /* Fields of Gdk-3.0.Gdk.EventTouch */
     /**
      * the type of the event (%GDK_TOUCH_BEGIN, %GDK_TOUCH_UPDATE,
      *   %GDK_TOUCH_END, %GDK_TOUCH_CANCEL)
@@ -17516,11 +16850,8 @@ export class EventTouch {
     y_root: number
     static name: string
 }
-/**
- * Generated during touchpad swipe gestures.
- */
 export class EventTouchpadPinch {
-    /* Own fields of Gdk-3.0.Gdk.EventTouchpadPinch */
+    /* Fields of Gdk-3.0.Gdk.EventTouchpadPinch */
     /**
      * the type of the event (%GDK_TOUCHPAD_PINCH)
      */
@@ -17589,11 +16920,8 @@ export class EventTouchpadPinch {
     state: ModifierType
     static name: string
 }
-/**
- * Generated during touchpad swipe gestures.
- */
 export class EventTouchpadSwipe {
-    /* Own fields of Gdk-3.0.Gdk.EventTouchpadSwipe */
+    /* Fields of Gdk-3.0.Gdk.EventTouchpadSwipe */
     /**
      * the type of the event (%GDK_TOUCHPAD_SWIPE)
      */
@@ -17652,11 +16980,8 @@ export class EventTouchpadSwipe {
     state: ModifierType
     static name: string
 }
-/**
- * Generated when the window visibility status has changed.
- */
 export class EventVisibility {
-    /* Own fields of Gdk-3.0.Gdk.EventVisibility */
+    /* Fields of Gdk-3.0.Gdk.EventVisibility */
     /**
      * the type of the event (%GDK_VISIBILITY_NOTIFY).
      */
@@ -17676,11 +17001,8 @@ export class EventVisibility {
     state: VisibilityState
     static name: string
 }
-/**
- * Generated when the state of a toplevel window changes.
- */
 export class EventWindowState {
-    /* Own fields of Gdk-3.0.Gdk.EventWindowState */
+    /* Fields of Gdk-3.0.Gdk.EventWindowState */
     /**
      * the type of the event (%GDK_WINDOW_STATE).
      */
@@ -17710,16 +17032,8 @@ export abstract class FrameClockClass {
 export class FrameClockPrivate {
     static name: string
 }
-/**
- * A #GdkFrameTimings object holds timing information for a single frame
- * of the application’s displays. To retrieve #GdkFrameTimings objects,
- * use gdk_frame_clock_get_timings() or gdk_frame_clock_get_current_timings().
- * The information in #GdkFrameTimings is useful for precise synchronization
- * of video with the event or audio streams, and for measuring
- * quality metrics for the application’s display, such as latency and jitter.
- */
 export class FrameTimings {
-    /* Owm methods of Gdk-3.0.Gdk.FrameTimings */
+    /* Methods of Gdk-3.0.Gdk.FrameTimings */
     /**
      * The timing information in a #GdkFrameTimings is filled in
      * incrementally as the frame as drawn and passed off to the
@@ -17777,67 +17091,8 @@ export class FrameTimings {
     unref(): void
     static name: string
 }
-/**
- * The #GdkGeometry struct gives the window manager information about
- * a window’s geometry constraints. Normally you would set these on
- * the GTK+ level using gtk_window_set_geometry_hints(). #GtkWindow
- * then sets the hints on the #GdkWindow it creates.
- * 
- * gdk_window_set_geometry_hints() expects the hints to be fully valid already
- * and simply passes them to the window manager; in contrast,
- * gtk_window_set_geometry_hints() performs some interpretation. For example,
- * #GtkWindow will apply the hints to the geometry widget instead of the
- * toplevel window, if you set a geometry widget. Also, the
- * `min_width/``min_height/``max_width/``max_height` fields may be set to -1, and
- * #GtkWindow will substitute the size request of the window or geometry widget.
- * If the minimum size hint is not provided, #GtkWindow will use its requisition
- * as the minimum size. If the minimum size is provided and a geometry widget is
- * set, #GtkWindow will take the minimum size as the minimum size of the
- * geometry widget rather than the entire window. The base size is treated
- * similarly.
- * 
- * The canonical use-case for gtk_window_set_geometry_hints() is to get a
- * terminal widget to resize properly. Here, the terminal text area should be
- * the geometry widget; #GtkWindow will then automatically set the base size to
- * the size of other widgets in the terminal window, such as the menubar and
- * scrollbar. Then, the `width_inc` and `height_inc` fields should be set to the
- * size of one character in the terminal. Finally, the base size should be set
- * to the size of one character. The net effect is that the minimum size of the
- * terminal will have a 1x1 character terminal area, and only terminal sizes on
- * the “character grid” will be allowed.
- * 
- * Here’s an example of how the terminal example would be implemented, assuming
- * a terminal area widget called “terminal” and a toplevel window “toplevel”:
- * 
- * 
- * ```c
- * 	GdkGeometry hints;
- * 
- * 	hints.base_width = terminal->char_width;
- *         hints.base_height = terminal->char_height;
- *         hints.min_width = terminal->char_width;
- *         hints.min_height = terminal->char_height;
- *         hints.width_inc = terminal->char_width;
- *         hints.height_inc = terminal->char_height;
- * 
- *  gtk_window_set_geometry_hints (GTK_WINDOW (toplevel),
- *                                 GTK_WIDGET (terminal),
- *                                 &hints,
- *                                 GDK_HINT_RESIZE_INC |
- *                                 GDK_HINT_MIN_SIZE |
- *                                 GDK_HINT_BASE_SIZE);
- * ```
- * 
- * 
- * The other useful fields are the `min_aspect` and `max_aspect` fields; these
- * contain a width/height ratio as a floating point number. If a geometry widget
- * is set, the aspect applies to the geometry widget rather than the entire
- * window. The most common use of these hints is probably to set `min_aspect` and
- * `max_aspect` to the same value, thus forcing the window to keep a constant
- * aspect ratio.
- */
 export class Geometry {
-    /* Own fields of Gdk-3.0.Gdk.Geometry */
+    /* Fields of Gdk-3.0.Gdk.Geometry */
     /**
      * minimum width of window (or -1 to use requisition, with
      *  #GtkWindow only)
@@ -17890,11 +17145,8 @@ export class Geometry {
     win_gravity: Gravity
     static name: string
 }
-/**
- * A #GdkKeymapKey is a hardware key that can be mapped to a keyval.
- */
 export class KeymapKey {
-    /* Own fields of Gdk-3.0.Gdk.KeymapKey */
+    /* Fields of Gdk-3.0.Gdk.KeymapKey */
     /**
      * the hardware keycode. This is an identifying number for a
      *   physical key.
@@ -17921,11 +17173,8 @@ export class KeymapKey {
 export abstract class MonitorClass {
     static name: string
 }
-/**
- * Defines the x and y coordinates of a point.
- */
 export class Point {
-    /* Own fields of Gdk-3.0.Gdk.Point */
+    /* Fields of Gdk-3.0.Gdk.Point */
     /**
      * the x coordinate of the point.
      */
@@ -17936,12 +17185,8 @@ export class Point {
     y: number
     static name: string
 }
-/**
- * A #GdkRGBA is used to represent a (possibly translucent)
- * color, in a way that is compatible with cairo’s notion of color.
- */
 export class RGBA {
-    /* Own fields of Gdk-3.0.Gdk.RGBA */
+    /* Fields of Gdk-3.0.Gdk.RGBA */
     /**
      * The intensity of the red channel from 0.0 to 1.0 inclusive
      */
@@ -17959,7 +17204,7 @@ export class RGBA {
      *   1.0 for opaque
      */
     alpha: number
-    /* Owm methods of Gdk-3.0.Gdk.RGBA */
+    /* Methods of Gdk-3.0.Gdk.RGBA */
     /**
      * Makes a copy of a #GdkRGBA.
      * 
@@ -18019,17 +17264,13 @@ export class RGBA {
     to_string(): string
     static name: string
 }
-/**
- * Defines the position and size of a rectangle. It is identical to
- * #cairo_rectangle_int_t.
- */
 export class Rectangle {
-    /* Own fields of Gdk-3.0.Gdk.Rectangle */
+    /* Fields of Gdk-3.0.Gdk.Rectangle */
     x: number
     y: number
     width: number
     height: number
-    /* Owm methods of Gdk-3.0.Gdk.Rectangle */
+    /* Methods of Gdk-3.0.Gdk.Rectangle */
     /**
      * Checks if the two given rectangles are equal.
      * @param rect2 a #GdkRectangle
@@ -18044,7 +17285,7 @@ export class Rectangle {
      * pass %NULL for `dest`.
      * @param src2 a #GdkRectangle
      */
-    intersect(src2: Rectangle): [ /* returnType */ boolean, /* dest */ Rectangle ]
+    intersect(src2: Rectangle): [ /* returnType */ boolean, /* dest */ Rectangle | null ]
     /**
      * Calculates the union of two rectangles.
      * The union of rectangles `src1` and `src2` is the smallest rectangle which
@@ -18058,11 +17299,8 @@ export class Rectangle {
     union(src2: Rectangle): /* dest */ Rectangle
     static name: string
 }
-/**
- * A #GdkTimeCoord stores a single event in a motion history.
- */
 export class TimeCoord {
-    /* Own fields of Gdk-3.0.Gdk.TimeCoord */
+    /* Fields of Gdk-3.0.Gdk.TimeCoord */
     /**
      * The timestamp for this event.
      */
@@ -18073,11 +17311,8 @@ export class TimeCoord {
     axes: number[]
     static name: string
 }
-/**
- * Attributes to use for a newly-created window.
- */
 export class WindowAttr {
-    /* Own fields of Gdk-3.0.Gdk.WindowAttr */
+    /* Fields of Gdk-3.0.Gdk.WindowAttr */
     /**
      * title of the window (for toplevel windows)
      */
@@ -18138,7 +17373,7 @@ export class WindowAttr {
     static name: string
 }
 export abstract class WindowClass {
-    /* Own fields of Gdk-3.0.Gdk.WindowClass */
+    /* Fields of Gdk-3.0.Gdk.WindowClass */
     parent_class: GObject.ObjectClass
     to_embedder: (window: Window, offscreen_x: number, offscreen_y: number, embedder_x: number, embedder_y: number) => void
     from_embedder: (window: Window, embedder_x: number, embedder_y: number, offscreen_x: number, offscreen_y: number) => void
@@ -18148,147 +17383,8 @@ export abstract class WindowClass {
 export class WindowRedirect {
     static name: string
 }
-/**
- * A #GdkEvent contains a union of all of the event types,
- * and allows access to the data fields in a number of ways.
- * 
- * The event type is always the first field in all of the event types, and
- * can always be accessed with the following code, no matter what type of
- * event it is:
- * 
- * ```c
- *   GdkEvent *event;
- *   GdkEventType type;
- * 
- *   type = event->type;
- * ```
- * 
- * 
- * To access other fields of the event, the pointer to the event
- * can be cast to the appropriate event type, or the union member
- * name can be used. For example if the event type is %GDK_BUTTON_PRESS
- * then the x coordinate of the button press can be accessed with:
- * 
- * ```c
- *   GdkEvent *event;
- *   gdouble x;
- * 
- *   x = ((GdkEventButton*)event)->x;
- * ```
- * 
- * or:
- * 
- * ```c
- *   GdkEvent *event;
- *   gdouble x;
- * 
- *   x = event->button.x;
- * ```
- * 
- */
 export class Event {
-    /* Own fields of Gdk-3.0.Gdk.Event */
-    /**
-     * the #GdkEventType
-     */
-    type: EventType
-    /**
-     * a #GdkEventAny
-     */
-    any: EventAny
-    /**
-     * a #GdkEventExpose
-     */
-    expose: EventExpose
-    /**
-     * a #GdkEventVisibility
-     */
-    visibility: EventVisibility
-    /**
-     * a #GdkEventMotion
-     */
-    motion: EventMotion
-    /**
-     * a #GdkEventButton
-     */
-    button: EventButton
-    /**
-     * a #GdkEventTouch
-     */
-    touch: EventTouch
-    /**
-     * a #GdkEventScroll
-     */
-    scroll: EventScroll
-    /**
-     * a #GdkEventKey
-     */
-    key: EventKey
-    /**
-     * a #GdkEventCrossing
-     */
-    crossing: EventCrossing
-    /**
-     * a #GdkEventFocus
-     */
-    focus_change: EventFocus
-    /**
-     * a #GdkEventConfigure
-     */
-    configure: EventConfigure
-    /**
-     * a #GdkEventProperty
-     */
-    property: EventProperty
-    /**
-     * a #GdkEventSelection
-     */
-    selection: EventSelection
-    /**
-     * a #GdkEventOwnerChange
-     */
-    owner_change: EventOwnerChange
-    /**
-     * a #GdkEventProximity
-     */
-    proximity: EventProximity
-    /**
-     * a #GdkEventDND
-     */
-    dnd: EventDND
-    /**
-     * a #GdkEventWindowState
-     */
-    window_state: EventWindowState
-    /**
-     * a #GdkEventSetting
-     */
-    setting: EventSetting
-    /**
-     * a #GdkEventGrabBroken
-     */
-    grab_broken: EventGrabBroken
-    /**
-     * a #GdkEventTouchpadSwipe
-     */
-    touchpad_swipe: EventTouchpadSwipe
-    /**
-     * a #GdkEventTouchpadPinch
-     */
-    touchpad_pinch: EventTouchpadPinch
-    /**
-     * a #GdkEventPadButton
-     */
-    pad_button: EventPadButton
-    /**
-     * a #GdkEventPadAxis
-     */
-    pad_axis: EventPadAxis
-    /**
-     * a #GdkEventPadGroupMode
-     */
-    pad_group_mode: EventPadGroupMode
-    /* Owm methods of Gdk-3.0.Gdk.Event */
+    /* Methods of Gdk-3.0.Gdk.Event */
     /**
      * If both events contain X/Y information, this function will return %TRUE
      * and return in `angle` the relative angle from `event1` to `event2`. The rotation
@@ -18338,7 +17434,7 @@ export class Event {
     /**
      * Extract the event window relative x/y coordinates from an event.
      */
-    get_coords(): [ /* returnType */ boolean, /* x_win */ number, /* y_win */ number ]
+    get_coords(): [ /* returnType */ boolean, /* x_win */ number | null, /* y_win */ number | null ]
     /**
      * If the event contains a “device” field, this function will return
      * it, else it will return %NULL.
@@ -18384,7 +17480,7 @@ export class Event {
     /**
      * Extract the root window relative x/y coordinates from an event.
      */
-    get_root_coords(): [ /* returnType */ boolean, /* x_root */ number, /* y_root */ number ]
+    get_root_coords(): [ /* returnType */ boolean, /* x_root */ number | null, /* y_root */ number | null ]
     /**
      * Gets the keyboard low-level scancode of a key event.
      * 
@@ -18511,7 +17607,7 @@ export class Event {
      * Sets the device tool for this event, should be rarely used.
      * @param tool tool to set on the event, or %NULL
      */
-    set_device_tool(tool: DeviceTool | null): void
+    set_device_tool(tool?: DeviceTool | null): void
     /**
      * Sets the screen for `event` to `screen`. The event must
      * have been allocated by GTK+, for instance, by

@@ -69,21 +69,10 @@ export const PRGNAME: string
 export const VERSION: string
 export interface Decoder_ConstructProps extends GObject.Object_ConstructProps {
 }
-/**
- * #PangoFcDecoder is a virtual base class that implementations will
- * inherit from.  It's the interface that is used to define a custom
- * encoding for a font.  These objects are created in your code from a
- * function callback that was originally registered with
- * pango_fc_font_map_add_decoder_find_func().  Pango requires
- * information about the supported charset for a font as well as the
- * individual character to glyph conversions.  Pango gets that
- * information via the #get_charset and #get_glyph callbacks into your
- * object implementation.
- */
 export class Decoder {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of PangoFc-1.0.PangoFc.Decoder */
+    /* Methods of PangoFc-1.0.PangoFc.Decoder */
     /**
      * Generates an #FcCharSet of supported characters for the fcfont
      * given.  The returned #FcCharSet will be a reference to an
@@ -102,7 +91,7 @@ export class Decoder {
      * @param wc the Unicode code point to convert to a single #PangoGlyph.
      */
     get_glyph(fcfont: Font, wc: number): Pango.Glyph
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -148,7 +137,7 @@ export class Decoder {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -317,7 +306,7 @@ export class Decoder {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -405,14 +394,13 @@ export class Decoder {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Own virtual methods of PangoFc-1.0.PangoFc.Decoder */
+    watch_closure(closure: Function): void
+    /* Virtual methods of PangoFc-1.0.PangoFc.Decoder */
     /**
      * Generates an #FcCharSet of supported characters for the fcfont
      * given.  The returned #FcCharSet will be a reference to an
      * internal value stored by the #PangoFcDecoder and must not
      * be modified or freed.
-     * @virtual 
      * @param fcfont the #PangoFcFont to query.
      */
     vfunc_get_charset(fcfont: Font): fontconfig.CharSet
@@ -422,12 +410,11 @@ export class Decoder {
      * glyphs for a single character, the decoder will return whatever
      * glyph is most convenient for it. (Usually whatever glyph is directly
      * in the fonts character map table.)
-     * @virtual 
      * @param fcfont a #PangoFcFont to query.
      * @param wc the Unicode code point to convert to a single #PangoGlyph.
      */
     vfunc_get_glyph(fcfont: Font, wc: number): Pango.Glyph
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -444,12 +431,11 @@ export class Decoder {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -476,57 +462,41 @@ export class Decoder {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Decoder, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Decoder, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: Decoder_ConstructProps)
     _init (config?: Decoder_ConstructProps): void
-    static $gtype: GObject.GType<Decoder>
+    static $gtype: GObject.Type
 }
 export interface Font_ConstructProps extends Pango.Font_ConstructProps {
     /* Constructor properties of PangoFc-1.0.PangoFc.Font */
-    fontmap?: FontMap | null
-    pattern?: object | null
+    fontmap?: FontMap
+    pattern?: object
 }
-/**
- * #PangoFcFont is a base class for font implementations
- * using the Fontconfig and FreeType libraries and is used in
- * conjunction with #PangoFcFontMap. When deriving from this
- * class, you need to implement all of its virtual functions
- * other than shutdown() along with the get_glyph_extents()
- * virtual function from #PangoFont.
- */
 export class Font {
-    /* Own properties of PangoFc-1.0.PangoFc.Font */
+    /* Properties of PangoFc-1.0.PangoFc.Font */
+    fontmap: FontMap
     readonly pattern: object
-    /* Own fields of PangoFc-1.0.PangoFc.Font */
-    parent_instance: Pango.Font
-    font_pattern: fontconfig.Pattern
-    fontmap: Pango.FontMap
-    priv: object
-    matrix: Pango.Matrix
-    description: Pango.FontDescription
-    metrics_by_lang: object[]
-    is_hinted: number
-    is_transformed: number
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of Pango-1.0.Pango.Font */
+    parent_instance: GObject.Object
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of PangoFc-1.0.PangoFc.Font */
+    /* Methods of PangoFc-1.0.PangoFc.Font */
     /**
      * Gets the glyph index for a given Unicode character
      * for `font`. If you only want to determine
      * whether the font has the glyph, use pango_fc_font_has_char().
      * @param wc Unicode character to look up
      */
-    get_glyph(wc: string): number
+    get_glyph(wc: number): number
     /**
      * Returns the index of a glyph suitable for drawing `wc` as an
      * unknown character.
@@ -534,12 +504,12 @@ export class Font {
      * Use PANGO_GET_UNKNOWN_GLYPH() instead.
      * @param wc the Unicode character for which a glyph is needed.
      */
-    get_unknown_glyph(wc: string): Pango.Glyph
+    get_unknown_glyph(wc: number): Pango.Glyph
     /**
      * Determines whether `font` has a glyph for the codepoint `wc`.
      * @param wc Unicode codepoint to look up
      */
-    has_char(wc: string): boolean
+    has_char(wc: number): boolean
     /**
      * This function used to adjust each adjacent pair of glyphs
      * in `glyphs` according to kerning information in `font`.
@@ -553,7 +523,7 @@ export class Font {
      * pango_fc_font_lock_face().
      */
     unlock_face(): void
-    /* Extended methods of Pango-1.0.Pango.Font */
+    /* Methods of Pango-1.0.Pango.Font */
     /**
      * Returns a description of the font, with font size set in points.
      * Use pango_font_describe_with_absolute_size() if you want the font
@@ -603,7 +573,7 @@ export class Font {
      * output variables and returns.
      * @param glyph the glyph index
      */
-    get_glyph_extents(glyph: Pango.Glyph): [ /* ink_rect */ Pango.Rectangle, /* logical_rect */ Pango.Rectangle ]
+    get_glyph_extents(glyph: Pango.Glyph): [ /* ink_rect */ Pango.Rectangle | null, /* logical_rect */ Pango.Rectangle | null ]
     /**
      * Gets overall metric information for a font. Since the metrics may be
      * substantially different for different scripts, a language tag can
@@ -614,15 +584,15 @@ export class Font {
      * output variables and returns.
      * @param language language tag used to determine which script to get the metrics            for, or %NULL to indicate to get the metrics for the entire font.
      */
-    get_metrics(language: Pango.Language | null): Pango.FontMetrics
+    get_metrics(language?: Pango.Language | null): Pango.FontMetrics
     /**
      * Returns whether the font provides a glyph for this character.
      * 
      * Returns %TRUE if `font` can render `wc`
      * @param wc a Unicode character
      */
-    has_char(wc: string): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    has_char(wc: number): boolean
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -668,7 +638,7 @@ export class Font {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -837,7 +807,7 @@ export class Font {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -925,19 +895,17 @@ export class Font {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Pango-1.0.Pango.Font */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Pango-1.0.Pango.Font */
     /**
      * Returns a description of the font, with font size set in points.
      * Use pango_font_describe_with_absolute_size() if you want the font
      * size in device units.
-     * @virtual 
      */
     vfunc_describe(): Pango.FontDescription
     vfunc_describe_absolute(): Pango.FontDescription
     /**
      * Computes the coverage map for a given font and language tag.
-     * @virtual 
      * @param language the language tag
      */
     vfunc_get_coverage(language: Pango.Language): Pango.Coverage
@@ -951,7 +919,6 @@ export class Font {
      * It is the responsibility of the user to ensure that the font map is kept
      * alive.  In most uses this is not an issue as a #PangoContext holds
      * a reference to the font map.
-     * @virtual 
      */
     vfunc_get_font_map(): Pango.FontMap | null
     /**
@@ -965,10 +932,9 @@ export class Font {
      * 
      * If `font` is %NULL, this function gracefully sets some sane values in the
      * output variables and returns.
-     * @virtual 
      * @param glyph the glyph index
      */
-    vfunc_get_glyph_extents(glyph: Pango.Glyph): [ /* ink_rect */ Pango.Rectangle, /* logical_rect */ Pango.Rectangle ]
+    vfunc_get_glyph_extents(glyph: Pango.Glyph): [ /* ink_rect */ Pango.Rectangle | null, /* logical_rect */ Pango.Rectangle | null ]
     /**
      * Gets overall metric information for a font. Since the metrics may be
      * substantially different for different scripts, a language tag can
@@ -977,11 +943,10 @@ export class Font {
      * 
      * If `font` is %NULL, this function gracefully sets some sane values in the
      * output variables and returns.
-     * @virtual 
      * @param language language tag used to determine which script to get the metrics            for, or %NULL to indicate to get the metrics for the entire font.
      */
-    vfunc_get_metrics(language: Pango.Language | null): Pango.FontMetrics
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    vfunc_get_metrics(language?: Pango.Language | null): Pango.FontMetrics
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -998,12 +963,11 @@ export class Font {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1030,16 +994,17 @@ export class Font {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: Font, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: Font, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
+    connect(sigName: "notify::fontmap", callback: (($obj: Font, pspec: GObject.ParamSpec) => void)): number
+    connect_after(sigName: "notify::fontmap", callback: (($obj: Font, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::pattern", callback: (($obj: Font, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::pattern", callback: (($obj: Font, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -1055,16 +1020,16 @@ export class Font {
      * @param include_size if %TRUE, the pattern will include the size from   the `pattern;` otherwise the resulting pattern will be unsized.   (only %FC_SIZE is examined, not %FC_PIXEL_SIZE)
      */
     static description_from_pattern(pattern: fontconfig.Pattern, include_size: boolean): Pango.FontDescription
-    static $gtype: GObject.GType<Font>
+    static $gtype: GObject.Type
 }
 export interface FontMap_ConstructProps extends Pango.FontMap_ConstructProps {
 }
 export class FontMap {
-    /* Extended fields of Pango-1.0.Pango.FontMap */
+    /* Fields of Pango-1.0.Pango.FontMap */
     parent_instance: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of PangoFc-1.0.PangoFc.FontMap */
+    /* Methods of PangoFc-1.0.PangoFc.FontMap */
     /**
      * Clear all cached information and fontsets for this font map;
      * this should be called whenever there is a change in the
@@ -1095,7 +1060,7 @@ export class FontMap {
      * only for backend implementations deriving from #PangoFcFontMap.
      */
     shutdown(): void
-    /* Extended methods of Pango-1.0.Pango.FontMap */
+    /* Methods of Pango-1.0.Pango.FontMap */
     /**
      * Forces a change in the context, which will cause any #PangoContext
      * using this fontmap to change.
@@ -1149,7 +1114,7 @@ export class FontMap {
      * @param language a #PangoLanguage the fonts will be used for
      */
     load_fontset(context: Pango.Context, desc: Pango.FontDescription, language: Pango.Language): Pango.Fontset | null
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -1195,7 +1160,7 @@ export class FontMap {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -1364,7 +1329,7 @@ export class FontMap {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -1452,8 +1417,8 @@ export class FontMap {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Pango-1.0.Pango.FontMap */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Pango-1.0.Pango.FontMap */
     /**
      * Forces a change in the context, which will cause any #PangoContext
      * using this fontmap to change.
@@ -1462,7 +1427,6 @@ export class FontMap {
      * for Pango, something applications won't do. Backends should
      * call this function if they have attached extra data to the context
      * and such data is changed.
-     * @virtual 
      */
     vfunc_changed(): void
     /**
@@ -1477,17 +1441,14 @@ export class FontMap {
      * 
      * This can be used to automatically detect changes to a #PangoFontMap, like
      * in #PangoContext.
-     * @virtual 
      */
     vfunc_get_serial(): number
     /**
      * List all families for a fontmap.
-     * @virtual 
      */
     vfunc_list_families(): /* families */ Pango.FontFamily[]
     /**
      * Load the font in the fontmap that is the closest match for `desc`.
-     * @virtual 
      * @param context the #PangoContext the font will be used with
      * @param desc a #PangoFontDescription describing the font to load
      */
@@ -1495,13 +1456,12 @@ export class FontMap {
     /**
      * Load a set of fonts in the fontmap that can be used to render
      * a font matching `desc`.
-     * @virtual 
      * @param context the #PangoContext the font will be used with
      * @param desc a #PangoFontDescription describing the font to load
      * @param language a #PangoLanguage the fonts will be used for
      */
     vfunc_load_fontset(context: Pango.Context, desc: Pango.FontDescription, language: Pango.Language): Pango.Fontset | null
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -1518,12 +1478,11 @@ export class FontMap {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1550,26 +1509,22 @@ export class FontMap {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: FontMap, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: FontMap, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: FontMap_ConstructProps)
     _init (config?: FontMap_ConstructProps): void
-    static $gtype: GObject.GType<FontMap>
+    static $gtype: GObject.Type
 }
-/**
- * Class structure for #PangoFcDecoder.
- */
 export abstract class DecoderClass {
-    /* Own fields of PangoFc-1.0.PangoFc.DecoderClass */
+    /* Fields of PangoFc-1.0.PangoFc.DecoderClass */
     get_charset: (decoder: Decoder, fcfont: Font) => fontconfig.CharSet
     get_glyph: (decoder: Decoder, fcfont: Font, wc: number) => Pango.Glyph
     static name: string

@@ -37,20 +37,20 @@ export function x11_get_xatom_name_for_display(display: X11Display, xatom: xlib.
 export function x11_grab_server(): void
 export function x11_lookup_xdisplay(xdisplay: xlib.Display): X11Display
 export function x11_register_standard_event_type(display: X11Display, event_base: number, n_events: number): void
-export function x11_set_sm_client_id(sm_client_id: string | null): void
+export function x11_set_sm_client_id(sm_client_id?: string | null): void
 export function x11_ungrab_server(): void
 export function x11_xatom_to_atom(xatom: xlib.Atom): Gdk.Atom
 export function x11_xatom_to_atom_for_display(display: X11Display, xatom: xlib.Atom): Gdk.Atom
 export interface X11AppLaunchContext_ConstructProps extends Gdk.AppLaunchContext_ConstructProps {
 }
 export class X11AppLaunchContext {
-    /* Extended properties of Gdk-3.0.Gdk.AppLaunchContext */
+    /* Properties of Gdk-3.0.Gdk.AppLaunchContext */
     readonly display: Gdk.Display
-    /* Extended fields of Gio-2.0.Gio.AppLaunchContext */
+    /* Fields of Gio-2.0.Gio.AppLaunchContext */
     parent_instance: GObject.Object
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Gdk-3.0.Gdk.AppLaunchContext */
+    /* Methods of Gdk-3.0.Gdk.AppLaunchContext */
     /**
      * Sets the workspace on which applications will be launched when
      * using this context when running under a window manager that
@@ -79,7 +79,7 @@ export class X11AppLaunchContext {
      * See also gdk_app_launch_context_set_icon_name().
      * @param icon a #GIcon, or %NULL
      */
-    set_icon(icon: Gio.Icon | null): void
+    set_icon(icon?: Gio.Icon | null): void
     /**
      * Sets the icon for applications that are launched with this context.
      * The `icon_name` will be interpreted in the same way as the Icon field
@@ -91,7 +91,7 @@ export class X11AppLaunchContext {
      * for the launched application itself.
      * @param icon_name an icon name, or %NULL
      */
-    set_icon_name(icon_name: string | null): void
+    set_icon_name(icon_name?: string | null): void
     /**
      * Sets the screen on which applications will be launched when
      * using this context. See also gdk_app_launch_context_set_display().
@@ -113,7 +113,7 @@ export class X11AppLaunchContext {
      * @param timestamp a timestamp
      */
     set_timestamp(timestamp: number): void
-    /* Extended methods of Gio-2.0.Gio.AppLaunchContext */
+    /* Methods of Gio-2.0.Gio.AppLaunchContext */
     /**
      * Gets the display string for the `context`. This is used to ensure new
      * applications are started on the same display as the launching
@@ -158,7 +158,7 @@ export class X11AppLaunchContext {
      * @param variable the environment variable to remove
      */
     unsetenv(variable: string): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -204,7 +204,7 @@ export class X11AppLaunchContext {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -373,7 +373,7 @@ export class X11AppLaunchContext {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -461,13 +461,12 @@ export class X11AppLaunchContext {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Gio-2.0.Gio.AppLaunchContext */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Gio-2.0.Gio.AppLaunchContext */
     /**
      * Gets the display string for the `context`. This is used to ensure new
      * applications are started on the same display as the launching
      * application, by setting the `DISPLAY` environment variable.
-     * @virtual 
      * @param info a #GAppInfo
      * @param files a #GList of #GFile objects
      */
@@ -478,7 +477,6 @@ export class X11AppLaunchContext {
      * 
      * Startup notification IDs are defined in the
      * [FreeDesktop.Org Startup Notifications standard](http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt).
-     * @virtual 
      * @param info a #GAppInfo
      * @param files a #GList of of #GFile objects
      */
@@ -486,12 +484,11 @@ export class X11AppLaunchContext {
     /**
      * Called when an application has failed to launch, so that it can cancel
      * the application startup notification started in g_app_launch_context_get_startup_notify_id().
-     * @virtual 
      * @param startup_notify_id the startup notification id that was returned by g_app_launch_context_get_startup_notify_id().
      */
     vfunc_launch_failed(startup_notify_id: string): void
     vfunc_launched(info: Gio.AppInfo, platform_data: GLib.Variant): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -508,17 +505,15 @@ export class X11AppLaunchContext {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gio-2.0.Gio.AppLaunchContext */
+    /* Signals of Gio-2.0.Gio.AppLaunchContext */
     /**
      * The ::launch-failed signal is emitted when a #GAppInfo launch
      * fails. The startup notification id is provided, so that the launcher
      * can cancel the startup notification.
-     * @signal 
      * @param startup_notify_id the startup notification id for the failed launch
      */
     connect(sigName: "launch-failed", callback: (($obj: X11AppLaunchContext, startup_notify_id: string) => void)): number
@@ -530,14 +525,13 @@ export class X11AppLaunchContext {
      * strings to variants (ie a{sv}), which contains additional,
      * platform-specific data about this launch. On UNIX, at least the
      * "pid" and "startup-notification-id" keys will be present.
-     * @signal 
      * @param info the #GAppInfo that was just launched
      * @param platform_data additional platform-specific data for this launch
      */
     connect(sigName: "launched", callback: (($obj: X11AppLaunchContext, info: Gio.AppInfo, platform_data: GLib.Variant) => void)): number
     connect_after(sigName: "launched", callback: (($obj: X11AppLaunchContext, info: Gio.AppInfo, platform_data: GLib.Variant) => void)): number
     emit(sigName: "launched", info: Gio.AppInfo, platform_data: GLib.Variant): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -564,7 +558,6 @@ export class X11AppLaunchContext {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: X11AppLaunchContext, pspec: GObject.ParamSpec) => void)): number
@@ -572,8 +565,8 @@ export class X11AppLaunchContext {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::display", callback: (($obj: X11AppLaunchContext, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::display", callback: (($obj: X11AppLaunchContext, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -583,17 +576,17 @@ export class X11AppLaunchContext {
     static new(): X11AppLaunchContext
     /* Function overloads */
     static new(): X11AppLaunchContext
-    static $gtype: GObject.GType<X11AppLaunchContext>
+    static $gtype: GObject.Type
 }
 export interface X11Cursor_ConstructProps extends Gdk.Cursor_ConstructProps {
 }
 export class X11Cursor {
-    /* Extended properties of Gdk-3.0.Gdk.Cursor */
+    /* Properties of Gdk-3.0.Gdk.Cursor */
     readonly cursor_type: Gdk.CursorType
     readonly display: Gdk.Display
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GdkX11-3.0.GdkX11.X11Cursor */
+    /* Methods of GdkX11-3.0.GdkX11.X11Cursor */
     /**
      * Returns the X cursor belonging to a #GdkCursor.
      */
@@ -602,7 +595,7 @@ export class X11Cursor {
      * Returns the display of a #GdkCursor.
      */
     get_xdisplay(): xlib.Display
-    /* Extended methods of Gdk-3.0.Gdk.Cursor */
+    /* Methods of Gdk-3.0.Gdk.Cursor */
     /**
      * Returns the cursor type for this cursor.
      */
@@ -626,7 +619,7 @@ export class X11Cursor {
      * on the cursor, GDK may not be able to obtain the image data. In this
      * case, %NULL is returned.
      */
-    get_surface(): [ /* returnType */ cairo.Surface | null, /* x_hot */ number, /* y_hot */ number ]
+    get_surface(): [ /* returnType */ cairo.Surface | null, /* x_hot */ number | null, /* y_hot */ number | null ]
     /**
      * Adds a reference to `cursor`.
      */
@@ -636,7 +629,7 @@ export class X11Cursor {
      * if no references remain.
      */
     unref(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -682,7 +675,7 @@ export class X11Cursor {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -851,7 +844,7 @@ export class X11Cursor {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -929,8 +922,8 @@ export class X11Cursor {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -947,12 +940,11 @@ export class X11Cursor {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -979,7 +971,6 @@ export class X11Cursor {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: X11Cursor, pspec: GObject.ParamSpec) => void)): number
@@ -989,19 +980,19 @@ export class X11Cursor {
     connect_after(sigName: "notify::cursor-type", callback: (($obj: X11Cursor, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::display", callback: (($obj: X11Cursor, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::display", callback: (($obj: X11Cursor, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: X11Cursor_ConstructProps)
     _init (config?: X11Cursor_ConstructProps): void
-    static $gtype: GObject.GType<X11Cursor>
+    static $gtype: GObject.Type
 }
 export interface X11DeviceCore_ConstructProps extends Gdk.Device_ConstructProps {
 }
 export class X11DeviceCore {
-    /* Extended properties of Gdk-3.0.Gdk.Device */
+    /* Properties of Gdk-3.0.Gdk.Device */
     /**
      * Associated pointer or keyboard with this device, if any. Devices of type #GDK_DEVICE_TYPE_MASTER
      * always come in keyboard/pointer pairs. Other device types will have a %NULL associated device.
@@ -1060,9 +1051,9 @@ export class X11DeviceCore {
      * Vendor ID of this device, see gdk_device_get_vendor_id().
      */
     readonly vendor_id: string
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Gdk-3.0.Gdk.Device */
+    /* Methods of Gdk-3.0.Gdk.Device */
     /**
      * Returns the associated device to `device,` if `device` is of type
      * %GDK_DEVICE_TYPE_MASTER, it will return the paired pointer or
@@ -1133,14 +1124,14 @@ export class X11DeviceCore {
      * may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
      * unless there is an ongoing grab on them, see gdk_device_grab().
      */
-    get_position(): [ /* screen */ Gdk.Screen, /* x */ number, /* y */ number ]
+    get_position(): [ /* screen */ Gdk.Screen | null, /* x */ number | null, /* y */ number | null ]
     /**
      * Gets the current location of `device` in double precision. As a slave device's
      * coordinates are those of its master pointer, this function
      * may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
      * unless there is an ongoing grab on them. See gdk_device_grab().
      */
-    get_position_double(): [ /* screen */ Gdk.Screen, /* x */ number, /* y */ number ]
+    get_position_double(): [ /* screen */ Gdk.Screen | null, /* x */ number | null, /* y */ number | null ]
     /**
      * Returns the product ID of this device, or %NULL if this information couldn't
      * be obtained. This ID is retrieved from the device, and is thus constant for
@@ -1194,7 +1185,7 @@ export class X11DeviceCore {
      * function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
      * unless there is an ongoing grab on them, see gdk_device_grab().
      */
-    get_window_at_position(): [ /* returnType */ Gdk.Window | null, /* win_x */ number, /* win_y */ number ]
+    get_window_at_position(): [ /* returnType */ Gdk.Window | null, /* win_x */ number | null, /* win_y */ number | null ]
     /**
      * Obtains the window underneath `device,` returning the location of the device in `win_x` and `win_y` in
      * double precision. Returns %NULL if the window tree under `device` is not known to GDK (for example,
@@ -1204,7 +1195,7 @@ export class X11DeviceCore {
      * function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
      * unless there is an ongoing grab on them, see gdk_device_grab().
      */
-    get_window_at_position_double(): [ /* returnType */ Gdk.Window | null, /* win_x */ number, /* win_y */ number ]
+    get_window_at_position_double(): [ /* returnType */ Gdk.Window | null, /* win_x */ number | null, /* win_y */ number | null ]
     /**
      * Grabs the device so that all events coming from this device are passed to
      * this application until the device is ungrabbed with gdk_device_ungrab(),
@@ -1293,7 +1284,7 @@ export class X11DeviceCore {
      * @param y the Y coordinate of the destination.
      */
     warp(screen: Gdk.Screen, x: number, y: number): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -1339,7 +1330,7 @@ export class X11DeviceCore {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -1508,7 +1499,7 @@ export class X11DeviceCore {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -1596,8 +1587,8 @@ export class X11DeviceCore {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -1614,12 +1605,11 @@ export class X11DeviceCore {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gdk-3.0.Gdk.Device */
+    /* Signals of Gdk-3.0.Gdk.Device */
     /**
      * The ::changed signal is emitted either when the #GdkDevice
      * has changed the number of either axes or keys. For example
@@ -1628,7 +1618,6 @@ export class X11DeviceCore {
      * switches from the USB mouse to a tablet), in that case the
      * master device will change to reflect the new slave device
      * axes and keys.
-     * @signal 
      */
     connect(sigName: "changed", callback: (($obj: X11DeviceCore) => void)): number
     connect_after(sigName: "changed", callback: (($obj: X11DeviceCore) => void)): number
@@ -1636,13 +1625,12 @@ export class X11DeviceCore {
     /**
      * The ::tool-changed signal is emitted on pen/eraser
      * #GdkDevices whenever tools enter or leave proximity.
-     * @signal 
      * @param tool The new current tool
      */
     connect(sigName: "tool-changed", callback: (($obj: X11DeviceCore, tool: Gdk.DeviceTool) => void)): number
     connect_after(sigName: "tool-changed", callback: (($obj: X11DeviceCore, tool: Gdk.DeviceTool) => void)): number
     emit(sigName: "tool-changed", tool: Gdk.DeviceTool): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -1669,7 +1657,6 @@ export class X11DeviceCore {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: X11DeviceCore, pspec: GObject.ParamSpec) => void)): number
@@ -1705,23 +1692,23 @@ export class X11DeviceCore {
     connect_after(sigName: "notify::type", callback: (($obj: X11DeviceCore, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::vendor-id", callback: (($obj: X11DeviceCore, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::vendor-id", callback: (($obj: X11DeviceCore, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: X11DeviceCore_ConstructProps)
     _init (config?: X11DeviceCore_ConstructProps): void
-    static $gtype: GObject.GType<X11DeviceCore>
+    static $gtype: GObject.Type
 }
 export interface X11DeviceManagerCore_ConstructProps extends Gdk.DeviceManager_ConstructProps {
 }
 export class X11DeviceManagerCore {
-    /* Extended properties of Gdk-3.0.Gdk.DeviceManager */
+    /* Properties of Gdk-3.0.Gdk.DeviceManager */
     readonly display: Gdk.Display
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Gdk-3.0.Gdk.DeviceManager */
+    /* Methods of Gdk-3.0.Gdk.DeviceManager */
     /**
      * Returns the client pointer, that is, the master pointer that acts as the core pointer
      * for this application. In X11, window managers may change this depending on the interaction
@@ -1741,7 +1728,7 @@ export class X11DeviceManagerCore {
      * @param type device type to get.
      */
     list_devices(type: Gdk.DeviceType): Gdk.Device[]
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -1787,7 +1774,7 @@ export class X11DeviceManagerCore {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -1956,7 +1943,7 @@ export class X11DeviceManagerCore {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -2044,8 +2031,8 @@ export class X11DeviceManagerCore {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -2062,17 +2049,15 @@ export class X11DeviceManagerCore {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gdk-3.0.Gdk.DeviceManager */
+    /* Signals of Gdk-3.0.Gdk.DeviceManager */
     /**
      * The ::device-added signal is emitted either when a new master
      * pointer is created, or when a slave (Hardware) input device
      * is plugged in.
-     * @signal 
      * @param device the newly added #GdkDevice.
      */
     connect(sigName: "device-added", callback: (($obj: X11DeviceManagerCore, device: Gdk.Device) => void)): number
@@ -2089,7 +2074,6 @@ export class X11DeviceManagerCore {
      * (gdk_device_get_associated_device() returns %NULL), its
      * #GdkDeviceType will change to %GDK_DEVICE_TYPE_FLOATING,
      * if it's attached, it will change to %GDK_DEVICE_TYPE_SLAVE.
-     * @signal 
      * @param device the #GdkDevice that changed.
      */
     connect(sigName: "device-changed", callback: (($obj: X11DeviceManagerCore, device: Gdk.Device) => void)): number
@@ -2099,13 +2083,12 @@ export class X11DeviceManagerCore {
      * The ::device-removed signal is emitted either when a master
      * pointer is removed, or when a slave (Hardware) input device
      * is unplugged.
-     * @signal 
      * @param device the just removed #GdkDevice.
      */
     connect(sigName: "device-removed", callback: (($obj: X11DeviceManagerCore, device: Gdk.Device) => void)): number
     connect_after(sigName: "device-removed", callback: (($obj: X11DeviceManagerCore, device: Gdk.Device) => void)): number
     emit(sigName: "device-removed", device: Gdk.Device): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -2132,7 +2115,6 @@ export class X11DeviceManagerCore {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: X11DeviceManagerCore, pspec: GObject.ParamSpec) => void)): number
@@ -2140,31 +2122,31 @@ export class X11DeviceManagerCore {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::display", callback: (($obj: X11DeviceManagerCore, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::display", callback: (($obj: X11DeviceManagerCore, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: X11DeviceManagerCore_ConstructProps)
     _init (config?: X11DeviceManagerCore_ConstructProps): void
-    static $gtype: GObject.GType<X11DeviceManagerCore>
+    static $gtype: GObject.Type
 }
 export interface X11DeviceManagerXI2_ConstructProps extends X11DeviceManagerCore_ConstructProps {
     /* Constructor properties of GdkX11-3.0.GdkX11.X11DeviceManagerXI2 */
-    major?: number | null
-    minor?: number | null
-    opcode?: number | null
+    major?: number
+    minor?: number
+    opcode?: number
 }
 export class X11DeviceManagerXI2 {
-    /* Own properties of GdkX11-3.0.GdkX11.X11DeviceManagerXI2 */
+    /* Properties of GdkX11-3.0.GdkX11.X11DeviceManagerXI2 */
     readonly major: number
     readonly minor: number
     readonly opcode: number
-    /* Extended properties of Gdk-3.0.Gdk.DeviceManager */
+    /* Properties of Gdk-3.0.Gdk.DeviceManager */
     readonly display: Gdk.Display
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Gdk-3.0.Gdk.DeviceManager */
+    /* Methods of Gdk-3.0.Gdk.DeviceManager */
     /**
      * Returns the client pointer, that is, the master pointer that acts as the core pointer
      * for this application. In X11, window managers may change this depending on the interaction
@@ -2184,7 +2166,7 @@ export class X11DeviceManagerXI2 {
      * @param type device type to get.
      */
     list_devices(type: Gdk.DeviceType): Gdk.Device[]
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -2230,7 +2212,7 @@ export class X11DeviceManagerXI2 {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -2399,7 +2381,7 @@ export class X11DeviceManagerXI2 {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -2487,8 +2469,8 @@ export class X11DeviceManagerXI2 {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -2505,17 +2487,15 @@ export class X11DeviceManagerXI2 {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gdk-3.0.Gdk.DeviceManager */
+    /* Signals of Gdk-3.0.Gdk.DeviceManager */
     /**
      * The ::device-added signal is emitted either when a new master
      * pointer is created, or when a slave (Hardware) input device
      * is plugged in.
-     * @signal 
      * @param device the newly added #GdkDevice.
      */
     connect(sigName: "device-added", callback: (($obj: X11DeviceManagerXI2, device: Gdk.Device) => void)): number
@@ -2532,7 +2512,6 @@ export class X11DeviceManagerXI2 {
      * (gdk_device_get_associated_device() returns %NULL), its
      * #GdkDeviceType will change to %GDK_DEVICE_TYPE_FLOATING,
      * if it's attached, it will change to %GDK_DEVICE_TYPE_SLAVE.
-     * @signal 
      * @param device the #GdkDevice that changed.
      */
     connect(sigName: "device-changed", callback: (($obj: X11DeviceManagerXI2, device: Gdk.Device) => void)): number
@@ -2542,13 +2521,12 @@ export class X11DeviceManagerXI2 {
      * The ::device-removed signal is emitted either when a master
      * pointer is removed, or when a slave (Hardware) input device
      * is unplugged.
-     * @signal 
      * @param device the just removed #GdkDevice.
      */
     connect(sigName: "device-removed", callback: (($obj: X11DeviceManagerXI2, device: Gdk.Device) => void)): number
     connect_after(sigName: "device-removed", callback: (($obj: X11DeviceManagerXI2, device: Gdk.Device) => void)): number
     emit(sigName: "device-removed", device: Gdk.Device): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -2575,7 +2553,6 @@ export class X11DeviceManagerXI2 {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: X11DeviceManagerXI2, pspec: GObject.ParamSpec) => void)): number
@@ -2589,23 +2566,23 @@ export class X11DeviceManagerXI2 {
     connect_after(sigName: "notify::opcode", callback: (($obj: X11DeviceManagerXI2, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::display", callback: (($obj: X11DeviceManagerXI2, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::display", callback: (($obj: X11DeviceManagerXI2, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: X11DeviceManagerXI2_ConstructProps)
     _init (config?: X11DeviceManagerXI2_ConstructProps): void
-    static $gtype: GObject.GType<X11DeviceManagerXI2>
+    static $gtype: GObject.Type
 }
 export interface X11DeviceXI2_ConstructProps extends Gdk.Device_ConstructProps {
     /* Constructor properties of GdkX11-3.0.GdkX11.X11DeviceXI2 */
-    device_id?: number | null
+    device_id?: number
 }
 export class X11DeviceXI2 {
-    /* Own properties of GdkX11-3.0.GdkX11.X11DeviceXI2 */
+    /* Properties of GdkX11-3.0.GdkX11.X11DeviceXI2 */
     readonly device_id: number
-    /* Extended properties of Gdk-3.0.Gdk.Device */
+    /* Properties of Gdk-3.0.Gdk.Device */
     /**
      * Associated pointer or keyboard with this device, if any. Devices of type #GDK_DEVICE_TYPE_MASTER
      * always come in keyboard/pointer pairs. Other device types will have a %NULL associated device.
@@ -2664,9 +2641,9 @@ export class X11DeviceXI2 {
      * Vendor ID of this device, see gdk_device_get_vendor_id().
      */
     readonly vendor_id: string
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Gdk-3.0.Gdk.Device */
+    /* Methods of Gdk-3.0.Gdk.Device */
     /**
      * Returns the associated device to `device,` if `device` is of type
      * %GDK_DEVICE_TYPE_MASTER, it will return the paired pointer or
@@ -2737,14 +2714,14 @@ export class X11DeviceXI2 {
      * may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
      * unless there is an ongoing grab on them, see gdk_device_grab().
      */
-    get_position(): [ /* screen */ Gdk.Screen, /* x */ number, /* y */ number ]
+    get_position(): [ /* screen */ Gdk.Screen | null, /* x */ number | null, /* y */ number | null ]
     /**
      * Gets the current location of `device` in double precision. As a slave device's
      * coordinates are those of its master pointer, this function
      * may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
      * unless there is an ongoing grab on them. See gdk_device_grab().
      */
-    get_position_double(): [ /* screen */ Gdk.Screen, /* x */ number, /* y */ number ]
+    get_position_double(): [ /* screen */ Gdk.Screen | null, /* x */ number | null, /* y */ number | null ]
     /**
      * Returns the product ID of this device, or %NULL if this information couldn't
      * be obtained. This ID is retrieved from the device, and is thus constant for
@@ -2798,7 +2775,7 @@ export class X11DeviceXI2 {
      * function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
      * unless there is an ongoing grab on them, see gdk_device_grab().
      */
-    get_window_at_position(): [ /* returnType */ Gdk.Window | null, /* win_x */ number, /* win_y */ number ]
+    get_window_at_position(): [ /* returnType */ Gdk.Window | null, /* win_x */ number | null, /* win_y */ number | null ]
     /**
      * Obtains the window underneath `device,` returning the location of the device in `win_x` and `win_y` in
      * double precision. Returns %NULL if the window tree under `device` is not known to GDK (for example,
@@ -2808,7 +2785,7 @@ export class X11DeviceXI2 {
      * function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
      * unless there is an ongoing grab on them, see gdk_device_grab().
      */
-    get_window_at_position_double(): [ /* returnType */ Gdk.Window | null, /* win_x */ number, /* win_y */ number ]
+    get_window_at_position_double(): [ /* returnType */ Gdk.Window | null, /* win_x */ number | null, /* win_y */ number | null ]
     /**
      * Grabs the device so that all events coming from this device are passed to
      * this application until the device is ungrabbed with gdk_device_ungrab(),
@@ -2897,7 +2874,7 @@ export class X11DeviceXI2 {
      * @param y the Y coordinate of the destination.
      */
     warp(screen: Gdk.Screen, x: number, y: number): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -2943,7 +2920,7 @@ export class X11DeviceXI2 {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -3112,7 +3089,7 @@ export class X11DeviceXI2 {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -3200,8 +3177,8 @@ export class X11DeviceXI2 {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -3218,12 +3195,11 @@ export class X11DeviceXI2 {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gdk-3.0.Gdk.Device */
+    /* Signals of Gdk-3.0.Gdk.Device */
     /**
      * The ::changed signal is emitted either when the #GdkDevice
      * has changed the number of either axes or keys. For example
@@ -3232,7 +3208,6 @@ export class X11DeviceXI2 {
      * switches from the USB mouse to a tablet), in that case the
      * master device will change to reflect the new slave device
      * axes and keys.
-     * @signal 
      */
     connect(sigName: "changed", callback: (($obj: X11DeviceXI2) => void)): number
     connect_after(sigName: "changed", callback: (($obj: X11DeviceXI2) => void)): number
@@ -3240,13 +3215,12 @@ export class X11DeviceXI2 {
     /**
      * The ::tool-changed signal is emitted on pen/eraser
      * #GdkDevices whenever tools enter or leave proximity.
-     * @signal 
      * @param tool The new current tool
      */
     connect(sigName: "tool-changed", callback: (($obj: X11DeviceXI2, tool: Gdk.DeviceTool) => void)): number
     connect_after(sigName: "tool-changed", callback: (($obj: X11DeviceXI2, tool: Gdk.DeviceTool) => void)): number
     emit(sigName: "tool-changed", tool: Gdk.DeviceTool): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -3273,7 +3247,6 @@ export class X11DeviceXI2 {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: X11DeviceXI2, pspec: GObject.ParamSpec) => void)): number
@@ -3311,21 +3284,21 @@ export class X11DeviceXI2 {
     connect_after(sigName: "notify::type", callback: (($obj: X11DeviceXI2, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::vendor-id", callback: (($obj: X11DeviceXI2, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::vendor-id", callback: (($obj: X11DeviceXI2, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: X11DeviceXI2_ConstructProps)
     _init (config?: X11DeviceXI2_ConstructProps): void
-    static $gtype: GObject.GType<X11DeviceXI2>
+    static $gtype: GObject.Type
 }
 export interface X11Display_ConstructProps extends Gdk.Display_ConstructProps {
 }
 export class X11Display {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GdkX11-3.0.GdkX11.X11Display */
+    /* Methods of GdkX11-3.0.GdkX11.X11Display */
     /**
      * Pops the error trap pushed by gdk_x11_display_error_trap_push().
      * Will XSync() if necessary and will always block until
@@ -3454,7 +3427,7 @@ export class X11Display {
      * @param str a UTF-8 string
      */
     utf8_to_compound_text(str: string): [ /* returnType */ boolean, /* encoding */ Gdk.Atom, /* format */ number, /* ctext */ Uint8Array ]
-    /* Extended methods of Gdk-3.0.Gdk.Display */
+    /* Methods of Gdk-3.0.Gdk.Display */
     /**
      * Emits a short beep on `display`
      */
@@ -3555,7 +3528,7 @@ export class X11Display {
      * Gets the current location of the pointer and the current modifier
      * mask for a given display.
      */
-    get_pointer(): [ /* screen */ Gdk.Screen, /* x */ number, /* y */ number, /* mask */ Gdk.ModifierType ]
+    get_pointer(): [ /* screen */ Gdk.Screen | null, /* x */ number | null, /* y */ number | null, /* mask */ Gdk.ModifierType | null ]
     /**
      * Gets the primary monitor for the display.
      * 
@@ -3576,7 +3549,7 @@ export class X11Display {
      * if the window under the mouse pointer is not known to GDK (for example,
      * belongs to another application).
      */
-    get_window_at_pointer(): [ /* returnType */ Gdk.Window | null, /* win_x */ number, /* win_y */ number ]
+    get_window_at_pointer(): [ /* returnType */ Gdk.Window | null, /* win_x */ number | null, /* win_y */ number | null ]
     /**
      * Returns whether the display has events that are waiting
      * to be processed.
@@ -3737,7 +3710,7 @@ export class X11Display {
      * @param y the y coordinate of the destination
      */
     warp_pointer(screen: Gdk.Screen, x: number, y: number): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -3783,7 +3756,7 @@ export class X11Display {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -3952,7 +3925,7 @@ export class X11Display {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -4040,8 +4013,8 @@ export class X11Display {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -4058,16 +4031,14 @@ export class X11Display {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gdk-3.0.Gdk.Display */
+    /* Signals of Gdk-3.0.Gdk.Display */
     /**
      * The ::closed signal is emitted when the connection to the windowing
      * system for `display` is closed.
-     * @signal 
      * @param is_error %TRUE if the display was closed due to an error
      */
     connect(sigName: "closed", callback: (($obj: X11Display, is_error: boolean) => void)): number
@@ -4076,7 +4047,6 @@ export class X11Display {
     /**
      * The ::monitor-added signal is emitted whenever a monitor is
      * added.
-     * @signal 
      * @param monitor the monitor that was just added
      */
     connect(sigName: "monitor-added", callback: (($obj: X11Display, monitor: Gdk.Monitor) => void)): number
@@ -4085,7 +4055,6 @@ export class X11Display {
     /**
      * The ::monitor-removed signal is emitted whenever a monitor is
      * removed.
-     * @signal 
      * @param monitor the monitor that was just removed
      */
     connect(sigName: "monitor-removed", callback: (($obj: X11Display, monitor: Gdk.Monitor) => void)): number
@@ -4094,7 +4063,6 @@ export class X11Display {
     /**
      * The ::opened signal is emitted when the connection to the windowing
      * system for `display` is opened.
-     * @signal 
      */
     connect(sigName: "opened", callback: (($obj: X11Display) => void)): number
     connect_after(sigName: "opened", callback: (($obj: X11Display) => void)): number
@@ -4102,7 +4070,6 @@ export class X11Display {
     /**
      * The ::seat-added signal is emitted whenever a new seat is made
      * known to the windowing system.
-     * @signal 
      * @param seat the seat that was just added
      */
     connect(sigName: "seat-added", callback: (($obj: X11Display, seat: Gdk.Seat) => void)): number
@@ -4111,13 +4078,12 @@ export class X11Display {
     /**
      * The ::seat-removed signal is emitted whenever a seat is removed
      * by the windowing system.
-     * @signal 
      * @param seat the seat that was just removed
      */
     connect(sigName: "seat-removed", callback: (($obj: X11Display, seat: Gdk.Seat) => void)): number
     connect_after(sigName: "seat-removed", callback: (($obj: X11Display, seat: Gdk.Seat) => void)): number
     emit(sigName: "seat-removed", seat: Gdk.Seat): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -4144,14 +4110,13 @@ export class X11Display {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: X11Display, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: X11Display, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -4163,16 +4128,16 @@ export class X11Display {
      * @param display a #GdkDisplay
      */
     static get_glx_version(display: Gdk.Display): [ /* returnType */ boolean, /* major */ number, /* minor */ number ]
-    static $gtype: GObject.GType<X11Display>
+    static $gtype: GObject.Type
 }
 export interface X11DisplayManager_ConstructProps extends Gdk.DisplayManager_ConstructProps {
 }
 export class X11DisplayManager {
-    /* Extended properties of Gdk-3.0.Gdk.DisplayManager */
+    /* Properties of Gdk-3.0.Gdk.DisplayManager */
     default_display: Gdk.Display
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Gdk-3.0.Gdk.DisplayManager */
+    /* Methods of Gdk-3.0.Gdk.DisplayManager */
     /**
      * Gets the default #GdkDisplay.
      */
@@ -4191,7 +4156,7 @@ export class X11DisplayManager {
      * @param display a #GdkDisplay
      */
     set_default_display(display: Gdk.Display): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -4237,7 +4202,7 @@ export class X11DisplayManager {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -4406,7 +4371,7 @@ export class X11DisplayManager {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -4494,8 +4459,8 @@ export class X11DisplayManager {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -4512,21 +4477,19 @@ export class X11DisplayManager {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gdk-3.0.Gdk.DisplayManager */
+    /* Signals of Gdk-3.0.Gdk.DisplayManager */
     /**
      * The ::display-opened signal is emitted when a display is opened.
-     * @signal 
      * @param display the opened display
      */
     connect(sigName: "display-opened", callback: (($obj: X11DisplayManager, display: Gdk.Display) => void)): number
     connect_after(sigName: "display-opened", callback: (($obj: X11DisplayManager, display: Gdk.Display) => void)): number
     emit(sigName: "display-opened", display: Gdk.Display): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -4553,7 +4516,6 @@ export class X11DisplayManager {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: X11DisplayManager, pspec: GObject.ParamSpec) => void)): number
@@ -4561,21 +4523,21 @@ export class X11DisplayManager {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::default-display", callback: (($obj: X11DisplayManager, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::default-display", callback: (($obj: X11DisplayManager, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: X11DisplayManager_ConstructProps)
     _init (config?: X11DisplayManager_ConstructProps): void
-    static $gtype: GObject.GType<X11DisplayManager>
+    static $gtype: GObject.Type
 }
 export interface X11DragContext_ConstructProps extends Gdk.DragContext_ConstructProps {
 }
 export class X11DragContext {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Gdk-3.0.Gdk.DragContext */
+    /* Methods of Gdk-3.0.Gdk.DragContext */
     /**
      * Determines the bitmask of actions proposed by the source if
      * gdk_drag_context_get_suggested_action() returns %GDK_ACTION_ASK.
@@ -4653,7 +4615,7 @@ export class X11DragContext {
      * @param hot_y y coordinate of the drag window hotspot
      */
     set_hotspot(hot_x: number, hot_y: number): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -4699,7 +4661,7 @@ export class X11DragContext {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -4868,7 +4830,7 @@ export class X11DragContext {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -4956,8 +4918,8 @@ export class X11DragContext {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -4974,19 +4936,17 @@ export class X11DragContext {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gdk-3.0.Gdk.DragContext */
+    /* Signals of Gdk-3.0.Gdk.DragContext */
     /**
      * A new action is being chosen for the drag and drop operation.
      * 
      * This signal will only be emitted if the #GdkDragContext manages
      * the drag and drop operation. See gdk_drag_context_manage_dnd()
      * for more information.
-     * @signal 
      * @param action The action currently chosen
      */
     connect(sigName: "action-changed", callback: (($obj: X11DragContext, action: Gdk.DragAction) => void)): number
@@ -4998,7 +4958,6 @@ export class X11DragContext {
      * This signal will only be emitted if the #GdkDragContext manages
      * the drag and drop operation. See gdk_drag_context_manage_dnd()
      * for more information.
-     * @signal 
      * @param reason The reason the context was cancelled
      */
     connect(sigName: "cancel", callback: (($obj: X11DragContext, reason: Gdk.DragCancelReason) => void)): number
@@ -5012,7 +4971,6 @@ export class X11DragContext {
      * This signal will only be emitted if the #GdkDragContext manages
      * the drag and drop operation. See gdk_drag_context_manage_dnd()
      * for more information.
-     * @signal 
      */
     connect(sigName: "dnd-finished", callback: (($obj: X11DragContext) => void)): number
     connect_after(sigName: "dnd-finished", callback: (($obj: X11DragContext) => void)): number
@@ -5023,13 +4981,12 @@ export class X11DragContext {
      * This signal will only be emitted if the #GdkDragContext manages
      * the drag and drop operation. See gdk_drag_context_manage_dnd()
      * for more information.
-     * @signal 
      * @param time the time at which the drop happened.
      */
     connect(sigName: "drop-performed", callback: (($obj: X11DragContext, time: number) => void)): number
     connect_after(sigName: "drop-performed", callback: (($obj: X11DragContext, time: number) => void)): number
     emit(sigName: "drop-performed", time: number): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -5056,25 +5013,24 @@ export class X11DragContext {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: X11DragContext, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: X11DragContext, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: X11DragContext_ConstructProps)
     _init (config?: X11DragContext_ConstructProps): void
-    static $gtype: GObject.GType<X11DragContext>
+    static $gtype: GObject.Type
 }
 export interface X11GLContext_ConstructProps extends Gdk.GLContext_ConstructProps {
 }
 export class X11GLContext {
-    /* Extended properties of Gdk-3.0.Gdk.GLContext */
+    /* Properties of Gdk-3.0.Gdk.GLContext */
     /**
      * The #GdkDisplay used to create the #GdkGLContext.
      */
@@ -5087,9 +5043,9 @@ export class X11GLContext {
      * The #GdkWindow the gl context is bound to.
      */
     readonly window: Gdk.Window
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Gdk-3.0.Gdk.GLContext */
+    /* Methods of Gdk-3.0.Gdk.GLContext */
     /**
      * Retrieves the value set using gdk_gl_context_set_debug_enabled().
      */
@@ -5204,7 +5160,7 @@ export class X11GLContext {
      * @param use_es whether the context should use OpenGL ES instead of OpenGL,   or -1 to allow auto-detection
      */
     set_use_es(use_es: number): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -5250,7 +5206,7 @@ export class X11GLContext {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -5419,7 +5375,7 @@ export class X11GLContext {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -5507,8 +5463,8 @@ export class X11GLContext {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -5525,12 +5481,11 @@ export class X11GLContext {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -5557,7 +5512,6 @@ export class X11GLContext {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: X11GLContext, pspec: GObject.ParamSpec) => void)): number
@@ -5569,21 +5523,21 @@ export class X11GLContext {
     connect_after(sigName: "notify::shared-context", callback: (($obj: X11GLContext, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::window", callback: (($obj: X11GLContext, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::window", callback: (($obj: X11GLContext, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: X11GLContext_ConstructProps)
     _init (config?: X11GLContext_ConstructProps): void
-    static $gtype: GObject.GType<X11GLContext>
+    static $gtype: GObject.Type
 }
 export interface X11Keymap_ConstructProps extends Gdk.Keymap_ConstructProps {
 }
 export class X11Keymap {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GdkX11-3.0.GdkX11.X11Keymap */
+    /* Methods of GdkX11-3.0.GdkX11.X11Keymap */
     /**
      * Extracts the group from the state field sent in an X Key event.
      * This is only needed for code processing raw X events, since #GdkEventKey
@@ -5601,7 +5555,7 @@ export class X11Keymap {
      * @param keycode the hardware keycode from a key event
      */
     key_is_modifier(keycode: number): boolean
-    /* Extended methods of Gdk-3.0.Gdk.Keymap */
+    /* Methods of Gdk-3.0.Gdk.Keymap */
     /**
      * Maps the non-virtual modifiers (i.e Mod2, Mod3, ...) which are set
      * in `state` to the virtual modifiers (i.e. Super, Hyper and Meta) and
@@ -5633,7 +5587,7 @@ export class X11Keymap {
      * keyboard group and level. See gdk_keymap_translate_keyboard_state().
      * @param hardware_keycode a keycode
      */
-    get_entries_for_keycode(hardware_keycode: number): [ /* returnType */ boolean, /* keys */ Gdk.KeymapKey[], /* keyvals */ number[] ]
+    get_entries_for_keycode(hardware_keycode: number): [ /* returnType */ boolean, /* keys */ Gdk.KeymapKey[] | null, /* keyvals */ number[] | null ]
     /**
      * Obtains a list of keycode/group/level combinations that will
      * generate `keyval`. Groups and levels are two kinds of keyboard mode;
@@ -5754,8 +5708,8 @@ export class X11Keymap {
      * @param state a modifier state
      * @param group active keyboard group
      */
-    translate_keyboard_state(hardware_keycode: number, state: Gdk.ModifierType, group: number): [ /* returnType */ boolean, /* keyval */ number, /* effective_group */ number, /* level */ number, /* consumed_modifiers */ Gdk.ModifierType ]
-    /* Extended methods of GObject-2.0.GObject.Object */
+    translate_keyboard_state(hardware_keycode: number, state: Gdk.ModifierType, group: number): [ /* returnType */ boolean, /* keyval */ number | null, /* effective_group */ number | null, /* level */ number | null, /* consumed_modifiers */ Gdk.ModifierType | null ]
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -5801,7 +5755,7 @@ export class X11Keymap {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -5970,7 +5924,7 @@ export class X11Keymap {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -6058,8 +6012,8 @@ export class X11Keymap {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -6076,16 +6030,14 @@ export class X11Keymap {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gdk-3.0.Gdk.Keymap */
+    /* Signals of Gdk-3.0.Gdk.Keymap */
     /**
      * The ::direction-changed signal gets emitted when the direction of
      * the keymap changes.
-     * @signal 
      */
     connect(sigName: "direction-changed", callback: (($obj: X11Keymap) => void)): number
     connect_after(sigName: "direction-changed", callback: (($obj: X11Keymap) => void)): number
@@ -6093,7 +6045,6 @@ export class X11Keymap {
     /**
      * The ::keys-changed signal is emitted when the mapping represented by
      * `keymap` changes.
-     * @signal 
      */
     connect(sigName: "keys-changed", callback: (($obj: X11Keymap) => void)): number
     connect_after(sigName: "keys-changed", callback: (($obj: X11Keymap) => void)): number
@@ -6102,12 +6053,11 @@ export class X11Keymap {
      * The ::state-changed signal is emitted when the state of the
      * keyboard changes, e.g when Caps Lock is turned on or off.
      * See gdk_keymap_get_caps_lock_state().
-     * @signal 
      */
     connect(sigName: "state-changed", callback: (($obj: X11Keymap) => void)): number
     connect_after(sigName: "state-changed", callback: (($obj: X11Keymap) => void)): number
     emit(sigName: "state-changed"): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -6134,25 +6084,24 @@ export class X11Keymap {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: X11Keymap, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: X11Keymap, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: X11Keymap_ConstructProps)
     _init (config?: X11Keymap_ConstructProps): void
-    static $gtype: GObject.GType<X11Keymap>
+    static $gtype: GObject.Type
 }
 export interface X11Monitor_ConstructProps extends Gdk.Monitor_ConstructProps {
 }
 export class X11Monitor {
-    /* Extended properties of Gdk-3.0.Gdk.Monitor */
+    /* Properties of Gdk-3.0.Gdk.Monitor */
     readonly display: Gdk.Display
     readonly geometry: Gdk.Rectangle
     readonly height_mm: number
@@ -6163,9 +6112,9 @@ export class X11Monitor {
     readonly subpixel_layout: Gdk.SubpixelLayout
     readonly width_mm: number
     readonly workarea: Gdk.Rectangle
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Extended methods of Gdk-3.0.Gdk.Monitor */
+    /* Methods of Gdk-3.0.Gdk.Monitor */
     /**
      * Gets the display that this monitor belongs to.
      */
@@ -6239,7 +6188,7 @@ export class X11Monitor {
      * (see gdk_display_get_primary_monitor()).
      */
     is_primary(): boolean
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -6285,7 +6234,7 @@ export class X11Monitor {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -6454,7 +6403,7 @@ export class X11Monitor {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -6542,8 +6491,8 @@ export class X11Monitor {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -6560,19 +6509,15 @@ export class X11Monitor {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gdk-3.0.Gdk.Monitor */
-    /**
-     * @signal 
-     */
+    /* Signals of Gdk-3.0.Gdk.Monitor */
     connect(sigName: "invalidate", callback: (($obj: X11Monitor) => void)): number
     connect_after(sigName: "invalidate", callback: (($obj: X11Monitor) => void)): number
     emit(sigName: "invalidate"): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -6599,7 +6544,6 @@ export class X11Monitor {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: X11Monitor, pspec: GObject.ParamSpec) => void)): number
@@ -6625,8 +6569,8 @@ export class X11Monitor {
     connect_after(sigName: "notify::width-mm", callback: (($obj: X11Monitor, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::workarea", callback: (($obj: X11Monitor, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::workarea", callback: (($obj: X11Monitor, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -6634,17 +6578,17 @@ export class X11Monitor {
     _init (config?: X11Monitor_ConstructProps): void
     /* Static methods and pseudo-constructors */
     static get_output(monitor: Gdk.Monitor): xlib.XID
-    static $gtype: GObject.GType<X11Monitor>
+    static $gtype: GObject.Type
 }
 export interface X11Screen_ConstructProps extends Gdk.Screen_ConstructProps {
 }
 export class X11Screen {
-    /* Extended properties of Gdk-3.0.Gdk.Screen */
+    /* Properties of Gdk-3.0.Gdk.Screen */
     font_options: object
     resolution: number
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GdkX11-3.0.GdkX11.X11Screen */
+    /* Methods of GdkX11-3.0.GdkX11.X11Screen */
     /**
      * Returns the current workspace for `screen` when running under a
      * window manager that supports multiple workspaces, as described
@@ -6699,7 +6643,7 @@ export class X11Screen {
      * @param property a property atom.
      */
     supports_net_wm_hint(property: Gdk.Atom): boolean
-    /* Extended methods of Gdk-3.0.Gdk.Screen */
+    /* Methods of Gdk-3.0.Gdk.Screen */
     /**
      * Returns the screen’s currently active window.
      * 
@@ -6764,7 +6708,7 @@ export class X11Screen {
      * gdk_screen_get_width() and gdk_screen_get_height().
      * @param monitor_num the monitor number
      */
-    get_monitor_geometry(monitor_num: number): /* dest */ Gdk.Rectangle
+    get_monitor_geometry(monitor_num: number): /* dest */ Gdk.Rectangle | null
     /**
      * Gets the height in millimeters of the specified monitor.
      * @param monitor_num number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)
@@ -6811,7 +6755,7 @@ export class X11Screen {
      * `screen,` use gdk_screen_get_n_monitors().
      * @param monitor_num the monitor number
      */
-    get_monitor_workarea(monitor_num: number): /* dest */ Gdk.Rectangle
+    get_monitor_workarea(monitor_num: number): /* dest */ Gdk.Rectangle | null
     /**
      * Returns the number of monitors which `screen` consists of.
      */
@@ -6945,7 +6889,7 @@ export class X11Screen {
      * have already been created.
      * @param options a #cairo_font_options_t, or %NULL to unset any   previously set default font options.
      */
-    set_font_options(options: cairo.FontOptions | null): void
+    set_font_options(options?: cairo.FontOptions | null): void
     /**
      * Sets the resolution for font handling on the screen. This is a
      * scale factor between points specified in a #PangoFontDescription
@@ -6954,7 +6898,7 @@ export class X11Screen {
      * @param dpi the resolution in “dots per inch”. (Physical inches aren’t actually   involved; the terminology is conventional.)
      */
     set_resolution(dpi: number): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -7000,7 +6944,7 @@ export class X11Screen {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -7169,7 +7113,7 @@ export class X11Screen {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -7257,8 +7201,8 @@ export class X11Screen {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -7275,23 +7219,18 @@ export class X11Screen {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Own signals of GdkX11-3.0.GdkX11.X11Screen */
-    /**
-     * @signal 
-     */
+    /* Signals of GdkX11-3.0.GdkX11.X11Screen */
     connect(sigName: "window-manager-changed", callback: (($obj: X11Screen) => void)): number
     connect_after(sigName: "window-manager-changed", callback: (($obj: X11Screen) => void)): number
     emit(sigName: "window-manager-changed"): void
-    /* Extended signals of Gdk-3.0.Gdk.Screen */
+    /* Signals of Gdk-3.0.Gdk.Screen */
     /**
      * The ::composited-changed signal is emitted when the composited
      * status of the screen changes
-     * @signal 
      */
     connect(sigName: "composited-changed", callback: (($obj: X11Screen) => void)): number
     connect_after(sigName: "composited-changed", callback: (($obj: X11Screen) => void)): number
@@ -7302,7 +7241,6 @@ export class X11Screen {
      * 
      * Only for X11 and OS X for now. A future implementation for Win32
      * may be a possibility.
-     * @signal 
      */
     connect(sigName: "monitors-changed", callback: (($obj: X11Screen) => void)): number
     connect_after(sigName: "monitors-changed", callback: (($obj: X11Screen) => void)): number
@@ -7310,12 +7248,11 @@ export class X11Screen {
     /**
      * The ::size-changed signal is emitted when the pixel width or
      * height of a screen changes.
-     * @signal 
      */
     connect(sigName: "size-changed", callback: (($obj: X11Screen) => void)): number
     connect_after(sigName: "size-changed", callback: (($obj: X11Screen) => void)): number
     emit(sigName: "size-changed"): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -7342,7 +7279,6 @@ export class X11Screen {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: X11Screen, pspec: GObject.ParamSpec) => void)): number
@@ -7352,26 +7288,26 @@ export class X11Screen {
     connect_after(sigName: "notify::font-options", callback: (($obj: X11Screen, pspec: GObject.ParamSpec) => void)): number
     connect(sigName: "notify::resolution", callback: (($obj: X11Screen, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::resolution", callback: (($obj: X11Screen, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: X11Screen_ConstructProps)
     _init (config?: X11Screen_ConstructProps): void
-    static $gtype: GObject.GType<X11Screen>
+    static $gtype: GObject.Type
 }
 export interface X11Visual_ConstructProps extends Gdk.Visual_ConstructProps {
 }
 export class X11Visual {
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GdkX11-3.0.GdkX11.X11Visual */
+    /* Methods of GdkX11-3.0.GdkX11.X11Visual */
     /**
      * Returns the X visual belonging to a #GdkVisual.
      */
     get_xvisual(): xlib.Visual
-    /* Extended methods of Gdk-3.0.Gdk.Visual */
+    /* Methods of Gdk-3.0.Gdk.Visual */
     /**
      * Returns the number of significant bits per red, green and blue value.
      * 
@@ -7385,7 +7321,7 @@ export class X11Visual {
      * to be in position (according to the "mask"). Finally, "precision" refers
      * to how much precision the pixel value contains for a particular primary.
      */
-    get_blue_pixel_details(): [ /* mask */ number, /* shift */ number, /* precision */ number ]
+    get_blue_pixel_details(): [ /* mask */ number | null, /* shift */ number | null, /* precision */ number | null ]
     /**
      * Returns the byte order of this visual.
      * 
@@ -7411,7 +7347,7 @@ export class X11Visual {
      * to be in position (according to the "mask"). Finally, "precision" refers
      * to how much precision the pixel value contains for a particular primary.
      */
-    get_green_pixel_details(): [ /* mask */ number, /* shift */ number, /* precision */ number ]
+    get_green_pixel_details(): [ /* mask */ number | null, /* shift */ number | null, /* precision */ number | null ]
     /**
      * Obtains values that are needed to calculate red pixel values in TrueColor
      * and DirectColor. The “mask” is the significant bits within the pixel.
@@ -7419,7 +7355,7 @@ export class X11Visual {
      * to be in position (according to the "mask"). Finally, "precision" refers
      * to how much precision the pixel value contains for a particular primary.
      */
-    get_red_pixel_details(): [ /* mask */ number, /* shift */ number, /* precision */ number ]
+    get_red_pixel_details(): [ /* mask */ number | null, /* shift */ number | null, /* precision */ number | null ]
     /**
      * Gets the screen to which this visual belongs
      */
@@ -7428,7 +7364,7 @@ export class X11Visual {
      * Returns the type of visual this is (PseudoColor, TrueColor, etc).
      */
     get_visual_type(): Gdk.VisualType
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -7474,7 +7410,7 @@ export class X11Visual {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -7643,7 +7579,7 @@ export class X11Visual {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -7731,8 +7667,8 @@ export class X11Visual {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    watch_closure(closure: Function): void
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -7749,12 +7685,11 @@ export class X11Visual {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -7781,33 +7716,32 @@ export class X11Visual {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: X11Visual, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify", callback: (($obj: X11Visual, pspec: GObject.ParamSpec) => void)): number
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
     constructor (config?: X11Visual_ConstructProps)
     _init (config?: X11Visual_ConstructProps): void
-    static $gtype: GObject.GType<X11Visual>
+    static $gtype: GObject.Type
 }
 export interface X11Window_ConstructProps extends Gdk.Window_ConstructProps {
 }
 export class X11Window {
-    /* Extended properties of Gdk-3.0.Gdk.Window */
+    /* Properties of Gdk-3.0.Gdk.Window */
     /**
      * The mouse pointer for a #GdkWindow. See gdk_window_set_cursor() and
      * gdk_window_get_cursor() for details.
      */
     cursor: Gdk.Cursor
-    /* Extended fields of GObject-2.0.GObject.Object */
+    /* Fields of GObject-2.0.GObject.Object */
     g_type_instance: GObject.TypeInstance
-    /* Owm methods of GdkX11-3.0.GdkX11.X11Window */
+    /* Methods of GdkX11-3.0.GdkX11.X11Window */
     /**
      * Gets the number of the workspace `window` is on.
      */
@@ -7895,8 +7829,8 @@ export class X11Window {
      * @param name Property name, will be interned as an X atom
      * @param value Property value, or %NULL to delete
      */
-    set_utf8_property(name: string, value: string | null): void
-    /* Extended methods of Gdk-3.0.Gdk.Window */
+    set_utf8_property(name: string, value?: string | null): void
+    /* Methods of Gdk-3.0.Gdk.Window */
     /**
      * Emits a short beep associated to `window` in the appropriate
      * display, if supported. Otherwise, emits a short beep on
@@ -8060,7 +7994,7 @@ export class X11Window {
      * @param parent_x X coordinate in parent’s coordinate system
      * @param parent_y Y coordinate in parent’s coordinate system
      */
-    coords_from_parent(parent_x: number, parent_y: number): [ /* x */ number, /* y */ number ]
+    coords_from_parent(parent_x: number, parent_y: number): [ /* x */ number | null, /* y */ number | null ]
     /**
      * Transforms window coordinates from a child window to its parent
      * window, where the parent window is the normal parent as returned by
@@ -8081,7 +8015,7 @@ export class X11Window {
      * @param x X coordinate in child’s coordinate system
      * @param y Y coordinate in child’s coordinate system
      */
-    coords_to_parent(x: number, y: number): [ /* parent_x */ number, /* parent_y */ number ]
+    coords_to_parent(x: number, y: number): [ /* parent_x */ number | null, /* parent_y */ number | null ]
     /**
      * Creates a new #GdkGLContext matching the
      * framebuffer format to the visual of the #GdkWindow. The context
@@ -8289,7 +8223,7 @@ export class X11Window {
      * lowest window is first.
      * @param user_data user data to look for
      */
-    get_children_with_user_data(user_data: object | null): Gdk.Window[]
+    get_children_with_user_data(user_data?: object | null): Gdk.Window[]
     /**
      * Computes the region of a window that potentially can be written
      * to by drawing primitives. This region may not take into account
@@ -8337,14 +8271,14 @@ export class X11Window {
      * Use gdk_window_get_device_position_double() if you need subpixel precision.
      * @param device pointer #GdkDevice to query to.
      */
-    get_device_position(device: Gdk.Device): [ /* returnType */ Gdk.Window | null, /* x */ number, /* y */ number, /* mask */ Gdk.ModifierType ]
+    get_device_position(device: Gdk.Device): [ /* returnType */ Gdk.Window | null, /* x */ number | null, /* y */ number | null, /* mask */ Gdk.ModifierType | null ]
     /**
      * Obtains the current device position in doubles and modifier state.
      * The position is given in coordinates relative to the upper left
      * corner of `window`.
      * @param device pointer #GdkDevice to query to.
      */
-    get_device_position_double(device: Gdk.Device): [ /* returnType */ Gdk.Window | null, /* x */ number, /* y */ number, /* mask */ Gdk.ModifierType ]
+    get_device_position_double(device: Gdk.Device): [ /* returnType */ Gdk.Window | null, /* x */ number | null, /* y */ number | null, /* mask */ Gdk.ModifierType | null ]
     /**
      * Gets the #GdkDisplay associated with a #GdkWindow.
      */
@@ -8352,7 +8286,7 @@ export class X11Window {
     /**
      * Finds out the DND protocol supported by a window.
      */
-    get_drag_protocol(): [ /* returnType */ Gdk.DragProtocol, /* target */ Gdk.Window ]
+    get_drag_protocol(): [ /* returnType */ Gdk.DragProtocol, /* target */ Gdk.Window | null ]
     /**
      * Obtains the parent of `window,` as known to GDK. Works like
      * gdk_window_get_parent() for normal windows, but returns the
@@ -8423,7 +8357,7 @@ export class X11Window {
      * coordinate space, whereas gdk_window_get_geometry() is restricted to
      * the 16-bit coordinates of X11.
      */
-    get_geometry(): [ /* x */ number, /* y */ number, /* width */ number, /* height */ number ]
+    get_geometry(): [ /* x */ number | null, /* y */ number | null, /* width */ number | null, /* height */ number | null ]
     /**
      * Returns the group leader window for `window`. See gdk_window_set_group().
      */
@@ -8447,7 +8381,7 @@ export class X11Window {
      * gdk_window_get_geometry() which return the position of a window
      * relative to its parent window.)
      */
-    get_origin(): [ /* returnType */ number, /* x */ number, /* y */ number ]
+    get_origin(): [ /* returnType */ number, /* x */ number | null, /* y */ number | null ]
     /**
      * Obtains the parent of `window,` as known to GDK. Does not query the
      * X server; thus this returns the parent as passed to gdk_window_new(),
@@ -8474,7 +8408,7 @@ export class X11Window {
      * The position is given in coordinates relative to the upper left
      * corner of `window`.
      */
-    get_pointer(): [ /* returnType */ Gdk.Window | null, /* x */ number, /* y */ number, /* mask */ Gdk.ModifierType ]
+    get_pointer(): [ /* returnType */ Gdk.Window | null, /* x */ number | null, /* y */ number | null, /* mask */ Gdk.ModifierType | null ]
     /**
      * Obtains the position of the window as reported in the
      * most-recently-processed #GdkEventConfigure. Contrast with
@@ -8484,7 +8418,7 @@ export class X11Window {
      * 
      * The position coordinates are relative to the window’s parent window.
      */
-    get_position(): [ /* x */ number, /* y */ number ]
+    get_position(): [ /* x */ number | null, /* y */ number | null ]
     /**
      * Obtains the position of a window position in root
      * window coordinates. This is similar to
@@ -8650,7 +8584,7 @@ export class X11Window {
      * @param region a #cairo_region_t
      * @param child_func function to use to decide if to     recurse to a child, %NULL means never recurse.
      */
-    invalidate_maybe_recurse(region: cairo.Region, child_func: Gdk.WindowChildFunc | null): void
+    invalidate_maybe_recurse(region: cairo.Region, child_func?: Gdk.WindowChildFunc | null): void
     /**
      * A convenience wrapper around gdk_window_invalidate_region() which
      * invalidates a rectangular region. See
@@ -8938,7 +8872,7 @@ export class X11Window {
      * when the window is obscured then exposed.
      * @param pattern a pattern to use, or %NULL
      */
-    set_background_pattern(pattern: cairo.Pattern | null): void
+    set_background_pattern(pattern?: cairo.Pattern | null): void
     /**
      * Sets the background color of `window`.
      * 
@@ -8998,7 +8932,7 @@ export class X11Window {
      * should use this default.
      * @param cursor a cursor
      */
-    set_cursor(cursor: Gdk.Cursor | null): void
+    set_cursor(cursor?: Gdk.Cursor | null): void
     /**
      * “Decorations” are the features the window manager adds to a toplevel #GdkWindow.
      * This function sets the traditional Motif window manager hints that tell the
@@ -9152,7 +9086,7 @@ export class X11Window {
      * if your application pretends to be multiple applications.
      * @param leader group leader window, or %NULL to restore the default group leader window
      */
-    set_group(leader: Gdk.Window | null): void
+    set_group(leader?: Gdk.Window | null): void
     /**
      * Sets a list of icons for the window. One of these will be used
      * to represent the window when it has been iconified. The icon is
@@ -9181,7 +9115,7 @@ export class X11Window {
      * Note that some platforms don't support window icons.
      * @param name name of window while iconified (minimized)
      */
-    set_icon_name(name: string | null): void
+    set_icon_name(name?: string | null): void
     /**
      * Set if `window` must be kept above other windows. If the
      * window was already above, then this function does nothing.
@@ -9258,7 +9192,7 @@ export class X11Window {
      * property in your #GtkWidget::style-updated handler.
      * @param region a region, or %NULL
      */
-    set_opaque_region(region: cairo.Region | null): void
+    set_opaque_region(region?: cairo.Region | null): void
     /**
      * An override redirect window is not under the control of the window manager.
      * This means it won’t have a titlebar, won’t be minimizable, etc. - it will
@@ -9424,7 +9358,7 @@ export class X11Window {
      * user data is a #GtkWidget, and forward the event to that widget.
      * @param user_data user data
      */
-    set_user_data(user_data: GObject.Object | null): void
+    set_user_data(user_data?: GObject.Object | null): void
     /**
      * Makes pixels in `window` outside `shape_region` be transparent,
      * so that the window may be nonrectangular.
@@ -9538,7 +9472,7 @@ export class X11Window {
      * withdraws toplevel windows before hiding them.
      */
     withdraw(): void
-    /* Extended methods of GObject-2.0.GObject.Object */
+    /* Methods of GObject-2.0.GObject.Object */
     /**
      * Creates a binding between `source_property` on `source` and `target_property`
      * on `target`. Whenever the `source_property` is changed the `target_property` is
@@ -9584,7 +9518,7 @@ export class X11Window {
      * @param transform_to a #GClosure wrapping the transformation function     from the `source` to the `target,` or %NULL to use the default
      * @param transform_from a #GClosure wrapping the transformation function     from the `target` to the `source,` or %NULL to use the default
      */
-    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: GObject.TClosure, transform_from: GObject.TClosure): GObject.Binding
+    bind_property_full(source_property: string, target: GObject.Object, target_property: string, flags: GObject.BindingFlags, transform_to: Function, transform_from: Function): GObject.Binding
     /**
      * This function is intended for #GObject implementations to re-enforce
      * a [floating][floating-ref] object reference. Doing this is seldom
@@ -9753,7 +9687,7 @@ export class X11Window {
      * @param key name of the key
      * @param data data to associate with that key
      */
-    set_data(key: string, data: object | null): void
+    set_data(key: string, data?: object | null): void
     /**
      * Sets a property on an object.
      * @param property_name the name of the property to set
@@ -9841,12 +9775,12 @@ export class X11Window {
      * use this `object` as closure data.
      * @param closure #GClosure to watch
      */
-    watch_closure(closure: GObject.TClosure): void
-    /* Extended virtual methods of Gdk-3.0.Gdk.Window */
+    watch_closure(closure: Function): void
+    /* Virtual methods of Gdk-3.0.Gdk.Window */
     vfunc_create_surface(width: number, height: number): cairo.Surface
     vfunc_from_embedder(embedder_x: number, embedder_y: number, offscreen_x: number, offscreen_y: number): void
     vfunc_to_embedder(offscreen_x: number, offscreen_y: number, embedder_x: number, embedder_y: number): void
-    /* Extended virtual methods of GObject-2.0.GObject.Object */
+    /* Virtual methods of GObject-2.0.GObject.Object */
     vfunc_constructed(): void
     vfunc_dispatch_properties_changed(n_pspecs: number, pspecs: GObject.ParamSpec): void
     vfunc_dispose(): void
@@ -9863,12 +9797,11 @@ export class X11Window {
      * g_object_freeze_notify(). In this case, the signal emissions are queued
      * and will be emitted (in reverse order) when g_object_thaw_notify() is
      * called.
-     * @virtual 
      * @param pspec 
      */
     vfunc_notify(pspec: GObject.ParamSpec): void
     vfunc_set_property(property_id: number, value: any, pspec: GObject.ParamSpec): void
-    /* Extended signals of Gdk-3.0.Gdk.Window */
+    /* Signals of Gdk-3.0.Gdk.Window */
     /**
      * The ::create-surface signal is emitted when an offscreen window
      * needs its surface (re)created, which happens either when the
@@ -9880,7 +9813,6 @@ export class X11Window {
      * Note that it is not possible to access the window's previous
      * surface from within any callback of this signal. Calling
      * gdk_offscreen_window_get_surface() will lead to a crash.
-     * @signal 
      * @param width the width of the offscreen surface to create
      * @param height the height of the offscreen surface to create
      */
@@ -9892,7 +9824,6 @@ export class X11Window {
      * in the embedder of an offscreen window to the offscreen window.
      * 
      * See also #GdkWindow::to-embedder.
-     * @signal 
      * @param embedder_x x coordinate in the embedder window
      * @param embedder_y y coordinate in the embedder window
      */
@@ -9911,7 +9842,6 @@ export class X11Window {
      * flipping, but before any possible sliding. `final_rect` is `flipped_rect,`
      * but possibly translated in the case that flipping is still ineffective in
      * keeping `window` on-screen.
-     * @signal 
      * @param flipped_rect the position of `window` after any possible                flipping or %NULL if the backend can't obtain it
      * @param final_rect the final position of `window` or %NULL if the              backend can't obtain it
      * @param flipped_x %TRUE if the anchors were flipped horizontally
@@ -9923,26 +9853,24 @@ export class X11Window {
     /**
      * The ::pick-embedded-child signal is emitted to find an embedded
      * child at the given position.
-     * @signal 
      * @param x x coordinate in the window
      * @param y y coordinate in the window
      */
-    connect(sigName: "pick-embedded-child", callback: (($obj: X11Window, x: number, y: number) => Gdk.Window)): number
-    connect_after(sigName: "pick-embedded-child", callback: (($obj: X11Window, x: number, y: number) => Gdk.Window)): number
+    connect(sigName: "pick-embedded-child", callback: (($obj: X11Window, x: number, y: number) => Gdk.Window | null)): number
+    connect_after(sigName: "pick-embedded-child", callback: (($obj: X11Window, x: number, y: number) => Gdk.Window | null)): number
     emit(sigName: "pick-embedded-child", x: number, y: number): void
     /**
      * The ::to-embedder signal is emitted to translate coordinates
      * in an offscreen window to its embedder.
      * 
      * See also #GdkWindow::from-embedder.
-     * @signal 
      * @param offscreen_x x coordinate in the offscreen window
      * @param offscreen_y y coordinate in the offscreen window
      */
     connect(sigName: "to-embedder", callback: (($obj: X11Window, offscreen_x: number, offscreen_y: number) => void)): number
     connect_after(sigName: "to-embedder", callback: (($obj: X11Window, offscreen_x: number, offscreen_y: number) => void)): number
     emit(sigName: "to-embedder", offscreen_x: number, offscreen_y: number): void
-    /* Extended signals of GObject-2.0.GObject.Object */
+    /* Signals of GObject-2.0.GObject.Object */
     /**
      * The notify signal is emitted on an object when one of its properties has
      * its value set through g_object_set_property(), g_object_set(), et al.
@@ -9969,7 +9897,6 @@ export class X11Window {
      * It is important to note that you must use
      * [canonical parameter names][canonical-parameter-names] as
      * detail strings for the notify signal.
-     * @signal 
      * @param pspec the #GParamSpec of the property which changed.
      */
     connect(sigName: "notify", callback: (($obj: X11Window, pspec: GObject.ParamSpec) => void)): number
@@ -9977,8 +9904,8 @@ export class X11Window {
     emit(sigName: "notify", pspec: GObject.ParamSpec): void
     connect(sigName: "notify::cursor", callback: (($obj: X11Window, pspec: GObject.ParamSpec) => void)): number
     connect_after(sigName: "notify::cursor", callback: (($obj: X11Window, pspec: GObject.ParamSpec) => void)): number
-    connect(sigName: string, callback: (...args: any[]) => void): number
-    connect_after(sigName: string, callback: (...args: any[]) => void): number
+    connect(sigName: string, callback: any): number
+    connect_after(sigName: string, callback: any): number
     emit(sigName: string, ...args: any[]): void
     disconnect(id: number): void
     static name: string
@@ -9992,7 +9919,7 @@ export class X11Window {
      * @param window an Xlib Window
      */
     static lookup_for_display(display: X11Display, window: xlib.Window): X11Window
-    static $gtype: GObject.GType<X11Window>
+    static $gtype: GObject.Type
 }
 export abstract class X11AppLaunchContextClass {
     static name: string

@@ -908,9 +908,6 @@ export enum unicode_general_category_t {
     PARAGRAPH_SEPARATOR,
     SPACE_SEPARATOR,
 }
-/**
- * @bitfield 
- */
 export enum buffer_diff_flags_t {
     EQUAL,
     CONTENT_TYPE_MISMATCH,
@@ -922,9 +919,6 @@ export enum buffer_diff_flags_t {
     GLYPH_FLAGS_MISMATCH,
     POSITION_MISMATCH,
 }
-/**
- * @bitfield 
- */
 export enum buffer_flags_t {
     /**
      * the default buffer flag.
@@ -970,7 +964,6 @@ export enum buffer_flags_t {
 }
 /**
  * Flags that control what glyph information are serialized in hb_buffer_serialize_glyphs().
- * @bitfield 
  */
 export enum buffer_serialize_flags_t {
     /**
@@ -1003,9 +996,6 @@ export enum buffer_serialize_flags_t {
      */
     NO_ADVANCES,
 }
-/**
- * @bitfield 
- */
 export enum glyph_flags_t {
     /**
      * Indicates that if input text is broken at the
@@ -1030,9 +1020,6 @@ export enum glyph_flags_t {
      */
     DEFINED,
 }
-/**
- * @bitfield 
- */
 export enum ot_color_palette_flags_t {
     /**
      * Default indicating that there is nothing special
@@ -1052,14 +1039,10 @@ export enum ot_color_palette_flags_t {
 }
 /**
  * Flags for math glyph parts.
- * @bitfield 
  */
 export enum ot_math_glyph_part_flags_t {
     EXTENDER,
 }
-/**
- * @bitfield 
- */
 export enum ot_var_axis_flags_t {
     /**
      * The axis should not be exposed directly in user interfaces.
@@ -1136,7 +1119,7 @@ export function buffer_reverse_clusters(buffer: buffer_t): void
 export function buffer_reverse_range(buffer: buffer_t, start: number, end: number): void
 export function buffer_serialize_format_from_string(str: Uint8Array): buffer_serialize_format_t
 export function buffer_serialize_format_to_string(format: buffer_serialize_format_t): string
-export function buffer_serialize_glyphs(buffer: buffer_t, start: number, end: number, font: font_t | null, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): [ /* returnType */ number, /* buf */ Uint8Array, /* buf_consumed */ number ]
+export function buffer_serialize_glyphs(buffer: buffer_t, start: number, end: number, font: font_t | null, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): [ /* returnType */ number, /* buf */ Uint8Array, /* buf_consumed */ number | null ]
 export function buffer_serialize_list_formats(): string[]
 export function buffer_set_cluster_level(buffer: buffer_t, cluster_level: buffer_cluster_level_t): void
 export function buffer_set_content_type(buffer: buffer_t, content_type: buffer_content_type_t): void
@@ -1290,7 +1273,7 @@ export function ot_layout_collect_features(face: face_t, table_tag: tag_t, scrip
 export function ot_layout_collect_lookups(face: face_t, table_tag: tag_t, scripts: tag_t, languages: tag_t, features: tag_t): /* lookup_indexes */ set_t
 export function ot_layout_feature_get_characters(face: face_t, table_tag: tag_t, feature_index: number, start_offset: number): [ /* returnType */ number, /* characters */ codepoint_t[] ]
 export function ot_layout_feature_get_lookups(face: face_t, table_tag: tag_t, feature_index: number, start_offset: number): [ /* returnType */ number, /* lookup_indexes */ number[] ]
-export function ot_layout_feature_get_name_ids(face: face_t, table_tag: tag_t, feature_index: number): [ /* returnType */ bool_t, /* label_id */ ot_name_id_t, /* tooltip_id */ ot_name_id_t, /* sample_id */ ot_name_id_t, /* num_named_parameters */ number, /* first_param_id */ ot_name_id_t ]
+export function ot_layout_feature_get_name_ids(face: face_t, table_tag: tag_t, feature_index: number): [ /* returnType */ bool_t, /* label_id */ ot_name_id_t | null, /* tooltip_id */ ot_name_id_t | null, /* sample_id */ ot_name_id_t | null, /* num_named_parameters */ number | null, /* first_param_id */ ot_name_id_t | null ]
 export function ot_layout_feature_with_variations_get_lookups(face: face_t, table_tag: tag_t, feature_index: number, variations_index: number, start_offset: number): [ /* returnType */ number, /* lookup_indexes */ number[] ]
 export function ot_layout_get_attach_points(face: face_t, glyph: codepoint_t, start_offset: number): [ /* returnType */ number, /* point_array */ number[] ]
 export function ot_layout_get_baseline(font: font_t, baseline_tag: ot_layout_baseline_tag_t, direction: direction_t, script_tag: tag_t, language_tag: tag_t): [ /* returnType */ bool_t, /* coord */ position_t ]
@@ -1331,7 +1314,7 @@ export function ot_math_has_data(face: face_t): bool_t
 export function ot_math_is_glyph_extended_shape(face: face_t, glyph: codepoint_t): bool_t
 export function ot_meta_get_entry_tags(face: face_t, start_offset: number, entries_count: number, entries: ot_meta_tag_t): number
 export function ot_meta_reference_entry(face: face_t, meta_tag: ot_meta_tag_t): blob_t
-export function ot_metrics_get_position(font: font_t, metrics_tag: ot_metrics_tag_t): [ /* returnType */ bool_t, /* position */ position_t ]
+export function ot_metrics_get_position(font: font_t, metrics_tag: ot_metrics_tag_t): [ /* returnType */ bool_t, /* position */ position_t | null ]
 export function ot_metrics_get_variation(font: font_t, metrics_tag: ot_metrics_tag_t): number
 export function ot_metrics_get_x_variation(font: font_t, metrics_tag: ot_metrics_tag_t): position_t
 export function ot_metrics_get_y_variation(font: font_t, metrics_tag: ot_metrics_tag_t): position_t
@@ -1344,8 +1327,8 @@ export function ot_tag_from_language(language: language_t): tag_t
 export function ot_tag_to_language(tag: tag_t): language_t
 export function ot_tag_to_script(tag: tag_t): script_t
 export function ot_tags_from_script(script: script_t, script_tag_1: tag_t, script_tag_2: tag_t): void
-export function ot_tags_from_script_and_language(script: script_t, language: language_t, script_count: number | null, language_count: number | null): [ /* script_tags */ tag_t, /* language_tags */ tag_t ]
-export function ot_tags_to_script_and_language(script_tag: tag_t, language_tag: tag_t, script: script_t | null, language: language_t | null): void
+export function ot_tags_from_script_and_language(script: script_t, language: language_t, script_count?: number | null, language_count?: number | null): [ /* script_tags */ tag_t | null, /* language_tags */ tag_t | null ]
+export function ot_tags_to_script_and_language(script_tag: tag_t, language_tag: tag_t, script?: script_t | null, language?: language_t | null): void
 export function ot_var_find_axis(face: face_t, axis_tag: tag_t, axis_index: number, axis_info: ot_var_axis_t): bool_t
 export function ot_var_find_axis_info(face: face_t, axis_tag: tag_t, axis_info: ot_var_axis_info_t): bool_t
 export function ot_var_get_axes(face: face_t, start_offset: number, axes_count: number, axes_array: ot_var_axis_t): number
@@ -1390,7 +1373,7 @@ export function set_subtract(set: set_t, other: set_t): void
 export function set_symmetric_difference(set: set_t, other: set_t): void
 export function set_union(set: set_t, other: set_t): void
 export function shape(font: font_t, buffer: buffer_t, features: feature_t[] | null): void
-export function shape_full(font: font_t, buffer: buffer_t, features: feature_t[] | null, shaper_list: string[] | null): bool_t
+export function shape_full(font: font_t, buffer: buffer_t, features: feature_t[] | null, shaper_list?: string[] | null): bool_t
 export function shape_list_shapers(): string[]
 export function shape_plan_create(face: face_t, props: segment_properties_t, user_features: feature_t[], shaper_list: string[]): shape_plan_t
 export function shape_plan_create2(face: face_t, props: segment_properties_t, user_features: feature_t, num_user_features: number, coords: number, num_coords: number, shaper_list: string): shape_plan_t
@@ -1406,7 +1389,7 @@ export function unicode_compose(ufuncs: unicode_funcs_t, a: codepoint_t, b: code
 export function unicode_decompose(ufuncs: unicode_funcs_t, ab: codepoint_t): [ /* returnType */ bool_t, /* a */ codepoint_t, /* b */ codepoint_t ]
 export function unicode_decompose_compatibility(ufuncs: unicode_funcs_t, u: codepoint_t): [ /* returnType */ number, /* decomposed */ codepoint_t ]
 export function unicode_eastasian_width(ufuncs: unicode_funcs_t, unicode: codepoint_t): number
-export function unicode_funcs_create(parent: unicode_funcs_t | null): unicode_funcs_t
+export function unicode_funcs_create(parent?: unicode_funcs_t | null): unicode_funcs_t
 export function unicode_funcs_get_default(): unicode_funcs_t
 export function unicode_funcs_get_empty(): unicode_funcs_t
 export function unicode_funcs_get_parent(ufuncs: unicode_funcs_t): unicode_funcs_t
@@ -1428,111 +1411,57 @@ export function variation_to_string(variation: variation_t, buf: string, size: n
 export function version(): [ /* major */ number, /* minor */ number, /* micro */ number ]
 export function version_atleast(major: number, minor: number, micro: number): bool_t
 export function version_string(): string
-/**
- * @callback 
- */
 export interface buffer_message_func_t {
     (buffer: buffer_t, font: font_t, message: string): bool_t
 }
-/**
- * @callback 
- */
 export interface destroy_func_t {
     (): void
 }
-/**
- * @callback 
- */
 export interface font_get_font_extents_func_t {
     (font: font_t, font_data: object | null, extents: font_extents_t): bool_t
 }
-/**
- * @callback 
- */
 export interface font_get_glyph_advance_func_t {
     (font: font_t, font_data: object | null, glyph: codepoint_t): position_t
 }
-/**
- * @callback 
- */
 export interface font_get_glyph_advances_func_t {
     (font: font_t, font_data: object | null, count: number, first_glyph: codepoint_t, glyph_stride: number, first_advance: position_t, advance_stride: number): void
 }
-/**
- * @callback 
- */
 export interface font_get_glyph_contour_point_func_t {
     (font: font_t, font_data: object | null, glyph: codepoint_t, point_index: number, x: position_t, y: position_t): bool_t
 }
-/**
- * @callback 
- */
 export interface font_get_glyph_extents_func_t {
     (font: font_t, font_data: object | null, glyph: codepoint_t, extents: glyph_extents_t): bool_t
 }
-/**
- * @callback 
- */
 export interface font_get_glyph_from_name_func_t {
     (font: font_t, font_data: object | null, name: string, len: number, glyph: codepoint_t): bool_t
 }
-/**
- * @callback 
- */
 export interface font_get_glyph_func_t {
     (font: font_t, font_data: object | null, unicode: codepoint_t, variation_selector: codepoint_t, glyph: codepoint_t): bool_t
 }
-/**
- * @callback 
- */
 export interface font_get_glyph_kerning_func_t {
     (font: font_t, font_data: object | null, first_glyph: codepoint_t, second_glyph: codepoint_t): position_t
 }
-/**
- * @callback 
- */
 export interface font_get_glyph_name_func_t {
     (font: font_t, font_data: object | null, glyph: codepoint_t, name: string, size: number): bool_t
 }
-/**
- * @callback 
- */
 export interface font_get_glyph_origin_func_t {
     (font: font_t, font_data: object | null, glyph: codepoint_t, x: position_t, y: position_t): bool_t
 }
-/**
- * @callback 
- */
 export interface font_get_nominal_glyph_func_t {
     (font: font_t, font_data: object | null, unicode: codepoint_t, glyph: codepoint_t): bool_t
 }
-/**
- * @callback 
- */
 export interface font_get_nominal_glyphs_func_t {
     (font: font_t, font_data: object | null, count: number, first_unicode: codepoint_t, unicode_stride: number, first_glyph: codepoint_t, glyph_stride: number): number
 }
-/**
- * @callback 
- */
 export interface font_get_variation_glyph_func_t {
     (font: font_t, font_data: object | null, unicode: codepoint_t, variation_selector: codepoint_t, glyph: codepoint_t): bool_t
 }
-/**
- * @callback 
- */
 export interface reference_table_func_t {
     (face: face_t, tag: tag_t): blob_t
 }
-/**
- * @callback 
- */
 export interface unicode_combining_class_func_t {
     (ufuncs: unicode_funcs_t, unicode: codepoint_t): unicode_combining_class_t
 }
-/**
- * @callback 
- */
 export interface unicode_compose_func_t {
     (ufuncs: unicode_funcs_t, a: codepoint_t, b: codepoint_t, ab: codepoint_t): bool_t
 }
@@ -1545,63 +1474,36 @@ export interface unicode_compose_func_t {
  * The Unicode standard guarantees that a buffer of length %HB_UNICODE_MAX_DECOMPOSITION_LEN codepoints will always be sufficient for any
  * compatibility decomposition plus an terminating value of 0.  Consequently, `decompose` must be allocated by the caller to be at least this length.  Implementations
  * of this function type must ensure that they do not write past the provided array.
- * @callback 
  */
 export interface unicode_decompose_compatibility_func_t {
     (ufuncs: unicode_funcs_t, u: codepoint_t, decomposed: codepoint_t): number
 }
-/**
- * @callback 
- */
 export interface unicode_decompose_func_t {
     (ufuncs: unicode_funcs_t, ab: codepoint_t, a: codepoint_t, b: codepoint_t): bool_t
 }
-/**
- * @callback 
- */
 export interface unicode_eastasian_width_func_t {
     (ufuncs: unicode_funcs_t, unicode: codepoint_t): number
 }
-/**
- * @callback 
- */
 export interface unicode_general_category_func_t {
     (ufuncs: unicode_funcs_t, unicode: codepoint_t): unicode_general_category_t
 }
-/**
- * @callback 
- */
 export interface unicode_mirroring_func_t {
     (ufuncs: unicode_funcs_t, unicode: codepoint_t): codepoint_t
 }
-/**
- * @callback 
- */
 export interface unicode_script_func_t {
     (ufuncs: unicode_funcs_t, unicode: codepoint_t): script_t
 }
 export class blob_t {
     static name: string
 }
-/**
- * The main structure holding the input text and its properties before shaping,
- * and output glyphs and their information after shaping.
- */
 export class buffer_t {
     static name: string
 }
 export class face_t {
     static name: string
 }
-/**
- * The #hb_feature_t is the structure that holds information about requested
- * feature application. The feature will be applied with the given value to all
- * glyphs which are in clusters between `start` (inclusive) and `end` (exclusive).
- * Setting start to `HB_FEATURE_GLOBAL_START` and end to `HB_FEATURE_GLOBAL_END`
- * specifies that the feature always applies to the entire buffer.
- */
 export class feature_t {
-    /* Own fields of HarfBuzz-0.0.HarfBuzz.feature_t */
+    /* Fields of HarfBuzz-0.0.HarfBuzz.feature_t */
     /**
      * a feature tag
      */
@@ -1620,7 +1522,7 @@ export class feature_t {
      * the cluster to end applying this feature setting (exclusive).
      */
     end: number
-    /* Owm methods of HarfBuzz-0.0.HarfBuzz.feature_t */
+    /* Methods of HarfBuzz-0.0.HarfBuzz.feature_t */
     /**
      * Converts a #hb_feature_t into a %NULL-terminated string in the format
      * understood by hb_feature_from_string(). The client in responsible for
@@ -1630,7 +1532,7 @@ export class feature_t {
     static name: string
 }
 export class font_extents_t {
-    /* Own fields of HarfBuzz-0.0.HarfBuzz.font_extents_t */
+    /* Fields of HarfBuzz-0.0.HarfBuzz.font_extents_t */
     ascender: position_t
     descender: position_t
     line_gap: position_t
@@ -1643,19 +1545,15 @@ export class font_t {
     static name: string
 }
 export class glyph_extents_t {
-    /* Own fields of HarfBuzz-0.0.HarfBuzz.glyph_extents_t */
+    /* Fields of HarfBuzz-0.0.HarfBuzz.glyph_extents_t */
     x_bearing: position_t
     y_bearing: position_t
     width: position_t
     height: position_t
     static name: string
 }
-/**
- * The #hb_glyph_info_t is the structure that holds information about the
- * glyphs and their relation to input text.
- */
 export class glyph_info_t {
-    /* Own fields of HarfBuzz-0.0.HarfBuzz.glyph_info_t */
+    /* Fields of HarfBuzz-0.0.HarfBuzz.glyph_info_t */
     /**
      * either a Unicode code point (before shaping) or a glyph index
      *             (after shaping).
@@ -1677,13 +1575,8 @@ export class glyph_info_t {
     cluster: number
     static name: string
 }
-/**
- * The #hb_glyph_position_t is the structure that holds the positions of the
- * glyph in both horizontal and vertical directions. All positions in
- * #hb_glyph_position_t are relative to the current point.
- */
 export class glyph_position_t {
-    /* Own fields of HarfBuzz-0.0.HarfBuzz.glyph_position_t */
+    /* Fields of HarfBuzz-0.0.HarfBuzz.glyph_position_t */
     /**
      * how much the line advances after drawing this glyph when setting
      *             text in horizontal direction.
@@ -1707,7 +1600,7 @@ export class glyph_position_t {
     static name: string
 }
 export class language_t {
-    /* Owm methods of HarfBuzz-0.0.HarfBuzz.language_t */
+    /* Methods of HarfBuzz-0.0.HarfBuzz.language_t */
     /**
      * See hb_language_from_string().
      */
@@ -1717,22 +1610,14 @@ export class language_t {
 export class map_t {
     static name: string
 }
-/**
- * Pairs of glyph and color index.
- */
 export class ot_color_layer_t {
-    /* Own fields of HarfBuzz-0.0.HarfBuzz.ot_color_layer_t */
+    /* Fields of HarfBuzz-0.0.HarfBuzz.ot_color_layer_t */
     glyph: codepoint_t
     color_index: number
     static name: string
 }
-/**
- * Data type to hold information for a "part" component of a math-variant glyph.
- * Large variants for stretchable math glyphs (such as parentheses) can be constructed
- * on the fly from parts.
- */
 export class ot_math_glyph_part_t {
-    /* Own fields of HarfBuzz-0.0.HarfBuzz.ot_math_glyph_part_t */
+    /* Fields of HarfBuzz-0.0.HarfBuzz.ot_math_glyph_part_t */
     /**
      * The glyph index of the variant part
      */
@@ -1755,11 +1640,8 @@ export class ot_math_glyph_part_t {
     flags: ot_math_glyph_part_flags_t
     static name: string
 }
-/**
- * Data type to hold math-variant information for a glyph.
- */
 export class ot_math_glyph_variant_t {
-    /* Own fields of HarfBuzz-0.0.HarfBuzz.ot_math_glyph_variant_t */
+    /* Fields of HarfBuzz-0.0.HarfBuzz.ot_math_glyph_variant_t */
     /**
      * The glyph index of the variant
      */
@@ -1770,11 +1652,8 @@ export class ot_math_glyph_variant_t {
     advance: position_t
     static name: string
 }
-/**
- * Structure representing a name ID in a particular language.
- */
 export class ot_name_entry_t {
-    /* Own fields of HarfBuzz-0.0.HarfBuzz.ot_name_entry_t */
+    /* Fields of HarfBuzz-0.0.HarfBuzz.ot_name_entry_t */
     /**
      * name ID
      */
@@ -1786,7 +1665,7 @@ export class ot_name_entry_t {
     static name: string
 }
 export class ot_var_axis_info_t {
-    /* Own fields of HarfBuzz-0.0.HarfBuzz.ot_var_axis_info_t */
+    /* Fields of HarfBuzz-0.0.HarfBuzz.ot_var_axis_info_t */
     axis_index: number
     tag: tag_t
     name_id: ot_name_id_t
@@ -1797,7 +1676,7 @@ export class ot_var_axis_info_t {
     static name: string
 }
 export class ot_var_axis_t {
-    /* Own fields of HarfBuzz-0.0.HarfBuzz.ot_var_axis_t */
+    /* Fields of HarfBuzz-0.0.HarfBuzz.ot_var_axis_t */
     tag: tag_t
     name_id: ot_name_id_t
     min_value: number
@@ -1805,13 +1684,8 @@ export class ot_var_axis_t {
     max_value: number
     static name: string
 }
-/**
- * The structure that holds various text properties of an #hb_buffer_t. Can be
- * set and retrieved using hb_buffer_set_segment_properties() and
- * hb_buffer_get_segment_properties(), respectively.
- */
 export class segment_properties_t {
-    /* Own fields of HarfBuzz-0.0.HarfBuzz.segment_properties_t */
+    /* Fields of HarfBuzz-0.0.HarfBuzz.segment_properties_t */
     /**
      * the #hb_direction_t of the buffer, see hb_buffer_set_direction().
      */
@@ -1839,21 +1713,14 @@ export class user_data_key_t {
     static name: string
 }
 export class variation_t {
-    /* Own fields of HarfBuzz-0.0.HarfBuzz.variation_t */
+    /* Fields of HarfBuzz-0.0.HarfBuzz.variation_t */
     tag: tag_t
     value: number
-    /* Owm methods of HarfBuzz-0.0.HarfBuzz.variation_t */
+    /* Methods of HarfBuzz-0.0.HarfBuzz.variation_t */
     _string(buf: string, size: number): void
     static name: string
 }
 export class var_int_t {
-    /* Own fields of HarfBuzz-0.0.HarfBuzz.var_int_t */
-    u32: number
-    i32: number
-    u16: number[]
-    i16: number[]
-    u8: Uint8Array
-    i8: Uint8Array
     static name: string
 }
     export type bool_t = number
