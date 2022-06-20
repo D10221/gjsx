@@ -1,30 +1,27 @@
 import { ApplicationWindow, MenuButton } from "@local/gjs";
 import { MenuModel } from "@local/gjs/types/gjs/Gio-2.0";
-import {
-  factory,
-  getObject,
-  addAction
-} from "@local/gjsxml";
+import { factory, getObject, addAction } from "@local/gjsxml";
 import { jsxml, render } from "@local/jsxml";
 
 type Context = {
   menuButton: MenuButton;
   window: ApplicationWindow;
+  dispatch(action: { type: string; payload?: {} }): any;
 };
 /**
  *
  */
-export default ({ menuButton, window }: Context) =>
+export default ({ menuButton, window, dispatch }: Context) =>
   factory(
     /* configure: */ (builder) => {
       const get = getObject(builder);
       const menu = get<MenuModel>("menu");
       menuButton.set_menu_model(menu);
       addAction(window, "one", (action) => {
-        log(`window:action:${action.name}`);
+        dispatch({ type: `window:action:${action.name}` });
       });
       addAction(window, "two", (action) => {
-        log(`window:action:${action.name}`);
+        dispatch({ type: `window:action:${action.name}` });
       });
       return menu;
     },

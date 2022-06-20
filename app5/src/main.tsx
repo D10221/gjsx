@@ -8,7 +8,7 @@ const app = new Application({
 app.connect("activate", (app: Application) => {
   let win = app.active_window;
   if (!win) {
-    win = mainWindow({ title: "App 5", app });
+    win = mainWindow({ title: "App 5" });
     win.connect("delete-event", () => {
       main_quit(); //exit app
     });

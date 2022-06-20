@@ -8,14 +8,14 @@ import {
   GtkHeaderBar,
   GtkLabel,
   GtkMenuButton,
-  GtkPacking
+  GtkPacking,
 } from "@local/gjsxml";
 import { jsxml, render } from "@local/jsxml";
 import appMenu from "./app-menu";
 /**
  *
  */
-export default ({ title, app }: { title: string; app?: Application }) => {
+export default ({ title }: { title: string; app?: Application }) => {
   //
   return factory(
     /*configure: */ (builder) => {
@@ -30,7 +30,18 @@ export default ({ title, app }: { title: string; app?: Application }) => {
 
       const menuButton = get<MenuButton>("menu-button");
       const window = builder.get_object("MainWindow") as ApplicationWindow;
-      appMenu({ menuButton, window });
+      /**
+       * redux?
+       */
+      const dispatch = (action: { type: string; payload?: any }) => {
+        log("action: " + JSON.stringify(action));
+      };
+      // build menu
+      appMenu({
+        menuButton,
+        window,
+        dispatch,
+      });
 
       return window;
     },
