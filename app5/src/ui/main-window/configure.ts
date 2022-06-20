@@ -7,7 +7,7 @@ import {
 } from "@local/gjs";
 import { MenuModel } from "@local/gjs/Gjs/Gio-2.0";
 import { addAction, build, getObject } from "@local/gjsxml";
-import { Store } from "redux";
+import type { Store } from "redux";
 import appMenu from "./menu";
 /**
  * @param context

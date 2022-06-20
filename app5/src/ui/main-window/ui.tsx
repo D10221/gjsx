@@ -8,11 +8,11 @@ import {
   GtkPacking,
 } from "@local/gjsxml";
 import { jsxml, render } from "@local/jsxml";
-import { Store } from "../../redux";
+import type { Store } from "redux";
 /**
  *
  */
-export default (store: Store<any, any>) => {
+export default (store: Store) => {
   const { title } = store.getState();
   return render(
     <interface>
