@@ -1,5 +1,6 @@
 /**
  * src: https://github.com/smmoosavi/jsx-xml/blob/master/src/jsxxml.js
+ * without underscore
  */
 export default (
   type?: string | Function,

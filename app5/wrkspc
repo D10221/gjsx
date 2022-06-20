@@ -1,0 +1,48 @@
+#!/usr/bin/env sh
+
+usage() {
+    echo "gjs workspace helper"
+    echo "wrkspc [options]"
+    echo "  options:" 
+    echo "      -d  'debug'"
+    echo "      -s  'start'     <dist/?>"
+    echo "      -h  'help'      shows this"
+    echo "      -b  'build'     <src/?>"
+    echo "      -o  'outdir'    <?dist>     TODO:"
+}
+if [ -z "$1" ]; then
+    usage
+    exit 1
+fi
+GTK_DEBUG=''
+while getopts ':b:ds:h' arg; do
+    case $arg in
+    b)
+        # target: "firefox60", // Since GJS 1.53.90
+        # target: "firefox68", // Since GJS 1.63.90
+        # target: "firefox78", // Since GJS 1.65.90
+        # target: "firefox91", // Since GJS 1.71.1
+        esbuild --target=firefox91 --loader:.xml=text --bundle --outdir=dist --external:gi://* src/"$OPTARG"
+        exit $?
+        ;;
+    d)
+        GTK_DEBUG='interactive'        
+        ;;
+    h)
+        usage
+        exit 
+        ;;
+    s)
+        GTK_DEBUG=$GTK_DEBUG gjs dist/"$OPTARG"
+        exit $?        
+        ;;
+    :)
+        usage
+        exit 1
+        ;;
+    ?)
+        usage
+        exit 1
+        ;;
+    esac
+done

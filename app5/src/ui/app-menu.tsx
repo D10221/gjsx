@@ -1,10 +1,9 @@
-import { ApplicationWindow, MenuButton, Window } from "@local/gjs";
+import { ApplicationWindow, MenuButton } from "@local/gjs";
 import { MenuModel } from "@local/gjs/types/gjs/Gio-2.0";
 import {
   factory,
   getObject,
-  addAction,
-  ApplicationWindowProps,
+  addAction
 } from "@local/gjsxml";
 import { jsxml, render } from "@local/jsxml";
 

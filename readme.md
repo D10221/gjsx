@@ -48,3 +48,6 @@ yarn && yarn build && yarn start app1
     ```bash
     $ gsettings set org.gtk.Settings.Debug enable-inspector-keybinding true
     ```
+
+### Engine
+- gjs: 1.72

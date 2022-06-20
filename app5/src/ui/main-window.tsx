@@ -1,4 +1,4 @@
-import { Application, ApplicationWindow, Button, MenuButton, Window } from "@local/gjs";
+import { Application, ApplicationWindow, Button, MenuButton } from "@local/gjs";
 import {
   factory,
   getObject,
@@ -8,8 +8,7 @@ import {
   GtkHeaderBar,
   GtkLabel,
   GtkMenuButton,
-  GtkPacking,
-  GtkWindow,
+  GtkPacking
 } from "@local/gjsxml";
 import { jsxml, render } from "@local/jsxml";
 import appMenu from "./app-menu";
