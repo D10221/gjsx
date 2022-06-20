@@ -18,5 +18,8 @@
     "start": "./wrkspc -s main.js",
     "test": "echo N/A",
     "watch": "yarn build --watch"
+  },
+  "dependencies": {
+    "redux": "^4.2.0"
   }
 }

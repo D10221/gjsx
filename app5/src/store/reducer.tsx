@@ -3,7 +3,7 @@
  */
 export default (
   state: { title: string; label: string; clicks: number },
-  action: import("/home/d10221/code/GTK/gjsx/app5/src/redux").Action
+  action: { type: string; payload?: any; error?: any }
 ): { label: any; title: string; clicks: number } => {
   switch (action.type) {
     case "click": {
