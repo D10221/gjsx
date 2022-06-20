@@ -10,23 +10,29 @@ import { addAction, build, getObject } from "@local/gjsxml";
 import { Store } from "../../redux";
 import appMenu from "./menu";
 /**
- *
+ * @param context 
  */
-export default (store: Store<any, any>, builder: Builder) => {
+export default ({
+  store,
+  builder,
+}: {
+  store: Store<any, any>;
+  builder: Builder;
+}) => {
   const get = getObject(builder);
 
   const button = get<Button>("_button1");
   const menuButton = get<MenuButton>("menu-button");
   const window = get<ApplicationWindow>("MainWindow");
   const label1 = get<Label>("_label1");
-  
+
   store.subscribe(() => {
     const { title, label, clicks } = store.getState();
     window.title = title;
     label1.label = label;
     button.label = clicks == 0 ? "Click me!" : `clicks=${clicks}`;
   });
-  
+
   button.connect("clicked", () => store.dispatch({ type: "click" }));
 
   addAction(window, "one", (action) =>
