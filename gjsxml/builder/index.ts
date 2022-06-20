@@ -41,7 +41,6 @@ export function addAction(
 ) {
   // @ts-ignore
   imports.gi.versions.Gio = "2.0";
-  // @ts-ignore
   const Gio = imports.gi.Gio;
   const action = Gio.SimpleAction.new(actionName, null);
   action.connect("activate", callback);
