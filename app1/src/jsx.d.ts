@@ -12,294 +12,294 @@ declare namespace JSX {
 
   interface IntrinsicElements {
     aboutDialog: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").AboutDialog
+      import("@local/gjs").AboutDialog
     >;
     accelLabel: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").AccelLabel
+      import("@local/gjs").AccelLabel
     >;
     actionBar: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ActionBar
+      import("@local/gjs").ActionBar
     >;
     alignment: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").Alignment
+      import("@local/gjs").Alignment
     >;
     appChooserButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").AppChooserButton
+      import("@local/gjs").AppChooserButton
     >;
     appChooserDialog: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").AppChooserDialog
+      import("@local/gjs").AppChooserDialog
     >;
     appChooserWidget: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").AppChooserWidget
+      import("@local/gjs").AppChooserWidget
     >;
     applicationWindow: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ApplicationWindow
+      import("@local/gjs").ApplicationWindow
     >;
-    arrow: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Arrow>;
+    arrow: IntrinsicElement<import("@local/gjs").Arrow>;
     aspectFrame: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").AspectFrame
+      import("@local/gjs").AspectFrame
     >;
     assistant: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").Assistant
+      import("@local/gjs").Assistant
     >;
-    box: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Box>;
-    button: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Button>;
+    box: IntrinsicElement<import("@local/gjs").Box>;
+    button: IntrinsicElement<import("@local/gjs").Button>;
     buttonBox: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ButtonBox
+      import("@local/gjs").ButtonBox
     >;
-    calendar: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Calendar>;
-    cellView: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").CellView>;
+    calendar: IntrinsicElement<import("@local/gjs").Calendar>;
+    cellView: IntrinsicElement<import("@local/gjs").CellView>;
     checkButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").CheckButton
+      import("@local/gjs").CheckButton
     >;
     checkMenuItem: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").CheckMenuItem
+      import("@local/gjs").CheckMenuItem
     >;
     colorButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ColorButton
+      import("@local/gjs").ColorButton
     >;
     colorChooserDialog: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ColorChooserDialog
+      import("@local/gjs").ColorChooserDialog
     >;
     colorChooserWidget: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ColorChooserWidget
+      import("@local/gjs").ColorChooserWidget
     >;
     colorSelection: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ColorSelection
+      import("@local/gjs").ColorSelection
     >;
     colorSelectionDialog: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ColorSelectionDialog
+      import("@local/gjs").ColorSelectionDialog
     >;
-    comboBox: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").ComboBox>;
+    comboBox: IntrinsicElement<import("@local/gjs").ComboBox>;
     comboBoxText: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ComboBoxText
+      import("@local/gjs").ComboBoxText
     >;
-    dialog: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Dialog>;
+    dialog: IntrinsicElement<import("@local/gjs").Dialog>;
     drawingArea: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").DrawingArea
+      import("@local/gjs").DrawingArea
     >;
-    entry: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Entry>;
-    eventBox: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").EventBox>;
-    expander: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Expander>;
+    entry: IntrinsicElement<import("@local/gjs").Entry>;
+    eventBox: IntrinsicElement<import("@local/gjs").EventBox>;
+    expander: IntrinsicElement<import("@local/gjs").Expander>;
     fileChooserButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").FileChooserButton
+      import("@local/gjs").FileChooserButton
     >;
     fileChooserDialog: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").FileChooserDialog
+      import("@local/gjs").FileChooserDialog
     >;
     fileChooserWidget: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").FileChooserWidget
+      import("@local/gjs").FileChooserWidget
     >;
-    fixed: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Fixed>;
-    flowBox: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").FlowBox>;
+    fixed: IntrinsicElement<import("@local/gjs").Fixed>;
+    flowBox: IntrinsicElement<import("@local/gjs").FlowBox>;
     flowBoxChild: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").FlowBoxChild
+      import("@local/gjs").FlowBoxChild
     >;
     fontButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").FontButton
+      import("@local/gjs").FontButton
     >;
     fontChooserDialog: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").FontChooserDialog
+      import("@local/gjs").FontChooserDialog
     >;
     fontChooserWidget: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").FontChooserWidget
+      import("@local/gjs").FontChooserWidget
     >;
     fontSelection: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").FontSelection
+      import("@local/gjs").FontSelection
     >;
     fontSelectionDialog: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").FontSelectionDialog
+      import("@local/gjs").FontSelectionDialog
     >;
-    frame: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Frame>;
-    gLArea: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").GLArea>;
-    grid: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Grid>;
-    hBox: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").HBox>;
+    frame: IntrinsicElement<import("@local/gjs").Frame>;
+    gLArea: IntrinsicElement<import("@local/gjs").GLArea>;
+    grid: IntrinsicElement<import("@local/gjs").Grid>;
+    hBox: IntrinsicElement<import("@local/gjs").HBox>;
     hButtonBox: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").HButtonBox
+      import("@local/gjs").HButtonBox
     >;
-    hPaned: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").HPaned>;
-    hSV: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").HSV>;
-    hScale: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").HScale>;
+    hPaned: IntrinsicElement<import("@local/gjs").HPaned>;
+    hSV: IntrinsicElement<import("@local/gjs").HSV>;
+    hScale: IntrinsicElement<import("@local/gjs").HScale>;
     hScrollbar: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").HScrollbar
+      import("@local/gjs").HScrollbar
     >;
     hSeparator: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").HSeparator
+      import("@local/gjs").HSeparator
     >;
     handleBox: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").HandleBox
+      import("@local/gjs").HandleBox
     >;
     headerBar: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").HeaderBar
+      import("@local/gjs").HeaderBar
     >;
-    iconView: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").IconView>;
-    image: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Image>;
+    iconView: IntrinsicElement<import("@local/gjs").IconView>;
+    image: IntrinsicElement<import("@local/gjs").Image>;
     imageMenuItem: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ImageMenuItem
+      import("@local/gjs").ImageMenuItem
     >;
-    infoBar: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").InfoBar>;
+    infoBar: IntrinsicElement<import("@local/gjs").InfoBar>;
     invisible: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").Invisible
+      import("@local/gjs").Invisible
     >;
-    label: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Label>;
-    layout: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Layout>;
-    levelBar: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").LevelBar>;
+    label: IntrinsicElement<import("@local/gjs").Label>;
+    layout: IntrinsicElement<import("@local/gjs").Layout>;
+    levelBar: IntrinsicElement<import("@local/gjs").LevelBar>;
     linkButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").LinkButton
+      import("@local/gjs").LinkButton
     >;
-    listBox: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").ListBox>;
+    listBox: IntrinsicElement<import("@local/gjs").ListBox>;
     listBoxRow: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ListBoxRow
+      import("@local/gjs").ListBoxRow
     >;
     lockButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").LockButton
+      import("@local/gjs").LockButton
     >;
-    menu: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Menu>;
-    menuBar: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").MenuBar>;
+    menu: IntrinsicElement<import("@local/gjs").Menu>;
+    menuBar: IntrinsicElement<import("@local/gjs").MenuBar>;
     menuButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").MenuButton
+      import("@local/gjs").MenuButton
     >;
-    menuItem: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").MenuItem>;
+    menuItem: IntrinsicElement<import("@local/gjs").MenuItem>;
     menuToolButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").MenuToolButton
+      import("@local/gjs").MenuToolButton
     >;
     messageDialog: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").MessageDialog
+      import("@local/gjs").MessageDialog
     >;
     modelButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ModelButton
+      import("@local/gjs").ModelButton
     >;
-    notebook: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Notebook>;
+    notebook: IntrinsicElement<import("@local/gjs").Notebook>;
     offscreenWindow: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").OffscreenWindow
+      import("@local/gjs").OffscreenWindow
     >;
-    overlay: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Overlay>;
-    paned: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Paned>;
+    overlay: IntrinsicElement<import("@local/gjs").Overlay>;
+    paned: IntrinsicElement<import("@local/gjs").Paned>;
     placesSidebar: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").PlacesSidebar
+      import("@local/gjs").PlacesSidebar
     >;
-    plug: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Plug>;
-    popover: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Popover>;
+    plug: IntrinsicElement<import("@local/gjs").Plug>;
+    popover: IntrinsicElement<import("@local/gjs").Popover>;
     popoverMenu: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").PopoverMenu
+      import("@local/gjs").PopoverMenu
     >;
     progressBar: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ProgressBar
+      import("@local/gjs").ProgressBar
     >;
     radioButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").RadioButton
+      import("@local/gjs").RadioButton
     >;
     radioMenuItem: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").RadioMenuItem
+      import("@local/gjs").RadioMenuItem
     >;
     radioToolButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").RadioToolButton
+      import("@local/gjs").RadioToolButton
     >;
     recentChooserDialog: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").RecentChooserDialog
+      import("@local/gjs").RecentChooserDialog
     >;
     recentChooserMenu: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").RecentChooserMenu
+      import("@local/gjs").RecentChooserMenu
     >;
     recentChooserWidget: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").RecentChooserWidget
+      import("@local/gjs").RecentChooserWidget
     >;
-    revealer: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Revealer>;
-    scale: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Scale>;
+    revealer: IntrinsicElement<import("@local/gjs").Revealer>;
+    scale: IntrinsicElement<import("@local/gjs").Scale>;
     scaleButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ScaleButton
+      import("@local/gjs").ScaleButton
     >;
     scrollbar: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").Scrollbar
+      import("@local/gjs").Scrollbar
     >;
     scrolledWindow: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ScrolledWindow
+      import("@local/gjs").ScrolledWindow
     >;
     searchBar: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").SearchBar
+      import("@local/gjs").SearchBar
     >;
     searchEntry: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").SearchEntry
+      import("@local/gjs").SearchEntry
     >;
     separator: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").Separator
+      import("@local/gjs").Separator
     >;
     separatorMenuItem: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").SeparatorMenuItem
+      import("@local/gjs").SeparatorMenuItem
     >;
     separatorToolItem: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").SeparatorToolItem
+      import("@local/gjs").SeparatorToolItem
     >;
     shortcutLabel: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ShortcutLabel
+      import("@local/gjs").ShortcutLabel
     >;
     shortcutsGroup: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ShortcutsGroup
+      import("@local/gjs").ShortcutsGroup
     >;
     shortcutsSection: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ShortcutsSection
+      import("@local/gjs").ShortcutsSection
     >;
     shortcutsShortcut: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ShortcutsShortcut
+      import("@local/gjs").ShortcutsShortcut
     >;
     shortcutsWindow: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ShortcutsWindow
+      import("@local/gjs").ShortcutsWindow
     >;
-    socket: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Socket>;
+    socket: IntrinsicElement<import("@local/gjs").Socket>;
     spinButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").SpinButton
+      import("@local/gjs").SpinButton
     >;
-    spinner: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Spinner>;
-    stack: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Stack>;
+    spinner: IntrinsicElement<import("@local/gjs").Spinner>;
+    stack: IntrinsicElement<import("@local/gjs").Stack>;
     stackSidebar: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").StackSidebar
+      import("@local/gjs").StackSidebar
     >;
     stackSwitcher: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").StackSwitcher
+      import("@local/gjs").StackSwitcher
     >;
     statusbar: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").Statusbar
+      import("@local/gjs").Statusbar
     >;
-    switch: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Switch>;
-    table: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Table>;
+    switch: IntrinsicElement<import("@local/gjs").Switch>;
+    table: IntrinsicElement<import("@local/gjs").Table>;
     tearoffMenuItem: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").TearoffMenuItem
+      import("@local/gjs").TearoffMenuItem
     >;
-    textView: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").TextView>;
+    textView: IntrinsicElement<import("@local/gjs").TextView>;
     toggleButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ToggleButton
+      import("@local/gjs").ToggleButton
     >;
     toggleToolButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ToggleToolButton
+      import("@local/gjs").ToggleToolButton
     >;
     toolButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ToolButton
+      import("@local/gjs").ToolButton
     >;
-    toolItem: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").ToolItem>;
+    toolItem: IntrinsicElement<import("@local/gjs").ToolItem>;
     toolItemGroup: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ToolItemGroup
+      import("@local/gjs").ToolItemGroup
     >;
     toolPalette: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").ToolPalette
+      import("@local/gjs").ToolPalette
     >;
-    toolbar: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Toolbar>;
-    treeView: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").TreeView>;
-    vBox: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").VBox>;
+    toolbar: IntrinsicElement<import("@local/gjs").Toolbar>;
+    treeView: IntrinsicElement<import("@local/gjs").TreeView>;
+    vBox: IntrinsicElement<import("@local/gjs").VBox>;
     vButtonBox: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").VButtonBox
+      import("@local/gjs").VButtonBox
     >;
-    vPaned: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").VPaned>;
-    vScale: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").VScale>;
+    vPaned: IntrinsicElement<import("@local/gjs").VPaned>;
+    vScale: IntrinsicElement<import("@local/gjs").VScale>;
     vScrollbar: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").VScrollbar
+      import("@local/gjs").VScrollbar
     >;
     vSeparator: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").VSeparator
+      import("@local/gjs").VSeparator
     >;
-    viewport: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Viewport>;
+    viewport: IntrinsicElement<import("@local/gjs").Viewport>;
     volumeButton: IntrinsicElement<
-      import("@local/gjs/types/gjs/Gtk-3.0").VolumeButton
+      import("@local/gjs").VolumeButton
     >;
-    window: IntrinsicElement<import("@local/gjs/types/gjs/Gtk-3.0").Window>;
+    window: IntrinsicElement<import("@local/gjs").Window>;
   }
 }

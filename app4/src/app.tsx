@@ -6,7 +6,7 @@ import {
   init,
   main,
   main_quit,
-} from "@local/gjs/types/gjs/Gtk-3.0";
+} from "@local/gjs";
 import { jsxml, render } from "@local/jsxml";
 import { build } from "@local/gjsxml";
 import GtkWindow from "./components/GtkWindow";

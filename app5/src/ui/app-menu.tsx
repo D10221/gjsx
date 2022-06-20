@@ -1,5 +1,5 @@
 import { ApplicationWindow, MenuButton } from "@local/gjs";
-import { MenuModel } from "@local/gjs/types/gjs/Gio-2.0";
+import { MenuModel } from "@local/gjs/Gjs/Gio-2.0";
 import { factory, getObject, addAction } from "@local/gjsxml";
 import { jsxml, render } from "@local/jsxml";
 

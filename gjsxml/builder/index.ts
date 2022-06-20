@@ -1,7 +1,7 @@
-import { Builder, ApplicationWindow } from "@local/gjs/types/gjs/Gtk-3.0";
-import type * as Gio from "@local/gjs/types/gjs/Gio-2.0";
-import type * as GLib from "@local/gjs/types/gjs/GLib-2.0";
-import type * as GObject from "@local/gjs/types/gjs/GObject-2.0";
+import { Builder, ApplicationWindow } from "@local/gjs/";
+import type * as Gio from "@local/gjs/Gjs/Gio-2.0";
+import type * as GLib from "@local/gjs/Gjs/GLib-2.0";
+import type * as GObject from "@local/gjs/Gjs/GObject-2.0";
 /**
  * 
  * @param string 

@@ -1,2 +1,2 @@
-export * from "./types/gjs"
-export * from "./types/gjs/Gtk-3.0"
+export * from "./Gjs"
+export * from "./Gjs/Gtk-3.0"

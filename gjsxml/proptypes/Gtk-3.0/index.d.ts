@@ -1,133 +1,135 @@
-import { AboutDialog } from "@local/gjs/types/gjs/Gtk-3.0";
-import { AccelLabel } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ActionBar } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Alignment } from "@local/gjs/types/gjs/Gtk-3.0";
-import { AppChooserButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { AppChooserDialog } from "@local/gjs/types/gjs/Gtk-3.0";
-import { AppChooserWidget } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ApplicationWindow } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Arrow } from "@local/gjs/types/gjs/Gtk-3.0";
-import { AspectFrame } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Assistant } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Box } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Button } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ButtonBox } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Calendar } from "@local/gjs/types/gjs/Gtk-3.0";
-import { CellView } from "@local/gjs/types/gjs/Gtk-3.0";
-import { CheckButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { CheckMenuItem } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ColorButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ColorChooserDialog } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ColorChooserWidget } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ColorSelection } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ColorSelectionDialog } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ComboBox } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ComboBoxText } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Dialog } from "@local/gjs/types/gjs/Gtk-3.0";
-import { DrawingArea } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Entry } from "@local/gjs/types/gjs/Gtk-3.0";
-import { EventBox } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Expander } from "@local/gjs/types/gjs/Gtk-3.0";
-import { FileChooserButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { FileChooserDialog } from "@local/gjs/types/gjs/Gtk-3.0";
-import { FileChooserWidget } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Fixed } from "@local/gjs/types/gjs/Gtk-3.0";
-import { FlowBox } from "@local/gjs/types/gjs/Gtk-3.0";
-import { FlowBoxChild } from "@local/gjs/types/gjs/Gtk-3.0";
-import { FontButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { FontChooserDialog } from "@local/gjs/types/gjs/Gtk-3.0";
-import { FontChooserWidget } from "@local/gjs/types/gjs/Gtk-3.0";
-import { FontSelection } from "@local/gjs/types/gjs/Gtk-3.0";
-import { FontSelectionDialog } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Frame } from "@local/gjs/types/gjs/Gtk-3.0";
-import { GLArea } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Grid } from "@local/gjs/types/gjs/Gtk-3.0";
-import { HBox } from "@local/gjs/types/gjs/Gtk-3.0";
-import { HButtonBox } from "@local/gjs/types/gjs/Gtk-3.0";
-import { HPaned } from "@local/gjs/types/gjs/Gtk-3.0";
-import { HSV } from "@local/gjs/types/gjs/Gtk-3.0";
-import { HScale } from "@local/gjs/types/gjs/Gtk-3.0";
-import { HScrollbar } from "@local/gjs/types/gjs/Gtk-3.0";
-import { HSeparator } from "@local/gjs/types/gjs/Gtk-3.0";
-import { HandleBox } from "@local/gjs/types/gjs/Gtk-3.0";
-import { HeaderBar } from "@local/gjs/types/gjs/Gtk-3.0";
-import { IconView } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Image } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ImageMenuItem } from "@local/gjs/types/gjs/Gtk-3.0";
-import { InfoBar } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Invisible } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Label } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Layout } from "@local/gjs/types/gjs/Gtk-3.0";
-import { LevelBar } from "@local/gjs/types/gjs/Gtk-3.0";
-import { LinkButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ListBox } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ListBoxRow } from "@local/gjs/types/gjs/Gtk-3.0";
-import { LockButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Menu } from "@local/gjs/types/gjs/Gtk-3.0";
-import { MenuBar } from "@local/gjs/types/gjs/Gtk-3.0";
-import { MenuButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { MenuItem } from "@local/gjs/types/gjs/Gtk-3.0";
-import { MenuToolButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { MessageDialog } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ModelButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Notebook } from "@local/gjs/types/gjs/Gtk-3.0";
-import { OffscreenWindow } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Overlay } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Paned } from "@local/gjs/types/gjs/Gtk-3.0";
-import { PlacesSidebar } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Plug } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Popover } from "@local/gjs/types/gjs/Gtk-3.0";
-import { PopoverMenu } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ProgressBar } from "@local/gjs/types/gjs/Gtk-3.0";
-import { RadioButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { RadioMenuItem } from "@local/gjs/types/gjs/Gtk-3.0";
-import { RadioToolButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { RecentChooserDialog } from "@local/gjs/types/gjs/Gtk-3.0";
-import { RecentChooserMenu } from "@local/gjs/types/gjs/Gtk-3.0";
-import { RecentChooserWidget } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Revealer } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Scale } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ScaleButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Scrollbar } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ScrolledWindow } from "@local/gjs/types/gjs/Gtk-3.0";
-import { SearchBar } from "@local/gjs/types/gjs/Gtk-3.0";
-import { SearchEntry } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Separator } from "@local/gjs/types/gjs/Gtk-3.0";
-import { SeparatorMenuItem } from "@local/gjs/types/gjs/Gtk-3.0";
-import { SeparatorToolItem } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ShortcutLabel } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ShortcutsGroup } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ShortcutsSection } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ShortcutsShortcut } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ShortcutsWindow } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Socket } from "@local/gjs/types/gjs/Gtk-3.0";
-import { SpinButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Spinner } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Stack } from "@local/gjs/types/gjs/Gtk-3.0";
-import { StackSidebar } from "@local/gjs/types/gjs/Gtk-3.0";
-import { StackSwitcher } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Statusbar } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Switch } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Table } from "@local/gjs/types/gjs/Gtk-3.0";
-import { TearoffMenuItem } from "@local/gjs/types/gjs/Gtk-3.0";
-import { TextView } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ToggleButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ToggleToolButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ToolButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ToolItem } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ToolItemGroup } from "@local/gjs/types/gjs/Gtk-3.0";
-import { ToolPalette } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Toolbar } from "@local/gjs/types/gjs/Gtk-3.0";
-import { TreeView } from "@local/gjs/types/gjs/Gtk-3.0";
-import { VBox } from "@local/gjs/types/gjs/Gtk-3.0";
-import { VButtonBox } from "@local/gjs/types/gjs/Gtk-3.0";
-import { VPaned } from "@local/gjs/types/gjs/Gtk-3.0";
-import { VScale } from "@local/gjs/types/gjs/Gtk-3.0";
-import { VScrollbar } from "@local/gjs/types/gjs/Gtk-3.0";
-import { VSeparator } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Viewport } from "@local/gjs/types/gjs/Gtk-3.0";
-import { VolumeButton } from "@local/gjs/types/gjs/Gtk-3.0";
-import { Window } from "@local/gjs/types/gjs/Gtk-3.0";
+import {
+  AboutDialog,
+  AccelLabel,
+  ActionBar,
+  Alignment,
+  AppChooserButton,
+  AppChooserDialog,
+  AppChooserWidget,
+  ApplicationWindow,
+  Arrow,
+  AspectFrame,
+  Assistant,
+  Box,
+  Button,
+  ButtonBox,
+  Calendar,
+  CellView,
+  CheckButton,
+  CheckMenuItem,
+  ColorButton,
+  ColorChooserDialog,
+  ColorChooserWidget,
+  ColorSelection,
+  ColorSelectionDialog,
+  ComboBox,
+  ComboBoxText,
+  Dialog,
+  DrawingArea,
+  Entry,
+  EventBox,
+  Expander,
+  FileChooserButton,
+  FileChooserDialog,
+  FileChooserWidget,
+  Fixed,
+  FlowBox,
+  FlowBoxChild,
+  FontButton,
+  FontChooserDialog,
+  FontChooserWidget,
+  FontSelection,
+  FontSelectionDialog,
+  Frame,
+  GLArea,
+  Grid,
+  HandleBox,
+  HBox,
+  HButtonBox,
+  HeaderBar,
+  HPaned,
+  HScale,
+  HScrollbar,
+  HSeparator,
+  HSV,
+  IconView,
+  Image,
+  ImageMenuItem,
+  InfoBar,
+  Invisible,
+  Label,
+  Layout,
+  LevelBar,
+  LinkButton,
+  ListBox,
+  ListBoxRow,
+  LockButton,
+  Menu,
+  MenuBar,
+  MenuButton,
+  MenuItem,
+  MenuToolButton,
+  MessageDialog,
+  ModelButton,
+  Notebook,
+  OffscreenWindow,
+  Overlay,
+  Paned,
+  PlacesSidebar,
+  Plug,
+  Popover,
+  PopoverMenu,
+  ProgressBar,
+  RadioButton,
+  RadioMenuItem,
+  RadioToolButton,
+  RecentChooserDialog,
+  RecentChooserMenu,
+  RecentChooserWidget,
+  Revealer,
+  Scale,
+  ScaleButton,
+  Scrollbar,
+  ScrolledWindow,
+  SearchBar,
+  SearchEntry,
+  Separator,
+  SeparatorMenuItem,
+  SeparatorToolItem,
+  ShortcutLabel,
+  ShortcutsGroup,
+  ShortcutsSection,
+  ShortcutsShortcut,
+  ShortcutsWindow,
+  Socket,
+  SpinButton,
+  Spinner,
+  Stack,
+  StackSidebar,
+  StackSwitcher,
+  Statusbar,
+  Switch,
+  Table,
+  TearoffMenuItem,
+  TextView,
+  ToggleButton,
+  ToggleToolButton,
+  Toolbar,
+  ToolButton,
+  ToolItem,
+  ToolItemGroup,
+  ToolPalette,
+  TreeView,
+  VBox,
+  VButtonBox,
+  Viewport,
+  VolumeButton,
+  VPaned,
+  VScale,
+  VScrollbar,
+  VSeparator,
+  Window,
+} from "@local/gjs";
 /* Props */
 export type AboutDialogProps = Partial<
   Pick<

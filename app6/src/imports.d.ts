@@ -1,1 +1,1 @@
-import type {} from "@local/gjs/types/gjs";
+import type {} from "@local/gjs";

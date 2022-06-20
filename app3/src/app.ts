@@ -1,6 +1,4 @@
-import {} from "@local/gjs";
-import * as gtk from "@local/gjs/types/gjs/Gtk-3.0";
-import { Button, Window } from "@local/gjs/types/gjs/Gtk-3.0";
+import * as gtk from "@local/gjs";
 // @ts-ignore
 import xml from "./app.xml";
 
@@ -8,16 +6,16 @@ try {
   gtk.init(null);
   const title = "Hellow World";
   let i = 0;
-  function clicked(sender: Button) {
+  function clicked(sender: gtk.Button) {
     sender.label = `Clicks=${++i}`;
     window.title = title + " Click!";
   }
 
   const builder = imports.gi.Gtk.Builder.new_from_string(xml, xml.length);
-  const window = builder.get_object("MainWindow") as Window;
+  const window = builder.get_object("MainWindow") as gtk.Window;
   window.connect("delete-event", () => imports.gi.Gtk.main_quit());
 
-  const button1 = builder.get_object("_button1") as Button;
+  const button1 = builder.get_object("_button1") as gtk.Button;
   button1.connect("clicked", clicked);
 
   window.show_all();

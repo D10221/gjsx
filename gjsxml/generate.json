@@ -3,7 +3,7 @@
   "scriptTarget": "ESNext",
   "module": "@local/gjs",
   "classes": {
-    "types/gjs/Gtk-3.0.d.ts": [
+    "Gjs/Gtk-3.0.d.ts": [
       "AboutDialog",
       "AccelLabel",
       "ActionBar",

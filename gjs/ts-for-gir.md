@@ -6,12 +6,7 @@
  npm link
  cd ../gjs 
  set package.json type to module
- ts-for-gir generate
- rm types -rf
- mv @types types
- mv types/Gjs types/gjs
- rm types/node-gtk -rf
+ ts-for-gir generate Gtk-3.0 -e gjs -o ./
  remove type module from package.json
  cd ../
- 
  yarn build

@@ -1,4 +1,4 @@
-import * as gtk from "@local/gjs/types/gjs/Gtk-3.0";
+import * as gtk from "@local/gjs";
 
 gtk.init(null);
 const title = "Hellow World";

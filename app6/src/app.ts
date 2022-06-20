@@ -1,6 +1,6 @@
 //@ts-ignore
 imports.gi.versions.Gtk="3.0"
-import type { Button, Window } from "@local/gjs/types/gjs/Gtk-3.0"
+import type { Button, Window } from "@local/gjs"
 const Gtk = imports.gi.Gtk;
 // @ts-ignore
 import xml from "./app.xml";
