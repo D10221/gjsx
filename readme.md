@@ -14,6 +14,8 @@ Explore JSX and Typescript usage with [GJS](https://gjs.guide/)
     using jsx factory function to create glade xml
 - app5
     using jsx and components
+- app6
+    Windows wls2 Ubtuntu 20.4 imports
 
 # Init
 
@@ -36,6 +38,7 @@ yarn && yarn build && yarn start app1
 - [node-gtk](https://github.com/romgrk/node-gtk)
 - [ts-for-gir](https://github.com/sammydre/ts-for-gir)
 - [gjsify](https://github.com/gjsify)
+- [gjsify ts-for-gjs](https://github.com/gjsify/ts-for-gjs)
 - [types-gjs](https://github.com/Gr3q/types-gjs)
 - [gir2dts](https://github.com/darkoverlordofdata/gir2dts)
 - [gtk3](https://docs.gtk.org/gtk3/)

@@ -1,0 +1,1 @@
+import type {} from "@local/gjs/types/gjs";
