@@ -1,46 +1,85 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 usage() {
     echo "gjs workspace helper"
     echo "wrkspc [options]"
-    echo "  options:" 
+    echo "  options:"
     echo "      -d  'debug'"
     echo "      -s  'start'     <dist/?>"
     echo "      -h  'help'      shows this"
     echo "      -b  'build'     <src/?>"
-    echo "      -o  'outdir'    <?dist>     TODO:"
+    echo "      -t  'target'    <esbuild target>    default: auto by gjs-version"
+    echo "      -o  'outdir'    <?dist>             TODO:"
 }
 if [ -z "$1" ]; then
     usage
     exit 1
 fi
 GTK_DEBUG=''
-while getopts ':b:ds:h' arg; do
+TARGET=''
+OUTDIR="dist"
+SRC_DIR="src"
+while getopts ':b:dhs:t:' arg; do
     case $arg in
     b)
-        # target: "firefox60", // Since GJS 1.53.90
-        # target: "firefox68", // Since GJS 1.63.90
-        # target: "firefox78", // Since GJS 1.65.90
         # target: "firefox91", // Since GJS 1.71.1
-        esbuild --target=firefox91 --loader:.xml=text --bundle --outdir=dist --external:gi://* src/"$OPTARG"
+        # target: "firefox78", // Since GJS 1.65.90
+        # target: "firefox68", // Since GJS 1.63.90
+        # target: "firefox60", // Since GJS 1.53.90
+        if [ -z "$TARGET" ]; then
+            if [ -z "$GJS_VERSION" ]; then
+                GJS_VERSION=$(gjs --version)
+                R='([0-9]+\.[0-9]+\.[0-9]+)'
+                [[ "$GJS_VERSION" =~ $R ]] && GJS_VERSION="${BASH_REMATCH[1]}"
+            fi
+            if [[ "$GJS_VERSION" == "1.71.1" || "$GJS_VERSION" > "1.71.1" ]]; then
+                TARGET="firefox91"
+            elif [[ "$GJS_VERSION" == "1.65.90" || "$GJS_VERSION" > "1.65.90" ]]; then
+                TARGET="firefox78"
+            elif [[ "$GJS_VERSION" == "1.63.90" || "$GJS_VERSION" > "1.63.90" ]]; then
+                TARGET="firefox68"
+            elif [[ "$GJS_VERSION" == "1.53.90" || "$GJS_VERSION" > "1.53.90" ]]; then
+                TARGET="firefox60"
+            else
+                TARGET="firefox60"
+            fi
+        fi
+        echo "GJS_VERSION=$GJS_VERSION TARGET=$TARGET"
+        SRC_FILE="$SRC_DIR/$OPTARG"
+        if [ ! -f $SRC_FILE ]; then
+            echo "can't find $SRC_FILE" >&2
+            exit 1
+        fi
+        esbuild "--target=$TARGET" --loader:.xml=text --bundle --outdir=$OUTDIR --external:gi://* $SRC_FILE
         exit $?
         ;;
     d)
-        GTK_DEBUG='interactive'        
+        GTK_DEBUG='interactive'
         ;;
     h)
         usage
-        exit 
+        exit
         ;;
     s)
-        GTK_DEBUG=$GTK_DEBUG gjs dist/"$OPTARG"
-        exit $?        
+        DIST_FILE="$OUTDIR/$OPTARG"
+        if [ ! -f $DIST_FILE ]; then
+            echo "can't find '$DIST_FILE'" >&2
+            exit 1
+        fi
+        GTK_DEBUG=$GTK_DEBUG gjs $DIST_FILE
+        exit $?
+        ;;
+    t)
+        TARGET="$OPTARG"
+        echo "TARGET=$TARGET"
         ;;
     :)
+        echo "Expected '-$OPTARG' [value]" >&2
         usage
         exit 1
         ;;
     ?)
+        echo "Unkown option -$OPTARG [value]" >&2
         usage
         exit 1
         ;;
