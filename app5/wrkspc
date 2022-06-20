@@ -16,7 +16,7 @@ if [ -z "$1" ]; then
     exit 1
 fi
 GTK_DEBUG=''
-TARGET=''
+# TARGET=''
 OUTDIR="dist"
 SRC_DIR="src"
 while getopts ':b:dhs:t:' arg; do
