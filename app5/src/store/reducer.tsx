@@ -1,10 +1,20 @@
+type State = {
+  title: string;
+  label: string;
+  clicks: number;
+  quit: boolean;
+};
+
+type Action = {
+  type: string;
+  payload?: any;
+  error?: any;
+};
+
 /**
  *
  */
-export default (
-  state: { title: string; label: string; clicks: number },
-  action: { type: string; payload?: any; error?: any }
-): { label: any; title: string; clicks: number } => {
+export default (state: State, action: Action): State => {
   switch (action.type) {
     case "click": {
       return {
@@ -18,10 +28,10 @@ export default (
         label: action.type,
       };
     }
-    case "window:action:two": {
+    case "window:action:quit": {
       return {
         ...state,
-        label: action.type,
+        quit: true,
       };
     }
     default:

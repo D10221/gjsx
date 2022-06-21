@@ -13,8 +13,8 @@ export default render(
       </section>
       <section>
         <item>
-          <attribute name="label">_Two</attribute>
-          <attribute name="action">win.two</attribute>
+          <attribute name="label">Quit</attribute>
+          <attribute name="action">win.quit</attribute>
         </item>
       </section>
     </menu>
