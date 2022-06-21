@@ -9,12 +9,14 @@
     "typescript": "^4.7.3"
   },
   "scripts": {
-    "build": "./wrkspc -b app.ts",
+    "build": "./wrkspc -b main.ts",
     "clean": "rm dist -rf",
     "format": "prettier -w ./",
-    "start": "./wrkspc -s app.js",
+    "start": "./wrkspc -s main.js",
     "test": "echo Not Implemented",
     "watch": "yarn build --watch"
   },
-  "dependencies": {}
+  "dependencies": {
+    "redux": "4.2.0"
+  }
 }
