@@ -1,0 +1,10 @@
+{
+  "name": "@local/flatpak-builder-helper",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
+  "license": "MIT",
+  "bin": {
+    "flatpak-builder-helper": "./flatpak-builder-helper"
+  }
+}

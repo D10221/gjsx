@@ -1,8 +1,7 @@
-#
-# flatpak-builder-helper
-#
 #!/usr/bin/env bash
-{APP:="local.me.app5"}
+if [ -z "$APP" ]; then
+  APP=$(cat package.json | jq '.id' | tr -d '"')
+fi
 BUILD_DIR="build"
 Build() {
   flatpak-builder --force-clean $BUILD_DIR $APP.json
@@ -10,13 +9,13 @@ Build() {
 Install() {
   flatpak-builder --user --install --force-clean $BUILD_DIR $APP.json
 }
-Debug(){
+Debug() {
   flatpak-builder --run $BUILD_DIR $APP.json sh
 }
 Help() {
-  echo "$(basename $0) [verb]" 
-  echo "  Verbs:" 
-  echo "    [build, install, run, help]" 
+  echo "$(basename $0) [verb]"
+  echo "  Verbs:"
+  echo "    [build, install, run, help]"
   echo "    at least 1"
 }
 if [[ $# -lt 1 ]]; then
@@ -38,6 +37,9 @@ for arg in ${@}; do
   run)
     flatpak -vvvv run $APP
     exit $?
+    ;;
+  uninstall)
+    flatpak uninstall $APP -y
     ;;
   help)
     Help

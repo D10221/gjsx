@@ -1,8 +1,10 @@
 .vscode/
+build/
 dist/
 node_modules/
+.flatpak-builder/
+temp/
 *.lock
 *.log
 *.zip
 *~
-temp/

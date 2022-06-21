@@ -21,7 +21,7 @@ const reducer = (state: typeof initialState, action: { type: string, payload?: a
  */
 const initialState = {
     clicks: 0,
-    title: "Hellow World"
+    title: "Hellow World v6"
 };
 /**
  * 

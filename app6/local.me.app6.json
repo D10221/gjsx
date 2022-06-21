@@ -1,5 +1,5 @@
 {
-  "app-id": "local.me.app5",
+  "app-id": "local.me.app6",
   "runtime": "org.gnome.Platform",
   "runtime-version": "42",
   "sdk": "org.gnome.Sdk",
@@ -23,7 +23,7 @@
   ],
   "modules": [
     {
-      "name": "App5",
+      "name": "App6",
       "builddir": true,
       "buildsystem": "simple",
       "build-commands": ["install -D main.js /app/bin/main.js"],
