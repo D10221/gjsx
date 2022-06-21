@@ -6,7 +6,7 @@ import {
   MenuButton,
 } from "@local/gjs";
 import { MenuModel } from "@local/gjs/Gjs/Gio-2.0";
-import { addAction, build, getObject } from "@local/gjsxml";
+import { addAction, build, getObjectFty } from "@local/gjsxml";
 import type { Store } from "redux";
 import appMenu from "./menu";
 /**
@@ -14,12 +14,12 @@ import appMenu from "./menu";
  */
 export default ({ store, builder }: { store: Store; builder: Builder }) => {
   // helper
-  const get = getObject(builder);
+  const getObj = getObjectFty(builder);
   // UI
-  const button = get<Button>("_button1");
-  const menuButton = get<MenuButton>("menu-button");
-  const window = get<ApplicationWindow>("MainWindow");
-  const label1 = get<Label>("_label1");
+  const button = getObj<Button>("_button1");
+  const menuButton = getObj<MenuButton>("menu-button");
+  const window = getObj<ApplicationWindow>("MainWindow");
+  const label1 = getObj<Label>("_label1");
   // State change subscription
   store.subscribe(() => {
     const { title, label, clicks } = store.getState();

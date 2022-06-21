@@ -39,22 +39,14 @@ type PackingProps = {
   children?: any;
 };
 /**
- * 
- * @param props 
- * @returns 
+ *
+ * @param props
+ * @returns
  */
-export function GtkPacking({ children, ...props }: PackingProps) {
+export function Packing(props: PackingProps) {
   const packingProps = () =>
     Object.entries(props).map(([key, value]) => (
       <property name={key}>{propValue(value)}</property>
     ));
-  if (children) {
-    return (
-      <child>
-        {children}
-        <packing>{packingProps()}</packing>;
-      </child>
-    );
-  }
   return <packing>{packingProps()}</packing>;
 }

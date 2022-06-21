@@ -5,7 +5,7 @@ import {
   GtkHeaderBar,
   GtkLabel,
   GtkMenuButton,
-  GtkPacking,
+  Packing,
 } from "@local/gjsxml";
 import { jsxml, render } from "@local/jsxml";
 import type { Store } from "redux";
@@ -43,7 +43,7 @@ export default (store: Store) => {
             </child>
           </GtkHeaderBar>
         </child>
-        <GtkPacking expand={true}>
+        <child>
           <GtkBox
             visible={true}
             can_focus={false}
@@ -53,15 +53,16 @@ export default (store: Store) => {
             //@ts-ignore
             orientation={"vertical"}
           >
-            <GtkPacking expand={true} fill={true} position={0}>
+            <child>
               <GtkLabel
                 id="_label1"
                 visible={true}
                 can_focus={false}
                 label="Hello World"
               />
-            </GtkPacking>
-            <GtkPacking position={1}>
+              <Packing expand={true} fill={true} position={0} />
+            </child>
+            <child>
               <GtkButton
                 id="_button1"
                 visible={true}
@@ -69,9 +70,10 @@ export default (store: Store) => {
                 receives_default={true}
                 label={"Click Me"}
               />
-            </GtkPacking>
+              <Packing position={1}/>
+            </child>
           </GtkBox>
-        </GtkPacking>
+        </child>
       </GtkApplicationWindow>
     </interface>
   );
