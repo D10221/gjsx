@@ -1,6 +1,7 @@
+#!/usr/bin/env gjs
 import * as gtk from "@local/gjs";
 // @ts-ignore
-import xml from "./app.xml";
+import xml from "./ui.xml";
 
 try {
   gtk.init(null);

@@ -2,6 +2,7 @@
 if [ -z "$APP" ]; then
   APP=$(cat package.json | jq '.id' | tr -d '"')
 fi
+echo APP=$APP
 BUILD_DIR="build"
 Build() {
   flatpak-builder --force-clean $BUILD_DIR $APP.json
