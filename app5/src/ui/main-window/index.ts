@@ -1,9 +1,7 @@
-import { build } from "@local/gjsxml";
 import { Store } from "redux";
-import configure from "./configure";
-import ui from "./ui";
+import connect from "./connect";
+import window from "./window";
 /**
- *
+ * pipe?
  */
-export default (store: Store) =>
-  configure({ store, builder: build(ui(store)) });
+export default (store: Store) => connect(window(store))(store);

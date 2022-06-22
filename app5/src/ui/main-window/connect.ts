@@ -1,26 +1,19 @@
-import {
-  ApplicationWindow,
-  Builder,
-  Button,
-  Label,
-  MenuButton,
-  MessageDialog,
-} from "@local/gjs";
-import { MenuModel } from "@local/gjs/Gjs/Gio-2.0";
-import { addAction, build, getObjectFty } from "@local/gjsxml";
+import type * as Gtk from "@local/gjs";
+import type * as Gio from "@local/gjs/Gjs/Gio-2.0";
 import type { Store } from "redux";
-import appMenu from "./menu";
+import { addAction, build, getObject } from "@local/gjsxml";
+import menu from "./menu";
 /**
  * @param context
  */
-export default ({ store, builder }: { store: Store; builder: Builder }) => {
+export default (builder: Gtk.Builder) => (store: Store) => {
   // helper
-  const getObj = getObjectFty(builder);
   // UI
-  const button = getObj<Button>("_button1");
-  const menuButton = getObj<MenuButton>("menu-button");
-  const window = getObj<ApplicationWindow>("MainWindow");
-  const label1 = getObj<Label>("_label1");
+  const button = getObject<Gtk.Button>(builder, "_button1");
+  const menuButton = getObject<Gtk.MenuButton>(builder, "menu-button");
+  const window = getObject<Gtk.ApplicationWindow>(builder, "MainWindow");
+  const label1 = getObject<Gtk.Label>(builder, "_label1");
+  const menuModel = getObject<Gio.MenuModel>(menu, "menu");
 
   // State change subscription
   store.subscribe(() => {
@@ -31,7 +24,7 @@ export default ({ store, builder }: { store: Store; builder: Builder }) => {
     if (quit) {
       import("./dialog")
         .then((x) => build(x.default))
-        .then((x) => x.get_object("dialog1") as MessageDialog)
+        .then((x) => x.get_object("dialog1") as Gtk.MessageDialog)
         .then((dialog) => {
           dialog.text = "Quit?";
           // TODO: show dialog, get result, and quit
@@ -50,6 +43,6 @@ export default ({ store, builder }: { store: Store; builder: Builder }) => {
     store.dispatch({ type: `window:action:${action.name}` })
   );
   // Attach menu
-  menuButton.set_menu_model(build(appMenu).get_object("menu") as MenuModel);
+  menuButton.set_menu_model(menuModel);
   return window;
 };
