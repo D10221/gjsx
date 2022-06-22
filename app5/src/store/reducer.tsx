@@ -31,6 +31,7 @@ export default (state: State, action: Action): State => {
     case "window:action:quit": {
       return {
         ...state,
+        label: action.type,
         quit: true,
       };
     }
