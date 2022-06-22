@@ -6,5 +6,11 @@
   "license": "MIT",
   "bin": {
     "flatpak-builder-helper": "./flatpak-builder-helper"
+  },
+  "scripts": {
+    "build": "echo N/A",
+    "clean": "echo N/A",
+    "format": "echo N/A",
+    "test": "echo N/A"
   }
 }
