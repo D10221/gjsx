@@ -1,11 +1,9 @@
-import { legacy_createStore, applyMiddleware, Middleware, } from "redux";
-import defaultState from "./defaultState";
-import reducer from "./reducer";
+import { legacy_createStore, applyMiddleware, Middleware, combineReducers } from "redux";
 /**
  * 
  */
-export default (...middleware: Middleware[]) => legacy_createStore(
-    reducer,
+export default (defaultState: {}, reducers: {}, ...middleware: Middleware[]) => legacy_createStore(
+    combineReducers(reducers,),
     defaultState,
     applyMiddleware(...middleware)
 );

@@ -1,5 +1,7 @@
 import { render, jsxml } from "@local/jsxml";
-
+/**
+ * dialog template
+ */
 export default render(
   <interface>
     <object class="GtkMessageDialog" id="dialog">

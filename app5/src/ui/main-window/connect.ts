@@ -3,6 +3,7 @@ import type * as Gio from "@local/gjs/Gjs/Gio-2.0";
 import type { Store } from "redux";
 import { addAction, getObject } from "@local/gjsxml";
 import menu from "./menu";
+import { actions } from "app/actions";
 /**
  * @param context
  */
@@ -16,7 +17,7 @@ export default (builder: Gtk.Builder) => (store: Store) => {
   const menuModel = getObject<Gio.MenuModel>(menu, "menu");
   // State change subscription
   store.subscribe(() => {
-    const { title, label, clicks } = store.getState();
+    const { app: { title, label, clicks } } = store.getState();
     window.title = title;
     label1.label = label;
     button.label = clicks == 0 ? "Click me!" : `clicks=${clicks}`;
@@ -26,11 +27,12 @@ export default (builder: Gtk.Builder) => (store: Store) => {
   addAction(window, "one", (action) =>
     store.dispatch({ type: `window:action:${action.name}` })
   );
-  addAction(window, "quit", (action) =>
-    store.dispatch({ type: `window:action:${action.name}` })
+  addAction(window, "quit", (_action) =>
+    store.dispatch(actions.quit())
   );
   // Attach menu
   menuButton.set_menu_model(menuModel);
+  store.dispatch({ type: "noop" })
   return window;
 };
 

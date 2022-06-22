@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "target": "esnext" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "jsx": "react",
     "jsxFactory": "jsxml",
     "reactNamespace": "" /* Specify the object invoked for 'createElement'. This only applies when targeting 'react' JSX emit. */,
@@ -11,7 +13,11 @@
     "allowJs": true /* Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files. */,
     "checkJs": true /* Enable error reporting in type-checked JavaScript files. */,
     "noEmit": true /* Disable emitting files from a compilation. */,
-    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "rootDir": "./",
+    "baseUrl": "./src"
   },
-  "include": ["src/"]
+  "include": [
+    "src/"
+  ]
 }

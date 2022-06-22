@@ -1,3 +1,6 @@
+import { actionTypes } from "app/actions";
+import defaultState from "./defaultState";
+
 type State = {
   title: string;
   label: string;
@@ -8,13 +11,13 @@ type State = {
 type Action = {
   type: string;
   payload?: any;
-  error?: any; 
+  error?: any;
 };
 
 /**
  *
  */
-export default (state: State, action: Action): State => {
+export default (state = defaultState, action: Action): State => {
   switch (action.type) {
     case "click": {
       return {
@@ -28,7 +31,7 @@ export default (state: State, action: Action): State => {
         label: action.type,
       };
     }
-    case "window:action:quit": {
+    case actionTypes.QUIT: {
       return {
         ...state,
         label: action.type,
