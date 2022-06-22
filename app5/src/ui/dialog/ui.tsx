@@ -2,7 +2,7 @@ import { render, jsxml } from "@local/jsxml";
 
 export default render(
   <interface>
-    <object class="GtkMessageDialog">
+    <object class="GtkMessageDialog" id="dialog">
       <property name="can-focus">False</property>
       <property name="type-hint">dialog</property>
       <child internal-child="vbox">
