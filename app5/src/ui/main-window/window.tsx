@@ -14,7 +14,9 @@ import { Store } from "redux";
  * @params state
  */
 export default (store: Store) => {
-  const { title } = store.getState();
+  const {
+    app: { title },
+  } = store.getState();
   return build(
     render(
       <interface>
