@@ -4,6 +4,8 @@
   "private": true,
   "version": "0.0.1",
   "license": "MIT",
+  "main": "dist/main.js",
+  "src": "src/main.tsx",
   "devDependencies": {
     "@types/xmlbuilder": "^11.0.1",
     "esbuild": "0.14.43",
@@ -11,16 +13,15 @@
     "ts-node": "10.8.1",
     "typescript": "4.7.3",
     "xmlbuilder": "15.1.1",
-    "@local/flatpak-builder-helper": "0.0.1"
+    "@local/gjs-builder": "0.0.1"
   },
   "scripts": {
-    "build": "./wrkspc -b main.tsx",
+    "build": "gjs-builder -b",
     "clean": "rm dist -rf",
     "format": "prettier -w ./",
-    "start": "./wrkspc -s main.js",
+    "start": "gjs-builder -s",
     "test": "echo N/A",
-    "watch": "yarn build --watch",
-    "flatpak": "flatpak-builder-helper"
+    "watch": "gjs-builder -w"    
   },
   "dependencies": {
     "redux": "^4.2.0"

@@ -1,11 +1,12 @@
 {
-  "name": "@local/flatpak-builder-helper",
+  "name": "@local/gjs-builder",
+  "description": "simple gls dev builder, helper",
   "version": "0.0.1",
   "private": true,
   "main": "index.js",
   "license": "MIT",
   "bin": {
-    "flatpak-builder-helper": "./flatpak-builder-helper"
+    "gjs-builder": "./gjs-builder"
   },
   "scripts": {
     "build": "echo N/A",
