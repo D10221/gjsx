@@ -1,4 +1,4 @@
-#!/usr/bin/env -S gjs
+#!/usr/bin/env -S gjs -m
 import Gtk from "gi://Gtk?version=3.0";
 import xml from "./ui.xml";
 

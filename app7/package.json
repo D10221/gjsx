@@ -26,7 +26,8 @@
     "format": "prettier -w ./",
     "start": "gjs-builder -d -m -s",
     "test": "echo N/A",
-    "watch": "gjs-builder -w"
+    "watch": "gjs-builder -w",
+    "fltpk": "gjs-builder -ubBir"    
   },
   "dependencies": {
     "jsx-xml": "^0.2.3",

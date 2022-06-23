@@ -43,19 +43,14 @@ while getopts ':bBdhimsrt:u' arg; do
             fi
             if [[ "$GJS_VERSION" == "1.71.1" || "$GJS_VERSION" > "1.71.1" ]]; then
                 TARGET="firefox91"
-                ${MODULE:='-m'}
             elif [[ "$GJS_VERSION" == "1.65.90" || "$GJS_VERSION" > "1.65.90" ]]; then
                 TARGET="firefox78"
-                ${MODULE:='-m'}
             elif [[ "$GJS_VERSION" == "1.63.90" || "$GJS_VERSION" > "1.63.90" ]]; then
                 TARGET="firefox68"
-                ${MODULE:=''}
             elif [[ "$GJS_VERSION" == "1.53.90" || "$GJS_VERSION" > "1.53.90" ]]; then
                 TARGET="firefox60"
-                ${MODULE:=''}
             else
                 TARGET="firefox60"
-                ${MODULE:=''}
             fi
         fi
         echo "GJS_VERSION=$GJS_VERSION TARGET=$TARGET"
@@ -70,7 +65,6 @@ while getopts ':bBdhimsrt:u' arg; do
         fi
         FORMAT="--format=esm" # check tsconfig ?
         esbuild "--target=$TARGET" --loader:.xml=text --bundle --outdir=$OUTDIR "$FORMAT" --external:gi://* $SRC_FILE
-        exit $?
         ;;
     B)
         BUILD_DIR="build"
@@ -91,7 +85,6 @@ while getopts ':bBdhimsrt:u' arg; do
     i)
         BUILD_DIR="build"
         flatpak-builder --user --install --force-clean $BUILD_DIR $APP_ID.json
-        exit $?
         ;;
     m)
         MODULE='-m'
@@ -108,31 +101,13 @@ while getopts ':bBdhimsrt:u' arg; do
         if [ ! -f $DIST_FILE ]; then
             echo "can't find '$DIST_FILE'" >&2
             exit 1
-        fi
-        #         Usage:
-        #   gjs [OPTION…]
-
-        # Help Options:
-        #   -h, --help                       Show help options
-
-        # Application Options:
-        #   --version                        Print GJS version and exit
-        #   --jsversion                      Print version of the JS engine and exit
-        #   -c, --command=COMMAND            Program passed in as a string
-        #   -C, --coverage-prefix=PREFIX     Add the prefix PREFIX to the list of files to generate coverage info for
-        #   --coverage-output=DIR            Write coverage output to a directory DIR. This option is mandatory when using --coverage-prefix
-        #   -I, --include-path=DIR           Add the directory DIR to the list of directories to search for js files.
-        #   -m, --module                     Execute the file as a module.
-        #   --profile=FILE                   Enable the profiler and write output to FILE (default: gjs-$PID.syscap)
-        #   -d, --debugger                   set DEBUG
-        #   -D,                              Start in debug mode
+        fi        
         if [ ! -z "$GTK_DEBUG" ];then
             GTK_DEBUG="GTK_DEBUG=\"$GTK_DEBUG\""
         fi
         CMD="$GTK_DEBUG gjs $MODULE $DIST_FILE"
         echo CMD="$CMD"
         bash -c "$CMD"
-        exit $?
         ;;
     t) # target
         TARGET="$OPTARG"
