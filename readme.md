@@ -31,6 +31,7 @@ yarn && yarn build && yarn start app1
 
 ### Credits and resources
 
+- [Workbench](https://github.com/sonnyp/Workbench)
 - [gtk-guitar-tuner-jsx](https://github.com/meghprkh/gtk-guitar-tuner-jsx)
 - [gjs-ts](https://github.com/niagr/gjs-ts)
 - [GIR2TS](https://github.com/niagr/GIR2TS)
