@@ -1,3 +1,11 @@
 build/
 dist/
 @types/
+_build/
+install/
+flatpak/
+.flatpak/
+.flatpak-builder/
+node_modules/
+repo/
+src/lib

@@ -1,0 +1,22 @@
+{
+    "editor.formatOnSave": true,
+    "javascript.preferences.importModuleSpecifierEnding": "js",
+    "typescript.preferences.importModuleSpecifierEnding": "js",
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/node_modules/*/**": true,
+      "**/.hg/store/**": true,
+      "**/.flatpak": true,
+      "**/.flatpak-builder": true,
+      "**/dist": true,
+      "**/build": true,
+      "**/src/lib": true,
+      ".flatpak": true,
+      ".flatpak/**": true,
+      "_build/**": true
+    },
+    "mesonbuild.configureOnOpen": false,
+    "mesonbuild.buildFolder": "_build",
+    "mesonbuild.mesonPath": "/home/sonny/Projects/Workbench/.flatpak/meson.sh"
+  }
