@@ -2,6 +2,7 @@ build/
 dist/
 node_modules/
 .flatpak-builder/
+.flatpak/
 temp/
 *.lock
 *.log
