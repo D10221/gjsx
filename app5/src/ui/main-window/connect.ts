@@ -1,5 +1,5 @@
-import type * as Gtk from "@local/gjs";
-import type * as Gio from "@local/gjs/Gjs/Gio-2.0";
+import type * as gtk from "@local/gjs";
+import type * as gio from "@local/gjs/Gjs/Gio-2.0";
 import type { Store } from "redux";
 import { addAction, getObject } from "@local/gjsxml";
 import menu from "./menu";
@@ -7,14 +7,14 @@ import { actions } from "app/actions";
 /**
  * @param context
  */
-export default (builder: Gtk.Builder) => (store: Store) => {
+export default (builder: gtk.Builder) => (store: Store) => {
   // helper
   // UI
-  const button = getObject<Gtk.Button>(builder, "_button1");
-  const menuButton = getObject<Gtk.MenuButton>(builder, "menu-button");
-  const window = getObject<Gtk.ApplicationWindow>(builder, "MainWindow");
-  const label1 = getObject<Gtk.Label>(builder, "_label1");
-  const menuModel = getObject<Gio.MenuModel>(menu, "menu");
+  const button = getObject<gtk.Button>(builder, "_button1");
+  const menuButton = getObject<gtk.MenuButton>(builder, "menu-button");
+  const window = getObject<gtk.ApplicationWindow>(builder, "MainWindow");
+  const label1 = getObject<gtk.Label>(builder, "_label1");
+  const menuModel = getObject<gio.MenuModel>(menu, "menu");
   // State change subscription
   store.subscribe(() => {
     const { app: { title, label, clicks } } = store.getState();
