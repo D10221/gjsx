@@ -4,24 +4,27 @@ Explore JSX and Typescript usage with [GJS](https://gjs.guide/)
 
 ## Apps
 
-- app1  
+- app1
    using a simple jsx factory function to create Gtk windgets class instances
-- app2  
-   using `ts-for-gir` for classic Gtk 
-- app3  
+- app2
+   using `ts-for-gir` for classic Gtk
+- app3
    using `ts-for-gir` for classic Gtk, from glade UI xml templates
 - app4
     using jsx factory function to create glade xml
 - app5
-    using jsx and components
+    using jsx and components, using [jsx-xml](https://github.com/smmoosavi/jsx-xml) and redux 
 - app6
     Windows wls2 Ubtuntu 20.4 imports
+- app7
+    using 'gi-types' from [gi-ts](https://github.com/gi-ts)
+
 
 # Init
 
 ```bash
 # TODO: generate gjs types
-yarn && yarn build && yarn start app1 
+yarn && yarn build && yarn start app1
 # where app1 is a @local/app1 workspace name
 ```
 ### Types:
@@ -32,6 +35,7 @@ yarn && yarn build && yarn start app1
 ### Credits and resources
 
 - [Workbench](https://github.com/sonnyp/Workbench)
+- [gi-ts](https://github.com/gi-ts)
 - [gtk-guitar-tuner-jsx](https://github.com/meghprkh/gtk-guitar-tuner-jsx)
 - [gjs-ts](https://github.com/niagr/gjs-ts)
 - [GIR2TS](https://github.com/niagr/GIR2TS)
@@ -48,10 +52,17 @@ yarn && yarn build && yarn start app1
 - [xmlbuilder](https://github.com/oozcitak/xmlbuilder-js)
 
 ### Debug
-- enable [inspector](https://wiki.gnome.org/action/show/Projects/GTK/Inspector)  
+- enable [inspector](https://wiki.gnome.org/action/show/Projects/GTK/Inspector)
     ```bash
     $ gsettings set org.gtk.Settings.Debug enable-inspector-keybinding true
     ```
 
 ### Engine
 - gjs: 1.72
+
+### WSL notes
+  - Wsl Ubuntu 20.4 ships with older gjs
+    - doesn't support modules
+  - Can't use jsx-xml (firedox engne doens't like sintax)
+  - flatpak doesn;t find display with gwsl
+    - it works over ```ssh -X```

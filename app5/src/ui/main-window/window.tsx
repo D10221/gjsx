@@ -7,7 +7,7 @@ import {
   GtkMenuButton,
   Packing,
 } from "@local/gjsxml";
-import { jsxml, render } from "@local/jsxml";
+import { render, JSXXML } from "jsx-xml";
 import { build } from "@local/gjsxml";
 import { Store } from "redux";
 /**

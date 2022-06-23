@@ -1,19 +1,19 @@
 {
   "name": "@local/app5",
-  "id": "local.me.app5",
+  "application_id": "local.me.app5",
   "private": true,
   "version": "0.0.1",
   "license": "MIT",
   "main": "dist/main.js",
   "src": "src/main.tsx",
   "devDependencies": {
+    "@local/gjs-builder": "0.0.1",
     "@types/xmlbuilder": "^11.0.1",
     "esbuild": "0.14.43",
     "prettier": "2.6.2",
     "ts-node": "10.8.1",
     "typescript": "4.7.3",
-    "xmlbuilder": "15.1.1",
-    "@local/gjs-builder": "0.0.1"
+    "xmlbuilder": "15.1.1"
   },
   "scripts": {
     "build": "gjs-builder -b",
@@ -21,9 +21,11 @@
     "format": "prettier -w ./",
     "start": "gjs-builder -s",
     "test": "echo N/A",
-    "watch": "gjs-builder -w"    
+    "watch": "gjs-builder -w",
+    "fltpk": "gjs-builder -t firefox91 -ubBir"
   },
   "dependencies": {
+    "jsx-xml": "^0.2.3",
     "redux": "^4.2.0"
   }
 }

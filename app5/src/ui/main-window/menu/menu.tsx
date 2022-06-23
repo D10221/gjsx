@@ -1,4 +1,4 @@
-import { jsxml, render } from "@local/jsxml";
+import { render, JSXXML } from "jsx-xml";
 import { actionTypes, signals } from "app/actions";
 /**
  *

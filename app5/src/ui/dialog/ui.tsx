@@ -1,4 +1,4 @@
-import { render, jsxml } from "@local/jsxml";
+import { render, JSXXML } from "jsx-xml";
 /**
  * dialog template
  */
