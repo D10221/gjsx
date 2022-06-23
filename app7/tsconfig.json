@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "ES2019" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+    "lib": [
+      "ES2019"
+    ],
+    // "jsx": "react",
+    // "jsxFactory": "jsxml",
+    // "reactNamespace": "" /* Specify the object invoked for 'createElement'. This only applies when targeting 'react' JSX emit. */,
+    "module": "ESNext" /* Specify what module code is generated. */,
+    "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
+    "resolveJsonModule": true,
+    "allowJs": true /* Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files. */,
+    "checkJs": true /* Enable error reporting in type-checked JavaScript files. */,
+    "noEmit": true /* Disable emitting files from a compilation. */,
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "rootDir": "./",
+    "baseUrl": "./src",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/@gi-types",
+    ],
+    "types": [
+      "gjs-environment",
+      "base-types",
+      "gtk3-types",
+      "gtk4-types"
+    ],
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "src/"
+  ]
+}

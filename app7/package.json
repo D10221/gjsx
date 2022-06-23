@@ -1,0 +1,35 @@
+{
+  "name": "@local/app7",  
+  "application_id": "local.me.app7",
+  "private": true,
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "dist/main.js",
+  "src": "src/main.ts",
+  "devDependencies": {
+    "@gi-types/base-types": "^1.0.0",
+    "@gi-types/gjs-environment": "^1.0.0",
+    "@gi-types/gtk3": "^3.24.0",
+    "@gi-types/gtk3-types": "^1.0.0",
+    "@gi-types/gtk4": "^4.2.0",
+    "@gi-types/gtk4-types": "^1.0.0",
+    "@types/xmlbuilder": "11.0.1",
+    "esbuild": "0.14.43",
+    "prettier": "2.6.2",
+    "ts-node": "10.8.1",
+    "typescript": "4.7.3",
+    "xmlbuilder": "15.1.1"
+  },
+  "scripts": {
+    "build": "./wrkspc -b",
+    "clean": "rm dist -rf",
+    "format": "prettier -w ./",
+    "start": "./wrkspc -s",
+    "test": "echo N/A",
+    "watch": "./wrkspc -w"
+  },
+  "dependencies": {
+    "jsx-xml": "^0.2.3",
+    "redux": "^4.2.0"
+  }
+}

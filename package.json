@@ -10,7 +10,8 @@
     "app3",
     "app4",
     "app5",
-    "app6"
+    "app6",
+    "app7"
   ],
   "devDependencies": {
     "esbuild": "0.14.43",

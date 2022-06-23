@@ -1,0 +1,147 @@
+#!/usr/bin/env bash
+
+usage() {
+    echo "gjs workspace helper"
+    echo "wrkspc [options]"
+    echo "  options:"
+    echo "      -d  'set debug'"
+    echo "      -D  'start debug'"
+    echo "      -s  'start'     <dist/?>"
+    echo "      -h  'help'      shows this"
+    echo "      -i  'flatpak-builder install'"
+    echo "      -b  'build'     <src/?>"
+    echo "      -B  'flatpak-builder build'"
+    echo "      -t  'target'    <esbuild target>    default: auto by gjs-version"
+    echo "      -u  'flatpak uninstall'"
+    echo "      -o  'outdir'    <?dist>             TODO:"
+    echo "      -r  flatpak run"
+}
+if [ -z "$1" ]; then
+    usage
+    exit 1
+fi
+GTK_DEBUG=''
+# TARGET=''
+OUTDIR="dist"
+SRC_DIR="src"
+if [ -z "$APP_ID" ]; then
+    APP_ID=$(cat package.json | jq '.application_id' | tr -d '"')
+fi
+echo APP_ID=$APP
+while getopts ':bBdhisrt:u' arg; do
+    case $arg in
+    b)
+        # target: "firefox91", // Since GJS 1.71.1
+        # target: "firefox78", // Since GJS 1.65.90
+        # target: "firefox68", // Since GJS 1.63.90
+        # target: "firefox60", // Since GJS 1.53.90
+        if [ -z "$TARGET" ]; then
+            if [ -z "$GJS_VERSION" ]; then
+                GJS_VERSION=$(gjs --version)
+                R='([0-9]+\.[0-9]+\.[0-9]+)'
+                [[ "$GJS_VERSION" =~ $R ]] && GJS_VERSION="${BASH_REMATCH[1]}"
+            fi
+            if [[ "$GJS_VERSION" == "1.71.1" || "$GJS_VERSION" > "1.71.1" ]]; then
+                TARGET="firefox91"
+                ${MODULE:='-m'}
+            elif [[ "$GJS_VERSION" == "1.65.90" || "$GJS_VERSION" > "1.65.90" ]]; then
+                TARGET="firefox78"
+                ${MODULE:='-m'}
+            elif [[ "$GJS_VERSION" == "1.63.90" || "$GJS_VERSION" > "1.63.90" ]]; then
+                TARGET="firefox68"
+                ${MODULE:=''}
+            elif [[ "$GJS_VERSION" == "1.53.90" || "$GJS_VERSION" > "1.53.90" ]]; then
+                TARGET="firefox60"
+                ${MODULE:=''}
+            else
+                TARGET="firefox60"
+                ${MODULE:=''}
+            fi
+        fi
+        echo "GJS_VERSION=$GJS_VERSION TARGET=$TARGET"
+        if [ ! -z $OPTARG ]; then
+            SRC_FILE="$SRC_DIR/$OPTARG"
+        else
+            SRC_FILE="$(cat package.json |jq '.src'|tr -d '"')"
+        fi
+        if [ ! -f $SRC_FILE ]; then
+            echo "can't find $SRC_FILE" >&2
+            exit 1
+        fi
+        FORMAT="--format=esm" # check tsconfig ?
+        esbuild "--target=$TARGET" --loader:.xml=text --bundle --outdir=$OUTDIR "$FORMAT" --external:gi://* $SRC_FILE
+        exit $?
+        ;;
+    B)
+        BUILD_DIR="build"
+        flatpak-builder --force-clean $BUILD_DIR $APP_ID.json
+        # exit $?
+        ;;
+    d)
+        GTK_DEBUG='interactive'
+        ;;
+    D)
+        flatpak-builder --run $BUILD_DIR $APP_ID.json sh
+        # exit $?
+        ;;
+    h) # help
+        usage
+        exit
+        ;;
+    i)
+        BUILD_DIR="build"
+        flatpak-builder --user --install --force-clean $BUILD_DIR $APP_ID.json
+        exit $?
+        ;;
+    r)
+        flatpak -vvvv run $APP_ID
+        ;;
+    s) # start
+        if [ ! -z "$OPTARG" ]; then
+            DIST_FILE="$OUTDIR/$OPTARG"
+            else
+            DIST_FILE="$(cat package.json |jq '.main'|tr -d '"')"
+        fi
+        if [ ! -f $DIST_FILE ]; then
+            echo "can't find '$DIST_FILE'" >&2
+            exit 1
+        fi
+        #         Usage:
+        #   gjs [OPTION…]
+
+        # Help Options:
+        #   -h, --help                       Show help options
+
+        # Application Options:
+        #   --version                        Print GJS version and exit
+        #   --jsversion                      Print version of the JS engine and exit
+        #   -c, --command=COMMAND            Program passed in as a string
+        #   -C, --coverage-prefix=PREFIX     Add the prefix PREFIX to the list of files to generate coverage info for
+        #   --coverage-output=DIR            Write coverage output to a directory DIR. This option is mandatory when using --coverage-prefix
+        #   -I, --include-path=DIR           Add the directory DIR to the list of directories to search for js files.
+        #   -m, --module                     Execute the file as a module.
+        #   --profile=FILE                   Enable the profiler and write output to FILE (default: gjs-$PID.syscap)
+        #   -d, --debugger                   set DEBUG
+        #   -D,                              Start in debug mode
+        GTK_DEBUG=$GTK_DEBUG gjs $MODULE $DIST_FILE
+        exit $?
+        ;;
+    t) # target
+        TARGET="$OPTARG"
+        echo "TARGET=$TARGET"
+        ;;
+    u)
+        flatpak uninstall $APP_ID -y
+        ;;
+    :)
+        echo "Expected '-$OPTARG' [value]" >&2
+        usage
+        exit 1
+        ;;
+    ?)
+        echo "Unkown option -$OPTARG [value]" >&2
+        usage
+        exit 1
+        ;;
+    esac
+done
