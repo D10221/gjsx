@@ -4,16 +4,16 @@ usage() {
     echo "gjs workspace helper"
     echo "wrkspc [options]"
     echo "  options:"
-    echo "      -d  'set debug'"
-    echo "      -D  'start debug'"
-    echo "      -s  'start'     <dist/?>"
-    echo "      -h  'help'      shows this"
-    echo "      -i  'flatpak-builder install'"
     echo "      -b  'build'     <src/?>"
     echo "      -B  'flatpak-builder build'"
+    echo "      -d  'set debug'"
+    echo "      -D  'start debug'"
+    echo "      -h  'help'      shows this"
+    echo "      -i  'flatpak-builder install'"
+    echo "      -m  'module' run/start flag"
+    echo "      -s  'start'     <dist/?>"
     echo "      -t  'target'    <esbuild target>    default: auto by gjs-version"
     echo "      -u  'flatpak uninstall'"
-    echo "      -o  'outdir'    <?dist>             TODO:"
     echo "      -r  flatpak run"
 }
 if [ -z "$1" ]; then
@@ -27,8 +27,8 @@ SRC_DIR="src"
 if [ -z "$APP_ID" ]; then
     APP_ID=$(cat package.json | jq '.application_id' | tr -d '"')
 fi
-echo APP_ID=$APP
-while getopts ':bBdhisrt:u' arg; do
+echo APP_ID=$APP_ID
+while getopts ':bBdhimsrt:u' arg; do
     case $arg in
     b)
         # target: "firefox91", // Since GJS 1.71.1
@@ -62,7 +62,7 @@ while getopts ':bBdhisrt:u' arg; do
         if [ ! -z $OPTARG ]; then
             SRC_FILE="$SRC_DIR/$OPTARG"
         else
-            SRC_FILE="$(cat package.json |jq '.src'|tr -d '"')"
+            SRC_FILE="$(cat package.json | jq '.src' | tr -d '"')"
         fi
         if [ ! -f $SRC_FILE ]; then
             echo "can't find $SRC_FILE" >&2
@@ -93,14 +93,17 @@ while getopts ':bBdhisrt:u' arg; do
         flatpak-builder --user --install --force-clean $BUILD_DIR $APP_ID.json
         exit $?
         ;;
+    m)
+        MODULE='-m'
+        ;;
     r)
         flatpak -vvvv run $APP_ID
         ;;
     s) # start
         if [ ! -z "$OPTARG" ]; then
             DIST_FILE="$OUTDIR/$OPTARG"
-            else
-            DIST_FILE="$(cat package.json |jq '.main'|tr -d '"')"
+        else
+            DIST_FILE="$(cat package.json | jq '.main' | tr -d '"')"
         fi
         if [ ! -f $DIST_FILE ]; then
             echo "can't find '$DIST_FILE'" >&2
@@ -123,7 +126,12 @@ while getopts ':bBdhisrt:u' arg; do
         #   --profile=FILE                   Enable the profiler and write output to FILE (default: gjs-$PID.syscap)
         #   -d, --debugger                   set DEBUG
         #   -D,                              Start in debug mode
-        GTK_DEBUG=$GTK_DEBUG gjs $MODULE $DIST_FILE
+        if [ ! -z "$GTK_DEBUG" ];then
+            GTK_DEBUG="GTK_DEBUG=\"$GTK_DEBUG\""
+        fi
+        CMD="$GTK_DEBUG gjs $MODULE $DIST_FILE"
+        echo CMD="$CMD"
+        bash -c "$CMD"
         exit $?
         ;;
     t) # target

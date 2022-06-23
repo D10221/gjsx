@@ -17,8 +17,8 @@
     "rootDir": "./",
     "baseUrl": "./src",
     "typeRoots": [
-      "./node_modules/@types",
-      "./node_modules/@gi-types",
+      "../node_modules/@types",
+      "../node_modules/@gi-types",
     ],
     "types": [
       "gjs-environment",

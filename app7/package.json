@@ -24,7 +24,7 @@
     "build": "./wrkspc -b",
     "clean": "rm dist -rf",
     "format": "prettier -w ./",
-    "start": "./wrkspc -s",
+    "start": "./wrkspc -d -m -s",
     "test": "echo N/A",
     "watch": "./wrkspc -w"
   },
