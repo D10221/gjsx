@@ -113,7 +113,10 @@ try {
   log(error);
   Gtk.main_quit();
 }
-
+/**
+ *
+ * @returns menu model builder
+ */
 function AppMenu() {
   return build(
     render(
