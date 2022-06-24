@@ -11,8 +11,10 @@
     "app4",
     "app5",
     "app6",
-    "app7"
-  ], 
+    "app7",
+    "app8",
+    "app9"
+  ],
   "scripts": {
     "build": "yarn workspaces run build",
     "build:": "./build",
