@@ -4,7 +4,7 @@ import gtk from "gi://Gtk?version=3.0";
  */
 export default function gjsx(
   x: any,
-  props: { connect?: any } | null | undefined,
+  props: { $connect?: any; $ref?: any } | null | undefined,
   ...children: any[]
 ) {
   if (typeof x === "function") {
@@ -14,13 +14,13 @@ export default function gjsx(
     });
   }
   if (typeof x === "string") {
-    const { connect, ...xprops } = props || {};
+    const { $ref, $connect, ...xprops } = props || {};
     const el = contruct(x, xprops);
     // @ts-ignore
-    if (connect) {
-      for (let signal of keys(connect)) {
+    if ($connect) {
+      for (let signal of keys($connect)) {
         // @ts-ignore
-        el.connect(signal, connect[signal]);
+        el.connect(signal, $connect[signal]);
       }
     }
     if (children) {
@@ -28,6 +28,10 @@ export default function gjsx(
         // @ts-ignore
         el.add(child);
       }
+    }
+    if ($ref) {
+      log("ref")
+      $ref(el);
     }
     return el;
   }

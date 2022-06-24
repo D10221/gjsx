@@ -5,25 +5,31 @@ Gtk.init(null);
 
 const title = "Hellow World";
 let i = 0;
-function clicked(sender: Gtk.Button) {
-  sender.label = `Clicks=${++i}`;
-  window.title = title + " Click!";
-  const a = <aboutDialog></aboutDialog>;
-  a.present();
-}
+let window: Gtk.Window = await new Promise(resolve=>
 //
-const window: Gtk.Window = (
-  <window
-    title={title}
-    border_width={100}
-    connect={{ destroy: () => Gtk.main_quit() }}
-  >
-    <box>
-      <button label="Click me!" connect={{ clicked }} />
-      <button label="Click me!" connect={{ clicked }} />
-    </box>
-  </window>
-);
-window.show_all();
-// mainloop start until quit
+<window
+  $ref={(x) => {
+    window = x;
+    log(`window.name${window.name}`);
+    resolve(window);
+  }}
+  title={title}
+  border_width={100}
+  $connect={{ destroy: () => Gtk.main_quit() }}
+>
+  <box>
+    <button
+      label="Click me!"
+      $connect={{
+        clicked: (sender) => {
+          sender.label = `Clicks=${++i}`;
+          window.title = title + " Click!";
+          const a = <aboutDialog></aboutDialog>;
+          a.present();
+        },
+      }}
+    />
+  </box>
+</window>);
+window.show_all()
 Gtk.main();
