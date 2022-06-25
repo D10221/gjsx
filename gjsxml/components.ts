@@ -1,6 +1,7 @@
 /**
  * TODO: Gtk.<Class>>.ConstructorProperties
  * is for constructor not for property assignment
+ * but it could be just fine
  */
 import Gtk from "gi://Gtk?version=3.0";
 import GtkComponent from "./GtkComponent";

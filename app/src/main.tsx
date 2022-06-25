@@ -18,7 +18,10 @@ try {
     if (!app.active_window) {
       const [, window, getObject] = MainWindow({
         id: "main-window",
-        windowProps: { default_width: 800, default_height: 600 },
+        windowProps: {
+          default_width: 480,
+          default_height: 240 
+        },
         header: (
           <AppHeaderBar
             id="app-header-bar"
@@ -84,6 +87,13 @@ try {
       addAction(window, "quit", (action) => {
         log(`window.action.name: ${action.name}`);
         window.close();
+      });
+
+      // App logic
+      const _button1 = getObject<Gtk.Button>("_button1");
+      let clicks = 0;
+      _button1.connect("clicked", (button) => {
+        button.label = `Clicks=${++clicks}`;
       });
 
       window.connect("delete-event", () => {
