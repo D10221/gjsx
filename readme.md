@@ -1,9 +1,8 @@
-# GJSX
+# GJSXML
 
 Explore JSX and Typescript usage with [GJS](https://gjs.guide/)
 
-# Init
-
+# Init & Run  
 ```bash
 yarn && yarn build && yarn start app
 ```
