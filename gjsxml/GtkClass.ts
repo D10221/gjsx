@@ -1,3 +1,7 @@
+/**
+ * Glade's <object class={'className'}>
+ * TODO: generate
+ */
 export type GtkClass =
     | "GtkAboutDialog"
     | "GtkAccelLabel"

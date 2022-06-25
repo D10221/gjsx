@@ -2,7 +2,7 @@
 import Gtk from "gi://Gtk?version=3.0";
 import Gio from "gi://Gio?version=2.0";
 import { addAction } from "@local/gjsxml/actions";
-import { build, getObject } from "@local/gjsxml/builder.js";
+import { build, getObject } from "@local/gjsxml/builder";
 import {
   GtkApplicationWindow,
   GtkHeaderBar,

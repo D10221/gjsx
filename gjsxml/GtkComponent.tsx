@@ -1,5 +1,5 @@
 import jsx from "./jsx";
-import { GtkClass } from "gjsxml/types";
+import type { GtkClass } from "./GtkClass";
 
 export type GtkProps<T> = T & { children?: any; id?: string };
 /**

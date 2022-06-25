@@ -1,5 +1,5 @@
 import Gtk from "gi://Gtk?version=3.0";
-import GtkComponent from "gjsxml/GtkComponent";
+import GtkComponent from "./GtkComponent";
 
 export const GtkAboutDialog =
   GtkComponent<Partial<Gtk.AboutDialog.ConstructorProperties>>(

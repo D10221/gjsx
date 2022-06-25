@@ -16,7 +16,7 @@ declare global {
         // no children
       };
       object: {
-        class: import("./types").GtkClass;
+        class: import("./GtkClass").GtkClass;
         id?: string; //xsd:ID
         "type-func"?: string;
         // "constructor"?: string;
