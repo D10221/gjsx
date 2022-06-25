@@ -16,7 +16,8 @@
     "start": "gjs-builder -m -s",
     "test": "echo N/A",
     "watch": "gjs-builder -w",
-    "fltpk": "gjs-builder -ubBir"
+    "pack:local": "gjs-builder -ubBir",
+    "pack": "echo N/I"
   },
   "dependencies": {
     "@gi-types/base-types": "1.0.0",
