@@ -1,6 +1,0 @@
-node_modules/
-build/
-dist/
-*.lock
-*.log
-.flatpak-builder/

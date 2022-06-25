@@ -1,6 +1,6 @@
-import { ApplicationWindow } from "@local/gjs/";
-import * as Gio from "@local/gjs/Gjs/Gio-2.0";
-import * as GLib from "@local/gjs/Gjs/GLib-2.0";
+import { ApplicationWindow } from "gi://Gtk?version=3.0";
+import type Gio from "gi://Gio?version=2.0";
+import type GLib from "gi://GLib?version=2.0";
 import { createAction } from "./createAction";
 /**
  *

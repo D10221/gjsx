@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-if [  -z "$1" ]; then
-    echo "Expected \$1" >&2
-    exit 1
-fi
-gjs dist/$1

@@ -1,20 +1,23 @@
 {
   "name": "@local/gjsxml",
-  "private": "true",
+  "private": true,
   "version": "0.0.1",
-  "types": "./index.d.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@gi-types/base-types": "^1.0.0",
+    "@gi-types/gjs-environment": "^1.0.0",
+    "@gi-types/gtk3": "^3.24.0",
+    "@gi-types/gtk3-types": "^1.0.0",
+    "prettier": "2.6.2",
+    "ts-node": "10.8.1",
+    "typescript": "4.7.3",
+    "jsx-xml": "0.2.3"
+  },
   "scripts": {
     "build": "echo N/A",
     "clean": "echo N/A",
-    "test": "echo N/A",
     "format": "echo N/A",
-    "generate": "./generate.sh"
-  },
-  "devDependencies": {
-    "@types/node": "^18.0.0",
-    "@types/prettier": "^2.6.3",
-    "prettier": "2.6.2",
-    "ts-node": "^10.8.1",
-    "typescript": "4.7.3"
+    "start": "echo N/A",
+    "test": "echo N/A"
   }
 }

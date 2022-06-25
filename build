@@ -1,2 +1,0 @@
-#!/usr/bin/env sh
-yarn workspace @local/$1 run build

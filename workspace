@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+usage() {
+  echo "workspace [option] "
+  echo "  Options:"
+  echo "    -b    build workspace name"
+  echo "    -s    start workspace name"
+}
+while getopts ':s:b:h' arg; do
+  case $arg in
+  b)
+    yarn workspace @local/$OPTARG run build
+    ;;
+  s)
+    yarn workspace "@local/$OPTARG" run start
+    ;;
+  h)
+    usage
+    ;;
+  ?) ;;
+  :)
+    echo "Expected '-$OPTARG' [value]" >&2
+    usage
+    exit 1
+    ;;
+  ?)
+    echo "Unkown option -$OPTARG [value]" >&2
+    usage
+    exit 1
+    ;;
+  esac
+done

@@ -2,25 +2,15 @@
   "private": true,
   "workspaces": [
     "gjs-builder",
-    "gjs",
-    "jsxml",
     "gjsxml",
-    "app1",
-    "app2",
-    "app3",
-    "app4",
-    "app5",
-    "app6",
-    "app7",
-    "app8",
-    "app9"
+    "app"
   ],
   "scripts": {
     "build": "yarn workspaces run build",
-    "build:": "./build",
+    "build:": "./workspace -b",
     "clean": "yarn workspaces run clean",
     "format": "yarn workspaces run format",
-    "start": "./start",
+    "start": "./workspace -s",
     "test": "yarn workspaces run test"
   }
 }

@@ -1,0 +1,34 @@
+{
+  "name": "@local/app",
+  "application_id": "local.me.app",
+  "title": "My App",
+  "description": "App #9",
+  "private": true,
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "dist/main.js",
+  "src": "src/main.tsx",
+  "scripts": {
+    "build": "gjs-builder -b",
+    "clean": "rm dist -rf",
+    "debug": "gjs-builder -d -m -s",
+    "format": "prettier -w ./",
+    "start": "gjs-builder -m -s",
+    "test": "echo N/A",
+    "watch": "gjs-builder -w",
+    "fltpk": "gjs-builder -ubBir"
+  },
+  "dependencies": {
+    "@gi-types/base-types": "1.0.0",
+    "@gi-types/gjs-environment": "1.0.0",
+    "@gi-types/gtk3": "3.24.0",
+    "@gi-types/gtk3-types": "1.0.0",
+    "@local/gjs-builder": "0.0.1",
+    "@local/gjsxml": "0.0.1",
+    "esbuild": "0.14.43",
+    "prettier": "2.6.2",
+    "ts-node": "10.8.1",
+    "typescript": "4.7.3",
+    "redux": "4.2.0"
+  }
+}
