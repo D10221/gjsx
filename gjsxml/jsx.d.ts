@@ -12,7 +12,7 @@ declare global {
       };
       requires: {
         lib: "gtk+";
-        version: "3.0" | "3.18" | "3.20" | "3.24"; // TODO
+        version: import("./gtk-types").GtkInterfaceRequireVersion; // TODO
         // no children
       };
       object: {
@@ -91,7 +91,29 @@ declare global {
     }
   }
 }
+/**
+ * from "jsx-xml/index.d.ts"
+ */
+function jsx(
+  type: string,
+  attr: null | object,
+  ...children: import("jsx-xml").JSXNode[]
+): import("jsx-xml").JsxElement;
+/**
+ * from "jsx-xml/index.d.ts"
+ */
+function jsx(
+  type: (
+    attr: null | object,
+    children: import("jsx-xml").JSXNode[]
+  ) => import("jsx-xml").JSXNode,
+  attr: null | object,
+  ...children: import("jsx-xml").JSXNode[]
+): import("jsx-xml").JSXNode;
 
-export default function jsx(...any: any[]);
-export function render(xml: string): any;
-export function fragment({ children }: { children?: any });
+export default jsx;
+
+export function render(
+  xml: import("jsx-xml").JsxElement,
+  options?: import("jsx-xml").Options
+): string;

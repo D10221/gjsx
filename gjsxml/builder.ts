@@ -6,28 +6,41 @@ import GObject from "gi://GObject?version=2.0";
  * @returns
  */
 export function builder(xml: string) {
-  log(xml)
+  // log(xml);
   return Gtk.Builder.new_from_string(xml, xml.length);
 }
 /**
  *
- * @param Object id
+ */
+export type GetObject = <Object extends GObject.Object>(
+  id: string
+) => Object | null;
+/**
+ *
+ * @param id id
  * @param builder
  * @returns lots of things
  */
-export function build<T extends GObject.Object = GObject.Object>(
+export function build<GtkClass extends GObject.Object = GObject.Object>(
   id: string,
   builder: Gtk.Builder
-): [Gtk.Builder, T, <C extends GObject.Object>(name: string) => C] {
+): [Gtk.Builder, GtkClass | null, GetObject] {
   return [
     builder,
-    getObject<T>(builder, id),
+    getObject<GtkClass>(builder, id),
     (n: string) => getObject(builder, n),
   ];
 }
-export function getObject<T extends GObject.Object = GObject.Object>(
+/**
+ * typescrypt helper
+ * Gtk.Builder wrapper
+ * @param builder
+ * @param id object's id
+ * @returns
+ */
+export function getObject<Object extends GObject.Object = GObject.Object>(
   builder: Gtk.Builder,
-  name: string
-) {
-  return builder.get_object(name) as T;
+  id: string
+): Object | null {
+  return builder.get_object(id) as Object;
 }

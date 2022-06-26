@@ -26,10 +26,14 @@ export function AppMenu({ id, target }: AppMenuOptions) {
           <menu id={id}>
             <section>
               <item>
+                <attribute name="label">_About</attribute>
+                <attribute name="action">{target}.about</attribute>
+              </item>
+            </section>
+            <item>
                 <attribute name="label">_Quit</attribute>
                 <attribute name="action">{target}.quit</attribute>
               </item>
-            </section>
           </menu>
         </interface>
       )

@@ -3,7 +3,7 @@ import jsx from "@local/gjsxml/jsx.js";
 /**
  *
  * @param param0
- * @returns
+ * @returns jsx
  */
 export default function AppHeaderBar({
   id,

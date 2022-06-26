@@ -5,7 +5,7 @@ export type GtkProps<T> = T & { children?: any; id?: string };
 /**
  * Component Fty
  * @param className
- * @returns Component
+ * @returns jsx
  */
 export default function GtkComponent<T>(className: GtkClass) {
   /**

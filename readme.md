@@ -1,8 +1,10 @@
-# GJSXML
+# gjsxml
 
-Explore JSX and Typescript usage with [GJS](https://gjs.guide/)
+gjs, jsx, xml and friends
 
-# Init & Run  
+Exploring with [GJS](https://gjs.guide/) [JSX](https://en.wikipedia.org/wiki/JSX_(JavaScript)) and [Typescript](https://www.typescriptlang.org/)
+
+# Init & Run
 ```bash
 yarn && yarn build && yarn start app
 ```
@@ -35,9 +37,7 @@ yarn && yarn build && yarn start app
 ### Engine
 - gjs: 1.72
 
-### WSL notes
-  - Wsl Ubuntu 20.4 ships with older gjs
-    - doesn't support modules
-  - Can't use jsx-xml (firedox engne doens't like sintax)
-  - flatpak doesn;t find display with gwsl
-    - it works over ```ssh -X```
+### Known issues
+  - [Wsl](https://docs.microsoft.com/en-us/windows/wsl/about) Ubuntu 20.4 ships with older gjs, it doesn't support modules
+  - Can't use [jsx-xml](https://github.com/smmoosavi/jsx-xml), js engine doens't like the output syntax, it seems to be related to it's dependencies
+  - flatpaked on ```wsl``` can' find ```$DISPLAY```, but it works over ```ssh -X``` with a bit of work
