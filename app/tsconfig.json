@@ -17,6 +17,7 @@
     "strict": true,
     "jsx": "react",
     "jsxFactory": "jsx",
+    "jsxFragmentFactory": "fragment",
     "reactNamespace": ""
   },
   "include": ["src/"]

@@ -91,5 +91,7 @@ declare global {
     }
   }
 }
+
 export default function jsx(...any: any[]);
 export function render(xml: string): any;
+export function fragment({ children }: { children?: any });

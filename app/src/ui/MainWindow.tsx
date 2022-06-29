@@ -8,7 +8,7 @@ import jsx, { render } from "@local/gjsxml/jsx";
 export type MainwindowOptions = {
   id: string;
   children: any;
-  header: any;
+  header?: any;
   windowProps?: Partial<Gtk.ApplicationWindow.ConstructorProperties>;
 };
 /**
@@ -18,8 +18,7 @@ export type MainwindowOptions = {
  */
 export default function MainWindow({
   id,
-  children,
-  header,
+  children,  
   windowProps,
 }: MainwindowOptions) {
   return build<Gtk.ApplicationWindow>(
@@ -28,8 +27,7 @@ export default function MainWindow({
       render(
         <interface>
           <requires lib="gtk+" version="3.20" />
-          <GtkApplicationWindow id={id} {...{ ...(windowProps || {}) }}>
-            {header}
+          <GtkApplicationWindow id={id} {...{ ...(windowProps || {}) }}>            
             {children}
           </GtkApplicationWindow>
         </interface>
