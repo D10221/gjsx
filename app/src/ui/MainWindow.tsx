@@ -16,11 +16,6 @@ export type MainwindowOptions = {
    */
   children: any;
   /**
-   * there is no fragment support
-   * set here the app header
-   */
-  header: any;
-  /**
    * props to build the window
    */
   windowProps?: Partial<Gtk.ApplicationWindow.ConstructorProperties>;

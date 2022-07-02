@@ -26,41 +26,46 @@ try {
           default_height: 240,
         },
         children: (
-          <child>
-            <GtkBox
-              visible={true}
-              can_focus={false}
-              orientation={Gtk.Orientation.VERTICAL}
-            >
-              <child>
-                <GtkLabel
-                  id="_label1"
-                  visible={true}
-                  can_focus={false}
-                  label="Hello World!"
-                />
-                <packing>
-                  <property name="expand">True</property>
-                  <property name="fill">True</property>
-                  <property name="position">0</property>
-                </packing>
-              </child>
-              <child>
-                <GtkButton
-                  id="_button1"
-                  label="Click me!"
-                  visible={true}
-                  can_focus={true}
-                  receives_default={true}
-                  expand={false}
-                ></GtkButton>
-                <packing>
-                  <property name="fill">True</property>
-                  <property name="position">1</property>
-                </packing>
-              </child>
-            </GtkBox>
-          </child>
+          <>
+            <AppHeaderBar id='app-header-bar' subtitle={pkg.description} title={pkg.title}>
+              <AppMenuButton id="app-header-bar-menu-button"></AppMenuButton>
+            </AppHeaderBar>
+            <child>
+              <GtkBox
+                visible={true}
+                can_focus={false}
+                orientation={Gtk.Orientation.VERTICAL}
+              >
+                <child>
+                  <GtkLabel
+                    id="_label1"
+                    visible={true}
+                    can_focus={false}
+                    label="Hello World!"
+                  />
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <GtkButton
+                    id="_button1"
+                    label="Click me!"
+                    visible={true}
+                    can_focus={true}
+                    receives_default={true}
+                    expand={false}
+                  ></GtkButton>
+                  <packing>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </GtkBox>
+            </child>
+          </>
         ),
       });
 
