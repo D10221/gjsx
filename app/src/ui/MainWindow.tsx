@@ -15,9 +15,6 @@ export type MainwindowOptions = {
    * window content
    */
   children: any;
-<<<<<<< HEAD
-  header?: any;
-=======
   /**
    * there is no fragment support
    * set here the app header
@@ -26,7 +23,6 @@ export type MainwindowOptions = {
   /**
    * props to build the window
    */
->>>>>>> a4368c5 (about dialog, from glade)
   windowProps?: Partial<Gtk.ApplicationWindow.ConstructorProperties>;
   /**
    * glade's <interface><require version='?'
