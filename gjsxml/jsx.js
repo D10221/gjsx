@@ -3,6 +3,7 @@
  * otherwise the 'jsx-xml' JSX defition wins over the locall global.JSX
  */
 export { JSXXML as default } from "jsx-xml";
+export { Fragment as fragment } from "jsx-xml"
 import { render as _render } from "jsx-xml";
 /**
  * TODO:
@@ -14,11 +15,3 @@ import { render as _render } from "jsx-xml";
  * @returns
  */
 export const render = (jsx, options) => _render(jsx, options);
-/**
- * 
- * @param {{ children?: any}} param0 
- * @returns 
- */
-export function fragment({ children }) {
-  return children
-}

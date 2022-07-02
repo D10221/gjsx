@@ -99,17 +99,6 @@ function jsx(
   attr: null | object,
   ...children: import("jsx-xml").JSXNode[]
 ): import("jsx-xml").JsxElement;
-/**
- * from "jsx-xml/index.d.ts"
- */
-function jsx(
-  type: (
-    attr: null | object,
-    children: import("jsx-xml").JSXNode[]
-  ) => import("jsx-xml").JSXNode,
-  attr: null | object,
-  ...children: import("jsx-xml").JSXNode[]
-): import("jsx-xml").JSXNode;
 
 export default jsx;
 
@@ -117,3 +106,7 @@ export function render(
   xml: import("jsx-xml").JsxElement,
   options?: import("jsx-xml").Options
 ): string;
+
+export function fragment(
+  props: import("jsx-xml").FragmentProps
+): import("jsx-xml").FragmentNode;
